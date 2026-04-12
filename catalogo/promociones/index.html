@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promociones | Alex Store</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #ffcc00; /* Dorado para promociones */
-            --secondary: #ff6600; /* Naranja para resaltar */
+            --primary: #ffcc00; 
+            --secondary: #ff6600; 
             --dark: #0a0a0a;
             --card-bg: #1a1a1a;
             --whatsapp: #25d366;
-            --text-gray: #aaa;
+            --yape: #742284;
             --danger: #ff4444;
+            --gray-note: #666;
+            --vip: #d4af37;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,18 +28,33 @@
             padding-bottom: 120px;
         }
 
+        /* HEADER CORREGIDO PARA CENTRADO PERFECTO */
         header {
             background: linear-gradient(135deg, #b8860b, #ffcc00);
-            padding: 35px 20px;
+            padding: 35px 0; /* Sin padding lateral para que no se mueva a la derecha */
             text-align: center;
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
             box-shadow: 0 10px 25px rgba(255, 204, 0, 0.2);
             color: #000;
+            width: 100%;
         }
 
-        header h1 { font-size: 1.7rem; font-weight: 800; text-transform: uppercase; }
-        header p { font-size: 0.9rem; font-weight: 600; }
+        header h1 { 
+            font-size: 1.7rem; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            margin: 0 auto;
+            display: block;
+            width: 100%;
+        }
+
+        header p { 
+            font-size: 0.9rem; 
+            font-weight: 600; 
+            margin: 5px auto 0;
+            width: 90%; /* Evita que choque en bordes */
+        }
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
 
@@ -52,8 +69,8 @@
             border-radius: 20px;
             transition: 0.3s;
         }
-        .back-btn:hover { border-color: var(--primary); color: var(--primary); }
 
+        /* ESTILO DE TARJETAS Y COPIADO */
         .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 15px; transition: 0.4s; }
         
         .promo-card {
@@ -67,93 +84,40 @@
             position: relative;
             overflow: hidden;
             transition: 0.4s;
+            cursor: pointer;
         }
 
-        /* Etiqueta de "OFERTA" */
-        .promo-card::before {
-            content: "OFERTA";
-            position: absolute;
-            top: 10px;
-            right: -25px;
-            background: var(--danger);
-            color: white;
-            font-size: 0.6rem;
-            font-weight: 700;
-            padding: 5px 30px;
-            transform: rotate(45deg);
-            z-index: 1;
-        }
-
-        .promo-card:hover {
-            border-color: var(--primary);
-            background: #222;
-            transform: scale(1.02);
-        }
+        .promo-card:hover { border-color: var(--primary); background: #222; transform: scale(1.02); }
 
         .service-logo {
-            width: 75px;
-            height: 75px;
-            object-fit: cover;
-            border-radius: 15px;
-            flex-shrink: 0;
-            border: 1px solid #444;
+            width: 70px; height: 70px;
+            object-fit: cover; border-radius: 15px;
+            flex-shrink: 0; border: 1px solid #444;
         }
 
         .service-text { flex-grow: 1; }
         .service-text h3 { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
         
-        .manual-desc {
-            font-size: 0.8rem;
-            color: #ddd;
-            line-height: 1.4;
-            display: block;
-        }
+        .manual-desc { font-size: 0.8rem; color: #ddd; display: block; }
 
         .price-container { text-align: right; flex-shrink: 0; min-width: 85px; }
         .price-tag { 
-            color: #fff; 
-            background: var(--secondary);
-            padding: 6px 12px;
-            border-radius: 10px;
-            font-weight: 700; 
-            font-size: 1.15rem; 
-            display: block; 
+            color: #fff; background: var(--secondary);
+            padding: 6px 12px; border-radius: 10px;
+            font-weight: 700; font-size: 1.15rem; 
         }
 
-        /* --- LÓGICA DE AGOTADO --- */
-        .promo-link.agotado {
-            pointer-events: none;
-            opacity: 0.5;
-        }
+        /* BADGES DE ESTADO (Colores Yape/Robo/Plomo) */
+        .badge { padding: 4px 8px; border-radius: 5px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-top: 5px; display: inline-block; }
+        .badge-rojo { background: rgba(255, 77, 77, 0.2); color: var(--danger); border: 1px solid var(--danger); }
+        .badge-yape { background: rgba(116, 34, 132, 0.2); color: #e5b6f2; border: 1px solid var(--yape); }
+        .badge-plomo { background: rgba(102, 102, 102, 0.2); color: #ccc; border: 1px solid var(--gray-note); }
 
-        /* Cambia el color de la etiqueta OFERTA a gris cuando está agotado */
-        .promo-link.agotado .promo-card::before {
-            content: "AGOTADO";
-            background: #555;
-        }
-
-        .promo-link.agotado .price-tag {
-            display: none;
-        }
-
-        /* Texto AGOTADO en la zona del precio */
-        .promo-link.agotado .price-container::after {
-            content: "AGOTADO";
-            color: var(--danger);
-            font-weight: 800;
-            font-size: 0.8rem;
-            display: block;
-            text-transform: uppercase;
-        }
-
-        .category-title {
-            margin: 25px 0 12px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: #fff;
-            padding: 5px 0;
-            display: block;
-            border-bottom: 1px solid #333;
+        .copy-toast {
+            position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
+            background: var(--primary); color: black; padding: 10px 20px;
+            border-radius: 50px; font-weight: 800; font-size: 0.8rem;
+            display: none; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
 
         .floating-btn {
@@ -161,11 +125,14 @@
             background: var(--whatsapp); color: white; padding: 18px;
             border-radius: 50px; text-decoration: none; font-weight: 700;
             width: 85%; max-width: 400px; text-align: center; z-index: 100;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
+
+        .category-title { margin: 25px 0 12px; font-size: 0.9rem; font-weight: 700; color: #fff; border-bottom: 1px solid #333; }
     </style>
 </head>
 <body>
+
+<div id="toast" class="copy-toast">✅ COPIADO AL PORTAPAPELES</div>
 
 <header>
     <h1>COMBOS DUOS Y TRIOS⚡</h1>
@@ -173,78 +140,72 @@
 </header>
 
 <div class="container">
-    
     <div class="back-nav">
         <a href="../" class="back-btn">⬅ Volver al Inicio</a>
     </div>
 
-    <div class="category-title">🔥 COMBOS MÁS PEDIDOS</div>
+    <div class="category-title">🔥 COMBOS MÁS PEDIDOS (Clic para copiar)</div>
 
-    <a href="#" target="_blank" class="promo-link">
+    <div class="promo-link" onclick="copyInfo(this)">
         <div class="promo-card">
-            <img src="img/combo1.png" class="service-logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Combo Cine Pro</h3>
-                <span class="manual-desc">Netflix Premium + Disney Premium • Ambos 4K Ultra HD • Garantía de 1 mes.</span>
+                <span class="manual-desc">Netflix + Disney Premium 4K</span>
+                <span class="badge badge-rojo">ROBO DE CUENTA</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 25</span>
             </div>
         </div>
-    </a>
+    </div>
 
-    <a href="#" target="_blank" class="promo-link agotado">
-        <div class="promo-card">
-            <img src="img/combo-deportes.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Combo Full Fútbol</h3>
-                <span class="manual-desc">DGO (Liga 1 Max) + Disney Premium (ESPN) • Todo en una sola compra.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 25</span>
-            </div>
-        </div>
-    </a>
-
-    <div class="category-title">🕒 PROMOCIONES INDIVIDUALES</div>
-
-    <a href="#" target="_blank" class="promo-link">
+    <div class="promo-link" onclick="copyInfo(this)">
         <div class="promo-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" class="service-logo">
             <div class="service-text">
-                <h3 class="nombre-prod">Spotify Premium (3 Meses)</h3>
-                <span class="manual-desc">Plan trimestral • Sin anuncios • Música sin conexión.</span>
+                <h3 class="nombre-prod">Spotify Premium</h3>
+                <span class="manual-desc">3 Meses sin anuncios</span>
+                <span class="badge badge-yape">YAPE FAKE</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 18</span>
             </div>
         </div>
-    </a>
+    </div>
+
+    <div class="promo-link" onclick="copyInfo(this)">
+        <div class="promo-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">YouTube Premium</h3>
+                <span class="manual-desc">Plan familiar 1 mes</span>
+                <span class="badge badge-plomo">ESTADO NORMAL</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 15</span>
+            </div>
+        </div>
+    </div>
 
 </div>
 
-<a href="https://wa.me/51918600000?text=Hola%20Alex%20Store,%20vengo%20de%20la%20web" target="_blank" class="floating-btn">
-    📲 CONSULTAR OTRAS PROMOS
+<a href="https://wa.me/51918600000?text=Hola%20Alex%20Store" target="_blank" class="floating-btn">
+    📲 CONSULTAR POR WHATSAPP
 </a>
 
 <script>
-    function configurarLinksWhatsApp() {
-        const telefono = "51918600000";
-        // Buscamos solo promociones con stock
-        const tarjetas = document.querySelectorAll('.promo-link:not(.agotado)');
-
-        tarjetas.forEach(tarjeta => {
-            const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
-            const precio = tarjeta.querySelector('.precio-prod')?.innerText;
-
-            if (nombre && precio) {
-                const mensaje = `Hola Alex Store, quiero la PROMO: ${nombre} (${precio})`;
-                tarjeta.href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-            }
+    function copyInfo(element) {
+        const nombre = element.querySelector('.nombre-prod').innerText;
+        const precio = element.querySelector('.precio-prod').innerText;
+        const texto = `Hola Alex Store, quiero la PROMO: ${nombre} (${precio})`;
+        
+        navigator.clipboard.writeText(texto).then(() => {
+            const toast = document.getElementById('toast');
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2000);
         });
     }
-
-    window.onload = configurarLinksWhatsApp;
 </script>
 
 </body>
