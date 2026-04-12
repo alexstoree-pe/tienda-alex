@@ -12,6 +12,7 @@
             --dark: #0a0a0a;
             --card-bg: #1a1a1a;
             --whatsapp: #25d366;
+            --text-gray: #aaa;
             --danger: #cc3333;
         }
 
@@ -25,10 +26,10 @@
             padding-bottom: 120px;
         }
 
-        /* HEADER - CORRECCIÓN DE CENTRADO TOTAL */
+        /* HEADER - CENTRADO ABSOLUTO */
         header {
             background: linear-gradient(135deg, #b8860b, #ffcc00);
-            padding: 40px 15px; /* Padding equilibrado */
+            padding: 45px 20px;
             text-align: center;
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
@@ -36,23 +37,28 @@
             color: #000;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Esto centra horizontalmente todo el contenido */
+            align-items: center; 
             justify-content: center;
+            width: 100%;
         }
 
         header h1 { 
             font-size: 1.7rem; 
             font-weight: 800; 
             text-transform: uppercase; 
-            margin-bottom: 5px;
+            margin: 0;
+            display: block;
             width: 100%;
+            text-align: center; 
         }
 
         header p { 
             font-size: 0.9rem; 
             font-weight: 600; 
-            margin: 0 auto; /* Margen automático para centrarlo */
-            max-width: 320px; /* Evita que el texto se estire demasiado */
+            margin: 8px auto 0 auto; /* Centrado con márgenes automáticos */
+            display: block;
+            text-align: center;
+            max-width: 280px; /* Ancho máximo para el centrado del texto pequeño */
             line-height: 1.2;
         }
 
@@ -67,9 +73,12 @@
             border: 1px solid #333;
             padding: 8px 18px;
             border-radius: 20px;
+            transition: 0.3s;
         }
+        .back-btn:hover { border-color: var(--primary); color: var(--primary); }
 
-        .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 15px; }
+        /* TARJETAS DE PROMOCIÓN */
+        .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 15px; transition: 0.4s; }
         
         .promo-card {
             background: var(--card-bg);
@@ -81,6 +90,7 @@
             gap: 15px;
             position: relative;
             overflow: hidden;
+            transition: 0.4s;
         }
 
         .promo-card::before {
@@ -97,16 +107,24 @@
             z-index: 1;
         }
 
+        .promo-card:hover {
+            border-color: var(--primary);
+            background: #222;
+            transform: scale(1.02);
+        }
+
         .service-logo {
-            width: 75px; height: 75px;
-            object-fit: cover; border-radius: 15px;
-            flex-shrink: 0; border: 1px solid #444;
+            width: 75px;
+            height: 75px;
+            object-fit: cover;
+            border-radius: 15px;
+            flex-shrink: 0;
+            border: 1px solid #444;
         }
 
         .service-text { flex-grow: 1; }
         .service-text h3 { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
         
-        /* Esta es la descripción de los productos, no afecta al header */
         .manual-desc {
             font-size: 0.8rem;
             color: #ddd;
@@ -116,14 +134,24 @@
 
         .price-container { text-align: right; flex-shrink: 0; min-width: 85px; }
         .price-tag { 
-            color: #fff; background: var(--secondary);
-            padding: 6px 14px; border-radius: 10px;
-            font-weight: 800; font-size: 1.15rem; display: block; 
+            color: #fff; 
+            background: var(--secondary);
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-weight: 800; 
+            font-size: 1.15rem; 
+            display: block; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
 
         .category-title {
-            margin: 25px 0 12px; font-size: 0.9rem; font-weight: 700;
-            color: #fff; border-bottom: 1px solid #333; padding-bottom: 5px;
+            margin: 25px 0 12px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            padding: 5px 0;
+            display: block;
+            border-bottom: 1px solid #333;
         }
 
         .floating-btn {
@@ -131,6 +159,7 @@
             background: var(--whatsapp); color: white; padding: 18px;
             border-radius: 50px; text-decoration: none; font-weight: 700;
             width: 85%; max-width: 400px; text-align: center; z-index: 100;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
     </style>
 </head>
@@ -148,7 +177,7 @@
 
     <div class="category-title">🔥 COMBOS MÁS PEDIDOS</div>
 
-    <a href="#" class="promo-link">
+    <a href="#" target="_blank" class="promo-link">
         <div class="promo-card">
             <img src="img/combo1.png" class="service-logo">
             <div class="service-text">
@@ -161,11 +190,13 @@
         </div>
     </a>
 
-    <a href="#" class="promo-link">
+    <div class="category-title">🕒 PROMOCIONES INDIVIDUALES</div>
+
+    <a href="#" target="_blank" class="promo-link">
         <div class="promo-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" class="service-logo">
             <div class="service-text">
-                <h3 class="nombre-prod">Spotify Premium</h3>
+                <h3 class="nombre-prod">Spotify Premium (3 Meses)</h3>
                 <span class="manual-desc">Plan trimestral sin anuncios y música sin conexión para todos tus dispositivos</span>
             </div>
             <div class="price-container">
@@ -183,9 +214,11 @@
     function configurarLinksWhatsApp() {
         const telefono = "51918600000";
         const tarjetas = document.querySelectorAll('.promo-link');
+
         tarjetas.forEach(tarjeta => {
             const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
             const precio = tarjeta.querySelector('.precio-prod')?.innerText;
+
             if (nombre && precio) {
                 const mensaje = `Hola Alex Store, quiero la PROMO: ${nombre} (${precio})`;
                 tarjeta.href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
