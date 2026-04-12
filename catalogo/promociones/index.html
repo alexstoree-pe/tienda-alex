@@ -8,12 +8,12 @@
     <style>
         :root {
             --primary: #ffcc00; 
-            --secondary: #ff6600; 
+            --secondary: #d48806; /* Naranja quemado/mate, menos intenso */
             --dark: #0a0a0a;
             --card-bg: #1a1a1a;
             --whatsapp: #25d366;
             --text-gray: #aaa;
-            --danger: #ff4444;
+            --danger: #cc3333; /* Rojo más suave para OFERTA */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,7 +29,7 @@
         /* HEADER CENTRADO */
         header {
             background: linear-gradient(135deg, #b8860b, #ffcc00);
-            padding: 35px 0; /* Centrado corregido */
+            padding: 35px 0;
             text-align: center;
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
@@ -116,12 +116,13 @@
         .price-container { text-align: right; flex-shrink: 0; min-width: 85px; }
         .price-tag { 
             color: #fff; 
-            background: var(--secondary);
-            padding: 6px 12px;
+            background: var(--secondary); /* Color suavizado */
+            padding: 6px 14px;
             border-radius: 10px;
-            font-weight: 700; 
+            font-weight: 800; 
             font-size: 1.15rem; 
             display: block; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
 
         .category-title {
