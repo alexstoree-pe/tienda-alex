@@ -8,12 +8,11 @@
     <style>
         :root {
             --primary: #ffcc00; 
-            --secondary: #d48806; /* Color de precio suavizado */
+            --secondary: #d48806; 
             --dark: #0a0a0a;
             --card-bg: #1a1a1a;
             --whatsapp: #25d366;
-            --text-gray: #aaa;
-            --danger: #cc3333; /* Rojo OFERTA más sobrio */
+            --danger: #cc3333;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,19 +25,18 @@
             padding-bottom: 120px;
         }
 
-        /* HEADER CON CENTRADO TOTAL */
+        /* HEADER - CORRECCIÓN DE CENTRADO TOTAL */
         header {
             background: linear-gradient(135deg, #b8860b, #ffcc00);
-            padding: 40px 0;
+            padding: 40px 15px; /* Padding equilibrado */
             text-align: center;
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
             box-shadow: 0 10px 25px rgba(255, 204, 0, 0.2);
             color: #000;
-            width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Alineación central forzada */
+            align-items: center; /* Esto centra horizontalmente todo el contenido */
             justify-content: center;
         }
 
@@ -46,17 +44,16 @@
             font-size: 1.7rem; 
             font-weight: 800; 
             text-transform: uppercase; 
-            margin: 0;
+            margin-bottom: 5px;
             width: 100%;
         }
 
         header p { 
             font-size: 0.9rem; 
             font-weight: 600; 
-            margin: 5px 0 0 0;
-            width: 90%;
-            text-align: center;
-            display: block;
+            margin: 0 auto; /* Margen automático para centrarlo */
+            max-width: 320px; /* Evita que el texto se estire demasiado */
+            line-height: 1.2;
         }
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
@@ -70,12 +67,9 @@
             border: 1px solid #333;
             padding: 8px 18px;
             border-radius: 20px;
-            transition: 0.3s;
         }
-        .back-btn:hover { border-color: var(--primary); color: var(--primary); }
 
-        /* TARJETAS DE PROMOCIÓN */
-        .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 15px; transition: 0.4s; }
+        .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 15px; }
         
         .promo-card {
             background: var(--card-bg);
@@ -87,7 +81,6 @@
             gap: 15px;
             position: relative;
             overflow: hidden;
-            transition: 0.4s;
         }
 
         .promo-card::before {
@@ -104,24 +97,16 @@
             z-index: 1;
         }
 
-        .promo-card:hover {
-            border-color: var(--primary);
-            background: #222;
-            transform: scale(1.02);
-        }
-
         .service-logo {
-            width: 75px;
-            height: 75px;
-            object-fit: cover;
-            border-radius: 15px;
-            flex-shrink: 0;
-            border: 1px solid #444;
+            width: 75px; height: 75px;
+            object-fit: cover; border-radius: 15px;
+            flex-shrink: 0; border: 1px solid #444;
         }
 
         .service-text { flex-grow: 1; }
         .service-text h3 { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
         
+        /* Esta es la descripción de los productos, no afecta al header */
         .manual-desc {
             font-size: 0.8rem;
             color: #ddd;
@@ -131,24 +116,14 @@
 
         .price-container { text-align: right; flex-shrink: 0; min-width: 85px; }
         .price-tag { 
-            color: #fff; 
-            background: var(--secondary);
-            padding: 6px 14px;
-            border-radius: 10px;
-            font-weight: 800; 
-            font-size: 1.15rem; 
-            display: block; 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            color: #fff; background: var(--secondary);
+            padding: 6px 14px; border-radius: 10px;
+            font-weight: 800; font-size: 1.15rem; display: block; 
         }
 
         .category-title {
-            margin: 25px 0 12px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: #fff;
-            padding: 5px 0;
-            display: block;
-            border-bottom: 1px solid #333;
+            margin: 25px 0 12px; font-size: 0.9rem; font-weight: 700;
+            color: #fff; border-bottom: 1px solid #333; padding-bottom: 5px;
         }
 
         .floating-btn {
@@ -156,7 +131,6 @@
             background: var(--whatsapp); color: white; padding: 18px;
             border-radius: 50px; text-decoration: none; font-weight: 700;
             width: 85%; max-width: 400px; text-align: center; z-index: 100;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
     </style>
 </head>
@@ -168,7 +142,6 @@
 </header>
 
 <div class="container">
-    
     <div class="back-nav">
         <a href="../" class="back-btn">⬅ Volver al Inicio</a>
     </div>
@@ -200,7 +173,6 @@
             </div>
         </div>
     </a>
-
 </div>
 
 <a href="https://wa.me/51918600000?text=Hola%20Alex%20Store" target="_blank" class="floating-btn">
@@ -211,11 +183,9 @@
     function configurarLinksWhatsApp() {
         const telefono = "51918600000";
         const tarjetas = document.querySelectorAll('.promo-link');
-
         tarjetas.forEach(tarjeta => {
             const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
             const precio = tarjeta.querySelector('.precio-prod')?.innerText;
-
             if (nombre && precio) {
                 const mensaje = `Hola Alex Store, quiero la PROMO: ${nombre} (${precio})`;
                 tarjeta.href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
