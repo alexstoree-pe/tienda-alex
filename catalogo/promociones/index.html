@@ -7,12 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #ffcc00; 
-            --secondary: #d48806; 
+            /* Colores actualizados según tu Catálogo */
+            --primary: #00d4ff;
+            --secondary: #0055ff;
             --dark: #0a0a0a;
-            --card-bg: #1a1a1a;
+            --card-bg: #161616;
             --whatsapp: #25d366;
-            --danger: #cc3333;
+            --text-gray: #aaa;
+            --danger: #ff0000;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,48 +27,29 @@
             padding-bottom: 120px;
         }
 
-        /* HEADER - CENTRADO TOTAL POR CAPAS */
+        /* HEADER COPIADO DEL CATÁLOGO */
         header {
-            background: linear-gradient(135deg, #b8860b, #ffcc00);
-            padding: 50px 0;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            padding: 40px 20px; 
             text-align: center;
-            border-bottom-left-radius: 40px;
+            border-bottom-left-radius: 40px; 
             border-bottom-right-radius: 40px;
-            box-shadow: 0 10px 25px rgba(255, 204, 0, 0.2);
-            color: #000;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
-        }
-
-        .header-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 90%;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
 
         header h1 { 
-            font-size: 1.7rem; 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px; 
-            width: 100%;
+            font-size: 2.2rem; /* Ajustado para que quepa COMBOS DUOS Y TRIOS */
+            font-weight: 700; 
+            letter-spacing: 1px; 
+            color: white;
+            text-transform: uppercase;
         }
 
         header p { 
-            font-size: 0.9rem; 
-            font-weight: 600; 
-            margin: 10px auto 0;
-            width: 100%;
-            max-width: 320px; 
-            text-align: center;
+            font-size: 1.1rem; 
+            opacity: 0.9; 
+            color: white;
+            margin-top: 5px;
         }
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
@@ -74,29 +57,44 @@
         .back-nav { text-align: left; margin-bottom: 20px; }
         .back-btn {
             display: inline-block;
-            color: #aaa;
+            color: var(--primary);
             text-decoration: none;
             font-size: 0.8rem;
-            border: 1px solid #333;
+            border: 1px dashed var(--primary);
             padding: 8px 18px;
             border-radius: 20px;
+            background: rgba(0, 212, 255, 0.1);
         }
 
-        /* TARJETAS */
+        /* TÍTULOS DE CATEGORÍA CON LÍNEA (ESTILO CATÁLOGO) */
+        .category-title {
+            margin: 30px 0 15px; font-size: 1.1rem; font-weight: 700;
+            color: var(--primary); text-transform: uppercase;
+            display: flex; align-items: center;
+        }
+        .category-title::after { 
+            content: ""; height: 1px; background: #333; flex: 1; margin-left: 15px; 
+        }
+
+        /* TARJETAS DE PROMOCIÓN */
         .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 15px; }
         
         .promo-card {
             background: var(--card-bg);
-            border-radius: 20px;
-            padding: 18px;
+            border-radius: 18px;
+            padding: 15px;
             display: flex;
             align-items: center;
-            border: 2px solid #333;
+            border: 1px solid #222;
             gap: 15px;
             position: relative;
             overflow: hidden;
+            transition: 0.3s;
         }
 
+        .promo-card:hover { border-color: var(--primary); transform: scale(1.01); }
+
+        /* Etiqueta de Oferta estilo Catálogo */
         .promo-card::before {
             content: "OFERTA";
             position: absolute;
@@ -105,60 +103,55 @@
             background: var(--danger);
             color: white;
             font-size: 0.6rem;
-            font-weight: 700;
+            font-weight: 800;
             padding: 5px 30px;
             transform: rotate(45deg);
             z-index: 1;
         }
 
         .service-logo {
-            width: 75px; height: 75px;
-            object-fit: cover; border-radius: 15px;
-            flex-shrink: 0; border: 1px solid #444;
+            width: 65px; height: 65px;
+            object-fit: cover; border-radius: 12px;
+            flex-shrink: 0;
         }
 
         .service-text { flex-grow: 1; }
-        .service-text h3 { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+        .service-text h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
         
         .manual-desc {
-            font-size: 0.8rem;
-            color: #ddd;
+            font-size: 0.78rem;
+            color: var(--text-gray);
             line-height: 1.4;
             display: block;
         }
 
-        .price-container { text-align: right; flex-shrink: 0; min-width: 85px; }
+        .price-container { text-align: right; flex-shrink: 0; min-width: 80px; }
         .price-tag { 
-            color: #fff; background: var(--secondary);
-            padding: 6px 14px; border-radius: 10px;
-            font-weight: 800; font-size: 1.15rem; display: block; 
-        }
-
-        .category-title {
-            margin: 25px 0 12px; font-size: 0.9rem; font-weight: 700;
-            color: #fff; border-bottom: 1px solid #333; padding-bottom: 5px;
+            color: var(--primary); 
+            font-weight: 700; 
+            font-size: 1.2rem; 
+            display: block; 
         }
 
         .floating-btn {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
             background: var(--whatsapp); color: white; padding: 18px;
             border-radius: 50px; text-decoration: none; font-weight: 700;
-            width: 85%; max-width: 400px; text-align: center; z-index: 100;
+            width: 90%; max-width: 450px; text-align: center; z-index: 1000;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="header-content">
-        <h1>COMBOS DUOS Y TRIOS ⚡</h1>
-        <p>Ahorra más con nuestros combos exclusivos</p>
-    </div>
+    <h1>COMBOS DUOS Y TRIOS ⚡</h1>
+    <p>Ahorra más con nuestros combos exclusivos</p>
 </header>
 
 <div class="container">
     <div class="back-nav">
-        <a href="../" class="back-btn">⬅ Volver al Inicio</a>
+        <a href="../" class="back-btn">⬅ VOLVER AL CATÁLOGO</a>
     </div>
 
     <div class="category-title">🔥 COMBOS MÁS PEDIDOS</div>
@@ -168,7 +161,7 @@
             <img src="img/combo1.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Combo Cine Pro</h3>
-                <span class="manual-desc">Netflix Premium más Disney Premium en calidad 4K Ultra HD con garantía de 1 mes</span>
+                <span class="manual-desc">• Netflix Premium + Disney Premium • Calidad 4K Ultra HD • Garantía de 1 mes.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 25</span>
@@ -183,7 +176,7 @@
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Spotify Premium</h3>
-                <span class="manual-desc">Plan trimestral sin anuncios y música sin conexión para todos tus dispositivos</span>
+                <span class="manual-desc">• Plan trimestral (3 meses) • Sin anuncios • Música sin conexión.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 18</span>
@@ -200,11 +193,13 @@
     function configurarLinksWhatsApp() {
         const telefono = "51918600000";
         const tarjetas = document.querySelectorAll('.promo-link');
+
         tarjetas.forEach(tarjeta => {
             const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
             const precio = tarjeta.querySelector('.precio-prod')?.innerText;
+
             if (nombre && precio) {
-                const mensaje = `Hola Alex Store, quiero la PROMO: ${nombre} (${precio})`;
+                const mensaje = `Hola *Alex Store*, deseo la PROMO: *${nombre}* (${precio})`;
                 tarjeta.href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
             }
         });
