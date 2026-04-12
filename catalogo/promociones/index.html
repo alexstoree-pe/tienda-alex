@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Colores actualizados según tu Catálogo */
             --primary: #00d4ff;
             --secondary: #0055ff;
             --dark: #0a0a0a;
@@ -27,59 +26,77 @@
             padding-bottom: 120px;
         }
 
-        /* HEADER COPIADO DEL CATÁLOGO */
+        /* HEADER COPIADO EXACTAMENTE DE DISTRIBUCIÓN */
         header {
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            padding: 40px 20px; 
+            background: linear-gradient(135deg, #111, #222);
+            padding: 30px 20px;
             text-align: center;
-            border-bottom-left-radius: 40px; 
+            border-bottom: 3px solid var(--primary);
+            border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
 
         header h1 { 
-            font-size: 2.2rem; /* Ajustado para que quepa COMBOS DUOS Y TRIOS */
+            font-size: 2.8rem; 
             font-weight: 700; 
-            letter-spacing: 1px; 
-            color: white;
+            color: var(--primary); 
             text-transform: uppercase;
         }
 
         header p { 
-            font-size: 1.1rem; 
-            opacity: 0.9; 
+            font-size: 1.0rem; 
+            opacity: 0.8; 
             color: white;
             margin-top: 5px;
         }
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
 
-        .back-nav { text-align: left; margin-bottom: 20px; }
-        .back-btn {
-            display: inline-block;
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 0.8rem;
-            border: 1px dashed var(--primary);
-            padding: 8px 18px;
+        /* NAV BUTTONS ESTILO DISTRIBUCIÓN */
+        .nav-buttons {
+            text-align: center; 
+            margin: 20px 0; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
+            align-items: center;
+        }
+
+        .btn-back {
+            color: #aaa; 
+            text-decoration: none; 
+            font-size: 1.0rem; 
+            border: 1px solid #333; 
+            padding: 5px 15px; 
             border-radius: 20px;
-            background: rgba(0, 212, 255, 0.1);
+            transition: 0.3s;
         }
+        .btn-back:hover { border-color: var(--primary); color: var(--primary); }
 
-        /* TÍTULOS DE CATEGORÍA CON LÍNEA (ESTILO CATÁLOGO) */
+        /* TÍTULOS DE CATEGORÍA ESTILO DISTRIBUCIÓN */
         .category-title {
-            margin: 30px 0 15px; font-size: 1.1rem; font-weight: 700;
-            color: var(--primary); text-transform: uppercase;
-            display: flex; align-items: center;
-        }
-        .category-title::after { 
-            content: ""; height: 1px; background: #333; flex: 1; margin-left: 15px; 
+            margin: 25px 0 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            background: var(--secondary);
+            padding: 6px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            text-transform: uppercase;
         }
 
-        /* TARJETAS DE PROMOCIÓN */
-        .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 15px; }
-        
-        .promo-card {
+        /* TARJETAS DE SERVICIO */
+        .service-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            margin-bottom: 12px;
+            transition: 0.3s;
+        }
+
+        .service-card {
             background: var(--card-bg);
             border-radius: 18px;
             padding: 15px;
@@ -89,13 +106,16 @@
             gap: 15px;
             position: relative;
             overflow: hidden;
-            transition: 0.3s;
         }
 
-        .promo-card:hover { border-color: var(--primary); transform: scale(1.01); }
+        .service-card:hover {
+            border-color: var(--primary);
+            background: #1f1f1f;
+            transform: translateY(-2px);
+        }
 
-        /* Etiqueta de Oferta estilo Catálogo */
-        .promo-card::before {
+        /* ETIQUETA DE OFERTA */
+        .service-card::before {
             content: "OFERTA";
             position: absolute;
             top: 10px;
@@ -109,17 +129,12 @@
             z-index: 1;
         }
 
-        .service-logo {
-            width: 65px; height: 65px;
-            object-fit: cover; border-radius: 12px;
-            flex-shrink: 0;
-        }
-
+        .service-logo { width: 65px; height: 65px; object-fit: cover; border-radius: 12px; flex-shrink: 0; }
         .service-text { flex-grow: 1; }
         .service-text h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
         
         .manual-desc {
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             color: var(--text-gray);
             line-height: 1.4;
             display: block;
@@ -137,27 +152,28 @@
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
             background: var(--whatsapp); color: white; padding: 18px;
             border-radius: 50px; text-decoration: none; font-weight: 700;
-            width: 90%; max-width: 450px; text-align: center; z-index: 1000;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            width: 85%; max-width: 400px; text-align: center; z-index: 100;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>COMBOS DUOS Y TRIOS ⚡</h1>
-    <p>Ahorra más con nuestros combos exclusivos</p>
+    <h1>COMBOS Y DUOS ⚡</h1>
+    <p>Alex Store • Ahorra al Máximo</p>
 </header>
 
 <div class="container">
-    <div class="back-nav">
-        <a href="../" class="back-btn">⬅ VOLVER AL CATÁLOGO</a>
+    
+    <div class="nav-buttons">
+        <a href="../" class="btn-back">⬅ Volver al Catálogo</a>
     </div>
 
     <div class="category-title">🔥 COMBOS MÁS PEDIDOS</div>
 
-    <a href="#" class="promo-link">
-        <div class="promo-card">
+    <a href="#" class="service-link">
+        <div class="service-card">
             <img src="img/combo1.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Combo Cine Pro</h3>
@@ -171,8 +187,8 @@
 
     <div class="category-title">🕒 PROMOCIONES INDIVIDUALES</div>
 
-    <a href="#" class="promo-link">
-        <div class="promo-card">
+    <a href="#" class="service-link">
+        <div class="service-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Spotify Premium</h3>
@@ -192,7 +208,7 @@
 <script>
     function configurarLinksWhatsApp() {
         const telefono = "51918600000";
-        const tarjetas = document.querySelectorAll('.promo-link');
+        const tarjetas = document.querySelectorAll('.service-link');
 
         tarjetas.forEach(tarjeta => {
             const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
