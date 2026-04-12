@@ -25,10 +25,10 @@
             padding-bottom: 120px;
         }
 
-        /* HEADER - CENTRADO MATEMÁTICO */
+        /* HEADER - CENTRADO TOTAL POR CAPAS */
         header {
             background: linear-gradient(135deg, #b8860b, #ffcc00);
-            padding: 50px 0; /* Aumentamos el aire arriba y abajo */
+            padding: 50px 0;
             text-align: center;
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
@@ -37,7 +37,7 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centrado horizontal forzado */
+            align-items: center; 
         }
 
         .header-content {
@@ -56,16 +56,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px; /* Espacio controlado para el rayo */
+            gap: 8px; 
             width: 100%;
         }
 
         header p { 
             font-size: 0.9rem; 
             font-weight: 600; 
-            margin-top: 10px;
+            margin: 10px auto 0;
             width: 100%;
-            max-width: 300px; /* Limita el ancho para que el texto pequeño no se riegue */
+            max-width: 320px; 
             text-align: center;
         }
 
@@ -151,7 +151,7 @@
 
 <header>
     <div class="header-content">
-        <h1>COMBOS DUOS Y TRIOS</h1>
+        <h1>COMBOS DUOS Y TRIOS ⚡</h1>
         <p>Ahorra más con nuestros combos exclusivos</p>
     </div>
 </header>
@@ -165,13 +165,28 @@
 
     <a href="#" class="promo-link">
         <div class="promo-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
+            <img src="img/combo1.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Combo Cine Pro</h3>
                 <span class="manual-desc">Netflix Premium más Disney Premium en calidad 4K Ultra HD con garantía de 1 mes</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 25</span>
+            </div>
+        </div>
+    </a>
+
+    <div class="category-title">🕒 PROMOCIONES INDIVIDUALES</div>
+
+    <a href="#" class="promo-link">
+        <div class="promo-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">Spotify Premium</h3>
+                <span class="manual-desc">Plan trimestral sin anuncios y música sin conexión para todos tus dispositivos</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 18</span>
             </div>
         </div>
     </a>
