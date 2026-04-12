@@ -13,6 +13,7 @@
             --card-bg: #1a1a1a;
             --whatsapp: #25d366;
             --text-gray: #aaa;
+            --danger: #ff4444;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,120 +29,123 @@
         /* HEADER CENTRADO */
         header {
             background: linear-gradient(135deg, #b8860b, #ffcc00);
-            padding: 40px 0;
+            padding: 35px 0; /* Centrado corregido */
             text-align: center;
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
-            box-shadow: 0 10px 25px rgba(255, 204, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(255, 204, 0, 0.2);
             color: #000;
+            width: 100%;
         }
 
-        header h1 { font-size: 1.8rem; font-weight: 800; text-transform: uppercase; margin: 0; }
-        header p { font-size: 0.95rem; font-weight: 600; margin-top: 5px; opacity: 0.9; }
+        header h1 { 
+            font-size: 1.7rem; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            margin: 0;
+        }
 
-        .container { padding: 25px 15px; max-width: 600px; margin: auto; }
+        header p { 
+            font-size: 0.9rem; 
+            font-weight: 600; 
+            margin: 5px auto 0;
+            width: 90%;
+        }
 
-        .back-nav { margin-bottom: 20px; }
+        .container { padding: 20px 15px; max-width: 600px; margin: auto; }
+
+        .back-nav { text-align: left; margin-bottom: 20px; }
         .back-btn {
             display: inline-block;
-            color: var(--text-gray);
+            color: #aaa;
             text-decoration: none;
             font-size: 0.8rem;
             border: 1px solid #333;
-            padding: 8px 20px;
-            border-radius: 50px;
-            transition: 0.3s;
-        }
-        .back-btn:hover { border-color: var(--primary); color: var(--primary); }
-
-        .category-title { 
-            margin: 10px 0 20px; 
-            font-size: 0.9rem; 
-            font-weight: 700; 
-            color: #fff; 
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 20px;
         }
 
-        /* TARJETAS DE PROMO LIMPIAS */
+        .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 15px; }
+        
         .promo-card {
             background: var(--card-bg);
-            border-radius: 22px;
-            padding: 20px;
+            border-radius: 20px;
+            padding: 18px;
             display: flex;
             align-items: center;
-            border: 1px solid #2a2a2a;
+            border: 2px solid #333;
             gap: 15px;
-            margin-bottom: 15px;
-            cursor: pointer;
-            transition: 0.3s;
             position: relative;
+            overflow: hidden;
+            transition: 0.4s;
         }
 
-        .promo-card:hover { 
-            border-color: var(--primary); 
-            background: #222; 
-            transform: translateY(-3px); 
+        .promo-card::before {
+            content: "OFERTA";
+            position: absolute;
+            top: 10px;
+            right: -25px;
+            background: var(--danger);
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            z-index: 1;
         }
 
         .service-logo {
-            width: 65px; height: 65px;
-            object-fit: cover; border-radius: 18px;
-            border: 1px solid #333;
+            width: 75px;
+            height: 75px;
+            object-fit: cover;
+            border-radius: 15px;
+            flex-shrink: 0;
+            border: 1px solid #444;
         }
 
         .service-text { flex-grow: 1; }
-        .service-text h3 { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
-        .service-text p { font-size: 0.85rem; color: #ccc; margin-top: 2px; }
+        .service-text h3 { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
         
-        /* ETIQUETA DE CALIDAD O DISPONIBILIDAD */
-        .stock-tag {
-            font-size: 0.65rem;
-            font-weight: 700;
-            background: rgba(37, 211, 102, 0.1);
-            color: #25d366;
-            padding: 3px 8px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-top: 8px;
-            text-transform: uppercase;
+        .manual-desc {
+            font-size: 0.8rem;
+            color: #ddd;
+            line-height: 1.4;
+            display: block;
         }
 
-        .price-container { text-align: right; }
+        .price-container { text-align: right; flex-shrink: 0; min-width: 85px; }
         .price-tag { 
             color: #fff; 
             background: var(--secondary);
-            padding: 8px 15px; 
-            border-radius: 12px;
-            font-weight: 800; 
-            font-size: 1.2rem;
-            display: block;
-            box-shadow: 0 4px 10px rgba(255, 102, 0, 0.2);
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-weight: 700; 
+            font-size: 1.15rem; 
+            display: block; 
         }
 
-        .copy-toast {
-            position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
-            background: var(--primary); color: black; padding: 12px 25px;
-            border-radius: 50px; font-weight: 800; font-size: 0.85rem;
-            display: none; z-index: 1000;
+        .category-title {
+            margin: 25px 0 12px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            padding: 5px 0;
+            display: block;
+            border-bottom: 1px solid #333;
         }
 
         .floating-btn {
-            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
             background: var(--whatsapp); color: white; padding: 18px;
             border-radius: 50px; text-decoration: none; font-weight: 700;
-            width: 90%; max-width: 400px; text-align: center; z-index: 100;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            width: 85%; max-width: 400px; text-align: center; z-index: 100;
         }
     </style>
 </head>
 <body>
 
-<div id="toast" class="copy-toast">✅ COPIADO PARA WHATSAPP</div>
-
 <header>
-    <h1>COMBOS DUOS Y TRIOS ⚡</h1>
+    <h1>COMBOS DUOS Y TRIOS⚡</h1>
     <p>Ahorra más con nuestros combos exclusivos</p>
 </header>
 
@@ -150,60 +154,57 @@
         <a href="../" class="back-btn">⬅ Volver al Inicio</a>
     </div>
 
-    <div class="category-title">🔥 COMBOS MÁS PEDIDOS (Toca para elegir)</div>
+    <div class="category-title">🔥 COMBOS MÁS PEDIDOS</div>
 
-    <div class="promo-card" onclick="copyPromo('Combo Cine Pro', 'S/ 25')">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
-        <div class="service-text">
-            <h3>Combo Cine Pro</h3>
-            <p>Netflix + Disney Premium 4K</p>
-            <span class="stock-tag">• 1 mes • perfiles privados</span>
+    <a href="#" target="_blank" class="promo-link">
+        <div class="promo-card">
+            <img src="img/combo1.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">Combo Cine Pro</h3>
+                <span class="manual-desc">Netflix Premium más Disney Premium en calidad 4K Ultra HD con garantía de 1 mes.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 25</span>
+            </div>
         </div>
-        <div class="price-container">
-            <span class="price-tag">S/ 25</span>
-        </div>
-    </div>
+    </a>
 
-    <div class="promo-card" onclick="copyPromo('Spotify Premium', 'S/ 18')">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" class="service-logo">
-        <div class="service-text">
-            <h3>Spotify Premium</h3>
-            <p>3 Meses sin anuncios</p>
-            <span class="stock-tag">Entrega Inmediata</span>
-        </div>
-        <div class="price-container">
-            <span class="price-tag">S/ 18</span>
-        </div>
-    </div>
+    <div class="category-title">🕒 PROMOCIONES INDIVIDUALES</div>
 
-    <div class="promo-card" onclick="copyPromo('YouTube Premium', 'S/ 15')">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" class="service-logo">
-        <div class="service-text">
-            <h3>YouTube Premium</h3>
-            <p>Plan familiar 1 mes</p>
-            <span class="stock-tag">Garantizado</span>
+    <a href="#" target="_blank" class="promo-link">
+        <div class="promo-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">Spotify Premium (3 Meses)</h3>
+                <span class="manual-desc">Plan trimestral sin anuncios y música sin conexión para todos tus dispositivos.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 18</span>
+            </div>
         </div>
-        <div class="price-container">
-            <span class="price-tag">S/ 15</span>
-        </div>
-    </div>
-
+    </a>
 </div>
 
 <a href="https://wa.me/51918600000?text=Hola%20Alex%20Store" target="_blank" class="floating-btn">
-    📲 CONSULTAR POR WHATSAPP
+    📲 CONSULTAR OTRAS PROMOS
 </a>
 
 <script>
-    function copyPromo(nombre, precio) {
-        const mensaje = `Hola Alex Store, me interesa el ${nombre} (${precio})`;
-        
-        navigator.clipboard.writeText(mensaje).then(() => {
-            const toast = document.getElementById('toast');
-            toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 2000);
+    function configurarLinksWhatsApp() {
+        const telefono = "51918600000";
+        const tarjetas = document.querySelectorAll('.promo-link');
+
+        tarjetas.forEach(tarjeta => {
+            const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
+            const precio = tarjeta.querySelector('.precio-prod')?.innerText;
+
+            if (nombre && precio) {
+                const mensaje = `Hola Alex Store, quiero la PROMO: ${nombre} (${precio})`;
+                tarjeta.href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+            }
         });
     }
+    window.onload = configurarLinksWhatsApp;
 </script>
 
 </body>
