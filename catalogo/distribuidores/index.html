@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distribución | Alex Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d4ff;
+            --secondary: #0055ff;
+            --dark: #0a0a0a;
+            --card-bg: #161616;
+            --whatsapp: #25d366;
+            --text-gray: #aaa;
+            --danger: #ff0000; /* Rojo puro para resaltar */
+            --vip: #d4af37;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: white;
+            line-height: 1.6;
+            padding-bottom: 120px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #111, #222);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--primary);
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        header h1 { font-size: 2.8rem; font-weight: 700; color: var(--primary); }
+
+        .container { padding: 20px 15px; max-width: 600px; margin: auto; }
+
+        .nav-buttons {
+            text-align: center; 
+            margin: 20px 0; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
+            align-items: center;
+        }
+
+        .btn-vip {
+            text-decoration: none; 
+            width: 85%; 
+            max-width: 400px;
+            background: linear-gradient(135deg, #d4af37, #f4d03f); 
+            color: black; 
+            padding: 12px; 
+            border-radius: 25px; 
+            font-weight: 800; 
+            font-size: 1.0rem; 
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            display: inline-block;
+        }
+
+        .btn-back {
+            color: #aaa; 
+            text-decoration: none; 
+            font-size: 1.0rem; 
+            border: 1px solid #333; 
+            padding: 5px 15px; 
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+        .btn-back:hover { border-color: var(--primary); color: var(--primary); }
+
+        .service-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            margin-bottom: 12px;
+            transition: 0.3s;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            border: 1px solid #222;
+            gap: 15px;
+        }
+
+        .service-card:hover {
+            border-color: var(--primary);
+            background: #1f1f1f;
+            transform: translateY(-2px);
+        }
+
+        .service-logo { width: 65px; height: 65px; object-fit: cover; border-radius: 12px; flex-shrink: 0; }
+        .service-text { flex-grow: 1; }
+        .service-text h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+        .manual-desc { font-size: 0.8rem; color: var(--text-gray); line-height: 1.4; display: block; }
+
+        .price-container { text-align: right; flex-shrink: 0; min-width: 80px; }
+        .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; display: block; }
+
+        /* --- LÓGICA AUTOMÁTICA PARA AGOTADOS ACTUALIZADA --- */
+        .service-link.agotado { 
+            pointer-events: none; 
+            opacity: 0.7; 
+        }
+
+        /* Solo la imagen y el texto se ponen grises */
+        .service-link.agotado .service-logo,
+        .service-link.agotado .service-text {
+            filter: grayscale(1);
+        }
+
+        .service-link.agotado .precio-prod { display: none; }
+
+        /* Texto AGOTADO en rojo sin que le afecte el gris */
+        .service-link.agotado .price-container::after {
+            content: "AGOTADO";
+            color: var(--danger);
+            font-weight: 1000;
+            font-size: 0.85rem;
+            display: block;
+            border: 1px solid var(--danger);
+            padding: 2px 6px;
+            border-radius: 6px;
+            background: rgba(455, 0, 0, 0.3);
+        }
+
+        .category-title {
+            margin: 25px 0 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            background: var(--secondary);
+            padding: 6px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .floating-btn {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: var(--whatsapp); color: white; padding: 18px;
+            border-radius: 50px; text-decoration: none; font-weight: 700;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4); z-index: 100;
+            width: 85%; max-width: 400px; text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>SOLO DISTRIBUIDORES 🚀</h1>
+    <p style="font-size: 1.0rem; opacity: 0.8;">Alex Store • Precios Especiales</p>
+</header>
+
+<div class="container">
+    
+    <div class="nav-buttons">
+        <a href="../distribuidores-promos" class="btn-vip">👑 VER PROMOCIONES MAYORISTAS</a>
+        <a href="../" class="btn-back">⬅ Catálogo Clientes</a>
+    </div>
+
+    <div class="category-title">👤 ZONA PERFILES</div>
+
+    <a href="#" target="_blank" class="service-link agotado">
+        <div class="service-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">Netflix Perfil</h3>
+                <span class="manual-desc">Ultra HD 4K • 1 Pantalla • Renovable • Perfil privado.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 12</span></div>
+        </div>
+    </a>
+    
+    <a href="#" target="_blank" class="service-link">
+        <div class="service-card">
+            <img src="/catalogo/img/disneys.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">Disney standar Perfil</h3>
+                <span class="manual-desc">• Sin ESPN • Calidad 4K • PIN privado • (en caso sea cliente nuevo) Solo activación TV.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 4</span></div>
+        </div>
+    </a>
+    
+    <a href="#" target="_blank" class="service-link">
+        <div class="service-card">
+            <img src="/catalogo/img/disneyp.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">Disney premium Perfil</h3>
+                <span class="manual-desc">• Todo ESPN • Calidad 4K • PIN privado • (en caso sea cliente nuevo) Solo activación TV.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 6</span></div>
+        </div>
+    </a>
+    
+    <a href="#" target="_blank" class="service-link">
+        <div class="service-card">
+            <img src="/catalogo/img/prime.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">AMAZON PRIME Perfil</h3>
+                <span class="manual-desc">• 1 perfil • Entrega de correo y contraseña.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 4</span></div>
+        </div>
+    </a>
+    
+    <a href="#" target="_blank" class="service-link">
+        <div class="service-card">
+            <img src="/catalogo/img/prime.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">AMAZON PRIME Perfil (TV)</h3>
+                <span class="manual-desc">• 1 perfil • Activación directa a TV.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 3</span></div>
+        </div>
+    </a>
+    
+    <a href="#" target="_blank" class="service-link">
+        <div class="service-card">
+            <img src="/catalogo/img/vix.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">VIX PREMIUM Perfil</h3>
+                <span class="manual-desc">• Premium • Series y Telenovelas • 1 perfil.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 3</span></div>
+        </div>
+    </a>
+    
+    <a href="#" target="_blank" class="service-link">
+        <div class="service-card">
+            <img src="/catalogo/img/paramount.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">PARAMOUNT Perfil</h3>
+                <span class="manual-desc">• Premium • Estrenos exclusivos • 1 perfil.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 3</span></div>
+        </div>
+    </a>
+    
+    <a href="#" target="_blank" class="service-link">
+        <div class="service-card">
+            <img src="/catalogo/img/crunchyroll.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">CRUNCHYROLL Perfil</h3>
+                <span class="manual-desc">• Premium • Sin anuncios • 1 perfil.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 3</span></div>
+        </div>
+    </a>
+    
+    <a href="#" target="_blank" class="service-link">
+        <div class="service-card">
+            <img src="/catalogo/img/movistar.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">Movistar Play + Liga 1 Max Perfil</h3>
+                <span class="manual-desc">• Activación TV • Incluye ESPN • 1 perfil.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 12</span></div>
+        </div>
+    </a>
+    
+    <a href="#" target="_blank" class="service-link">
+        <div class="service-card">
+            <img src="/catalogo/img/dgo.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">DGO + Liga 1 Max Perfil</h3>
+                <span class="manual-desc">• Activación TV • Incluye ESPN • 1 perfil.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 16</span></div>
+        </div>
+    </a>
+    
+    <div class="category-title">🏠 ZONA CUENTAS COMPLETAS</div>
+
+    <a href="#" target="_blank" class="service-link agotado">
+        <div class="service-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">Netflix Completa</h3>
+                <span class="manual-desc">• 5 Perfiles • 1 mes • Renovable • Ultra HD.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 45</span></div>
+        </div>
+    </a>
+    
+    <a href="#" target="_blank" class="service-link">
+        <div class="service-card">
+            <img src="/catalogo/img/disneys.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">Disney premium Completa</h3>
+                <span class="manual-desc">• 7 Perfiles • 1 mes • Sin canales ESPN.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 14</span></div>
+        </div>
+    </a>
+    
+    <a href="#" target="_blank" class="service-link agotado">
+        <div class="service-card">
+            <img src="/catalogo/img/disneyp.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">Disney Premium Completa</h3>
+                <span class="manual-desc">• 7 Perfiles • 1 mes • Todo los canales ESPN incluido.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 20</span></div>
+        </div>
+    </a>
+
+    <a href="#" class="service-link agotado">
+        <div class="service-card">
+            <img src="/catalogo/img/dgo.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">DGO + Liga 1 Max Completa</h3>
+                <span class="manual-desc">• Plan Completo • 4 dispositivos en simultáneo (2 en simultaneo canal liga 1 max).</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 28</span></div>
+        </div>
+    </a>
+    
+    <a href="#" class="service-link agotado">
+        <div class="service-card">
+            <img src="/catalogo/img/movistar.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">Movistar Play + Liga 1 Max Completa</h3>
+                <span class="manual-desc">• Plan Completo • 2 dispositivos en simultáneo .</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 22</span></div>
+        </div>
+    </a>
+
+    <a href="#" class="service-link">
+        <div class="service-card">
+            <img src="/catalogo/img/max.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">MAX PLATINO completa</h3>
+                <span class="manual-desc">• 5 perfiles • Ultra HD • 4 en simultáneo.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 12</span></div>
+        </div>
+    </a>
+    
+    <a href="#" class="service-link">
+        <div class="service-card">
+            <img src="/catalogo/img/max.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">MAX STANDARD completa</h3>
+                <span class="manual-desc">• 5 perfiles • Ultra HD • 2 en simultáneo.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 7</span></div>
+        </div>
+    </a>
+    
+    <a href="#" class="service-link">
+        <div class="service-card">
+            <img src="/catalogo/img/vix.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">VIX PREMIUM completa</h3>
+                <span class="manual-desc">• 5 perfiles • FULL HD • 3 en simultáneo.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 5</span></div>
+        </div>
+    </a>
+    
+    <a href="#" class="service-link">
+        <div class="service-card">
+            <img src="/catalogo/img/crunchyroll.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">crunchyroll completa</h3>
+                <span class="manual-desc">• 5 perfiles • full HD •  .</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 7</span></div>
+        </div>
+    </a>
+    
+    <a href="#" class="service-link">
+        <div class="service-card">
+            <img src="/catalogo/img/prime.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">prime video completa</h3>
+                <span class="manual-desc">• 6 perfiles • Ultra HD • 3 en simultáneo.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 10</span></div>
+        </div>
+    </a>
+    
+    <a href="#" class="service-link">
+        <div class="service-card">
+            <img src="/catalogo/img/paramount.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">PARAMOUNT completa</h3>
+                <span class="manual-desc">• 6 perfiles • Ultra HD • 3 en simultáneo.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 7</span></div>
+        </div>
+    </a>
+    
+    <div class="category-title">👤 APPS DE PAGA PARA SMARTERS</div>
+    
+    <a href="#" target="_blank" class="service-link">
+       <div class="service-card">
+            <img src="/catalogo/img/ibo.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">IBO PLAYER (12 meses)</h3>
+                <span class="manual-desc">• Licencia 1 año • Solo activación de app.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 13</span></div>
+        </div>
+    </a>
+    
+    <a href="#" target="_blank" class="service-link">
+       <div class="service-card">
+            <img src="/catalogo/img/ibopro.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">IBOPRO (12 meses)</h3>
+                <span class="manual-desc">• Licencia 1 año • Solo activación de app.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 13</span></div>
+        </div>
+    </a>
+</div>
+
+<a href="https://wa.me/51918600000?text=Hola%20Alex%20Store,%20soy%20Distribuidor" target="_blank" class="floating-btn">
+    📲 CONTACTAR SOPORTE WHATSAPP
+</a>
+
+<script>
+    function configurarLinksWhatsApp() {
+        const telefono = "51918600000";
+        const tarjetas = document.querySelectorAll('.service-link:not(.agotado)');
+
+        tarjetas.forEach(tarjeta => {
+            const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
+            const precio = tarjeta.querySelector('.precio-prod')?.innerText;
+
+            if (nombre && precio) {
+                const mensaje = `Hola Alex Store, soy Distribuidor. Deseo ${nombre} (${precio})`;
+                tarjeta.href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+            }
+        });
+    }
+    window.onload = configurarLinksWhatsApp;
+</script>
+
+</body>
+</html>
