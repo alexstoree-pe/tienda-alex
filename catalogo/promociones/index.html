@@ -7,8 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #ffcc00; /* Dorado para promociones */
-            --secondary: #ff6600; /* Naranja para resaltar */
+            --primary: #ffcc00; 
+            --secondary: #ff6600; 
             --dark: #0a0a0a;
             --card-bg: #1a1a1a;
             --whatsapp: #25d366;
@@ -126,39 +126,30 @@
             display: block; 
         }
 
-        /* --- LÓGICA DE AGOTADO MEJORADA --- */
+        /* --- LÓGICA DE AGOTADO (RESALTADO ROJO) --- */
         .promo-link.agotado {
             pointer-events: none;
-            opacity: 0.8; /* Menos opaco para que se vea el contenido */
+            opacity: 0.8; 
         }
 
-        .promo-link.agotado .promo-card {
-            border-color: #444;
-        }
-
-        /* Etiqueta superior en gris */
         .promo-link.agotado .promo-card::before {
             content: "SIN STOCK";
             background: #555;
         }
 
-        .promo-link.agotado .price-tag {
-            display: none;
-        }
+        .promo-link.agotado .price-tag { display: none; }
 
-        /* Texto AGOTADO resaltado en rojo puro */
         .promo-link.agotado .price-container::after {
             content: "AGOTADO";
-            color: #ff0000; /* Rojo intenso */
-            background: rgba(255, 0, 0, 0.15); /* Fondo suave rojo para resaltar */
-            border: 1px solid #ff0000;
+            color: #ff0000; /* Rojo vivo */
+            background: rgba(255, 0, 0, 0.2); 
+            border: 2px solid #ff0000;
             padding: 4px 8px;
             border-radius: 8px;
-            font-weight: 900; /* Super negrita */
+            font-weight: 900; 
             font-size: 0.85rem;
             display: inline-block;
             text-transform: uppercase;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
         }
 
         .category-title {
@@ -183,7 +174,8 @@
 <body>
 
 <header>
-    <h1>COMBOS OFERTAS ⚡</h1><p>Ahorra más con nuestros combos exclusivos</p>
+    <h1>COMBOS OFERTAS ⚡</h1>
+    <p>Ahorra más con nuestros combos exclusivos</p>
 </header>
 
 <div class="container">
@@ -207,7 +199,7 @@
         </div>
     </a>
 
-    <a href="#" target="_blank" class="promo-link">
+    <a href="#" target="_blank" class="promo-link agotado">
         <div class="promo-card">
             <img src="/img/combo-deportes.png" class="service-logo">
             <div class="service-text">
@@ -216,6 +208,21 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 25</span>
+            </div>
+        </div>
+    </a>
+
+    <div class="category-title">🕒 PROMOCIONES INDIVIDUALES</div>
+
+    <a href="#" target="_blank" class="promo-link agotado">
+        <div class="promo-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">Spotify Premium (3 Meses)</h3>
+                <span class="manual-desc">Plan trimestral • Sin anuncios • Música sin conexión.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 18</span>
             </div>
         </div>
     </a>
