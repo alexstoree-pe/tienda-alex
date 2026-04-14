@@ -38,11 +38,13 @@
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
 
+        /* Botón de Distribuidores Modificado */
         .distributor-btn {
             background: rgba(0, 212, 255, 0.1); color: var(--primary); 
             border: 1px dashed var(--primary); padding: 12px 25px; 
             border-radius: 30px; text-decoration: none; font-weight: 600; 
-            font-size: 0.85rem; display: block; text-align: center; margin: 20px 0; transition: 0.3s;
+            font-size: 0.85rem; display: block; text-align: center; margin: 20px 0; 
+            transition: 0.3s; cursor: pointer;
         }
 
         .category-title {
@@ -72,12 +74,10 @@
         .manual-desc { font-size: 0.78rem; color: var(--text-gray); line-height: 1.4; display: block; }
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
 
-        /* AGOTADOS */
         .service-item.agotado { pointer-events: none; opacity: 0.6; filter: grayscale(1); }
         .service-item.agotado .price-tag { display: none; }
         .service-item.agotado .price-container::after { content: "AGOTADO"; color: var(--danger); font-weight: 800; font-size: 0.75rem; border: 1px solid var(--danger); padding: 2px 5px; border-radius: 4px; }
 
-        /* MODAL */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 2000; }
         .modal-content { background: #1a1a1a; padding: 25px; border-radius: 20px; width: 90%; max-width: 400px; border: 1px solid var(--primary); }
         .option-btn { display: block; width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; }
@@ -106,7 +106,7 @@
 </header>
 
 <div class="container">
-    <a href="distribuidores/" class="distributor-btn">👤 ZONA DISTRIBUIDORES</a>
+    <a href="javascript:void(0)" class="distributor-btn" onclick="accesoDistribuidores()">👤 ZONA DISTRIBUIDORES</a>
 
     <div class="category-title main-title">⭐ ZONA DE CLIENTES ⭐</div>
 
@@ -244,7 +244,7 @@
         <div id="form-datos" style="display:none;">
             <h2 style="color:var(--primary); margin-bottom:15px; text-align:center;">Datos de Registro</h2>
             <div class="input-group"><label>Nombre Completo</label><input type="text" id="reg-nom"></div>
-            <div class="input-group"><label>Celular con el que nos es escribirá  por whatsapp</label><input type="tel" id="reg-cel"></div>
+            <div class="input-group"><label>Celular de contacto</label><input type="tel" id="reg-cel"></div>
             <div class="input-group"><label>Nombre para el Perfil</label><input type="text" id="reg-per"></div>
             <button class="option-btn btn-nuevo" onclick="enviarWhatsApp('nuevo')">CONFIRMAR Y PEDIR</button>
             <button onclick="volverPaso1()" style="background:none; border:none; color:grey; width:100%; margin-top:10px; cursor:pointer;">Atrás</button>
@@ -255,6 +255,18 @@
 <script>
     let carrito = [];
     const numWhatsApp = "51918600000";
+
+    // FUNCIÓN DE ACCESO PARA DISTRIBUIDORES
+    function accesoDistribuidores() {
+        const passCorrecta = "ALEX2026"; // Cambia esta contraseña si deseas
+        const passUsuario = prompt("🔐 Ingrese el código de acceso para Distribuidores:");
+        
+        if (passUsuario === passCorrecta) {
+            window.location.href = "distribuidores/";
+        } else if (passUsuario !== null) {
+            alert("❌ Código incorrecto. Acceso denegado.");
+        }
+    }
 
     function toggleCarrito(elemento) {
         const nombre = elemento.querySelector('.nombre-prod').innerText;
@@ -289,7 +301,7 @@
             const n = document.getElementById('reg-nom').value;
             const c = document.getElementById('reg-cel').value;
             const p = document.getElementById('reg-per').value;
-            if(!n || !c || !p) return alert("Completa los datos para el registro en la base");
+            if(!n || !c || !p) return alert("Completa los datos para el registro");
             msg += `\n\n👤 *NUEVO CLIENTE*:\n- Nombre: ${n}\n- Cel: ${c}\n- Perfil: ${p}`;
         } else { msg += `\n\n✅ *CLIENTE REGISTRADO*`; }
 
