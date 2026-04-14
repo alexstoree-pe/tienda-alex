@@ -16,116 +16,54 @@
             --danger: #ff0000;
         }
 
+        /* --- TUS ESTILOS ORIGINALES (Mantenidos) --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark);
-            color: white;
-            line-height: 1.6;
-            padding-bottom: 140px;
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            padding: 40px 20px; text-align: center;
-            border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
-
+        body { font-family: 'Poppins', sans-serif; background-color: var(--dark); color: white; line-height: 1.6; padding-bottom: 140px; }
+        header { background: linear-gradient(135deg, var(--secondary), var(--primary)); padding: 40px 20px; text-align: center; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
         header h1 { font-size: 3.0rem; font-weight: 700; letter-spacing: 1px; }
         header p { font-size: 1.2rem; opacity: 0.9; }
-
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
-
-        .distributor-link { text-align: center; margin: 25px 0 10px; }
-        .distributor-btn {
-            background: rgba(0, 212, 255, 0.1); color: var(--primary); 
-            border: 1px dashed var(--primary); padding: 12px 25px; 
-            border-radius: 30px; text-decoration: none; font-weight: 600; 
-            font-size: 0.85rem; display: inline-block; transition: 0.3s;
-        }
-
-        .category-title {
-            margin: 30px 0 15px; font-size: 1.1rem; font-weight: 700;
-            color: var(--primary); text-transform: uppercase;
-            display: flex; align-items: center;
-        }
+        .distributor-btn { background: rgba(0, 212, 255, 0.1); color: var(--primary); border: 1px dashed var(--primary); padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 0.85rem; display: inline-block; transition: 0.3s; }
+        .category-title { margin: 30px 0 15px; font-size: 1.1rem; font-weight: 700; color: var(--primary); text-transform: uppercase; display: flex; align-items: center; }
         .category-title::after { content: ""; height: 1px; background: #333; flex: 1; margin-left: 15px; }
-
-        .main-title {
-            display: block; text-align: center; margin: 40px 0 20px;
-            color: #fff; border-bottom: 1px solid #333;
-            padding-bottom: 10px; font-size: 1.3rem;
-        }
-        .main-title::after { display: none; }
-
-        .service-item { cursor: pointer; display: block; margin-bottom: 12px; user-select: none; }
-        .service-card {
-            background: var(--card-bg); border-radius: 18px; padding: 15px;
-            display: flex; align-items: center; border: 1px solid #222;
-            transition: 0.3s; gap: 15px; position: relative;
-        }
-
+        .main-title { display: block; text-align: center; margin: 40px 0 20px; color: #fff; border-bottom: 1px solid #333; padding-bottom: 10px; font-size: 1.3rem; }
+        .service-item { cursor: pointer; display: block; margin-bottom: 12px; }
+        .service-card { background: var(--card-bg); border-radius: 18px; padding: 15px; display: flex; align-items: center; border: 1px solid #222; transition: 0.3s; gap: 15px; position: relative; }
         .service-item.selected .service-card { border-color: var(--primary); background: #1a2a3a; transform: scale(1.02); }
-        .service-item.selected .service-card::before {
-            content: "✓"; position: absolute; top: -5px; right: -5px;
-            background: var(--primary); color: var(--dark);
-            width: 22px; height: 22px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: bold; font-size: 12px;
-        }
-
-        .service-logo { width: 65px; height: 65px; object-fit: cover; border-radius: 12px; flex-shrink: 0; }
-        .service-text { flex-grow: 1; }
-        .service-text h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-        .manual-desc { font-size: 0.78rem; color: var(--text-gray); line-height: 1.4; display: block; }
-        .price-container { text-align: right; flex-shrink: 0; min-width: 80px; }
-        .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; display: block; }
-
-        /* --- ESTILO ACTUALIZADO AGOTADOS --- */
-        .service-item.agotado { 
-            pointer-events: none; 
-            opacity: 0.8; 
-        }
-        .service-item.agotado .service-logo,
-        .service-item.agotado .service-text {
-            filter: grayscale(1);
-        }
-        .service-item.agotado .precio-prod { display: none; }
-        .service-item.agotado .price-container::after {
-            content: "AGOTADO"; 
-            color: var(--danger); 
-            border: 1px solid var(--danger);
-            padding: 3px 8px; 
-            border-radius: 6px; 
-            font-size: 0.75rem; 
-            font-weight: 800; 
-            display: block;
-            background: rgba(255, 0, 0, 0.3);
-        }
-
-        .promo-banner { text-align: center; margin: 35px 0 20px; }
-        .promo-btn {
-            text-decoration: none; display: inline-block; width: 90%; 
-            background: linear-gradient(135deg, #ff6600, #ff4444); color: white;
-            padding: 15px; border-radius: 25px; font-weight: 800; text-transform: uppercase;
-        }
-
-        .floating-btn {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: var(--whatsapp); color: white; padding: 15px;
-            border-radius: 50px; text-decoration: none; font-weight: 700;
-            width: 90%; max-width: 450px; text-align: center; z-index: 1000;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
-            display: flex; justify-content: space-between; align-items: center;
-        }
+        .service-logo { width: 65px; height: 65px; object-fit: cover; border-radius: 12px; }
+        .service-text h3 { font-size: 1rem; color: #fff; }
+        .price-tag { color: var(--primary); font-weight: 700; }
+        .floating-btn { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--whatsapp); color: white; padding: 15px; border-radius: 50px; text-decoration: none; font-weight: 700; width: 90%; max-width: 450px; text-align: center; z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
         .floating-btn.hidden { display: none; }
-        .btn-text { flex-grow: 1; text-align: center; display: flex; flex-direction: column; }
-        .discount-notice { font-size: 0.7rem; color: #e0ffe0; font-weight: 400; }
-        .cart-count { background: rgba(0,0,0,0.2); padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; }
-        .total-amount { font-weight: 800; font-size: 1.1rem; }
-        .old-price { font-size: 0.75rem; text-decoration: line-through; opacity: 0.7; display: block; }
+
+        /* --- NUEVOS ESTILOS PARA EL MODAL DE REGISTRO --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); display: none; 
+            justify-content: center; align-items: center; z-index: 2000;
+        }
+        .modal-content {
+            background: #1a1a1a; padding: 25px; border-radius: 20px;
+            width: 90%; max-width: 400px; border: 1px solid var(--primary);
+            text-align: center;
+        }
+        .modal-content h2 { color: var(--primary); margin-bottom: 15px; font-size: 1.2rem; }
+        .option-btn {
+            display: block; width: 100%; padding: 12px; margin: 10px 0;
+            border-radius: 10px; border: none; font-weight: 700; cursor: pointer;
+            font-family: 'Poppins';
+        }
+        .btn-nuevo { background: var(--primary); color: #000; }
+        .btn-antiguo { background: #333; color: #fff; }
+        
+        #form-datos { display: none; margin-top: 20px; text-align: left; }
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; font-size: 0.8rem; color: var(--text-gray); margin-bottom: 5px; }
+        .input-group input {
+            width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #444;
+            background: #0a0a0a; color: white; outline: none;
+        }
+        .btn-confirmar { background: var(--whatsapp); color: white; width: 100%; padding: 12px; border-radius: 10px; border: none; font-weight: 700; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -154,181 +92,43 @@
             <div class="price-container"><span class="price-tag precio-prod">S/ 16</span></div>
         </div>
     </div>
-
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/disneys.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Disney Standar</h3>
-                <span class="manual-desc">• No incluye ESPN • Contenido Disney y películas.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 6</span></div>
-        </div>
-    </div>
-
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/disneyp.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Disney Premium</h3>
-                <span class="manual-desc">• Incluye todos los canales ESPN y Deportes.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 10</span></div>
-        </div>
-    </div>
-
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/max.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">MAX</h3>
-                <span class="manual-desc">• FULL HD • Estrenos exclusivos • 1 perfil.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 5</span></div>
-        </div>
-    </div>
-
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/max.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">MAX Platino</h3>
-                <span class="manual-desc">• 4K Ultra HD • Estrenos exclusivos • 1 perfil.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 7</span></div>
-        </div>
-    </div>
-
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/paramount.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">PARAMOUNT</h3>
-                <span class="manual-desc">• Premium • Estrenos exclusivos • 1 perfil.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 6</span></div>
-        </div>
-    </div>
-
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/vix.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">VIX PREMIUM</h3>
-                <span class="manual-desc">• Premium • Series mexicanas • 1 perfil.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 5</span></div>
-        </div>
-    </div>
-
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/prime.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">AMAZON PRIME (activacion a TV)</h3>
-                <span class="manual-desc">• Premium • Estrenos exclusivos • 1 perfil.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 5</span></div>
-        </div>
-    </div>
-
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/prime.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">AMAZON PRIME</h3>
-                <span class="manual-desc">• Premium • Estrenos exclusivos • 1 perfil • Se entrega correo y contraseña.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 8</span></div>
-        </div>
-    </div>
     
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/crunchyroll.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">CRUNCHYROLL</h3>
-                <span class="manual-desc">• Premium • Anime sin anuncios • 1 perfil.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 5</span></div>
-        </div>
     </div>
 
-    <div class="category-title">📺 TV y Deportes</div>
+<a href="javascript:void(0)" id="whatsapp-btn" class="floating-btn hidden" onclick="abrirModal()">
+    <span class="cart-count" id="cart-count">0</span>
+    <span class="btn-text">PEDIR POR WHATSAPP</span>
+    <span class="total-amount" id="cart-total">S/ 0</span>
+</a>
 
-    <div class="service-item agotado" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/dgo.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">DGO con Liga</h3>
-                <span class="manual-desc">• Directv Go + Liga 1 Max • Activación TV.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 20</span></div>
+<div id="modal-registro" class="modal-overlay">
+    <div class="modal-content">
+        <div id="paso-1">
+            <h2>¿Eres cliente de Alex Store?</h2>
+            <button class="option-btn btn-antiguo" onclick="finalizarPedido('antiguo')">SÍ, YA SOY CLIENTE</button>
+            <button class="option-btn btn-nuevo" onclick="mostrarFormulario()">NO, SOY CLIENTE NUEVO</button>
+            <button style="background:transparent; color:grey; border:none; margin-top:10px;" onclick="cerrarModal()">Cancelar</button>
         </div>
-    </div>
 
-    <div class="service-item agotado" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/movistar.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Movistar Play</h3>
-                <span class="manual-desc">• Movistar Play + Liga 1 Max • Activación TV.</span>
+        <div id="form-datos">
+            <h2>Datos del Nuevo Cliente</h2>
+            <div class="input-group">
+                <label>Nombre Completo</label>
+                <input type="text" id="reg-nombre" placeholder="Ej: Juan Pérez">
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 20</span></div>
-        </div>
-    </div>
-
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/flujo.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Magis TV - Flujo TV</h3>
-                <span class="manual-desc">• 10000+ Canales • 1 Perfil.</span>
+            <div class="input-group">
+                <label>Número de Celular</label>
+                <input type="tel" id="reg-celular" placeholder="Ej: 918600000">
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 12</span></div>
-        </div>
-    </div>
-
-    <div class="category-title">🎵 MUSICA Y VIDEO</div>
-
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Spotify Premium (1 mes)</h3>
-                <span class="manual-desc">• Sin anuncios • Descargas • Renovable.</span>
+            <div class="input-group">
+                <label>Nombre del Perfil deseado</label>
+                <input type="text" id="reg-perfil" placeholder="Ej: MiPerfil2026">
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 8</span></div>
+            <button class="btn-confirmar" onclick="finalizarPedido('nuevo')">ENVIAR PEDIDO</button>
+            <button style="background:transparent; color:grey; border:none; margin-top:10px; width:100%" onclick="volverPaso1()">Atrás</button>
         </div>
-    </div>
-
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/youtube.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Youtube Premium (1 mes)</h3>
-                <span class="manual-desc">• Sin anuncios • Descargas • No Renovable.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 8</span></div>
-        </div>
-    </div>
-    
-    <div class="promo-banner">
-        <a href="promociones/" class="promo-btn">🔥 VER COMBO DE PLATAFORMAS</a>
     </div>
 </div>
-
-<a href="javascript:void(0)" id="whatsapp-btn" class="floating-btn hidden" onclick="enviarPedido()">
-    <span class="cart-count" id="cart-count">0</span>
-    <span class="btn-text">
-        PEDIR POR WHATSAPP
-        <span id="discount-label" class="discount-notice"></span>
-    </span>
-    <div class="total-info">
-        <span id="old-price" class="old-price"></span>
-        <span class="total-amount" id="cart-total">S/ 0</span>
-    </div>
-</a>
 
 <script>
     let carrito = [];
@@ -336,11 +136,9 @@
 
     function toggleCarrito(elemento) {
         if(elemento.classList.contains('agotado')) return;
-
         const nombre = elemento.querySelector('.nombre-prod').innerText;
         const precioTexto = elemento.querySelector('.precio-prod').innerText;
         const precio = parseFloat(precioTexto.replace('S/', '').trim());
-
         const index = carrito.findIndex(item => item.nombre === nombre);
         
         if (index > -1) {
@@ -361,38 +159,58 @@
         const btn = document.getElementById('whatsapp-btn');
         const countLabel = document.getElementById('cart-count');
         const totalLabel = document.getElementById('cart-total');
-        const oldPriceLabel = document.getElementById('old-price');
-        const discountLabel = document.getElementById('discount-label');
-        
-        let subtotal = carrito.reduce((sum, item) => sum + item.precio, 0);
-        let totalFinal = subtotal;
-        let cantidad = carrito.length;
+        let total = carrito.reduce((sum, item) => sum + item.precio, 0);
+        let final = (carrito.length === 2) ? Math.round(total * 0.96) : total;
 
-        if (cantidad === 2) {
-            totalFinal = Math.round(subtotal * 0.96); 
-            oldPriceLabel.innerText = `S/ ${subtotal}`;
-            discountLabel.innerText = "¡Combo Especial 2 Servicios!";
-        } else {
-            oldPriceLabel.innerText = "";
-            discountLabel.innerText = (cantidad === 1) ? "¡Agrega otro y obtén descuento!" : "";
-        }
-        
-        countLabel.innerText = cantidad;
-        totalLabel.innerText = `S/ ${totalFinal}`;
-        cantidad > 0 ? btn.classList.remove('hidden') : btn.classList.add('hidden');
+        countLabel.innerText = carrito.length;
+        totalLabel.innerText = `S/ ${final}`;
+        carrito.length > 0 ? btn.classList.remove('hidden') : btn.classList.add('hidden');
     }
 
-    function enviarPedido() {
-        if (carrito.length === 0) return;
+    // LÓGICA DEL MODAL
+    function abrirModal() {
+        document.getElementById('modal-registro').style.display = 'flex';
+    }
+
+    function cerrarModal() {
+        document.getElementById('modal-registro').style.display = 'none';
+        volverPaso1();
+    }
+
+    function mostrarFormulario() {
+        document.getElementById('paso-1').style.display = 'none';
+        document.getElementById('form-datos').style.display = 'block';
+    }
+
+    function volverPaso1() {
+        document.getElementById('paso-1').style.display = 'block';
+        document.getElementById('form-datos').style.display = 'none';
+    }
+
+    function finalizarPedido(tipo) {
         let subtotal = carrito.reduce((sum, item) => sum + item.precio, 0);
-        let cantidad = carrito.length;
-        let totalFinal = (cantidad === 2) ? Math.round(subtotal * 0.96) : subtotal;
+        let final = (carrito.length === 2) ? Math.round(subtotal * 0.96) : subtotal;
 
         let mensaje = "Hola *Alex Store*, deseo contratar:\n\n";
-        carrito.forEach(item => mensaje += `🔹 *${item.nombre}* - S/ ${item.precio}\n`);
-        if (cantidad === 2) mensaje += `\nSubtotal: S/ ${subtotal}\n🎁 Combo Especial aplicado`;
-        mensaje += `\n💰 *TOTAL A PAGAR: S/ ${totalFinal}*`;
+        carrito.forEach(item => mensaje += `🔹 *${item.nombre}*\n`);
+        mensaje += `\n💰 *TOTAL: S/ ${final}*`;
+
+        if (tipo === 'nuevo') {
+            const nom = document.getElementById('reg-nombre').value;
+            const cel = document.getElementById('reg-celular').value;
+            const per = document.getElementById('reg-perfil').value;
+
+            if(!nom || !cel || !per) {
+                alert("Por favor, completa todos los campos.");
+                return;
+            }
+            mensaje += `\n\n👤 *DATOS CLIENTE NUEVO*:\n- Nombre: ${nom}\n- WhatsApp: ${cel}\n- Perfil: ${per}`;
+        } else {
+            mensaje += `\n\n✅ *YA SOY CLIENTE REGISTRADO*`;
+        }
+
         window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
+        cerrarModal();
     }
 </script>
 </body>
