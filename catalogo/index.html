@@ -244,8 +244,8 @@
         <div id="form-datos" style="display:none;">
             <h2 style="color:var(--primary); margin-bottom:15px; text-align:center;">Datos de Registro</h2>
             <div class="input-group"><label>Nombre Completo</label><input type="text" id="reg-nom"></div>
-            <div class="input-group"><label>Celular</label><input type="tel" id="reg-cel"></div>
-            <div class="input-group"><label>Nombre de Perfil</label><input type="text" id="reg-per"></div>
+            <div class="input-group"><label>Celular con el que nos habalre por whatsapp</label><input type="tel" id="reg-cel"></div>
+            <div class="input-group"><label>Nombre para el Perfil</label><input type="text" id="reg-per"></div>
             <button class="option-btn btn-nuevo" onclick="enviarWhatsApp('nuevo')">CONFIRMAR Y PEDIR</button>
             <button onclick="volverPaso1()" style="background:none; border:none; color:grey; width:100%; margin-top:10px; cursor:pointer;">Atrás</button>
         </div>
@@ -289,7 +289,7 @@
             const n = document.getElementById('reg-nom').value;
             const c = document.getElementById('reg-cel').value;
             const p = document.getElementById('reg-per').value;
-            if(!n || !c || !p) return alert("Completa los datos");
+            if(!n || !c || !p) return alert("Completa los datos para el registro en la base de datos");
             msg += `\n\n👤 *NUEVO CLIENTE*:\n- Nombre: ${n}\n- Cel: ${c}\n- Perfil: ${p}`;
         } else { msg += `\n\n✅ *CLIENTE REGISTRADO*`; }
 
