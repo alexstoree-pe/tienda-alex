@@ -59,11 +59,10 @@
 
         /* LÓGICA DE ETIQUETAS DINÁMICAS */
         .stock-status::before { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; display: block; }
-        
         .disponible .stock-status::before { content: "✅ Entrega inmediata"; color: var(--success); }
         .pocas .stock-status::before { content: "⏳ Últimas cuentas"; color: var(--warning); }
         
-        /* JERARQUÍA AGOTADO: Borra etiquetas, precios y renovaciones */
+        /* JERARQUÍA AGOTADO */
         .service-link.agotado .stock-status,
         .service-link.agotado .price-tag, 
         .service-link.agotado .renovacion-info { display: none !important; }
@@ -98,11 +97,9 @@
             width: 100%; padding: 6px 4px; border-radius: 8px; background: rgba(255, 0, 0, 0.1);
         }
 
-        .btn-vip { text-decoration: none; width: 100%; max-width: 450px; background: linear-gradient(135deg, var(--vip), #f4d03f); color: black; padding: 18px; border-radius: 20px; font-weight: 800; font-size: 1rem; display: inline-block; text-align: center; }
+        .floating-btn { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--whatsapp); color: white; padding: 18px; border-radius: 50px; text-decoration: none; font-weight: 700; width: 85%; max-width: 400px; text-align: center; z-index: 100; }
         .modal-pass { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 3000; justify-content: center; align-items: center; }
         .modal-content { background: #1a1a1a; padding: 30px; border-radius: 25px; width: 90%; max-width: 380px; border: 1px solid var(--primary); text-align: center; }
-        .input-estilo { width: 100%; padding: 15px; margin: 20px 0; border-radius: 12px; background: #000; color: white; text-align: center; border: 1px solid #444; font-size: 1.2rem; }
-        .floating-btn { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--whatsapp); color: white; padding: 18px; border-radius: 50px; text-decoration: none; font-weight: 700; width: 85%; max-width: 400px; text-align: center; z-index: 100; }
     </style>
 </head>
 <body>
@@ -114,10 +111,6 @@
 </header>
 
 <div class="container">
-    <div class="nav-buttons" style="text-align: center; margin-bottom: 20px;">
-        <a href="../distribuidores-promos" class="btn-vip">👑 VER PROMOCIONES MAYORISTAS</a>
-    </div>
-
     <div class="category-title">👤 ZONA PERFILES</div>
 
     <a href="#" class="service-link disponible con-renovacion">
@@ -140,7 +133,7 @@
             <img src="../img/disneys.png" class="service-logo">
             <div class="service-text">
                 <span class="stock-status"></span>
-                <h3 class="nombre-prod">Disney standar Perfil</h3>
+                <h3 class="nombre-prod">Disney Standard Perfil</h3>
                 <span class="manual-desc">Sin ESPN • Calidad 4K • PIN privado.</span>
             </div>
             <div class="price-container">
@@ -155,7 +148,7 @@
             <img src="../img/disneyp.png" class="service-logo">
             <div class="service-text">
                 <span class="stock-status"></span>
-                <h3 class="nombre-prod">Disney premium Perfil</h3>
+                <h3 class="nombre-prod">Disney Premium Perfil</h3>
                 <span class="manual-desc">Todo ESPN • Calidad 4K • PIN privado.</span>
             </div>
             <div class="price-container">
@@ -170,7 +163,7 @@
             <img src="../img/prime.png" class="service-logo">
             <div class="service-text">
                 <span class="stock-status"></span>
-                <h3 class="nombre-prod">AMAZON PRIME Perfil</h3>
+                <h3 class="nombre-prod">Amazon Prime Perfil</h3>
                 <span class="manual-desc">1 perfil • Correo y contraseña.</span>
             </div>
             <div class="price-container">
@@ -185,8 +178,53 @@
             <img src="../img/prime.png" class="service-logo">
             <div class="service-text">
                 <span class="stock-status"></span>
-                <h3 class="nombre-prod">AMAZON PRIME Perfil (TV)</h3>
+                <h3 class="nombre-prod">Amazon Prime Perfil (TV)</h3>
                 <span class="manual-desc">1 perfil • Activación directa a TV.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+                <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="#" class="service-link disponible">
+        <div class="service-card">
+            <img src="../img/vix.png" class="service-logo">
+            <div class="service-text">
+                <span class="stock-status"></span>
+                <h3 class="nombre-prod">Vix Premium Perfil</h3>
+                <span class="manual-desc">Premium • Series y Telenovelas.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+                <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="#" class="service-link disponible">
+        <div class="service-card">
+            <img src="../img/paramount.png" class="service-logo">
+            <div class="service-text">
+                <span class="stock-status"></span>
+                <h3 class="nombre-prod">Paramount Perfil</h3>
+                <span class="manual-desc">Premium • Estrenos exclusivos.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+                <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="#" class="service-link disponible">
+        <div class="service-card">
+            <img src="../img/crunchyroll.png" class="service-logo">
+            <div class="service-text">
+                <span class="stock-status"></span>
+                <h3 class="nombre-prod">Crunchyroll Perfil</h3>
+                <span class="manual-desc">Premium • Sin anuncios.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 3</span>
@@ -200,7 +238,7 @@
             <img src="../img/movistar.png" class="service-logo">
             <div class="service-text">
                 <span class="stock-status"></span>
-                <h3 class="nombre-prod">Movistar Play + Liga 1 Max Perfil</h3>
+                <h3 class="nombre-prod">Movistar + Liga 1 Perfil</h3>
                 <span class="manual-desc">Activación TV • Incluye ESPN.</span>
             </div>
             <div class="price-container">
@@ -215,7 +253,7 @@
             <img src="../img/dgo.png" class="service-logo">
             <div class="service-text">
                 <span class="stock-status"></span>
-                <h3 class="nombre-prod">DGO + Liga 1 Max Perfil</h3>
+                <h3 class="nombre-prod">DGO + Liga 1 Perfil</h3>
                 <span class="manual-desc">Activación TV • Incluye ESPN.</span>
             </div>
             <div class="price-container">
@@ -225,22 +263,7 @@
         </div>
     </a>
 
-    <div class="category-title">🏠 ZONA CUENTAS COMPLETAS</div>
-
-    <a href="#" class="service-link agotado con-renovacion">
-        <div class="service-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">Netflix Completa</h3>
-                <span class="manual-desc">5 Perfiles • Renovable • Ultra HD.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 45</span>
-                <span class="renovacion-info">🔄 Renova: S/ 45.00</span>
-            </div>
-        </div>
-    </a>
+    <div class="category-title">🏠 CUENTAS COMPLETAS</div>
 
     <a href="#" class="service-link disponible con-renovacion">
         <div class="service-card">
@@ -248,7 +271,7 @@
             <div class="service-text">
                 <span class="stock-status"></span>
                 <h3 class="nombre-prod">Disney Premium Completa</h3>
-                <span class="manual-desc">7 Perfiles • Incluye todo ESPN.</span>
+                <span class="manual-desc">7 Perfiles • Todo ESPN.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 22</span>
@@ -257,17 +280,32 @@
         </div>
     </a>
 
-    <a href="#" class="service-link agotado">
+    <a href="#" class="service-link disponible">
         <div class="service-card">
-            <img src="../img/dgo.png" class="service-logo">
+            <img src="../img/max.png" class="service-logo">
             <div class="service-text">
                 <span class="stock-status"></span>
-                <h3 class="nombre-prod">DGO + Liga 1 Max Completa</h3>
-                <span class="manual-desc">Plan Completo • 4 dispositivos.</span>
+                <h3 class="nombre-prod">Max Platino Completa</h3>
+                <span class="manual-desc">5 perfiles • Ultra HD.</span>
             </div>
             <div class="price-container">
-                <span class="price-tag precio-prod">S/ 28</span>
-                <span class="renovacion-info">🔄 Renova: S/ 32.00</span>
+                <span class="price-tag precio-prod">S/ 12</span>
+                <span class="renovacion-info">🔄 Renova: S/ 15.00</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="#" class="service-link disponible">
+        <div class="service-card">
+            <img src="../img/max.png" class="service-logo">
+            <div class="service-text">
+                <span class="stock-status"></span>
+                <h3 class="nombre-prod">Max Standard Completa</h3>
+                <span class="manual-desc">5 perfiles • HD.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 7</span>
+                <span class="renovacion-info">🔄 Renova: S/ 10.00</span>
             </div>
         </div>
     </a>
@@ -279,8 +317,8 @@
             <img src="../img/ibo.png" class="service-logo">
             <div class="service-text">
                 <span class="stock-status"></span>
-                <h3 class="nombre-prod">IBO PLAYER (12 meses)</h3>
-                <span class="manual-desc">Licencia 1 año • Solo activación.</span>
+                <h3 class="nombre-prod">Ibo Player (12 meses)</h3>
+                <span class="manual-desc">Licencia 1 año • Activación.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 13</span>
@@ -293,8 +331,8 @@
 <div id="modal-login-distribuidor" class="modal-pass">
     <div class="modal-content">
         <h2 style="color:var(--primary); margin-bottom:10px;">ACCESO PRIVADO</h2>
-        <input type="password" id="input-dist-pass" class="input-estilo" placeholder="****">
-        <button onclick="validarAcceso()" style="background:var(--primary); width:100%; padding:15px; border-radius:12px; font-weight:700; border:none;">ENTRAR</button>
+        <input type="password" id="input-dist-pass" style="width:100%; padding:15px; margin:20px 0; border-radius:12px; background:#000; color:white; text-align:center; border:1px solid #444;" placeholder="****">
+        <button onclick="validarAcceso()" style="background:var(--primary); width:100%; padding:15px; border-radius:12px; font-weight:700; border:none; cursor:pointer;">ENTRAR</button>
     </div>
 </div>
 
@@ -319,15 +357,4 @@
         const telefono = "51918600000";
         document.querySelectorAll('.service-link:not(.agotado)').forEach(tarjeta => {
             const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
-            const precio = tarjeta.querySelector('.precio-prod')?.innerText;
-            if (nombre && precio) {
-                const mensaje = `Hola Alex Store, soy Distribuidor. Deseo ${nombre} (${precio})`;
-                tarjeta.href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-                tarjeta.target = "_blank";
-            }
-        });
-    }
-</script>
-
-</body>
-</html>
+            const precio = tarjeta.querySelector
