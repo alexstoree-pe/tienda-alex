@@ -6,26 +6,40 @@
     <title>Catálogo | Alex Store</title>
     
     <style>
-        /* Ocultamos el body por defecto hasta que el script verifique el acceso */
-        body { display: none; } 
+        /* Bloqueo total de la vista hasta que se valide */
+        html { display: none; background-color: #0a0a0a; } 
     </style>
 
     <script>
-        // --- SEGURIDAD INVISIBLE ---
+        // --- SEGURIDAD ELEGANTE SIN ALERTAS ---
         (function() {
-            // Verifica si existe la "llave" guardada en la sesión
-            if (sessionStorage.getItem("acceso_concedido") === "true") {
-                // Si existe, mostramos la página
+            const acceso = sessionStorage.getItem("acceso_concedido");
+            
+            if (acceso === "true") {
+                // Si ya tiene la llave, mostramos la página de inmediato
                 document.documentElement.style.display = "block";
-                document.addEventListener("DOMContentLoaded", function() {
-                    document.body.style.display = "block";
-                });
             } else {
-                // Si no existe, lo mandamos a la página principal para que ponga la clave
-                alert("⚠️ Por favor, ingrese desde la página principal.");
-                window.location.href = "../"; 
+                // Si no tiene acceso, esperamos a que cargue el DOM y abrimos el modal
+                document.addEventListener("DOMContentLoaded", function() {
+                    document.documentElement.style.display = "block";
+                    abrirModalAccesoDirecto();
+                });
             }
         })();
+
+        function abrirModalAccesoDirecto() {
+            const modal = document.getElementById('modal-password');
+            if (modal) {
+                modal.style.display = 'flex';
+                // Cambiamos los textos para el cliente que entra directo
+                modal.querySelector('h2').innerText = "Catálogo Protegido";
+                modal.querySelector('p').innerText = "Ingresa tu código de cliente para ver los precios";
+                // Quitamos el botón cancelar para que deba poner la clave o irse
+                const btnCancel = modal.querySelector('button[onclick="cerrarModalPass()"]');
+                if(btnCancel) btnCancel.innerText = "Ir al Inicio";
+                if(btnCancel) btnCancel.onclick = () => window.location.href = "../";
+            }
+        }
     </script>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -291,18 +305,33 @@
     let carrito = [];
     const numWhatsApp = "51918600000";
 
-    // --- SEGURIDAD DISTRIBUIDORES ---
+    // --- SEGURIDAD ACTUALIZADA ---
     function abrirModalPass() {
         document.getElementById('modal-password').style.display = 'flex';
         document.getElementById('input-pass').focus();
     }
-    function cerrarModalPass() { document.getElementById('modal-password').style.display = 'none'; }
+    
+    function cerrarModalPass() { 
+        document.getElementById('modal-password').style.display = 'none'; 
+    }
+
     function validarPass() {
-        if (document.getElementById('input-pass').value === "dc") {
+        const pass = document.getElementById('input-pass').value;
+        const CLAVE_CLIENTE = "cliente"; // La misma que en index
+        const CLAVE_DISTRI = "dc";
+
+        if (pass === CLAVE_DISTRI) {
+            sessionStorage.setItem("acceso_concedido", "true");
             window.location.href = "distribuidores/";
+        } else if (pass === CLAVE_CLIENTE) {
+            sessionStorage.setItem("acceso_concedido", "true");
+            cerrarModalPass();
         } else {
-            alert("❌ Código incorrecto");
-            document.getElementById('input-pass').value = "";
+            const input = document.getElementById('input-pass');
+            input.style.borderColor = "red";
+            input.value = "";
+            input.placeholder = "Código Error";
+            setTimeout(() => { input.style.borderColor = "#444"; input.placeholder = "****"; }, 2000);
         }
     }
 
@@ -348,6 +377,11 @@
         window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
         cerrarModalRegistro();
     }
+
+    // Permitir Enter en el input de pass
+    document.getElementById('input-pass').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') validarPass();
+    });
 </script>
 </body>
 </html>
