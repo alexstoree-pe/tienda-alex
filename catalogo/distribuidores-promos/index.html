@@ -36,7 +36,7 @@
             --whatsapp: #25d366;
             --text-gray: #888;
             --danger: #ff0000;
-            --danger-bright: #ff3333; /* Rojo neón más brillante */
+            --danger-bright: #ff3333;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -65,38 +65,64 @@
         .vip-card {
             background: #111; border-radius: 20px; padding: 20px;
             display: flex; align-items: center; border: 1px solid #222;
-            gap: 15px; position: relative; transition: 0.3s;
+            gap: 15px; position: relative; transition: 0.3s; min-height: 100px;
         }
         .vip-card:hover { border-color: var(--vip); transform: scale(1.02); }
 
-        /* --- LÓGICA DE AGOTADO MEJORADA --- */
-        .promo-link.agotado {
-            pointer-events: none; /* Bloquea el clic */
-            opacity: 0.7;
+        /* --- CONTENEDOR DE PRECIO Y ALINEACIÓN SIN STOCK --- */
+        .price-container { 
+            text-align: right; 
+            min-width: 100px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: flex-end;
+            flex-shrink: 0;
         }
 
-        /* Oculta el precio y la renovación cuando está agotado */
+        .price-tag { color: #fff; font-weight: 800; font-size: 1.4rem; display: block; }
+        .reno-tag { font-size: 0.75rem; color: #25d366; font-weight: 600; display: block; }
+
+        /* --- LÓGICA DE AGOTADO ACTUALIZADA --- */
+        .promo-link.agotado { pointer-events: none; }
+        .promo-link.agotado .service-logo, 
+        .promo-link.agotado .service-text,
+        .promo-link.agotado .batch-badge { 
+            filter: grayscale(1); 
+            opacity: 0.5; 
+        }
+
         .promo-link.agotado .price-tag,
         .promo-link.agotado .reno-tag {
             display: none !important;
         }
 
-        /* Estilo brillante para SIN STOCK */
+        .promo-link.agotado .price-container {
+            align-items: center; /* Centra el marco horizontalmente */
+            justify-content: center; /* Centra el marco verticalmente */
+        }
+
         .promo-link.agotado .price-container::after {
             content: "SIN STOCK";
             color: var(--danger-bright);
-            font-size: 0.8rem;
+            /* AJUSTE: Letra más grande y negrita */
+            font-size: 0.85rem;
             font-weight: 900;
-            display: block;
+            display: flex;
+            align-items: center;      
+            justify-content: center;  
             border: 2px solid var(--danger-bright);
-            padding: 5px 8px;
+            width: 100%;
+            height: auto;
+            padding: 6px 4px; /* Espaciado ajustado */
             border-radius: 8px;
             text-align: center;
             text-transform: uppercase;
             /* Efecto de brillo neón */
-            box-shadow: 0 0 10px rgba(255, 51, 51, 0.5), inset 0 0 5px rgba(255, 51, 51, 0.3);
-            text-shadow: 0 0 5px rgba(255, 51, 51, 0.8);
-            letter-spacing: 1px;
+            box-shadow: 0 0 12px rgba(255, 51, 51, 0.3);
+            text-shadow: 0 0 8px var(--danger-bright);
+            background: rgba(255, 0, 0, 0.1);
+            letter-spacing: 0.5px;
         }
 
         .batch-badge {
@@ -110,10 +136,6 @@
         .service-text { flex-grow: 1; }
         .service-text h3 { font-size: 1.1rem; font-weight: 700; color: #fff; }
         .manual-desc { font-size: 0.8rem; color: var(--text-gray); display: block; }
-
-        .price-container { text-align: right; min-width: 100px; display: flex; flex-direction: column; justify-content: center; align-items: flex-end;}
-        .price-tag { color: #fff; font-weight: 800; font-size: 1.4rem; display: block; }
-        .reno-tag { font-size: 0.75rem; color: #25d366; font-weight: 600; display: block; }
 
         .category-title {
             margin: 30px 0 15px; font-size: 0.85rem; font-weight: 700; color: var(--vip);
@@ -250,7 +272,6 @@
 
     function configurarLinksWhatsApp() {
         const telefono = "51918600000";
-        // Importante: Solo configurar links para los que NO están agotados
         const tarjetas = document.querySelectorAll('.promo-link:not(.agotado)');
         tarjetas.forEach(tarjeta => {
             const badge = tarjeta.querySelector('.batch-badge')?.innerText;
