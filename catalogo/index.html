@@ -1,25 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <style>
-    body { display: none; } 
-</style>
-
-<script>
-    (function() {
-        const pass = prompt("🛒 ACCESO CLIENTES\nIngrese su código de acceso:");
-        
-        if (pass === "CLIENTE2026") {
-            document.documentElement.style.display = "block";
-            document.addEventListener("DOMContentLoaded", function() {
-                document.body.style.display = "block";
-            });
-        } else {
-            alert("❌ Código incorrecto.");
-            window.location.href = "../"; 
-        }
-    })();
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alex Store | Acceso Autorizado</title>
@@ -128,13 +109,12 @@
             font-weight: 700;
         }
 
-        /* MENSAJE DE ERROR INTEGRADO (Reemplaza al alert de Github) */
         #error-msg {
             color: var(--danger);
             font-size: 0.8rem;
             font-weight: 600;
             margin-bottom: 10px;
-            display: none; /* Se activa con JS */
+            display: none;
         }
 
         .btn-confirm {
@@ -156,7 +136,6 @@
             cursor: pointer;
         }
 
-        /* Animación de vibración para error */
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             25% { transform: translateX(-5px); }
@@ -205,7 +184,7 @@
         const desc = document.getElementById('modal-desc');
         const error = document.getElementById('error-msg');
         
-        error.style.display = "none"; // Reset error
+        error.style.display = "none";
         
         if (url.includes('distribuidores')) {
             titulo.style.color = "#d4af37";
@@ -232,6 +211,7 @@
         const error = document.getElementById('error-msg');
         const modalBox = document.getElementById('modal-box');
         
+        // --- TUS CLAVES ACTUALIZADAS ---
         const CLAVE_CLIENTES = "cliente";
         const CLAVE_DISTRIBUIDORES = "ds";
         
@@ -240,13 +220,10 @@
         if (pass === claveCorrecta) {
             window.location.href = urlDestino;
         } else {
-            // EFECTO DE ERROR SIN ALERT
             error.style.display = "block";
             modalBox.classList.add('shake');
             input.value = "";
             input.focus();
-            
-            // Quitar animación para poder repetirla
             setTimeout(() => { modalBox.classList.remove('shake'); }, 300);
         }
     }
@@ -255,6 +232,9 @@
         if (e.key === 'Enter') validar();
     });
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
