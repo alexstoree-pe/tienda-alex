@@ -69,6 +69,7 @@
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
             transition: 0.3s;
         }
+        .distributor-btn:active { transform: scale(0.98); }
 
         .nav-btn {
             width: auto; padding: 6px 20px; color: #666; background: none; 
@@ -76,6 +77,7 @@
             text-decoration: none; font-size: 0.75rem; font-weight: 500;
             transition: 0.3s;
         }
+        .nav-btn:hover { color: #aaa; border-color: #444; }
 
         .category-title { margin: 30px 0 15px; font-size: 1.1rem; font-weight: 700; color: var(--primary); text-transform: uppercase; display: flex; align-items: center; }
         .category-title::after { content: ""; height: 1px; background: #333; flex: 1; margin-left: 15px; }
@@ -90,11 +92,20 @@
         .manual-desc { font-size: 0.78rem; color: var(--text-gray); }
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
 
-        /* Lógica para productos Agotados */
-        .service-item.agotado { cursor: not-allowed; opacity: 0.8; }
+        /* LÓGICA DE PRODUCTO AGOTADO Y BRILLO */
+        .service-item.agotado { cursor: pointer; opacity: 0.9; }
+        .service-item.agotado .service-card { border-color: rgba(255, 68, 68, 0.3); }
         .service-item.agotado .precio-prod { display: none; }
-        .acceso-ok .service-item.agotado .price-container::after { content: "CONSULTAR"; color: #ff4444; font-size: 0.75rem; font-weight: 800; }
+        .acceso-ok .service-item.agotado .price-container::after { 
+            content: "SIN STOCK, CONSULTAR 📲"; 
+            color: #ff4d4d; 
+            font-size: 0.75rem; 
+            font-weight: 800; 
+            text-shadow: 0 0 8px rgba(255, 0, 0, 0.8), 0 0 15px rgba(255, 0, 0, 0.5); /* Letras brillantes */
+            display: inline-block;
+        }
 
+        /* MODALES */
         .modal-overlay, .modal-pass { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; justify-content: center; align-items: center; z-index: 3000; }
         .modal-overlay { background: rgba(0,0,0,0.9); }
         .modal-pass { background: rgba(0,0,0,0.95); }
@@ -107,6 +118,7 @@
         .input-group { margin-bottom: 12px; text-align: left; }
         .input-group label { display: block; font-size: 0.8rem; color: #aaa; margin-bottom: 4px; }
         .input-group input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #444; background: #000; color: #fff; }
+
         #input-pass { width: 100%; padding: 12px; margin: 20px 0; border-radius: 10px; border: 1px solid #444; background: #000; color: white; text-align: center; font-size: 1.2rem; letter-spacing: 4px; }
 
         .floating-btn {
@@ -273,6 +285,7 @@
         <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px;">Ingresa tu código de cliente para ver los precios</p>
         <input type="password" id="input-pass" placeholder="****">
         <button class="option-btn btn-nuevo" onclick="validarPass()">INGRESAR</button>
+        
         <button onclick="window.location.href='../'" style="width:100%; background:none; border:none; color:grey; margin-top:15px; cursor:pointer; font-size: 0.8rem;">🏠 Ir al Inicio</button>
     </div>
 </div>
@@ -316,12 +329,25 @@
     }
 
     function toggleCarrito(elemento) {
-        if (elemento.classList.contains('agotado')) return;
         const nombre = elemento.querySelector('.nombre-prod').innerText;
+        
+        // --- NUEVA LÓGICA: Redirección automática si está agotado ---
+        if (elemento.classList.contains('agotado')) {
+            let msgConsulta = `Hola *Alex Store*, quisiera consultar si aún hay disponible la plataforma *${nombre}* que figura sin stock.`;
+            window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msgConsulta)}`, '_blank');
+            return; // Detiene la función para que no se sume al carrito
+        }
+
         const precio = parseFloat(elemento.querySelector('.precio-prod').innerText.replace('S/', ''));
         const idx = carrito.findIndex(i => i.nombre === nombre);
-        if (idx > -1) { carrito.splice(idx, 1); elemento.classList.remove('selected'); }
-        else { carrito.push({nombre, precio}); elemento.classList.add('selected'); }
+        
+        if (idx > -1) { 
+            carrito.splice(idx, 1); 
+            elemento.classList.remove('selected'); 
+        } else { 
+            carrito.push({nombre, precio}); 
+            elemento.classList.add('selected'); 
+        }
         actualizarUI();
     }
 
