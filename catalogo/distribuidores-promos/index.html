@@ -83,6 +83,13 @@
         .price-tag { color: #fff; font-weight: 800; font-size: 1.4rem; display: block; }
         .reno-tag { font-size: 0.75rem; color: #25d366; font-weight: 600; display: block; }
 
+        /* --- ANIMACIÓN NEÓN PARA SIN STOCK --- */
+        @keyframes shine-red {
+            0% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; color: #ff3333; }
+            50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #ffffff; }
+            100% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; color: #ff3333; }
+        }
+
         /* --- LÓGICA DE AGOTADO ACTUALIZADA --- */
         .promo-link.agotado { pointer-events: none; }
         .promo-link.agotado .service-logo, 
@@ -98,14 +105,13 @@
         }
 
         .promo-link.agotado .price-container {
-            align-items: center; /* Centra el marco horizontalmente */
-            justify-content: center; /* Centra el marco verticalmente */
+            align-items: center;
+            justify-content: center;
         }
 
         .promo-link.agotado .price-container::after {
             content: "SIN STOCK";
             color: var(--danger-bright);
-            /* AJUSTE: Letra más grande y negrita */
             font-size: 0.85rem;
             font-weight: 900;
             display: flex;
@@ -114,15 +120,14 @@
             border: 2px solid var(--danger-bright);
             width: 100%;
             height: auto;
-            padding: 6px 4px; /* Espaciado ajustado */
+            padding: 6px 4px;
             border-radius: 8px;
             text-align: center;
             text-transform: uppercase;
-            /* Efecto de brillo neón */
-            box-shadow: 0 0 12px rgba(255, 51, 51, 0.3);
-            text-shadow: 0 0 8px var(--danger-bright);
             background: rgba(255, 0, 0, 0.1);
             letter-spacing: 0.5px;
+            /* Aplicación de la animación restaurada */
+            animation: shine-red 1.5s infinite;
         }
 
         .batch-badge {
