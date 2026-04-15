@@ -43,7 +43,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--dark); color: white; padding-bottom: 120px; line-height: 1.6; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--dark); color: white; padding-bottom: 180px; line-height: 1.6; }
 
         header {
             background: linear-gradient(135deg, #111, #222);
@@ -100,13 +100,17 @@
             padding: 6px 4px; 
             border-radius: 8px; 
             background: rgba(255, 0, 0, 0.1);
-            animation: shine-red 1.5s infinite; /* El brillo restaurado */
+            animation: shine-red 1.5s infinite;
             display: block;
             width: 100%;
             text-align: center;
         }
 
-        .floating-btn { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--whatsapp); color: white; padding: 18px; border-radius: 50px; text-decoration: none; font-weight: 700; width: 85%; max-width: 400px; text-align: center; z-index: 100; }
+        /* --- BOTONES FLOTANTES --- */
+        .floating-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; display: flex; flex-direction: column; gap: 10px; z-index: 100; }
+        .floating-btn { background: var(--whatsapp); color: white; padding: 15px; border-radius: 50px; text-decoration: none; font-weight: 700; text-align: center; font-size: 0.9rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .btn-promo { background: var(--vip); color: #000; }
+
         .modal-pass { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 3000; justify-content: center; align-items: center; }
         .modal-content { background: #1a1a1a; padding: 30px; border-radius: 25px; width: 90%; max-width: 380px; border: 1px solid var(--primary); text-align: center; }
     </style>
@@ -287,7 +291,10 @@
     </div>
 </div>
 
-<a href="https://wa.me/51918600000?text=Hola%20Alex%20Store" class="floating-btn">📲 SOPORTE WHATSAPP</a>
+<div class="floating-container">
+    <a href="../promos/" class="floating-btn btn-promo">👑 ZONA PROMOS MAYORISTAS</a>
+    <a href="https://wa.me/51918600000?text=Hola%20Alex%20Store" class="floating-btn">📲 SOPORTE WHATSAPP</a>
+</div>
 
 <script>
     function actualizarFecha() {
