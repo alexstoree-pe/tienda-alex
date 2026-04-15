@@ -11,15 +11,11 @@
     </style>
 
     <script>
-        // --- SEGURIDAD ELEGANTE SIN ALERTAS ---
         (function() {
             const acceso = sessionStorage.getItem("acceso_concedido");
-            
             if (acceso === "true") {
-                // Si ya tiene la llave, mostramos la página de inmediato
                 document.documentElement.style.display = "block";
             } else {
-                // Si no tiene acceso, esperamos a que cargue el DOM y abrimos el modal
                 document.addEventListener("DOMContentLoaded", function() {
                     document.documentElement.style.display = "block";
                     abrirModalAccesoDirecto();
@@ -31,13 +27,9 @@
             const modal = document.getElementById('modal-password');
             if (modal) {
                 modal.style.display = 'flex';
-                // Cambiamos los textos para el cliente que entra directo
                 modal.querySelector('h2').innerText = "Catálogo Protegido";
                 modal.querySelector('p').innerText = "Ingresa tu código de cliente para ver los precios";
-                // Quitamos el botón cancelar para que deba poner la clave o irse
-                const btnCancel = modal.querySelector('button[onclick="cerrarModalPass()"]');
-                if(btnCancel) btnCancel.innerText = "Ir al Inicio";
-                if(btnCancel) btnCancel.onclick = () => window.location.href = "../";
+                document.getElementById('input-pass').focus();
             }
         }
     </script>
@@ -51,18 +43,10 @@
             --card-bg: #161616;
             --whatsapp: #25d366;
             --text-gray: #aaa;
-            --danger: #ff0000;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark);
-            color: white;
-            line-height: 1.6;
-            padding-bottom: 140px;
-        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--dark); color: white; line-height: 1.6; padding-bottom: 140px; }
 
         header {
             background: linear-gradient(135deg, var(--secondary), var(--primary));
@@ -70,57 +54,48 @@
             border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
-
-        header h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: 1px; }
-        header p { font-size: 1.1rem; opacity: 0.9; }
+        header h1 { font-size: 2.5rem; font-weight: 700; }
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
 
+        /* --- BOTONES DE NAVEGACIÓN --- */
+        .nav-buttons { display: flex; gap: 10px; margin-bottom: 15px; }
+        .nav-btn {
+            flex: 1; text-align: center; text-decoration: none;
+            padding: 10px; border-radius: 15px; font-size: 0.8rem;
+            font-weight: 600; border: 1px solid #333; color: #ccc; transition: 0.3s;
+        }
+        .nav-btn:hover { border-color: var(--primary); color: var(--primary); background: rgba(0, 212, 255, 0.05); }
+
         .distributor-btn {
-            background: rgba(0, 212, 255, 0.1); color: var(--primary); 
-            border: 1px dashed var(--primary); padding: 12px 25px; 
-            border-radius: 30px; text-decoration: none; font-weight: 600; 
-            font-size: 0.85rem; display: block; text-align: center; margin: 20px 0; 
-            transition: 0.3s; cursor: pointer;
+            background: rgba(37, 211, 102, 0.1); color: var(--whatsapp); border: 1px dashed var(--whatsapp);
+            padding: 15px; border-radius: 20px; text-decoration: none; font-weight: 600;
+            font-size: 0.85rem; display: block; text-align: center; margin-bottom: 20px;
         }
 
-        .category-title {
-            margin: 30px 0 15px; font-size: 1.1rem; font-weight: 700;
-            color: var(--primary); text-transform: uppercase;
-            display: flex; align-items: center;
-        }
+        .category-title { margin: 30px 0 15px; font-size: 1.1rem; font-weight: 700; color: var(--primary); text-transform: uppercase; display: flex; align-items: center; }
         .category-title::after { content: ""; height: 1px; background: #333; flex: 1; margin-left: 15px; }
+        .main-title { display: block; text-align: center; margin: 20px 0; border-bottom: 1px solid #333; padding-bottom: 10px; font-size: 1.3rem; }
 
-        .main-title {
-            display: block; text-align: center; margin: 40px 0 20px;
-            color: #fff; border-bottom: 1px solid #333;
-            padding-bottom: 10px; font-size: 1.3rem;
-        }
-
-        .service-item { cursor: pointer; display: block; margin-bottom: 12px; user-select: none; }
-        .service-card {
-            background: var(--card-bg); border-radius: 18px; padding: 15px;
-            display: flex; align-items: center; border: 1px solid #222;
-            transition: 0.3s; gap: 15px; position: relative;
-        }
-
+        .service-item { cursor: pointer; display: block; margin-bottom: 12px; }
+        .service-card { background: var(--card-bg); border-radius: 18px; padding: 15px; display: flex; align-items: center; border: 1px solid #222; transition: 0.3s; gap: 15px; }
         .service-item.selected .service-card { border-color: var(--primary); background: #1a2a3a; transform: scale(1.02); }
         .service-logo { width: 65px; height: 65px; object-fit: cover; border-radius: 12px; flex-shrink: 0; }
         .service-text { flex-grow: 1; }
-        .service-text h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-        .manual-desc { font-size: 0.78rem; color: var(--text-gray); line-height: 1.4; display: block; }
+        .service-text h3 { font-size: 1rem; font-weight: 700; color: #fff; }
+        .manual-desc { font-size: 0.78rem; color: var(--text-gray); }
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
 
         /* MODALES */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 2000; }
-        .modal-content { background: #1a1a1a; padding: 25px; border-radius: 20px; width: 90%; max-width: 400px; border: 1px solid var(--primary); text-align: center; }
-        
-        .modal-pass { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 3000; justify-content: center; align-items: center; }
+        .modal-overlay, .modal-pass { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; justify-content: center; align-items: center; z-index: 3000; }
+        .modal-overlay { background: rgba(0,0,0,0.9); }
+        .modal-pass { background: rgba(0,0,0,0.95); }
+        .modal-content { background: #1a1a1a; padding: 25px; border-radius: 25px; width: 90%; max-width: 400px; border: 1px solid var(--primary); text-align: center; }
         
         .option-btn { display: block; width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; }
         .btn-nuevo { background: var(--primary); color: #000; }
         .btn-antiguo { background: #333; color: #fff; }
-        
+
         .input-group { margin-bottom: 12px; text-align: left; }
         .input-group label { display: block; font-size: 0.8rem; color: #aaa; margin-bottom: 4px; }
         .input-group input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #444; background: #000; color: #fff; }
@@ -129,10 +104,9 @@
 
         .floating-btn {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: var(--whatsapp); color: white; padding: 15px;
-            border-radius: 50px; text-decoration: none; font-weight: 700;
-            width: 90%; max-width: 450px; text-align: center; z-index: 1000;
-            display: flex; justify-content: space-between; align-items: center; box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            background: var(--whatsapp); color: white; padding: 15px; border-radius: 50px;
+            text-decoration: none; font-weight: 700; width: 90%; max-width: 450px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 1000;
         }
         .hidden { display: none; }
     </style>
@@ -145,7 +119,12 @@
 </header>
 
 <div class="container">
-    <a href="../promociones-clientes/" class="distributor-btn" style="border-color: var(--whatsapp); color: var(--whatsapp); background: rgba(37, 211, 102, 0.1); margin-bottom: 20px;">🎁 VER PROMOCIONES Y COMBOS</a>
+    <div class="nav-buttons">
+        <a href="../" class="nav-btn">🏠 Ir al Inicio</a>
+        <a href="../clientes/" class="nav-btn">📂 Ver Catálogo</a>
+    </div>
+
+    <a href="../promociones-clientes/" class="distributor-btn" style="border-color: var(--whatsapp); color: var(--whatsapp);">🎁 VER PROMOCIONES Y COMBOS</a>
 
     <div class="category-title main-title">⭐ ZONA DE CLIENTES ⭐</div>
 
@@ -156,7 +135,7 @@
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Netflix Premium</h3>
-                <span class="manual-desc">• Premium Ultra HD • Perfil Privado • 1 perfil.</span>
+                <span class="manual-desc">• Premium Ultra HD • Perfil Privado.</span>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 16</span></div>
         </div>
@@ -178,7 +157,7 @@
             <img src="../img/max.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">MAX Platino</h3>
-                <span class="manual-desc">• 4K Ultra HD • Estrenos exclusivos • 1 perfil.</span>
+                <span class="manual-desc">• 4K Ultra HD • 1 perfil.</span>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 7</span></div>
         </div>
@@ -189,7 +168,7 @@
             <img src="../img/paramount.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">PARAMOUNT</h3>
-                <span class="manual-desc">• Premium • Estrenos exclusivos • 1 perfil.</span>
+                <span class="manual-desc">• Premium • 1 perfil.</span>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 6</span></div>
         </div>
@@ -200,7 +179,7 @@
             <img src="../img/vix.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">VIX PREMIUM</h3>
-                <span class="manual-desc">• Premium • Series mexicanas • 1 perfil.</span>
+                <span class="manual-desc">• Premium • 1 perfil.</span>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 5</span></div>
         </div>
@@ -211,7 +190,7 @@
             <img src="../img/prime.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">AMAZON PRIME</h3>
-                <span class="manual-desc">• Premium • Estrenos exclusivos • 1 perfil.</span>
+                <span class="manual-desc">• Estrenos exclusivos • 1 perfil.</span>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 8</span></div>
         </div>
@@ -222,7 +201,7 @@
             <img src="../img/crunchyroll.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">CRUNCHYROLL</h3>
-                <span class="manual-desc">• Premium • Anime sin anuncios • 1 perfil.</span>
+                <span class="manual-desc">• Anime sin anuncios • 1 perfil.</span>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 5</span></div>
         </div>
@@ -248,7 +227,7 @@
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Spotify Premium</h3>
-                <span class="manual-desc">• Sin anuncios • Descargas • Renovable.</span>
+                <span class="manual-desc">• Sin anuncios • Renovable.</span>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 8</span></div>
         </div>
@@ -259,7 +238,7 @@
             <img src="../img/youtube.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Youtube Premium</h3>
-                <span class="manual-desc">• Sin anuncios • Descargas • No Renovable.</span>
+                <span class="manual-desc">• Sin anuncios • No Renovable.</span>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 8</span></div>
         </div>
@@ -274,11 +253,15 @@
 
 <div id="modal-password" class="modal-pass">
     <div class="modal-content">
-        <h2 style="color:var(--primary); font-size: 1.2rem;">Acceso Distribuidores</h2>
+        <h2 style="color:var(--primary);">Acceso Protegido</h2>
         <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px;">Ingresa tu código de acceso</p>
         <input type="password" id="input-pass" placeholder="****">
         <button class="option-btn btn-nuevo" onclick="validarPass()">INGRESAR</button>
-        <button onclick="cerrarModalPass()" style="background:none; border:none; color:grey; width:100%; margin-top:10px; cursor:pointer;">Cancelar</button>
+        
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button onclick="window.location.href='../'" style="flex: 1; background: #333; color: white; border: none; padding: 10px; border-radius: 10px; cursor: pointer; font-size: 0.75rem;">🏠 Inicio</button>
+            <button onclick="window.location.href='../clientes/'" style="flex: 1; background: #333; color: white; border: none; padding: 10px; border-radius: 10px; cursor: pointer; font-size: 0.75rem;">📂 Catálogo</button>
+        </div>
     </div>
 </div>
 
@@ -305,37 +288,21 @@
     let carrito = [];
     const numWhatsApp = "51918600000";
 
-    // --- SEGURIDAD ACTUALIZADA ---
-    function abrirModalPass() {
-        document.getElementById('modal-password').style.display = 'flex';
-        document.getElementById('input-pass').focus();
-    }
-    
-    function cerrarModalPass() { 
-        document.getElementById('modal-password').style.display = 'none'; 
-    }
-
     function validarPass() {
         const pass = document.getElementById('input-pass').value;
-        const CLAVE_CLIENTE = "cliente"; // La misma que en index
-        const CLAVE_DISTRI = "dc";
-
-        if (pass === CLAVE_DISTRI) {
+        if (pass === "dc") {
+            window.location.href = "../distribuidores/";
+        } else if (pass === "cliente") {
             sessionStorage.setItem("acceso_concedido", "true");
-            window.location.href = "distribuidores/";
-        } else if (pass === CLAVE_CLIENTE) {
-            sessionStorage.setItem("acceso_concedido", "true");
-            cerrarModalPass();
+            document.getElementById('modal-password').style.display = 'none';
         } else {
             const input = document.getElementById('input-pass');
             input.style.borderColor = "red";
             input.value = "";
-            input.placeholder = "Código Error";
-            setTimeout(() => { input.style.borderColor = "#444"; input.placeholder = "****"; }, 2000);
+            setTimeout(() => { input.style.borderColor = "#444"; }, 2000);
         }
     }
 
-    // --- LÓGICA CARRITO ---
     function toggleCarrito(elemento) {
         const nombre = elemento.querySelector('.nombre-prod').innerText;
         const precio = parseFloat(elemento.querySelector('.precio-prod').innerText.replace('S/', ''));
@@ -346,14 +313,13 @@
     }
 
     function actualizarUI() {
-        const total = carrito.reduce((s, i) => s + i.precio, 0);
-        const final = (carrito.length === 2) ? Math.round(total * 0.96) : total;
+        const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
+        const total = (carrito.length === 2) ? Math.round(subtotal * 0.96) : subtotal;
         document.getElementById('cart-count').innerText = carrito.length;
-        document.getElementById('cart-total').innerText = `S/ ${final}`;
+        document.getElementById('cart-total').innerText = `S/ ${total}`;
         document.getElementById('whatsapp-btn').classList.toggle('hidden', carrito.length === 0);
     }
 
-    // --- MODAL REGISTRO ---
     function abrirModalRegistro() { document.getElementById('modal-registro').style.display = 'flex'; }
     function cerrarModalRegistro() { document.getElementById('modal-registro').style.display = 'none'; volverPaso1(); }
     function mostrarForm() { document.getElementById('paso-1').style.display = 'none'; document.getElementById('form-datos').style.display = 'block'; }
@@ -378,10 +344,7 @@
         cerrarModalRegistro();
     }
 
-    // Permitir Enter en el input de pass
-    document.getElementById('input-pass').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') validarPass();
-    });
+    document.getElementById('input-pass').addEventListener('keypress', (e) => { if (e.key === 'Enter') validarPass(); });
 </script>
 </body>
 </html>
