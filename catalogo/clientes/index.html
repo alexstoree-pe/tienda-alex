@@ -58,11 +58,11 @@
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
 
-        /* --- BOTONES DE NAVEGACIÓN --- */
-        .nav-buttons { display: flex; gap: 10px; margin-bottom: 15px; }
+        /* --- BOTÓN DE INICIO --- */
+        .nav-buttons { display: flex; justify-content: center; margin-bottom: 15px; }
         .nav-btn {
-            flex: 1; text-align: center; text-decoration: none;
-            padding: 10px; border-radius: 15px; font-size: 0.8rem;
+            width: 100%; text-align: center; text-decoration: none;
+            padding: 10px; border-radius: 15px; font-size: 0.85rem;
             font-weight: 600; border: 1px solid #333; color: #ccc; transition: 0.3s;
         }
         .nav-btn:hover { border-color: var(--primary); color: var(--primary); background: rgba(0, 212, 255, 0.05); }
@@ -120,8 +120,7 @@
 
 <div class="container">
     <div class="nav-buttons">
-        <a href="../" class="nav-btn">🏠 Ir al Inicio</a>
-        <a href="../clientes/" class="nav-btn">📂 Ver Catálogo</a>
+        <a href="../" class="nav-btn">🏠 Ir al Inicio del Sitio</a>
     </div>
 
     <a href="../promociones-clientes/" class="distributor-btn" style="border-color: var(--whatsapp); color: var(--whatsapp);">🎁 VER PROMOCIONES Y COMBOS</a>
@@ -146,7 +145,7 @@
             <img src="../img/disneyp.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Disney Premium</h3>
-                <span class="manual-desc">• Incluye todos los canales ESPN y Deportes.</span>
+                <span class="manual-desc">• Canales ESPN y Deportes incluidos.</span>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 10</span></div>
         </div>
@@ -179,7 +178,7 @@
             <img src="../img/vix.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">VIX PREMIUM</h3>
-                <span class="manual-desc">• Premium • 1 perfil.</span>
+                <span class="manual-desc">• Contenido Premium • 1 perfil.</span>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 5</span></div>
         </div>
@@ -258,10 +257,7 @@
         <input type="password" id="input-pass" placeholder="****">
         <button class="option-btn btn-nuevo" onclick="validarPass()">INGRESAR</button>
         
-        <div style="display: flex; gap: 10px; margin-top: 15px;">
-            <button onclick="window.location.href='../'" style="flex: 1; background: #333; color: white; border: none; padding: 10px; border-radius: 10px; cursor: pointer; font-size: 0.75rem;">🏠 Inicio</button>
-            <button onclick="window.location.href='../clientes/'" style="flex: 1; background: #333; color: white; border: none; padding: 10px; border-radius: 10px; cursor: pointer; font-size: 0.75rem;">📂 Catálogo</button>
-        </div>
+        <button onclick="window.location.href='../'" style="width:100%; background:none; border:none; color:grey; margin-top:15px; cursor:pointer; font-size: 0.8rem;">🏠 Ir al Inicio</button>
     </div>
 </div>
 
