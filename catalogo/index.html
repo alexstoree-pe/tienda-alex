@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex Store | Enlaces Oficiales</title>
+    <title>Alex Store | Acceso Autorizado</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -12,6 +12,7 @@
             --dark: #050505;
             --card-bg: #121212;
             --vip: #d4af37;
+            --success: #25d366;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,20 +39,21 @@
         }
 
         .logo-section h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 700;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .logo-section p {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #888;
             margin-top: 5px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         .buttons-grid {
@@ -60,9 +62,9 @@
             gap: 15px;
         }
 
-        .btn-link {
+        .btn-access {
             display: block;
-            text-decoration: none;
+            width: 100%;
             padding: 18px;
             border-radius: 15px;
             font-weight: 600;
@@ -72,18 +74,20 @@
             background: var(--card-bg);
             color: white;
             cursor: pointer;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
         }
 
-        .btn-link:hover {
+        .btn-access:hover {
             transform: translateY(-3px);
-            border-color: var(--primary);
-            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.15);
         }
 
-        /* Botones Especiales */
-        .btn-clients { border-left: 5px solid var(--primary); }
-        .btn-promos { border-left: 5px solid #25d366; }
-        .btn-distributors { border-left: 5px solid var(--vip); color: var(--vip); }
+        /* Bordes de color para cada sección */
+        .btn-clients { border-left: 6px solid var(--primary); }
+        .btn-promos-c { border-left: 6px solid var(--success); }
+        .btn-dist { border-left: 6px solid var(--vip); color: var(--vip); }
+        .btn-promos-d { border-left: 6px solid #ff4b2b; color: var(--vip); }
 
         /* MODAL DE SEGURIDAD */
         .modal-pass {
@@ -98,40 +102,53 @@
         .modal-content {
             background: #111;
             padding: 30px;
-            border-radius: 20px;
+            border-radius: 25px;
             width: 85%;
             max-width: 350px;
-            border: 1px solid var(--vip);
+            border: 1px solid var(--primary);
             text-align: center;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
         }
-        .modal-content h2 { color: var(--vip); font-size: 1.2rem; margin-bottom: 10px; }
+        .modal-content h2 { color: white; font-size: 1.3rem; margin-bottom: 5px; }
+        .modal-content p { color: #666; font-size: 0.8rem; margin-bottom: 15px; }
+        
         .modal-content input {
             width: 100%;
-            padding: 12px;
-            margin: 20px 0;
-            border-radius: 10px;
+            padding: 14px;
+            margin: 15px 0;
+            border-radius: 12px;
             border: 1px solid #333;
             background: #000;
-            color: white;
+            color: var(--primary);
             text-align: center;
-            font-size: 1.2rem;
-            letter-spacing: 5px;
-        }
-        .btn-confirm {
-            background: var(--vip);
-            color: black;
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
+            font-size: 1.4rem;
+            letter-spacing: 6px;
             font-weight: 700;
+        }
+        
+        .btn-confirm {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-cancel {
+            background: none;
+            border: none;
+            color: #555;
+            margin-top: 15px;
             cursor: pointer;
         }
 
         footer {
             margin-top: 50px;
-            font-size: 0.8rem;
-            color: #444;
+            font-size: 0.75rem;
+            color: #333;
         }
     </style>
 </head>
@@ -140,29 +157,29 @@
 <div class="main-container">
     <div class="logo-section">
         <h1>ALEX STORE</h1>
-        <p>Soluciones Digitales & Streaming</p>
+        <p>Gestión de Servicios Streaming</p>
     </div>
 
     <div class="buttons-grid">
-        <a href="clientes/" class="btn-link btn-clients">🛒 Catálogo Clientes</a>
-        <a href="promociones-clientes/" class="btn-link btn-promos">🎁 Promociones Clientes</a>
-
-        <button onclick="solicitarAcceso('distribuidores/')" class="btn-link btn-distributors">👤 Zona Distribuidores</button>
-        <button onclick="solicitarAcceso('distribuidores-promos/')" class="btn-link btn-distributors">👑 Promos Distribuidores</button>
+        <button onclick="solicitarAcceso('clientes/')" class="btn-access btn-clients">🛒 Catálogo Clientes</button>
+        <button onclick="solicitarAcceso('promociones-clientes/')" class="btn-access btn-promos-c">🎁 Promociones Clientes</button>
+        
+        <button onclick="solicitarAcceso('distribuidores/')" class="btn-access btn-dist">👤 Zona Distribuidores</button>
+        <button onclick="solicitarAcceso('distribuidores-promos/')" class="btn-access btn-promos-d">👑 Promos Distribuidores</button>
     </div>
 
     <footer>
-        &copy; 2026 ALEX STORE. Todos los derechos reservados.
+        &copy; 2026 ALEX STORE | OFICIAL
     </footer>
 </div>
 
 <div id="modal-pass" class="modal-pass">
     <div class="modal-content">
-        <h2>Área Restringida</h2>
-        <p style="font-size: 0.8rem; color: #666;">Solo personal autorizado</p>
-        <input type="password" id="pass-input" placeholder="****">
-        <button class="btn-confirm" onclick="validar()">INGRESAR</button>
-        <button onclick="cerrar()" style="background:none; border:none; color:#444; margin-top:15px; cursor:pointer;">Cancelar</button>
+        <h2 id="modal-titulo">ACCESO RESTRINGIDO</h2>
+        <p id="modal-desc">Ingrese su código de autorización</p>
+        <input type="password" id="pass-input" placeholder="****" maxlength="12">
+        <button class="btn-confirm" onclick="validar()">VERIFICAR</button>
+        <button class="btn-cancel" onclick="cerrar()">CANCELAR</button>
     </div>
 </div>
 
@@ -171,7 +188,20 @@
 
     function solicitarAcceso(url) {
         urlDestino = url;
-        document.getElementById('modal-pass').style.display = 'flex';
+        const modal = document.getElementById('modal-pass');
+        const titulo = document.getElementById('modal-titulo');
+        const desc = document.getElementById('modal-desc');
+        
+        // Personalizar el modal según el tipo de acceso
+        if (url.includes('distribuidores')) {
+            titulo.style.color = "#d4af37";
+            desc.innerText = "Acceso exclusivo para Distribuidores";
+        } else {
+            titulo.style.color = "#00d4ff";
+            desc.innerText = "Ingrese el código de Cliente";
+        }
+
+        modal.style.display = 'flex';
         document.getElementById('pass-input').value = "";
         document.getElementById('pass-input').focus();
     }
@@ -182,15 +212,28 @@
 
     function validar() {
         const pass = document.getElementById('pass-input').value;
-        if (pass === "ALEX2026") {
+        
+        // --- CONFIGURACIÓN DE CONTRASEÑAS ---
+        const CLAVE_CLIENTES = "CLIENTE2026";
+        const CLAVE_DISTRIBUIDORES = "ALEX2026";
+        
+        // Lógica de validación por carpeta
+        let claveCorrecta = "";
+        if (urlDestino.includes('distribuidores')) {
+            claveCorrecta = CLAVE_DISTRIBUIDORES;
+        } else {
+            claveCorrecta = CLAVE_CLIENTES;
+        }
+
+        if (pass === claveCorrecta) {
             window.location.href = urlDestino;
         } else {
-            alert("❌ Código de acceso incorrecto");
+            alert("❌ Código incorrecto para esta sección");
             document.getElementById('pass-input').value = "";
         }
     }
 
-    // Soporte para tecla Enter
+    // Tecla Enter para confirmar
     document.getElementById('pass-input').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') { validar(); }
     });
