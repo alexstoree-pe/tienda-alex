@@ -13,6 +13,7 @@
             --card-bg: #121212;
             --vip: #d4af37;
             --success: #25d366;
+            --danger: #ff4b2b;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,10 +35,7 @@
             text-align: center;
         }
 
-        .logo-section {
-            margin-bottom: 40px;
-        }
-
+        .logo-section { margin-bottom: 40px; }
         .logo-section h1 {
             font-size: 2.8rem;
             font-weight: 700;
@@ -48,19 +46,7 @@
             text-transform: uppercase;
         }
 
-        .logo-section p {
-            font-size: 0.85rem;
-            color: #888;
-            margin-top: 5px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .buttons-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+        .buttons-grid { display: flex; flex-direction: column; gap: 15px; }
 
         .btn-access {
             display: block;
@@ -83,11 +69,10 @@
             box-shadow: 0 5px 15px rgba(0, 212, 255, 0.15);
         }
 
-        /* Bordes de color para cada sección */
         .btn-clients { border-left: 6px solid var(--primary); }
         .btn-promos-c { border-left: 6px solid var(--success); }
         .btn-dist { border-left: 6px solid var(--vip); color: var(--vip); }
-        .btn-promos-d { border-left: 6px solid #ff4b2b; color: var(--vip); }
+        .btn-promos-d { border-left: 6px solid var(--danger); color: var(--vip); }
 
         /* MODAL DE SEGURIDAD */
         .modal-pass {
@@ -107,15 +92,13 @@
             max-width: 350px;
             border: 1px solid var(--primary);
             text-align: center;
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+            position: relative;
         }
-        .modal-content h2 { color: white; font-size: 1.3rem; margin-bottom: 5px; }
-        .modal-content p { color: #666; font-size: 0.8rem; margin-bottom: 15px; }
-        
-        .modal-content input {
+
+        #pass-input {
             width: 100%;
             padding: 14px;
-            margin: 15px 0;
+            margin: 15px 0 10px;
             border-radius: 12px;
             border: 1px solid #333;
             background: #000;
@@ -125,7 +108,16 @@
             letter-spacing: 6px;
             font-weight: 700;
         }
-        
+
+        /* MENSAJE DE ERROR INTEGRADO (Reemplaza al alert de Github) */
+        #error-msg {
+            color: var(--danger);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: none; /* Se activa con JS */
+        }
+
         .btn-confirm {
             background: linear-gradient(135deg, var(--secondary), var(--primary));
             color: white;
@@ -145,11 +137,13 @@
             cursor: pointer;
         }
 
-        footer {
-            margin-top: 50px;
-            font-size: 0.75rem;
-            color: #333;
+        /* Animación de vibración para error */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
+        .shake { animation: shake 0.2s ease-in-out 0s 2; }
     </style>
 </head>
 <body>
@@ -157,27 +151,26 @@
 <div class="main-container">
     <div class="logo-section">
         <h1>ALEX STORE</h1>
-        <p>Gestión de Servicios Streaming</p>
+        <p style="color:#888; font-size:0.8rem; letter-spacing:2px;">GESTIÓN DIGITAL</p>
     </div>
 
     <div class="buttons-grid">
         <button onclick="solicitarAcceso('clientes/')" class="btn-access btn-clients">🛒 Catálogo Clientes</button>
         <button onclick="solicitarAcceso('promociones-clientes/')" class="btn-access btn-promos-c">🎁 Promociones Clientes</button>
-        
         <button onclick="solicitarAcceso('distribuidores/')" class="btn-access btn-dist">👤 Zona Distribuidores</button>
         <button onclick="solicitarAcceso('distribuidores-promos/')" class="btn-access btn-promos-d">👑 Promos Distribuidores</button>
     </div>
-
-    <footer>
-        &copy; 2026 ALEX STORE | OFICIAL
-    </footer>
 </div>
 
 <div id="modal-pass" class="modal-pass">
-    <div class="modal-content">
-        <h2 id="modal-titulo">ACCESO RESTRINGIDO</h2>
-        <p id="modal-desc">Ingrese su código de autorización</p>
+    <div class="modal-content" id="modal-box">
+        <h2 id="modal-titulo" style="font-size: 1.3rem;">ACCESO</h2>
+        <p id="modal-desc" style="font-size: 0.8rem; color: #666;"></p>
+        
         <input type="password" id="pass-input" placeholder="****" maxlength="12">
+        
+        <div id="error-msg">❌ CÓDIGO INCORRECTO</div>
+
         <button class="btn-confirm" onclick="validar()">VERIFICAR</button>
         <button class="btn-cancel" onclick="cerrar()">CANCELAR</button>
     </div>
@@ -191,14 +184,18 @@
         const modal = document.getElementById('modal-pass');
         const titulo = document.getElementById('modal-titulo');
         const desc = document.getElementById('modal-desc');
+        const error = document.getElementById('error-msg');
         
-        // Personalizar el modal según el tipo de acceso
+        error.style.display = "none"; // Reset error
+        
         if (url.includes('distribuidores')) {
             titulo.style.color = "#d4af37";
-            desc.innerText = "Acceso exclusivo para Distribuidores";
+            titulo.innerText = "ÁREA MAYORISTA";
+            desc.innerText = "Solo para Distribuidores Alex Store";
         } else {
             titulo.style.color = "#00d4ff";
-            desc.innerText = "Ingrese el código de Cliente";
+            titulo.innerText = "ÁREA CLIENTES";
+            desc.innerText = "Ingrese su código de acceso";
         }
 
         modal.style.display = 'flex';
@@ -211,31 +208,32 @@
     }
 
     function validar() {
-        const pass = document.getElementById('pass-input').value;
+        const input = document.getElementById('pass-input');
+        const pass = input.value;
+        const error = document.getElementById('error-msg');
+        const modalBox = document.getElementById('modal-box');
         
-        // --- CONFIGURACIÓN DE CONTRASEÑAS ---
         const CLAVE_CLIENTES = "CLIENTE2026";
         const CLAVE_DISTRIBUIDORES = "ALEX2026";
         
-        // Lógica de validación por carpeta
-        let claveCorrecta = "";
-        if (urlDestino.includes('distribuidores')) {
-            claveCorrecta = CLAVE_DISTRIBUIDORES;
-        } else {
-            claveCorrecta = CLAVE_CLIENTES;
-        }
+        let claveCorrecta = urlDestino.includes('distribuidores') ? CLAVE_DISTRIBUIDORES : CLAVE_CLIENTES;
 
         if (pass === claveCorrecta) {
             window.location.href = urlDestino;
         } else {
-            alert("❌ Código incorrecto para esta sección");
-            document.getElementById('pass-input').value = "";
+            // EFECTO DE ERROR SIN ALERT
+            error.style.display = "block";
+            modalBox.classList.add('shake');
+            input.value = "";
+            input.focus();
+            
+            // Quitar animación para poder repetirla
+            setTimeout(() => { modalBox.classList.remove('shake'); }, 300);
         }
     }
 
-    // Tecla Enter para confirmar
-    document.getElementById('pass-input').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') { validar(); }
+    document.getElementById('pass-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') validar();
     });
 </script>
 
