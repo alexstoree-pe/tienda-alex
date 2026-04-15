@@ -43,6 +43,7 @@
             --card-bg: #161616;
             --whatsapp: #25d366;
             --text-gray: #aaa;
+            --promo: #f4d03f; /* Color para resaltar promos */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -58,20 +59,29 @@
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
 
-        /* --- BOTÓN DE INICIO --- */
-        .nav-buttons { display: flex; justify-content: center; margin-bottom: 15px; }
-        .nav-btn {
-            width: 100%; text-align: center; text-decoration: none;
-            padding: 10px; border-radius: 15px; font-size: 0.85rem;
-            font-weight: 600; border: 1px solid #333; color: #ccc; transition: 0.3s;
-        }
-        .nav-btn:hover { border-color: var(--primary); color: var(--primary); background: rgba(0, 212, 255, 0.05); }
-
+        /* --- NAVEGACIÓN ACTUALIZADA --- */
+        .nav-buttons { display: flex; flex-direction: column; align-items: center; gap: 15px; margin: 20px 0; }
+        
+        /* Botón de Promo Principal */
         .distributor-btn {
-            background: rgba(37, 211, 102, 0.1); color: var(--whatsapp); border: 1px dashed var(--whatsapp);
-            padding: 15px; border-radius: 20px; text-decoration: none; font-weight: 600;
-            font-size: 0.85rem; display: block; text-align: center; margin-bottom: 20px;
+            width: 100%; max-width: 450px;
+            background: linear-gradient(135deg, #d4af37, var(--promo)); 
+            color: black; padding: 18px; border-radius: 20px; 
+            text-decoration: none; font-weight: 800; font-size: 1rem; 
+            display: block; text-align: center;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transition: 0.3s;
         }
+        .distributor-btn:active { transform: scale(0.98); }
+
+        /* Botón Volver Pequeño */
+        .nav-btn {
+            width: auto; padding: 6px 20px; color: #666; background: none; 
+            border: 1px solid #222; border-radius: 30px; 
+            text-decoration: none; font-size: 0.75rem; font-weight: 500;
+            transition: 0.3s;
+        }
+        .nav-btn:hover { color: #aaa; border-color: #444; }
 
         .category-title { margin: 30px 0 15px; font-size: 1.1rem; font-weight: 700; color: var(--primary); text-transform: uppercase; display: flex; align-items: center; }
         .category-title::after { content: ""; height: 1px; background: #333; flex: 1; margin-left: 15px; }
@@ -120,10 +130,9 @@
 
 <div class="container">
     <div class="nav-buttons">
+        <a href="../promociones-clientes/" class="distributor-btn">🎁 VER PROMOCIONES Y COMBOS</a>
         <a href="../" class="nav-btn">🏠 Ir al Inicio del Sitio</a>
     </div>
-
-    <a href="../promociones-clientes/" class="distributor-btn" style="border-color: var(--whatsapp); color: var(--whatsapp);">🎁 VER PROMOCIONES Y COMBOS</a>
 
     <div class="category-title main-title">⭐ ZONA DE CLIENTES ⭐</div>
 
