@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <style>
-    body { display: none; } 
-</style>
-
-<script>
-    (function() {
-        const pass = prompt("🛒 ACCESO CLIENTES\nIngrese su código de acceso:");
-        
-        if (pass === "CLIENTE2026") {
-            document.documentElement.style.display = "block";
-            document.addEventListener("DOMContentLoaded", function() {
-                document.body.style.display = "block";
-            });
-        } else {
-            alert("❌ Código incorrecto.");
-            window.location.href = "../"; 
-        }
-    })();
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo | Alex Store</title>
+    
+    <style>
+        /* Ocultamos el body por defecto hasta que el script verifique el acceso */
+        body { display: none; } 
+    </style>
+
+    <script>
+        // --- SEGURIDAD INVISIBLE ---
+        (function() {
+            // Verifica si existe la "llave" guardada en la sesión
+            if (sessionStorage.getItem("acceso_concedido") === "true") {
+                // Si existe, mostramos la página
+                document.documentElement.style.display = "block";
+                document.addEventListener("DOMContentLoaded", function() {
+                    document.body.style.display = "block";
+                });
+            } else {
+                // Si no existe, lo mandamos a la página principal para que ponga la clave
+                alert("⚠️ Por favor, ingrese desde la página principal.");
+                window.location.href = "../"; 
+            }
+        })();
+    </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
