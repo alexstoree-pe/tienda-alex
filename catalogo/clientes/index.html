@@ -43,20 +43,38 @@
             --whatsapp: #25d366;
             --text-gray: #aaa;
             --promo: #f4d03f;
+            --danger-bright: #ff3333; /* Rojo neón */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Poppins', sans-serif; background-color: var(--dark); color: white; line-height: 1.6; padding-bottom: 140px; }
 
         header {
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            background: linear-gradient(135deg, #111, #222);
             padding: 40px 20px; text-align: center;
+            border-bottom: 3px solid var(--primary);
             border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
-        header h1 { font-size: 2.5rem; font-weight: 700; }
+        header h1 { font-size: 2.5rem; font-weight: 700; color: var(--primary); }
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
+
+        /* BOTÓN VOLVER INICIO ESTÁTICO */
+        .btn-inicio-top {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: #222;
+            color: #fff;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 15px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border: 1px solid #444;
+            font-size: 0.9rem;
+        }
 
         .nav-buttons { display: flex; flex-direction: column; align-items: center; gap: 15px; margin: 20px 0; }
         
@@ -83,25 +101,32 @@
         .manual-desc { font-size: 0.78rem; color: var(--text-gray); }
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
 
+        /* --- ANIMACIÓN ROJO NEÓN --- */
+        @keyframes shine-red {
+            0% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; color: #ff3333; }
+            50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #ffffff; }
+            100% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; color: #ff3333; }
+        }
+
         /* --- ESTILO AGOTADO --- */
         .service-item.agotado { cursor: default; opacity: 0.9; }
         .service-item.agotado .precio-prod { display: none; }
+        .service-item.agotado .service-logo, .service-item.agotado .service-text { filter: grayscale(1); opacity: 0.5; }
         
         .btn-consultar-neon {
             display: block; 
             color: #ff3333; 
-            font-size: 1rem; /* Un poco más grande para que destaque */
+            font-size: 0.85rem;
             font-weight: 900; 
-            text-align: right;
+            text-align: center;
             cursor: pointer;
-            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
-            animation: latido 1.5s infinite alternate;
+            border: 2px solid var(--danger-bright);
+            padding: 6px 4px;
+            border-radius: 8px;
+            background: rgba(255, 0, 0, 0.1);
+            animation: shine-red 1.5s infinite;
             line-height: 1.2;
-        }
-
-        @keyframes latido {
-            from { transform: scale(1); }
-            to { transform: scale(1.08); text-shadow: 0 0 20px #ff0000, 0 0 30px #ff4444; }
+            text-transform: uppercase;
         }
 
         /* MODALES */
@@ -132,6 +157,8 @@
 </header>
 
 <div class="container">
+    <a href="../" class="btn-inicio-top">🏠 VOLVER AL INICIO</a>
+
     <div class="nav-buttons">
         <a href="../promociones-clientes/" class="distributor-btn">🎁 VER PROMOCIONES Y COMBOS</a>
     </div>
@@ -294,9 +321,9 @@
         </div>
         <div id="form-datos" style="display:none;">
             <h2 style="color:var(--primary); margin-bottom:15px;">Datos de Registro</h2>
-            <div class="input-group"><label>Nombre Completo</label><input type="text" id="reg-nom"></div>
-            <div class="input-group"><label>Celular de contacto</label><input type="tel" id="reg-cel"></div>
-            <div class="input-group"><label>Nombre para el Perfil</label><input type="text" id="reg-per"></div>
+            <div class="input-group"><label>Nombre Completo</label><input type="text" id="reg-nom" style="width:100%; padding:8px; margin-bottom:10px; border-radius:8px; border:1px solid #444; background:#000; color:#fff;"></div>
+            <div class="input-group"><label>Celular de contacto</label><input type="tel" id="reg-cel" style="width:100%; padding:8px; margin-bottom:10px; border-radius:8px; border:1px solid #444; background:#000; color:#fff;"></div>
+            <div class="input-group"><label>Nombre para el Perfil</label><input type="text" id="reg-per" style="width:100%; padding:8px; margin-bottom:10px; border-radius:8px; border:1px solid #444; background:#000; color:#fff;"></div>
             <button class="option-btn btn-nuevo" onclick="enviarWhatsApp('nuevo')">CONFIRMAR Y PEDIR</button>
         </div>
     </div>
@@ -314,10 +341,8 @@
         } else { alert("Código incorrecto"); }
     }
 
-    // --- MEJORA: Esta función busca el nombre completo de la tarjeta automáticamente ---
     function consultarStockManual(elemento, event) {
         event.stopPropagation();
-        // Sube hasta encontrar la tarjeta principal y busca el texto del nombre-prod
         const tarjeta = elemento.closest('.service-item');
         const nombreCompleto = tarjeta.querySelector('.nombre-prod').innerText;
         
