@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distribución | Alex Store</title>
+    
     <style>
-        body { display: none; } 
+        /* Bloqueo de seguridad inicial */
+        html { display: none; background-color: #0a0a0a; } 
     </style>
+
     <script>
         (function() {
-            const pass = prompt("🔐 ACCESO DISTRIBUIDOR\nIngrese su código autorizado:");
-            if (pass === "ALEX2026") {
+            const acceso = sessionStorage.getItem("acceso_distribuidor");
+            if (acceso === "true") {
                 document.documentElement.style.display = "block";
             } else {
-                window.location.href = "../"; 
+                document.addEventListener("DOMContentLoaded", function() {
+                    document.documentElement.style.display = "block";
+                    const container = document.querySelector('.container');
+                    const header = document.querySelector('header');
+                    if(container) container.style.display = 'none';
+                    if(header) header.style.display = 'none';
+                    document.getElementById('modal-login-distribuidor').style.display = 'flex';
+                });
             }
         })();
     </script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Distribución | Alex Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -28,92 +38,70 @@
             --whatsapp: #25d366;
             --text-gray: #aaa;
             --danger: #ff0000;
-            --vip: #d4af37;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            display: block !important; 
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark);
-            color: white;
-            line-height: 1.6;
-            padding-bottom: 120px;
-        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--dark); color: white; padding-bottom: 120px; }
 
         header {
             background: linear-gradient(135deg, #111, #222);
-            padding: 30px 20px;
-            text-align: center;
+            padding: 30px 20px; text-align: center;
             border-bottom: 3px solid var(--primary);
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;
         }
 
-        header h1 { font-size: 2.8rem; font-weight: 700; color: var(--primary); }
+        header h1 { font-size: 2.2rem; font-weight: 700; color: var(--primary); }
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
 
-        .nav-buttons {
-            text-align: center; margin: 20px 0; display: flex; 
-            flex-direction: column; gap: 10px; align-items: center;
-        }
+        .nav-buttons { text-align: center; margin: 20px 0; display: flex; flex-direction: column; gap: 10px; align-items: center; }
 
         .btn-vip {
             text-decoration: none; width: 85%; max-width: 400px;
             background: linear-gradient(135deg, #d4af37, #f4d03f); 
             color: black; padding: 12px; border-radius: 25px; 
-            font-weight: 800; font-size: 1.0rem; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-            display: inline-block;
+            font-weight: 800; display: inline-block;
         }
 
-        .btn-back {
-            color: #aaa; text-decoration: none; font-size: 1.0rem; 
-            border: 1px solid #333; padding: 5px 15px; border-radius: 20px;
-            transition: 0.3s; cursor: pointer; background: none;
-        }
+        .btn-back { color: #aaa; background: none; border: 1px solid #333; padding: 8px 18px; border-radius: 20px; cursor: pointer; }
 
-        .service-link { text-decoration: none; color: inherit; display: block; margin-bottom: 12px; transition: 0.3s; }
-        .service-card { background: var(--card-bg); border-radius: 18px; padding: 15px; display: flex; align-items: center; border: 1px solid #222; gap: 15px; }
-        .service-card:hover { border-color: var(--primary); background: #1f1f1f; transform: translateY(-2px); }
-        .service-logo { width: 65px; height: 65px; object-fit: cover; border-radius: 12px; flex-shrink: 0; }
+        /* TARJETAS */
+        .service-link { text-decoration: none; color: inherit; display: block; margin-bottom: 12px; }
+        .service-card { background: var(--card-bg); border-radius: 18px; padding: 15px; display: flex; align-items: center; border: 1px solid #222; gap: 15px; transition: 0.3s; }
+        .service-card:hover { border-color: var(--primary); background: #1f1f1f; }
+        .service-logo { width: 65px; height: 65px; object-fit: cover; border-radius: 12px; }
         .service-text { flex-grow: 1; }
-        .service-text h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-        .manual-desc { font-size: 0.8rem; color: var(--text-gray); line-height: 1.4; display: block; }
-        .price-container { text-align: right; flex-shrink: 0; min-width: 80px; }
-        .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; display: block; }
+        .service-text h3 { font-size: 1rem; color: #fff; }
+        .manual-desc { font-size: 0.8rem; color: var(--text-gray); }
+        .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
 
         .service-link.agotado { pointer-events: none; opacity: 0.7; }
-        .service-link.agotado .service-logo, .service-link.agotado .service-text { filter: grayscale(1); }
         .service-link.agotado .price-container::after {
-            content: "AGOTADO"; color: var(--danger); font-weight: 1000; font-size: 0.85rem;
+            content: "AGOTADO"; color: var(--danger); font-size: 0.75rem; font-weight: 900;
             display: block; border: 1px solid var(--danger); padding: 2px 6px; border-radius: 6px;
-            background: rgba(255, 0, 0, 0.2);
         }
 
         .category-title {
-            margin: 25px 0 12px; font-size: 1.1rem; font-weight: 700; color: #fff;
+            margin: 25px 0 12px; font-size: 0.9rem; font-weight: 700; color: #fff;
             background: var(--secondary); padding: 6px 15px; border-radius: 20px;
             display: inline-block; text-transform: uppercase;
         }
 
-        /* MODAL VOLVER */
-        .modal-pass {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 3000; justify-content: center; align-items: center;
+        /* MODAL */
+        .modal-pass { 
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.98); z-index: 3000; justify-content: center; align-items: center; 
         }
-        .modal-content-pass {
-            background: #1a1a1a; padding: 30px; border-radius: 20px; width: 90%;
-            max-width: 350px; border: 1px solid var(--primary); text-align: center;
+        .modal-content { 
+            background: #1a1a1a; padding: 30px; border-radius: 25px; width: 90%; max-width: 380px; 
+            border: 1px solid var(--primary); text-align: center; 
         }
+        .input-estilo { width: 100%; padding: 15px; margin: 20px 0; border-radius: 12px; background: #000; color: white; text-align: center; font-size: 1.3rem; border: 1px solid #444; }
 
         .floating-btn {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
             background: var(--whatsapp); color: white; padding: 18px;
-            border-radius: 50px; text-decoration: none; font-weight: 700;
-            z-index: 100; width: 85%; max-width: 400px; text-align: center;
+            border-radius: 50px; text-decoration: none; font-weight: 700; width: 85%; max-width: 400px; text-align: center;
         }
     </style>
 </head>
@@ -121,18 +109,18 @@
 
 <header>
     <h1>SOLO DISTRIBUIDORES 🚀</h1>
-    <p style="font-size: 1.0rem; opacity: 0.8;">Alex Store • Precios Especiales</p>
+    <p>Alex Store • Precios Especiales</p>
 </header>
 
 <div class="container">
     <div class="nav-buttons">
         <a href="../distribuidores-promos" class="btn-vip">👑 VER PROMOCIONES MAYORISTAS</a>
-        <button onclick="abrirModalClientes()" class="btn-back">⬅ Catálogo Clientes</button>
+        <button onclick="window.location.href='../'" class="btn-back">⬅ Catálogo Clientes</button>
     </div>
 
     <div class="category-title">👤 ZONA PERFILES</div>
 
-    <a href="#" target="_blank" class="service-link agotado">
+    <a href="#" class="service-link agotado">
         <div class="service-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
             <div class="service-text">
@@ -143,29 +131,29 @@
         </div>
     </a>
 
-    <a href="#" target="_blank" class="service-link">
+    <a href="#" class="service-link">
         <div class="service-card">
             <img src="../img/disneys.png" class="service-logo">
             <div class="service-text">
-                <h3 class="nombre-prod">Disney standar Perfil</h3>
+                <h3 class="nombre-prod">Disney Standar Perfil</h3>
                 <span class="manual-desc">• Sin ESPN • Calidad 4K • PIN privado.</span>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 4</span></div>
         </div>
     </a>
 
-    <a href="#" target="_blank" class="service-link">
+    <a href="#" class="service-link">
         <div class="service-card">
             <img src="../img/disneyp.png" class="service-logo">
             <div class="service-text">
-                <h3 class="nombre-prod">Disney premium Perfil</h3>
+                <h3 class="nombre-prod">Disney Premium Perfil</h3>
                 <span class="manual-desc">• Todo ESPN • Calidad 4K • PIN privado.</span>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 6</span></div>
         </div>
     </a>
 
-    <a href="#" target="_blank" class="service-link">
+    <a href="#" class="service-link">
         <div class="service-card">
             <img src="../img/prime.png" class="service-logo">
             <div class="service-text">
@@ -176,7 +164,7 @@
         </div>
     </a>
 
-    <a href="#" target="_blank" class="service-link">
+    <a href="#" class="service-link">
         <div class="service-card">
             <img src="../img/vix.png" class="service-logo">
             <div class="service-text">
@@ -187,7 +175,7 @@
         </div>
     </a>
 
-    <a href="#" target="_blank" class="service-link">
+    <a href="#" class="service-link">
         <div class="service-card">
             <img src="../img/movistar.png" class="service-logo">
             <div class="service-text">
@@ -223,25 +211,27 @@
     </a>
 </div>
 
-<div id="modal-password" class="modal-pass">
-    <div class="modal-content-pass">
-        <h2 style="color:var(--primary);">Volver al Catálogo</h2>
-        <input type="password" id="input-pass" placeholder="****" style="width:100%; padding:10px; margin:20px 0; background:#000; border:1px solid #444; color:white; text-align:center;">
-        <button onclick="validarSalida()" style="background:var(--primary); width:100%; padding:12px; border-radius:10px; font-weight:700;">CONFIRMAR</button>
-        <button onclick="cerrarModalClientes()" style="background:none; border:none; color:grey; margin-top:10px;">Cancelar</button>
+<div id="modal-login-distribuidor" class="modal-pass">
+    <div class="modal-content">
+        <h2 style="color:var(--primary);">ACCESO DISTRIBUIDOR</h2>
+        <input type="password" id="input-dist-pass" class="input-estilo" placeholder="****">
+        <button onclick="validarAccesoDist()" style="background:var(--primary); width:100%; padding:15px; border-radius:12px; font-weight:700; border:none;">ENTRAR</button>
     </div>
 </div>
 
-<a href="https://wa.me/51918600000?text=Hola%20Alex%20Store,%20soy%20Distribuidor" target="_blank" class="floating-btn">
-    📲 CONTACTAR SOPORTE WHATSAPP
-</a>
+<a href="https://wa.me/51918600000?text=Hola%20Alex%20Store" class="floating-btn">📲 SOPORTE DISTRIBUIDORES</a>
 
 <script>
-    function abrirModalClientes() { document.getElementById('modal-password').style.display = 'flex'; document.getElementById('input-pass').focus(); }
-    function cerrarModalClientes() { document.getElementById('modal-password').style.display = 'none'; }
-    function validarSalida() {
-        if (document.getElementById('input-pass').value === "ALEX2026") { window.location.href = "../"; }
-        else { alert("❌ Código incorrecto"); }
+    function validarAccesoDist() {
+        const input = document.getElementById('input-dist-pass');
+        if (input.value === "ALEX2026") {
+            sessionStorage.setItem("acceso_distribuidor", "true");
+            location.reload();
+        } else {
+            input.style.borderColor = "red";
+            input.value = "";
+            input.placeholder = "ERROR";
+        }
     }
 
     function configurarLinksWhatsApp() {
@@ -251,12 +241,13 @@
             const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
             const precio = tarjeta.querySelector('.precio-prod')?.innerText;
             if (nombre && precio) {
-                const mensaje = `Hola Alex Store, soy Distribuidor. Deseo ${nombre} (${precio})`;
-                tarjeta.href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+                tarjeta.href = `https://wa.me/${telefono}?text=Hola%20Alex%20Store,%20soy%20Distribuidor.%20Deseo%20${encodeURIComponent(nombre)}%20(${precio})`;
+                tarjeta.target = "_blank";
             }
         });
     }
     window.onload = configurarLinksWhatsApp;
 </script>
+
 </body>
 </html>
