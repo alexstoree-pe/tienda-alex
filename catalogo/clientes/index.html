@@ -6,7 +6,7 @@
     <title>Catálogo | Alex Store</title>
     
     <style>
-        /* Bloqueo inicial */
+        /* Bloqueo total de la vista hasta que se valide */
         html { display: none; background-color: #0a0a0a; } 
     </style>
 
@@ -89,27 +89,27 @@
         .manual-desc { font-size: 0.78rem; color: var(--text-gray); }
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
 
-        /* --- ESTILO AGOTADO CON NEON --- */
-        .service-item.agotado { opacity: 0.9; }
+        /* --- ESTILO AGOTADO EXCLUSIVO --- */
+        .service-item.agotado { cursor: default; opacity: 0.8; }
         .service-item.agotado .precio-prod { display: none; }
         
-        .acceso-ok .service-item.agotado .price-container::after { 
-            content: "SIN STOCK\a CONSULTAR 📲"; 
+        .btn-consultar-neon {
+            display: none; 
             color: #ff2222; 
-            font-size: 0.85rem; 
+            font-size: 0.95rem; 
             font-weight: 900; 
-            white-space: pre;
-            line-height: 1.1;
-            display: inline-block;
             text-align: right;
-            /* EFECTO BRILLANTE INTENSO */
+            cursor: pointer;
             text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
             animation: latido 1.5s infinite alternate;
+            line-height: 1.2;
         }
 
+        .acceso-ok .agotado .btn-consultar-neon { display: block; }
+
         @keyframes latido {
-            from { transform: scale(1); text-shadow: 0 0 10px #ff0000; }
-            to { transform: scale(1.05); text-shadow: 0 0 20px #ff0000, 0 0 30px #ff4444; }
+            from { transform: scale(1); }
+            to { transform: scale(1.1); text-shadow: 0 0 20px #ff0000, 0 0 30px #ff4444; }
         }
 
         /* MODALES */
@@ -121,11 +121,6 @@
         .option-btn { display: block; width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; }
         .btn-nuevo { background: var(--primary); color: #000; }
         .btn-antiguo { background: #333; color: #fff; }
-
-        .input-group { margin-bottom: 12px; text-align: left; }
-        .input-group label { display: block; font-size: 0.8rem; color: #aaa; margin-bottom: 4px; }
-        .input-group input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #444; background: #000; color: #fff; }
-
         #input-pass { width: 100%; padding: 12px; margin: 20px 0; border-radius: 10px; border: 1px solid #444; background: #000; color: white; text-align: center; font-size: 1.2rem; letter-spacing: 4px; }
 
         .floating-btn {
@@ -325,16 +320,17 @@
         else { alert("Código incorrecto"); }
     }
 
-    function toggleCarrito(elemento) {
-        const nombre = elemento.querySelector('.nombre-prod').innerText;
-        
-        // Si está agotado, manda directo al WhatsApp de consulta
-        if (elemento.classList.contains('agotado')) {
-            let msg = `Hola *Alex Store*, deseo consultar disponibilidad de: *${nombre}*`;
-            window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
-            return;
-        }
+    // Acción para las letras rojas neón
+    function consultarStock(nombre, event) {
+        event.stopPropagation();
+        let msg = `Hola *Alex Store*, quisiera consultar si aún hay disponible la plataforma *${nombre}* que figura sin stock.`;
+        window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
 
+    function toggleCarrito(elemento) {
+        if (elemento.classList.contains('agotado')) return;
+
+        const nombre = elemento.querySelector('.nombre-prod').innerText;
         const precio = parseFloat(elemento.querySelector('.precio-prod').innerText.replace('S/', ''));
         const idx = carrito.findIndex(i => i.nombre === nombre);
         
