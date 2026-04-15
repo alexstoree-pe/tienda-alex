@@ -56,6 +56,22 @@
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
 
+        /* BOTÓN VOLVER INICIO ESTÁTICO */
+        .btn-inicio-top {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: #222;
+            color: #fff;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 15px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border: 1px solid #444;
+            font-size: 0.9rem;
+        }
+
         /* LÓGICA DE ETIQUETAS DINÁMICAS */
         .stock-status::before { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; display: block; }
         .disponible .stock-status::before { content: "✅ Entrega inmediata"; color: var(--success); }
@@ -108,7 +124,7 @@
 
         /* --- BOTONES FLOTANTES --- */
         .floating-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; display: flex; flex-direction: column; gap: 10px; z-index: 100; }
-        .floating-btn { background: var(--whatsapp); color: white; padding: 15px; border-radius: 50px; text-decoration: none; font-weight: 700; text-align: center; font-size: 0.9rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .floating-btn { background: var(--whatsapp); color: white; padding: 18px; border-radius: 50px; text-decoration: none; font-weight: 700; text-align: center; font-size: 0.9rem; }
         .btn-promo { background: var(--vip); color: #000; }
 
         .modal-pass { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 3000; justify-content: center; align-items: center; }
@@ -124,6 +140,8 @@
 </header>
 
 <div class="container">
+    <a href="../" class="btn-inicio-top">🏠 VOLVER AL INICIO</a>
+
     <div class="category-title">👤 ZONA PERFILES</div>
 
     <a href="#" class="service-link disponible">
@@ -292,7 +310,7 @@
 </div>
 
 <div class="floating-container">
-    <a href="../distribuidores-promos/" class="floating-btn btn-promo">👑 PROMOCIONES DE CUENTAS</a>
+    <a href="../promos/" class="floating-btn btn-promo">👑 ZONA PROMOS MAYORISTAS</a>
     <a href="https://wa.me/51918600000?text=Hola%20Alex%20Store" class="floating-btn">📲 SOPORTE WHATSAPP</a>
 </div>
 
