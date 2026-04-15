@@ -61,7 +61,6 @@
         .disponible .stock-status::before { content: "✅ Entrega inmediata"; color: var(--success); }
         .pocas .stock-status::before { content: "⏳ Últimas cuentas"; color: var(--warning); }
         
-        /* JERARQUÍA AGOTADO */
         .service-link.agotado .stock-status,
         .service-link.agotado .price-tag, 
         .service-link.agotado .renovacion-info { display: none !important; }
@@ -84,10 +83,27 @@
         .price-container { text-align: right; min-width: 100px; display: flex; flex-direction: column; align-items: flex-end; }
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
 
-        .service-link.agotado { pointer-events: none; filter: grayscale(1); opacity: 0.5; }
+        /* --- RESTAURACIÓN DE BRILLO SIN STOCK --- */
+        @keyframes shine-red {
+            0% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; color: #ff3333; }
+            50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #ffffff; }
+            100% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; color: #ff3333; }
+        }
+
+        .service-link.agotado { pointer-events: none; }
+        .service-link.agotado .service-logo, .service-link.agotado .service-text { filter: grayscale(1); opacity: 0.5; }
         .service-link.agotado .price-container::after {
-            content: "SIN STOCK"; color: var(--danger-bright); font-size: 0.85rem; font-weight: 900;
-            border: 2px solid var(--danger-bright); padding: 4px; border-radius: 8px; margin-top: 5px; background: rgba(255, 0, 0, 0.1);
+            content: "SIN STOCK"; 
+            font-size: 0.85rem; 
+            font-weight: 900;
+            border: 2px solid var(--danger-bright); 
+            padding: 6px 4px; 
+            border-radius: 8px; 
+            background: rgba(255, 0, 0, 0.1);
+            animation: shine-red 1.5s infinite; /* El brillo restaurado */
+            display: block;
+            width: 100%;
+            text-align: center;
         }
 
         .floating-btn { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--whatsapp); color: white; padding: 18px; border-radius: 50px; text-decoration: none; font-weight: 700; width: 85%; max-width: 400px; text-align: center; z-index: 100; }
@@ -106,7 +122,7 @@
 <div class="container">
     <div class="category-title">👤 ZONA PERFILES</div>
 
-    <a href="#" class="service-link disponible con-renovacion">
+    <a href="#" class="service-link disponible disponible">
         <div class="service-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
             <div class="service-text"><span class="stock-status"></span><h3 class="nombre-prod">Netflix Perfil</h3><span class="manual-desc">Ultra HD 4K • 1 Pantalla • Renovable.</span></div>
@@ -133,7 +149,7 @@
     <a href="#" class="service-link disponible">
         <div class="service-card">
             <img src="../img/prime.png" class="service-logo">
-            <div class="service-text"><span class="stock-status"></span><h3 class="nombre-prod">AMAZON PRIME Perfil</h3><span class="manual-desc">1 perfil • Entrega de correo y contraseña.</span></div>
+            <div class="service-text"><span class="stock-status"></span><h3 class="nombre-prod">AMAZON PRIME Perfil</h3><span class="manual-desc">1 perfil • Correo y contraseña.</span></div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 4</span><span class="renovacion-info">🔄 Renova: S/ 5.00</span></div>
         </div>
     </a>
