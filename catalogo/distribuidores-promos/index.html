@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <style>
+    /* Oculta todo el contenido por defecto */
+    body { display: none; } 
+</style>
+
+<script>
+    (function() {
+        const pass = prompt("🔐 ACCESO DISTRIBUIDOR\nIngrese su código autorizado:");
+        
+        if (pass === "ALEX2026") {
+            // Si es correcto, mostramos la página
+            document.documentElement.style.display = "block";
+            document.addEventListener("DOMContentLoaded", function() {
+                document.body.style.display = "block";
+            });
+        } else {
+            // Si es incorrecto, lo mandamos afuera
+            alert("❌ Código inválido. No tiene permiso para ver estos precios.");
+            window.location.href = "../"; 
+        }
+    })();
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promos Mayoristas | Alex Store</title>
