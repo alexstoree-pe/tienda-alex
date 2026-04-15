@@ -102,12 +102,12 @@
             display: inline-block; text-transform: uppercase;
         }
 
-        /* --- ESTILOS DEL MODAL PERSONALIZADO --- */
+        /* MODAL DE SEGURIDAD */
         .modal-pass {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95); z-index: 3000; justify-content: center; align-items: center;
         }
-        .modal-content {
+        .modal-content-pass {
             background: #1a1a1a; padding: 30px; border-radius: 20px; width: 90%;
             max-width: 350px; border: 1px solid var(--primary); text-align: center;
         }
@@ -116,7 +116,6 @@
             border: 1px solid #444; background: #000; color: white;
             text-align: center; font-size: 1.2rem; letter-spacing: 4px;
         }
-        .btn-enter { background: var(--primary); color: #000; width: 100%; padding: 12px; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; }
 
         .floating-btn {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
@@ -141,6 +140,18 @@
     </div>
 
     <div class="category-title">👤 ZONA PERFILES</div>
+
+    <a href="#" target="_blank" class="service-link agotado">
+        <div class="service-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">Netflix Perfil</h3>
+                <span class="manual-desc">Ultra HD 4K • 1 Pantalla • Renovable • Perfil privado.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 12</span></div>
+        </div>
+    </a>
+
     <a href="#" target="_blank" class="service-link">
         <div class="service-card">
             <img src="../img/disneys.png" class="service-logo">
@@ -151,14 +162,95 @@
             <div class="price-container"><span class="price-tag precio-prod">S/ 4</span></div>
         </div>
     </a>
+
+    <a href="#" target="_blank" class="service-link">
+        <div class="service-card">
+            <img src="../img/disneyp.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">Disney premium Perfil</h3>
+                <span class="manual-desc">• Todo ESPN • Calidad 4K • PIN privado.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 6</span></div>
+        </div>
+    </a>
+
+    <a href="#" target="_blank" class="service-link">
+        <div class="service-card">
+            <img src="../img/prime.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">AMAZON PRIME Perfil</h3>
+                <span class="manual-desc">• 1 perfil • Entrega de correo y contraseña.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 4</span></div>
+        </div>
+    </a>
+
+    <a href="#" target="_blank" class="service-link">
+        <div class="service-card">
+            <img src="../img/vix.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">VIX PREMIUM Perfil</h3>
+                <span class="manual-desc">• Premium • Series y Telenovelas • 1 perfil.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 3</span></div>
+        </div>
+    </a>
+
+    <a href="#" target="_blank" class="service-link">
+        <div class="service-card">
+            <img src="../img/movistar.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">Movistar Play + Liga 1 Max Perfil</h3>
+                <span class="manual-desc">• Activación TV • Incluye ESPN • 1 perfil.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 12</span></div>
+        </div>
+    </a>
+
+    <div class="category-title">🏠 ZONA CUENTAS COMPLETAS</div>
+
+    <a href="#" class="service-link">
+        <div class="service-card">
+            <img src="../img/max.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">MAX PLATINO completa</h3>
+                <span class="manual-desc">• 5 perfiles • Ultra HD • 4 en simultáneo.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 12</span></div>
+        </div>
+    </a>
+
+    <a href="#" class="service-link">
+        <div class="service-card">
+            <img src="../img/prime.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">prime video completa</h3>
+                <span class="manual-desc">• 6 perfiles • Ultra HD • 3 en simultáneo.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 10</span></div>
+        </div>
+    </a>
+
+    <div class="category-title">👤 APPS DE PAGA</div>
+    
+    <a href="#" target="_blank" class="service-link">
+       <div class="service-card">
+            <img src="../img/ibo.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">IBO PLAYER (12 meses)</h3>
+                <span class="manual-desc">• Licencia 1 año • Solo activación de app.</span>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 13</span></div>
+        </div>
+    </a>
 </div>
 
 <div id="modal-password" class="modal-pass">
-    <div class="modal-content">
-        <h2 style="color:var(--primary); font-size: 1.2rem;">Volver al Catálogo</h2>
-        <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px;">Ingresa el código para salir de la Zona VIP</p>
+    <div class="modal-content-pass">
+        <h2 style="color:var(--primary);">Volver al Catálogo</h2>
+        <p style="font-size: 0.8rem; color: #aaa;">Ingresa el código para salir</p>
         <input type="password" id="input-pass" placeholder="****">
-        <button class="btn-enter" onclick="validarSalida()">CONFIRMAR</button>
+        <button onclick="validarSalida()" style="background:var(--primary); color:black; width:100%; padding:12px; border:none; border-radius:10px; font-weight:700; cursor:pointer;">CONFIRMAR</button>
         <button onclick="cerrarModalClientes()" style="background:none; border:none; color:grey; width:100%; margin-top:10px; cursor:pointer;">Cancelar</button>
     </div>
 </div>
@@ -168,7 +260,6 @@
 </a>
 
 <script>
-    // --- LÓGICA DEL MODAL ---
     function abrirModalClientes() {
         document.getElementById('modal-password').style.display = 'flex';
         document.getElementById('input-pass').value = "";
@@ -180,23 +271,13 @@
     }
 
     function validarSalida() {
-        const passCorrecta = "ALEX2026";
-        const passIngresada = document.getElementById('input-pass').value;
-
-        if (passIngresada === passCorrecta) {
-            window.location.href = "../"; // Te lleva al catálogo principal
+        if (document.getElementById('input-pass').value === "ALEX2026") {
+            window.location.href = "../";
         } else {
             alert("❌ Código incorrecto");
-            document.getElementById('input-pass').value = "";
         }
     }
 
-    // Enter para validar
-    document.getElementById('input-pass').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') { validarSalida(); }
-    });
-
-    // --- CONFIGURACIÓN WHATSAPP ORIGINAL ---
     function configurarLinksWhatsApp() {
         const telefono = "51918600000";
         const tarjetas = document.querySelectorAll('.service-link:not(.agotado)');
@@ -211,6 +292,5 @@
     }
     window.onload = configurarLinksWhatsApp;
 </script>
-
 </body>
 </html>
