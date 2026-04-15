@@ -62,6 +62,7 @@
             cursor: pointer;
             text-align: center;
             font-family: 'Poppins', sans-serif;
+            text-decoration: none;
         }
 
         .btn-access:hover {
@@ -177,6 +178,11 @@
 <script>
     let urlDestino = "";
 
+    // Al cargar el inicio, reseteamos cualquier acceso previo por seguridad
+    window.onload = function() {
+        sessionStorage.removeItem("acceso_concedido");
+    };
+
     function solicitarAcceso(url) {
         urlDestino = url;
         const modal = document.getElementById('modal-pass');
@@ -211,17 +217,21 @@
         const error = document.getElementById('error-msg');
         const modalBox = document.getElementById('modal-box');
         
-        // --- TUS CLAVES ---
+        // --- TUS CLAVES CONFIGURADAS ---
         const CLAVE_CLIENTES = "cliente";
-        const CLAVE_DISTRIBUIDORES = "ds";
+        const CLAVE_DISTRIBUIDORES = "ds"; // Cambia aquí a "dc" si usas esa en el catálogo
         
         let claveCorrecta = urlDestino.includes('distribuidores') ? CLAVE_DISTRIBUIDORES : CLAVE_CLIENTES;
 
         if (pass === claveCorrecta) {
-            // --- AQUÍ GUARDAMOS LA LLAVE DE ACCESO ---
+            // --- AQUÍ ENTREGAMOS LA LLAVE ---
             sessionStorage.setItem("acceso_concedido", "true");
             
-            window.location.href = urlDestino;
+            // Pequeña animación de éxito antes de redirigir
+            input.style.borderColor = "var(--success)";
+            setTimeout(() => {
+                window.location.href = urlDestino;
+            }, 300);
         } else {
             error.style.display = "block";
             modalBox.classList.add('shake');
