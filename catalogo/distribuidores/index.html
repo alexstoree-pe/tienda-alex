@@ -63,17 +63,11 @@
         .stock-status { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; display: block; }
         .disponible .stock-status { color: var(--success); }
         .pocas .stock-status { color: var(--warning); }
-        .agotado .stock-status { color: var(--danger-bright); }
-
-        .nav-buttons { text-align: center; margin: 20px 0; display: flex; flex-direction: column; gap: 15px; align-items: center; }
         
-        .btn-vip {
-            text-decoration: none; width: 100%; max-width: 450px; 
-            background: linear-gradient(135deg, var(--vip), #f4d03f); 
-            color: black; padding: 18px; border-radius: 20px; 
-            font-weight: 800; font-size: 1rem; display: inline-block;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-        }
+        /* JERARQUÍA AGOTADO: OCULTA ETIQUETAS DE STOCK, PRECIO Y RENOVACIÓN */
+        .service-link.agotado .stock-status,
+        .service-link.agotado .price-tag, 
+        .service-link.agotado .renovacion-info { display: none !important; }
 
         .category-title {
             margin: 25px 0 12px; font-size: 0.9rem; font-weight: 700; color: #fff;
@@ -99,21 +93,20 @@
         .price-container { text-align: right; min-width: 100px; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; align-items: flex-end; }
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
 
-        /* PRIORIDAD AGOTADO */
+        /* ESTILO VISUAL AGOTADO */
         .service-link.agotado { pointer-events: none; }
         .service-link.agotado .service-logo, .service-link.agotado .service-text { filter: grayscale(1); opacity: 0.5; }
-        .service-link.agotado .price-tag, .service-link.agotado .renovacion-info { display: none !important; }
         .service-link.agotado .price-container::after {
             content: "SIN STOCK"; color: var(--danger-bright); font-size: 0.85rem; font-weight: 900;
             display: flex; align-items: center; justify-content: center; border: 2px solid var(--danger-bright);
             width: 100%; padding: 6px 4px; border-radius: 8px; background: rgba(255, 0, 0, 0.1);
         }
 
-        /* MODAL LOGIN */
+        /* BOTONES Y MODAL */
+        .btn-vip { text-decoration: none; width: 100%; max-width: 450px; background: linear-gradient(135deg, var(--vip), #f4d03f); color: black; padding: 18px; border-radius: 20px; font-weight: 800; font-size: 1rem; display: inline-block; text-align: center; }
         .modal-pass { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 3000; justify-content: center; align-items: center; }
         .modal-content { background: #1a1a1a; padding: 30px; border-radius: 25px; width: 90%; max-width: 380px; border: 1px solid var(--primary); text-align: center; }
         .input-estilo { width: 100%; padding: 15px; margin: 20px 0; border-radius: 12px; background: #000; color: white; text-align: center; border: 1px solid #444; font-size: 1.2rem; }
-        
         .floating-btn { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--whatsapp); color: white; padding: 18px; border-radius: 50px; text-decoration: none; font-weight: 700; width: 85%; max-width: 400px; text-align: center; z-index: 100; }
     </style>
 </head>
@@ -126,17 +119,17 @@
 </header>
 
 <div class="container">
-    <div class="nav-buttons">
+    <div class="nav-buttons" style="text-align: center; margin-bottom: 20px;">
         <a href="../distribuidores-promos" class="btn-vip">👑 VER PROMOCIONES MAYORISTAS</a>
     </div>
 
     <div class="category-title">👤 ZONA PERFILES</div>
 
-    <a href="#" class="service-link con-renovacion pocas agotado">
+    <a href="#" class="service-link disponible con-renovacion">
         <div class="service-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
             <div class="service-text">
-                <span class="stock-status">⏳ Últimas cuentas</span>
+                <span class="stock-status">✅ Entrega inmediata</span>
                 <h3 class="nombre-prod">Netflix Perfil</h3>
                 <span class="manual-desc">Ultra HD 4K • 1 Pantalla • Renovable.</span>
             </div>
@@ -177,11 +170,11 @@
         </div>
     </a>
 
-    <a href="#" class="service-link agotado con-renovacion">
+    <a href="#" class="service-link disponible">
         <div class="service-card">
             <img src="../img/prime.png" class="service-logo">
             <div class="service-text">
-                <span class="stock-status">🚫 Agotado</span>
+                <span class="stock-status">✅ Entrega inmediata</span>
                 <h3 class="nombre-prod">AMAZON PRIME Perfil</h3>
                 <span class="manual-desc">1 perfil • Entrega de correo y contraseña.</span>
             </div>
@@ -192,7 +185,127 @@
         </div>
     </a>
 
+    <a href="#" class="service-link pocas">
+        <div class="service-card">
+            <img src="../img/prime.png" class="service-logo">
+            <div class="service-text">
+                <span class="stock-status">⏳ Últimas cuentas</span>
+                <h3 class="nombre-prod">AMAZON PRIME Perfil (TV)</h3>
+                <span class="manual-desc">1 perfil • Activación directa a TV.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+                <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="#" class="service-link disponible">
+        <div class="service-card">
+            <img src="../img/vix.png" class="service-logo">
+            <div class="service-text">
+                <span class="stock-status">✅ Entrega inmediata</span>
+                <h3 class="nombre-prod">VIX PREMIUM Perfil</h3>
+                <span class="manual-desc">Premium • Series y Telenovelas.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+                <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="#" class="service-link disponible">
+        <div class="service-card">
+            <img src="../img/paramount.png" class="service-logo">
+            <div class="service-text">
+                <span class="stock-status">✅ Entrega inmediata</span>
+                <h3 class="nombre-prod">PARAMOUNT Perfil</h3>
+                <span class="manual-desc">Premium • Estrenos exclusivos.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+                <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="#" class="service-link disponible">
+        <div class="service-card">
+            <img src="../img/crunchyroll.png" class="service-logo">
+            <div class="service-text">
+                <span class="stock-status">✅ Entrega inmediata</span>
+                <h3 class="nombre-prod">CRUNCHYROLL Perfil</h3>
+                <span class="manual-desc">Premium • Sin anuncios.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+                <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="#" class="service-link pocas">
+        <div class="service-card">
+            <img src="../img/movistar.png" class="service-logo">
+            <div class="service-text">
+                <span class="stock-status">⏳ Últimas cuentas</span>
+                <h3 class="nombre-prod">Movistar Play + Liga 1 Max Perfil</h3>
+                <span class="manual-desc">Activación TV • Incluye ESPN.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 12</span>
+                <span class="renovacion-info">🔄 Renova: S/ 15.00</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="#" class="service-link disponible">
+        <div class="service-card">
+            <img src="../img/dgo.png" class="service-logo">
+            <div class="service-text">
+                <span class="stock-status">✅ Entrega inmediata</span>
+                <h3 class="nombre-prod">DGO + Liga 1 Max Perfil</h3>
+                <span class="manual-desc">Activación TV • Incluye ESPN.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 16</span>
+                <span class="renovacion-info">🔄 Renova: S/ 18.00</span>
+            </div>
+        </div>
+    </a>
+
     <div class="category-title">🏠 ZONA CUENTAS COMPLETAS</div>
+
+    <a href="#" class="service-link agotado con-renovacion">
+        <div class="service-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
+            <div class="service-text">
+                <span class="stock-status">✅ Entrega inmediata</span>
+                <h3 class="nombre-prod">Netflix Completa</h3>
+                <span class="manual-desc">5 Perfiles • Renovable • Ultra HD.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 45</span>
+                <span class="renovacion-info">🔄 Renova: S/ 45.00</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="#" class="service-link disponible">
+        <div class="service-card">
+            <img src="../img/disneys.png" class="service-logo">
+            <div class="service-text">
+                <span class="stock-status">✅ Entrega inmediata</span>
+                <h3 class="nombre-prod">Disney premium Completa</h3>
+                <span class="manual-desc">7 Perfiles • Sin canales ESPN.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 14</span>
+                <span class="renovacion-info">🔄 Renova: S/ 18.00</span>
+            </div>
+        </div>
+    </a>
 
     <a href="#" class="service-link disponible con-renovacion">
         <div class="service-card">
@@ -200,7 +313,7 @@
             <div class="service-text">
                 <span class="stock-status">✅ Entrega inmediata</span>
                 <h3 class="nombre-prod">Disney Premium Completa</h3>
-                <span class="manual-desc">7 Perfiles • 1 mes • Todo ESPN.</span>
+                <span class="manual-desc">7 Perfiles • Incluye todo ESPN.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 22</span>
@@ -224,6 +337,51 @@
         </div>
     </a>
 
+    <a href="#" class="service-link disponible">
+        <div class="service-card">
+            <img src="../img/movistar.png" class="service-logo">
+            <div class="service-text">
+                <span class="stock-status">✅ Entrega inmediata</span>
+                <h3 class="nombre-prod">Movistar Play + Liga 1 Max Completa</h3>
+                <span class="manual-desc">Plan Completo • 2 dispositivos.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 22</span>
+                <span class="renovacion-info">🔄 Renova: S/ 25.00</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="#" class="service-link disponible">
+        <div class="service-card">
+            <img src="../img/max.png" class="service-logo">
+            <div class="service-text">
+                <span class="stock-status">✅ Entrega inmediata</span>
+                <h3 class="nombre-prod">MAX PLATINO completa</h3>
+                <span class="manual-desc">5 perfiles • Ultra HD • 4 dispositivos.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 12</span>
+                <span class="renovacion-info">🔄 Renova: S/ 15.00</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="#" class="service-link disponible">
+        <div class="service-card">
+            <img src="../img/max.png" class="service-logo">
+            <div class="service-text">
+                <span class="stock-status">✅ Entrega inmediata</span>
+                <h3 class="nombre-prod">MAX STANDARD completa</h3>
+                <span class="manual-desc">5 perfiles • HD • 2 dispositivos.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 7</span>
+                <span class="renovacion-info">🔄 Renova: S/ 10.00</span>
+            </div>
+        </div>
+    </a>
+
     <div class="category-title">👤 APPS DE PAGA</div>
     
     <a href="#" class="service-link disponible">
@@ -232,7 +390,22 @@
             <div class="service-text">
                 <span class="stock-status">✅ Entrega inmediata</span>
                 <h3 class="nombre-prod">IBO PLAYER (12 meses)</h3>
-                <span class="manual-desc">Licencia 1 año • Solo activación de app.</span>
+                <span class="manual-desc">Licencia 1 año • Solo activación.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 13</span>
+                <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
+            </div>
+        </div>
+    </a>
+    
+    <a href="#" class="service-link disponible">
+        <div class="service-card">
+            <img src="../img/ibopro.png" class="service-logo">
+            <div class="service-text">
+                <span class="stock-status">✅ Entrega inmediata</span>
+                <h3 class="nombre-prod">IBOPRO (12 meses)</h3>
+                <span class="manual-desc">Licencia 1 año • Estabilidad Pro.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 13</span>
@@ -245,16 +418,14 @@
 <div id="modal-login-distribuidor" class="modal-pass">
     <div class="modal-content">
         <h2 style="color:var(--primary); margin-bottom:10px;">ACCESO PRIVADO</h2>
-        <p style="font-size:0.8rem; color:var(--text-gray);">Ingrese llave</p>
         <input type="password" id="input-dist-pass" class="input-estilo" placeholder="****">
-        <button onclick="validarAcceso()" style="background:var(--primary); width:100%; padding:15px; border-radius:12px; font-weight:700; border:none; color:black;">ENTRAR</button>
+        <button onclick="validarAcceso()" style="background:var(--primary); width:100%; padding:15px; border-radius:12px; font-weight:700; border:none;">ENTRAR</button>
     </div>
 </div>
 
 <a href="https://wa.me/51918600000?text=Hola%20Alex%20Store" class="floating-btn">📲 SOPORTE WHATSAPP</a>
 
 <script>
-    // LÓGICA DE FECHA AUTOMÁTICA
     function actualizarFecha() {
         const fecha = new Date();
         const opciones = { day: '2-digit', month: 'long', year: 'numeric' };
