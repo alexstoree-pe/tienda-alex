@@ -92,17 +92,28 @@
         .manual-desc { font-size: 0.78rem; color: var(--text-gray); }
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
 
-        /* LÓGICA DE PRODUCTO AGOTADO Y BRILLO */
-        .service-item.agotado { cursor: pointer; opacity: 0.9; }
-        .service-item.agotado .service-card { border-color: rgba(255, 68, 68, 0.3); }
+        /* --- AJUSTES DE PRODUCTO AGOTADO: TEXTO APILADO Y MÁS BRILLANTE --- */
+        .service-item.agotado { cursor: pointer; opacity: 1; } /* Mantenemos opacidad alta para que brille */
+        .service-item.agotado .service-card { border-color: rgba(255, 68, 68, 0.5); }
         .service-item.agotado .precio-prod { display: none; }
+        
+        /* Contenedor del precio modificado para alinear a la derecha el texto apilado */
+        .service-item.agotado .price-container {
+            text-align: right;
+            min-width: 100px;
+        }
+
+        /* Solo si entró con clave ve el texto de consultar brillante y apilado */
         .acceso-ok .service-item.agotado .price-container::after { 
-            content: "SIN STOCK, CONSULTAR 📲"; 
-            color: #ff4d4d; 
-            font-size: 0.75rem; 
+            content: "SIN STOCK\a CONSULTAR 📲"; /* \a genera el salto de línea en CSS */
+            color: #ff3333; /* Rojo más vivo base */
+            font-size: 0.9rem; /* Letras más grandes */
             font-weight: 800; 
-            text-shadow: 0 0 8px rgba(255, 0, 0, 0.8), 0 0 15px rgba(255, 0, 0, 0.5); /* Letras brillantes */
+            white-space: pre; /* Necesario para reconocer el salto de línea \a */
+            line-height: 1.2; /* Ajuste de espacio entre líneas */
             display: inline-block;
+            /* Resplandor neón intensificado */
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000; 
         }
 
         /* MODALES */
@@ -331,7 +342,7 @@
     function toggleCarrito(elemento) {
         const nombre = elemento.querySelector('.nombre-prod').innerText;
         
-        // --- NUEVA LÓGICA: Redirección automática si está agotado ---
+        // --- NUEVA LÓGICA: Redirección automática si está agotado al presionar las letras brillantes ---
         if (elemento.classList.contains('agotado')) {
             let msgConsulta = `Hola *Alex Store*, quisiera consultar si aún hay disponible la plataforma *${nombre}* que figura sin stock.`;
             window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msgConsulta)}`, '_blank');
