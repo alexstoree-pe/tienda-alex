@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo Oficial | Alex Store</title>
+    <title>Catálogo | Alex Store</title>
     
     <style>
-        /* BLOQUEO TOTAL: Nadie ve nada sin la clave */
+        /* Bloqueo de seguridad inicial */
         html { display: none; background-color: #0a0a0a; } 
     </style>
 
@@ -52,8 +52,6 @@
             --card-bg: #161616;
             --whatsapp: #25d366;
             --text-gray: #aaa;
-            --glow: 0 0 15px rgba(0, 212, 255, 0.4);
-            --glow-red: 0 0 15px rgba(255, 68, 68, 0.4);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -63,7 +61,6 @@
             background: linear-gradient(135deg, var(--secondary), var(--primary));
             padding: 40px 20px; text-align: center;
             border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;
-            box-shadow: 0 5px 25px rgba(0, 212, 255, 0.3);
         }
         header h1 { font-size: 2.2rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
 
@@ -73,47 +70,50 @@
             width: 100%; max-width: 450px; margin: 10px auto 30px;
             background: linear-gradient(135deg, #f4d03f, #d4af37); 
             color: black; padding: 18px; border-radius: 20px; 
-            text-decoration: none; font-weight: 800; font-size: 1rem; 
-            display: block; text-align: center; box-shadow: 0 4px 20px rgba(244, 208, 63, 0.4);
+            text-decoration: none; font-weight: 800; display: block; text-align: center;
+            box-shadow: 0 4px 15px rgba(244, 208, 63, 0.3);
         }
 
-        .category-title { margin: 30px 0 15px; font-size: 1.1rem; font-weight: 700; color: var(--primary); text-transform: uppercase; display: flex; align-items: center; text-shadow: var(--glow); }
-        .category-title::after { content: ""; height: 1px; background: linear-gradient(to right, #333, transparent); flex: 1; margin-left: 15px; }
+        .category-title { margin: 30px 0 15px; font-size: 1.1rem; font-weight: 700; color: var(--primary); text-transform: uppercase; display: flex; align-items: center; }
+        .category-title::after { content: ""; height: 1px; background: #333; flex: 1; margin-left: 15px; }
 
         .service-item { cursor: pointer; display: block; margin-bottom: 15px; position: relative; transition: 0.3s; }
         .service-card { 
             background: var(--card-bg); border-radius: 20px; padding: 15px; 
-            display: flex; align-items: center; border: 1px solid #222; 
-            transition: 0.3s; gap: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            display: flex; align-items: center; border: 1px solid #222; gap: 15px;
         }
-        .service-item:hover:not(.agotado) .service-card { border-color: var(--primary); box-shadow: var(--glow); }
-        .service-item.selected .service-card { border-color: var(--primary); background: #1a2a3a; box-shadow: var(--glow); transform: scale(1.02); }
+        .service-item.selected .service-card { border-color: var(--primary); background: #1a2a3a; transform: scale(1.02); }
 
-        /* AGOTADO LÓGICA */
-        .service-item.agotado { cursor: not-allowed; }
-        .service-item.agotado .service-card { background: rgba(15, 15, 15, 0.9); border: 1px solid rgba(255, 68, 68, 0.2); filter: saturate(0.5); }
+        /* Lógica para productos Agotados */
+        .service-item.agotado { cursor: not-allowed; opacity: 0.7; }
         .service-item.agotado .precio-prod { display: none; }
-        
-        /* Solo si entró con clave ve CONSULTAR */
-        .acceso-ok .service-item.agotado .price-container::after { content: "CONSULTAR"; color: #ff4444; font-size: 0.75rem; font-weight: 800; text-shadow: var(--glow-red); }
-        
-        .service-item.agotado::before { content: "SIN STOCK"; position: absolute; top: -5px; right: 10px; background: linear-gradient(135deg, #ff4444, #990000); color: white; font-size: 0.65rem; font-weight: 800; padding: 4px 10px; border-radius: 10px; z-index: 10; box-shadow: 0 0 10px rgba(255, 68, 68, 0.5); }
+        .acceso-ok .service-item.agotado .price-container::after {
+            content: "CONSULTAR";
+            color: #ff4444; font-size: 0.75rem; font-weight: 800;
+        }
 
         .service-logo { width: 65px; height: 65px; object-fit: cover; border-radius: 15px; }
-        .service-text h3 { font-size: 1rem; font-weight: 700; color: #fff; }
+        .service-text h3 { font-size: 1rem; color: #fff; font-weight: 600; }
         .manual-desc { font-size: 0.78rem; color: var(--text-gray); }
-        .price-tag { color: var(--primary); font-weight: 800; font-size: 1.2rem; text-shadow: var(--glow); }
+        .price-tag { color: var(--primary); font-weight: 800; font-size: 1.2rem; }
 
-        .floating-btn { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--whatsapp), #1ebd5e); color: white; padding: 18px; border-radius: 50px; text-decoration: none; font-weight: 700; width: 90%; max-width: 450px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
+        .floating-btn {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--whatsapp), #1ebd5e); color: white; 
+            padding: 18px; border-radius: 50px; text-decoration: none; font-weight: 700; 
+            width: 90%; max-width: 450px; display: flex; justify-content: space-between; align-items: center; z-index: 1000;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+        }
         .hidden { display: none; }
 
+        /* Modales */
         .modal-pass { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; justify-content: center; align-items: center; z-index: 9999; }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; justify-content: center; align-items: center; z-index: 3000; backdrop-filter: blur(10px); }
-        .modal-content { background: #1a1a1a; padding: 25px; border-radius: 25px; width: 90%; max-width: 400px; border: 1px solid var(--primary); text-align: center; box-shadow: var(--glow); }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; justify-content: center; align-items: center; z-index: 3000; backdrop-filter: blur(8px); }
+        .modal-content { background: #1a1a1a; padding: 25px; border-radius: 25px; width: 90%; max-width: 400px; border: 1px solid var(--primary); text-align: center; }
         .option-btn { display: block; width: 100%; padding: 12px; margin: 10px 0; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; }
         .btn-nuevo { background: var(--primary); color: #000; }
         .btn-antiguo { background: #333; color: #fff; }
-        #input-pass { width: 100%; padding: 15px; margin: 20px 0; border-radius: 12px; border: 1px solid #444; background: #000; color: white; text-align: center; font-size: 1.2rem; }
+        #input-pass { width: 100%; padding: 15px; margin: 20px 0; border-radius: 12px; border: 1px solid #444; background: #000; color: white; text-align: center; font-size: 1.1rem; }
     </style>
 </head>
 <body>
@@ -121,6 +121,7 @@
 <div id="modal-password" class="modal-pass">
     <div class="modal-content">
         <h2 style="color:var(--primary);">ALEX STORE</h2>
+        <p style="color:var(--text-gray); font-size:0.9rem; margin-top:10px;">Catálogo Protegido</p>
         <input type="password" id="input-pass" placeholder="****">
         <button class="option-btn btn-nuevo" onclick="validarPass()">INGRESAR</button>
     </div>
@@ -139,7 +140,7 @@
     <div class="service-item" onclick="toggleCarrito(this)">
         <div class="service-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
-            <div class="service-text"><h3>Netflix Premium</h3><span class="manual-desc">• 4K + HDR • Perfil Privado.</span></div>
+            <div class="service-text"><h3>Netflix Premium</h3><span class="manual-desc">• 4K UHD • Perfil Privado</span></div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 16</span></div>
         </div>
     </div>
@@ -147,7 +148,7 @@
     <div class="service-item" onclick="toggleCarrito(this)">
         <div class="service-card">
             <img src="../img/disneyp.png" class="service-logo">
-            <div class="service-text"><h3>Disney Premium</h3><span class="manual-desc">• Todo ESPN y Deportes.</span></div>
+            <div class="service-text"><h3>Disney Premium</h3><span class="manual-desc">• ESPN y Deportes</span></div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 10</span></div>
         </div>
     </div>
@@ -155,7 +156,7 @@
     <div class="service-item" onclick="toggleCarrito(this)">
         <div class="service-card">
             <img src="../img/max.png" class="service-logo">
-            <div class="service-text"><h3>MAX Platino</h3><span class="manual-desc">• 4K UHD • 1 Perfil.</span></div>
+            <div class="service-text"><h3>MAX Platino</h3><span class="manual-desc">• 4K UHD • 1 Perfil</span></div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 7</span></div>
         </div>
     </div>
@@ -163,7 +164,7 @@
     <div class="service-item" onclick="toggleCarrito(this)">
         <div class="service-card">
             <img src="../img/prime.png" class="service-logo">
-            <div class="service-text"><h3>Prime Video</h3><span class="manual-desc">• Full HD • 1 Perfil.</span></div>
+            <div class="service-text"><h3>Prime Video</h3><span class="manual-desc">• Full HD • 1 Perfil</span></div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 6</span></div>
         </div>
     </div>
@@ -171,7 +172,7 @@
     <div class="service-item" onclick="toggleCarrito(this)">
         <div class="service-card">
             <img src="../img/paramount.png" class="service-logo">
-            <div class="service-text"><h3>Paramount+</h3><span class="manual-desc">• Cine y Series • 1 Perfil.</span></div>
+            <div class="service-text"><h3>Paramount+</h3><span class="manual-desc">• Cine y Series</span></div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 6</span></div>
         </div>
     </div>
@@ -179,7 +180,7 @@
     <div class="service-item" onclick="toggleCarrito(this)">
         <div class="service-card">
             <img src="../img/vix.png" class="service-logo">
-            <div class="service-text"><h3>Vix+ Premium</h3><span class="manual-desc">• Novelas y Deportes.</span></div>
+            <div class="service-text"><h3>Vix+ Premium</h3><span class="manual-desc">• Novelas y Fútbol</span></div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 10</span></div>
         </div>
     </div>
@@ -187,7 +188,7 @@
     <div class="service-item" onclick="toggleCarrito(this)">
         <div class="service-card">
             <img src="../img/appletv.png" class="service-logo">
-            <div class="service-text"><h3>Apple TV+</h3><span class="manual-desc">• Calidad Premium.</span></div>
+            <div class="service-text"><h3>Apple TV+</h3><span class="manual-desc">• Calidad 4K</span></div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 10</span></div>
         </div>
     </div>
@@ -197,7 +198,7 @@
     <div class="service-item" onclick="toggleCarrito(this)">
         <div class="service-card">
             <img src="../img/dgo.png" class="service-logo">
-            <div class="service-text"><h3>DGO (Directv GO)</h3><span class="manual-desc">• Canales en vivo y deportes.</span></div>
+            <div class="service-text"><h3>DGO (Directv GO)</h3><span class="manual-desc">• Canales en vivo</span></div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 15</span></div>
         </div>
     </div>
@@ -205,17 +206,17 @@
     <div class="service-item" onclick="toggleCarrito(this)">
         <div class="service-card">
             <img src="../img/movistar.png" class="service-logo">
-            <div class="service-text"><h3>Movistar + Liga 1 Max</h3><span class="manual-desc">• Fútbol Peruano en vivo.</span></div>
+            <div class="service-text"><h3>Movistar + Liga 1 Max</h3><span class="manual-desc">• Fútbol Peruano</span></div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 12</span></div>
         </div>
     </div>
 
-    <div class="category-title">🎵 MÚSICA Y WEB</div>
+    <div class="category-title">🎵 OTROS SERVICIOS</div>
 
     <div class="service-item" onclick="toggleCarrito(this)">
         <div class="service-card">
             <img src="../img/youtube.png" class="service-logo">
-            <div class="service-text"><h3>YouTube Premium</h3><span class="manual-desc">• Sin anuncios • 1 Mes.</span></div>
+            <div class="service-text"><h3>YouTube Premium</h3><span class="manual-desc">• Sin anuncios • 1 Mes</span></div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 9</span></div>
         </div>
     </div>
@@ -223,7 +224,7 @@
     <div class="service-item" onclick="toggleCarrito(this)">
         <div class="service-card">
             <img src="../img/spotify.png" class="service-logo">
-            <div class="service-text"><h3>Spotify Premium</h3><span class="manual-desc">• 1 Mes • Tu propia cuenta.</span></div>
+            <div class="service-text"><h3>Spotify Premium</h3><span class="manual-desc">• 1 Mes • Cuenta propia</span></div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 8</span></div>
         </div>
     </div>
@@ -231,14 +232,14 @@
     <div class="service-item" onclick="toggleCarrito(this)">
         <div class="service-card">
             <img src="../img/canva.png" class="service-logo">
-            <div class="service-text"><h3>Canva Pro</h3><span class="manual-desc">• Diseño sin límites.</span></div>
+            <div class="service-text"><h3>Canva Pro</h3><span class="manual-desc">• Diseño Pro</span></div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 5</span></div>
         </div>
     </div>
 </div>
 
 <a href="javascript:void(0)" id="whatsapp-btn" class="floating-btn hidden" onclick="abrirModalRegistro()">
-    <span id="cart-count">0</span>
+    <span id="cart-count" style="background: rgba(0,0,0,0.2); padding: 5px 12px; border-radius: 20px;">0</span>
     <span>PEDIR POR WHATSAPP</span>
     <span id="cart-total">S/ 0</span>
 </a>
@@ -267,11 +268,15 @@
     function toggleCarrito(elemento) {
         if (elemento.classList.contains('agotado')) return;
         const nombre = elemento.querySelector('h3').innerText;
-        const precioText = elemento.querySelector('.precio-prod').innerText;
-        const precio = parseFloat(precioText.replace('S/', ''));
+        const precio = parseFloat(elemento.querySelector('.precio-prod').innerText.replace('S/', ''));
         const idx = carrito.findIndex(i => i.nombre === nombre);
-        if (idx > -1) { carrito.splice(idx, 1); elemento.classList.remove('selected'); } 
-        else { carrito.push({nombre, precio}); elemento.classList.add('selected'); }
+        if (idx > -1) { 
+            carrito.splice(idx, 1); 
+            elemento.classList.remove('selected'); 
+        } else { 
+            carrito.push({nombre, precio}); 
+            elemento.classList.add('selected'); 
+        }
         actualizarUI();
     }
 
@@ -296,7 +301,7 @@
         if (tipo === 'nuevo') {
             const n = document.getElementById('reg-nom').value;
             const c = document.getElementById('reg-cel').value;
-            if(!n || !c) return alert("Completa tus datos.");
+            if(!n || !c) return alert("Completa los datos");
             msg += `\n\n👤 *NUEVO CLIENTE*:\n- Nombre: ${n}\n- Cel: ${c}`;
         } else { msg += `\n\n✅ *CLIENTE REGISTRADO*`; }
         window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
