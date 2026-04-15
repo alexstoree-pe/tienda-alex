@@ -38,7 +38,6 @@
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
 
-        /* Botón de Distribuidores Modificado */
         .distributor-btn {
             background: rgba(0, 212, 255, 0.1); color: var(--primary); 
             border: 1px dashed var(--primary); padding: 12px 25px; 
@@ -74,19 +73,21 @@
         .manual-desc { font-size: 0.78rem; color: var(--text-gray); line-height: 1.4; display: block; }
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
 
-        .service-item.agotado { pointer-events: none; opacity: 0.6; filter: grayscale(1); }
-        .service-item.agotado .price-tag { display: none; }
-        .service-item.agotado .price-container::after { content: "AGOTADO"; color: var(--danger); font-weight: 800; font-size: 0.75rem; border: 1px solid var(--danger); padding: 2px 5px; border-radius: 4px; }
-
+        /* MODALES */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 2000; }
-        .modal-content { background: #1a1a1a; padding: 25px; border-radius: 20px; width: 90%; max-width: 400px; border: 1px solid var(--primary); }
+        .modal-content { background: #1a1a1a; padding: 25px; border-radius: 20px; width: 90%; max-width: 400px; border: 1px solid var(--primary); text-align: center; }
+        
+        .modal-pass { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 3000; justify-content: center; align-items: center; }
+        
         .option-btn { display: block; width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; }
         .btn-nuevo { background: var(--primary); color: #000; }
         .btn-antiguo { background: #333; color: #fff; }
-        #form-datos { display: none; margin-top: 20px; text-align: left; }
-        .input-group { margin-bottom: 12px; }
+        
+        .input-group { margin-bottom: 12px; text-align: left; }
         .input-group label { display: block; font-size: 0.8rem; color: #aaa; margin-bottom: 4px; }
         .input-group input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #444; background: #000; color: #fff; }
+
+        #input-pass { width: 100%; padding: 12px; margin: 20px 0; border-radius: 10px; border: 1px solid #444; background: #000; color: white; text-align: center; font-size: 1.2rem; letter-spacing: 4px; }
 
         .floating-btn {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
@@ -106,7 +107,7 @@
 </header>
 
 <div class="container">
-    <a href="javascript:void(0)" class="distributor-btn" onclick="accesoDistribuidores()">👤 ZONA DISTRIBUIDORES</a>
+    <a href="javascript:void(0)" class="distributor-btn" onclick="abrirModalPass()">👤 ZONA DISTRIBUIDORES</a>
 
     <div class="category-title main-title">⭐ ZONA DE CLIENTES ⭐</div>
 
@@ -227,22 +228,32 @@
     </div>
 </div>
 
-<a href="javascript:void(0)" id="whatsapp-btn" class="floating-btn hidden" onclick="abrirModal()">
+<a href="javascript:void(0)" id="whatsapp-btn" class="floating-btn hidden" onclick="abrirModalRegistro()">
     <span id="cart-count" style="background: rgba(0,0,0,0.3); padding: 5px 12px; border-radius: 20px;">0</span>
     <span>PEDIR POR WHATSAPP</span>
     <span id="cart-total">S/ 0</span>
 </a>
 
+<div id="modal-password" class="modal-pass">
+    <div class="modal-content">
+        <h2 style="color:var(--primary); font-size: 1.2rem;">Acceso Distribuidores</h2>
+        <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px;">Ingresa tu código de acceso</p>
+        <input type="password" id="input-pass" placeholder="****">
+        <button class="option-btn btn-nuevo" onclick="validarPass()">INGRESAR</button>
+        <button onclick="cerrarModalPass()" style="background:none; border:none; color:grey; width:100%; margin-top:10px; cursor:pointer;">Cancelar</button>
+    </div>
+</div>
+
 <div id="modal-registro" class="modal-overlay">
     <div class="modal-content">
         <div id="paso-1">
-            <h2 style="color:var(--primary); margin-bottom:15px; text-align:center;">¿Eres cliente de Alex Store?</h2>
+            <h2 style="color:var(--primary); margin-bottom:15px;">¿Eres cliente de Alex Store?</h2>
             <button class="option-btn btn-antiguo" onclick="enviarWhatsApp('antiguo')">SÍ, YA SOY CLIENTE</button>
             <button class="option-btn btn-nuevo" onclick="mostrarForm()">NO, SOY CLIENTE NUEVO</button>
-            <button onclick="cerrarModal()" style="background:none; border:none; color:grey; width:100%; margin-top:10px; cursor:pointer;">Cancelar</button>
+            <button onclick="cerrarModalRegistro()" style="background:none; border:none; color:grey; width:100%; margin-top:10px; cursor:pointer;">Cancelar</button>
         </div>
         <div id="form-datos" style="display:none;">
-            <h2 style="color:var(--primary); margin-bottom:15px; text-align:center;">Datos de Registro</h2>
+            <h2 style="color:var(--primary); margin-bottom:15px;">Datos de Registro</h2>
             <div class="input-group"><label>Nombre Completo</label><input type="text" id="reg-nom"></div>
             <div class="input-group"><label>Celular de contacto</label><input type="tel" id="reg-cel"></div>
             <div class="input-group"><label>Nombre para el Perfil</label><input type="text" id="reg-per"></div>
@@ -256,18 +267,22 @@
     let carrito = [];
     const numWhatsApp = "51918600000";
 
-    // FUNCIÓN DE ACCESO PARA DISTRIBUIDORES
-    function accesoDistribuidores() {
-        const passCorrecta = "DC"; // Cambia esta contraseña si deseas
-        const passUsuario = prompt("🔐 Ingrese el código de acceso para Distribuidores:");
-        
-        if (passUsuario === passCorrecta) {
+    // --- SEGURIDAD DISTRIBUIDORES ---
+    function abrirModalPass() {
+        document.getElementById('modal-password').style.display = 'flex';
+        document.getElementById('input-pass').focus();
+    }
+    function cerrarModalPass() { document.getElementById('modal-password').style.display = 'none'; }
+    function validarPass() {
+        if (document.getElementById('input-pass').value === "ALEX2026") {
             window.location.href = "distribuidores/";
-        } else if (passUsuario !== null) {
-            alert("❌ Código incorrecto. Acceso denegado.");
+        } else {
+            alert("❌ Código incorrecto");
+            document.getElementById('input-pass').value = "";
         }
     }
 
+    // --- LÓGICA CARRITO ---
     function toggleCarrito(elemento) {
         const nombre = elemento.querySelector('.nombre-prod').innerText;
         const precio = parseFloat(elemento.querySelector('.precio-prod').innerText.replace('S/', ''));
@@ -285,8 +300,9 @@
         document.getElementById('whatsapp-btn').classList.toggle('hidden', carrito.length === 0);
     }
 
-    function abrirModal() { document.getElementById('modal-registro').style.display = 'flex'; }
-    function cerrarModal() { document.getElementById('modal-registro').style.display = 'none'; volverPaso1(); }
+    // --- MODAL REGISTRO ---
+    function abrirModalRegistro() { document.getElementById('modal-registro').style.display = 'flex'; }
+    function cerrarModalRegistro() { document.getElementById('modal-registro').style.display = 'none'; volverPaso1(); }
     function mostrarForm() { document.getElementById('paso-1').style.display = 'none'; document.getElementById('form-datos').style.display = 'block'; }
     function volverPaso1() { document.getElementById('paso-1').style.display = 'block'; document.getElementById('form-datos').style.display = 'none'; }
 
@@ -301,12 +317,12 @@
             const n = document.getElementById('reg-nom').value;
             const c = document.getElementById('reg-cel').value;
             const p = document.getElementById('reg-per').value;
-            if(!n || !c || !p) return alert("Completa los datos para el registro");
+            if(!n || !c || !p) return alert("Completa los datos");
             msg += `\n\n👤 *NUEVO CLIENTE*:\n- Nombre: ${n}\n- Cel: ${c}\n- Perfil: ${p}`;
         } else { msg += `\n\n✅ *CLIENTE REGISTRADO*`; }
 
         window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
-        cerrarModal();
+        cerrarModalRegistro();
     }
 </script>
 </body>
