@@ -89,14 +89,16 @@
         .service-text h3 { font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
         .manual-desc { font-size: 0.75rem; color: var(--text-gray); display: block; line-height: 1.3; }
 
-        /* LÓGICA DE RENOVACIÓN (OCULTA POR DEFECTO) */
+        /* LÓGICA DE RENOVACIÓN ACTUALIZADA */
         .renovacion-info { 
             display: none; 
-            font-size: 0.65rem; 
+            font-size: 0.58rem; /* Un poco más pequeño para caber bajo el precio */
             color: var(--primary); 
-            margin-top: 5px; 
+            margin-top: 2px; 
             font-weight: 600; 
-            font-style: italic; 
+            font-style: italic;
+            text-align: right;
+            white-space: nowrap;
         }
 
         /* SE MUESTRA SOLO SI TIENE LA CLASE 'con-renovacion' */
@@ -116,6 +118,7 @@
             display: flex; align-items: center; justify-content: center; border: 2px solid var(--danger-bright);
             width: 100%; padding: 6px 4px; border-radius: 8px; text-shadow: 0 0 8px var(--danger-bright); 
             box-shadow: 0 0 12px rgba(255, 51, 51, 0.3); background: rgba(255, 0, 0, 0.1);
+            margin-bottom: 5px;
         }
 
         /* MODAL LOGIN */
@@ -147,9 +150,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">Netflix Perfil</h3>
                 <span class="manual-desc">Ultra HD 4K • 1 Pantalla • Renovable • Perfil privado.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 12.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 12</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 12</span>
+                <span class="renovacion-info">🔄 Renova: S/ 12.00</span>
+            </div>
         </div>
     </a>
 
@@ -159,9 +164,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">Disney standar Perfil</h3>
                 <span class="manual-desc">Sin ESPN • Calidad 4K • PIN privado • Activación TV.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 5.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 4</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 4</span>
+                <span class="renovacion-info">🔄 Renova: S/ 5.00</span>
+            </div>
         </div>
     </a>
 
@@ -171,9 +178,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">Disney premium Perfil</h3>
                 <span class="manual-desc">Todo ESPN • Calidad 4K • PIN privado • Activación TV.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 7.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 6</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 6</span>
+                <span class="renovacion-info">🔄 Renova: S/ 7.00</span>
+            </div>
         </div>
     </a>
 
@@ -183,9 +192,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">AMAZON PRIME Perfil</h3>
                 <span class="manual-desc">1 perfil • Entrega de correo y contraseña.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 5.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 4</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 4</span>
+                <span class="renovacion-info">🔄 Renova: S/ 5.00</span>
+            </div>
         </div>
     </a>
 
@@ -195,9 +206,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">AMAZON PRIME Perfil (TV)</h3>
                 <span class="manual-desc">1 perfil • Activación directa a TV.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 4.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 3</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+                <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
+            </div>
         </div>
     </a>
 
@@ -207,9 +220,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">VIX PREMIUM Perfil</h3>
                 <span class="manual-desc">Premium • Series y Telenovelas • 1 perfil.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 4.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 3</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+                <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
+            </div>
         </div>
     </a>
 
@@ -219,9 +234,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">PARAMOUNT Perfil</h3>
                 <span class="manual-desc">Premium • Estrenos exclusivos • 1 perfil.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 4.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 3</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+                <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
+            </div>
         </div>
     </a>
 
@@ -231,9 +248,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">CRUNCHYROLL Perfil</h3>
                 <span class="manual-desc">Premium • Sin anuncios • 1 perfil.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 4.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 3</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+                <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
+            </div>
         </div>
     </a>
 
@@ -243,9 +262,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">Movistar Play + Liga 1 Max Perfil</h3>
                 <span class="manual-desc">Activación TV • Incluye ESPN • 1 perfil.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 15.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 12</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 12</span>
+                <span class="renovacion-info">🔄 Renova: S/ 15.00</span>
+            </div>
         </div>
     </a>
 
@@ -255,9 +276,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">DGO + Liga 1 Max Perfil</h3>
                 <span class="manual-desc">Activación TV • Incluye ESPN • 1 perfil.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 18.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 16</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 16</span>
+                <span class="renovacion-info">🔄 Renova: S/ 18.00</span>
+            </div>
         </div>
     </a>
 
@@ -269,9 +292,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">Netflix Completa</h3>
                 <span class="manual-desc">5 Perfiles • 1 mes • Renovable • Ultra HD.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 45.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 45</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 45</span>
+                <span class="renovacion-info">🔄 Renova: S/ 45.00</span>
+            </div>
         </div>
     </a>
 
@@ -281,9 +306,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">Disney premium Completa</h3>
                 <span class="manual-desc">7 Perfiles • 1 mes • Sin canales ESPN.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 18.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 14</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 14</span>
+                <span class="renovacion-info">🔄 Renova: S/ 18.00</span>
+            </div>
         </div>
     </a>
 
@@ -293,9 +320,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">Disney Premium Completa</h3>
                 <span class="manual-desc">• 7 Perfiles • 1 mes • Incluye todo los canales ESPN.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 20.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 22</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 22</span>
+                <span class="renovacion-info">🔄 Renova: S/ 20.00</span>
+            </div>
         </div>
     </a>
 
@@ -305,9 +334,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">DGO + Liga 1 Max Completa</h3>
                 <span class="manual-desc">Plan Completo • 4 dispositivos simultáneos.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 32.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 28</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 28</span>
+                <span class="renovacion-info">🔄 Renova: S/ 32.00</span>
+            </div>
         </div>
     </a>
 
@@ -317,9 +348,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">Movistar Play + Liga 1 Max Completa</h3>
                 <span class="manual-desc">Plan Completo • 2 dispositivos simultáneos.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 25.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 22</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 22</span>
+                <span class="renovacion-info">🔄 Renova: S/ 25.00</span>
+            </div>
         </div>
     </a>
 
@@ -329,9 +362,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">MAX PLATINO completa</h3>
                 <span class="manual-desc">5 perfiles • Ultra HD • 4 en simultáneo.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 15.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 12</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 12</span>
+                <span class="renovacion-info">🔄 Renova: S/ 15.00</span>
+            </div>
         </div>
     </a>
 
@@ -341,9 +376,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">MAX STANDARD completa</h3>
                 <span class="manual-desc">5 perfiles • Ultra HD • 2 en simultáneo.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 10.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 7</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 7</span>
+                <span class="renovacion-info">🔄 Renova: S/ 10.00</span>
+            </div>
         </div>
     </a>
 
@@ -353,9 +390,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">VIX PREMIUM completa</h3>
                 <span class="manual-desc">5 perfiles • FULL HD • 3 en simultáneo.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 8.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 5</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 5</span>
+                <span class="renovacion-info">🔄 Renova: S/ 8.00</span>
+            </div>
         </div>
     </a>
 
@@ -365,9 +404,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">crunchyroll completa</h3>
                 <span class="manual-desc">5 perfiles • Full HD • Todo el catálogo Anime.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 10.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 7</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 7</span>
+                <span class="renovacion-info">🔄 Renova: S/ 10.00</span>
+            </div>
         </div>
     </a>
 
@@ -377,9 +418,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">prime video completa</h3>
                 <span class="manual-desc">6 perfiles • Ultra HD • 3 en simultáneo.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 13.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 10</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 10</span>
+                <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
+            </div>
         </div>
     </a>
 
@@ -389,9 +432,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">PARAMOUNT completa</h3>
                 <span class="manual-desc">6 perfiles • Ultra HD • 3 en simultáneo.</span>
-                <span class="renovacion-info">🔄 Renovación: S/ 10.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 7</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 7</span>
+                <span class="renovacion-info">🔄 Renova: S/ 10.00</span>
+            </div>
         </div>
     </a>
 
@@ -403,9 +448,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">IBO PLAYER (12 meses)</h3>
                 <span class="manual-desc">Licencia 1 año • Solo activación de app • Sin lista.</span>
-                <span class="renovacion-info">🔄 Renovación Anual: S/ 13.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 13</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 13</span>
+                <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
+            </div>
         </div>
     </a>
     
@@ -415,9 +462,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">IBOPRO (12 meses)</h3>
                 <span class="manual-desc">Licencia 1 año • Activación app • Estabilidad Pro.</span>
-                <span class="renovacion-info">🔄 Renovación Anual: S/ 13.00</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 13</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 13</span>
+                <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
+            </div>
         </div>
     </a>
 </div>
