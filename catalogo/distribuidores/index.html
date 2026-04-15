@@ -55,12 +55,16 @@
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
 
-        .nav-buttons { text-align: center; margin: 20px 0; display: flex; flex-direction: column; gap: 10px; align-items: center; }
+        /* --- BOTONES DE NAVEGACIÓN AJUSTADOS --- */
+        .nav-buttons { text-align: center; margin: 20px 0; display: flex; flex-direction: column; gap: 12px; align-items: center; }
         .btn-vip {
-            text-decoration: none; width: 85%; max-width: 400px; background: linear-gradient(135deg, var(--vip), #f4d03f); 
-            color: black; padding: 12px; border-radius: 25px; font-weight: 800; display: inline-block;
+            text-decoration: none; width: 100%; max-width: 450px; background: linear-gradient(135deg, var(--vip), #f4d03f); 
+            color: black; padding: 12px; border-radius: 20px; font-weight: 800; display: inline-block;
         }
-        .btn-back { color: #aaa; background: none; border: 1px solid #333; padding: 8px 18px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; }
+        .btn-back { 
+            width: 100%; max-width: 450px; color: #aaa; background: none; border: 1px solid #333; 
+            padding: 10px; border-radius: 20px; text-decoration: none; font-size: 0.85rem; font-weight: 600;
+        }
 
         .category-title {
             margin: 25px 0 12px; font-size: 0.9rem; font-weight: 700; color: #fff;
@@ -76,50 +80,18 @@
         .service-text h3 { font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
         .manual-desc { font-size: 0.75rem; color: var(--text-gray); display: block; line-height: 1.3; }
 
-        /* CONTENEDOR DE PRECIO Y ALINEACIÓN SIN STOCK */
-        .price-container { 
-            text-align: right; 
-            min-width: 100px; /* Un poco más ancho para el texto más grande */
-            flex-shrink: 0; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-end;
-        }
-
+        .price-container { text-align: right; min-width: 100px; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; align-items: flex-end; }
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
 
-        /* LÓGICA AGOTADO CORREGIDA: TEXTO GRANDE Y MARCO AJUSTADO */
+        /* LÓGICA SIN STOCK */
         .service-link.agotado { pointer-events: none; }
         .service-link.agotado .service-logo, .service-link.agotado .service-text { filter: grayscale(1); opacity: 0.5; }
         .service-link.agotado .price-tag { display: none !important; }
-
-        .service-link.agotado .price-container {
-            align-items: center; /* Centra el marco horizontalmente */
-            justify-content: center; /* Centra el marco verticalmente */
-        }
-
         .service-link.agotado .price-container::after {
-            content: "SIN STOCK"; 
-            color: var(--danger-bright); 
-            /* AJUSTE: Letra más grande y negrita */
-            font-size: 0.85rem; 
-            font-weight: 900;
-            display: flex;
-            align-items: center;      
-            justify-content: center;  
-            border: 2px solid var(--danger-bright); 
-            width: 100%;
-            /* AJUSTE: Altura automática ajustada con padding */
-            height: auto;
-            padding: 6px 4px; /* Espaciado interno ajustado vertical/horizontal */
-            border-radius: 8px;
-            text-shadow: 0 0 8px var(--danger-bright); 
-            box-shadow: 0 0 12px rgba(255, 51, 51, 0.3);
-            background: rgba(255, 0, 0, 0.1);
-            text-align: center;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+            content: "SIN STOCK"; color: var(--danger-bright); font-size: 0.85rem; font-weight: 900;
+            display: flex; align-items: center; justify-content: center; border: 2px solid var(--danger-bright);
+            width: 100%; padding: 6px 4px; border-radius: 8px; text-shadow: 0 0 8px var(--danger-bright); 
+            box-shadow: 0 0 12px rgba(255, 51, 51, 0.3); background: rgba(255, 0, 0, 0.1);
         }
 
         /* MODAL LOGIN */
@@ -140,7 +112,7 @@
 <div class="container">
     <div class="nav-buttons">
         <a href="../distribuidores-promos" class="btn-vip">👑 VER PROMOCIONES MAYORISTAS</a>
-        <a href="../" class="btn-back">⬅ Pagina Principal</a>
+        <a href="../" class="btn-back">⬅ Volver a la Página Principal</a>
     </div>
 
     <div class="category-title">👤 ZONA PERFILES</div>
@@ -409,6 +381,7 @@
         <p style="font-size:0.8rem; color:var(--text-gray);">Ingrese la llave de distribuidor</p>
         <input type="password" id="input-dist-pass" class="input-estilo" placeholder="****">
         <button onclick="validarAcceso()" style="background:var(--primary); width:100%; padding:15px; border-radius:12px; font-weight:700; border:none; cursor:pointer; color:black;">ENTRAR</button>
+        <button onclick="window.location.href='../'" style="width:100%; background:none; border:none; color:grey; margin-top:15px; cursor:pointer; font-size: 0.8rem;">🏠 Ir al Inicio</button>
     </div>
 </div>
 
@@ -416,11 +389,15 @@
 
 <script>
     function validarAcceso() {
-        // Puedes cambiar ALEX2026 por la clave que prefieras
         if (document.getElementById('input-dist-pass').value === "dis") {
             sessionStorage.setItem("acceso_distribuidor", "true");
             location.reload();
-        } else { alert("LLAVE INCORRECTA"); }
+        } else { 
+            const input = document.getElementById('input-dist-pass');
+            input.style.borderColor = "red";
+            input.value = "";
+            setTimeout(() => { input.style.borderColor = "#444"; }, 2000);
+        }
     }
 
     window.onload = function() {
