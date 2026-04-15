@@ -55,16 +55,26 @@
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
 
-        /* --- BOTONES DE NAVEGACIÓN AJUSTADOS --- */
-        .nav-buttons { text-align: center; margin: 20px 0; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+        /* --- BOTONES DE NAVEGACIÓN ENFOCADOS EN PROMO --- */
+        .nav-buttons { text-align: center; margin: 20px 0; display: flex; flex-direction: column; gap: 15px; align-items: center; }
+        
         .btn-vip {
-            text-decoration: none; width: 100%; max-width: 450px; background: linear-gradient(135deg, var(--vip), #f4d03f); 
-            color: black; padding: 12px; border-radius: 20px; font-weight: 800; display: inline-block;
+            text-decoration: none; width: 100%; max-width: 450px; 
+            background: linear-gradient(135deg, var(--vip), #f4d03f); 
+            color: black; padding: 18px; border-radius: 20px; 
+            font-weight: 800; font-size: 1rem; display: inline-block;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transition: 0.3s;
         }
+        .btn-vip:active { transform: scale(0.98); }
+
         .btn-back { 
-            width: 100%; max-width: 450px; color: #aaa; background: none; border: 1px solid #333; 
-            padding: 10px; border-radius: 20px; text-decoration: none; font-size: 0.85rem; font-weight: 600;
+            width: auto; padding: 6px 20px; color: #666; background: none; 
+            border: 1px solid #222; border-radius: 30px; 
+            text-decoration: none; font-size: 0.75rem; font-weight: 500;
+            transition: 0.3s;
         }
+        .btn-back:hover { color: #aaa; border-color: #444; }
 
         .category-title {
             margin: 25px 0 12px; font-size: 0.9rem; font-weight: 700; color: #fff;
@@ -112,7 +122,7 @@
 <div class="container">
     <div class="nav-buttons">
         <a href="../distribuidores-promos" class="btn-vip">👑 VER PROMOCIONES MAYORISTAS</a>
-        <a href="../" class="btn-back">⬅ Volver a la Página Principal</a>
+        <a href="../" class="btn-back">⬅ Volver al Inicio</a>
     </div>
 
     <div class="category-title">👤 ZONA PERFILES</div>
@@ -381,7 +391,7 @@
         <p style="font-size:0.8rem; color:var(--text-gray);">Ingrese la llave de distribuidor</p>
         <input type="password" id="input-dist-pass" class="input-estilo" placeholder="****">
         <button onclick="validarAcceso()" style="background:var(--primary); width:100%; padding:15px; border-radius:12px; font-weight:700; border:none; cursor:pointer; color:black;">ENTRAR</button>
-        <button onclick="window.location.href='../'" style="width:100%; background:none; border:none; color:grey; margin-top:15px; cursor:pointer; font-size: 0.8rem;">🏠 Ir al Inicio</button>
+        <button onclick="window.location.href='../'" style="width:auto; background:none; border:none; color:#555; margin-top:20px; cursor:pointer; font-size: 0.7rem;">🏠 Regresar al Inicio</button>
     </div>
 </div>
 
