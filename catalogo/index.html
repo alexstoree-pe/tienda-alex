@@ -211,13 +211,16 @@
         const error = document.getElementById('error-msg');
         const modalBox = document.getElementById('modal-box');
         
-        // --- TUS CLAVES ACTUALIZADAS ---
+        // --- TUS CLAVES ---
         const CLAVE_CLIENTES = "cliente";
         const CLAVE_DISTRIBUIDORES = "ds";
         
         let claveCorrecta = urlDestino.includes('distribuidores') ? CLAVE_DISTRIBUIDORES : CLAVE_CLIENTES;
 
         if (pass === claveCorrecta) {
+            // --- AQUÍ GUARDAMOS LA LLAVE DE ACCESO ---
+            sessionStorage.setItem("acceso_concedido", "true");
+            
             window.location.href = urlDestino;
         } else {
             error.style.display = "block";
@@ -232,9 +235,6 @@
         if (e.key === 'Enter') validar();
     });
 </script>
-
-</body>
-</html>
 
 </body>
 </html>
