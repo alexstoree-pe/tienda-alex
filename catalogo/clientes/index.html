@@ -70,12 +70,6 @@
             transition: 0.3s;
         }
 
-        .nav-btn {
-            width: auto; padding: 6px 20px; color: #666; background: none; 
-            border: 1px solid #222; border-radius: 30px; 
-            text-decoration: none; font-size: 0.75rem; font-weight: 500;
-        }
-
         .category-title { margin: 30px 0 15px; font-size: 1.1rem; font-weight: 700; color: var(--primary); text-transform: uppercase; display: flex; align-items: center; }
         .category-title::after { content: ""; height: 1px; background: #333; flex: 1; margin-left: 15px; }
         .main-title { display: block; text-align: center; margin: 20px 0; border-bottom: 1px solid #333; padding-bottom: 10px; font-size: 1.3rem; }
@@ -89,26 +83,25 @@
         .manual-desc { font-size: 0.78rem; color: var(--text-gray); }
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
 
-        /* --- ESTILO AGOTADO CORREGIDO --- */
+        /* --- ESTILO AGOTADO --- */
         .service-item.agotado { cursor: default; opacity: 0.9; }
         .service-item.agotado .precio-prod { display: none; }
         
         .btn-consultar-neon {
-            display: block; /* Aseguramos que sea visible */
+            display: block; 
             color: #ff3333; 
-            font-size: 0.9rem; 
+            font-size: 1rem; /* Un poco más grande para que destaque */
             font-weight: 900; 
             text-align: right;
             cursor: pointer;
-            text-shadow: 0 0 8px #ff0000, 0 0 15px #ff0000;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
             animation: latido 1.5s infinite alternate;
             line-height: 1.2;
-            white-space: nowrap;
         }
 
         @keyframes latido {
-            from { transform: scale(1); text-shadow: 0 0 8px #ff0000; }
-            to { transform: scale(1.05); text-shadow: 0 0 15px #ff0000, 0 0 25px #ff4444; }
+            from { transform: scale(1); }
+            to { transform: scale(1.08); text-shadow: 0 0 20px #ff0000, 0 0 30px #ff4444; }
         }
 
         /* MODALES */
@@ -141,7 +134,6 @@
 <div class="container">
     <div class="nav-buttons">
         <a href="../promociones-clientes/" class="distributor-btn">🎁 VER PROMOCIONES Y COMBOS</a>
-        <a href="../" class="nav-btn">🏠 Ir al Inicio del Sitio</a>
     </div>
 
     <div class="category-title main-title">⭐ ZONA DE CLIENTES ⭐</div>
@@ -236,7 +228,7 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 12</span>
-                <div class="btn-consultar-neon" onclick="consultarStock('Movistar Play', event)">
+                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">
                     SIN STOCK<br>CONSULTAR 📲
                 </div>
             </div>
@@ -290,7 +282,6 @@
         <h2 style="color:var(--primary);">Acceso Protegido</h2>
         <input type="password" id="input-pass" placeholder="****">
         <button class="option-btn btn-nuevo" onclick="validarPass()">INGRESAR</button>
-        <button onclick="window.location.href='../'" style="width:100%; background:none; border:none; color:grey; margin-top:15px; cursor:pointer;">🏠 Inicio</button>
     </div>
 </div>
 
@@ -300,7 +291,6 @@
             <h2 style="color:var(--primary); margin-bottom:15px;">¿Eres cliente de Alex Store?</h2>
             <button class="option-btn btn-antiguo" onclick="enviarWhatsApp('antiguo')">SÍ, YA SOY CLIENTE</button>
             <button class="option-btn btn-nuevo" onclick="mostrarForm()">NO, SOY CLIENTE NUEVO</button>
-            <button onclick="cerrarModalRegistro()" style="background:none; border:none; color:grey; width:100%; margin-top:10px; cursor:pointer;">Cancelar</button>
         </div>
         <div id="form-datos" style="display:none;">
             <h2 style="color:var(--primary); margin-bottom:15px;">Datos de Registro</h2>
@@ -308,7 +298,6 @@
             <div class="input-group"><label>Celular de contacto</label><input type="tel" id="reg-cel"></div>
             <div class="input-group"><label>Nombre para el Perfil</label><input type="text" id="reg-per"></div>
             <button class="option-btn btn-nuevo" onclick="enviarWhatsApp('nuevo')">CONFIRMAR Y PEDIR</button>
-            <button onclick="volverPaso1()" style="background:none; border:none; color:grey; width:100%; margin-top:10px; cursor:pointer;">Atrás</button>
         </div>
     </div>
 </div>
@@ -319,15 +308,20 @@
 
     function validarPass() {
         const pass = document.getElementById('input-pass').value;
-        if (pass === "dc") { window.location.href = "../distribuidores/"; }
-        else if (pass === "cliente") { sessionStorage.setItem("acceso_concedido", "true"); location.reload(); }
-        else { alert("Código incorrecto"); }
+        if (pass === "cliente") { 
+            sessionStorage.setItem("acceso_concedido", "true"); 
+            location.reload(); 
+        } else { alert("Código incorrecto"); }
     }
 
-    // Link exclusivo para letras rojas
-    function consultarStock(nombre, event) {
-        event.stopPropagation(); // Evita que el clic afecte a la tarjeta
-        let msg = `Hola *Alex Store*, quisiera consultar si aún hay disponible la plataforma *${nombre-prod}* que figura sin stock.`;
+    // --- MEJORA: Esta función busca el nombre completo de la tarjeta automáticamente ---
+    function consultarStockManual(elemento, event) {
+        event.stopPropagation();
+        // Sube hasta encontrar la tarjeta principal y busca el texto del nombre-prod
+        const tarjeta = elemento.closest('.service-item');
+        const nombreCompleto = tarjeta.querySelector('.nombre-prod').innerText;
+        
+        let msg = `Hola *Alex Store*, quisiera consultar si aún hay disponible la plataforma *${nombreCompleto}* que figura sin stock.`;
         window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
@@ -357,9 +351,8 @@
     }
 
     function abrirModalRegistro() { document.getElementById('modal-registro').style.display = 'flex'; }
-    function cerrarModalRegistro() { document.getElementById('modal-registro').style.display = 'none'; volverPaso1(); }
+    function cerrarModalRegistro() { document.getElementById('modal-registro').style.display = 'none'; }
     function mostrarForm() { document.getElementById('paso-1').style.display = 'none'; document.getElementById('form-datos').style.display = 'block'; }
-    function volverPaso1() { document.getElementById('paso-1').style.display = 'block'; document.getElementById('form-datos').style.display = 'none'; }
 
     function enviarWhatsApp(tipo) {
         let sub = carrito.reduce((s, i) => s + i.precio, 0);
@@ -378,8 +371,6 @@
         window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
         cerrarModalRegistro();
     }
-
-    document.getElementById('input-pass').addEventListener('keypress', (e) => { if (e.key === 'Enter') validarPass(); });
 </script>
 </body>
 </html>
