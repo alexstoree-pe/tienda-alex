@@ -3,327 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo | Alex Store</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Alex Store | Enlaces Oficiales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #00d4ff;
             --secondary: #0055ff;
-            --dark: #0a0a0a;
-            --card-bg: #161616;
-            --whatsapp: #25d366;
-            --text-gray: #aaa;
-            --danger: #ff0000;
+            --dark: #050505;
+            --card-bg: #121212;
+            --vip: #d4af37;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--dark);
             color: white;
-            line-height: 1.6;
-            padding-bottom: 140px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
         }
 
-        header {
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            padding: 40px 20px; text-align: center;
-            border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        .main-container {
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
         }
 
-        header h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: 1px; }
-        header p { font-size: 1.1rem; opacity: 0.9; }
-
-        .container { padding: 20px 15px; max-width: 600px; margin: auto; }
-
-        .distributor-btn {
-            background: rgba(0, 212, 255, 0.1); color: var(--primary); 
-            border: 1px dashed var(--primary); padding: 12px 25px; 
-            border-radius: 30px; text-decoration: none; font-weight: 600; 
-            font-size: 0.85rem; display: block; text-align: center; margin: 20px 0; 
-            transition: 0.3s; cursor: pointer;
+        .logo-section {
+            margin-bottom: 40px;
         }
 
-        .category-title {
-            margin: 30px 0 15px; font-size: 1.1rem; font-weight: 700;
-            color: var(--primary); text-transform: uppercase;
-            display: flex; align-items: center;
-        }
-        .category-title::after { content: ""; height: 1px; background: #333; flex: 1; margin-left: 15px; }
-
-        .main-title {
-            display: block; text-align: center; margin: 40px 0 20px;
-            color: #fff; border-bottom: 1px solid #333;
-            padding-bottom: 10px; font-size: 1.3rem;
+        .logo-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
         }
 
-        .service-item { cursor: pointer; display: block; margin-bottom: 12px; user-select: none; }
-        .service-card {
-            background: var(--card-bg); border-radius: 18px; padding: 15px;
-            display: flex; align-items: center; border: 1px solid #222;
-            transition: 0.3s; gap: 15px; position: relative;
+        .logo-section p {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .service-item.selected .service-card { border-color: var(--primary); background: #1a2a3a; transform: scale(1.02); }
-        .service-logo { width: 65px; height: 65px; object-fit: cover; border-radius: 12px; flex-shrink: 0; }
-        .service-text { flex-grow: 1; }
-        .service-text h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-        .manual-desc { font-size: 0.78rem; color: var(--text-gray); line-height: 1.4; display: block; }
-        .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
-
-        /* MODALES */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 2000; }
-        .modal-content { background: #1a1a1a; padding: 25px; border-radius: 20px; width: 90%; max-width: 400px; border: 1px solid var(--primary); text-align: center; }
-        
-        .modal-pass { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 3000; justify-content: center; align-items: center; }
-        
-        .option-btn { display: block; width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; }
-        .btn-nuevo { background: var(--primary); color: #000; }
-        .btn-antiguo { background: #333; color: #fff; }
-        
-        .input-group { margin-bottom: 12px; text-align: left; }
-        .input-group label { display: block; font-size: 0.8rem; color: #aaa; margin-bottom: 4px; }
-        .input-group input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #444; background: #000; color: #fff; }
-
-        #input-pass { width: 100%; padding: 12px; margin: 20px 0; border-radius: 10px; border: 1px solid #444; background: #000; color: white; text-align: center; font-size: 1.2rem; letter-spacing: 4px; }
-
-        .floating-btn {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: var(--whatsapp); color: white; padding: 15px;
-            border-radius: 50px; text-decoration: none; font-weight: 700;
-            width: 90%; max-width: 450px; text-align: center; z-index: 1000;
-            display: flex; justify-content: space-between; align-items: center; box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+        .buttons-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
-        .hidden { display: none; }
+
+        .btn-link {
+            display: block;
+            text-decoration: none;
+            padding: 18px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 1px solid #222;
+            background: var(--card-bg);
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn-link:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.2);
+        }
+
+        /* Botones Especiales */
+        .btn-clients { border-left: 5px solid var(--primary); }
+        .btn-promos { border-left: 5px solid #25d366; }
+        .btn-distributors { border-left: 5px solid var(--vip); color: var(--vip); }
+
+        /* MODAL DE SEGURIDAD */
+        .modal-pass {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.98);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: #111;
+            padding: 30px;
+            border-radius: 20px;
+            width: 85%;
+            max-width: 350px;
+            border: 1px solid var(--vip);
+            text-align: center;
+        }
+        .modal-content h2 { color: var(--vip); font-size: 1.2rem; margin-bottom: 10px; }
+        .modal-content input {
+            width: 100%;
+            padding: 12px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 1px solid #333;
+            background: #000;
+            color: white;
+            text-align: center;
+            font-size: 1.2rem;
+            letter-spacing: 5px;
+        }
+        .btn-confirm {
+            background: var(--vip);
+            color: black;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 0.8rem;
+            color: #444;
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <h1> ALEX STORE CATALOGO </h1>
-    <p>Servicios Digitales • Garantía y Confianza</p>
-</header>
-
-<div class="container">
-    <a href="javascript:void(0)" class="distributor-btn" onclick="abrirModalPass()">👤 ZONA DISTRIBUIDORES</a>
-
-    <div class="category-title main-title">⭐ ZONA DE CLIENTES ⭐</div>
-
-    <div class="category-title">🎬 CINE, SERIES Y ANIME</div>
-    
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Netflix Premium</h3>
-                <span class="manual-desc">• Premium Ultra HD • Perfil Privado • 1 perfil.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 16</span></div>
-        </div>
+<div class="main-container">
+    <div class="logo-section">
+        <h1>ALEX STORE</h1>
+        <p>Soluciones Digitales & Streaming</p>
     </div>
 
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/disneyp.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Disney Premium</h3>
-                <span class="manual-desc">• Incluye todos los canales ESPN y Deportes.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 10</span></div>
-        </div>
+    <div class="buttons-grid">
+        <a href="clientes/" class="btn-link btn-clients">🛒 Catálogo Clientes</a>
+        <a href="promociones-clientes/" class="btn-link btn-promos">🎁 Promociones Clientes</a>
+
+        <button onclick="solicitarAcceso('distribuidores/')" class="btn-link btn-distributors">👤 Zona Distribuidores</button>
+        <button onclick="solicitarAcceso('distribuidores-promos/')" class="btn-link btn-distributors">👑 Promos Distribuidores</button>
     </div>
 
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/max.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">MAX Platino</h3>
-                <span class="manual-desc">• 4K Ultra HD • Estrenos exclusivos • 1 perfil.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 7</span></div>
-        </div>
-    </div>
-
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/paramount.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">PARAMOUNT</h3>
-                <span class="manual-desc">• Premium • Estrenos exclusivos • 1 perfil.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 6</span></div>
-        </div>
-    </div>
-
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/vix.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">VIX PREMIUM</h3>
-                <span class="manual-desc">• Premium • Series mexicanas • 1 perfil.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 5</span></div>
-        </div>
-    </div>
-
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/prime.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">AMAZON PRIME</h3>
-                <span class="manual-desc">• Premium • Estrenos exclusivos • 1 perfil.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 8</span></div>
-        </div>
-    </div>
-
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/crunchyroll.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">CRUNCHYROLL</h3>
-                <span class="manual-desc">• Premium • Anime sin anuncios • 1 perfil.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 5</span></div>
-        </div>
-    </div>
-
-    <div class="category-title">📺 TV Y DEPORTES</div>
-
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/flujo.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Magis TV - Flujo TV</h3>
-                <span class="manual-desc">• 10000+ Canales • 1 Perfil.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 12</span></div>
-        </div>
-    </div>
-
-    <div class="category-title">🎵 MUSICA Y VIDEO</div>
-
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Spotify Premium</h3>
-                <span class="manual-desc">• Sin anuncios • Descargas • Renovable.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 8</span></div>
-        </div>
-    </div>
-
-    <div class="service-item" onclick="toggleCarrito(this)">
-        <div class="service-card">
-            <img src="img/youtube.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Youtube Premium</h3>
-                <span class="manual-desc">• Sin anuncios • Descargas • No Renovable.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 8</span></div>
-        </div>
-    </div>
+    <footer>
+        &copy; 2026 ALEX STORE. Todos los derechos reservados.
+    </footer>
 </div>
 
-<a href="javascript:void(0)" id="whatsapp-btn" class="floating-btn hidden" onclick="abrirModalRegistro()">
-    <span id="cart-count" style="background: rgba(0,0,0,0.3); padding: 5px 12px; border-radius: 20px;">0</span>
-    <span>PEDIR POR WHATSAPP</span>
-    <span id="cart-total">S/ 0</span>
-</a>
-
-<div id="modal-password" class="modal-pass">
+<div id="modal-pass" class="modal-pass">
     <div class="modal-content">
-        <h2 style="color:var(--primary); font-size: 1.2rem;">Acceso Distribuidores</h2>
-        <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px;">Ingresa tu código de acceso</p>
-        <input type="password" id="input-pass" placeholder="****">
-        <button class="option-btn btn-nuevo" onclick="validarPass()">INGRESAR</button>
-        <button onclick="cerrarModalPass()" style="background:none; border:none; color:grey; width:100%; margin-top:10px; cursor:pointer;">Cancelar</button>
-    </div>
-</div>
-
-<div id="modal-registro" class="modal-overlay">
-    <div class="modal-content">
-        <div id="paso-1">
-            <h2 style="color:var(--primary); margin-bottom:15px;">¿Eres cliente de Alex Store?</h2>
-            <button class="option-btn btn-antiguo" onclick="enviarWhatsApp('antiguo')">SÍ, YA SOY CLIENTE</button>
-            <button class="option-btn btn-nuevo" onclick="mostrarForm()">NO, SOY CLIENTE NUEVO</button>
-            <button onclick="cerrarModalRegistro()" style="background:none; border:none; color:grey; width:100%; margin-top:10px; cursor:pointer;">Cancelar</button>
-        </div>
-        <div id="form-datos" style="display:none;">
-            <h2 style="color:var(--primary); margin-bottom:15px;">Datos de Registro</h2>
-            <div class="input-group"><label>Nombre Completo</label><input type="text" id="reg-nom"></div>
-            <div class="input-group"><label>Celular de contacto</label><input type="tel" id="reg-cel"></div>
-            <div class="input-group"><label>Nombre para el Perfil</label><input type="text" id="reg-per"></div>
-            <button class="option-btn btn-nuevo" onclick="enviarWhatsApp('nuevo')">CONFIRMAR Y PEDIR</button>
-            <button onclick="volverPaso1()" style="background:none; border:none; color:grey; width:100%; margin-top:10px; cursor:pointer;">Atrás</button>
-        </div>
+        <h2>Área Restringida</h2>
+        <p style="font-size: 0.8rem; color: #666;">Solo personal autorizado</p>
+        <input type="password" id="pass-input" placeholder="****">
+        <button class="btn-confirm" onclick="validar()">INGRESAR</button>
+        <button onclick="cerrar()" style="background:none; border:none; color:#444; margin-top:15px; cursor:pointer;">Cancelar</button>
     </div>
 </div>
 
 <script>
-    let carrito = [];
-    const numWhatsApp = "51918600000";
+    let urlDestino = "";
 
-    // --- SEGURIDAD DISTRIBUIDORES ---
-    function abrirModalPass() {
-        document.getElementById('modal-password').style.display = 'flex';
-        document.getElementById('input-pass').focus();
+    function solicitarAcceso(url) {
+        urlDestino = url;
+        document.getElementById('modal-pass').style.display = 'flex';
+        document.getElementById('pass-input').value = "";
+        document.getElementById('pass-input').focus();
     }
-    function cerrarModalPass() { document.getElementById('modal-password').style.display = 'none'; }
-    function validarPass() {
-        if (document.getElementById('input-pass').value === "dc") {
-            window.location.href = "distribuidores/";
+
+    function cerrar() {
+        document.getElementById('modal-pass').style.display = 'none';
+    }
+
+    function validar() {
+        const pass = document.getElementById('pass-input').value;
+        if (pass === "ALEX2026") {
+            window.location.href = urlDestino;
         } else {
-            alert("❌ Código incorrecto");
-            document.getElementById('input-pass').value = "";
+            alert("❌ Código de acceso incorrecto");
+            document.getElementById('pass-input').value = "";
         }
     }
 
-    // --- LÓGICA CARRITO ---
-    function toggleCarrito(elemento) {
-        const nombre = elemento.querySelector('.nombre-prod').innerText;
-        const precio = parseFloat(elemento.querySelector('.precio-prod').innerText.replace('S/', ''));
-        const idx = carrito.findIndex(i => i.nombre === nombre);
-        if (idx > -1) { carrito.splice(idx, 1); elemento.classList.remove('selected'); }
-        else { carrito.push({nombre, precio}); elemento.classList.add('selected'); }
-        actualizarUI();
-    }
-
-    function actualizarUI() {
-        const total = carrito.reduce((s, i) => s + i.precio, 0);
-        const final = (carrito.length === 2) ? Math.round(total * 0.96) : total;
-        document.getElementById('cart-count').innerText = carrito.length;
-        document.getElementById('cart-total').innerText = `S/ ${final}`;
-        document.getElementById('whatsapp-btn').classList.toggle('hidden', carrito.length === 0);
-    }
-
-    // --- MODAL REGISTRO ---
-    function abrirModalRegistro() { document.getElementById('modal-registro').style.display = 'flex'; }
-    function cerrarModalRegistro() { document.getElementById('modal-registro').style.display = 'none'; volverPaso1(); }
-    function mostrarForm() { document.getElementById('paso-1').style.display = 'none'; document.getElementById('form-datos').style.display = 'block'; }
-    function volverPaso1() { document.getElementById('paso-1').style.display = 'block'; document.getElementById('form-datos').style.display = 'none'; }
-
-    function enviarWhatsApp(tipo) {
-        let sub = carrito.reduce((s, i) => s + i.precio, 0);
-        let tot = (carrito.length === 2) ? Math.round(sub * 0.96) : sub;
-        let msg = `Hola *Alex Store*, deseo contratar:\n\n`;
-        carrito.forEach(i => msg += `🔹 *${i.nombre}*\n`);
-        msg += `\n💰 *TOTAL: S/ ${tot}*`;
-
-        if (tipo === 'nuevo') {
-            const n = document.getElementById('reg-nom').value;
-            const c = document.getElementById('reg-cel').value;
-            const p = document.getElementById('reg-per').value;
-            if(!n || !c || !p) return alert("Completa los datos");
-            msg += `\n\n👤 *NUEVO CLIENTE*:\n- Nombre: ${n}\n- Cel: ${c}\n- Perfil: ${p}`;
-        } else { msg += `\n\n✅ *CLIENTE REGISTRADO*`; }
-
-        window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
-        cerrarModalRegistro();
-    }
+    // Soporte para tecla Enter
+    document.getElementById('pass-input').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') { validar(); }
+    });
 </script>
+
 </body>
 </html>
