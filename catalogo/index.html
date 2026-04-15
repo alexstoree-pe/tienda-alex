@@ -178,9 +178,10 @@
 <script>
     let urlDestino = "";
 
-    // Al cargar el inicio, reseteamos cualquier acceso previo por seguridad
+    // IMPORTANTE: Al cargar la principal, limpiamos permisos antiguos
     window.onload = function() {
         sessionStorage.removeItem("acceso_concedido");
+        sessionStorage.removeItem("acceso_distribuidor");
     };
 
     function solicitarAcceso(url) {
@@ -192,6 +193,7 @@
         
         error.style.display = "none";
         
+        // Personalizamos el modal según el destino
         if (url.includes('distribuidores')) {
             titulo.style.color = "#d4af37";
             titulo.innerText = "ÁREA MAYORISTA";
@@ -217,17 +219,24 @@
         const error = document.getElementById('error-msg');
         const modalBox = document.getElementById('modal-box');
         
-        // --- TUS CLAVES CONFIGURADAS ---
+        // --- CONFIGURACIÓN DE CLAVES ---
         const CLAVE_CLIENTES = "cliente";
-        const CLAVE_DISTRIBUIDORES = "ds"; // Cambia aquí a "dc" si usas esa en el catálogo
+        const CLAVE_DISTRIBUIDORES = "ALEX2026"; 
         
-        let claveCorrecta = urlDestino.includes('distribuidores') ? CLAVE_DISTRIBUIDORES : CLAVE_CLIENTES;
+        let esRutaMayorista = urlDestino.includes('distribuidores');
+        let claveCorrecta = esRutaMayorista ? CLAVE_DISTRIBUIDORES : CLAVE_CLIENTES;
 
         if (pass === claveCorrecta) {
-            // --- AQUÍ ENTREGAMOS LA LLAVE ---
-            sessionStorage.setItem("acceso_concedido", "true");
+            // Logica de permisos cruzados:
+            if (esRutaMayorista) {
+                // Si entra como mayorista, le damos todos los permisos de una vez
+                sessionStorage.setItem("acceso_concedido", "true");
+                sessionStorage.setItem("acceso_distribuidor", "true");
+            } else {
+                // Si entra como cliente, solo permiso de cliente
+                sessionStorage.setItem("acceso_concedido", "true");
+            }
             
-            // Pequeña animación de éxito antes de redirigir
             input.style.borderColor = "var(--success)";
             setTimeout(() => {
                 window.location.href = urlDestino;
@@ -241,6 +250,7 @@
         }
     }
 
+    // Escuchar tecla Enter
     document.getElementById('pass-input').addEventListener('keypress', (e) => {
         if (e.key === 'Enter') validar();
     });
