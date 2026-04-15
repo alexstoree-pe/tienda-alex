@@ -6,7 +6,7 @@
     <title>Catálogo | Alex Store</title>
     
     <style>
-        /* Bloqueo total de la vista hasta que se valide */
+        /* Bloqueo inicial */
         html { display: none; background-color: #0a0a0a; } 
     </style>
 
@@ -69,15 +69,12 @@
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
             transition: 0.3s;
         }
-        .distributor-btn:active { transform: scale(0.98); }
 
         .nav-btn {
             width: auto; padding: 6px 20px; color: #666; background: none; 
             border: 1px solid #222; border-radius: 30px; 
             text-decoration: none; font-size: 0.75rem; font-weight: 500;
-            transition: 0.3s;
         }
-        .nav-btn:hover { color: #aaa; border-color: #444; }
 
         .category-title { margin: 30px 0 15px; font-size: 1.1rem; font-weight: 700; color: var(--primary); text-transform: uppercase; display: flex; align-items: center; }
         .category-title::after { content: ""; height: 1px; background: #333; flex: 1; margin-left: 15px; }
@@ -92,28 +89,27 @@
         .manual-desc { font-size: 0.78rem; color: var(--text-gray); }
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
 
-        /* --- AJUSTES DE PRODUCTO AGOTADO: TEXTO APILADO Y MÁS BRILLANTE --- */
-        .service-item.agotado { cursor: pointer; opacity: 1; } /* Mantenemos opacidad alta para que brille */
-        .service-item.agotado .service-card { border-color: rgba(255, 68, 68, 0.5); }
+        /* --- ESTILO AGOTADO CON NEON --- */
+        .service-item.agotado { opacity: 0.9; }
         .service-item.agotado .precio-prod { display: none; }
         
-        /* Contenedor del precio modificado para alinear a la derecha el texto apilado */
-        .service-item.agotado .price-container {
+        .acceso-ok .service-item.agotado .price-container::after { 
+            content: "SIN STOCK\a CONSULTAR 📲"; 
+            color: #ff2222; 
+            font-size: 0.85rem; 
+            font-weight: 900; 
+            white-space: pre;
+            line-height: 1.1;
+            display: inline-block;
             text-align: right;
-            min-width: 100px;
+            /* EFECTO BRILLANTE INTENSO */
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+            animation: latido 1.5s infinite alternate;
         }
 
-        /* Solo si entró con clave ve el texto de consultar brillante y apilado */
-        .acceso-ok .service-item.agotado .price-container::after { 
-            content: "SIN STOCK\a CONSULTAR 📲"; /* \a genera el salto de línea en CSS */
-            color: #ff3333; /* Rojo más vivo base */
-            font-size: 0.9rem; /* Letras más grandes */
-            font-weight: 800; 
-            white-space: pre; /* Necesario para reconocer el salto de línea \a */
-            line-height: 1.2; /* Ajuste de espacio entre líneas */
-            display: inline-block;
-            /* Resplandor neón intensificado */
-            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000; 
+        @keyframes latido {
+            from { transform: scale(1); text-shadow: 0 0 10px #ff0000; }
+            to { transform: scale(1.05); text-shadow: 0 0 20px #ff0000, 0 0 30px #ff4444; }
         }
 
         /* MODALES */
@@ -293,11 +289,9 @@
 <div id="modal-password" class="modal-pass">
     <div class="modal-content">
         <h2 style="color:var(--primary);">Acceso Protegido</h2>
-        <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px;">Ingresa tu código de cliente para ver los precios</p>
         <input type="password" id="input-pass" placeholder="****">
         <button class="option-btn btn-nuevo" onclick="validarPass()">INGRESAR</button>
-        
-        <button onclick="window.location.href='../'" style="width:100%; background:none; border:none; color:grey; margin-top:15px; cursor:pointer; font-size: 0.8rem;">🏠 Ir al Inicio</button>
+        <button onclick="window.location.href='../'" style="width:100%; background:none; border:none; color:grey; margin-top:15px; cursor:pointer;">🏠 Inicio</button>
     </div>
 </div>
 
@@ -326,27 +320,19 @@
 
     function validarPass() {
         const pass = document.getElementById('input-pass').value;
-        if (pass === "dc") {
-            window.location.href = "../distribuidores/";
-        } else if (pass === "cliente") {
-            sessionStorage.setItem("acceso_concedido", "true");
-            location.reload(); 
-        } else {
-            const input = document.getElementById('input-pass');
-            input.style.borderColor = "red";
-            input.value = "";
-            setTimeout(() => { input.style.borderColor = "#444"; }, 2000);
-        }
+        if (pass === "dc") { window.location.href = "../distribuidores/"; }
+        else if (pass === "cliente") { sessionStorage.setItem("acceso_concedido", "true"); location.reload(); }
+        else { alert("Código incorrecto"); }
     }
 
     function toggleCarrito(elemento) {
         const nombre = elemento.querySelector('.nombre-prod').innerText;
         
-        // --- NUEVA LÓGICA: Redirección automática si está agotado al presionar las letras brillantes ---
+        // Si está agotado, manda directo al WhatsApp de consulta
         if (elemento.classList.contains('agotado')) {
-            let msgConsulta = `Hola *Alex Store*, quisiera consultar si aún hay disponible la plataforma *${nombre}* que figura sin stock.`;
-            window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msgConsulta)}`, '_blank');
-            return; // Detiene la función para que no se sume al carrito
+            let msg = `Hola *Alex Store*, deseo consultar disponibilidad de: *${nombre}*`;
+            window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
+            return;
         }
 
         const precio = parseFloat(elemento.querySelector('.precio-prod').innerText.replace('S/', ''));
@@ -388,8 +374,7 @@
             const p = document.getElementById('reg-per').value;
             if(!n || !c || !p) return alert("Completa los datos");
             msg += `\n\n👤 *NUEVO CLIENTE*:\n- Nombre: ${n}\n- Cel: ${c}\n- Perfil: ${p}`;
-        } else { msg += `\n\n✅ *CLIENTE REGISTRADO*`; }
-
+        }
         window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
         cerrarModalRegistro();
     }
