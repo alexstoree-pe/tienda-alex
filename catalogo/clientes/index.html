@@ -327,7 +327,7 @@
     // Link exclusivo para letras rojas
     function consultarStock(nombre, event) {
         event.stopPropagation(); // Evita que el clic afecte a la tarjeta
-        let msg = `Hola *Alex Store*, quisiera consultar si aún hay disponible la plataforma *${nombre}* que figura sin stock.`;
+        let msg = `Hola *Alex Store*, quisiera consultar si aún hay disponible la plataforma *${nombre-prod}* que figura sin stock.`;
         window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
