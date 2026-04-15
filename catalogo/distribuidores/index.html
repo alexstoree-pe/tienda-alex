@@ -79,7 +79,7 @@
         /* CONTENEDOR DE PRECIO Y ALINEACIÓN SIN STOCK */
         .price-container { 
             text-align: right; 
-            min-width: 90px; 
+            min-width: 100px; /* Un poco más ancho para el texto más grande */
             flex-shrink: 0; 
             display: flex;
             flex-direction: column;
@@ -89,31 +89,37 @@
 
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
 
-        /* LÓGICA AGOTADO CORREGIDA */
+        /* LÓGICA AGOTADO CORREGIDA: TEXTO GRANDE Y MARCO AJUSTADO */
         .service-link.agotado { pointer-events: none; }
         .service-link.agotado .service-logo, .service-link.agotado .service-text { filter: grayscale(1); opacity: 0.5; }
         .service-link.agotado .price-tag { display: none !important; }
 
         .service-link.agotado .price-container {
             align-items: center; /* Centra el marco horizontalmente */
+            justify-content: center; /* Centra el marco verticalmente */
         }
 
         .service-link.agotado .price-container::after {
             content: "SIN STOCK"; 
             color: var(--danger-bright); 
-            font-size: 0.65rem; 
+            /* AJUSTE: Letra más grande y negrita */
+            font-size: 0.85rem; 
             font-weight: 900;
             display: flex;
-            align-items: center;      /* Centrado vertical del texto */
-            justify-content: center;  /* Centrado horizontal del texto */
+            align-items: center;      
+            justify-content: center;  
             border: 2px solid var(--danger-bright); 
             width: 100%;
-            height: 35px;
+            /* AJUSTE: Altura automática ajustada con padding */
+            height: auto;
+            padding: 6px 4px; /* Espaciado interno ajustado vertical/horizontal */
             border-radius: 8px;
             text-shadow: 0 0 8px var(--danger-bright); 
-            box-shadow: 0 0 10px rgba(255,51,51,0.2);
-            background: rgba(255,0,0,0.1);
+            box-shadow: 0 0 12px rgba(255, 51, 51, 0.3);
+            background: rgba(255, 0, 0, 0.1);
             text-align: center;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         /* MODAL LOGIN */
@@ -410,6 +416,7 @@
 
 <script>
     function validarAcceso() {
+        // Puedes cambiar ALEX2026 por la clave que prefieras
         if (document.getElementById('input-dist-pass').value === "ALEX2026") {
             sessionStorage.setItem("acceso_distribuidor", "true");
             location.reload();
