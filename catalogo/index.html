@@ -3,101 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex Store | Acceso Autorizado</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Dashboard | Alex Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Bloqueo total de la vista hasta que se valide */
+        html { display: none; background-color: #050505; } 
+    </style>
+    <script>
+        (function() {
+            const acceso = sessionStorage.getItem("acceso_concedido");
+            if (acceso === "true") {
+                document.documentElement.classList.add("acceso-ok");
+                document.documentElement.style.display = "block";
+            } else {
+                document.addEventListener("DOMContentLoaded", function() {
+                    document.documentElement.style.display = "block";
+                    abrirModalAccesoDirecto();
+                });
+            }
+        })();
+
+        function abrirModalAccesoDirecto() {
+            const modal = document.getElementById('modal-password');
+            if (modal) {
+                modal.style.display = 'flex';
+                document.getElementById('input-pass').focus();
+            }
+        }
+    </script>
     <style>
         :root {
-            --primary: #00d4ff;
+            --primary: #00d4ff; /* Azul neón */
             --secondary: #0055ff;
             --dark: #050505;
-            --card-bg: rgba(20, 20, 20, 0.8);
-            --vip: #d4af37;
+            --card-bg: rgba(18, 18, 18, 0.9);
+            --vip: #d4af37; /* Dorado neón */
             --success: #25d366;
-            --danger: #ff4b2b;
+            --danger-bright: #ff3333; /* Rojo neón */
+            --text-gray: #888;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
+        
         body {
             font-family: 'Poppins', sans-serif;
             background: radial-gradient(circle at center, #111 0%, #050505 100%);
             color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            padding: 20px;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Contenedor que evita el exceso de espacio */
-        .main-container {
+        /* --- BARRA SUPERIOR DE NAVEGACIÓN --- */
+        .top-nav {
             width: 100%;
-            max-width: 650px; /* Un poco más ancho para el grid */
-            padding: 40px;
-            background: var(--card-bg);
-            border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.05);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.5);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
             backdrop-filter: blur(10px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            position: fixed;
+            top: 0;
+            z-index: 2000;
+        }
+
+        .btn-inicio-top {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.03);
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+        .btn-inicio-top:hover { background: rgba(255,255,255,0.1); }
+
+        .header-logo {
             text-align: center;
         }
-
-        .logo-section { margin-bottom: 40px; }
-        .logo-section h1 {
-            font-size: clamp(2rem, 8vw, 3.2rem);
+        .header-logo h1 {
+            font-size: 1.8rem;
             font-weight: 800;
             background: linear-gradient(135deg, #fff, var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.3));
+            filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.4));
+        }
+        .update-tag { font-size: 0.7rem; color: #666; font-weight: 600; letter-spacing: 1px; }
+
+        /* --- LAYOUT PRINCIPAL DE TRES COLUMNAS --- */
+        .main-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 100px; /* Espacio para la top-nav */
+            padding: 40px 50px;
+            width: 100%;
+            gap: 30px;
         }
 
-        /* Grid de 2 columnas para PC, 1 para móvil */
-        .buttons-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
-            gap: 20px; 
+        /* Paneles Laterales (Widgets) */
+        .side-panel {
+            flex: 1;
+            max-width: 320px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.03);
+            padding: 25px;
+            position: sticky;
+            top: 120px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
         }
+
+        .side-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #222;
+            padding-bottom: 10px;
+        }
+
+        /* Widgets Izquierdos */
+        .left-panel { border-left: 2px solid var(--primary); }
+        .service-mini-card {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 15px;
+            align-items: center;
+            background: rgba(255,255,255,0.02);
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        .mini-logo { width: 35px; height: 35px; border-radius: 8px; object-fit: cover; }
+        .mini-text h4 { font-size: 0.8rem; color: #fff; }
+        .mini-text p { font-size: 0.7rem; color: var(--text-gray); }
+
+        /* Widgets Derechos */
+        .right-panel { border-right: 2px solid var(--vip); }
+        .status-widget { text-align: center; color: var(--success); text-shadow: 0 0 10px var(--success); }
+        .status-widget .perc { font-size: 2rem; font-weight: 800; }
+        .status-widget p { font-size: 0.8rem; color: #fff; text-shadow: none; margin-top: -5px; }
+        .help-box {
+            margin-top: 25px;
+            text-align: center;
+            border-top: 1px solid #222;
+            padding-top: 15px;
+        }
+        .help-box h4 { color: #fff; font-size: 0.85rem; margin-bottom: 5px; }
+        .help-box p { color: var(--text-gray); font-size: 0.7rem; margin-bottom: 10px; }
+        .btn-tech {
+            display: inline-block;
+            color: #000;
+            background: var(--success);
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.7rem;
+            padding: 8px 20px;
+            border-radius: 20px;
+        }
+
+        /* --- CONTENEDOR CENTRAL DE DOS SECCIONES --- */
+        .center-dashboard {
+            flex: 2;
+            max-width: 800px;
+            background: rgba(10, 10, 10, 0.7);
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.03);
+            display: flex;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+            overflow: hidden;
+        }
+
+        /* Línea divisora central */
+        .center-dashboard::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 10%;
+            bottom: 10%;
+            width: 1px;
+            background: linear-gradient(transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-50%);
+        }
+
+        .dashboard-section {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section-header { margin-bottom: 20px; }
+        .section-header h2 { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .section-header p { font-size: 0.8rem; color: #666; margin-top: 3px; }
+
+        /* Secciones de colores neón */
+        .section-clientes { color: var(--primary); filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.2)); }
+        .section-distribuidores { color: var(--vip); filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)); }
 
         .btn-access {
             position: relative;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            padding: 30px 20px;
-            border-radius: 20px;
+            gap: 15px;
+            padding: 20px;
+            border-radius: 18px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.9rem;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid rgba(255,255,255,0.1);
             background: rgba(255,255,255,0.03);
             color: white;
             cursor: pointer;
             text-decoration: none;
-            overflow: hidden;
+            width: 100%;
         }
-
-        .btn-access span { font-size: 1.5rem; }
-
-        .btn-access:hover {
-            transform: translateY(-8px);
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(255,255,255,0.2);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-        }
-
-        /* Colores Neón por categoría */
-        .btn-clients:hover { border-bottom: 4px solid var(--primary); box-shadow: 0 10px 20px rgba(0, 212, 255, 0.1); }
-        .btn-promos-c:hover { border-bottom: 4px solid var(--success); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.1); }
-        .btn-dist:hover { border-bottom: 4px solid var(--vip); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.1); }
-        .btn-promos-d:hover { border-bottom: 4px solid var(--danger); box-shadow: 0 10px 20px rgba(255, 75, 43, 0.1); }
-
-        /* Iconos (puedes usar emojis o SVGs) */
+        .btn-access span { font-size: 1.3rem; }
         .btn-access::before {
             content: '';
             position: absolute;
@@ -105,9 +243,18 @@
             background: linear-gradient(transparent, rgba(255,255,255,0.05));
             opacity: 0; transition: 0.3s;
         }
-        .btn-access:hover::before { opacity: 1; }
+        .btn-access:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
 
-        /* MODAL DE SEGURIDAD mejorado */
+        /* Efectos Neón de Hover para el Dash */
+        .btn-clientes:hover { border-bottom: 3px solid var(--primary); box-shadow: 0 5px 15px rgba(0, 212, 255, 0.1); }
+        .btn-dist:hover { border-bottom: 3px solid var(--vip); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.1); }
+
+        /* --- MODAL DE SEGURIDAD --- */
         .modal-pass {
             display: none;
             position: fixed;
@@ -141,8 +288,8 @@
             font-size: 1.8rem;
             letter-spacing: 8px;
             outline: none;
+            font-weight: 700;
         }
-
         #pass-input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 212, 255, 0.2); }
 
         .btn-confirm {
@@ -165,36 +312,107 @@
 </head>
 <body>
 
-<div class="main-container">
-    <div class="logo-section">
+<div class="top-nav">
+    <a href="../" class="btn-inicio-top">🏠 VOLVER AL INICIO</a>
+    
+    <div class="header-logo">
         <h1>ALEX STORE</h1>
-        <p style="color:#666; font-size:0.8rem; letter-spacing:4px; font-weight: 600;">PREMIUM SERVICES</p>
+        <p class="update-tag">Novedades 15/05/2024</p>
+    </div>
+    
+    <div class="user-info" style="color:#444; font-size:0.7rem;">Sesión: Protegida</div>
+</div>
+
+<div class="main-wrapper">
+    
+    <div class="side-panel left-panel">
+        <h3 class="side-title">⚡ NOVEDADES</h3>
+        
+        <div class="service-mini-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="mini-logo">
+            <div class="mini-text">
+                <h4>Netflix Extra</h4>
+                <p>UHD + 1 miembro extra</p>
+            </div>
+        </div>
+        
+        <div class="service-mini-card">
+            <img src="../img/disneys.png" class="mini-logo">
+            <div class="service-text">
+                <h4>Disney+ Ads</h4>
+                <p>Plan Standard con anuncios</p>
+            </div>
+        </div>
+        
+        <div class="help-box" style="margin-top:10px; padding-top:10px;">
+            <p style="font-size:0.65rem; color:#444;">Consulta stock en tiempo real</p>
+        </div>
     </div>
 
-    <div class="buttons-grid">
-        <div onclick="solicitarAcceso('clientes/')" class="btn-access btn-clients">
-            <span>🛒</span> Catálogo Clientes
+    <div class="center-dashboard">
+        
+        <div class="dashboard-section section-clientes">
+            <div class="section-header">
+                <h2>ZONA CLIENTES</h2>
+                <p>Pedidos e información para usuarios</p>
+            </div>
+            
+            <a href="clientes/" class="btn-access btn-clientes">
+                <span>🛒</span> Catálogo Completo
+            </a>
+            <a href="promociones-clientes/" class="btn-access btn-clientes">
+                <span>🎁</span> Promos y Combos
+            </a>
         </div>
-        <div onclick="solicitarAcceso('promociones-clientes/')" class="btn-access btn-promos-c">
-            <span>🎁</span> Promociones
+
+        <div class="dashboard-section section-distribuidores">
+            <div class="section-header">
+                <h2>ZONA MAYORISTA</h2>
+                <p>Catálogo exclusivo para socios</p>
+            </div>
+            
+            <a href="distribuidores/" class="btn-access btn-dist">
+                <span>👤</span> Panel Distribuidores
+            </a>
+            <a href="distribuidores-promos/" class="btn-access btn-dist">
+                <span>👑</span> Packs Mayoristas VIP
+            </a>
         </div>
-        <div onclick="solicitarAcceso('distribuidores/')" class="btn-access btn-dist">
-            <span>👤</span> Zona Mayorista
+
+    </div>
+
+    <div class="side-panel right-panel">
+        <h3 class="side-title">📊 DISTRIBUCIÓN</h3>
+        
+        <div class="status-widget">
+            <span class="perc">98%</span>
+            <p>Disponibilidad Cuentas</p>
         </div>
-        <div onclick="solicitarAcceso('distribuidores-promos/')" class="btn-access btn-promos-d">
-            <span>👑</span> Promos VIP
+        
+        <div class="service-mini-card" style="margin-top:15px;">
+            <div class="mini-text" style="width:100%; text-align:center;">
+                <h4>Netflix Mayorista</h4>
+                <p>Estado: ✅ Operativo</p>
+            </div>
+        </div>
+        
+        <div class="help-box">
+            <h4>¿Problemas con el Panel?</h4>
+            <p>Soporte VIP para Distribuidores</p>
+            <a href="https://wa.me/51918600000" class="btn-tech">SOPORTE TÉCNICO 🛠️</a>
         </div>
     </div>
+
 </div>
 
 <div id="modal-pass" class="modal-pass">
     <div class="modal-content" id="modal-box">
-        <h2 id="modal-titulo" style="font-size: 1.5rem;">ACCESO</h2>
-        <p id="modal-desc" style="font-size: 0.9rem; color: #666; margin-top: 5px;"></p>
+        <h2 id="modal-titulo" style="font-size: 1.5rem; color: #00d4ff;">Acceso Protegido</h2>
+        <p id="modal-desc" style="font-size: 0.9rem; color: #666; margin-top: 5px;">Ingrese su código de acceso</p>
         
         <input type="password" id="pass-input" placeholder="****" maxlength="12">
         
-        <div id="error-msg" style="color:var(--danger); font-size:0.8rem; margin-bottom:10px; display:none;">❌ CÓDIGO INCORRECTO</div>
+        <div id="error-msg" style="color:#ff3333; font-size:0.8rem; margin-bottom:10px; display:none;">❌ CÓDIGO INCORRECTO</div>
 
         <button class="btn-confirm" onclick="validar()">VERIFICAR</button>
         <button class="btn-cancel" onclick="cerrar()">CANCELAR</button>
