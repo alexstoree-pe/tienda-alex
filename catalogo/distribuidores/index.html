@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <style>
+        body { display: none; } /* Oculta todo antes de validar */
+    </style>
+    <script>
+        (function() {
+            const pass = prompt("🔐 ACCESO DISTRIBUIDOR\nIngrese su código autorizado:");
+            if (pass === "ALEX2026") {
+                // Si es correcto, permite mostrar el contenido
+                document.documentElement.style.display = "block";
+            } else {
+                // Si es incorrecto, lo expulsa al inicio
+                window.location.href = "../"; 
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Distribución | Alex Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Mantenemos todo tu CSS original intacto */
         :root {
             --primary: #00d4ff;
             --secondary: #0055ff;
@@ -20,6 +36,8 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
+            /* 2. IMPORTANTE: Cambiamos body para que se vea solo tras validar */
+            display: block !important; 
             font-family: 'Poppins', sans-serif;
             background-color: var(--dark);
             color: white;
@@ -82,215 +100,4 @@
         .service-card:hover { border-color: var(--primary); background: #1f1f1f; transform: translateY(-2px); }
         .service-logo { width: 65px; height: 65px; object-fit: cover; border-radius: 12px; flex-shrink: 0; }
         .service-text { flex-grow: 1; }
-        .service-text h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-        .manual-desc { font-size: 0.8rem; color: var(--text-gray); line-height: 1.4; display: block; }
-        .price-container { text-align: right; flex-shrink: 0; min-width: 80px; }
-        .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; display: block; }
-
-        .service-link.agotado { pointer-events: none; opacity: 0.7; }
-        .service-link.agotado .service-logo, .service-link.agotado .service-text { filter: grayscale(1); }
-        .service-link.agotado .precio-prod { display: none; }
-        .service-link.agotado .price-container::after {
-            content: "AGOTADO"; color: var(--danger); font-weight: 1000; font-size: 0.85rem;
-            display: block; border: 1px solid var(--danger); padding: 2px 6px; border-radius: 6px;
-            background: rgba(455, 0, 0, 0.3);
-        }
-
-        .category-title {
-            margin: 25px 0 12px; font-size: 1.1rem; font-weight: 700; color: #fff;
-            background: var(--secondary); padding: 6px 15px; border-radius: 20px;
-            display: inline-block; text-transform: uppercase;
-        }
-
-        /* MODAL DE SEGURIDAD */
-        .modal-pass {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 3000; justify-content: center; align-items: center;
-        }
-        .modal-content-pass {
-            background: #1a1a1a; padding: 30px; border-radius: 20px; width: 90%;
-            max-width: 350px; border: 1px solid var(--primary); text-align: center;
-        }
-        #input-pass {
-            width: 100%; padding: 12px; margin: 20px 0; border-radius: 10px;
-            border: 1px solid #444; background: #000; color: white;
-            text-align: center; font-size: 1.2rem; letter-spacing: 4px;
-        }
-
-        .floating-btn {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: var(--whatsapp); color: white; padding: 18px;
-            border-radius: 50px; text-decoration: none; font-weight: 700;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4); z-index: 100;
-            width: 85%; max-width: 400px; text-align: center;
-        }
-    </style>
-</head>
-<body>
-
-<header>
-    <h1>SOLO DISTRIBUIDORES 🚀</h1>
-    <p style="font-size: 1.0rem; opacity: 0.8;">Alex Store • Precios Especiales</p>
-</header>
-
-<div class="container">
-    <div class="nav-buttons">
-        <a href="../distribuidores-promos" class="btn-vip">👑 VER PROMOCIONES MAYORISTAS</a>
-        <button onclick="abrirModalClientes()" class="btn-back">⬅ Catálogo Clientes</button>
-    </div>
-
-    <div class="category-title">👤 ZONA PERFILES</div>
-
-    <a href="#" target="_blank" class="service-link agotado">
-        <div class="service-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Netflix Perfil</h3>
-                <span class="manual-desc">Ultra HD 4K • 1 Pantalla • Renovable • Perfil privado.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 12</span></div>
-        </div>
-    </a>
-
-    <a href="#" target="_blank" class="service-link">
-        <div class="service-card">
-            <img src="../img/disneys.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Disney standar Perfil</h3>
-                <span class="manual-desc">• Sin ESPN • Calidad 4K • PIN privado.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 4</span></div>
-        </div>
-    </a>
-
-    <a href="#" target="_blank" class="service-link">
-        <div class="service-card">
-            <img src="../img/disneyp.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Disney premium Perfil</h3>
-                <span class="manual-desc">• Todo ESPN • Calidad 4K • PIN privado.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 6</span></div>
-        </div>
-    </a>
-
-    <a href="#" target="_blank" class="service-link">
-        <div class="service-card">
-            <img src="../img/prime.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">AMAZON PRIME Perfil</h3>
-                <span class="manual-desc">• 1 perfil • Entrega de correo y contraseña.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 4</span></div>
-        </div>
-    </a>
-
-    <a href="#" target="_blank" class="service-link">
-        <div class="service-card">
-            <img src="../img/vix.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">VIX PREMIUM Perfil</h3>
-                <span class="manual-desc">• Premium • Series y Telenovelas • 1 perfil.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 3</span></div>
-        </div>
-    </a>
-
-    <a href="#" target="_blank" class="service-link">
-        <div class="service-card">
-            <img src="../img/movistar.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Movistar Play + Liga 1 Max Perfil</h3>
-                <span class="manual-desc">• Activación TV • Incluye ESPN • 1 perfil.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 12</span></div>
-        </div>
-    </a>
-
-    <div class="category-title">🏠 ZONA CUENTAS COMPLETAS</div>
-
-    <a href="#" class="service-link">
-        <div class="service-card">
-            <img src="../img/max.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">MAX PLATINO completa</h3>
-                <span class="manual-desc">• 5 perfiles • Ultra HD • 4 en simultáneo.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 12</span></div>
-        </div>
-    </a>
-
-    <a href="#" class="service-link">
-        <div class="service-card">
-            <img src="../img/prime.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">prime video completa</h3>
-                <span class="manual-desc">• 6 perfiles • Ultra HD • 3 en simultáneo.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 10</span></div>
-        </div>
-    </a>
-
-    <div class="category-title">👤 APPS DE PAGA</div>
-    
-    <a href="#" target="_blank" class="service-link">
-       <div class="service-card">
-            <img src="../img/ibo.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">IBO PLAYER (12 meses)</h3>
-                <span class="manual-desc">• Licencia 1 año • Solo activación de app.</span>
-            </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 13</span></div>
-        </div>
-    </a>
-</div>
-
-<div id="modal-password" class="modal-pass">
-    <div class="modal-content-pass">
-        <h2 style="color:var(--primary);">Volver al Catálogo</h2>
-        <p style="font-size: 0.8rem; color: #aaa;">Ingresa el código para salir</p>
-        <input type="password" id="input-pass" placeholder="****">
-        <button onclick="validarSalida()" style="background:var(--primary); color:black; width:100%; padding:12px; border:none; border-radius:10px; font-weight:700; cursor:pointer;">CONFIRMAR</button>
-        <button onclick="cerrarModalClientes()" style="background:none; border:none; color:grey; width:100%; margin-top:10px; cursor:pointer;">Cancelar</button>
-    </div>
-</div>
-
-<a href="https://wa.me/51918600000?text=Hola%20Alex%20Store,%20soy%20Distribuidor" target="_blank" class="floating-btn">
-    📲 CONTACTAR SOPORTE WHATSAPP
-</a>
-
-<script>
-    function abrirModalClientes() {
-        document.getElementById('modal-password').style.display = 'flex';
-        document.getElementById('input-pass').value = "";
-        document.getElementById('input-pass').focus();
-    }
-
-    function cerrarModalClientes() {
-        document.getElementById('modal-password').style.display = 'none';
-    }
-
-    function validarSalida() {
-        if (document.getElementById('input-pass').value === "ALEX2026") {
-            window.location.href = "../";
-        } else {
-            alert("❌ Código incorrecto");
-        }
-    }
-
-    function configurarLinksWhatsApp() {
-        const telefono = "51918600000";
-        const tarjetas = document.querySelectorAll('.service-link:not(.agotado)');
-        tarjetas.forEach(tarjeta => {
-            const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
-            const precio = tarjeta.querySelector('.precio-prod')?.innerText;
-            if (nombre && precio) {
-                const mensaje = `Hola Alex Store, soy Distribuidor. Deseo ${nombre} (${precio})`;
-                tarjeta.href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-            }
-        });
-    }
-    window.onload = configurarLinksWhatsApp;
-</script>
-</body>
-</html>
+        .service-text h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px;
