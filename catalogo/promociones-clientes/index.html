@@ -15,7 +15,6 @@
             --dark: #050505;
             --glass: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.08);
-            --whatsapp: #25d366;
             --danger-bright: #ff3333;
         }
 
@@ -27,14 +26,14 @@
             background: radial-gradient(circle at top right, #0a0a0a, #050505);
             color: white;
             line-height: 1.6;
-            padding-bottom: 140px;
+            padding-bottom: 50px; /* Reducido al quitar el botón inferior */
         }
 
         header {
             background: rgba(255, 204, 0, 0.9);
             backdrop-filter: blur(15px);
             padding: 45px 20px;
-            text-align: center;
+            text-align: center; /* Asegura el centrado de los textos */
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
             box-shadow: 0 10px 30px rgba(255, 204, 0, 0.2);
@@ -44,7 +43,16 @@
             z-index: 2000;
         }
 
-        header h1 { font-size: 2.2rem; font-weight: 800; text-transform: uppercase; }
+        header h1 { font-size: 2.2rem; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; }
+        
+        /* Subtítulo centrado */
+        header p { 
+            font-size: 0.9rem; 
+            font-weight: 400; 
+            margin: 0 auto; 
+            display: block; 
+            width: 100%;
+        }
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
 
@@ -60,7 +68,6 @@
             border-radius: 15px;
         }
 
-        /* --- TÍTULOS DE CATEGORÍA ULTRA LLAMATIVOS --- */
         .category-title {
             margin: 45px 0 20px; 
             font-size: 1.1rem; 
@@ -85,7 +92,6 @@
             box-shadow: 0 0 15px var(--primary);
         }
 
-        /* --- TARJETAS PREMIUM CON GRID --- */
         .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 18px; }
         
         .promo-card {
@@ -93,18 +99,16 @@
             border-radius: 25px;
             padding: 15px 20px;
             display: grid;
-            /* Columnas: Icono(80px) | Texto(flexible) | Botón(100px) */
             grid-template-columns: 80px 1fr 100px; 
             align-items: center;
             border: 1px solid var(--glass-border);
             gap: 10px;
             position: relative;
-            overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             min-height: 100px;
         }
 
-        .promo-card:hover {
+        .promo-link:hover .promo-card {
             border-color: var(--primary);
             background: rgba(255, 204, 0, 0.05);
             transform: scale(1.02);
@@ -117,28 +121,20 @@
             border: 1px solid var(--glass-border);
         }
 
-        .service-text { min-width: 0; }
         .service-text h3 { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
         .manual-desc { font-size: 0.75rem; color: #999; display: block; line-height: 1.2; }
 
-        /* --- CENTRADO GARANTIZADO DEL BOTÓN --- */
-        .price-container { 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
+        .price-container { display: flex; align-items: center; justify-content: center; width: 100%; }
 
         .price-tag { 
             color: #000; background: var(--primary);
             padding: 8px 0; border-radius: 10px;
             font-weight: 800; font-size: 1rem;
-            width: 100%;
-            text-align: center;
+            width: 100%; text-align: center;
             box-shadow: 0 4px 15px rgba(255, 204, 0, 0.2);
         }
 
-        /* --- PARPADEO SIN STOCK --- */
+        /* --- ESTADO SIN STOCK --- */
         @keyframes shine-red {
             0% { text-shadow: 0 0 5px #ff0000; color: #ff3333; border-color: #ff3333; }
             50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #ffffff; border-color: #ffffff; }
@@ -152,16 +148,12 @@
 
         .promo-link.agotado .price-container::after {
             content: "SIN STOCK";
-            font-size: 0.7rem;
-            font-weight: 900;
+            font-size: 0.7rem; font-weight: 900;
             border: 2px solid var(--danger-bright);
-            padding: 8px 0;
-            border-radius: 10px;
+            padding: 8px 0; border-radius: 10px;
             background: rgba(255, 0, 0, 0.1);
             animation: shine-red 1.5s infinite;
-            display: block;
-            width: 100%; 
-            text-align: center;
+            display: block; width: 100%; text-align: center;
         }
 
         /* SEGURIDAD MODAL */
@@ -182,14 +174,6 @@
         .btn-acceso { 
             display: block; width: 100%; padding: 18px; border-radius: 18px; border: none; 
             background: var(--primary); color: #000; font-weight: 800; cursor: pointer;
-        }
-
-        .floating-btn {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            background: linear-gradient(135deg, #25d366, #128c7e);
-            color: white; padding: 20px; border-radius: 25px;
-            text-decoration: none; font-weight: 800; width: 90%; max-width: 450px;
-            text-align: center; z-index: 1000; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
     </style>
 
@@ -233,7 +217,7 @@
 
     <div class="category-title" data-aos="fade-right">🔥 COMBOS MÁS PEDIDOS</div>
 
-    <a href="#" class="promo-link " data-aos="fade-up">
+    <a href="#" class="promo-link" data-aos="fade-up">
         <div class="promo-card">
             <img src="../img/combo1.png" class="service-logo">
             <div class="service-text">
@@ -261,10 +245,6 @@
         </div>
     </a>
 </div>
-
-<a href="https://wa.me/51918600000?text=Hola%20Alex%20Store,%20quiero%20consultar%20promos" target="_blank" class="floating-btn" data-aos="zoom-in">
-    📲 CONSULTAR DISPONIBILIDAD
-</a>
 
 <div id="modal-password" class="modal-pass">
     <div class="modal-content">
@@ -295,13 +275,18 @@
         if (e.key === 'Enter') validarPassPromos();
     });
 
+    // CONFIGURACIÓN DE WHATSAPP POR PRODUCTO
     function configurarLinksWhatsApp() {
         const telefono = "51918600000";
         document.querySelectorAll('.promo-link:not(.agotado)').forEach(tarjeta => {
             const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
             const precio = tarjeta.querySelector('.precio-prod')?.innerText;
+            const descripcion = tarjeta.querySelector('.manual-desc')?.innerText;
+            
             if (nombre && precio) {
-                tarjeta.href = `https://wa.me/${telefono}?text=Hola Alex Store, quiero la PROMO: ${nombre} (${precio})`;
+                // Mensaje personalizado que incluye nombre, descripción y precio
+                const mensaje = `Hola Alex Store, quiero adquirir esta promoción:%0A%0A📌 *${nombre}*%0A📝 _${descripcion}_%0A💰 *Precio:* ${precio}`;
+                tarjeta.href = `https://wa.me/${telefono}?text=${mensaje}`;
                 tarjeta.target = "_blank";
             }
         });
