@@ -424,7 +424,7 @@
         event.stopPropagation();
         const tarjeta = elemento.closest('.service-item');
         const nombre = tarjeta.querySelector('.nombre-prod').innerText;
-        let msg = `Hola *Alex Store*, consulto stock de: *${nombre}*`;
+        let msg = `Hola *Alex Store*, aun tendras disponible: *${nombre}* ya que en la pagina me sale *sin stock*`;
         window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 </script>
