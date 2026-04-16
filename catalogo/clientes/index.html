@@ -17,7 +17,7 @@
             --glass-border: rgba(255, 255, 255, 0.08);
             --whatsapp: #25d366;
             --promo: #f4d03f;
-            --danger: #ff3333; /* Rojo neón */
+            --danger: #ff3333; 
         }
 
         /* Bloqueo inicial */
@@ -80,19 +80,18 @@
 
         .service-item { cursor: pointer; margin-bottom: 15px; outline: none; }
         
-        /* CORRECCIÓN: Volver a layout horizontal para el precio a la derecha */
         .service-card { 
             background: var(--glass); 
             border-radius: 22px; 
             padding: 18px; 
             display: flex; 
-            align-items: center; /* Alineación vertical central */
+            align-items: center; 
             border: 1px solid var(--glass-border); 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             gap: 15px; 
             position: relative;
             overflow: hidden;
-            justify-content: flex-start; /* Texto y logo a la izquierda por defecto */
+            justify-content: flex-start;
         }
 
         .service-card::after {
@@ -114,22 +113,19 @@
         }
         .service-card:hover .service-logo { transform: scale(1.1); }
 
-        .service-text { flex-grow: 1; } /* El texto ocupa el espacio central */
+        .service-text { flex-grow: 1; } 
         .service-text h3 { font-size: 1.05rem; font-weight: 600; color: #fff; }
         .manual-desc { font-size: 0.75rem; color: #777; }
         
-        /* CORRECCIÓN: Contenedor de precio a la derecha */
         .price-container { flex-shrink: 0; text-align: right; margin-left: auto; }
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.2rem; }
 
-        /* --- CORRECCIÓN: ANIMACIÓN ROJO NEÓN RESTAURADA --- */
         @keyframes shine-red {
             0% { text-shadow: 0 0 5px #ff0000; color: #ff3333; }
             50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #ffffff; }
             100% { text-shadow: 0 0 5px #ff0000; color: #ff3333; }
         }
 
-        /* CORRECCIÓN: Quitar opacidad y grayscale de 'agotado' */
         .service-item.agotado { cursor: default; }
         .service-item.agotado .precio-prod { display: none; }
         
@@ -144,11 +140,10 @@
             padding: 8px 10px;
             border-radius: 10px;
             background: rgba(255, 0, 0, 0.1);
-            animation: shine-red 1.5s infinite; /* Animación restaurada */
+            animation: shine-red 1.5s infinite;
             text-transform: uppercase;
         }
 
-        /* BOTÓN FLOTANTE DINÁMICO */
         .floating-btn {
             position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
             background: linear-gradient(135deg, #25d366, #128c7e);
@@ -356,14 +351,17 @@
     function toggleCarrito(elemento) {
         if (elemento.classList.contains('agotado')) return;
         const nombre = elemento.querySelector('.nombre-prod').innerText;
-        const precio = parseFloat(elemento.querySelector('.precio-prod').innerText.replace('S/', ''));
+        const precioText = elemento.querySelector('.precio-prod').innerText;
+        const precio = parseFloat(precioText.replace('S/', ''));
+        const descripcion = elemento.querySelector('.manual-desc').innerText; // Captura descripción
+        
         const idx = carrito.findIndex(i => i.nombre === nombre);
         
         if (idx > -1) { 
             carrito.splice(idx, 1); 
             elemento.classList.remove('selected'); 
         } else { 
-            carrito.push({nombre, precio}); 
+            carrito.push({nombre, precio, descripcion}); // Guarda la descripción en el objeto
             elemento.classList.add('selected'); 
         }
         actualizarUI();
@@ -402,8 +400,12 @@
         let totalFinal = subtotal - ahorro;
 
         let msg = `Hola *Alex Store*, deseo contratar:\n\n`;
-        carrito.forEach(i => msg += `🔹 *${i.nombre}* - S/ ${i.precio}\n`);
-        msg += `\n──────────────────\n`;
+        // Aquí se añade la descripción detallada al mensaje
+        carrito.forEach(i => {
+            msg += `🔹 *${i.nombre}* - S/ ${i.precio}\n`;
+            msg += `   _${i.descripcion}_\n\n`;
+        });
+        msg += `──────────────────\n`;
         msg += `💰 *Subtotal:* S/ ${subtotal}\n`;
         if (ahorro > 0) msg += `🎁 *Descuento:* - S/ ${ahorro}\n`;
         msg += `✅ *TOTAL A PAGAR: S/ ${totalFinal}*`;
@@ -424,7 +426,8 @@
         event.stopPropagation();
         const tarjeta = elemento.closest('.service-item');
         const nombre = tarjeta.querySelector('.nombre-prod').innerText;
-        let msg = `Hola *Alex Store*, aun tendras disponible: *${nombre}* ya que en la pagina me sale *sin stock*`;
+        const descripcion = tarjeta.querySelector('.manual-desc').innerText;
+        let msg = `Hola *Alex Store*, aun tendras disponible: *${nombre}* (${descripcion}) ya que en la pagina me sale *sin stock*`;
         window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 </script>
