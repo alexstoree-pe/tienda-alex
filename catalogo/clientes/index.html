@@ -107,7 +107,6 @@
             animation: shine-red 1.5s infinite; text-transform: uppercase;
         }
 
-        /* BOTÓN FLOTANTE DINÁMICO */
         .floating-btn {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
             background: var(--whatsapp); color: white; padding: 15px; border-radius: 50px;
@@ -119,7 +118,7 @@
         .cart-info { display: flex; flex-direction: column; align-items: flex-start; }
         .total-info { display: flex; flex-direction: column; align-items: flex-end; }
         .old-price { font-size: 0.8rem; text-decoration: line-through; opacity: 0.7; }
-        .discount-label { font-size: 0.7rem; background: #fff; color: #000; padding: 2px 6px; border-radius: 4px; margin-top: 2px; }
+        .discount-label { font-size: 0.7rem; background: #fff; color: #000; padding: 2px 6px; border-radius: 4px; margin-top: 2px; font-weight: 800; }
 
         .modal-overlay, .modal-pass { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; justify-content: center; align-items: center; z-index: 3000; }
         .modal-overlay { background: rgba(0,0,0,0.9); }
@@ -348,20 +347,22 @@
 
     function actualizarUI() {
         const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
-        let total = subtotal;
+        let ahorro = 0;
+        
+        // Lógica de ahorro: 2 cuentas = S/ 1, 3 cuentas = S/ 2, etc.
+        if (carrito.length >= 2) {
+            ahorro = carrito.length - 1;
+        }
+        
+        let total = subtotal - ahorro;
         
         const oldPriceEl = document.getElementById('old-price-display');
         const discountTag = document.getElementById('discount-tag');
         
-        // Lógica de descuento: si lleva 2 o más, aplica 4% de descuento aproximado
-        if (carrito.length >= 2) {
-            total = Math.round(subtotal * 0.96);
-            let ahorro = subtotal - total;
-            
+        if (ahorro > 0) {
             oldPriceEl.innerText = `S/ ${subtotal}`;
             oldPriceEl.classList.remove('hidden');
-            
-            discountTag.innerText = `¡AHORRAS S/ ${ahorro}!`;
+            discountTag.innerText = `AHORRAS S/ ${ahorro}`;
             discountTag.classList.remove('hidden');
         } else {
             oldPriceEl.classList.add('hidden');
@@ -378,11 +379,25 @@
     function mostrarForm() { document.getElementById('paso-1').style.display = 'none'; document.getElementById('form-datos').style.display = 'block'; }
 
     function enviarWhatsApp(tipo) {
-        let sub = carrito.reduce((s, i) => s + i.precio, 0);
-        let tot = (carrito.length >= 2) ? Math.round(sub * 0.96) : sub;
+        const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
+        let ahorro = (carrito.length >= 2) ? (carrito.length - 1) : 0;
+        let totalFinal = subtotal - ahorro;
+
         let msg = `Hola *Alex Store*, deseo contratar:\n\n`;
-        carrito.forEach(i => msg += `🔹 *${i.nombre}*\n`);
-        msg += `\n💰 *TOTAL: S/ ${tot}*`;
+        
+        // Desglose de plataformas con su precio individual
+        carrito.forEach(i => {
+            msg += `🔹 *${i.nombre}* - S/ ${i.precio}\n`;
+        });
+
+        msg += `\n──────────────────\n`;
+        msg += `💰 *Subtotal:* S/ ${subtotal}\n`;
+        
+        if (ahorro > 0) {
+            msg += `🎁 *Descuento aplicado:* - S/ ${ahorro}\n`;
+        }
+        
+        msg += `✅ *TOTAL A PAGAR: S/ ${totalFinal}*`;
 
         if (tipo === 'nuevo') {
             const n = document.getElementById('reg-nom').value;
@@ -391,6 +406,7 @@
             if(!n || !c || !p) return alert("Completa los datos");
             msg += `\n\n👤 *NUEVO CLIENTE*:\n- Nombre: ${n}\n- Cel: ${c}\n- Perfil: ${p}`;
         }
+        
         window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
         cerrarModalRegistro();
     }
