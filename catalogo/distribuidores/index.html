@@ -113,7 +113,6 @@
             animation-delay: 0.2s;
         }
 
-        /* BOTÓN VOLVER */
         .btn-inicio-top {
             display: flex;
             align-items: center;
@@ -132,7 +131,6 @@
             backdrop-filter: blur(10px);
         }
 
-        /* CATEGORÍAS */
         .category-title {
             margin: 40px 0 15px; 
             font-size: 0.85rem; 
@@ -151,7 +149,6 @@
             background: linear-gradient(to right, var(--primary), transparent);
         }
 
-        /* TARJETAS DE SERVICIO */
         .service-link { text-decoration: none; color: inherit; display: block; margin-bottom: 15px; transition: 0.4s; }
         
         .service-card { 
@@ -181,11 +178,10 @@
         .service-text h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
         .manual-desc { font-size: 0.75rem; color: var(--text-gray); display: block; line-height: 1.4; }
 
-        /* PRECIOS A LA DERECHA */
         .price-container { 
             text-align: right; 
             margin-left: auto; 
-            min-width: 100px; 
+            min-width: 110px; 
             display: flex;
             flex-direction: column;
             align-items: flex-end;
@@ -194,7 +190,6 @@
 
         .price-tag { color: var(--primary); font-weight: 800; font-size: 1.2rem; display: block; }
         
-        /* LÓGICA DE RENOVACIÓN (OCULTA POR DEFECTO) */
         .renovacion-info { 
             display: none; 
             font-size: 0.65rem; 
@@ -205,21 +200,19 @@
             padding: 2px 6px; 
             border-radius: 4px; 
         }
-        /* Solo se muestra si el enlace tiene la clase 'con-renovacion' */
         .service-link.con-renovacion .renovacion-info { display: inline-block; }
 
-        /* STATUS */
         .stock-status { display: block; margin-bottom: 5px; }
         .stock-status::before { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; padding: 2px 8px; border-radius: 50px; }
+        
         .disponible .stock-status::before { content: "● Disponible"; color: var(--success); background: rgba(46, 204, 113, 0.1); }
+        /* CORREGIDO EL PUNTO DE ABAJO */
         .pocas .stock-status::before { content: "● Pocas Unidades"; color: var(--warning); background: rgba(244, 208, 63, 0.1); }
 
-        /* --- CORRECCIÓN AGOTADO --- */
         .service-link.agotado { pointer-events: none; }
         .service-link.agotado .service-logo, 
         .service-link.agotado .service-text { opacity: 0.4; }
 
-        /* Ocultamos precio, renovación y punto de stock si está agotado */
         .service-link.agotado .price-tag, 
         .service-link.agotado .renovacion-info,
         .service-link.agotado .stock-status { 
@@ -239,12 +232,10 @@
             text-align: center;
         }
 
-        /* BOTONES FLOTANTES */
         .floating-container { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 450px; display: flex; flex-direction: column; gap: 12px; z-index: 100; }
         .floating-btn { background: var(--whatsapp); color: white; padding: 18px; border-radius: 20px; text-decoration: none; font-weight: 700; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .btn-promo { background: var(--vip); color: #000; animation: pulse-glow 2s infinite; }
 
-        /* MODAL */
         .modal-pass { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); z-index: 5000; justify-content: center; align-items: center; }
         .modal-content { background: #111; padding: 40px; border-radius: 40px; width: 90%; max-width: 400px; border: 1px solid var(--primary); text-align: center; }
         #input-dist-pass { width: 100%; padding: 20px; margin: 25px 0; border-radius: 15px; background: #000; color: white; text-align: center; font-size: 1.5rem; border: 1px solid #333; outline: none; }
@@ -263,7 +254,7 @@
 
     <div class="category-title">👤 ZONA PERFILES</div>
 
-    <a href="#" class="service-link disponible ">
+    <a href="#" class="service-link disponible">
         <div class="service-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
             <div class="service-text">
@@ -293,7 +284,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link disponible ">
+    <a href="#" class="service-link disponible">
         <div class="service-card">
             <img src="../img/disneyp.png" class="service-logo">
             <div class="service-text">
@@ -383,7 +374,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link pocas ">
+    <a href="#" class="service-link pocas">
         <div class="service-card">
             <img src="../img/movistar.png" class="service-logo">
             <div class="service-text">
@@ -415,7 +406,7 @@
 
     <div class="category-title">🏠 ZONA CUENTAS COMPLETAS</div>
 
-      <a href="#" class="service-link disponible">
+    <a href="#" class="service-link disponible">
         <div class="service-card">
             <img src="../img/paramount.png" class="service-logo">
             <div class="service-text">
@@ -578,8 +569,17 @@
         if (document.getElementById('input-dist-pass').value === "dis") {
             sessionStorage.setItem("acceso_distribuidor", "true");
             location.reload();
+        } else {
+            alert("Contraseña incorrecta");
         }
     }
+
+    // EVENTO PARA ENTRAR CON TECLA ENTER
+    document.getElementById('input-dist-pass').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            validarAcceso();
+        }
+    });
 
     window.onload = function() {
         actualizarFecha();
