@@ -65,14 +65,16 @@
         .vip-card {
             background: #111; border-radius: 20px; padding: 20px;
             display: flex; align-items: center; border: 1px solid #222;
+            justify-content: space-between; /* Mejora la distribución */
             gap: 15px; position: relative; transition: 0.3s; min-height: 100px;
         }
         .vip-card:hover { border-color: var(--vip); transform: scale(1.02); }
 
-        /* --- CONTENEDOR DE PRECIO Y ALINEACIÓN SIN STOCK --- */
+        /* --- CONTENEDOR DE PRECIO A LA DERECHA --- */
         .price-container { 
             text-align: right; 
-            min-width: 100px; 
+            margin-left: auto; /* Empuja todo a la derecha */
+            min-width: 110px; 
             display: flex; 
             flex-direction: column; 
             justify-content: center; 
@@ -83,51 +85,40 @@
         .price-tag { color: #fff; font-weight: 800; font-size: 1.4rem; display: block; }
         .reno-tag { font-size: 0.75rem; color: #25d366; font-weight: 600; display: block; }
 
-        /* --- ANIMACIÓN NEÓN PARA SIN STOCK --- */
+        /* --- ANIMACIÓN NEÓN BRILLANTE PARA SIN STOCK --- */
         @keyframes shine-red {
-            0% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; color: #ff3333; }
-            50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #ffffff; }
-            100% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; color: #ff3333; }
+            0% { text-shadow: 0 0 8px #ff0000; color: #ff3333; border-color: #ff3333; }
+            50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #fff; border-color: #fff; }
+            100% { text-shadow: 0 0 8px #ff0000; color: #ff3333; border-color: #ff3333; }
         }
 
-        /* --- LÓGICA DE AGOTADO ACTUALIZADA --- */
+        /* --- LÓGICA DE AGOTADO MEJORADA --- */
         .promo-link.agotado { pointer-events: none; }
         .promo-link.agotado .service-logo, 
         .promo-link.agotado .service-text,
         .promo-link.agotado .batch-badge { 
             filter: grayscale(1); 
-            opacity: 0.5; 
+            opacity: 0.4; 
         }
 
+        /* Ocultar precios cuando no hay stock */
         .promo-link.agotado .price-tag,
         .promo-link.agotado .reno-tag {
             display: none !important;
         }
 
-        .promo-link.agotado .price-container {
-            align-items: center;
-            justify-content: center;
-        }
-
         .promo-link.agotado .price-container::after {
             content: "SIN STOCK";
-            color: var(--danger-bright);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 900;
-            display: flex;
-            align-items: center;      
-            justify-content: center;  
             border: 2px solid var(--danger-bright);
-            width: 100%;
-            height: auto;
-            padding: 6px 4px;
-            border-radius: 8px;
-            text-align: center;
-            text-transform: uppercase;
+            padding: 6px 10px;
+            border-radius: 10px;
+            animation: shine-red 1.2s infinite;
+            display: block;
             background: rgba(255, 0, 0, 0.1);
-            letter-spacing: 0.5px;
-            /* Aplicación de la animación restaurada */
-            animation: shine-red 1.5s infinite;
+            text-align: center;
+            letter-spacing: 1px;
         }
 
         .batch-badge {
@@ -170,6 +161,7 @@
             background: var(--vip); color: #000; padding: 18px;
             border-radius: 50px; text-decoration: none; font-weight: 800;
             width: 85%; max-width: 400px; text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
     </style>
 </head>
