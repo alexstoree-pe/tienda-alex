@@ -20,7 +20,6 @@
         }
 
         html { display: none; background-color: var(--dark); scroll-behavior: smooth; }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
@@ -61,31 +60,29 @@
             border-radius: 15px;
         }
 
-        /* --- TÍTULOS DE CATEGORÍA LLAMATIVOS --- */
+        /* --- TÍTULOS DE CATEGORÍA MEJORADOS --- */
         .category-title {
             margin: 45px 0 20px; 
-            font-size: 1rem; 
+            font-size: 1.1rem; 
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 2px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            /* Degradado para que no sea opaco */
-            background: linear-gradient(to right, #fff, var(--primary));
+            gap: 12px;
+            background: linear-gradient(to right, #ffffff, #ffcc00, #ff6600);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 10px 20px rgba(255, 204, 0, 0.1);
+            filter: drop-shadow(0 2px 5px rgba(255,204,0,0.2));
         }
 
         .category-title::before {
             content: '';
-            width: 4px;
-            height: 20px;
+            width: 5px;
+            height: 24px;
             background: var(--primary);
-            display: inline-block;
             border-radius: 10px;
-            box-shadow: 0 0 10px var(--primary);
+            box-shadow: 0 0 15px var(--primary);
         }
 
         /* --- TARJETAS PREMIUM --- */
@@ -126,31 +123,32 @@
             border: 1px solid var(--glass-border);
         }
 
-        .service-text { flex-grow: 1; }
+        .service-text { flex: 1; min-width: 0; }
         .service-text h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
         .manual-desc { font-size: 0.8rem; color: #999; }
 
+        /* --- AJUSTE FINAL: CENTRADO TOTAL DEL BOTÓN --- */
         .price-container { 
-            text-align: right; 
-            flex-shrink: 0; 
-            margin-left: auto;
+            flex-shrink: 0;
             display: flex;
             align-items: center;
-            justify-content: flex-end;
-            min-width: 90px;
+            justify-content: center;
+            min-width: 110px; /* Espacio fijo para que el botón no baile */
+            text-align: center;
         }
 
         .price-tag { 
             color: #000; background: var(--primary);
             padding: 8px 15px; border-radius: 12px;
             font-weight: 800; font-size: 1.1rem;
+            width: 100%; /* Para que el fondo ocupe el espacio */
         }
 
         /* --- PARPADEO SIN STOCK --- */
         @keyframes shine-red {
-            0% { text-shadow: 0 0 5px #ff0000; color: #ff3333; }
-            50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #ffffff; }
-            100% { text-shadow: 0 0 5px #ff0000; color: #ff3333; }
+            0% { text-shadow: 0 0 5px #ff0000; color: #ff3333; border-color: #ff3333; }
+            50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #ffffff; border-color: #ffffff; }
+            100% { text-shadow: 0 0 5px #ff0000; color: #ff3333; border-color: #ff3333; }
         }
 
         .promo-link.agotado { pointer-events: none; }
@@ -158,16 +156,19 @@
         .promo-link.agotado .service-text { opacity: 0.6; }
         .promo-link.agotado .price-tag { display: none !important; }
 
+        /* Botón Sin Stock Corregido */
         .promo-link.agotado .price-container::after {
             content: "SIN STOCK";
             font-size: 0.75rem;
             font-weight: 900;
             border: 2px solid var(--danger-bright);
-            padding: 8px 12px;
+            padding: 8px 0;
             border-radius: 10px;
             background: rgba(255, 0, 0, 0.1);
             animation: shine-red 1.5s infinite;
-            display: inline-block;
+            display: block;
+            width: 100%; /* Centrado absoluto dentro de su caja */
+            text-align: center;
         }
 
         /* SEGURIDAD MODAL */
