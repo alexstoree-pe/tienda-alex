@@ -57,7 +57,6 @@
             100% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.2); }
         }
 
-        /* EFECTO BRILLANTE MEJORADO PARA SIN STOCK */
         @keyframes shine-red {
             0% { text-shadow: 0 0 8px #ff0000; color: #ff3333; border-color: #ff3333; }
             50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #fff; border-color: #fff; }
@@ -194,7 +193,20 @@
         }
 
         .price-tag { color: var(--primary); font-weight: 800; font-size: 1.2rem; display: block; }
-        .renovacion-info { font-size: 0.65rem; color: var(--renovacion-color); margin-top: 5px; font-weight: 700; background: rgba(241, 196, 15, 0.1); padding: 2px 6px; border-radius: 4px; }
+        
+        /* LÓGICA DE RENOVACIÓN (OCULTA POR DEFECTO) */
+        .renovacion-info { 
+            display: none; 
+            font-size: 0.65rem; 
+            color: var(--renovacion-color); 
+            margin-top: 5px; 
+            font-weight: 700; 
+            background: rgba(241, 196, 15, 0.1); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+        }
+        /* Solo se muestra si el enlace tiene la clase 'con-renovacion' */
+        .service-link.con-renovacion .renovacion-info { display: inline-block; }
 
         /* STATUS */
         .stock-status { display: block; margin-bottom: 5px; }
@@ -202,7 +214,7 @@
         .disponible .stock-status::before { content: "● Disponible"; color: var(--success); background: rgba(46, 204, 113, 0.1); }
         .pocas .stock-status::before { content: "● Pocas Unidades"; color: var(--warning); background: rgba(244, 208, 63, 0.1); }
 
-        /* --- CORRECCIÓN AGOTADO: OCULTAR PRECIO Y BRILLO --- */
+        /* --- CORRECCIÓN AGOTADO --- */
         .service-link.agotado { pointer-events: none; }
         .service-link.agotado .service-logo, 
         .service-link.agotado .service-text { opacity: 0.4; }
@@ -221,9 +233,10 @@
             border: 2px solid var(--danger-bright); 
             padding: 6px 10px; 
             border-radius: 12px; 
-            animation: shine-red 1.2s infinite; /* Brillo más rápido y fuerte */
+            animation: shine-red 1.2s infinite;
             display: block;
             background: rgba(255, 0, 0, 0.1);
+            text-align: center;
         }
 
         /* BOTONES FLOTANTES */
@@ -250,7 +263,7 @@
 
     <div class="category-title">👤 ZONA PERFILES</div>
 
-    <a href="#" class="service-link disponible">
+    <a href="#" class="service-link disponible ">
         <div class="service-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
             <div class="service-text">
@@ -280,7 +293,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link disponible">
+    <a href="#" class="service-link disponible ">
         <div class="service-card">
             <img src="../img/disneyp.png" class="service-logo">
             <div class="service-text">
@@ -370,7 +383,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link pocas">
+    <a href="#" class="service-link pocas con-renovacion">
         <div class="service-card">
             <img src="../img/movistar.png" class="service-logo">
             <div class="service-text">
@@ -385,7 +398,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link disponible">
+    <a href="#" class="service-link disponible con-renovacion">
         <div class="service-card">
             <img src="../img/dgo.png" class="service-logo">
             <div class="service-text">
@@ -402,7 +415,7 @@
 
     <div class="category-title">🏠 ZONA CUENTAS COMPLETAS</div>
 
-    <a href="#" class="service-link agotado">
+    <a href="#" class="service-link agotado con-renovacion">
         <div class="service-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
             <div class="service-text">
@@ -432,7 +445,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link pocas">
+    <a href="#" class="service-link pocas con-renovacion">
         <div class="service-card">
             <img src="../img/disneyp.png" class="service-logo">
             <div class="service-text">
