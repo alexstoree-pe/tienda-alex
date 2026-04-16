@@ -28,140 +28,193 @@
         })();
     </script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
             --vip: #d4af37; 
             --dark: #050505;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
             --whatsapp: #25d366;
-            --text-gray: #888;
-            --danger: #ff0000;
+            --text-gray: #bbb;
             --danger-bright: #ff3333;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--dark); color: white; padding-bottom: 120px; }
-
-        header {
-            background: linear-gradient(135deg, #000, #1a1a1a);
-            padding: 35px 20px; text-align: center;
-            border-bottom: 2px solid var(--vip);
-            border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;
+        /* --- ANIMACIONES PROFESIONALES --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        header h1 { font-size: 1.6rem; font-weight: 800; color: var(--vip); }
-
-        .container { padding: 20px 15px; max-width: 600px; margin: auto; }
-
-        .back-nav { text-align: left; margin-bottom: 15px; }
-        .back-btn {
-            display: inline-block; color: var(--vip); text-decoration: none;
-            font-size: 0.8rem; border: 1px solid var(--vip);
-            padding: 6px 15px; border-radius: 20px;
+        @keyframes pulse-vip {
+            0% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
+            100% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.2); }
         }
 
-        /* ESTILOS DE TARJETAS */
-        .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 15px; }
-        .vip-card {
-            background: #111; border-radius: 20px; padding: 20px;
-            display: flex; align-items: center; border: 1px solid #222;
-            justify-content: space-between; /* Mejora la distribución */
-            gap: 15px; position: relative; transition: 0.3s; min-height: 100px;
-        }
-        .vip-card:hover { border-color: var(--vip); transform: scale(1.02); }
-
-        /* --- CONTENEDOR DE PRECIO A LA DERECHA --- */
-        .price-container { 
-            text-align: right; 
-            margin-left: auto; /* Empuja todo a la derecha */
-            min-width: 110px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: flex-end;
-            flex-shrink: 0;
-        }
-
-        .price-tag { color: #fff; font-weight: 800; font-size: 1.4rem; display: block; }
-        .reno-tag { font-size: 0.75rem; color: #25d366; font-weight: 600; display: block; }
-
-        /* --- ANIMACIÓN NEÓN BRILLANTE PARA SIN STOCK --- */
         @keyframes shine-red {
             0% { text-shadow: 0 0 8px #ff0000; color: #ff3333; border-color: #ff3333; }
             50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #fff; border-color: #fff; }
             100% { text-shadow: 0 0 8px #ff0000; color: #ff3333; border-color: #ff3333; }
         }
 
-        /* --- LÓGICA DE AGOTADO MEJORADA --- */
-        .promo-link.agotado { pointer-events: none; }
-        .promo-link.agotado .service-logo, 
-        .promo-link.agotado .service-text,
-        .promo-link.agotado .batch-badge { 
-            filter: grayscale(1); 
-            opacity: 0.4; 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: radial-gradient(circle at top right, #1a1a1a, #050505);
+            color: white; 
+            padding-bottom: 150px; 
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Ocultar precios cuando no hay stock */
-        .promo-link.agotado .price-tag,
-        .promo-link.agotado .reno-tag {
-            display: none !important;
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            padding: 45px 20px; text-align: center;
+            border-bottom: 2px solid var(--vip);
+            border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;
+            animation: fadeInUp 0.8s ease;
         }
+
+        header h1 { 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            color: var(--vip);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        header p { font-size: 0.85rem; opacity: 0.7; margin-top: 5px; }
+
+        .container { 
+            padding: 20px 15px; 
+            max-width: 600px; 
+            margin: auto;
+            animation: fadeInUp 1s ease backwards;
+            animation-delay: 0.2s;
+        }
+
+        .back-nav { margin-bottom: 25px; }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--vip); text-decoration: none;
+            font-size: 0.8rem; border: 1px solid var(--glass-border);
+            background: var(--card-bg);
+            padding: 8px 18px; border-radius: 50px;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+        .back-btn:hover { background: var(--vip); color: #000; }
+
+        /* CATEGORÍAS */
+        .category-title {
+            margin: 40px 0 20px; 
+            font-size: 0.85rem; 
+            font-weight: 800; 
+            color: var(--vip); 
+            display: flex; align-items: center; gap: 10px;
+            text-transform: uppercase; letter-spacing: 2px;
+        }
+        .category-title::after {
+            content: ""; flex: 1; height: 1px;
+            background: linear-gradient(to right, var(--vip), transparent);
+        }
+
+        /* TARJETAS VIP */
+        .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 20px; }
+        
+        .vip-card {
+            background: var(--card-bg); 
+            backdrop-filter: blur(15px);
+            border-radius: 25px; 
+            padding: 22px; 
+            display: flex; align-items: center; 
+            border: 1px solid var(--glass-border); 
+            gap: 15px; position: relative; transition: 0.4s; min-height: 110px;
+        }
+        .vip-card:hover { border-color: var(--vip); transform: translateY(-5px); background: rgba(255,255,255,0.05); }
+
+        .batch-badge {
+            position: absolute; top: -12px; left: 25px;
+            background: var(--vip); color: #000; font-size: 0.7rem;
+            font-weight: 900; padding: 4px 14px; border-radius: 50px;
+            z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .service-logo { 
+            width: 75px; height: 75px; object-fit: cover; 
+            border-radius: 18px; border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+        }
+
+        .service-text { flex-grow: 1; }
+        .service-text h3 { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 3px; }
+        .manual-desc { font-size: 0.75rem; color: var(--text-gray); display: block; line-height: 1.4; }
+
+        /* PRECIOS A LA DERECHA */
+        .price-container { 
+            text-align: right; 
+            margin-left: auto; 
+            min-width: 110px; 
+            display: flex; flex-direction: column; 
+            justify-content: center; align-items: flex-end;
+        }
+
+        .price-tag { color: #fff; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px; }
+        .reno-tag { 
+            font-size: 0.65rem; color: var(--whatsapp); font-weight: 700; 
+            background: rgba(37, 211, 102, 0.1); padding: 2px 8px; border-radius: 50px;
+            margin-top: 4px;
+        }
+
+        /* --- LÓGICA DE AGOTADO --- */
+        .promo-link.agotado { pointer-events: none; }
+        .promo-link.agotado .vip-card { opacity: 0.6; }
+        .promo-link.agotado .service-logo { filter: grayscale(1); }
+        
+        .promo-link.agotado .price-tag,
+        .promo-link.agotado .reno-tag { display: none !important; }
 
         .promo-link.agotado .price-container::after {
             content: "SIN STOCK";
-            font-size: 0.8rem;
-            font-weight: 900;
+            font-size: 0.8rem; font-weight: 900;
             border: 2px solid var(--danger-bright);
-            padding: 6px 10px;
-            border-radius: 10px;
+            padding: 8px 12px; border-radius: 12px;
             animation: shine-red 1.2s infinite;
-            display: block;
-            background: rgba(255, 0, 0, 0.1);
-            text-align: center;
-            letter-spacing: 1px;
+            display: block; background: rgba(255, 0, 0, 0.1);
         }
 
-        .batch-badge {
-            position: absolute; top: -10px; left: 20px;
-            background: var(--vip); color: #000; font-size: 0.7rem;
-            font-weight: 800; padding: 3px 12px; border-radius: 10px;
-            z-index: 2;
-        }
-
-        .service-logo { width: 70px; height: 70px; object-fit: cover; border-radius: 15px; border: 1px solid #333; }
-        .service-text { flex-grow: 1; }
-        .service-text h3 { font-size: 1.1rem; font-weight: 700; color: #fff; }
-        .manual-desc { font-size: 0.8rem; color: var(--text-gray); display: block; }
-
-        .category-title {
-            margin: 30px 0 15px; font-size: 0.85rem; font-weight: 700; color: var(--vip);
-            border-left: 3px solid var(--vip); padding-left: 10px; text-transform: uppercase;
+        /* BOTÓN FLOTANTE */
+        .floating-btn {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: var(--vip); color: #000; padding: 20px;
+            border-radius: 20px; text-decoration: none; font-weight: 800;
+            width: 85%; max-width: 420px; text-align: center;
+            font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 10px;
+            animation: pulse-vip 2s infinite; z-index: 100;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         /* MODAL */
         .modal-pass { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.98); z-index: 3000; justify-content: center; align-items: center; 
+            display: none; position: fixed; inset: 0; 
+            background: rgba(0,0,0,0.96); backdrop-filter: blur(20px);
+            z-index: 3000; justify-content: center; align-items: center; 
         }
         .modal-content { 
-            background: #111; padding: 30px; border-radius: 25px; width: 90%; 
-            max-width: 380px; border: 1px solid var(--vip); text-align: center; 
+            background: #111; padding: 40px; border-radius: 35px; width: 90%; 
+            max-width: 400px; border: 1px solid var(--vip); text-align: center; 
         }
         #input-dist-pass { 
-            width: 100%; padding: 15px; margin: 20px 0; border-radius: 12px; border: 1px solid #333; 
-            background: #000; color: white; text-align: center; font-size: 1.3rem;
+            width: 100%; padding: 18px; margin: 25px 0; border-radius: 15px; border: 1px solid #333; 
+            background: #000; color: white; text-align: center; font-size: 1.5rem; outline: none;
         }
         .btn-acceso { 
-            width: 100%; padding: 15px; border-radius: 12px; border: none; 
-            background: var(--vip); color: #000; font-weight: 700; cursor: pointer;
-        }
-
-        .floating-btn {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: var(--vip); color: #000; padding: 18px;
-            border-radius: 50px; text-decoration: none; font-weight: 800;
-            width: 85%; max-width: 400px; text-align: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            width: 100%; padding: 18px; border-radius: 15px; border: none; 
+            background: var(--vip); color: #000; font-weight: 800; cursor: pointer;
         }
     </style>
 </head>
@@ -174,7 +227,7 @@
 
 <div class="container">
     <div class="back-nav">
-        <a href="../distribuidores/" class="back-btn">⬅ Panel Distribuidores</a>
+        <a href="../distribuidores/" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Panel Principal</a>
     </div>
 
     <div class="category-title">📦 PACKS DE CUENTAS COMPLETAS</div>
@@ -244,6 +297,7 @@
 
 <div id="modal-login-dist-promo" class="modal-pass">
     <div class="modal-content">
+        <i class="fa-solid fa-crown" style="color:var(--vip); font-size: 3rem; margin-bottom: 20px;"></i>
         <h2 style="color:var(--vip);">ACCESO PRIVADO</h2>
         <input type="password" id="input-dist-pass" placeholder="****">
         <button class="btn-acceso" onclick="validarAccesoDist()">ENTRAR AL PANEL</button>
@@ -251,7 +305,7 @@
 </div>
 
 <a href="https://wa.me/51918600000?text=Hola%20Alex%20Store" class="floating-btn">
-    👑 SOLICITAR PRECIO ESPECIAL
+    <i class="fa-brands fa-whatsapp"></i> SOLICITAR PRECIO ESPECIAL
 </a>
 
 <script>
