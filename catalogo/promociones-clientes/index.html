@@ -5,16 +5,202 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promociones | Alex Store</title>
     
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        /* 1. Bloqueo de seguridad inicial */
-        html { display: none; background-color: #0a0a0a; } 
+        :root {
+            --primary: #ffcc00; 
+            --secondary: #ff6600; 
+            --dark: #050505;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --whatsapp: #25d366;
+            --text-gray: #aaa;
+            --danger: #ff0000;
+            --danger-bright: #ff3333;
+        }
+
+        /* Bloqueo de seguridad inicial */
+        html { display: none; background-color: var(--dark); scroll-behavior: smooth; }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at top right, #0a0a0a, #050505);
+            color: white;
+            line-height: 1.6;
+            padding-bottom: 140px;
+        }
+
+        /* 1. Header con Glassmorphism y diseño pulido */
+        header {
+            background: rgba(255, 204, 0, 0.9); /* Color primario con transparencia */
+            backdrop-filter: blur(15px);
+            padding: 45px 20px;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 10px 30px rgba(255, 204, 0, 0.2);
+            color: #000;
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+        }
+
+        header h1 { font-size: 2.2rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        header p { font-size: 0.85rem; font-weight: 600; opacity: 0.8; }
+
+        .container { padding: 20px 15px; max-width: 600px; margin: auto; }
+
+        .back-nav { text-align: left; margin-bottom: 25px; }
+        .back-btn {
+            display: inline-block;
+            color: #888;
+            text-decoration: none;
+            font-size: 0.8rem;
+            border: 1px solid var(--glass-border);
+            background: var(--glass);
+            padding: 10px 20px;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+        .back-btn:hover { border-color: var(--primary); color: var(--primary); background: rgba(255,204,0,0.05); }
+
+        /* --- ESTILOS DE TARJETAS PREMIUM --- */
+        .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 18px; outline: none; }
+        
+        .promo-card {
+            background: var(--glass);
+            border-radius: 25px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--glass-border);
+            gap: 15px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            min-height: 110px;
+        }
+
+        /* Brillo dinámico al pasar el mouse */
+        .promo-card::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: rotate(45deg); transition: 0.6s; pointer-events: none;
+        }
+        .promo-link:hover .promo-card::after { left: 100%; }
+
+        .promo-link:hover .promo-card {
+            border-color: var(--primary);
+            background: rgba(255, 204, 0, 0.03);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-logo {
+            width: 70px; height: 70px;
+            object-fit: cover;
+            border-radius: 18px;
+            flex-shrink: 0;
+            border: 1px solid var(--glass-border);
+            transition: 0.3s;
+        }
+        .promo-link:hover .service-logo { transform: scale(1.1) rotate(-3deg); }
+
+        .service-text { flex-grow: 1; }
+        .service-text h3 { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+        .manual-desc { font-size: 0.8rem; color: #999; line-height: 1.4; display: block; }
+
+        /* Precio alineado a la derecha */
+        .price-container { 
+            text-align: right; 
+            flex-shrink: 0; 
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .price-tag { 
+            color: #000; background: var(--primary);
+            padding: 8px 15px; border-radius: 12px;
+            font-weight: 800; font-size: 1.1rem; display: block;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+        }
+
+        /* --- ANIMACIÓN ROJO NEÓN RESTAURADA --- */
+        @keyframes shine-red {
+            0% { text-shadow: 0 0 5px #ff0000; color: #ff3333; }
+            50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #ffffff; }
+            100% { text-shadow: 0 0 5px #ff0000; color: #ff3333; }
+        }
+
+        .promo-link.agotado { pointer-events: none; }
+        .promo-link.agotado .service-logo { filter: grayscale(1); opacity: 0.4; }
+        .promo-link.agotado .service-text { opacity: 0.6; }
+        .promo-link.agotado .price-tag { display: none !important; }
+
+        .promo-link.agotado .price-container::after {
+            content: "SIN STOCK";
+            font-size: 0.75rem;
+            font-weight: 900;
+            border: 2px solid var(--danger-bright);
+            padding: 8px 10px;
+            border-radius: 10px;
+            background: rgba(255, 0, 0, 0.1);
+            animation: shine-red 1.5s infinite;
+            display: block;
+            text-align: center;
+        }
+
+        .category-title {
+            margin: 40px 0 15px; font-size: 0.85rem; font-weight: 700;
+            color: #555; letter-spacing: 3px; text-transform: uppercase;
+            border-bottom: 1px solid var(--glass-border); padding-bottom: 8px;
+        }
+
+        /* --- MODAL ESTILO PREMIUM --- */
+        .modal-pass { 
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(15px);
+            z-index: 3000; justify-content: center; align-items: flex-end; 
+        }
+        .modal-content { 
+            background: #111; padding: 40px 25px; border-radius: 35px 35px 0 0; 
+            width: 100%; max-width: 500px; border-top: 2px solid var(--primary); text-align: center;
+            animation: slideUp 0.4s ease;
+        }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+        #input-pass { 
+            width: 100%; padding: 18px; margin: 25px 0; border-radius: 15px; border: 1px solid #333; 
+            background: #000; color: var(--primary); text-align: center; font-size: 1.6rem; letter-spacing: 6px; 
+        }
+        .btn-acceso { 
+            display: block; width: 100%; padding: 18px; border-radius: 18px; border: none; 
+            background: var(--primary); color: #000; font-weight: 800; cursor: pointer; font-size: 1rem;
+            transition: 0.3s;
+        }
+        .btn-acceso:active { transform: scale(0.98); }
+
+        .floating-btn {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white; padding: 20px; border-radius: 25px;
+            text-decoration: none; font-weight: 800; width: 90%; max-width: 450px;
+            text-align: center; z-index: 1000;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transition: 0.3s;
+        }
+        .floating-btn:active { transform: translateX(-50%) scale(0.95); }
     </style>
 
     <script>
-        // --- SEGURIDAD INTEGRADA CON EL CATÁLOGO ---
+        // --- SEGURIDAD INTEGRADA ---
         (function() {
             const acceso = sessionStorage.getItem("acceso_concedido");
-            
             if (acceso === "true") {
                 document.documentElement.style.display = "block";
             } else {
@@ -37,187 +223,22 @@
             }
         }
     </script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #ffcc00; 
-            --secondary: #ff6600; 
-            --dark: #0a0a0a;
-            --card-bg: #1a1a1a;
-            --whatsapp: #25d366;
-            --text-gray: #aaa;
-            --danger: #ff0000;
-            --danger-bright: #ff3333;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark);
-            color: white;
-            line-height: 1.6;
-            padding-bottom: 120px;
-        }
-
-        header {
-            background: linear-gradient(135deg, #b8860b, #ffcc00);
-            padding: 35px 20px;
-            text-align: center;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
-            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.1);
-            color: #000;
-        }
-
-        header h1 { font-size: 2.2rem; font-weight: 800; text-transform: uppercase; }
-        header p { font-size: 0.9rem; font-weight: 400; margin-top: 5px; }
-
-        .container { padding: 20px 15px; max-width: 600px; margin: auto; }
-
-        .back-nav { text-align: left; margin-bottom: 20px; }
-        .back-btn {
-            display: inline-block;
-            color: #aaa;
-            text-decoration: none;
-            font-size: 0.8rem;
-            border: 1px solid #333;
-            padding: 8px 18px;
-            border-radius: 20px;
-            transition: 0.3s;
-        }
-        .back-btn:hover { border-color: var(--primary); color: var(--primary); }
-
-        /* --- ESTILOS DE TARJETAS --- */
-        .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 15px; transition: 0.4s; }
-        
-        .promo-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 18px;
-            display: flex;
-            align-items: center;
-            border: 2px solid #333;
-            gap: 15px;
-            position: relative;
-            overflow: hidden;
-            transition: 0.4s;
-            min-height: 100px;
-        }
-
-        .promo-card:hover {
-            border-color: var(--primary);
-            background: #222;
-            transform: scale(1.02);
-        }
-
-        .service-logo {
-            width: 75px; height: 75px;
-            object-fit: cover;
-            border-radius: 15px;
-            flex-shrink: 0;
-            border: 1px solid #444;
-        }
-
-        .service-text { flex-grow: 1; }
-        .service-text h3 { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
-        .manual-desc { font-size: 0.8rem; color: #ddd; line-height: 1.4; display: block; }
-
-        .price-container { 
-            text-align: right; 
-            flex-shrink: 0; 
-            min-width: 100px; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-end;
-        }
-
-        .price-tag { 
-            color: #fff; background: var(--secondary);
-            padding: 6px 12px; border-radius: 10px;
-            font-weight: 700; font-size: 1.15rem; display: block; 
-        }
-
-        /* --- LOGICA AGOTADO MEJORADA CON PARPADEO --- */
-        @keyframes shine-red {
-            0% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; color: #ff3333; }
-            50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #ffffff; }
-            100% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; color: #ff3333; }
-        }
-
-        .promo-link.agotado { pointer-events: none; }
-        .promo-link.agotado .service-logo, .promo-link.agotado .service-text { filter: grayscale(1); opacity: 0.5; }
-        .promo-link.agotado .price-tag { display: none !important; }
-
-        .promo-link.agotado .price-container {
-            align-items: center;
-            justify-content: center;
-        }
-
-        .promo-link.agotado .price-container::after {
-            content: "SIN STOCK";
-            font-size: 0.85rem;
-            font-weight: 900;
-            border: 2px solid var(--danger-bright);
-            padding: 6px 4px;
-            border-radius: 8px;
-            background: rgba(255, 0, 0, 0.1);
-            animation: shine-red 1.5s infinite;
-            display: block;
-            width: 100%;
-            text-align: center;
-            text-transform: uppercase;
-        }
-
-        .category-title {
-            margin: 25px 0 12px; font-size: 0.9rem; font-weight: 700;
-            color: #fff; padding: 5px 0; border-bottom: 1px solid #333;
-        }
-
-        /* --- MODAL DE SEGURIDAD --- */
-        .modal-pass { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.98); z-index: 3000; justify-content: center; align-items: center; 
-        }
-        .modal-content { 
-            background: #1a1a1a; padding: 30px; border-radius: 25px; width: 90%; 
-            max-width: 400px; border: 1px solid var(--primary); text-align: center; 
-        }
-        #input-pass { 
-            width: 100%; padding: 15px; margin: 20px 0; border-radius: 12px; border: 1px solid #444; 
-            background: #000; color: white; text-align: center; font-size: 1.3rem; letter-spacing: 5px; 
-        }
-        .btn-acceso { 
-            display: block; width: 100%; padding: 15px; border-radius: 12px; border: none; 
-            background: var(--primary); color: #000; font-weight: 700; cursor: pointer; font-size: 1rem;
-        }
-
-        .floating-btn {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: var(--whatsapp); color: white; padding: 18px;
-            border-radius: 50px; text-decoration: none; font-weight: 700;
-            width: 85%; max-width: 400px; text-align: center; z-index: 100;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-        }
-    </style>
 </head>
 <body>
 
 <header>
-    <h1>COMBOS OFERTAS ⚡</h1>
-    <p>Alex Store • Ahorra con nuestros combos</p>
+    <h1 data-aos="fade-down">COMBOS OFERTAS ⚡</h1>
+    <p>Alex Store • Máximo ahorro garantizado</p>
 </header>
 
 <div class="container">
-    <div class="back-nav">
-    <a href="../clientes/" class="back-btn">⬅ Volver al Catálogo</a>
+    <div class="back-nav" data-aos="fade-right">
+        <a href="../clientes/" class="back-btn">⬅ VOLVER AL CATÁLOGO</a>
     </div>
 
-    <div class="category-title">🔥 COMBOS MÁS PEDIDOS</div>
+    <div class="category-title" data-aos="fade-right">🔥 COMBOS MÁS PEDIDOS</div>
 
-    <a href="#" class="promo-link agotado">
+    <a href="#" class="promo-link agotado" data-aos="fade-up">
         <div class="promo-card">
             <img src="../img/combo1.png" class="service-logo">
             <div class="service-text">
@@ -230,9 +251,9 @@
         </div>
     </a>
 
-    <div class="category-title">🕒 PROMOCIONES INDIVIDUALES</div>
+    <div class="category-title" data-aos="fade-right">🕒 PROMOCIONES INDIVIDUALES</div>
 
-    <a href="#" class="promo-link agotado">
+    <a href="#" class="promo-link agotado" data-aos="fade-up">
         <div class="promo-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" class="service-logo">
             <div class="service-text">
@@ -246,21 +267,25 @@
     </a>
 </div>
 
-<a href="https://wa.me/51918600000?text=Hola%20Alex%20Store,%20quiero%20consultar%20promos" target="_blank" class="floating-btn">
+<a href="https://wa.me/51918600000?text=Hola%20Alex%20Store,%20quiero%20consultar%20promos" target="_blank" class="floating-btn" data-aos="zoom-in" data-aos-offset="0">
     📲 CONSULTAR DISPONIBILIDAD
 </a>
 
 <div id="modal-password" class="modal-pass">
     <div class="modal-content">
-        <h2 style="color:var(--primary); margin-bottom: 10px;">ACCESO PRIVADO</h2>
-        <p style="font-size: 0.85rem; color: #aaa;">Esta sección es solo para clientes registrados.</p>
+        <h2 style="color:var(--primary); font-weight: 800; letter-spacing: 1px;">ACCESO PRIVADO</h2>
+        <p style="font-size: 0.8rem; color: #555; margin-top: 5px;">Sección exclusiva para clientes registrados.</p>
         <input type="password" id="input-pass" placeholder="****">
         <button class="btn-acceso" onclick="validarPassPromos()">ENTRAR A OFERTAS</button>
-        <button onclick="window.location.href='../clientes/'" style="background:none; border:none; color:grey; width:100%; margin-top:20px; cursor:pointer; font-size: 0.8rem;">Volver al Catálogo</button>
+        <button onclick="window.location.href='../clientes/'" style="background:none; border:none; color:#444; width:100%; margin-top:25px; cursor:pointer; font-size: 0.8rem; font-weight: 600;">Regresar al Catálogo</button>
     </div>
 </div>
 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
+    // Inicializar animaciones
+    AOS.init({ duration: 800, once: true });
+
     function validarPassPromos() {
         const input = document.getElementById('input-pass');
         const pass = input.value;
@@ -271,11 +296,13 @@
             document.querySelector('.container').style.display = 'block';
             document.querySelector('header').style.display = 'block';
             document.getElementById('modal-password').style.display = 'none';
+            // Refrescar AOS al mostrar contenido
+            setTimeout(() => { AOS.refresh(); }, 100);
         } else {
             input.style.borderColor = "red";
             input.value = "";
             input.placeholder = "ERROR";
-            setTimeout(() => { input.style.borderColor = "#444"; input.placeholder = "****"; }, 1500);
+            setTimeout(() => { input.style.borderColor = "#333"; input.placeholder = "****"; }, 1500);
         }
     }
 
