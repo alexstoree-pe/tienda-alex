@@ -5,29 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promos Mayoristas | Alex Store</title>
     
-    <style>
-        /* Bloqueo de seguridad inicial */
-        html { display: none; background-color: #050505; } 
-    </style>
-
-    <script>
-        (function() {
-            const acceso = sessionStorage.getItem("acceso_distribuidor");
-            if (acceso === "true") {
-                document.documentElement.style.display = "block";
-            } else {
-                document.addEventListener("DOMContentLoaded", function() {
-                    document.documentElement.style.display = "block";
-                    const container = document.querySelector('.container');
-                    const header = document.querySelector('header');
-                    if(container) container.style.display = 'none';
-                    if(header) header.style.display = 'none';
-                    document.getElementById('modal-login-dist-promo').style.display = 'flex';
-                });
-            }
-        })();
-    </script>
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -39,81 +16,87 @@
             --glass-border: rgba(255, 255, 255, 0.08);
             --whatsapp: #25d366;
             --text-gray: #bbb;
+            --timer-color: #ddd; 
             --danger-bright: #ff3333;
         }
 
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes shine-red { 0%, 100% { text-shadow: 0 0 8px #ff0000; color: #ff3333; border-color: #ff3333; } 50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #fff; border-color: #fff; } }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background: radial-gradient(circle at top right, #1a1a1a, #050505); color: white; padding-bottom: 150px; line-height: 1.6; overflow-x: hidden; }
+        body { font-family: 'Poppins', sans-serif; background: radial-gradient(circle at top right, #1a1a1a, #050505); color: white; padding-bottom: 120px; line-height: 1.6; }
 
-        header { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(15px); padding: 45px 20px; text-align: center; border-bottom: 2px solid var(--vip); border-bottom-left-radius: 50px; border-bottom-right-radius: 50px; animation: fadeInUp 0.8s ease; }
-        header h1 { font-size: 1.8rem; font-weight: 800; color: var(--vip); letter-spacing: 1px; text-transform: uppercase; }
-        header p { font-size: 0.85rem; opacity: 0.7; margin-top: 5px; }
+        header { background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(15px); padding: 40px 20px; text-align: center; border-bottom: 2px solid var(--vip); border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; animation: fadeInUp 0.8s ease; }
+        header h1 { font-size: 1.6rem; color: var(--vip); text-transform: uppercase; letter-spacing: 1px; }
 
-        .container { padding: 20px 15px; max-width: 600px; margin: auto; animation: fadeInUp 1s ease backwards; animation-delay: 0.2s; }
-        .back-nav { margin-bottom: 25px; }
-        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--vip); text-decoration: none; font-size: 0.8rem; border: 1px solid var(--glass-border); background: var(--card-bg); padding: 8px 18px; border-radius: 50px; backdrop-filter: blur(10px); transition: 0.3s; }
+        .container { padding: 20px 15px; max-width: 600px; margin: auto; }
         
-        .category-title { margin: 40px 0 20px; font-size: 0.85rem; font-weight: 800; color: var(--vip); display: flex; align-items: center; gap: 10px; text-transform: uppercase; letter-spacing: 2px; }
+        .category-title { margin: 30px 0 15px; font-size: 0.8rem; font-weight: 800; color: var(--vip); display: flex; align-items: center; gap: 10px; text-transform: uppercase; letter-spacing: 1px; }
         .category-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, var(--vip), transparent); }
 
-        .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 20px; }
-        .vip-card { background: var(--card-bg); backdrop-filter: blur(15px); border-radius: 25px; padding: 22px; display: flex; align-items: center; border: 1px solid var(--glass-border); gap: 15px; position: relative; transition: 0.4s; min-height: 110px; }
-        .vip-card:hover { border-color: var(--vip); transform: translateY(-5px); background: rgba(255,255,255,0.05); }
+        .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 20px; animation: fadeInUp 1s ease backwards; }
+        .vip-card { background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 22px; padding: 20px; display: flex; align-items: center; border: 1px solid var(--glass-border); gap: 15px; position: relative; transition: 0.3s; }
+        
+        .batch-badge { position: absolute; top: -10px; left: 20px; background: var(--vip); color: #000; font-size: 0.65rem; font-weight: 900; padding: 3px 12px; border-radius: 50px; z-index: 5; }
+        .service-logo { width: 70px; height: 70px; border-radius: 15px; object-fit: cover; border: 1px solid var(--glass-border); }
 
-        .batch-badge { position: absolute; top: -12px; left: 25px; background: var(--vip); color: #000; font-size: 0.7rem; font-weight: 900; padding: 4px 14px; border-radius: 50px; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-        .service-logo { width: 75px; height: 75px; object-fit: cover; border-radius: 18px; border: 1px solid var(--glass-border); }
+        /* --- TEMPORIZADOR PROFESIONAL --- */
+        .countdown-timer { 
+            display: none; 
+            font-size: 0.65rem; 
+            color: var(--timer-color); 
+            background: rgba(255, 255, 255, 0.05); 
+            padding: 2px 8px; 
+            border-radius: 6px; 
+            margin-bottom: 5px; 
+            font-weight: 600; 
+            width: fit-content; 
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .promo-link.time .countdown-timer { display: flex; align-items: center; gap: 5px; }
 
         .service-text { flex-grow: 1; }
-        .service-text h3 { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 3px; }
-        .manual-desc { font-size: 0.75rem; color: var(--text-gray); display: block; line-height: 1.4; }
+        .service-text h3 { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
+        .manual-desc { font-size: 0.7rem; color: var(--text-gray); display: block; }
 
-        /* TEMPORIZADOR */
-        .countdown-timer { display: none; font-size: 0.7rem; color: #ffcc00; background: rgba(255, 204, 0, 0.1); align-items: center; gap: 5px; padding: 2px 10px; border-radius: 8px; margin-top: 10px; font-weight: 700; width: fit-content; border: 1px solid rgba(255, 204, 0, 0.2); }
-        .promo-link.time .countdown-timer { display: inline-flex; }
+        .price-container { text-align: right; min-width: 100px; }
+        .price-tag { color: #fff; font-weight: 800; font-size: 1.3rem; }
+        .reno-tag { font-size: 0.6rem; color: var(--whatsapp); font-weight: 700; background: rgba(37, 211, 102, 0.1); padding: 2px 8px; border-radius: 50px; display: block; margin-top: 4px; }
 
-        .price-container { text-align: right; margin-left: auto; min-width: 110px; display: flex; flex-direction: column; justify-content: center; align-items: flex-end; }
-        .price-tag { color: #fff; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px; }
-        .reno-tag { font-size: 0.65rem; color: var(--whatsapp); font-weight: 700; background: rgba(37, 211, 102, 0.1); padding: 2px 8px; border-radius: 50px; margin-top: 4px; }
-
-        /* AGOTADO (Prioridad Máxima) */
+        /* AGOTADO - PRIORIDAD ALTA */
         .promo-link.agotado { pointer-events: none; }
-        .promo-link.agotado .vip-card { opacity: 0.5; }
+        .promo-link.agotado .vip-card { opacity: 0.4; }
         .promo-link.agotado .price-tag, .promo-link.agotado .reno-tag, .promo-link.agotado .countdown-timer { display: none !important; }
-        .promo-link.agotado .price-container::after { content: "SIN STOCK"; font-size: 0.8rem; font-weight: 900; border: 2px solid var(--danger-bright); padding: 8px 12px; border-radius: 12px; animation: shine-red 1.2s infinite; display: block; background: rgba(255, 0, 0, 0.1); }
+        .promo-link.agotado .price-container::after { 
+            content: "SIN STOCK"; 
+            font-size: 0.75rem; font-weight: 900; border: 1px solid var(--danger-bright); 
+            padding: 6px 10px; border-radius: 10px; animation: shine-red 1.2s infinite; 
+            display: block; background: rgba(255, 0, 0, 0.1); 
+        }
 
-        .floating-btn { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--vip); color: #000; padding: 20px; border-radius: 20px; text-decoration: none; font-weight: 800; width: 85%; max-width: 420px; text-align: center; z-index: 100; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-
-        .modal-pass { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.96); backdrop-filter: blur(20px); z-index: 3000; justify-content: center; align-items: center; }
-        .modal-content { background: #111; padding: 40px; border-radius: 35px; width: 90%; max-width: 400px; border: 1px solid var(--vip); text-align: center; }
-        #input-dist-pass { width: 100%; padding: 18px; margin: 25px 0; border-radius: 15px; border: 1px solid #333; background: #000; color: white; text-align: center; font-size: 1.5rem; outline: none; }
-        .btn-acceso { width: 100%; padding: 18px; border-radius: 15px; background: var(--vip); color: #000; font-weight: 800; cursor: pointer; }
+        .floating-btn { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--vip); color: #000; padding: 15px; border-radius: 15px; text-decoration: none; font-weight: 800; width: 90%; max-width: 400px; text-align: center; z-index: 100; box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>PROMOS DISTRIBUIDORES 👑</h1>
-    <p>Cuentas Completas • Solo Mayoristas</p>
+    <h1>ALEX STORE PROMOS 👑</h1>
+    <p>Panel Exclusivo para Mayoristas</p>
 </header>
 
 <div class="container">
-    <div class="back-nav">
-        <a href="../distribuidores/" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Panel Principal</a>
-    </div>
-
+    
     <div class="category-title">📦 PACKS DE CUENTAS COMPLETAS</div>
 
-    <a href="#" class="promo-link time" data-tiempo="2026-04-18 23:59">
+    <a href="#" class="promo-link time" data-tiempo="2026-04-20 20:00">
         <div class="vip-card">
             <div class="batch-badge">PACK x10</div>
             <img src="../img/max.png" class="service-logo">
             <div class="service-text">
+                <div class="countdown-timer"><i class="fa-regular fa-clock"></i> Cierra en: <span class="timer">...</span></div>
                 <h3 class="nombre-prod">MAX PLATINO COMPLETA</h3>
-                <span class="manual-desc">10 Cuentas Completas • 4K UHD.</span>
-                <div class="countdown-timer"><i class="fa-solid fa-clock"></i> Termina en: <span class="timer">--:--:--</span></div>
+                <span class="manual-desc">10 Cuentas • 4K UHD • 1 Mes.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 50</span> 
@@ -127,9 +110,9 @@
             <div class="batch-badge">PACK x10</div>
             <img src="../img/vix.png" class="service-logo">
             <div class="service-text">
+                <div class="countdown-timer"><i class="fa-regular fa-clock"></i> Cierra en: <span class="timer">...</span></div>
                 <h3 class="nombre-prod">VIX PREMIUM</h3>
-                <span class="manual-desc">10 Cuentas Completas • 4K UHD.</span>
-                <div class="countdown-timer"><i class="fa-solid fa-clock"></i> Termina en: <span class="timer">--:--:--</span></div>
+                <span class="manual-desc">10 Cuentas • Liga MX • 1 Mes.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 30</span> 
@@ -138,14 +121,14 @@
         </div>
     </a>
 
-    <a href="#" class="promo-link time" data-tiempo="2026-04-18 23:59">
+    <a href="#" class="promo-link time" data-tiempo="2026-04-19 18:00">
         <div class="vip-card">
             <div class="batch-badge">PACK x10</div>
             <img src="../img/paramount.png" class="service-logo">
             <div class="service-text">
+                <div class="countdown-timer"><i class="fa-regular fa-clock"></i> Cierra en: <span class="timer">...</span></div>
                 <h3 class="nombre-prod">PARAMOUNT</h3>
-                <span class="manual-desc">10 Cuentas Completas • Premium.</span>
-                <div class="countdown-timer"><i class="fa-solid fa-clock"></i> Termina en: <span class="timer">--:--:--</span></div>
+                <span class="manual-desc">10 Cuentas • Todo el catálogo.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 50</span> 
@@ -154,18 +137,34 @@
         </div>
     </a>
 
-    <div class="category-title">👤 PROMOCIONES INDIVIDUALES</div>
-
-    <a href="#" class="promo-link agotado">
+    <a href="#" class="promo-link time" data-tiempo="2026-04-20 12:00">
         <div class="vip-card">
-            <div class="batch-badge">PROMO INDIVIDUAL</div>
-            <img src="../img/vix.png" class="service-logo">
+            <div class="batch-badge">PACK x5</div>
+            <img src="../img/disney.png" class="service-logo">
             <div class="service-text">
-                <h3 class="nombre-prod">VIX PREMIUM COMPLETA</h3>
-                <span class="manual-desc">Cuenta Completa • 1 Mes • Liga MX.</span>
+                <div class="countdown-timer"><i class="fa-regular fa-clock"></i> Cierra en: <span class="timer">...</span></div>
+                <h3 class="nombre-prod">DISNEY + PREMIUM</h3>
+                <span class="manual-desc">5 Cuentas • Combo Plus • 1 Mes.</span>
             </div>
             <div class="price-container">
-                <span class="price-tag precio-prod">S/ 8</span> 
+                <span class="price-tag precio-prod">S/ 45</span> 
+                <span class="reno-tag">Reno: S/ 12 c/u</span>
+            </div>
+        </div>
+    </a>
+
+    <div class="category-title">👤 PROMOCIONES INDIVIDUALES</div>
+
+    <a href="#" class="promo-link">
+        <div class="vip-card">
+            <div class="batch-badge">INDIVIDUAL</div>
+            <img src="../img/netflix.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">NETFLIX PREMIUM</h3>
+                <span class="manual-desc">Perfil Ultra HD • Con Garantía.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 12</span> 
                 <span class="reno-tag">Entrega Inmediata</span>
             </div>
         </div>
@@ -173,64 +172,46 @@
 
     <a href="#" class="promo-link agotado">
         <div class="vip-card">
-            <div class="batch-badge">PROMO INDIVIDUAL</div>
-            <img src="../img/prime.png" class="service-logo">
+            <div class="batch-badge">INDIVIDUAL</div>
+            <img src="../img/spotify.png" class="service-logo">
             <div class="service-text">
-                <h3 class="nombre-prod">PRIME VIDEO COMPLETA</h3>
-                <span class="manual-desc">Cuenta Completa • 1 Mes • Original.</span>
+                <h3 class="nombre-prod">SPOTIFY PREMIUM</h3>
+                <span class="manual-desc">A tu propio correo • 1 Mes.</span>
             </div>
             <div class="price-container">
-                <span class="price-tag precio-prod">S/ 10</span> 
-                <span class="reno-tag">A tu correo</span>
+                <span class="price-tag precio-prod">S/ 7</span> 
             </div>
         </div>
     </a>
-</div>
 
-<div id="modal-login-dist-promo" class="modal-pass">
-    <div class="modal-content">
-        <i class="fa-solid fa-crown" style="color:var(--vip); font-size: 3rem; margin-bottom: 20px;"></i>
-        <h2 style="color:var(--vip);">ACCESO PRIVADO</h2>
-        <input type="password" id="input-dist-pass" placeholder="****">
-        <button class="btn-acceso" onclick="validarAccesoDist()">ENTRAR AL PANEL</button>
-    </div>
+    <a href="#" class="promo-link agotado">
+        <div class="vip-card">
+            <div class="batch-badge">PROMO</div>
+            <img src="../img/prime.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">PRIME VIDEO</h3>
+                <span class="manual-desc">Cuenta Completa • Original.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 10</span> 
+            </div>
+        </div>
+    </a>
+
 </div>
 
 <a href="https://wa.me/51918600000?text=Hola%20Alex%20Store" class="floating-btn">
-    <i class="fa-brands fa-whatsapp"></i> SOLICITAR PRECIO ESPECIAL
+    <i class="fa-brands fa-whatsapp"></i> PEDIR POR WHATSAPP
 </a>
 
 <script>
-    function validarAccesoDist() {
-        const input = document.getElementById('input-dist-pass');
-        if (input.value === "dis") {
-            sessionStorage.setItem("acceso_distribuidor", "true");
-            location.reload();
-        } else {
-            input.style.borderColor = "red"; input.value = ""; input.placeholder = "ERROR";
-        }
-    }
-
-    function configurarLinksWhatsApp() {
-        const telefono = "51918600000";
-        const tarjetas = document.querySelectorAll('.promo-link:not(.agotado)');
-        tarjetas.forEach(tarjeta => {
-            const badge = tarjeta.querySelector('.batch-badge')?.innerText;
-            const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
-            const precio = tarjeta.querySelector('.precio-prod')?.innerText;
-            if (nombre && precio) {
-                const mensaje = `Hola Alex Store, deseo la promo ${badge}: ${nombre} (${precio})`;
-                tarjeta.href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-                tarjeta.target = "_blank";
-            }
-        });
-    }
-
     function actualizarCronometros() {
         const tarjetasConTiempo = document.querySelectorAll('.promo-link.time:not(.agotado)');
+        
         tarjetasConTiempo.forEach(tarjeta => {
             const timerDisplay = tarjeta.querySelector('.timer');
             const fechaLimiteStr = tarjeta.getAttribute('data-tiempo');
+            
             if (!fechaLimiteStr) return;
 
             const fechaLimite = new Date(fechaLimiteStr.replace(/-/g, "/")).getTime();
@@ -242,16 +223,32 @@
                 return;
             }
 
-            const h = Math.floor((distancia / (1000 * 60 * 60)));
+            const d = Math.floor(distancia / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const m = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((distancia % (1000 * 60)) / 1000);
 
-            timerDisplay.innerText = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
+            let formato = "";
+            if (d > 0) formato += d + "d ";
+            formato += h + "h " + m + "m " + s + "s";
+
+            timerDisplay.innerText = formato;
         });
     }
 
-    window.onload = function() {
-        configurarLinksWhatsApp();
+    function configurarWhatsApp() {
+        const tarjetas = document.querySelectorAll('.promo-link:not(.agotado)');
+        tarjetas.forEach(t => {
+            const nombre = t.querySelector('.nombre-prod')?.innerText;
+            const precio = t.querySelector('.precio-prod')?.innerText;
+            const msg = `Hola Alex Store, quiero la promo: ${nombre} (${precio})`;
+            t.href = `https://wa.me/51918600000?text=${encodeURIComponent(msg)}`;
+            t.target = "_blank";
+        });
+    }
+
+    window.onload = () => {
+        configurarWhatsApp();
         setInterval(actualizarCronometros, 1000);
         actualizarCronometros();
     };
