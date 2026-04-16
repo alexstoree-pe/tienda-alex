@@ -17,7 +17,7 @@
             --glass-border: rgba(255, 255, 255, 0.08);
             --whatsapp: #25d366;
             --promo: #f4d03f;
-            --danger: #ff3333;
+            --danger: #ff3333; /* Rojo neón */
         }
 
         /* Bloqueo inicial */
@@ -33,7 +33,6 @@
             padding-bottom: 160px; 
         }
 
-        /* 1. DISEÑO REFINADO: Glassmorphism en Header */
         header {
             background: rgba(10, 10, 10, 0.7);
             backdrop-filter: blur(20px);
@@ -79,23 +78,23 @@
             color: var(--primary); letter-spacing: 3px;
         }
 
-        /* 2. IMÁGENES DINÁMICAS Y TARJETAS PREMIUM */
         .service-item { cursor: pointer; margin-bottom: 15px; outline: none; }
         
+        /* CORRECCIÓN: Volver a layout horizontal para el precio a la derecha */
         .service-card { 
             background: var(--glass); 
             border-radius: 22px; 
             padding: 18px; 
             display: flex; 
-            align-items: center; 
+            align-items: center; /* Alineación vertical central */
             border: 1px solid var(--glass-border); 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             gap: 15px; 
             position: relative;
             overflow: hidden;
+            justify-content: flex-start; /* Texto y logo a la izquierda por defecto */
         }
 
-        /* Efecto de brillo al pasar el mouse */
         .service-card::after {
             content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
             background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
@@ -111,27 +110,45 @@
 
         .service-logo { 
             width: 60px; height: 60px; object-fit: cover; 
-            border-radius: 15px; transition: 0.3s;
+            border-radius: 15px; transition: 0.3s; flex-shrink: 0;
         }
         .service-card:hover .service-logo { transform: scale(1.1); }
 
-        .service-text h3 { font-size: 1.05rem; font-weight: 600; }
+        .service-text { flex-grow: 1; } /* El texto ocupa el espacio central */
+        .service-text h3 { font-size: 1.05rem; font-weight: 600; color: #fff; }
         .manual-desc { font-size: 0.75rem; color: #777; }
+        
+        /* CORRECCIÓN: Contenedor de precio a la derecha */
+        .price-container { flex-shrink: 0; text-align: right; margin-left: auto; }
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.2rem; }
 
-        /* Botón Neón Stock */
-        .btn-consultar-neon {
-            font-size: 0.7rem; font-weight: 800; border: 1.5px solid var(--danger);
-            padding: 5px 8px; border-radius: 8px; color: var(--danger);
-            animation: pulse-red 2s infinite; text-align: center;
-        }
-        @keyframes pulse-red {
-            0% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 51, 51, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0); }
+        /* --- CORRECCIÓN: ANIMACIÓN ROJO NEÓN RESTAURADA --- */
+        @keyframes shine-red {
+            0% { text-shadow: 0 0 5px #ff0000; color: #ff3333; }
+            50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #ffffff; }
+            100% { text-shadow: 0 0 5px #ff0000; color: #ff3333; }
         }
 
-        /* 3. BOTÓN FLOTANTE MEJORADO */
+        /* CORRECCIÓN: Quitar opacidad y grayscale de 'agotado' */
+        .service-item.agotado { cursor: default; }
+        .service-item.agotado .precio-prod { display: none; }
+        
+        .btn-consultar-neon {
+            display: block; 
+            color: #ff3333; 
+            font-size: 0.85rem;
+            font-weight: 900; 
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid var(--danger);
+            padding: 8px 10px;
+            border-radius: 10px;
+            background: rgba(255, 0, 0, 0.1);
+            animation: shine-red 1.5s infinite; /* Animación restaurada */
+            text-transform: uppercase;
+        }
+
+        /* BOTÓN FLOTANTE DINÁMICO */
         .floating-btn {
             position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
             background: linear-gradient(135deg, #25d366, #128c7e);
@@ -142,9 +159,11 @@
             backdrop-filter: blur(10px);
         }
 
+        .cart-info { display: flex; flex-direction: column; align-items: flex-start; }
+        .total-info { display: flex; flex-direction: column; align-items: flex-end; }
+        .old-price { font-size: 0.8rem; text-decoration: line-through; opacity: 0.6; }
         .discount-label { background: #fff; color: #000; padding: 3px 8px; border-radius: 6px; font-size: 0.65rem; font-weight: 800; margin-top: 4px; display: inline-block; }
 
-        /* Modales Estilo Apple */
         .modal-overlay, .modal-pass { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; 
             justify-content: center; align-items: flex-end; z-index: 3000;
@@ -233,9 +252,7 @@
     <div class="category-title" data-aos="fade-right">📺 TELEVISIÓN DIGITAL</div>
 
     <div class="service-item agotado" data-aos="fade-up">
-        <div class="service-card" style="opacity: 0.6;">
-            <img src="../img/movistar.png" class="service-logo" style="filter: grayscale(1);">
-            <div class="service-text">
+        <div class="service-card"> <img src="../img/movistar.png" class="service-logo"> <div class="service-text">
                 <h3 class="nombre-prod">Movistar TV + Liga 1</h3>
                 <span class="manual-desc">• Fútbol Peruano en Vivo.</span>
             </div>
@@ -276,7 +293,7 @@
         <span style="font-size: 0.9rem; margin-left: 8px;">PEDIR AHORA</span>
     </div>
     <div class="total-info">
-        <span id="old-price-display" class="old-price hidden" style="font-size: 0.8rem; text-decoration: line-through; opacity: 0.6;"></span>
+        <span id="old-price-display" class="old-price hidden"></span>
         <span id="cart-total" style="font-size: 1.3rem; display: block;">S/ 0</span>
         <span id="discount-tag" class="discount-label hidden"></span>
     </div>
