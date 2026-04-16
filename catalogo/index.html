@@ -6,32 +6,8 @@
     <title>Dashboard | Alex Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Bloqueo total de la vista hasta que se valide */
-        html { display: none; background-color: #050505; } 
-    </style>
-    <script>
-        (function() {
-            const acceso = sessionStorage.getItem("acceso_concedido");
-            if (acceso === "true") {
-                document.documentElement.classList.add("acceso-ok");
-                document.documentElement.style.display = "block";
-            } else {
-                document.addEventListener("DOMContentLoaded", function() {
-                    document.documentElement.style.display = "block";
-                    abrirModalAccesoDirecto();
-                });
-            }
-        })();
-
-        function abrirModalAccesoDirecto() {
-            const modal = document.getElementById('modal-pass');
-            if (modal) {
-                modal.style.display = 'flex';
-                document.getElementById('pass-input').focus();
-            }
-        }
-    </script>
-    <style>
+        /* ELIMINADO: html { display: none; } para que la web cargue visible siempre */
+        
         :root {
             --primary: #00d4ff;
             --secondary: #0055ff;
@@ -266,7 +242,6 @@
                 <h2>ZONA CLIENTES</h2>
                 <p>Acceso público y promociones</p>
             </div>
-            
             <a href="clientes/" class="btn-access"><span>🛒</span> Catálogo General</a>
             <a href="promociones/" class="btn-access"><span>🔥</span> Promociones Hoy</a>
             <a href="https://alexstoree-pe.github.io/reportes/" class="btn-access"><span>🚫</span> Ver Blacklist</a>
@@ -332,9 +307,7 @@
     let urlDestino = "";
     const API_URL_REPORTE = "https://script.google.com/macros/s/AKfycby_9wqz7FhvK3W2qVxpJE7bUKeIPgPjjyPP10C7pfC8NavqX5Q03Xb5lck-SkhdOQd-/exec";
 
-    window.onload = function() {
-        sessionStorage.removeItem("acceso_concedido");
-    };
+    // NO HAY AUTO-BLOQUEO AL CARGAR. La página es libre.
 
     function abrirModalReporte() { document.getElementById('modal-reporte').style.display = 'flex'; }
     function cerrarReporte() { document.getElementById('modal-reporte').style.display = 'none'; }
@@ -361,6 +334,7 @@
         finally { btn.innerText = "ENVIAR REPORTE"; btn.disabled = false; }
     }
 
+    // Solo se activa cuando se hace clic en un botón privado
     function solicitarAcceso(url) {
         urlDestino = url;
         document.getElementById('modal-pass').style.display = 'flex';
@@ -375,8 +349,8 @@
         const pass = input.value;
         const modalBox = document.getElementById('modal-box');
         
-        // Mantengo tus claves
         if (pass === "dis") {
+            // Guardamos el permiso por si la siguiente página también lo pide
             sessionStorage.setItem("acceso_concedido", "true");
             window.location.href = urlDestino;
         } else {
