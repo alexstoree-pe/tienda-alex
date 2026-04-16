@@ -31,7 +31,6 @@
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
 
-        /* BOTÓN VOLVER RESTAURADO */
         .back-nav { margin-bottom: 25px; }
         .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--vip); text-decoration: none; font-size: 0.8rem; border: 1px solid var(--glass-border); background: var(--card-bg); padding: 8px 18px; border-radius: 50px; backdrop-filter: blur(10px); transition: 0.3s; }
         
@@ -209,7 +208,14 @@
         tarjetas.forEach(t => {
             const nombre = t.querySelector('.nombre-prod')?.innerText;
             const precio = t.querySelector('.precio-prod')?.innerText;
-            const msg = `Hola Alex Store, quiero la promo: ${nombre} (${precio})`;
+            const descripcion = t.querySelector('.manual-desc')?.innerText; // Captura el manual-desc
+            
+            // Mensaje estructurado con la descripción detallada
+            const msg = `Hola Alex Store, quiero la promo:\n\n` +
+                        `👑 *Promo:* ${nombre}\n` +
+                        `💰 *Precio:* ${precio}\n` +
+                        `📝 *Detalle:* ${descripcion || 'Sin descripción'}`;
+            
             t.href = `https://wa.me/51918600000?text=${encodeURIComponent(msg)}`;
             t.target = "_blank";
         });
