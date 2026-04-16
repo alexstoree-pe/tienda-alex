@@ -30,10 +30,9 @@
             overflow-x: hidden;
         }
 
-        /* Contenedor que evita el exceso de espacio */
         .main-container {
             width: 100%;
-            max-width: 650px; /* Un poco más ancho para el grid */
+            max-width: 750px;
             padding: 40px;
             background: var(--card-bg);
             border-radius: 30px;
@@ -43,7 +42,7 @@
             text-align: center;
         }
 
-        .logo-section { margin-bottom: 40px; }
+        .logo-section { margin-bottom: 30px; }
         .logo-section h1 {
             font-size: clamp(2rem, 8vw, 3.2rem);
             font-weight: 800;
@@ -55,24 +54,44 @@
             filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.3));
         }
 
-        /* Grid de 2 columnas para PC, 1 para móvil */
+        /* --- NUEVAS SECCIONES --- */
+        .section-wrapper {
+            margin-bottom: 35px;
+            text-align: left;
+        }
+
+        .section-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .title-clientes { color: var(--primary); border-left: 3px solid var(--primary); }
+        .title-distribuidor { color: var(--vip); border-left: 3px solid var(--vip); }
+
         .buttons-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
-            gap: 20px; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 15px; 
         }
 
         .btn-access {
             position: relative;
             display: flex;
-            flex-direction: column;
+            flex-direction: row; /* Cambio a horizontal para que no ocupen tanto alto */
             align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 30px 20px;
-            border-radius: 20px;
+            justify-content: flex-start;
+            gap: 15px;
+            padding: 20px;
+            border-radius: 18px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid rgba(255,255,255,0.1);
             background: rgba(255,255,255,0.03);
@@ -82,32 +101,21 @@
             overflow: hidden;
         }
 
-        .btn-access span { font-size: 1.5rem; }
+        .btn-access span { font-size: 1.3rem; }
 
         .btn-access:hover {
-            transform: translateY(-8px);
+            transform: translateX(5px);
             background: rgba(255,255,255,0.08);
             border-color: rgba(255,255,255,0.2);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
         }
 
-        /* Colores Neón por categoría */
-        .btn-clients:hover { border-bottom: 4px solid var(--primary); box-shadow: 0 10px 20px rgba(0, 212, 255, 0.1); }
-        .btn-promos-c:hover { border-bottom: 4px solid var(--success); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.1); }
-        .btn-dist:hover { border-bottom: 4px solid var(--vip); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.1); }
-        .btn-promos-d:hover { border-bottom: 4px solid var(--danger); box-shadow: 0 10px 20px rgba(255, 75, 43, 0.1); }
+        .btn-clients:hover { border-left: 5px solid var(--primary); }
+        .btn-promos-c:hover { border-left: 5px solid var(--success); }
+        .btn-dist:hover { border-left: 5px solid var(--vip); }
+        .btn-promos-d:hover { border-left: 5px solid var(--danger); }
 
-        /* Iconos (puedes usar emojis o SVGs) */
-        .btn-access::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(transparent, rgba(255,255,255,0.05));
-            opacity: 0; transition: 0.3s;
-        }
-        .btn-access:hover::before { opacity: 1; }
-
-        /* MODAL DE SEGURIDAD mejorado */
+        /* MODAL DE SEGURIDAD */
         .modal-pass {
             display: none;
             position: fixed;
@@ -143,8 +151,6 @@
             outline: none;
         }
 
-        #pass-input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 212, 255, 0.2); }
-
         .btn-confirm {
             background: linear-gradient(135deg, var(--secondary), var(--primary));
             color: white; width: 100%; padding: 16px; border: none;
@@ -152,7 +158,6 @@
             transition: 0.3s;
         }
         .btn-confirm:hover { filter: brightness(1.2); transform: scale(1.02); }
-
         .btn-cancel { background: none; border: none; color: #555; margin-top: 20px; cursor: pointer; font-size: 0.9rem; }
 
         @keyframes shake {
@@ -161,6 +166,10 @@
             75% { transform: translateX(8px); }
         }
         .shake { animation: shake 0.2s ease-in-out 0s 2; }
+
+        @media (max-width: 500px) {
+            .buttons-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -171,18 +180,27 @@
         <p style="color:#666; font-size:0.8rem; letter-spacing:4px; font-weight: 600;">PREMIUM SERVICES</p>
     </div>
 
-    <div class="buttons-grid">
-        <div onclick="solicitarAcceso('clientes/')" class="btn-access btn-clients">
-            <span>🛒</span> Catálogo Clientes
+    <div class="section-wrapper">
+        <h3 class="section-title title-clientes">🔹 ZONA CLIENTES</h3>
+        <div class="buttons-grid">
+            <div onclick="solicitarAcceso('clientes/')" class="btn-access btn-clients">
+                <span>🛒</span> Catálogo Clientes
+            </div>
+            <div onclick="solicitarAcceso('promociones-clientes/')" class="btn-access btn-promos-c">
+                <span>🎁</span> Promociones
+            </div>
         </div>
-        <div onclick="solicitarAcceso('promociones-clientes/')" class="btn-access btn-promos-c">
-            <span>🎁</span> Promociones
-        </div>
-        <div onclick="solicitarAcceso('distribuidores/')" class="btn-access btn-dist">
-            <span>👤</span> Zona Mayorista
-        </div>
-        <div onclick="solicitarAcceso('distribuidores-promos/')" class="btn-access btn-promos-d">
-            <span>👑</span> Promos VIP
+    </div>
+
+    <div class="section-wrapper" style="margin-bottom: 0;">
+        <h3 class="section-title title-distribuidor">👑 ZONA DISTRIBUIDOR</h3>
+        <div class="buttons-grid">
+            <div onclick="solicitarAcceso('distribuidores/')" class="btn-access btn-dist">
+                <span>👤</span> Panel Mayorista
+            </div>
+            <div onclick="solicitarAcceso('distribuidores-promos/')" class="btn-access btn-promos-d">
+                <span>🔥</span> Ofertas VIP
+            </div>
         </div>
     </div>
 </div>
@@ -191,11 +209,8 @@
     <div class="modal-content" id="modal-box">
         <h2 id="modal-titulo" style="font-size: 1.5rem;">ACCESO</h2>
         <p id="modal-desc" style="font-size: 0.9rem; color: #666; margin-top: 5px;"></p>
-        
         <input type="password" id="pass-input" placeholder="****" maxlength="12">
-        
         <div id="error-msg" style="color:var(--danger); font-size:0.8rem; margin-bottom:10px; display:none;">❌ CÓDIGO INCORRECTO</div>
-
         <button class="btn-confirm" onclick="validar()">VERIFICAR</button>
         <button class="btn-cancel" onclick="cerrar()">CANCELAR</button>
     </div>
@@ -247,12 +262,8 @@
         let claveCorrecta = esRutaMayorista ? CLAVE_DISTRIBUIDORES : CLAVE_CLIENTES;
 
         if (pass === claveCorrecta) {
-            if (esRutaMayorista) {
-                sessionStorage.setItem("acceso_concedido", "true");
-                sessionStorage.setItem("acceso_distribuidor", "true");
-            } else {
-                sessionStorage.setItem("acceso_concedido", "true");
-            }
+            sessionStorage.setItem("acceso_concedido", "true");
+            if (esRutaMayorista) sessionStorage.setItem("acceso_distribuidor", "true");
             
             input.style.borderColor = "#25d366";
             setTimeout(() => { window.location.href = urlDestino; }, 300);
