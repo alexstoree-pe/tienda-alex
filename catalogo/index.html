@@ -3,293 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Alex Store</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Alex Store | Acceso Autorizado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #00d4ff;
             --secondary: #0055ff;
             --dark: #050505;
-            --card-bg: rgba(18, 18, 18, 0.9);
+            --card-bg: rgba(20, 20, 20, 0.8);
             --vip: #d4af37;
             --success: #25d366;
-            --danger-bright: #ff3333;
-            --text-gray: #888;
+            --danger: #ff4b2b;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+
         body {
             font-family: 'Poppins', sans-serif;
             background: radial-gradient(circle at center, #111 0%, #050505 100%);
             color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
+            padding: 20px;
             overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
         }
 
-        /* --- NAVEGACIÓN --- */
-        .top-nav {
+        /* Contenedor que evita el exceso de espacio */
+        .main-container {
             width: 100%;
-            padding: 20px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(0,0,0,0.5);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            max-width: 650px; /* Un poco más ancho para el grid */
+            padding: 40px;
+            background: var(--card-bg);
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
             backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            z-index: 2000;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            text-align: center;
         }
 
-        .btn-inicio-top {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255,255,255,0.03);
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-weight: 600;
-            border: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.85rem;
-            transition: 0.3s;
-        }
-
-        .header-logo { text-align: center; }
-        .header-logo h1 {
-            font-size: 1.8rem;
+        .logo-section { margin-bottom: 40px; }
+        .logo-section h1 {
+            font-size: clamp(2rem, 8vw, 3.2rem);
             font-weight: 800;
             background: linear-gradient(135deg, #fff, var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-        }
-        .update-tag { font-size: 0.7rem; color: #666; font-weight: 600; }
-
-        /* --- CUERPO PRINCIPAL --- */
-        .main-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            margin-top: 100px;
-            padding: 40px 50px;
-            width: 100%;
-            gap: 30px;
+            filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.3));
         }
 
-        .center-dashboard {
-            flex: 2;
-            max-width: 850px;
-            background: rgba(10, 10, 10, 0.7);
-            border-radius: 25px;
-            border: 1px solid rgba(255,255,255,0.03);
-            display: flex;
-            position: relative;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
-            overflow: hidden;
+        /* Grid de 2 columnas para PC, 1 para móvil */
+        .buttons-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+            gap: 20px; 
         }
-
-        .center-dashboard::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 10%;
-            bottom: 10%;
-            width: 1px;
-            background: linear-gradient(transparent, rgba(255,255,255,0.1), transparent);
-            transform: translateX(-50%);
-        }
-
-        .dashboard-section {
-            flex: 1;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .section-header h2 { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; }
-        .section-header p { font-size: 0.8rem; color: #666; margin-bottom: 20px; }
-
-        .section-clientes { color: var(--primary); }
-        .section-distribuidores { color: var(--vip); }
 
         .btn-access {
+            position: relative;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 12px;
-            padding: 18px;
-            border-radius: 15px;
+            padding: 30px 20px;
+            border-radius: 20px;
             font-weight: 600;
-            font-size: 0.85rem;
-            transition: 0.3s;
+            font-size: 1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid rgba(255,255,255,0.1);
             background: rgba(255,255,255,0.03);
             color: white;
             cursor: pointer;
             text-decoration: none;
-        }
-        .btn-access:hover { transform: translateY(-3px); background: rgba(255,255,255,0.08); }
-
-        /* PANEL DERECHO */
-        .side-panel {
-            flex: 1;
-            max-width: 300px;
-            background: var(--card-bg);
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.03);
-            padding: 25px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            border-right: 2px solid var(--vip);
+            overflow: hidden;
         }
 
-        .side-title { font-size: 0.8rem; font-weight: 700; color: #666; text-transform: uppercase; margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        .btn-access span { font-size: 1.5rem; }
 
-        .status-widget { text-align: center; color: var(--success); margin-bottom: 20px; }
-        .status-widget .perc { font-size: 2rem; font-weight: 800; }
-
-        .payment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .pay-card { background: rgba(255,255,255,0.03); padding: 10px; border-radius: 10px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
-        .pay-card img { height: 18px; filter: brightness(1.2); }
-        .pay-card span { display: block; font-size: 0.55rem; color: #666; margin-top: 4px; }
-
-        .btn-tech {
-            display: block;
-            text-align: center;
-            background: var(--success);
-            color: #000;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 0.7rem;
-            padding: 10px;
-            border-radius: 20px;
-            margin-top: 15px;
+        .btn-access:hover {
+            transform: translateY(-8px);
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
 
-        /* MODALES */
+        /* Colores Neón por categoría */
+        .btn-clients:hover { border-bottom: 4px solid var(--primary); box-shadow: 0 10px 20px rgba(0, 212, 255, 0.1); }
+        .btn-promos-c:hover { border-bottom: 4px solid var(--success); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.1); }
+        .btn-dist:hover { border-bottom: 4px solid var(--vip); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.1); }
+        .btn-promos-d:hover { border-bottom: 4px solid var(--danger); box-shadow: 0 10px 20px rgba(255, 75, 43, 0.1); }
+
+        /* Iconos (puedes usar emojis o SVGs) */
+        .btn-access::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(transparent, rgba(255,255,255,0.05));
+            opacity: 0; transition: 0.3s;
+        }
+        .btn-access:hover::before { opacity: 1; }
+
+        /* MODAL DE SEGURIDAD mejorado */
         .modal-pass {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(15px);
             z-index: 3000;
             justify-content: center;
             align-items: center;
         }
         .modal-content {
             background: #000;
-            padding: 30px;
-            border-radius: 25px;
+            padding: 40px 30px;
+            border-radius: 30px;
             width: 90%;
-            max-width: 380px;
-            border: 1px solid var(--primary);
+            max-width: 400px;
+            border: 1px solid rgba(0, 212, 255, 0.5);
             text-align: center;
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.1);
         }
 
         #pass-input {
             width: 100%;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 12px;
+            padding: 16px;
+            margin: 20px 0;
+            border-radius: 15px;
             border: 1px solid #222;
             background: #111;
             color: #fff;
             text-align: center;
-            font-size: 1.5rem;
-            letter-spacing: 5px;
+            font-size: 1.8rem;
+            letter-spacing: 8px;
             outline: none;
         }
 
-        .btn-confirm { background: var(--primary); color: #000; width: 100%; padding: 15px; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; }
+        #pass-input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 212, 255, 0.2); }
 
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
-        .shake { animation: shake 0.2s ease-in-out 0s 2; }
-
-        @media (max-width: 900px) {
-            .main-wrapper { flex-direction: column; align-items: center; }
-            .center-dashboard { flex-direction: column; }
-            .center-dashboard::after { display: none; }
-            .side-panel { max-width: 100%; width: 100%; }
+        .btn-confirm {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white; width: 100%; padding: 16px; border: none;
+            border-radius: 15px; font-weight: 700; cursor: pointer;
+            transition: 0.3s;
         }
+        .btn-confirm:hover { filter: brightness(1.2); transform: scale(1.02); }
+
+        .btn-cancel { background: none; border: none; color: #555; margin-top: 20px; cursor: pointer; font-size: 0.9rem; }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+        .shake { animation: shake 0.2s ease-in-out 0s 2; }
     </style>
 </head>
 <body>
 
-<div class="top-nav">
-    <a href="../" class="btn-inicio-top">🏠 VOLVER AL INICIO</a>
-    <div class="header-logo">
+<div class="main-container">
+    <div class="logo-section">
         <h1>ALEX STORE</h1>
-        <p class="update-tag">SISTEMA DE GESTIÓN v2.0</p>
-    </div>
-    <div style="width:150px"></div>
-</div>
-
-<div class="main-wrapper">
-    <div class="center-dashboard">
-        <div class="dashboard-section section-clientes">
-            <div class="section-header">
-                <h2>ZONA CLIENTES</h2>
-                <p>Acceso público y promociones</p>
-            </div>
-            <a href="clientes/" class="btn-access"><span>🛒</span> Catálogo General</a>
-            <a href="promociones/" class="btn-access"><span>🔥</span> Promociones Hoy</a>
-            <a href="https://alexstoree-pe.github.io/reportes/" class="btn-access"><span>🚫</span> Ver Blacklist</a>
-        </div>
-
-        <div class="dashboard-section section-distribuidores">
-            <div class="section-header">
-                <h2>ZONA MAYORISTA</h2>
-                <p>Exclusivo para socios Alex Store</p>
-            </div>
-            
-            <button onclick="solicitarAcceso('distribuidores/')" class="btn-access"><span>👤</span> Panel de Control</button>
-            <button onclick="solicitarAcceso('distribuidores-promos/')" class="btn-access"><span>👑</span> Ofertas VIP</button>
-        </div>
+        <p style="color:#666; font-size:0.8rem; letter-spacing:4px; font-weight: 600;">PREMIUM SERVICES</p>
     </div>
 
-    <div class="side-panel">
-        <h3 class="side-title">📊 ESTADO RED</h3>
-        <div class="status-widget">
-            <span class="perc">98%</span>
-            <p style="font-size:0.7rem; color:#fff">Stock Disponible</p>
+    <div class="buttons-grid">
+        <div onclick="solicitarAcceso('clientes/')" class="btn-access btn-clients">
+            <span>🛒</span> Catálogo Clientes
         </div>
-
-        <h3 class="side-title">💳 PAGOS PERÚ</h3>
-        <div class="payment-grid">
-            <div class="pay-card"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Logo_BCP.svg"><span>BCP</span></div>
-            <div class="pay-card"><img src="https://vignette.wikia.nocookie.net/logopedia/images/2/23/Interbank_2011.png"><span>Interbank</span></div>
-            <div class="pay-card"><span style="color:#742284; font-weight:800">YAPE</span><span>Activo</span></div>
-            <div class="pay-card"><span style="color:#00ffca; font-weight:800">PLIN</span><span>Activo</span></div>
+        <div onclick="solicitarAcceso('promociones-clientes/')" class="btn-access btn-promos-c">
+            <span>🎁</span> Promociones
         </div>
-
-        <a href="https://wa.me/51918600000" class="btn-tech">SOPORTE TÉCNICO 🛠️</a>
+        <div onclick="solicitarAcceso('distribuidores/')" class="btn-access btn-dist">
+            <span>👤</span> Zona Mayorista
+        </div>
+        <div onclick="solicitarAcceso('distribuidores-promos/')" class="btn-access btn-promos-d">
+            <span>👑</span> Promos VIP
+        </div>
     </div>
 </div>
 
 <div id="modal-pass" class="modal-pass">
     <div class="modal-content" id="modal-box">
-        <h2 id="modal-titulo">ACCESO PROTEGIDO</h2>
-        <p id="modal-desc" style="color:#666; font-size:0.8rem">Ingrese su contraseña</p>
-        <input type="password" id="pass-input" placeholder="****">
-        <div id="error-msg" style="color:var(--danger-bright); font-size:0.7rem; display:none; margin-bottom:10px">CONTRASEÑA INCORRECTA</div>
-        <button class="btn-confirm" onclick="validar()">INGRESAR</button>
-        <button onclick="cerrar()" style="background:none; border:none; color:#444; margin-top:15px; cursor:pointer">Cerrar</button>
+        <h2 id="modal-titulo" style="font-size: 1.5rem;">ACCESO</h2>
+        <p id="modal-desc" style="font-size: 0.9rem; color: #666; margin-top: 5px;"></p>
+        
+        <input type="password" id="pass-input" placeholder="****" maxlength="12">
+        
+        <div id="error-msg" style="color:var(--danger); font-size:0.8rem; margin-bottom:10px; display:none;">❌ CÓDIGO INCORRECTO</div>
+
+        <button class="btn-confirm" onclick="validar()">VERIFICAR</button>
+        <button class="btn-cancel" onclick="cerrar()">CANCELAR</button>
     </div>
 </div>
 
 <script>
     let urlDestino = "";
 
+    window.onload = function() {
+        sessionStorage.removeItem("acceso_concedido");
+        sessionStorage.removeItem("acceso_distribuidor");
+    };
+
     function solicitarAcceso(url) {
         urlDestino = url;
-        document.getElementById('modal-pass').style.display = 'flex';
+        const modal = document.getElementById('modal-pass');
+        const titulo = document.getElementById('modal-titulo');
+        const desc = document.getElementById('modal-desc');
+        
+        document.getElementById('error-msg').style.display = "none";
+        
+        if (url.includes('distribuidores')) {
+            titulo.style.color = "#d4af37";
+            titulo.innerText = "ÁREA MAYORISTA";
+            desc.innerText = "Solo para socios estratégicos";
+        } else {
+            titulo.style.color = "#00d4ff";
+            titulo.innerText = "ÁREA CLIENTES";
+            desc.innerText = "Ingrese su código de acceso";
+        }
+
+        modal.style.display = 'flex';
         document.getElementById('pass-input').value = "";
         document.getElementById('pass-input').focus();
     }
@@ -299,17 +237,37 @@
     function validar() {
         const input = document.getElementById('pass-input');
         const pass = input.value;
+        const error = document.getElementById('error-msg');
         const modalBox = document.getElementById('modal-box');
         
-        if (pass === "dis") {
-            sessionStorage.setItem("acceso_concedido", "true");
-            window.location.href = urlDestino;
+        const CLAVE_CLIENTES = "cliente";
+        const CLAVE_DISTRIBUIDORES = "dis"; 
+        
+        let esRutaMayorista = urlDestino.includes('distribuidores');
+        let claveCorrecta = esRutaMayorista ? CLAVE_DISTRIBUIDORES : CLAVE_CLIENTES;
+
+        if (pass === claveCorrecta) {
+            if (esRutaMayorista) {
+                sessionStorage.setItem("acceso_concedido", "true");
+                sessionStorage.setItem("acceso_distribuidor", "true");
+            } else {
+                sessionStorage.setItem("acceso_concedido", "true");
+            }
+            
+            input.style.borderColor = "#25d366";
+            setTimeout(() => { window.location.href = urlDestino; }, 300);
         } else {
-            document.getElementById('error-msg').style.display = "block";
+            error.style.display = "block";
             modalBox.classList.add('shake');
+            input.value = "";
+            input.focus();
             setTimeout(() => { modalBox.classList.remove('shake'); }, 300);
         }
     }
+
+    document.getElementById('pass-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') validar();
+    });
 </script>
 
 </body>
