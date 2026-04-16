@@ -24,10 +24,10 @@
         })();
 
         function abrirModalAccesoDirecto() {
-            const modal = document.getElementById('modal-password');
+            const modal = document.getElementById('modal-pass'); // Ajustado al ID correcto de abajo
             if (modal) {
                 modal.style.display = 'flex';
-                document.getElementById('input-pass').focus();
+                document.getElementById('pass-input').focus();
             }
         }
     </script>
@@ -88,6 +88,7 @@
 
         .header-logo {
             text-align: center;
+            cursor: pointer; /* Para el reporte oculto */
         }
         .header-logo h1 {
             font-size: 1.8rem;
@@ -106,13 +107,12 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-top: 100px; /* Espacio para la top-nav */
+            margin-top: 100px;
             padding: 40px 50px;
             width: 100%;
             gap: 30px;
         }
 
-        /* Paneles Laterales (Widgets) */
         .side-panel {
             flex: 1;
             max-width: 320px;
@@ -136,7 +136,6 @@
             padding-bottom: 10px;
         }
 
-        /* Widgets Izquierdos */
         .left-panel { border-left: 2px solid var(--primary); }
         .service-mini-card {
             display: flex;
@@ -152,11 +151,17 @@
         .mini-text h4 { font-size: 0.8rem; color: #fff; }
         .mini-text p { font-size: 0.7rem; color: var(--text-gray); }
 
-        /* Widgets Derechos */
         .right-panel { border-right: 2px solid var(--vip); }
         .status-widget { text-align: center; color: var(--success); text-shadow: 0 0 10px var(--success); }
         .status-widget .perc { font-size: 2rem; font-weight: 800; }
         .status-widget p { font-size: 0.8rem; color: #fff; text-shadow: none; margin-top: -5px; }
+
+        /* NUEVO: ESTILO MEDIOS DE PAGO */
+        .payment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 15px; }
+        .pay-card { background: rgba(255,255,255,0.03); padding: 10px; border-radius: 10px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+        .pay-card img { height: 18px; filter: brightness(1.2); }
+        .pay-card span { display: block; font-size: 0.6rem; color: #666; margin-top: 4px; font-weight: 600; }
+
         .help-box {
             margin-top: 25px;
             text-align: center;
@@ -176,7 +181,6 @@
             border-radius: 20px;
         }
 
-        /* --- CONTENEDOR CENTRAL DE DOS SECCIONES --- */
         .center-dashboard {
             flex: 2;
             max-width: 800px;
@@ -189,7 +193,6 @@
             overflow: hidden;
         }
 
-        /* Línea divisora central */
         .center-dashboard::after {
             content: '';
             position: absolute;
@@ -213,7 +216,6 @@
         .section-header h2 { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
         .section-header p { font-size: 0.8rem; color: #666; margin-top: 3px; }
 
-        /* Secciones de colores neón */
         .section-clientes { color: var(--primary); filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.2)); }
         .section-distribuidores { color: var(--vip); filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)); }
 
@@ -236,13 +238,6 @@
             width: 100%;
         }
         .btn-access span { font-size: 1.3rem; }
-        .btn-access::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(transparent, rgba(255,255,255,0.05));
-            opacity: 0; transition: 0.3s;
-        }
         .btn-access:hover {
             transform: translateY(-5px);
             background: rgba(255,255,255,0.06);
@@ -250,11 +245,10 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.4);
         }
 
-        /* Efectos Neón de Hover para el Dash */
-        .btn-clientes:hover { border-bottom: 3px solid var(--primary); box-shadow: 0 5px 15px rgba(0, 212, 255, 0.1); }
-        .btn-dist:hover { border-bottom: 3px solid var(--vip); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.1); }
+        .btn-clientes:hover { border-bottom: 3px solid var(--primary); }
+        .btn-dist:hover { border-bottom: 3px solid var(--vip); }
 
-        /* --- MODAL DE SEGURIDAD --- */
+        /* MODALES */
         .modal-pass {
             display: none;
             position: fixed;
@@ -276,6 +270,10 @@
             box-shadow: 0 0 50px rgba(0, 212, 255, 0.1);
         }
 
+        /* NUEVO: FORMULARIO REPORTE */
+        .input-report { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #333; background: #111; color: #fff; outline: none; }
+        .btn-report-send { background: var(--danger-bright); color: #fff; width: 100%; padding: 12px; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 10px; }
+
         #pass-input {
             width: 100%;
             padding: 16px;
@@ -290,7 +288,6 @@
             outline: none;
             font-weight: 700;
         }
-        #pass-input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 212, 255, 0.2); }
 
         .btn-confirm {
             background: linear-gradient(135deg, var(--secondary), var(--primary));
@@ -299,7 +296,6 @@
             transition: 0.3s;
         }
         .btn-confirm:hover { filter: brightness(1.2); transform: scale(1.02); }
-
         .btn-cancel { background: none; border: none; color: #555; margin-top: 20px; cursor: pointer; font-size: 0.9rem; }
 
         @keyframes shake {
@@ -308,6 +304,13 @@
             75% { transform: translateX(8px); }
         }
         .shake { animation: shake 0.2s ease-in-out 0s 2; }
+
+        @media (max-width: 1000px) {
+            .main-wrapper { flex-direction: column; padding: 20px; }
+            .side-panel { max-width: 100%; width: 100%; position: static; }
+            .center-dashboard { flex-direction: column; }
+            .top-nav { padding: 15px 20px; }
+        }
     </style>
 </head>
 <body>
@@ -315,7 +318,7 @@
 <div class="top-nav">
     <a href="../" class="btn-inicio-top">🏠 VOLVER AL INICIO</a>
     
-    <div class="header-logo">
+    <div class="header-logo" onclick="abrirModalReporte()">
         <h1>ALEX STORE</h1>
         <p class="update-tag">Novedades 15/05/2024</p>
     </div>
@@ -337,8 +340,8 @@
         </div>
         
         <div class="service-mini-card">
-            <img src="../img/disneys.png" class="mini-logo">
-            <div class="service-text">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" class="mini-logo" style="background:#000">
+            <div class="mini-text">
                 <h4>Disney+ Ads</h4>
                 <p>Plan Standard con anuncios</p>
             </div>
@@ -350,7 +353,6 @@
     </div>
 
     <div class="center-dashboard">
-        
         <div class="dashboard-section section-clientes">
             <div class="section-header">
                 <h2>ZONA CLIENTES</h2>
@@ -360,8 +362,8 @@
             <a href="clientes/" class="btn-access btn-clientes">
                 <span>🛒</span> Catálogo Completo
             </a>
-            <a href="promociones-clientes/" class="btn-access btn-clientes">
-                <span>🎁</span> Promos y Combos
+            <a href="reportes/" class="btn-access btn-clientes">
+                <span>🚫</span> Ver Blacklist
             </a>
         </div>
 
@@ -371,14 +373,13 @@
                 <p>Catálogo exclusivo para socios</p>
             </div>
             
-            <a href="distribuidores/" class="btn-access btn-dist">
+            <button onclick="solicitarAcceso('distribuidores/')" class="btn-access btn-dist">
                 <span>👤</span> Panel Distribuidores
-            </a>
-            <a href="distribuidores-promos/" class="btn-access btn-dist">
+            </button>
+            <button onclick="solicitarAcceso('distribuidores-promos/')" class="btn-access btn-dist">
                 <span>👑</span> Packs Mayoristas VIP
-            </a>
+            </button>
         </div>
-
     </div>
 
     <div class="side-panel right-panel">
@@ -388,12 +389,12 @@
             <span class="perc">98%</span>
             <p>Disponibilidad Cuentas</p>
         </div>
-        
-        <div class="service-mini-card" style="margin-top:15px;">
-            <div class="mini-text" style="width:100%; text-align:center;">
-                <h4>Netflix Mayorista</h4>
-                <p>Estado: ✅ Operativo</p>
-            </div>
+
+        <div class="payment-grid">
+            <div class="pay-card"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Logo_BCP.svg"><span>Crédito</span></div>
+            <div class="pay-card"><img src="https://vignette.wikia.nocookie.net/logopedia/images/2/23/Interbank_2011.png"><span>Ahorros</span></div>
+            <div class="pay-card"><span style="color:#742284; font-weight:800; font-size:0.7rem;">YAPE</span><span>6 AM - 11 PM</span></div>
+            <div class="pay-card"><span style="color:#00ffca; font-weight:800; font-size:0.7rem;">PLIN</span><span>Inmediato</span></div>
         </div>
         
         <div class="help-box">
@@ -419,20 +420,62 @@
     </div>
 </div>
 
+<div id="modal-reporte" class="modal-pass">
+    <div class="modal-content" style="border-color: var(--danger-bright);">
+        <h2 style="color: var(--danger-bright);">REPORTAR INCIDENCIA</h2>
+        <input type="number" id="rep-numero" class="input-report" placeholder="Número de celular">
+        <select id="rep-motivo" class="input-report">
+            <option value="ROBO">ROBO / ESTAFA</option>
+            <option value="YAPE FAKE">YAPE FAKE</option>
+            <option value="DEUDA">FALTA DE PAGO</option>
+        </select>
+        <textarea id="rep-nota" class="input-report" placeholder="Detalle corto..."></textarea>
+        <button id="btn-send-rep" class="btn-report-send" onclick="enviarReporte()">ENVIAR A BLACKLIST</button>
+        <button class="btn-cancel" onclick="cerrarReporte()">CERRAR</button>
+    </div>
+</div>
+
 <script>
     let urlDestino = "";
+    // PEGA AQUÍ TU URL DE GOOGLE APPS SCRIPT
+    const API_URL_REPORTE = "https://script.google.com/macros/s/AKfycby_9wqz7FhvK3W2qVxpJE7bUKeIPgPjjyPP10C7pfC8NavqX5Q03Xb5lck-SkhdOQd-/exec";
 
     window.onload = function() {
         sessionStorage.removeItem("acceso_concedido");
         sessionStorage.removeItem("acceso_distribuidor");
     };
 
+    function abrirModalReporte() { document.getElementById('modal-reporte').style.display = 'flex'; }
+    function cerrarReporte() { document.getElementById('modal-reporte').style.display = 'none'; }
+
+    async function enviarReporte() {
+        const num = document.getElementById('rep-numero').value;
+        const mot = document.getElementById('rep-motivo').value;
+        const not = document.getElementById('rep-nota').value;
+        const btn = document.getElementById('btn-send-rep');
+
+        if(!num || !not) return alert("Completa los datos");
+        btn.innerText = "ENVIANDO..."; btn.disabled = true;
+
+        try {
+            await fetch(API_URL_REPORTE, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ numero: num, motivo: mot, nota: not })
+            });
+            alert("Reporte enviado exitosamente.");
+            cerrarReporte();
+        } catch(e) { alert("Error al conectar"); }
+        finally { btn.innerText = "ENVIAR A BLACKLIST"; btn.disabled = false; }
+    }
+
+    // TU LÓGICA DE VALIDACIÓN ORIGINAL
     function solicitarAcceso(url) {
         urlDestino = url;
         const modal = document.getElementById('modal-pass');
         const titulo = document.getElementById('modal-titulo');
         const desc = document.getElementById('modal-desc');
-        
         document.getElementById('error-msg').style.display = "none";
         
         if (url.includes('distribuidores')) {
@@ -444,7 +487,6 @@
             titulo.innerText = "ÁREA CLIENTES";
             desc.innerText = "Ingrese su código de acceso";
         }
-
         modal.style.display = 'flex';
         document.getElementById('pass-input').value = "";
         document.getElementById('pass-input').focus();
@@ -465,13 +507,7 @@
         let claveCorrecta = esRutaMayorista ? CLAVE_DISTRIBUIDORES : CLAVE_CLIENTES;
 
         if (pass === claveCorrecta) {
-            if (esRutaMayorista) {
-                sessionStorage.setItem("acceso_concedido", "true");
-                sessionStorage.setItem("acceso_distribuidor", "true");
-            } else {
-                sessionStorage.setItem("acceso_concedido", "true");
-            }
-            
+            sessionStorage.setItem("acceso_concedido", "true");
             input.style.borderColor = "#25d366";
             setTimeout(() => { window.location.href = urlDestino; }, 300);
         } else {
