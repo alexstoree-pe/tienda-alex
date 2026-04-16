@@ -6,8 +6,6 @@
     <title>Dashboard | Alex Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ELIMINADO: html { display: none; } para que la web cargue visible siempre */
-        
         :root {
             --primary: #00d4ff;
             --secondary: #0055ff;
@@ -61,7 +59,7 @@
             transition: 0.3s;
         }
 
-        .header-logo { text-align: center; cursor: pointer; }
+        .header-logo { text-align: center; }
         .header-logo h1 {
             font-size: 1.8rem;
             font-weight: 800;
@@ -211,8 +209,6 @@
 
         .btn-confirm { background: var(--primary); color: #000; width: 100%; padding: 15px; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; }
 
-        .input-report { width: 100%; padding: 10px; margin: 5px 0; border-radius: 8px; background: #111; color: #fff; border: 1px solid #333; }
-
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
         .shake { animation: shake 0.2s ease-in-out 0s 2; }
 
@@ -228,7 +224,7 @@
 
 <div class="top-nav">
     <a href="../" class="btn-inicio-top">🏠 VOLVER AL INICIO</a>
-    <div class="header-logo" onclick="abrirModalReporte()">
+    <div class="header-logo">
         <h1>ALEX STORE</h1>
         <p class="update-tag">SISTEMA DE GESTIÓN v2.0</p>
     </div>
@@ -288,53 +284,9 @@
     </div>
 </div>
 
-<div id="modal-reporte" class="modal-pass">
-    <div class="modal-content" style="border-color: var(--danger-bright);">
-        <h2 style="color: var(--danger-bright);">REPORTE BLACKLIST</h2>
-        <input type="number" id="rep-numero" class="input-report" placeholder="Número de celular">
-        <select id="rep-motivo" class="input-report">
-            <option value="ROBO">ROBO / ESTAFA</option>
-            <option value="YAPE FAKE">YAPE FAKE</option>
-            <option value="DEUDA">FALTA DE PAGO</option>
-        </select>
-        <textarea id="rep-nota" class="input-report" placeholder="Motivo breve..."></textarea>
-        <button id="btn-send-rep" class="btn-confirm" style="background:var(--danger-bright); color:#fff" onclick="enviarReporte()">ENVIAR REPORTE</button>
-        <button onclick="cerrarReporte()" style="background:none; border:none; color:#444; margin-top:15px; cursor:pointer">Cerrar</button>
-    </div>
-</div>
-
 <script>
     let urlDestino = "";
-    const API_URL_REPORTE = "https://script.google.com/macros/s/AKfycby_9wqz7FhvK3W2qVxpJE7bUKeIPgPjjyPP10C7pfC8NavqX5Q03Xb5lck-SkhdOQd-/exec";
 
-    // NO HAY AUTO-BLOQUEO AL CARGAR. La página es libre.
-
-    function abrirModalReporte() { document.getElementById('modal-reporte').style.display = 'flex'; }
-    function cerrarReporte() { document.getElementById('modal-reporte').style.display = 'none'; }
-
-    async function enviarReporte() {
-        const num = document.getElementById('rep-numero').value;
-        const mot = document.getElementById('rep-motivo').value;
-        const not = document.getElementById('rep-nota').value;
-        const btn = document.getElementById('btn-send-rep');
-
-        if(!num || !not) return alert("Completa los datos");
-        btn.innerText = "ENVIANDO..."; btn.disabled = true;
-
-        try {
-            await fetch(API_URL_REPORTE, {
-                method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ numero: num, motivo: mot, nota: not })
-            });
-            alert("Reporte enviado con éxito.");
-            cerrarReporte();
-        } catch(e) { alert("Error al conectar"); }
-        finally { btn.innerText = "ENVIAR REPORTE"; btn.disabled = false; }
-    }
-
-    // Solo se activa cuando se hace clic en un botón privado
     function solicitarAcceso(url) {
         urlDestino = url;
         document.getElementById('modal-pass').style.display = 'flex';
@@ -350,7 +302,6 @@
         const modalBox = document.getElementById('modal-box');
         
         if (pass === "dis") {
-            // Guardamos el permiso por si la siguiente página también lo pide
             sessionStorage.setItem("acceso_concedido", "true");
             window.location.href = urlDestino;
         } else {
