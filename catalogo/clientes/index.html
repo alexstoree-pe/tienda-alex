@@ -43,7 +43,7 @@
             --whatsapp: #25d366;
             --text-gray: #aaa;
             --promo: #f4d03f;
-            --danger-bright: #ff3333; /* Rojo neón */
+            --danger-bright: #ff3333;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -60,32 +60,21 @@
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
 
-        /* BOTÓN VOLVER INICIO ESTÁTICO */
         .btn-inicio-top {
-            display: block;
-            width: 100%;
-            text-align: center;
-            background: #222;
-            color: #fff;
-            text-decoration: none;
-            padding: 12px;
-            border-radius: 15px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            border: 1px solid #444;
-            font-size: 0.9rem;
+            display: block; width: 100%; text-align: center;
+            background: #222; color: #fff; text-decoration: none;
+            padding: 12px; border-radius: 15px; font-weight: 600;
+            margin-bottom: 20px; border: 1px solid #444; font-size: 0.9rem;
         }
 
         .nav-buttons { display: flex; flex-direction: column; align-items: center; gap: 15px; margin: 20px 0; }
-        
         .distributor-btn {
             width: 100%; max-width: 450px;
             background: linear-gradient(135deg, #d4af37, var(--promo)); 
             color: black; padding: 18px; border-radius: 20px; 
             text-decoration: none; font-weight: 800; font-size: 1rem; 
             display: block; text-align: center;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4); transition: 0.3s;
         }
 
         .category-title { margin: 30px 0 15px; font-size: 1.1rem; font-weight: 700; color: var(--primary); text-transform: uppercase; display: flex; align-items: center; }
@@ -101,35 +90,37 @@
         .manual-desc { font-size: 0.78rem; color: var(--text-gray); }
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
 
-        /* --- ANIMACIÓN ROJO NEÓN --- */
         @keyframes shine-red {
-            0% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; color: #ff3333; }
-            50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #ffffff; }
-            100% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; color: #ff3333; }
+            0% { text-shadow: 0 0 5px #ff0000; color: #ff3333; }
+            50% { text-shadow: 0 0 20px #ff0000; color: #ffffff; }
+            100% { text-shadow: 0 0 5px #ff0000; color: #ff3333; }
         }
 
-        /* --- ESTILO AGOTADO --- */
         .service-item.agotado { cursor: default; opacity: 0.9; }
         .service-item.agotado .precio-prod { display: none; }
         .service-item.agotado .service-logo, .service-item.agotado .service-text { filter: grayscale(1); opacity: 0.5; }
         
         .btn-consultar-neon {
-            display: block; 
-            color: #ff3333; 
-            font-size: 0.85rem;
-            font-weight: 900; 
-            text-align: center;
-            cursor: pointer;
-            border: 2px solid var(--danger-bright);
-            padding: 6px 4px;
-            border-radius: 8px;
-            background: rgba(255, 0, 0, 0.1);
-            animation: shine-red 1.5s infinite;
-            line-height: 1.2;
-            text-transform: uppercase;
+            display: block; color: #ff3333; font-size: 0.85rem; font-weight: 900; 
+            text-align: center; cursor: pointer; border: 2px solid var(--danger-bright);
+            padding: 6px 4px; border-radius: 8px; background: rgba(255, 0, 0, 0.1);
+            animation: shine-red 1.5s infinite; text-transform: uppercase;
         }
 
-        /* MODALES */
+        /* BOTÓN FLOTANTE DINÁMICO */
+        .floating-btn {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: var(--whatsapp); color: white; padding: 15px; border-radius: 50px;
+            text-decoration: none; font-weight: 700; width: 90%; max-width: 450px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .cart-info { display: flex; flex-direction: column; align-items: flex-start; }
+        .total-info { display: flex; flex-direction: column; align-items: flex-end; }
+        .old-price { font-size: 0.8rem; text-decoration: line-through; opacity: 0.7; }
+        .discount-label { font-size: 0.7rem; background: #fff; color: #000; padding: 2px 6px; border-radius: 4px; margin-top: 2px; }
+
         .modal-overlay, .modal-pass { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; justify-content: center; align-items: center; z-index: 3000; }
         .modal-overlay { background: rgba(0,0,0,0.9); }
         .modal-pass { background: rgba(0,0,0,0.95); }
@@ -139,13 +130,7 @@
         .btn-nuevo { background: var(--primary); color: #000; }
         .btn-antiguo { background: #333; color: #fff; }
         #input-pass { width: 100%; padding: 12px; margin: 20px 0; border-radius: 10px; border: 1px solid #444; background: #000; color: white; text-align: center; font-size: 1.2rem; letter-spacing: 4px; }
-
-        .floating-btn {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: var(--whatsapp); color: white; padding: 15px; border-radius: 50px;
-            text-decoration: none; font-weight: 700; width: 90%; max-width: 450px;
-            display: flex; justify-content: space-between; align-items: center; z-index: 1000;
-        }
+        
         .hidden { display: none; }
     </style>
 </head>
@@ -251,13 +236,11 @@
             <img src="../img/movistar.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Movistar Play + Liga 1 Max</h3>
-                <span class="manual-desc">• +90 canales • Liga 1 Max • Activación TV.</span>
+                <span class="manual-desc">• +90 canales • Liga 1 Max.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 12</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">
-                    SIN STOCK<br>CONSULTAR 📲
-                </div>
+                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK<br>CONSULTAR 📲</div>
             </div>
         </div>
     </div>
@@ -299,9 +282,15 @@
 </div>
 
 <a href="javascript:void(0)" id="whatsapp-btn" class="floating-btn hidden" onclick="abrirModalRegistro()">
-    <span id="cart-count" style="background: rgba(0,0,0,0.3); padding: 5px 12px; border-radius: 20px;">0</span>
-    <span>PEDIR POR WHATSAPP</span>
-    <span id="cart-total">S/ 0</span>
+    <div class="cart-info">
+        <span id="cart-count" style="background: rgba(0,0,0,0.3); padding: 2px 10px; border-radius: 10px; font-size: 0.8rem;">0</span>
+        <span style="font-size: 0.9rem;">PEDIR AHORA</span>
+    </div>
+    <div class="total-info">
+        <span id="old-price-display" class="old-price hidden"></span>
+        <span id="cart-total" style="font-size: 1.2rem;">S/ 0</span>
+        <span id="discount-tag" class="discount-label hidden"></span>
+    </div>
 </a>
 
 <div id="modal-password" class="modal-pass">
@@ -321,9 +310,9 @@
         </div>
         <div id="form-datos" style="display:none;">
             <h2 style="color:var(--primary); margin-bottom:15px;">Datos de Registro</h2>
-            <div class="input-group"><label>Nombre Completo</label><input type="text" id="reg-nom" style="width:100%; padding:8px; margin-bottom:10px; border-radius:8px; border:1px solid #444; background:#000; color:#fff;"></div>
-            <div class="input-group"><label>Celular de contacto</label><input type="tel" id="reg-cel" style="width:100%; padding:8px; margin-bottom:10px; border-radius:8px; border:1px solid #444; background:#000; color:#fff;"></div>
-            <div class="input-group"><label>Nombre para el Perfil</label><input type="text" id="reg-per" style="width:100%; padding:8px; margin-bottom:10px; border-radius:8px; border:1px solid #444; background:#000; color:#fff;"></div>
+            <input type="text" id="reg-nom" placeholder="Nombre Completo" style="width:100%; padding:10px; margin-bottom:10px; border-radius:8px; border:1px solid #444; background:#000; color:#fff;">
+            <input type="tel" id="reg-cel" placeholder="Celular" style="width:100%; padding:10px; margin-bottom:10px; border-radius:8px; border:1px solid #444; background:#000; color:#fff;">
+            <input type="text" id="reg-per" placeholder="Nombre para Perfil" style="width:100%; padding:10px; margin-bottom:10px; border-radius:8px; border:1px solid #444; background:#000; color:#fff;">
             <button class="option-btn btn-nuevo" onclick="enviarWhatsApp('nuevo')">CONFIRMAR Y PEDIR</button>
         </div>
     </div>
@@ -341,18 +330,8 @@
         } else { alert("Código incorrecto"); }
     }
 
-    function consultarStockManual(elemento, event) {
-        event.stopPropagation();
-        const tarjeta = elemento.closest('.service-item');
-        const nombreCompleto = tarjeta.querySelector('.nombre-prod').innerText;
-        
-        let msg = `Hola *Alex Store*, quisiera consultar si aún hay disponible la plataforma *${nombreCompleto}* que figura sin stock.`;
-        window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
-    }
-
     function toggleCarrito(elemento) {
         if (elemento.classList.contains('agotado')) return;
-
         const nombre = elemento.querySelector('.nombre-prod').innerText;
         const precio = parseFloat(elemento.querySelector('.precio-prod').innerText.replace('S/', ''));
         const idx = carrito.findIndex(i => i.nombre === nombre);
@@ -369,7 +348,26 @@
 
     function actualizarUI() {
         const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
-        const total = (carrito.length === 2) ? Math.round(subtotal * 0.96) : subtotal;
+        let total = subtotal;
+        
+        const oldPriceEl = document.getElementById('old-price-display');
+        const discountTag = document.getElementById('discount-tag');
+        
+        // Lógica de descuento: si lleva 2 o más, aplica 4% de descuento aproximado
+        if (carrito.length >= 2) {
+            total = Math.round(subtotal * 0.96);
+            let ahorro = subtotal - total;
+            
+            oldPriceEl.innerText = `S/ ${subtotal}`;
+            oldPriceEl.classList.remove('hidden');
+            
+            discountTag.innerText = `¡AHORRAS S/ ${ahorro}!`;
+            discountTag.classList.remove('hidden');
+        } else {
+            oldPriceEl.classList.add('hidden');
+            discountTag.classList.add('hidden');
+        }
+
         document.getElementById('cart-count').innerText = carrito.length;
         document.getElementById('cart-total').innerText = `S/ ${total}`;
         document.getElementById('whatsapp-btn').classList.toggle('hidden', carrito.length === 0);
@@ -381,7 +379,7 @@
 
     function enviarWhatsApp(tipo) {
         let sub = carrito.reduce((s, i) => s + i.precio, 0);
-        let tot = (carrito.length === 2) ? Math.round(sub * 0.96) : sub;
+        let tot = (carrito.length >= 2) ? Math.round(sub * 0.96) : sub;
         let msg = `Hola *Alex Store*, deseo contratar:\n\n`;
         carrito.forEach(i => msg += `🔹 *${i.nombre}*\n`);
         msg += `\n💰 *TOTAL: S/ ${tot}*`;
@@ -395,6 +393,14 @@
         }
         window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
         cerrarModalRegistro();
+    }
+
+    function consultarStockManual(elemento, event) {
+        event.stopPropagation();
+        const tarjeta = elemento.closest('.service-item');
+        const nombre = tarjeta.querySelector('.nombre-prod').innerText;
+        let msg = `Hola *Alex Store*, consulto stock de: *${nombre}*`;
+        window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 </script>
 </body>
