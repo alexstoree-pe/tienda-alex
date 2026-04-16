@@ -54,7 +54,6 @@
             filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.3));
         }
 
-        /* --- SECCIONES AMPLIADAS --- */
         .section-wrapper {
             margin-bottom: 40px;
             text-align: left;
@@ -75,7 +74,7 @@
 
         .buttons-grid { 
             display: grid; 
-            grid-template-columns: 1fr; /* Una sola columna para que ocupen todo el ancho */
+            grid-template-columns: 1fr; 
             gap: 20px; 
         }
 
@@ -83,12 +82,11 @@
             position: relative;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 20px;
-            padding: 35px 25px; /* Más acolchado para que se vean grandes */
+            justify-content: space-between; /* Para separar el texto del descuento */
+            padding: 35px 30px;
             border-radius: 20px;
             font-weight: 700;
-            font-size: 1.2rem; /* Texto más grande */
+            font-size: 1.2rem;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid rgba(255,255,255,0.1);
             background: rgba(255,255,255,0.03);
@@ -98,7 +96,19 @@
             width: 100%;
         }
 
+        .btn-content { display: flex; align-items: center; gap: 20px; }
         .btn-access span { font-size: 2rem; }
+
+        /* Etiqueta de descuento/aviso */
+        .promo-tag {
+            font-size: 0.75rem;
+            background: rgba(255,255,255,0.1);
+            padding: 5px 12px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
         .btn-access:hover {
             transform: translateY(-5px);
@@ -107,11 +117,13 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.5);
         }
 
-        /* Efectos de brillo en hover */
         .btn-clients:hover { border-bottom: 4px solid var(--primary); }
         .btn-promos-c:hover { border-bottom: 4px solid var(--success); }
+        .btn-promos-c .promo-tag { color: var(--success); border-color: var(--success); }
+        
         .btn-dist:hover { border-bottom: 4px solid var(--vip); }
         .btn-promos-d:hover { border-bottom: 4px solid var(--danger); }
+        .btn-promos-d .promo-tag { color: var(--danger); border-color: var(--danger); }
 
         /* MODAL DE SEGURIDAD */
         .modal-pass {
@@ -174,10 +186,11 @@
         <h3 class="section-title title-clientes">ZONA CLIENTES</h3>
         <div class="buttons-grid">
             <div onclick="solicitarAcceso('clientes/')" class="btn-access btn-clients">
-                <span>🛒</span> Catálogo Clientes
+                <div class="btn-content"><span>🛒</span> Catálogo Clientes</div>
             </div>
             <div onclick="solicitarAcceso('promociones-clientes/')" class="btn-access btn-promos-c">
-                <span>🎁</span> Promociones Clientes
+                <div class="btn-content"><span>🎁</span> Promociones Clientes</div>
+                <div class="promo-tag">OFERTAS ACTIVAS</div>
             </div>
         </div>
     </div>
@@ -186,10 +199,11 @@
         <h3 class="section-title title-distribuidor">ZONA DISTRIBUIDOR</h3>
         <div class="buttons-grid">
             <div onclick="solicitarAcceso('distribuidores/')" class="btn-access btn-dist">
-                <span>👤</span> Zona Distribudior
+                <div class="btn-content"><span>👤</span> Zona Distribudior</div>
             </div>
             <div onclick="solicitarAcceso('distribuidores-promos/')" class="btn-access btn-promos-d">
-                <span>👑</span> Promo Distribuidores
+                <div class="btn-content"><span>👑</span> Promo Distribuidores</div>
+                <div class="promo-tag">PRECIOS VIP</div>
             </div>
         </div>
     </div>
@@ -224,7 +238,7 @@
         
         if (url.includes('distribuidores')) {
             titulo.style.color = "#d4af37";
-            titulo.innerText = "Acceso Distribuidor";
+            titulo.innerText = "ÁREA MAYORISTA";
             desc.innerText = "Solo para socios estratégicos";
         } else {
             titulo.style.color = "#00d4ff";
