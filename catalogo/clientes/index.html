@@ -322,4 +322,94 @@
             document.documentElement.style.display = "block";
         } else {
             document.addEventListener("DOMContentLoaded", function() {
-                document.documentElement.style.
+                document.documentElement.style.display = "block";
+                document.getElementById('modal-password').style.display = 'flex';
+                document.getElementById('input-pass').focus();
+            });
+        }
+    })();
+
+    function validarPass() {
+        if (document.getElementById('input-pass').value === "cliente") { 
+            sessionStorage.setItem("acceso_concedido", "true"); 
+            location.reload(); 
+        } else { alert("Código incorrecto"); }
+    }
+
+    function toggleCarrito(elemento) {
+        if (elemento.classList.contains('agotado')) return;
+        const nombre = elemento.querySelector('.nombre-prod').innerText;
+        const precio = parseFloat(elemento.querySelector('.precio-prod').innerText.replace('S/', ''));
+        const idx = carrito.findIndex(i => i.nombre === nombre);
+        
+        if (idx > -1) { 
+            carrito.splice(idx, 1); 
+            elemento.classList.remove('selected'); 
+        } else { 
+            carrito.push({nombre, precio}); 
+            elemento.classList.add('selected'); 
+        }
+        actualizarUI();
+    }
+
+    function actualizarUI() {
+        const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
+        let ahorro = (carrito.length >= 2) ? (carrito.length - 1) : 0;
+        let total = subtotal - ahorro;
+        
+        const oldPriceEl = document.getElementById('old-price-display');
+        const discountTag = document.getElementById('discount-tag');
+        
+        if (ahorro > 0) {
+            oldPriceEl.innerText = `S/ ${subtotal}`;
+            oldPriceEl.classList.remove('hidden');
+            discountTag.innerText = `AHORRAS S/ ${ahorro}`;
+            discountTag.classList.remove('hidden');
+        } else {
+            oldPriceEl.classList.add('hidden');
+            discountTag.classList.add('hidden');
+        }
+
+        document.getElementById('cart-count').innerText = carrito.length;
+        document.getElementById('cart-total').innerText = `S/ ${total}`;
+        document.getElementById('whatsapp-btn').classList.toggle('hidden', carrito.length === 0);
+    }
+
+    function abrirModalRegistro() { document.getElementById('modal-registro').style.display = 'flex'; }
+    function cerrarModalRegistro() { document.getElementById('modal-registro').style.display = 'none'; }
+    function mostrarForm() { document.getElementById('paso-1').style.display = 'none'; document.getElementById('form-datos').style.display = 'block'; }
+
+    function enviarWhatsApp(tipo) {
+        const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
+        let ahorro = (carrito.length >= 2) ? (carrito.length - 1) : 0;
+        let totalFinal = subtotal - ahorro;
+
+        let msg = `Hola *Alex Store*, deseo contratar:\n\n`;
+        carrito.forEach(i => msg += `🔹 *${i.nombre}* - S/ ${i.precio}\n`);
+        msg += `\n──────────────────\n`;
+        msg += `💰 *Subtotal:* S/ ${subtotal}\n`;
+        if (ahorro > 0) msg += `🎁 *Descuento:* - S/ ${ahorro}\n`;
+        msg += `✅ *TOTAL A PAGAR: S/ ${totalFinal}*`;
+
+        if (tipo === 'nuevo') {
+            const n = document.getElementById('reg-nom').value;
+            const c = document.getElementById('reg-cel').value;
+            const p = document.getElementById('reg-per').value;
+            if(!n || !c || !p) return alert("Completa los datos");
+            msg += `\n\n👤 *NUEVO CLIENTE*:\n- Nombre: ${n}\n- Cel: ${c}\n- Perfil: ${p}`;
+        }
+        
+        window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
+        cerrarModalRegistro();
+    }
+
+    function consultarStockManual(elemento, event) {
+        event.stopPropagation();
+        const tarjeta = elemento.closest('.service-item');
+        const nombre = tarjeta.querySelector('.nombre-prod').innerText;
+        let msg = `Hola *Alex Store*, consulto stock de: *${nombre}*`;
+        window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+</script>
+</body>
+</html>
