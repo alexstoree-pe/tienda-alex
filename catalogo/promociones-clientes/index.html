@@ -45,12 +45,11 @@
 
         header h1 { font-size: 2.2rem; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; }
         
-        /* SUBTÍTULO CON PORCENTAJE PARA CENTRADO PERFECTO */
         header p { 
             font-size: 0.85rem; 
             font-weight: 500; 
-            width: 98%;         /* Usamos porcentaje para control total */
-            margin: 5 auto;      /* Margen automático a los lados centra el bloque */
+            width: 98%; 
+            margin: 5 auto; 
             display: block;
             text-align: center; 
             line-height: 1.3;
@@ -144,7 +143,7 @@
             100% { text-shadow: 0 0 5px #ff0000; color: #ff3333; border-color: #ff3333; }
         }
 
-        .promo-link.agotado { pointer-events: none; }
+        .promo-link.agotado { cursor: default; }
         .promo-link.agotado .service-logo { filter: grayscale(1); opacity: 0.4; }
         .promo-link.agotado .service-text { opacity: 0.6; }
         .promo-link.agotado .price-tag { display: none !important; }
@@ -220,7 +219,7 @@
 
     <div class="category-title" data-aos="fade-right">🔥 COMBOS MÁS PEDIDOS</div>
 
-    <a href="#" class="promo-link" data-aos="fade-up">
+    <a href="javascript:void(0)" class="promo-link" data-aos="fade-up">
         <div class="promo-card">
             <img src="../img/combo1.png" class="service-logo">
             <div class="service-text">
@@ -235,7 +234,7 @@
 
     <div class="category-title" data-aos="fade-right">🕒 PROMOCIONES INDIVIDUALES</div>
 
-    <a href="#" class="promo-link agotado" data-aos="fade-up">
+    <a href="javascript:void(0)" class="promo-link agotado" data-aos="fade-up">
         <div class="promo-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" class="service-logo">
             <div class="service-text">
@@ -280,15 +279,25 @@
 
     function configurarLinksWhatsApp() {
         const telefono = "51918600000";
-        document.querySelectorAll('.promo-link:not(.agotado)').forEach(tarjeta => {
-            const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
-            const precio = tarjeta.querySelector('.precio-prod')?.innerText;
-            const descripcion = tarjeta.querySelector('.manual-desc')?.innerText;
-            
-            if (nombre && precio) {
-                const mensaje = `Hola Alex Store, quiero adquirir esta promoción:%0A%0A📌 *${nombre}*%0A📝 _${descripcion}_%0A💰 *Precio:* ${precio}`;
-                tarjeta.href = `https://wa.me/${telefono}?text=${mensaje}`;
-                tarjeta.target = "_blank";
+        document.querySelectorAll('.promo-link').forEach(tarjeta => {
+            // Solo activar links si NO está agotado
+            if (!tarjeta.classList.contains('agotado')) {
+                const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
+                const precio = tarjeta.querySelector('.precio-prod')?.innerText;
+                const descripcion = tarjeta.querySelector('.manual-desc')?.innerText;
+                
+                const mensaje = `Hola *Alex Store*, deseo adquirir esta promoción: \n\n📌 *${nombre}*\n📝 _${descripcion}_\n💰 *Precio:* ${precio}`;
+                
+                tarjeta.onclick = () => {
+                    window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
+                };
+            } else {
+                // Para productos agotados, opcionalmente consultar stock
+                tarjeta.onclick = () => {
+                    const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
+                    const mensajeAgotado = `Hola *Alex Store*, ¿volverás a tener stock de: *${nombre}*? Actualmente figura como agotado.`;
+                    window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensajeAgotado)}`, '_blank');
+                };
             }
         });
     }
