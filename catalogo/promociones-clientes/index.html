@@ -70,11 +70,10 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            /* Degradado de alto contraste */
             background: linear-gradient(to right, #ffffff, var(--primary), #ff6600);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 8px rgba(255,204,0,0.4));
+            filter: drop-shadow(0 0 12px rgba(255,204,0,0.5));
         }
 
         .category-title::before {
@@ -86,21 +85,23 @@
             box-shadow: 0 0 15px var(--primary);
         }
 
-        /* --- TARJETAS PREMIUM --- */
+        /* --- TARJETAS PREMIUM CON GRID --- */
         .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 18px; }
         
         .promo-card {
             background: var(--glass);
             border-radius: 25px;
-            padding: 20px;
-            display: flex;
+            padding: 15px 20px;
+            display: grid;
+            /* Columnas: Icono(80px) | Texto(flexible) | Botón(100px) */
+            grid-template-columns: 80px 1fr 100px; 
             align-items: center;
             border: 1px solid var(--glass-border);
-            gap: 15px;
+            gap: 10px;
             position: relative;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            min-height: 110px;
+            min-height: 100px;
         }
 
         .promo-card:hover {
@@ -110,31 +111,28 @@
         }
 
         .service-logo {
-            width: 70px; height: 70px;
+            width: 65px; height: 65px;
             object-fit: cover;
             border-radius: 18px;
-            flex-shrink: 0;
             border: 1px solid var(--glass-border);
         }
 
-        .service-text { flex: 1; min-width: 0; }
-        .service-text h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-        .manual-desc { font-size: 0.8rem; color: #999; }
+        .service-text { min-width: 0; }
+        .service-text h3 { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
+        .manual-desc { font-size: 0.75rem; color: #999; display: block; line-height: 1.2; }
 
-        /* --- CORRECCIÓN DEFINITIVA: CENTRADO DE BOTÓN --- */
+        /* --- CENTRADO GARANTIZADO DEL BOTÓN --- */
         .price-container { 
-            flex-shrink: 0;
             display: flex;
             align-items: center;
-            justify-content: center; /* Centra horizontalmente */
-            width: 120px; /* Ancho fijo para consistencia */
-            margin-left: 10px;
+            justify-content: center;
+            width: 100%;
         }
 
         .price-tag { 
             color: #000; background: var(--primary);
-            padding: 8px 0; border-radius: 12px;
-            font-weight: 800; font-size: 1.1rem;
+            padding: 8px 0; border-radius: 10px;
+            font-weight: 800; font-size: 1rem;
             width: 100%;
             text-align: center;
             box-shadow: 0 4px 15px rgba(255, 204, 0, 0.2);
@@ -152,10 +150,9 @@
         .promo-link.agotado .service-text { opacity: 0.6; }
         .promo-link.agotado .price-tag { display: none !important; }
 
-        /* Botón Sin Stock con centrado total */
         .promo-link.agotado .price-container::after {
             content: "SIN STOCK";
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 900;
             border: 2px solid var(--danger-bright);
             padding: 8px 0;
@@ -167,7 +164,7 @@
             text-align: center;
         }
 
-        /* MODAL SEGURIDAD */
+        /* SEGURIDAD MODAL */
         .modal-pass { 
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: rgba(0,0,0,0.85); backdrop-filter: blur(15px);
@@ -236,7 +233,7 @@
 
     <div class="category-title" data-aos="fade-right">🔥 COMBOS MÁS PEDIDOS</div>
 
-    <a href="#" class="promo-link " data-aos="fade-up">
+    <a href="#" class="promo-link agotado" data-aos="fade-up">
         <div class="promo-card">
             <img src="../img/combo1.png" class="service-logo">
             <div class="service-text">
