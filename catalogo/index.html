@@ -32,7 +32,7 @@
 
         .main-container {
             width: 100%;
-            max-width: 750px;
+            max-width: 650px;
             padding: 40px;
             background: var(--card-bg);
             border-radius: 30px;
@@ -42,9 +42,9 @@
             text-align: center;
         }
 
-        .logo-section { margin-bottom: 30px; }
+        .logo-section { margin-bottom: 40px; }
         .logo-section h1 {
-            font-size: clamp(2rem, 8vw, 3.2rem);
+            font-size: clamp(2.5rem, 10vw, 3.5rem);
             font-weight: 800;
             background: linear-gradient(135deg, #fff, var(--primary));
             -webkit-background-clip: text;
@@ -54,66 +54,64 @@
             filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.3));
         }
 
-        /* --- NUEVAS SECCIONES --- */
+        /* --- SECCIONES AMPLIADAS --- */
         .section-wrapper {
-            margin-bottom: 35px;
+            margin-bottom: 40px;
             text-align: left;
         }
 
         .section-title {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 700;
             letter-spacing: 2px;
-            margin-bottom: 15px;
-            padding-left: 10px;
+            margin-bottom: 20px;
+            padding-left: 15px;
             text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            border-left: 4px solid;
         }
 
-        .title-clientes { color: var(--primary); border-left: 3px solid var(--primary); }
-        .title-distribuidor { color: var(--vip); border-left: 3px solid var(--vip); }
+        .title-clientes { color: var(--primary); border-color: var(--primary); }
+        .title-distribuidor { color: var(--vip); border-color: var(--vip); }
 
         .buttons-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-            gap: 15px; 
+            grid-template-columns: 1fr; /* Una sola columna para que ocupen todo el ancho */
+            gap: 20px; 
         }
 
         .btn-access {
             position: relative;
             display: flex;
-            flex-direction: row; /* Cambio a horizontal para que no ocupen tanto alto */
             align-items: center;
-            justify-content: flex-start;
-            gap: 15px;
-            padding: 20px;
-            border-radius: 18px;
-            font-weight: 600;
-            font-size: 0.95rem;
+            justify-content: center;
+            gap: 20px;
+            padding: 35px 25px; /* Más acolchado para que se vean grandes */
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 1.2rem; /* Texto más grande */
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid rgba(255,255,255,0.1);
             background: rgba(255,255,255,0.03);
             color: white;
             cursor: pointer;
             text-decoration: none;
-            overflow: hidden;
+            width: 100%;
         }
 
-        .btn-access span { font-size: 1.3rem; }
+        .btn-access span { font-size: 2rem; }
 
         .btn-access:hover {
-            transform: translateX(5px);
+            transform: translateY(-5px);
             background: rgba(255,255,255,0.08);
-            border-color: rgba(255,255,255,0.2);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            border-color: rgba(255,255,255,0.3);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
         }
 
-        .btn-clients:hover { border-left: 5px solid var(--primary); }
-        .btn-promos-c:hover { border-left: 5px solid var(--success); }
-        .btn-dist:hover { border-left: 5px solid var(--vip); }
-        .btn-promos-d:hover { border-left: 5px solid var(--danger); }
+        /* Efectos de brillo en hover */
+        .btn-clients:hover { border-bottom: 4px solid var(--primary); }
+        .btn-promos-c:hover { border-bottom: 4px solid var(--success); }
+        .btn-dist:hover { border-bottom: 4px solid var(--vip); }
+        .btn-promos-d:hover { border-bottom: 4px solid var(--danger); }
 
         /* MODAL DE SEGURIDAD */
         .modal-pass {
@@ -134,7 +132,6 @@
             max-width: 400px;
             border: 1px solid rgba(0, 212, 255, 0.5);
             text-align: center;
-            box-shadow: 0 0 50px rgba(0, 212, 255, 0.1);
         }
 
         #pass-input {
@@ -155,10 +152,7 @@
             background: linear-gradient(135deg, var(--secondary), var(--primary));
             color: white; width: 100%; padding: 16px; border: none;
             border-radius: 15px; font-weight: 700; cursor: pointer;
-            transition: 0.3s;
         }
-        .btn-confirm:hover { filter: brightness(1.2); transform: scale(1.02); }
-        .btn-cancel { background: none; border: none; color: #555; margin-top: 20px; cursor: pointer; font-size: 0.9rem; }
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
@@ -166,10 +160,6 @@
             75% { transform: translateX(8px); }
         }
         .shake { animation: shake 0.2s ease-in-out 0s 2; }
-
-        @media (max-width: 500px) {
-            .buttons-grid { grid-template-columns: 1fr; }
-        }
     </style>
 </head>
 <body>
@@ -181,25 +171,25 @@
     </div>
 
     <div class="section-wrapper">
-        <h3 class="section-title title-clientes">🔹 ZONA CLIENTES</h3>
+        <h3 class="section-title title-clientes">ZONA CLIENTES</h3>
         <div class="buttons-grid">
             <div onclick="solicitarAcceso('clientes/')" class="btn-access btn-clients">
                 <span>🛒</span> Catálogo Clientes
             </div>
             <div onclick="solicitarAcceso('promociones-clientes/')" class="btn-access btn-promos-c">
-                <span>🎁</span> Promociones
+                <span>🎁</span> Promociones Clientes
             </div>
         </div>
     </div>
 
     <div class="section-wrapper" style="margin-bottom: 0;">
-        <h3 class="section-title title-distribuidor">👑 ZONA DISTRIBUIDOR</h3>
+        <h3 class="section-title title-distribuidor">ZONA DISTRIBUIDOR</h3>
         <div class="buttons-grid">
             <div onclick="solicitarAcceso('distribuidores/')" class="btn-access btn-dist">
-                <span>👤</span> Panel Mayorista
+                <span>👤</span> Zona Distribudior
             </div>
             <div onclick="solicitarAcceso('distribuidores-promos/')" class="btn-access btn-promos-d">
-                <span>🔥</span> Ofertas VIP
+                <span>👑</span> Promo Distribuidores
             </div>
         </div>
     </div>
@@ -207,12 +197,12 @@
 
 <div id="modal-pass" class="modal-pass">
     <div class="modal-content" id="modal-box">
-        <h2 id="modal-titulo" style="font-size: 1.5rem;">ACCESO</h2>
-        <p id="modal-desc" style="font-size: 0.9rem; color: #666; margin-top: 5px;"></p>
+        <h2 id="modal-titulo">ACCESO</h2>
+        <p id="modal-desc" style="color: #666; margin-top: 5px;"></p>
         <input type="password" id="pass-input" placeholder="****" maxlength="12">
         <div id="error-msg" style="color:var(--danger); font-size:0.8rem; margin-bottom:10px; display:none;">❌ CÓDIGO INCORRECTO</div>
         <button class="btn-confirm" onclick="validar()">VERIFICAR</button>
-        <button class="btn-cancel" onclick="cerrar()">CANCELAR</button>
+        <button style="background:none; border:none; color:#555; margin-top:20px; cursor:pointer;" onclick="cerrar()">CANCELAR</button>
     </div>
 </div>
 
@@ -264,7 +254,6 @@
         if (pass === claveCorrecta) {
             sessionStorage.setItem("acceso_concedido", "true");
             if (esRutaMayorista) sessionStorage.setItem("acceso_distribuidor", "true");
-            
             input.style.borderColor = "#25d366";
             setTimeout(() => { window.location.href = urlDestino; }, 300);
         } else {
