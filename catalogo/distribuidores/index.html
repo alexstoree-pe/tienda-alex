@@ -206,7 +206,6 @@
         .stock-status::before { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; padding: 2px 8px; border-radius: 50px; }
         
         .disponible .stock-status::before { content: "● Disponible"; color: var(--success); background: rgba(46, 204, 113, 0.1); }
-        /* CORREGIDO EL PUNTO DE ABAJO */
         .pocas .stock-status::before { content: "● Pocas Unidades"; color: var(--warning); background: rgba(244, 208, 63, 0.1); }
 
         .service-link.agotado { pointer-events: none; }
@@ -574,7 +573,6 @@
         }
     }
 
-    // EVENTO PARA ENTRAR CON TECLA ENTER
     document.getElementById('input-dist-pass').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
             validarAcceso();
@@ -587,8 +585,15 @@
         document.querySelectorAll('.service-link:not(.agotado)').forEach(tarjeta => {
             const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
             const precio = tarjeta.querySelector('.precio-prod')?.innerText;
+            const descripcion = tarjeta.querySelector('.manual-desc')?.innerText; // Captura el manual-desc
+
             if (nombre && precio) {
-                const mensaje = `Hola Alex Store, soy Distribuidor. Deseo ${nombre} (${precio})`;
+                // Mensaje detallado con nombre, precio y descripción
+                const mensaje = `Hola Alex Store, soy Distribuidor.\n\n` +
+                                `📌 *Producto:* ${nombre}\n` +
+                                `💰 *Precio:* ${precio}\n` +
+                                `📝 *Detalle:* ${descripcion || 'Sin descripción'}`;
+                                
                 tarjeta.href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
                 tarjeta.target = "_blank";
             }
