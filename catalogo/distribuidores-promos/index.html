@@ -16,7 +16,7 @@
             --glass-border: rgba(255, 255, 255, 0.08);
             --whatsapp: #25d366;
             --text-gray: #bbb;
-            --timer-color: #00d4ff; /* MODIFICADO: Color Celeste vibrante */
+            --timer-color: #00d4ff; 
             --danger-bright: #ff3333;
         }
 
@@ -30,6 +30,10 @@
         header h1 { font-size: 1.6rem; color: var(--vip); text-transform: uppercase; letter-spacing: 1px; }
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
+
+        /* BOTÓN VOLVER RESTAURADO */
+        .back-nav { margin-bottom: 25px; }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--vip); text-decoration: none; font-size: 0.8rem; border: 1px solid var(--glass-border); background: var(--card-bg); padding: 8px 18px; border-radius: 50px; backdrop-filter: blur(10px); transition: 0.3s; }
         
         .category-title { margin: 30px 0 15px; font-size: 0.8rem; font-weight: 800; color: var(--vip); display: flex; align-items: center; gap: 10px; text-transform: uppercase; letter-spacing: 1px; }
         .category-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, var(--vip), transparent); }
@@ -40,12 +44,11 @@
         .batch-badge { position: absolute; top: -10px; left: 20px; background: var(--vip); color: #000; font-size: 0.65rem; font-weight: 900; padding: 3px 12px; border-radius: 50px; z-index: 5; }
         .service-logo { width: 70px; height: 70px; border-radius: 15px; object-fit: cover; border: 1px solid var(--glass-border); }
 
-        /* --- TEMPORIZADOR PROFESIONAL --- */
         .countdown-timer { 
             display: none; 
             font-size: 0.65rem; 
             color: var(--timer-color); 
-            background: rgba(0, 212, 255, 0.1); /* Fondo celeste muy suave para armonizar */
+            background: rgba(0, 212, 255, 0.1);
             padding: 2px 8px; 
             border-radius: 6px; 
             margin-bottom: 5px; 
@@ -64,7 +67,6 @@
         .price-tag { color: #fff; font-weight: 800; font-size: 1.3rem; }
         .reno-tag { font-size: 0.6rem; color: var(--whatsapp); font-weight: 700; background: rgba(37, 211, 102, 0.1); padding: 2px 8px; border-radius: 50px; display: block; margin-top: 4px; }
 
-        /* AGOTADO - PRIORIDAD ALTA */
         .promo-link.agotado { pointer-events: none; }
         .promo-link.agotado .vip-card { opacity: 0.4; }
         .promo-link.agotado .price-tag, .promo-link.agotado .reno-tag, .promo-link.agotado .countdown-timer { display: none !important; }
@@ -87,6 +89,10 @@
 
 <div class="container">
     
+    <div class="back-nav">
+        <a href="../distribuidores/" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Panel Principal</a>
+    </div>
+
     <div class="category-title">📦 PACKS DE CUENTAS COMPLETAS</div>
 
     <a href="#" class="promo-link time" data-tiempo="2026-04-18 23:59">
@@ -139,7 +145,6 @@
 
     <div class="category-title">👤 PROMOCIONES INDIVIDUALES</div>
 
-
     <a href="#" class="promo-link agotado">
         <div class="vip-card">
             <div class="batch-badge">INDIVIDUAL</div>
@@ -177,31 +182,24 @@
 <script>
     function actualizarCronometros() {
         const tarjetasConTiempo = document.querySelectorAll('.promo-link.time:not(.agotado)');
-        
         tarjetasConTiempo.forEach(tarjeta => {
             const timerDisplay = tarjeta.querySelector('.timer');
             const fechaLimiteStr = tarjeta.getAttribute('data-tiempo');
-            
             if (!fechaLimiteStr) return;
-
             const fechaLimite = new Date(fechaLimiteStr.replace(/-/g, "/")).getTime();
             const ahora = new Date().getTime();
             const distancia = fechaLimite - ahora;
-
             if (distancia < 0) {
                 timerDisplay.innerText = "EXPIRADO";
                 return;
             }
-
             const d = Math.floor(distancia / (1000 * 60 * 60 * 24));
             const h = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const m = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((distancia % (1000 * 60)) / 1000);
-
             let formato = "";
             if (d > 0) formato += d + "d ";
             formato += h + "h " + m + "m " + s + "s";
-
             timerDisplay.innerText = formato;
         });
     }
