@@ -3,169 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex Store | Premium Portal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Alex Store | Acceso Premium</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
             --primary: #00d4ff;
             --secondary: #0055ff;
-            --dark: #020202;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --dark: #050505;
+            --glass: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.1);
             --vip: #d4af37;
+            --success: #25d366;
+            --danger: #ff4b2b;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: var(--dark);
-            height: 100vh;
+            background: radial-gradient(circle at top right, #111, #050505);
+            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            color: white;
-        }
-
-        /* Fondo Animado Sutil */
-        body::before {
-            content: "";
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: var(--secondary);
-            filter: blur(150px);
-            top: -100px;
-            right: -100px;
-            opacity: 0.2;
-            z-index: -1;
+            min-height: 100vh;
+            padding: 20px;
         }
 
         .main-container {
-            width: 95%;
-            max-width: 500px;
-            padding: 50px 30px;
+            width: 100%;
+            max-width: 750px; /* Diseño más grande y ancho */
+            padding: 60px 40px;
             background: var(--glass);
             border-radius: 40px;
             border: 1px solid var(--glass-border);
             backdrop-filter: blur(20px);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.7);
             text-align: center;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
         }
 
         .logo-section { margin-bottom: 50px; }
-        
         .logo-section h1 {
-            font-size: 2.8rem;
+            font-size: clamp(2.5rem, 10vw, 4rem); /* Texto más grande */
             font-weight: 800;
-            letter-spacing: 6px;
-            background: linear-gradient(to bottom, #fff 40%, #888);
+            letter-spacing: 8px;
+            background: linear-gradient(135deg, #fff, var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
+            text-transform: uppercase;
         }
 
-        .logo-section p {
-            font-size: 0.75rem;
-            color: var(--primary);
+        /* --- SEPARADORES DE ZONA --- */
+        .zone-title {
+            text-align: left;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #555;
+            margin: 30px 0 20px 10px;
             text-transform: uppercase;
-            letter-spacing: 5px;
-            font-weight: 400;
-            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .zone-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--glass-border), transparent);
         }
 
         .buttons-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
         }
 
         .btn-access {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--glass-border);
-            padding: 30px 15px;
-            border-radius: 25px;
+            padding: 40px 30px; /* Botones más espaciosos */
+            border-radius: 30px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
-            flex-direction: column;
-            gap: 10px;
             align-items: center;
+            gap: 25px;
             text-decoration: none;
             color: #fff;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-access i {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
+            font-size: 2.2rem;
             transition: 0.3s;
         }
 
-        .btn-access span {
-            font-size: 0.85rem;
-            font-weight: 600;
-            opacity: 0.9;
-        }
+        .btn-info { text-align: left; }
+        .btn-info strong { display: block; font-size: 1.2rem; margin-bottom: 4px; }
+        .btn-info span { font-size: 0.8rem; color: #777; font-weight: 300; }
 
-        /* Efectos Hover Individuales */
+        /* --- HOVERS --- */
         .btn-access:hover {
+            transform: translateY(-8px) scale(1.02);
             background: rgba(255,255,255,0.05);
-            transform: translateY(-5px);
-            border-color: rgba(255,255,255,0.2);
         }
 
-        .btn-clients:hover i { color: var(--primary); filter: drop-shadow(0 0 10px var(--primary)); }
-        .btn-promos-c:hover i { color: #25d366; filter: drop-shadow(0 0 10px #25d366); }
-        .btn-dist:hover i { color: var(--vip); filter: drop-shadow(0 0 10px var(--vip)); }
-        .btn-promos-d:hover i { color: #ff4b2b; filter: drop-shadow(0 0 10px #ff4b2b); }
+        .btn-clients:hover { border-color: var(--primary); box-shadow: 0 0 30px rgba(0, 212, 255, 0.15); }
+        .btn-promos-c:hover { border-color: var(--success); box-shadow: 0 0 30px rgba(37, 211, 102, 0.15); }
+        .btn-dist:hover { border-color: var(--vip); box-shadow: 0 0 30px rgba(212, 175, 55, 0.15); }
+        .btn-promos-d:hover { border-color: var(--danger); box-shadow: 0 0 30px rgba(255, 75, 43, 0.15); }
 
-        /* Modal Estilo Apple */
+        /* --- MODAL --- */
         .modal-pass {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(25px);
-            z-index: 100;
-            justify-content: center;
-            align-items: center;
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.9); backdrop-filter: blur(20px);
+            z-index: 2000; justify-content: center; align-items: center;
         }
-
         .modal-content {
-            width: 85%;
-            max-width: 350px;
-            text-align: center;
+            width: 90%; max-width: 450px; text-align: center;
+            background: #000; padding: 50px; border-radius: 40px;
+            border: 1px solid var(--glass-border);
         }
 
         #pass-input {
-            width: 100%;
-            background: none;
-            border: none;
-            border-bottom: 2px solid #333;
-            color: #fff;
-            font-size: 2rem;
-            text-align: center;
-            padding: 15px;
-            margin: 30px 0;
-            outline: none;
-            letter-spacing: 10px;
-            transition: 0.3s;
+            width: 100%; background: none; border: none;
+            border-bottom: 2px solid #222; color: #fff;
+            font-size: 2.5rem; text-align: center; padding: 20px;
+            margin: 30px 0; outline: none; letter-spacing: 12px;
         }
 
-        #pass-input:focus { border-bottom-color: var(--primary); }
-
         .btn-confirm {
-            background: #fff;
-            color: #000;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-weight: 800;
-            border: none;
-            cursor: pointer;
-            width: 100%;
+            background: #fff; color: #000; padding: 20px;
+            border-radius: 20px; font-weight: 800; border: none;
+            width: 100%; cursor: pointer; font-size: 1.1rem;
         }
     </style>
 </head>
@@ -174,45 +149,73 @@
 <div class="main-container">
     <div class="logo-section">
         <h1>ALEX STORE</h1>
-        <p>Digital Excellence</p>
+        <p style="color:var(--primary); font-size:0.85rem; letter-spacing:5px;">SERVICIOS DIGITALES PREMIUM</p>
     </div>
 
+    <div class="zone-title">Área de Clientes</div>
     <div class="buttons-grid">
         <div onclick="solicitarAcceso('clientes/')" class="btn-access btn-clients">
-            <i class="fa-solid fa-layer-group"></i>
-            <span>Catálogo</span>
+            <i class="fa-solid fa-store" style="color: var(--primary);"></i>
+            <div class="btn-info">
+                <strong>Catálogo General</strong>
+                <span>Explora todos nuestros servicios</span>
+            </div>
         </div>
         <div onclick="solicitarAcceso('promociones-clientes/')" class="btn-access btn-promos-c">
-            <i class="fa-solid fa-bolt"></i>
-            <span>Ofertas</span>
+            <i class="fa-solid fa-tags" style="color: var(--success);"></i>
+            <div class="btn-info">
+                <strong>Ofertas Flash</strong>
+                <span>Combos y descuentos exclusivos</span>
+            </div>
         </div>
+    </div>
+
+    <div class="zone-title" style="margin-top: 50px;">Área para Socios</div>
+    <div class="buttons-grid">
         <div onclick="solicitarAcceso('distribuidores/')" class="btn-access btn-dist">
-            <i class="fa-solid fa-crown"></i>
-            <span>Mayoristas</span>
+            <i class="fa-solid fa-briefcase" style="color: var(--vip);"></i>
+            <div class="btn-info">
+                <strong>Zona Mayorista</strong>
+                <span>Precios para revendedores</span>
+            </div>
         </div>
         <div onclick="solicitarAcceso('distribuidores-promos/')" class="btn-access btn-promos-d">
-            <i class="fa-solid fa-gem"></i>
-            <span>VIP Promos</span>
+            <i class="fa-solid fa-gem" style="color: var(--danger);"></i>
+            <div class="btn-info">
+                <strong>Promos VIP</strong>
+                <span>Liquidaciones para distribuidores</span>
+            </div>
         </div>
     </div>
 </div>
 
 <div id="modal-pass" class="modal-pass">
     <div class="modal-content">
-        <h2 id="modal-titulo">ACCESO</h2>
+        <h2 id="modal-titulo" style="font-weight: 800; letter-spacing: 2px;">ACCESO</h2>
         <input type="password" id="pass-input" placeholder="****" maxlength="8">
-        <button class="btn-confirm" onclick="validar()">CONTINUAR</button>
-        <p onclick="cerrar()" style="margin-top:20px; font-size:0.8rem; color:#666; cursor:pointer;">Cancelar</p>
+        <button class="btn-confirm" onclick="validar()">VERIFICAR</button>
+        <p onclick="cerrar()" style="margin-top:25px; color:#444; cursor:pointer; font-size:0.9rem;">Cerrar Ventana</p>
     </div>
 </div>
 
 <script>
-    // Tu lógica de script se mantiene igual, solo ajusta los IDs si cambiaste algo
     let urlDestino = "";
 
     function solicitarAcceso(url) {
         urlDestino = url;
-        document.getElementById('modal-pass').style.display = 'flex';
+        const modal = document.getElementById('modal-pass');
+        const titulo = document.getElementById('modal-titulo');
+        
+        if (url.includes('distribuidores')) {
+            titulo.style.color = "#d4af37";
+            titulo.innerText = "ÁREA MAYORISTA";
+        } else {
+            titulo.style.color = "#00d4ff";
+            titulo.innerText = "ÁREA CLIENTES";
+        }
+
+        modal.style.display = 'flex';
+        document.getElementById('pass-input').value = "";
         document.getElementById('pass-input').focus();
     }
 
@@ -220,13 +223,9 @@
 
     function validar() {
         const pass = document.getElementById('pass-input').value;
-        if (pass === "cliente" || pass === "dis") {
-            window.location.href = urlDestino;
-        } else {
-            alert("Código Incorrecto");
-        }
-    }
-</script>
+        // Mantenemos tus claves originales
+        const CLAVE_CLIENTES = "cliente";
+        const CLAVE_DISTRIBUIDORES = "dis";
 
-</body>
-</html>
+        let esRutaMayorista = urlDestino.includes('distribuidores');
+        let claveCorrecta = esRutaMayorista ? CLAVE_DISTRIBUIDORES : CLAVE_CLIENTES;
