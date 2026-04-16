@@ -32,7 +32,7 @@
 
         .main-container {
             width: 100%;
-            max-width: 650px;
+            max-width: 650px; 
             padding: 40px;
             background: var(--card-bg);
             border-radius: 30px;
@@ -44,7 +44,7 @@
 
         .logo-section { margin-bottom: 40px; }
         .logo-section h1 {
-            font-size: clamp(2.5rem, 10vw, 3.5rem);
+            font-size: clamp(2rem, 8vw, 3.2rem);
             font-weight: 800;
             background: linear-gradient(135deg, #fff, var(--primary));
             -webkit-background-clip: text;
@@ -54,78 +54,55 @@
             filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.3));
         }
 
-        .section-wrapper {
-            margin-bottom: 40px;
-            text-align: left;
-        }
-
-        .section-title {
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            padding-left: 15px;
-            text-transform: uppercase;
-            border-left: 4px solid;
-        }
-
-        .title-clientes { color: var(--primary); border-color: var(--primary); }
-        .title-distribuidor { color: var(--vip); border-color: var(--vip); }
-
         .buttons-grid { 
             display: grid; 
-            grid-template-columns: 1fr; 
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
             gap: 20px; 
         }
 
         .btn-access {
             position: relative;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between; /* Para separar el texto del descuento */
-            padding: 35px 30px;
+            justify-content: center;
+            gap: 12px;
+            padding: 30px 20px;
             border-radius: 20px;
-            font-weight: 700;
-            font-size: 1.2rem;
+            font-weight: 600;
+            font-size: 1rem;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid rgba(255,255,255,0.1);
             background: rgba(255,255,255,0.03);
             color: white;
             cursor: pointer;
             text-decoration: none;
-            width: 100%;
+            overflow: hidden;
         }
 
-        .btn-content { display: flex; align-items: center; gap: 20px; }
-        .btn-access span { font-size: 2rem; }
-
-        /* Etiqueta de descuento/aviso */
-        .promo-tag {
-            font-size: 0.75rem;
-            background: rgba(255,255,255,0.1);
-            padding: 5px 12px;
-            border-radius: 50px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
+        .btn-access span { font-size: 1.5rem; }
 
         .btn-access:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             background: rgba(255,255,255,0.08);
-            border-color: rgba(255,255,255,0.3);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
 
-        .btn-clients:hover { border-bottom: 4px solid var(--primary); }
-        .btn-promos-c:hover { border-bottom: 4px solid var(--success); }
-        .btn-promos-c .promo-tag { color: var(--success); border-color: var(--success); }
-        
-        .btn-dist:hover { border-bottom: 4px solid var(--vip); }
-        .btn-promos-d:hover { border-bottom: 4px solid var(--danger); }
-        .btn-promos-d .promo-tag { color: var(--danger); border-color: var(--danger); }
+        .btn-clients:hover { border-bottom: 4px solid var(--primary); box-shadow: 0 10px 20px rgba(0, 212, 255, 0.1); }
+        .btn-promos-c:hover { border-bottom: 4px solid var(--success); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.1); }
+        .btn-dist:hover { border-bottom: 4px solid var(--vip); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.1); }
+        .btn-promos-d:hover { border-bottom: 4px solid var(--danger); box-shadow: 0 10px 20px rgba(255, 75, 43, 0.1); }
 
-        /* MODAL DE SEGURIDAD */
+        .btn-access::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(transparent, rgba(255,255,255,0.05));
+            opacity: 0; transition: 0.3s;
+        }
+        .btn-access:hover::before { opacity: 1; }
+
         .modal-pass {
             display: none;
             position: fixed;
@@ -144,6 +121,7 @@
             max-width: 400px;
             border: 1px solid rgba(0, 212, 255, 0.5);
             text-align: center;
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.1);
         }
 
         #pass-input {
@@ -164,7 +142,11 @@
             background: linear-gradient(135deg, var(--secondary), var(--primary));
             color: white; width: 100%; padding: 16px; border: none;
             border-radius: 15px; font-weight: 700; cursor: pointer;
+            transition: 0.3s;
         }
+        .btn-confirm:hover { filter: brightness(1.2); transform: scale(1.02); }
+
+        .btn-cancel { background: none; border: none; color: #555; margin-top: 20px; cursor: pointer; font-size: 0.9rem; }
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
@@ -182,41 +164,30 @@
         <p style="color:#666; font-size:0.8rem; letter-spacing:4px; font-weight: 600;">PREMIUM SERVICES</p>
     </div>
 
-    <div class="section-wrapper">
-        <h3 class="section-title title-clientes">ZONA CLIENTES</h3>
-        <div class="buttons-grid">
-            <div onclick="solicitarAcceso('clientes/')" class="btn-access btn-clients">
-                <div class="btn-content"><span>🛒</span> Catálogo Clientes</div>
-            </div>
-            <div onclick="solicitarAcceso('promociones-clientes/')" class="btn-access btn-promos-c">
-                <div class="btn-content"><span>🎁</span> Promociones Clientes</div>
-                <div class="promo-tag">OFERTAS ACTIVAS</div>
-            </div>
+    <div class="buttons-grid">
+        <div onclick="solicitarAcceso('clientes/')" class="btn-access btn-clients">
+            <span>🛒</span> Catálogo Clientes
         </div>
-    </div>
-
-    <div class="section-wrapper" style="margin-bottom: 0;">
-        <h3 class="section-title title-distribuidor">ZONA DISTRIBUIDOR</h3>
-        <div class="buttons-grid">
-            <div onclick="solicitarAcceso('distribuidores/')" class="btn-access btn-dist">
-                <div class="btn-content"><span>👤</span> Zona Distribudior</div>
-            </div>
-            <div onclick="solicitarAcceso('distribuidores-promos/')" class="btn-access btn-promos-d">
-                <div class="btn-content"><span>👑</span> Promo Distribuidores</div>
-                <div class="promo-tag">PRECIOS VIP</div>
-            </div>
+        <div onclick="solicitarAcceso('promociones-clientes/')" class="btn-access btn-promos-c">
+            <span>🎁</span> Promociones Clientes
+        </div>
+        <div onclick="solicitarAcceso('distribuidores/')" class="btn-access btn-dist">
+            <span>👤</span> Zona Distribudior
+        </div>
+        <div onclick="solicitarAcceso('distribuidores-promos/')" class="btn-access btn-promos-d">
+            <span>👑</span> Promo Distribuidores
         </div>
     </div>
 </div>
 
 <div id="modal-pass" class="modal-pass">
     <div class="modal-content" id="modal-box">
-        <h2 id="modal-titulo">ACCESO</h2>
-        <p id="modal-desc" style="color: #666; margin-top: 5px;"></p>
+        <h2 id="modal-titulo" style="font-size: 1.5rem;">ACCESO</h2>
+        <p id="modal-desc" style="font-size: 0.9rem; color: #666; margin-top: 5px;"></p>
         <input type="password" id="pass-input" placeholder="****" maxlength="12">
         <div id="error-msg" style="color:var(--danger); font-size:0.8rem; margin-bottom:10px; display:none;">❌ CÓDIGO INCORRECTO</div>
         <button class="btn-confirm" onclick="validar()">VERIFICAR</button>
-        <button style="background:none; border:none; color:#555; margin-top:20px; cursor:pointer;" onclick="cerrar()">CANCELAR</button>
+        <button class="btn-cancel" onclick="cerrar()">CANCELAR</button>
     </div>
 </div>
 
