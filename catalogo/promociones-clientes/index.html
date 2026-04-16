@@ -60,7 +60,7 @@
             border-radius: 15px;
         }
 
-        /* --- TÍTULOS DE CATEGORÍA MEJORADOS --- */
+        /* --- TÍTULOS DE CATEGORÍA ULTRA LLAMATIVOS --- */
         .category-title {
             margin: 45px 0 20px; 
             font-size: 1.1rem; 
@@ -70,10 +70,11 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            background: linear-gradient(to right, #ffffff, #ffcc00, #ff6600);
+            /* Degradado de alto contraste */
+            background: linear-gradient(to right, #ffffff, var(--primary), #ff6600);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 2px 5px rgba(255,204,0,0.2));
+            filter: drop-shadow(0 0 8px rgba(255,204,0,0.4));
         }
 
         .category-title::before {
@@ -102,16 +103,9 @@
             min-height: 110px;
         }
 
-        .promo-card::after {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
-            transform: rotate(45deg); transition: 0.6s; pointer-events: none;
-        }
-        .promo-link:hover .promo-card::after { left: 100%; }
-
-        .promo-link:hover .promo-card {
+        .promo-card:hover {
             border-color: var(--primary);
-            background: rgba(255, 204, 0, 0.03);
+            background: rgba(255, 204, 0, 0.05);
             transform: scale(1.02);
         }
 
@@ -127,21 +121,23 @@
         .service-text h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
         .manual-desc { font-size: 0.8rem; color: #999; }
 
-        /* --- AJUSTE FINAL: CENTRADO TOTAL DEL BOTÓN --- */
+        /* --- CORRECCIÓN DEFINITIVA: CENTRADO DE BOTÓN --- */
         .price-container { 
             flex-shrink: 0;
             display: flex;
             align-items: center;
-            justify-content: center;
-            min-width: 110px; /* Espacio fijo para que el botón no baile */
-            text-align: center;
+            justify-content: center; /* Centra horizontalmente */
+            width: 120px; /* Ancho fijo para consistencia */
+            margin-left: 10px;
         }
 
         .price-tag { 
             color: #000; background: var(--primary);
-            padding: 8px 15px; border-radius: 12px;
+            padding: 8px 0; border-radius: 12px;
             font-weight: 800; font-size: 1.1rem;
-            width: 100%; /* Para que el fondo ocupe el espacio */
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.2);
         }
 
         /* --- PARPADEO SIN STOCK --- */
@@ -156,7 +152,7 @@
         .promo-link.agotado .service-text { opacity: 0.6; }
         .promo-link.agotado .price-tag { display: none !important; }
 
-        /* Botón Sin Stock Corregido */
+        /* Botón Sin Stock con centrado total */
         .promo-link.agotado .price-container::after {
             content: "SIN STOCK";
             font-size: 0.75rem;
@@ -167,11 +163,11 @@
             background: rgba(255, 0, 0, 0.1);
             animation: shine-red 1.5s infinite;
             display: block;
-            width: 100%; /* Centrado absoluto dentro de su caja */
+            width: 100%; 
             text-align: center;
         }
 
-        /* SEGURIDAD MODAL */
+        /* MODAL SEGURIDAD */
         .modal-pass { 
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: rgba(0,0,0,0.85); backdrop-filter: blur(15px);
@@ -180,9 +176,7 @@
         .modal-content { 
             background: #111; padding: 40px 25px; border-radius: 35px 35px 0 0; 
             width: 100%; max-width: 500px; border-top: 2px solid var(--primary); text-align: center;
-            animation: slideUp 0.4s ease;
         }
-        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
         #input-pass { 
             width: 100%; padding: 18px; margin: 25px 0; border-radius: 15px; border: 1px solid #333; 
@@ -271,7 +265,7 @@
     </a>
 </div>
 
-<a href="https://wa.me/51918600000?text=Hola%20Alex%20Store,%20quiero%20consultar%20promos" target="_blank" class="floating-btn" data-aos="zoom-in" data-aos-offset="0">
+<a href="https://wa.me/51918600000?text=Hola%20Alex%20Store,%20quiero%20consultar%20promos" target="_blank" class="floating-btn" data-aos="zoom-in">
     📲 CONSULTAR DISPONIBILIDAD
 </a>
 
