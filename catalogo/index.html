@@ -34,7 +34,6 @@
             overflow-x: hidden;
         }
 
-        /* Capa de fondo decorativa que no bloquea clics */
         body::before {
             content: "";
             position: fixed;
@@ -47,7 +46,7 @@
         .main-container {
             width: 100%;
             max-width: 850px;
-            padding: 70px 50px;
+            padding: 60px 50px;
             background: var(--glass);
             border-radius: 50px;
             border: 1px solid var(--glass-border);
@@ -58,15 +57,24 @@
             z-index: 1;
         }
 
-        .logo-section { margin-bottom: 60px; pointer-events: none; }
-        .logo-section h1 {
-            font-size: clamp(3rem, 12vw, 4.5rem); 
-            font-weight: 800;
-            letter-spacing: 10px;
-            background: linear-gradient(135deg, #fff 30%, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
+        /* --- ESTILOS DEL LOGO (IDEA 1) --- */
+        .logo-section { 
+            margin-bottom: 40px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main-logo {
+            width: 280px; /* Tamaño premium */
+            height: auto;
+            filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.3));
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .main-logo:hover {
+            transform: scale(1.05);
         }
 
         .logo-section p {
@@ -74,9 +82,11 @@
             font-size: 0.9rem;
             letter-spacing: 6px;
             font-weight: 600;
-            margin-top: 5px;
+            margin-top: 15px;
+            text-transform: uppercase;
         }
 
+        /* --- SEPARADORES --- */
         .zone-header {
             display: flex;
             align-items: center;
@@ -102,7 +112,6 @@
             gap: 30px;
         }
 
-        /* --- BOTONES PREMIUM --- */
         .btn-access {
             background: rgba(255, 255, 255, 0.02);
             border: 2px solid var(--glass-border);
@@ -117,17 +126,14 @@
             color: #fff;
             position: relative;
             z-index: 10;
-            user-select: none;
         }
 
-        /* Garantiza que el clic sea en toda la caja */
         .btn-access * { pointer-events: none; } 
 
         .btn-access:hover {
             transform: translateY(-12px) scale(1.03);
             background: rgba(255,255,255,0.06);
             border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
         .btn-access i { font-size: 2.8rem; transition: 0.4s; }
@@ -135,13 +141,12 @@
         .btn-info strong { display: block; font-size: 1.4rem; margin-bottom: 5px; }
         .btn-info span { font-size: 0.9rem; color: #888; font-weight: 300; }
 
-        /* Colores por sección */
         .btn-clients i { color: var(--primary); }
         .btn-promos-c i { color: var(--success); }
         .btn-dist i { color: var(--vip); }
         .btn-promos-d i { color: var(--danger); }
 
-        /* MODAL DE ACCESO */
+        /* MODAL */
         .modal-pass {
             display: none; position: fixed; inset: 0;
             background: rgba(0,0,0,0.95); backdrop-filter: blur(30px);
@@ -172,14 +177,19 @@
             25% { transform: translateX(-10px); }
             75% { transform: translateX(10px); }
         }
+
+        @media (max-width: 480px) {
+            .main-logo { width: 220px; }
+            .main-container { padding: 40px 20px; }
+        }
     </style>
 </head>
 <body>
 
 <div class="main-container">
     <div class="logo-section">
-        <h1>ALEX STORE</h1>
-        <p>PREMIUM DIGITAL EXPERIENCE</p>
+        <img src="logo.png" alt="Alex Store Logo" class="main-logo">
+        <p>Premium Digital Experience</p>
     </div>
 
     <div class="zone-header">
@@ -229,7 +239,7 @@
 
 <div id="modal-pass" class="modal-pass">
     <div class="modal-content" id="modal-box">
-        <h2 id="modal-titulo" style="letter-spacing: 2px;">SEGURIDAD</h2>
+        <h2 id="modal-titulo">SEGURIDAD</h2>
         <input type="password" id="pass-input" placeholder="****" maxlength="8">
         <button class="btn-confirm" onclick="validar()">DESBLOQUEAR</button>
         <p onclick="cerrar()" style="margin-top:30px; color:#555; cursor:pointer; font-size:0.9rem;">Regresar al portal</p>
@@ -271,17 +281,13 @@
         let claveCorrecta = esRutaMayorista ? CLAVE_DISTRIBUIDORES : CLAVE_CLIENTES;
 
         if (pass === claveCorrecta) {
-            // SOLUCIÓN AL DOBLE CÓDIGO:
-            // Seteamos todos los permisos posibles para que las páginas internas no vuelvan a preguntar.
+            // Seteamos permisos para evitar doble validación
             sessionStorage.setItem("acceso_concedido", "true");
-            
             if (esRutaMayorista) {
                 sessionStorage.setItem("acceso_distribuidor", "true");
             }
-
             window.location.href = urlDestino;
         } else {
-            // Efecto de error
             modalBox.style.animation = "shake 0.3s";
             input.style.borderColor = "red";
             setTimeout(() => { 
