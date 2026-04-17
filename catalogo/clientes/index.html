@@ -52,28 +52,32 @@
             letter-spacing: 2px;
         }
 
-        /* ESTILO DEL NUEVO BOTÓN REFERENCIAS */
-        .btn-referencias-header {
+        /* ESTILO DEL BOTÓN REFERENCIAS (AHORA FUERA DEL HEADER) */
+        .btn-referencias-container {
+            text-align: center;
+            margin: 20px 0 30px;
+        }
+
+        .btn-referencias-ext {
             display: inline-block;
-            margin-top: 15px;
-            padding: 10px 30px;
+            padding: 12px 35px;
             background: linear-gradient(45deg, var(--primary), var(--secondary));
             color: #000;
             text-decoration: none;
             font-weight: 800;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             border-radius: 50px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            letter-spacing: 1.5px;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
             animation: pulse-cyan 2s infinite;
             transition: 0.3s;
         }
 
         @keyframes pulse-cyan {
-            0% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 212, 255, 0.5); }
-            50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(0, 212, 255, 0.8); }
-            100% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 212, 255, 0.5); }
+            0% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 212, 255, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(0, 212, 255, 0.7); }
+            100% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 212, 255, 0.4); }
         }
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
@@ -213,12 +217,15 @@
 <header>
     <h1 data-aos="fade-down">ALEX STORE</h1>
     <p style="color: #555; font-size: 0.7rem; letter-spacing: 5px; font-weight: 700; margin-top: 5px;">PREMIUM DIGITAL CATALOG</p>
-    <a href="https://drive.google.com/file/d/1ejxo7_KIVIbm-4i7DxDKgxkOD5P2NcFj/view?usp=drive_link" target="_blank" class="btn-referencias-header" data-aos="zoom-in">
-        ⭐ REFERENCIAS
-    </a>
 </header>
 
 <div class="container">
+    <div class="btn-referencias-container" data-aos="zoom-in">
+        <a href="https://drive.google.com/file/d/1ejxo7_KIVIbm-4i7DxDKgxkOD5P2NcFj/view?usp=drive_link" target="_blank" class="btn-referencias-ext">
+            ⭐ NUESTRAS REFERENCIAS
+        </a>
+    </div>
+
     <a href="../" class="btn-inicio-top">🏠 VOLVER AL PORTAL DE INICIO</a>
 
     <div class="nav-buttons" data-aos="zoom-in">
