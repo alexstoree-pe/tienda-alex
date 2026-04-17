@@ -21,9 +21,7 @@
             --danger: #ff3333; 
         }
 
-        /* Bloqueo inicial */
         html { display: none; background-color: var(--dark); scroll-behavior: smooth; }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
@@ -55,7 +53,6 @@
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
 
-        /* --- GRILLA DE BOTONES RECUPERANDO ESTILOS --- */
         .grid-botones {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -68,7 +65,7 @@
             align-items: center;
             justify-content: center;
             padding: 15px 10px;
-            border-radius: 50px; /* Estilo píldora */
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 800;
             font-size: 0.7rem;
@@ -80,29 +77,18 @@
             text-align: center;
         }
 
-        /* 1. Volver al Inicio (Sobrio) */
-        .btn-inicio-top {
-            background: var(--glass);
-            color: #fff;
-            border: 1px solid var(--glass-border);
-        }
-
-        /* 2. Referencias (RESTAURADO ESTILO AZUL) */
+        .btn-inicio-top { background: var(--glass); color: #fff; border: 1px solid var(--glass-border); }
         .btn-referencias {
             background: linear-gradient(45deg, var(--primary), var(--secondary));
             color: #000;
             box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
             animation: pulse-mini 2s infinite;
         }
-
-        /* 3. Combos (RESTAURADO ESTILO DORADO) */
         .btn-combos-premium {
             background: linear-gradient(45deg, var(--promo-dark), var(--promo));
             color: #000;
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
-
-        /* 4. Comunidad (Degradado WhatsApp) */
         .btn-comunidad {
             background: linear-gradient(45deg, #25d366, #128c7e);
             color: #fff;
@@ -115,7 +101,6 @@
             100% { transform: scale(1); }
         }
 
-        /* --- RESTO DEL CONTENIDO (SIN CAMBIOS) --- */
         .category-title { 
             margin: 30px 0 15px; font-size: 0.9rem; font-weight: 700; 
             color: var(--primary); letter-spacing: 3px;
@@ -134,11 +119,18 @@
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.2rem; }
         .selected .service-card { border-color: var(--primary); background: rgba(0, 212, 255, 0.08); }
 
+        /* LÓGICA DE STOCK UNIVERSAL */
         .btn-consultar-neon {
+            display: none; 
             color: #ff3333; font-size: 0.85rem; font-weight: 900; 
             border: 2px solid var(--danger); padding: 8px 10px; border-radius: 10px;
             background: rgba(255, 0, 0, 0.1); animation: shine-red 1.5s infinite; text-transform: uppercase;
         }
+
+        .service-item.agotado .btn-consultar-neon { display: block; }
+        .service-item.agotado .price-tag { display: none; }
+        .service-item.agotado .service-card { opacity: 0.5; filter: grayscale(0.5); }
+
         @keyframes shine-red { 0%, 100% { text-shadow: 0 0 5px #ff0000; color: #ff3333; } 50% { text-shadow: 0 0 20px #ff0000; color: #fff; } }
 
         .floating-btn {
@@ -173,11 +165,8 @@
     
     <div class="grid-botones" data-aos="zoom-in">
         <a href="../" class="btn-universal btn-inicio-top">🏠 VOLVER AL INICIO</a>
-
         <a href="https://drive.google.com/file/d/1ejxo7_KIVIbm-4i7DxDKgxkOD5P2NcFj/view?usp=drive_link" target="_blank" class="btn-universal btn-referencias">⭐ NUESTRAS REFERENCIAS</a>
-
         <a href="../promociones-clientes/" class="btn-universal btn-combos-premium">🎁 VER COMBOS Y PROMOCIONES</a>
-
         <a href="https://chat.whatsapp.com/Dhp57nuChw89kT6pb5kggS" target="_blank" class="btn-universal btn-comunidad">👥 COMUNIDAD</a>
     </div>
 
@@ -190,7 +179,10 @@
                 <h3 class="nombre-prod">Netflix Premium</h3>
                 <span class="manual-desc">• Perfil Privado • 4K UHD.</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 16</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 16</span>
+                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
+            </div>
         </div>
     </div>
 
@@ -201,7 +193,10 @@
                 <h3 class="nombre-prod">Disney Premium</h3>
                 <span class="manual-desc">• ESPN y Star+ Incluido.</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 10</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 10</span>
+                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
+            </div>
         </div>
     </div>
 
@@ -212,7 +207,10 @@
                 <h3 class="nombre-prod">MAX Platino</h3>
                 <span class="manual-desc">• 4 Dispositivos • 4K.</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 7</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 7</span>
+                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
+            </div>
         </div>
     </div>
 
@@ -223,21 +221,24 @@
                 <h3 class="nombre-prod">Amazon Prime</h3>
                 <span class="manual-desc">• Envíos y Series exclusivas.</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 8</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 8</span>
+                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
+            </div>
         </div>
     </div>
 
     <div class="category-title" data-aos="fade-right">📺 TELEVISIÓN DIGITAL</div>
 
-    <div class="service-item" data-aos="fade-up">
+    <div class="service-item agotado" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card"> 
             <img src="../img/movistar.png" class="service-logo"> 
             <div class="service-text">
                 <h3 class="nombre-prod">Movistar TV + Liga 1</h3>
                 <span class="manual-desc">• Fútbol Peruano en Vivo.</span>
             </div>
-            <div class="price-container"><span
-class="price-tag precio-prod">S/ 20</span>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 20</span>
                 <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
@@ -250,7 +251,10 @@ class="price-tag precio-prod">S/ 20</span>
                 <h3 class="nombre-prod">Magis TV</h3>
                 <span class="manual-desc">• +1200 Canales en vivo.</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 12</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 12</span>
+                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
+            </div>
         </div>
     </div>
 
@@ -263,7 +267,10 @@ class="price-tag precio-prod">S/ 20</span>
                 <h3 class="nombre-prod">Spotify Premium</h3>
                 <span class="manual-desc">• Sin anuncios • Offline.</span>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 8</span></div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 8</span>
+                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
+            </div>
         </div>
     </div>
 </div>
@@ -330,16 +337,16 @@ class="price-tag precio-prod">S/ 20</span>
 
     function toggleCarrito(elemento) {
         if (elemento.classList.contains('agotado')) return;
+
         const nombre = elemento.querySelector('.nombre-prod').innerText;
         const precio = parseFloat(elemento.querySelector('.precio-prod').innerText.replace('S/', ''));
-        const descripcion = elemento.querySelector('.manual-desc').innerText;
         
         const idx = carrito.findIndex(i => i.nombre === nombre);
         if (idx > -1) { 
             carrito.splice(idx, 1); 
             elemento.classList.remove('selected'); 
         } else { 
-            carrito.push({nombre, precio, descripcion}); 
+            carrito.push({nombre, precio}); 
             elemento.classList.add('selected'); 
         }
         actualizarUI();
@@ -347,10 +354,8 @@ class="price-tag precio-prod">S/ 20</span>
 
     function actualizarUI() {
         const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
-        let ahorro = (carrito.length >= 2) ? (carrito.length - 1) : 0;
-        let total = subtotal - ahorro;
         document.getElementById('cart-count').innerText = carrito.length;
-        document.getElementById('cart-total').innerText = `S/ ${total}`;
+        document.getElementById('cart-total').innerText = `S/ ${subtotal}`;
         document.getElementById('whatsapp-btn').classList.toggle('hidden', carrito.length === 0);
     }
 
@@ -359,8 +364,11 @@ class="price-tag precio-prod">S/ 20</span>
     function mostrarForm() { document.getElementById('paso-1').style.display = 'none'; document.getElementById('form-datos').style.display = 'block'; }
 
     function enviarWhatsApp(tipo) {
+        let nom = document.getElementById('reg-nom').value;
         let msg = `Hola *Alex Store*, deseo contratar:\n\n`;
         carrito.forEach(i => msg += `🔹 *${i.nombre}* - S/ ${i.precio}\n`);
+        if(tipo === 'nuevo') msg += `\n👤 Cliente: ${nom}`;
+        
         window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
         cerrarModalRegistro();
     }
@@ -368,7 +376,7 @@ class="price-tag precio-prod">S/ 20</span>
     function consultarStockManual(elemento, event) {
         event.stopPropagation();
         const nombre = elemento.closest('.service-item').querySelector('.nombre-prod').innerText;
-        window.open(`https://wa.me/${numWhatsApp}?text=Hola, ¿tienes stock de ${nombre}?`, '_blank');
+        window.open(`https://wa.me/${numWhatsApp}?text=Hola Alex Store, ¿tienes stock de ${nombre}?`, '_blank');
     }
 </script>
 </body>
