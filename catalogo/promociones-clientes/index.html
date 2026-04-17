@@ -110,7 +110,7 @@
             min-height: 100px;
         }
 
-        .promo-link:hover .promo-card {
+        .promo-link:not(.agotado):hover .promo-card {
             border-color: var(--primary);
             background: rgba(255, 204, 0, 0.05);
             transform: scale(1.02);
@@ -136,16 +136,21 @@
             box-shadow: 0 4px 15px rgba(255, 204, 0, 0.2);
         }
 
-        /* ESTADO SIN STOCK */
+        /* ESTADO SIN STOCK - BLOQUEO TOTAL */
         @keyframes shine-red {
             0% { text-shadow: 0 0 5px #ff0000; color: #ff3333; border-color: #ff3333; }
             50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #ffffff; border-color: #ffffff; }
             100% { text-shadow: 0 0 5px #ff0000; color: #ff3333; border-color: #ff3333; }
         }
 
-        .promo-link.agotado { cursor: default; }
-        .promo-link.agotado .service-logo { filter: grayscale(1); opacity: 0.4; }
-        .promo-link.agotado .service-text { opacity: 0.6; }
+        .promo-link.agotado { 
+            cursor: not-allowed; 
+            pointer-events: none; /* Esto bloquea el clic completamente */
+            filter: grayscale(0.8);
+        }
+        
+        .promo-link.agotado .service-logo { opacity: 0.3; }
+        .promo-link.agotado .service-text { opacity: 0.4; }
         .promo-link.agotado .price-tag { display: none !important; }
 
         .promo-link.agotado .price-container::after {
@@ -373,17 +378,8 @@
         const telefono = "51918600000";
         document.querySelectorAll('.promo-link').forEach(tarjeta => {
             
-            // LÓGICA DE BLOQUEO:
-            if (tarjeta.classList.contains('agotado')) {
-                // Si está AGOTADO: Bloqueamos el flujo de pedido y enviamos mensaje de consulta de stock
-                tarjeta.onclick = (e) => {
-                    e.preventDefault();
-                    const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
-                    const mensajeAgotado = `Hola *Alex Store*, ¿volverás a tener stock de: *${nombre}*? Actualmente figura como agotado en las ofertas.`;
-                    window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensajeAgotado)}`, '_blank');
-                };
-            } else {
-                // Si HAY STOCK: Generamos el enlace de pedido normal
+            // Si la tarjeta NO tiene la clase agotado, le asignamos el enlace
+            if (!tarjeta.classList.contains('agotado')) {
                 const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
                 const precio = tarjeta.querySelector('.precio-prod')?.innerText;
                 const descripcion = tarjeta.querySelector('.manual-desc')?.innerText;
@@ -392,6 +388,12 @@
                 
                 tarjeta.onclick = () => {
                     window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
+                };
+            } else {
+                // Si está agotado, nos aseguramos de que no haga absolutamente nada al hacer clic
+                tarjeta.onclick = (e) => {
+                    e.preventDefault();
+                    return false;
                 };
             }
         });
