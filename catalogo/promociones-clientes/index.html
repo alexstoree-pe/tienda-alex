@@ -372,8 +372,18 @@
     function configurarLinksWhatsApp() {
         const telefono = "51918600000";
         document.querySelectorAll('.promo-link').forEach(tarjeta => {
-            // Solo activar links si NO está agotado
-            if (!tarjeta.classList.contains('agotado')) {
+            
+            // LÓGICA DE BLOQUEO:
+            if (tarjeta.classList.contains('agotado')) {
+                // Si está AGOTADO: Bloqueamos el flujo de pedido y enviamos mensaje de consulta de stock
+                tarjeta.onclick = (e) => {
+                    e.preventDefault();
+                    const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
+                    const mensajeAgotado = `Hola *Alex Store*, ¿volverás a tener stock de: *${nombre}*? Actualmente figura como agotado en las ofertas.`;
+                    window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensajeAgotado)}`, '_blank');
+                };
+            } else {
+                // Si HAY STOCK: Generamos el enlace de pedido normal
                 const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
                 const precio = tarjeta.querySelector('.precio-prod')?.innerText;
                 const descripcion = tarjeta.querySelector('.manual-desc')?.innerText;
@@ -382,13 +392,6 @@
                 
                 tarjeta.onclick = () => {
                     window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
-                };
-            } else {
-                // Para productos agotados, opcionalmente consultar stock
-                tarjeta.onclick = () => {
-                    const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
-                    const mensajeAgotado = `Hola *Alex Store*, ¿volverás a tener stock de: *${nombre}*? Actualmente figura como agotado.`;
-                    window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensajeAgotado)}`, '_blank');
                 };
             }
         });
