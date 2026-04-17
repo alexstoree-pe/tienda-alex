@@ -116,7 +116,22 @@
         .service-text { flex-grow: 1; } 
         .service-text h3 { font-size: 1.05rem; font-weight: 600; color: #fff; }
         .manual-desc { font-size: 0.75rem; color: #777; }
-        .price-tag { color: var(--primary); font-weight: 700; font-size: 1.2rem; }
+        
+        /* --- CORRECCIÓN PRECIO JUNTO --- */
+        .price-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            min-width: 85px; /* Asegura espacio para que el precio no se aplaste */
+            text-align: right;
+        }
+        .price-tag { 
+            color: var(--primary); 
+            font-weight: 700; 
+            font-size: 1.25rem; 
+            white-space: nowrap; /* Evita que S/ y el número se separen */
+        }
         .selected .service-card { border-color: var(--primary); background: rgba(0, 212, 255, 0.08); }
 
         .btn-consultar-neon {
@@ -431,6 +446,7 @@
             </div>
         </div>
     </div>
+</div>
 
 <a href="javascript:void(0)" id="whatsapp-btn" class="floating-btn hidden" onclick="abrirModalRegistro()">
     <div class="cart-row">
@@ -521,21 +537,13 @@
         const numBaratos = carrito.filter(item => item.precio < 10).length;
         const totalItems = carrito.length;
 
-        // CASO 1: TODAS son Premium (10 a más)
         if (numPremium === totalItems) {
-            // 2 soles por las primeras dos + 2 soles por cada una extra
-            return 2 + (totalItems - 2) * 2; // Ejemplo: 3 items -> 2 + 2 = 4 soles
+            return 2 + (totalItems - 2) * 2;
         } 
-        
-        // CASO 2: TODAS son Baratas (menores a 10)
         else if (numBaratos === totalItems) {
-            // 1 sol por las primeras dos + 1 sol por cada una extra
-            return 1 + (totalItems - 2) * 1; // Ejemplo: 3 items -> 1 + 1 = 2 soles
+            return 1 + (totalItems - 2) * 1;
         } 
-        
-        // CASO 3: COMBINADAS (siempre que haya al menos una de 10 a más)
         else if (numPremium > 0) {
-            // 1 sol por cada plataforma seleccionada
             return totalItems * 1;
         }
 
@@ -595,7 +603,7 @@
             msg += `📞 Celular: ${cel}\n`;
             if(per.trim() !== "") msg += `👤 Perfil: ${per}`;
         } else {
-            msg += `\n✅ *SOY CLIENTE ANTIGUO*`;
+            msg += `\n✅ *YA SOY CLIENTE*`;
         }
         
         window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
