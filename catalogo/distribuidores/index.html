@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Distribución | Alex Store</title>
     
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
         /* BLOQUEO DE SEGURIDAD */
         html { display: none; background-color: #0a0a0a; } 
@@ -84,7 +86,6 @@
             border-bottom-left-radius: 50px; 
             border-bottom-right-radius: 50px;
             margin-bottom: 30px;
-            animation: fadeInUp 0.8s ease;
         }
         header h1 { 
             font-size: 2.2rem; 
@@ -109,8 +110,6 @@
             padding: 10px 20px; 
             max-width: 650px; 
             margin: auto;
-            animation: fadeInUp 1s ease backwards;
-            animation-delay: 0.2s;
         }
 
         .btn-inicio-top {
@@ -242,18 +241,18 @@
 </head>
 <body>
 
-<header>
+<header data-aos="fade-down">
     <h1>SOLO DISTRIBUIDORES 🚀</h1>
     <p id="fecha-actualizacion" class="update-tag">Cargando fecha...</p>
     <p style="opacity: 0.6; font-size: 0.75rem; margin-top: 5px;">ALEX STORE • PREMIUM EXPERIENCE</p>
 </header>
 
 <div class="container">
-    <a href="../" class="btn-inicio-top"><i class="fa-solid fa-house"></i> VOLVER AL INICIO</a>
+    <a href="../" class="btn-inicio-top" data-aos="fade-up"><i class="fa-solid fa-house"></i> VOLVER AL INICIO</a>
 
-    <div class="category-title">👤 ZONA PERFILES</div>
+    <div class="category-title" data-aos="fade-right">👤 ZONA PERFILES</div>
 
-    <a href="#" class="service-link disponible">
+    <a href="#" class="service-link disponible" data-aos="fade-up">
         <div class="service-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
             <div class="service-text">
@@ -268,7 +267,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link disponible">
+    <a href="#" class="service-link disponible" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/disneys.png" class="service-logo">
             <div class="service-text">
@@ -283,7 +282,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link disponible">
+    <a href="#" class="service-link disponible" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/disneyp.png" class="service-logo">
             <div class="service-text">
@@ -298,7 +297,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link disponible">
+    <a href="#" class="service-link disponible" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/prime.png" class="service-logo">
             <div class="service-text">
@@ -313,7 +312,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link disponible">
+    <a href="#" class="service-link disponible" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/prime.png" class="service-logo">
             <div class="service-text">
@@ -328,7 +327,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link disponible">
+    <a href="#" class="service-link disponible" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/vix.png" class="service-logo">
             <div class="service-text">
@@ -343,7 +342,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link disponible">
+    <a href="#" class="service-link disponible" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/paramount.png" class="service-logo">
             <div class="service-text">
@@ -358,7 +357,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link disponible">
+    <a href="#" class="service-link disponible" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/crunchyroll.png" class="service-logo">
             <div class="service-text">
@@ -373,7 +372,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link pocas">
+    <a href="#" class="service-link pocas" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/movistar.png" class="service-logo">
             <div class="service-text">
@@ -388,7 +387,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link disponible">
+    <a href="#" class="service-link disponible" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/dgo.png" class="service-logo">
             <div class="service-text">
@@ -403,9 +402,9 @@
         </div>
     </a>
 
-    <div class="category-title">🏠 ZONA CUENTAS COMPLETAS</div>
+    <div class="category-title" data-aos="fade-right">🏠 ZONA CUENTAS COMPLETAS</div>
 
-    <a href="#" class="service-link disponible">
+    <a href="#" class="service-link disponible" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/paramount.png" class="service-logo">
             <div class="service-text">
@@ -420,7 +419,7 @@
         </div>
     </a>
     
-    <a href="#" class="service-link agotado con-renovacion">
+    <a href="#" class="service-link agotado con-renovacion" data-aos="fade-up">
         <div class="service-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
             <div class="service-text">
@@ -435,7 +434,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link disponible">
+    <a href="#" class="service-link disponible" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/disneys.png" class="service-logo">
             <div class="service-text">
@@ -450,7 +449,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link pocas con-renovacion agotado">
+    <a href="#" class="service-link pocas con-renovacion agotado" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/disneyp.png" class="service-logo">
             <div class="service-text">
@@ -465,7 +464,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link agotado">
+    <a href="#" class="service-link agotado" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/dgo.png" class="service-logo">
             <div class="service-text">
@@ -480,7 +479,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link pocas">
+    <a href="#" class="service-link pocas" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/movistar.png" class="service-logo">
             <div class="service-text">
@@ -495,7 +494,7 @@
         </div>
     </a>
 
-    <a href="#" class="service-link disponible">
+    <a href="#" class="service-link disponible" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/max.png" class="service-logo">
             <div class="service-text">
@@ -510,9 +509,9 @@
         </div>
     </a>
 
-    <div class="category-title">👤 APPS DE PAGA</div>
+    <div class="category-title" data-aos="fade-right">👤 APPS DE PAGA</div>
     
-    <a href="#" class="service-link disponible">
+    <a href="#" class="service-link disponible" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/ibo.png" class="service-logo">
             <div class="service-text">
@@ -527,7 +526,7 @@
         </div>
     </a>
     
-    <a href="#" class="service-link disponible">
+    <a href="#" class="service-link disponible" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/ibopro.png" class="service-logo">
             <div class="service-text">
@@ -557,7 +556,14 @@
     <a href="https://wa.me/51918600000?text=Hola%20Alex%20Store" class="floating-btn"><i class="fa-brands fa-whatsapp"></i> SOPORTE WHATSAPP</a>
 </div>
 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
+    // INICIALIZACIÓN DE ANIMACIONES
+    AOS.init({
+        duration: 1000,
+        once: true
+    });
+
     function actualizarFecha() {
         const fecha = new Date();
         const opciones = { day: '2-digit', month: 'long' };
@@ -585,10 +591,9 @@
         document.querySelectorAll('.service-link:not(.agotado)').forEach(tarjeta => {
             const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
             const precio = tarjeta.querySelector('.precio-prod')?.innerText;
-            const descripcion = tarjeta.querySelector('.manual-desc')?.innerText; // Captura el manual-desc
+            const descripcion = tarjeta.querySelector('.manual-desc')?.innerText; 
 
             if (nombre && precio) {
-                // Mensaje detallado con nombre, precio y descripción
                 const mensaje = `Hola Alex Store, soy Distribuidor.\n\n` +
                                 `📌 *Producto:* ${nombre}\n` +
                                 `💰 *Precio:* ${precio}\n` +
