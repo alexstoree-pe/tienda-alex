@@ -52,6 +52,30 @@
             letter-spacing: 2px;
         }
 
+        /* ESTILO DEL NUEVO BOTÓN REFERENCIAS */
+        .btn-referencias-header {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 30px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: #000;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.8rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            animation: pulse-cyan 2s infinite;
+            transition: 0.3s;
+        }
+
+        @keyframes pulse-cyan {
+            0% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 212, 255, 0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(0, 212, 255, 0.8); }
+            100% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 212, 255, 0.5); }
+        }
+
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
 
         .btn-inicio-top {
@@ -189,6 +213,9 @@
 <header>
     <h1 data-aos="fade-down">ALEX STORE</h1>
     <p style="color: #555; font-size: 0.7rem; letter-spacing: 5px; font-weight: 700; margin-top: 5px;">PREMIUM DIGITAL CATALOG</p>
+    <a href="https://drive.google.com/file/d/1ejxo7_KIVIbm-4i7DxDKgxkOD5P2NcFj/view?usp=drive_link" target="_blank" class="btn-referencias-header" data-aos="zoom-in">
+        ⭐ REFERENCIAS
+    </a>
 </header>
 
 <div class="container">
@@ -353,7 +380,7 @@
         const nombre = elemento.querySelector('.nombre-prod').innerText;
         const precioText = elemento.querySelector('.precio-prod').innerText;
         const precio = parseFloat(precioText.replace('S/', ''));
-        const descripcion = elemento.querySelector('.manual-desc').innerText; // Captura descripción
+        const descripcion = elemento.querySelector('.manual-desc').innerText; 
         
         const idx = carrito.findIndex(i => i.nombre === nombre);
         
@@ -361,7 +388,7 @@
             carrito.splice(idx, 1); 
             elemento.classList.remove('selected'); 
         } else { 
-            carrito.push({nombre, precio, descripcion}); // Guarda la descripción en el objeto
+            carrito.push({nombre, precio, descripcion}); 
             elemento.classList.add('selected'); 
         }
         actualizarUI();
@@ -400,10 +427,9 @@
         let totalFinal = subtotal - ahorro;
 
         let msg = `Hola *Alex Store*, deseo contratar:\n\n`;
-        // Aquí se añade la descripción detallada al mensaje
         carrito.forEach(i => {
             msg += `🔹 *${i.nombre}* - S/ ${i.precio}\n`;
-            msg += `   _${i.descripcion}_\n\n`;
+            msg += `    _${i.descripcion}_\n\n`;
         });
         msg += `──────────────────\n`;
         msg += `💰 *Subtotal:* S/ ${subtotal}\n`;
