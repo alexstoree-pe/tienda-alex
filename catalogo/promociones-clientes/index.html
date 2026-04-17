@@ -136,7 +136,7 @@
             box-shadow: 0 4px 15px rgba(255, 204, 0, 0.2);
         }
 
-        /* ESTADO SIN STOCK - BLOQUEO TOTAL */
+        /* ESTADO SIN STOCK - RESTABLECIMIENTO DE BRILLO */
         @keyframes shine-red {
             0% { text-shadow: 0 0 5px #ff0000; color: #ff3333; border-color: #ff3333; }
             50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #ffffff; border-color: #ffffff; }
@@ -144,13 +144,12 @@
         }
 
         .promo-link.agotado { 
-            cursor: not-allowed; 
-            pointer-events: none; /* Esto bloquea el clic completamente */
-            filter: grayscale(0.8);
+            cursor: default; 
+            pointer-events: none; /* Bloquea el enlace */
         }
         
-        .promo-link.agotado .service-logo { opacity: 0.3; }
-        .promo-link.agotado .service-text { opacity: 0.4; }
+        .promo-link.agotado .service-logo { filter: grayscale(1); opacity: 0.4; }
+        .promo-link.agotado .service-text { opacity: 0.6; }
         .promo-link.agotado .price-tag { display: none !important; }
 
         .promo-link.agotado .price-container::after {
@@ -158,9 +157,12 @@
             font-size: 0.7rem; font-weight: 900;
             border: 2px solid var(--danger-bright);
             padding: 8px 0; border-radius: 10px;
-            background: rgba(255, 0, 0, 0.1);
+            background: rgba(255, 0, 0, 0.2); /* Un poco más visible el fondo */
             animation: shine-red 1.5s infinite;
             display: block; width: 100%; text-align: center;
+            /* Aseguramos que el brillo no se pierda */
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+            pointer-events: auto;
         }
 
         /* SEGURIDAD MODAL */
@@ -377,20 +379,17 @@
     function configurarLinksWhatsApp() {
         const telefono = "51918600000";
         document.querySelectorAll('.promo-link').forEach(tarjeta => {
-            
-            // Si la tarjeta NO tiene la clase agotado, le asignamos el enlace
             if (!tarjeta.classList.contains('agotado')) {
                 const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
                 const precio = tarjeta.querySelector('.precio-prod')?.innerText;
                 const descripcion = tarjeta.querySelector('.manual-desc')?.innerText;
-                
                 const mensaje = `Hola *Alex Store*, deseo adquirir esta promoción: \n\n📌 *${nombre}*\n📝 _${descripcion}_\n💰 *Precio:* ${precio}`;
                 
                 tarjeta.onclick = () => {
                     window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
                 };
             } else {
-                // Si está agotado, nos aseguramos de que no haga absolutamente nada al hacer clic
+                // Bloqueo total de la acción
                 tarjeta.onclick = (e) => {
                     e.preventDefault();
                     return false;
