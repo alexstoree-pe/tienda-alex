@@ -69,28 +69,31 @@
             border-radius: 15px;
         }
 
+        /* CORRECCIÓN DE TÍTULOS DE CATEGORÍA - MÁXIMA NITIDEZ */
         .category-title {
             margin: 45px 0 20px; 
-            font-size: 1.1rem; 
+            font-size: 0.95rem; 
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             display: flex;
             align-items: center;
             gap: 12px;
-            background: linear-gradient(to right, #ffffff, var(--primary), #ff6600);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 12px rgba(255,204,0,0.5));
+            /* Eliminamos el degradado en el texto que causa el efecto borroso */
+            color: var(--primary); 
+            -webkit-text-fill-color: initial; 
+            background: none;
+            /* Usamos una sombra de texto sólida y suave para legibilidad */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
 
         .category-title::before {
             content: '';
-            width: 5px;
-            height: 24px;
-            background: var(--primary);
-            border-radius: 10px;
-            box-shadow: 0 0 15px var(--primary);
+            width: 4px;
+            height: 18px;
+            background: var(--secondary);
+            border-radius: 4px;
+            box-shadow: 0 0 10px var(--secondary);
         }
 
         /* TARJETAS GRID */
@@ -145,7 +148,7 @@
 
         .promo-link.agotado { 
             cursor: default; 
-            pointer-events: none; /* Bloquea el enlace */
+            pointer-events: none; 
         }
         
         .promo-link.agotado .service-logo { filter: grayscale(1); opacity: 0.4; }
@@ -157,10 +160,9 @@
             font-size: 0.7rem; font-weight: 900;
             border: 2px solid var(--danger-bright);
             padding: 8px 0; border-radius: 10px;
-            background: rgba(255, 0, 0, 0.2); /* Un poco más visible el fondo */
+            background: rgba(255, 0, 0, 0.2); 
             animation: shine-red 1.5s infinite;
             display: block; width: 100%; text-align: center;
-            /* Aseguramos que el brillo no se pierda */
             box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
             pointer-events: auto;
         }
@@ -389,7 +391,6 @@
                     window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
                 };
             } else {
-                // Bloqueo total de la acción
                 tarjeta.onclick = (e) => {
                     e.preventDefault();
                     return false;
