@@ -19,7 +19,6 @@
             --promo: #f4d03f;
             --promo-dark: #d4af37;
             --danger: #ff3333; 
-            --comunidad: #7289da; /* Color para el botón comunidad */
         }
 
         /* Bloqueo inicial */
@@ -56,10 +55,10 @@
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
 
-        /* --- GRILLA DE BOTONES REORGANIZADA --- */
+        /* --- GRILLA DE BOTONES RECUPERANDO ESTILOS --- */
         .grid-botones {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 2 columnas */
+            grid-template-columns: 1fr 1fr;
             gap: 12px;
             margin: 20px 0 30px;
         }
@@ -69,10 +68,10 @@
             align-items: center;
             justify-content: center;
             padding: 15px 10px;
-            border-radius: 18px; /* Redondeado elegante */
+            border-radius: 50px; /* Estilo píldora */
             text-decoration: none;
             font-weight: 800;
-            font-size: 0.7rem; /* Ajustado para que quepa en 2 columnas */
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: 0.3s;
@@ -81,37 +80,42 @@
             text-align: center;
         }
 
-        /* 1. Botón Volver (Estilo Sobrio) */
+        /* 1. Volver al Inicio (Sobrio) */
         .btn-inicio-top {
             background: var(--glass);
             color: #fff;
             border: 1px solid var(--glass-border);
         }
 
-        /* 2. Botón Referencias (Degradado Azul) */
+        /* 2. Referencias (RESTAURADO ESTILO AZUL) */
         .btn-referencias {
             background: linear-gradient(45deg, var(--primary), var(--secondary));
             color: #000;
-            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+            animation: pulse-mini 2s infinite;
         }
 
-        /* 3. Botón Combos (Degradado Dorado) */
+        /* 3. Combos (RESTAURADO ESTILO DORADO) */
         .btn-combos-premium {
             background: linear-gradient(45deg, var(--promo-dark), var(--promo));
             color: #000;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
 
-        /* 4. Botón Comunidad (Nuevo) */
+        /* 4. Comunidad (Degradado WhatsApp) */
         .btn-comunidad {
             background: linear-gradient(45deg, #25d366, #128c7e);
             color: #fff;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.3);
         }
 
-        .btn-universal:hover { transform: translateY(-3px); opacity: 0.9; }
+        @keyframes pulse-mini {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
 
-        /* --- RESTO DE DISEÑO (SIN BORRAR NADA) --- */
+        /* --- RESTO DEL CONTENIDO (SIN CAMBIOS) --- */
         .category-title { 
             margin: 30px 0 15px; font-size: 0.9rem; font-weight: 700; 
             color: var(--primary); letter-spacing: 3px;
@@ -128,7 +132,6 @@
         .service-text h3 { font-size: 1.05rem; font-weight: 600; color: #fff; }
         .manual-desc { font-size: 0.75rem; color: #777; }
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.2rem; }
-
         .selected .service-card { border-color: var(--primary); background: rgba(0, 212, 255, 0.08); }
 
         .btn-consultar-neon {
@@ -169,21 +172,13 @@
 <div class="container">
     
     <div class="grid-botones" data-aos="zoom-in">
-        <a href="../" class="btn-universal btn-inicio-top">
-            🏠 VOLVER AL INICIO
-        </a>
+        <a href="../" class="btn-universal btn-inicio-top">🏠 VOLVER</a>
 
-        <a href="https://drive.google.com/file/d/1ejxo7_KIVIbm-4i7DxDKgxkOD5P2NcFj/view?usp=drive_link" target="_blank" class="btn-universal btn-referencias">
-            ⭐ NUESTRAS REFERENCIAS
-        </a>
+        <a href="https://drive.google.com/file/d/1ejxo7_KIVIbm-4i7DxDKgxkOD5P2NcFj/view?usp=drive_link" target="_blank" class="btn-universal btn-referencias">⭐ REFERENCIAS</a>
 
-        <a href="../promociones-clientes/" class="btn-universal btn-combos-premium">
-            🎁 VER COMBOS Y PROMOCIONES
-        </a>
+        <a href="../promociones-clientes/" class="btn-universal btn-combos-premium">🎁 VER COMBOS</a>
 
-        <a href="https://chat.whatsapp.com/Dhp57nuChw89kT6pb5kggS" target="_blank" class="btn-universal btn-comunidad">
-            👥 COMUNIDAD
-        </a>
+        <a href="https://chat.whatsapp.com/Dhp57nuChw89kT6pb5kggS" target="_blank" class="btn-universal btn-comunidad">👥 COMUNIDAD</a>
     </div>
 
     <div class="category-title" data-aos="fade-right">🎬 STREAMING Y CINE</div>
