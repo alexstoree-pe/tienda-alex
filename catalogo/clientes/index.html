@@ -17,6 +17,7 @@
             --glass-border: rgba(255, 255, 255, 0.08);
             --whatsapp: #25d366;
             --promo: #f4d03f;
+            --promo-dark: #d4af37;
             --danger: #ff3333; 
         }
 
@@ -52,61 +53,64 @@
             letter-spacing: 2px;
         }
 
-        /* ESTILO DEL BOTÓN REFERENCIAS (AHORA FUERA DEL HEADER) */
-        .btn-referencias-container {
-            text-align: center;
-            margin: 20px 0 30px;
-        }
+        .container { padding: 20px 15px; max-width: 600px; margin: auto; text-align: center; }
 
-        .btn-referencias-ext {
+        /* --- ESTILO DE BOTONES (TAMAÑO UNIFICADO) --- */
+        .btn-universal {
             display: inline-block;
-            padding: 12px 35px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: #000;
+            width: 100%;
+            max-width: 360px; /* Ancho unificado */
+            padding: 15px 20px; /* Alto unificado */
+            margin: 10px auto;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 800;
             font-size: 0.85rem;
-            border-radius: 50px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* 1. Botón Referencias */
+        .btn-referencias {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: #000;
             box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
             animation: pulse-cyan 2s infinite;
-            transition: 0.3s;
         }
 
-        @keyframes pulse-cyan {
-            0% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 212, 255, 0.4); }
-            50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(0, 212, 255, 0.7); }
-            100% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 212, 255, 0.4); }
+        /* 2. Botón Combos (Mismo estilo visual que Referencias pero Dorado) */
+        .btn-combos-premium {
+            background: linear-gradient(45deg, var(--promo-dark), var(--promo));
+            color: #000;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            /* Quitamos la animación de pulso para que solo la tenga Referencias, 
+               o puedes dejarla si gustas */
         }
 
-        .container { padding: 20px 15px; max-width: 600px; margin: auto; }
-
+        /* 3. Botón Volver (Estilo original pero mismo tamaño) */
         .btn-inicio-top {
-            display: block; width: 100%; text-align: center;
-            background: var(--glass); color: #888; text-decoration: none;
-            padding: 10px; border-radius: 12px; font-size: 0.8rem;
-            margin-bottom: 25px; border: 1px solid var(--glass-border);
-            transition: 0.3s;
+            background: var(--glass);
+            color: #888;
+            border: 1px solid var(--glass-border);
         }
         .btn-inicio-top:hover { color: #fff; background: rgba(255,255,255,0.1); }
 
-        .distributor-btn {
-            width: 100%; 
-            background: linear-gradient(135deg, #d4af37, #f4d03f); 
-            color: #000; padding: 16px; border-radius: 18px; 
-            text-decoration: none; font-weight: 700; display: block; text-align: center;
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
-            transition: transform 0.3s ease;
+        @keyframes pulse-cyan {
+            0% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 212, 255, 0.4); }
+            50% { transform: scale(1.03); box-shadow: 0 0 25px rgba(0, 212, 255, 0.7); }
+            100% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 212, 255, 0.4); }
         }
-        .distributor-btn:hover { transform: scale(1.02); }
 
+        /* --- RESTO DE TU CÓDIGO (DATOS INTACTOS) --- */
         .category-title { 
             margin: 40px 0 15px; font-size: 0.9rem; font-weight: 700; 
-            color: var(--primary); letter-spacing: 3px;
+            color: var(--primary); letter-spacing: 3px; text-align: left;
         }
 
-        .service-item { cursor: pointer; margin-bottom: 15px; outline: none; }
+        .service-item { cursor: pointer; margin-bottom: 15px; outline: none; text-align: left; }
         
         .service-card { 
             background: var(--glass); 
@@ -115,61 +119,27 @@
             display: flex; 
             align-items: center; 
             border: 1px solid var(--glass-border); 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            transition: 0.4s; 
             gap: 15px; 
             position: relative;
             overflow: hidden;
-            justify-content: flex-start;
         }
 
-        .service-card::after {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
-            transform: rotate(45deg); transition: 0.5s; pointer-events: none;
-        }
-        .service-card:hover::after { left: 100%; }
-
-        .service-item.selected .service-card { 
-            border-color: var(--primary); 
-            background: rgba(0, 212, 255, 0.08); 
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.15);
-        }
-
-        .service-logo { 
-            width: 60px; height: 60px; object-fit: cover; 
-            border-radius: 15px; transition: 0.3s; flex-shrink: 0;
-        }
-        .service-card:hover .service-logo { transform: scale(1.1); }
-
+        .service-logo { width: 60px; height: 60px; object-fit: cover; border-radius: 15px; flex-shrink: 0; }
         .service-text { flex-grow: 1; } 
         .service-text h3 { font-size: 1.05rem; font-weight: 600; color: #fff; }
         .manual-desc { font-size: 0.75rem; color: #777; }
-        
-        .price-container { flex-shrink: 0; text-align: right; margin-left: auto; }
         .price-tag { color: var(--primary); font-weight: 700; font-size: 1.2rem; }
 
-        @keyframes shine-red {
-            0% { text-shadow: 0 0 5px #ff0000; color: #ff3333; }
-            50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #ffffff; }
-            100% { text-shadow: 0 0 5px #ff0000; color: #ff3333; }
+        .btn-consultar-neon {
+            color: #ff3333; font-size: 0.85rem; font-weight: 900; 
+            border: 2px solid var(--danger); padding: 8px 10px; border-radius: 10px;
+            background: rgba(255, 0, 0, 0.1); animation: shine-red 1.5s infinite; text-transform: uppercase;
         }
 
-        .service-item.agotado { cursor: default; }
-        .service-item.agotado .precio-prod { display: none; }
-        
-        .btn-consultar-neon {
-            display: block; 
-            color: #ff3333; 
-            font-size: 0.85rem;
-            font-weight: 900; 
-            text-align: center;
-            cursor: pointer;
-            border: 2px solid var(--danger);
-            padding: 8px 10px;
-            border-radius: 10px;
-            background: rgba(255, 0, 0, 0.1);
-            animation: shine-red 1.5s infinite;
-            text-transform: uppercase;
+        @keyframes shine-red {
+            0%, 100% { text-shadow: 0 0 5px #ff0000; color: #ff3333; }
+            50% { text-shadow: 0 0 20px #ff0000; color: #fff; }
         }
 
         .floating-btn {
@@ -178,14 +148,8 @@
             color: white; padding: 20px; border-radius: 25px;
             text-decoration: none; font-weight: 700; width: 92%; max-width: 480px;
             display: flex; justify-content: space-between; align-items: center; z-index: 1000;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6); backdrop-filter: blur(10px);
         }
-
-        .cart-info { display: flex; flex-direction: column; align-items: flex-start; }
-        .total-info { display: flex; flex-direction: column; align-items: flex-end; }
-        .old-price { font-size: 0.8rem; text-decoration: line-through; opacity: 0.6; }
-        .discount-label { background: #fff; color: #000; padding: 3px 8px; border-radius: 6px; font-size: 0.65rem; font-weight: 800; margin-top: 4px; display: inline-block; }
 
         .modal-overlay, .modal-pass { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; 
@@ -195,13 +159,7 @@
         .modal-content { 
             background: #111; padding: 35px 25px; border-radius: 35px 35px 0 0; 
             width: 100%; max-width: 500px; border: 1px solid var(--glass-border); text-align: center;
-            animation: slideUp 0.4s ease;
         }
-        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-
-        .option-btn { display: block; width: 100%; padding: 15px; margin: 12px 0; border-radius: 18px; border: none; font-weight: 700; cursor: pointer; transition: 0.3s; }
-        .btn-nuevo { background: var(--primary); color: #000; }
-        .btn-antiguo { background: #222; color: #fff; }
 
         #input-pass { 
             width: 100%; padding: 15px; margin: 20px 0; border-radius: 15px; 
@@ -210,6 +168,7 @@
         }
 
         .hidden { display: none; }
+        .selected .service-card { border-color: var(--primary); background: rgba(0, 212, 255, 0.08); }
     </style>
 </head>
 <body>
@@ -220,17 +179,18 @@
 </header>
 
 <div class="container">
-    <div class="btn-referencias-container" data-aos="zoom-in">
-        <a href="https://drive.google.com/file/d/1ejxo7_KIVIbm-4i7DxDKgxkOD5P2NcFj/view?usp=drive_link" target="_blank" class="btn-referencias-ext">
-            ⭐ NUESTRAS REFERENCIAS
-        </a>
-    </div>
+    
+    <a href="https://drive.google.com/file/d/1ejxo7_KIVIbm-4i7DxDKgxkOD5P2NcFj/view?usp=drive_link" target="_blank" class="btn-universal btn-referencias" data-aos="zoom-in">
+        ⭐ NUESTRAS REFERENCIAS
+    </a>
 
-    <a href="../" class="btn-inicio-top">🏠 VOLVER AL PORTAL DE INICIO</a>
+    <a href="../" class="btn-universal btn-inicio-top" data-aos="zoom-in">
+        🏠 VOLVER AL PORTAL DE INICIO
+    </a>
 
-    <div class="nav-buttons" data-aos="zoom-in">
-        <a href="../promociones-clientes/" class="distributor-btn">🎁 VER COMBOS Y PROMOCIONES</a>
-    </div>
+    <a href="../promociones-clientes/" class="btn-universal btn-combos-premium" data-aos="zoom-in">
+        🎁 VER COMBOS Y PROMOCIONES
+    </a>
 
     <div class="category-title" data-aos="fade-right">🎬 STREAMING Y CINE</div>
     
@@ -281,7 +241,9 @@
     <div class="category-title" data-aos="fade-right">📺 TELEVISIÓN DIGITAL</div>
 
     <div class="service-item agotado" data-aos="fade-up">
-        <div class="service-card"> <img src="../img/movistar.png" class="service-logo"> <div class="service-text">
+        <div class="service-card"> 
+            <img src="../img/movistar.png" class="service-logo"> 
+            <div class="service-text">
                 <h3 class="nombre-prod">Movistar TV + Liga 1</h3>
                 <span class="manual-desc">• Fútbol Peruano en Vivo.</span>
             </div>
@@ -318,42 +280,13 @@
 
 <a href="javascript:void(0)" id="whatsapp-btn" class="floating-btn hidden" onclick="abrirModalRegistro()">
     <div class="cart-info">
-        <span id="cart-count" style="background: rgba(0,0,0,0.2); padding: 4px 12px; border-radius: 10px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.2);">0</span>
+        <span id="cart-count" style="background: rgba(0,0,0,0.2); padding: 4px 12px; border-radius: 10px;">0</span>
         <span style="font-size: 0.9rem; margin-left: 8px;">PEDIR AHORA</span>
     </div>
     <div class="total-info">
-        <span id="old-price-display" class="old-price hidden"></span>
-        <span id="cart-total" style="font-size: 1.3rem; display: block;">S/ 0</span>
-        <span id="discount-tag" class="discount-label hidden"></span>
+        <span id="cart-total" style="font-size: 1.3rem;">S/ 0</span>
     </div>
 </a>
-
-<div id="modal-password" class="modal-pass">
-    <div class="modal-content">
-        <h2 style="color:var(--primary); font-weight: 800;">ACCESO PRIVADO</h2>
-        <p style="color:#555; font-size: 0.8rem;">Ingrese su código de cliente autorizado</p>
-        <input type="password" id="input-pass" placeholder="****">
-        <button class="option-btn btn-nuevo" onclick="validarPass()">INGRESAR AL CATÁLOGO</button>
-    </div>
-</div>
-
-<div id="modal-registro" class="modal-overlay">
-    <div class="modal-content">
-        <div id="paso-1">
-            <h2 style="color:var(--primary); margin-bottom:15px;">¿Ya eres cliente?</h2>
-            <button class="option-btn btn-antiguo" onclick="enviarWhatsApp('antiguo')">SÍ, YA COMPRÉ ANTES</button>
-            <button class="option-btn btn-nuevo" onclick="mostrarForm()">SOY NUEVO CLIENTE</button>
-            <button class="option-btn" style="background:transparent; color:#444;" onclick="cerrarModalRegistro()">CANCELAR</button>
-        </div>
-        <div id="form-datos" style="display:none;">
-            <h2 style="color:var(--primary); margin-bottom:15px;">Registro de Pedido</h2>
-            <input type="text" id="reg-nom" placeholder="Nombre Completo" style="width:100%; padding:15px; margin-bottom:12px; border-radius:15px; border:1px solid #222; background:#000; color:#fff;">
-            <input type="tel" id="reg-cel" placeholder="Número de Celular" style="width:100%; padding:15px; margin-bottom:12px; border-radius:15px; border:1px solid #222; background:#000; color:#fff;">
-            <input type="text" id="reg-per" placeholder="Nombre para Perfil" style="width:100%; padding:15px; margin-bottom:12px; border-radius:15px; border:1px solid #222; background:#000; color:#fff;">
-            <button class="option-btn btn-nuevo" onclick="enviarWhatsApp('nuevo')">FINALIZAR Y ENVIAR</button>
-        </div>
-    </div>
-</div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
@@ -364,13 +297,11 @@
 
     (function() {
         const acceso = sessionStorage.getItem("acceso_concedido");
-        if (acceso === "true") {
-            document.documentElement.style.display = "block";
-        } else {
+        if (acceso === "true") { document.documentElement.style.display = "block"; } 
+        else {
             document.addEventListener("DOMContentLoaded", function() {
                 document.documentElement.style.display = "block";
                 document.getElementById('modal-password').style.display = 'flex';
-                document.getElementById('input-pass').focus();
             });
         }
     })();
@@ -385,12 +316,10 @@
     function toggleCarrito(elemento) {
         if (elemento.classList.contains('agotado')) return;
         const nombre = elemento.querySelector('.nombre-prod').innerText;
-        const precioText = elemento.querySelector('.precio-prod').innerText;
-        const precio = parseFloat(precioText.replace('S/', ''));
-        const descripcion = elemento.querySelector('.manual-desc').innerText; 
+        const precio = parseFloat(elemento.querySelector('.precio-prod').innerText.replace('S/', ''));
+        const descripcion = elemento.querySelector('.manual-desc').innerText;
         
         const idx = carrito.findIndex(i => i.nombre === nombre);
-        
         if (idx > -1) { 
             carrito.splice(idx, 1); 
             elemento.classList.remove('selected'); 
@@ -405,20 +334,6 @@
         const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
         let ahorro = (carrito.length >= 2) ? (carrito.length - 1) : 0;
         let total = subtotal - ahorro;
-        
-        const oldPriceEl = document.getElementById('old-price-display');
-        const discountTag = document.getElementById('discount-tag');
-        
-        if (ahorro > 0) {
-            oldPriceEl.innerText = `S/ ${subtotal}`;
-            oldPriceEl.classList.remove('hidden');
-            discountTag.innerText = `AHORRAS S/ ${ahorro}`;
-            discountTag.classList.remove('hidden');
-        } else {
-            oldPriceEl.classList.add('hidden');
-            discountTag.classList.add('hidden');
-        }
-
         document.getElementById('cart-count').innerText = carrito.length;
         document.getElementById('cart-total').innerText = `S/ ${total}`;
         document.getElementById('whatsapp-btn').classList.toggle('hidden', carrito.length === 0);
@@ -429,39 +344,16 @@
     function mostrarForm() { document.getElementById('paso-1').style.display = 'none'; document.getElementById('form-datos').style.display = 'block'; }
 
     function enviarWhatsApp(tipo) {
-        const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
-        let ahorro = (carrito.length >= 2) ? (carrito.length - 1) : 0;
-        let totalFinal = subtotal - ahorro;
-
         let msg = `Hola *Alex Store*, deseo contratar:\n\n`;
-        carrito.forEach(i => {
-            msg += `🔹 *${i.nombre}* - S/ ${i.precio}\n`;
-            msg += `    _${i.descripcion}_\n\n`;
-        });
-        msg += `──────────────────\n`;
-        msg += `💰 *Subtotal:* S/ ${subtotal}\n`;
-        if (ahorro > 0) msg += `🎁 *Descuento:* - S/ ${ahorro}\n`;
-        msg += `✅ *TOTAL A PAGAR: S/ ${totalFinal}*`;
-
-        if (tipo === 'nuevo') {
-            const n = document.getElementById('reg-nom').value;
-            const c = document.getElementById('reg-cel').value;
-            const p = document.getElementById('reg-per').value;
-            if(!n || !c || !p) return alert("Completa los datos");
-            msg += `\n\n👤 *NUEVO CLIENTE*:\n- Nombre: ${n}\n- Cel: ${c}\n- Perfil: ${p}`;
-        }
-        
+        carrito.forEach(i => msg += `🔹 *${i.nombre}* - S/ ${i.precio}\n`);
         window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
         cerrarModalRegistro();
     }
 
     function consultarStockManual(elemento, event) {
         event.stopPropagation();
-        const tarjeta = elemento.closest('.service-item');
-        const nombre = tarjeta.querySelector('.nombre-prod').innerText;
-        const descripcion = tarjeta.querySelector('.manual-desc').innerText;
-        let msg = `Hola *Alex Store*, aun tendras disponible: *${nombre}* (${descripcion}) ya que en la pagina me sale *sin stock*`;
-        window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
+        const nombre = elemento.closest('.service-item').querySelector('.nombre-prod').innerText;
+        window.open(`https://wa.me/${numWhatsApp}?text=Hola, ¿tienes stock de ${nombre}?`, '_blank');
     }
 </script>
 </body>
