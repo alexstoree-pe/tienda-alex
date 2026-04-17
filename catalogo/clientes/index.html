@@ -137,9 +137,12 @@
             background: linear-gradient(135deg, #25d366, #128c7e);
             color: white; padding: 20px; border-radius: 25px;
             text-decoration: none; font-weight: 700; width: 92%; max-width: 480px;
-            display: flex; justify-content: space-between; align-items: center; z-index: 1000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000;
             box-shadow: 0 15px 40px rgba(0,0,0,0.6); backdrop-filter: blur(10px);
         }
+        .cart-row { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+        .discount-notice { font-size: 0.7rem; color: #f4d03f; font-weight: 600; margin-top: 5px; display: none; }
+
         .modal-overlay, .modal-pass { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; 
             justify-content: center; align-items: flex-end; z-index: 3000;
@@ -333,13 +336,16 @@
 </div>
 
 <a href="javascript:void(0)" id="whatsapp-btn" class="floating-btn hidden" onclick="abrirModalRegistro()">
-    <div class="cart-info">
-        <span id="cart-count" style="background: rgba(0,0,0,0.2); padding: 4px 12px; border-radius: 10px;">0</span>
-        <span style="font-size: 0.9rem; margin-left: 8px;">PEDIR AHORA</span>
+    <div class="cart-row">
+        <div class="cart-info">
+            <span id="cart-count" style="background: rgba(0,0,0,0.2); padding: 4px 12px; border-radius: 10px;">0</span>
+            <span style="font-size: 0.9rem; margin-left: 8px;">PEDIR AHORA</span>
+        </div>
+        <div class="total-info">
+            <span id="cart-total" style="font-size: 1.3rem;">S/ 0</span>
+        </div>
     </div>
-    <div class="total-info">
-        <span id="cart-total" style="font-size: 1.3rem;">S/ 0</span>
-    </div>
+    <div id="discount-label" class="discount-notice"></div>
 </a>
 
 <div id="modal-password" class="modal-pass">
@@ -411,10 +417,50 @@
         actualizarUI();
     }
 
+    function calcularDescuento() {
+        if (carrito.length < 2) return 0;
+        
+        const numPremium = carrito.filter(item => item.precio >= 10).length;
+        const numBaratos = carrito.filter(item => item.precio < 10).length;
+        const totalItems = carrito.length;
+
+        // CASO 1: TODAS son Premium (10 a más)
+        if (numPremium === totalItems) {
+            // 2 soles por las primeras dos + 2 soles por cada una extra
+            return 2 + (totalItems - 2) * 2; // Ejemplo: 3 items -> 2 + 2 = 4 soles
+        } 
+        
+        // CASO 2: TODAS son Baratas (menores a 10)
+        else if (numBaratos === totalItems) {
+            // 1 sol por las primeras dos + 1 sol por cada una extra
+            return 1 + (totalItems - 2) * 1; // Ejemplo: 3 items -> 1 + 1 = 2 soles
+        } 
+        
+        // CASO 3: COMBINADAS (siempre que haya al menos una de 10 a más)
+        else if (numPremium > 0) {
+            // 1 sol por cada plataforma seleccionada
+            return totalItems * 1;
+        }
+
+        return 0;
+    }
+
     function actualizarUI() {
         const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
+        const descuento = calcularDescuento();
+        const totalFinal = subtotal - descuento;
+
         document.getElementById('cart-count').innerText = carrito.length;
-        document.getElementById('cart-total').innerText = `S/ ${subtotal}`;
+        document.getElementById('cart-total').innerText = `S/ ${totalFinal}`;
+        
+        const label = document.getElementById('discount-label');
+        if (descuento > 0) {
+            label.innerText = `¡Descuento aplicado: -S/ ${descuento}!`;
+            label.style.display = 'block';
+        } else {
+            label.style.display = 'none';
+        }
+
         document.getElementById('whatsapp-btn').classList.toggle('hidden', carrito.length === 0);
     }
 
@@ -427,6 +473,10 @@
         let cel = document.getElementById('reg-cel').value;
         let per = document.getElementById('reg-per').value;
 
+        const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
+        const descuento = calcularDescuento();
+        const totalFinal = subtotal - descuento;
+
         let msg = `Hola *Alex Store*, deseo contratar:\n\n`;
         
         carrito.forEach(i => {
@@ -435,20 +485,20 @@
             msg += `   Precio: S/ ${i.precio}\n\n`;
         });
 
-        const total = carrito.reduce((s, i) => s + i.precio, 0);
-        msg += `💰 *TOTAL A PAGAR: S/ ${total}*\n`;
+        if(descuento > 0) {
+            msg += `💵 Subtotal: S/ ${subtotal}\n`;
+            msg += `🎁 Descuento: -S/ ${descuento}\n`;
+        }
+        msg += `💰 *TOTAL A PAGAR: S/ ${totalFinal}*\n`;
 
         if(tipo === 'nuevo') {
             msg += `\n───────────────\n`;
             msg += `📝 *DATOS DEL CLIENTE*\n`;
             msg += `👤 Nombre: ${nom}\n`;
             msg += `📞 Celular: ${cel}\n`;
-            // Solo añade la línea de perfil si el cliente escribió algo
-            if(per.trim() !== "") {
-                msg += `👤 Nombre de Perfil: ${per}`;
-            }
+            if(per.trim() !== "") msg += `👤 Perfil: ${per}`;
         } else {
-            msg += `\n✅ *Ya Soy cliente*`;
+            msg += `\n✅ *SOY CLIENTE ANTIGUO*`;
         }
         
         window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
