@@ -46,7 +46,6 @@
         header h1 { font-size: 2.2rem; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; }
         header p { font-size: 0.85rem; font-weight: 500; text-align: center; line-height: 1.3; margin-bottom: 15px; }
 
-        /* --- BUSCADOR DE PROMOS --- */
         .search-container {
             max-width: 500px;
             margin: 0 auto;
@@ -89,6 +88,7 @@
             gap: 12px;
             color: var(--primary); 
             text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
         .category-title::before {
@@ -99,9 +99,36 @@
             box-shadow: 0 0 10px var(--secondary);
         }
 
-        /* TARJETAS GRID */
-        .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 18px; outline: none; }
-        
+        /* --- NUEVAS ANIMACIONES DE BÚSQUEDA --- */
+        .promo-link { 
+            text-decoration: none; 
+            color: inherit; 
+            display: block; 
+            margin-bottom: 18px; 
+            outline: none;
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin 0.4s ease;
+            transform-origin: center;
+        }
+
+        /* Clase para ocultar suavemente */
+        .promo-hidden {
+            opacity: 0 !important;
+            transform: translateY(20px) scale(0.95) !important;
+            pointer-events: none;
+            margin-bottom: 0;
+            height: 0;
+            overflow: hidden;
+        }
+
+        /* Clase para mostrar suavemente */
+        .promo-visible {
+            opacity: 1 !important;
+            transform: translateY(0) scale(1) !important;
+            height: auto;
+        }
+
         .promo-card {
             background: var(--glass);
             border-radius: 25px;
@@ -114,13 +141,6 @@
             position: relative;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             min-height: 100px;
-        }
-
-        /* SOLUCIÓN AOS + BUSCADOR */
-        .promo-link[style*="display: block"] {
-            opacity: 1 !important;
-            transform: none !important;
-            visibility: visible !important;
         }
 
         .promo-link:not(.agotado):hover .promo-card {
@@ -374,24 +394,42 @@
         const items = document.querySelectorAll('.promo-link');
         const titulos = document.querySelectorAll('.category-title');
 
-        items.forEach(item => {
+        items.forEach((item, index) => {
             const nombre = item.querySelector('.nombre-prod').innerText.toLowerCase();
-            if (nombre.includes(busqueda)) {
-                item.style.display = 'block';
-                item.style.opacity = "1";
-                item.style.transform = "none";
+            const desc = item.querySelector('.manual-desc').innerText.toLowerCase();
+            
+            if (nombre.includes(busqueda) || desc.includes(busqueda)) {
+                // Remover clase oculta y añadir visible
+                item.classList.remove('promo-hidden');
+                item.classList.add('promo-visible');
+                
+                // Pequeño delay para que no aparezcan todos al mismo tiempo
+                item.style.transitionDelay = (index * 0.05) + "s";
+                
+                // Forzar que el display sea block para que ocupe espacio
+                setTimeout(() => { item.style.display = 'block'; }, 0);
             } else {
-                item.style.display = 'none';
+                // Añadir clase oculta
+                item.classList.add('promo-hidden');
+                item.classList.remove('promo-visible');
+                item.style.transitionDelay = "0s";
+                
+                // Esperar a que termine la animación para poner display none
+                setTimeout(() => { 
+                    if(item.classList.contains('promo-hidden')) item.style.display = 'none'; 
+                }, 400);
             }
         });
 
         titulos.forEach(titulo => {
-            titulo.style.display = (busqueda !== "") ? 'none' : 'block';
+            if (busqueda !== "") {
+                titulo.style.opacity = "0";
+                setTimeout(() => { titulo.style.display = 'none'; }, 400);
+            } else {
+                titulo.style.display = 'flex';
+                setTimeout(() => { titulo.style.opacity = "1"; }, 10);
+            }
         });
-
-        if (typeof AOS !== 'undefined') {
-            AOS.refreshHard();
-        }
     }
 
     function validarPassPromos() {
