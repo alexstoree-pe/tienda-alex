@@ -7,6 +7,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         :root {
@@ -24,12 +25,19 @@
         @keyframes shine-red { 0%, 100% { text-shadow: 0 0 8px #ff0000; color: #ff3333; border-color: #ff3333; } 50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #fff; border-color: #fff; } }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background: radial-gradient(circle at top right, #1a1a1a, #050505); color: white; padding-bottom: 120px; line-height: 1.6; }
+        body { font-family: 'Poppins', sans-serif; background: radial-gradient(circle at top right, #1a1a1a, #050505); color: white; padding-bottom: 120px; line-height: 1.6; min-height: 100vh; }
 
-        header { background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(15px); padding: 40px 20px; text-align: center; border-bottom: 2px solid var(--vip); border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; animation: fadeInUp 0.8s ease; }
+        header { background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(15px); padding: 40px 20px; text-align: center; border-bottom: 2px solid var(--vip); border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; }
         header h1 { font-size: 1.6rem; color: var(--vip); text-transform: uppercase; letter-spacing: 1px; }
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
+
+        /* --- ESTILOS BUSCADOR --- */
+        .search-box { position: sticky; top: 10px; z-index: 1000; margin-bottom: 25px; }
+        .search-input-wrapper { position: relative; width: 100%; }
+        .search-input-wrapper i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--vip); }
+        .search-input { width: 100%; padding: 12px 12px 12px 45px; border-radius: 50px; background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white; backdrop-filter: blur(10px); outline: none; transition: 0.3s; }
+        .search-input:focus { border-color: var(--vip); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
 
         .back-nav { margin-bottom: 25px; }
         .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--vip); text-decoration: none; font-size: 0.8rem; border: 1px solid var(--glass-border); background: var(--card-bg); padding: 8px 18px; border-radius: 50px; backdrop-filter: blur(10px); transition: 0.3s; }
@@ -37,25 +45,19 @@
         .category-title { margin: 30px 0 15px; font-size: 0.8rem; font-weight: 800; color: var(--vip); display: flex; align-items: center; gap: 10px; text-transform: uppercase; letter-spacing: 1px; }
         .category-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, var(--vip), transparent); }
 
-        .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 20px; animation: fadeInUp 1s ease backwards; }
-        .vip-card { background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 22px; padding: 20px; display: flex; align-items: center; border: 1px solid var(--glass-border); gap: 15px; position: relative; transition: 0.3s; }
+        .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 20px; transition: transform 0.2s; }
+        .promo-link:active { transform: scale(0.98); }
+
+        .vip-card { background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 22px; padding: 20px; display: flex; align-items: center; border: 1px solid var(--glass-border); gap: 15px; position: relative; }
         
         .batch-badge { position: absolute; top: -10px; left: 20px; background: var(--vip); color: #000; font-size: 0.65rem; font-weight: 900; padding: 3px 12px; border-radius: 50px; z-index: 5; }
+        
+        /* --- ESTILO POPULAR TAG --- */
+        .popular-tag { position: absolute; top: -10px; right: 20px; background: #ff3333; color: white; font-size: 0.6rem; font-weight: 800; padding: 3px 10px; border-radius: 50px; box-shadow: 0 0 10px rgba(255, 51, 51, 0.4); z-index: 5; animation: fadeInUp 0.5s ease; }
+
         .service-logo { width: 70px; height: 70px; border-radius: 15px; object-fit: cover; border: 1px solid var(--glass-border); }
 
-        .countdown-timer { 
-            display: none; 
-            font-size: 0.65rem; 
-            color: var(--timer-color); 
-            background: rgba(0, 212, 255, 0.1);
-            padding: 2px 8px; 
-            border-radius: 6px; 
-            margin-bottom: 5px; 
-            font-weight: 600; 
-            width: fit-content; 
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
+        .countdown-timer { display: none; font-size: 0.65rem; color: var(--timer-color); background: rgba(0, 212, 255, 0.1); padding: 2px 8px; border-radius: 6px; margin-bottom: 5px; font-weight: 600; width: fit-content; letter-spacing: 0.5px; text-transform: uppercase; }
         .promo-link.time .countdown-timer { display: flex; align-items: center; gap: 5px; }
 
         .service-text { flex-grow: 1; }
@@ -68,18 +70,15 @@
 
         .promo-link.agotado { pointer-events: none; }
         .promo-link.agotado .vip-card { opacity: 0.4; }
-        .promo-link.agotado .price-tag, .promo-link.agotado .reno-tag, .promo-link.agotado .countdown-timer { display: none !important; }
-        .promo-link.agotado .price-container::after { 
-            content: "SIN STOCK"; 
-            font-size: 0.75rem; font-weight: 900; border: 1px solid var(--danger-bright); 
-            padding: 6px 10px; border-radius: 10px; animation: shine-red 1.2s infinite; 
-            display: block; background: rgba(255, 0, 0, 0.1); 
-        }
+        .promo-link.agotado .price-tag, .promo-link.agotado .reno-tag, .promo-link.agotado .countdown-timer, .promo-link.agotado .popular-tag { display: none !important; }
+        .promo-link.agotado .price-container::after { content: "SIN STOCK"; font-size: 0.75rem; font-weight: 900; border: 1px solid var(--danger-bright); padding: 6px 10px; border-radius: 10px; animation: shine-red 1.2s infinite; display: block; background: rgba(255, 0, 0, 0.1); }
 
         .floating-btn { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--vip); color: #000; padding: 15px; border-radius: 15px; text-decoration: none; font-weight: 800; width: 90%; max-width: 400px; text-align: center; z-index: 100; box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+        
+        .no-results { display: none; text-align: center; padding: 40px; color: var(--text-gray); font-size: 0.9rem; }
     </style>
 </head>
-<body>
+<body data-aos-easing="ease" data-aos-duration="800" data-aos-delay="0">
 
 <header>
     <h1>ALEX STORE PROMOS 👑</h1>
@@ -92,85 +91,98 @@
         <a href="../distribuidores/" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Panel Principal</a>
     </div>
 
+    <div class="search-box">
+        <div class="search-input-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="buscador" class="search-input" placeholder="Buscar plataforma o servicio...">
+        </div>
+    </div>
+
     <div class="category-title">📦 PACKS DE CUENTAS COMPLETAS</div>
 
-    <a href="#" class="promo-link time" data-tiempo="2026-04-18 23:59">
-        <div class="vip-card">
-            <div class="batch-badge">PACK x10</div>
-            <img src="../img/max.png" class="service-logo">
-            <div class="service-text">
-                <div class="countdown-timer"><i class="fa-regular fa-clock"></i> Cierra en: <span class="timer">...</span></div>
-                <h3 class="nombre-prod">MAX PLATINO COMPLETA</h3>
-                <span class="manual-desc">10 Cuentas • 4K UHD • 1 Mes.</span>
+    <div id="lista-promos">
+        <a href="#" class="promo-link time popular" data-tiempo="2026-04-18 23:59" data-aos="fade-up">
+            <div class="vip-card">
+                <div class="popular-tag"><i class="fa-solid fa-fire"></i> MÁS VENDIDO</div>
+                <div class="batch-badge">PACK x10</div>
+                <img src="../img/max.png" class="service-logo">
+                <div class="service-text">
+                    <div class="countdown-timer"><i class="fa-regular fa-clock"></i> Cierra en: <span class="timer">...</span></div>
+                    <h3 class="nombre-prod">MAX PLATINO COMPLETA</h3>
+                    <span class="manual-desc">10 Cuentas • 4K UHD • 1 Mes.</span>
+                </div>
+                <div class="price-container">
+                    <span class="price-tag precio-prod">S/ 50</span> 
+                    <span class="reno-tag">Reno: S/ 9 c/u</span>
+                </div>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 50</span> 
-                <span class="reno-tag">Reno: S/ 9 c/u</span>
-            </div>
-        </div>
-    </a>
+        </a>
 
-    <a href="#" class="promo-link time" data-tiempo="2026-04-18 23:59">
-        <div class="vip-card">
-            <div class="batch-badge">PACK x10</div>
-            <img src="../img/vix.png" class="service-logo">
-            <div class="service-text">
-                <div class="countdown-timer"><i class="fa-regular fa-clock"></i> Cierra en: <span class="timer">...</span></div>
-                <h3 class="nombre-prod">VIX PREMIUM</h3>
-                <span class="manual-desc">10 Cuentas • Liga MX • 1 Mes.</span>
+        <a href="#" class="promo-link time" data-tiempo="2026-04-18 23:59" data-aos="fade-up">
+            <div class="vip-card">
+                <div class="batch-badge">PACK x10</div>
+                <img src="../img/vix.png" class="service-logo">
+                <div class="service-text">
+                    <div class="countdown-timer"><i class="fa-regular fa-clock"></i> Cierra en: <span class="timer">...</span></div>
+                    <h3 class="nombre-prod">VIX PREMIUM</h3>
+                    <span class="manual-desc">10 Cuentas • Liga MX • 1 Mes.</span>
+                </div>
+                <div class="price-container">
+                    <span class="price-tag precio-prod">S/ 30</span> 
+                    <span class="reno-tag">Reno: S/ 4.50 c/u</span>
+                </div>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 30</span> 
-                <span class="reno-tag">Reno: S/ 4.50 c/u</span>
-            </div>
-        </div>
-    </a>
+        </a>
 
-    <a href="#" class="promo-link time" data-tiempo="2026-04-18 23:59">
-        <div class="vip-card">
-            <div class="batch-badge">PACK x10</div>
-            <img src="../img/paramount.png" class="service-logo">
-            <div class="service-text">
-                <div class="countdown-timer"><i class="fa-regular fa-clock"></i> Cierra en: <span class="timer">...</span></div>
-                <h3 class="nombre-prod">PARAMOUNT</h3>
-                <span class="manual-desc">10 Cuentas • Todo el catálogo.</span>
+        <a href="#" class="promo-link time popular" data-tiempo="2026-04-18 23:59" data-aos="fade-up">
+            <div class="vip-card">
+                <div class="popular-tag"><i class="fa-solid fa-star"></i> POPULAR</div>
+                <div class="batch-badge">PACK x10</div>
+                <img src="../img/paramount.png" class="service-logo">
+                <div class="service-text">
+                    <div class="countdown-timer"><i class="fa-regular fa-clock"></i> Cierra en: <span class="timer">...</span></div>
+                    <h3 class="nombre-prod">PARAMOUNT</h3>
+                    <span class="manual-desc">10 Cuentas • Todo el catálogo.</span>
+                </div>
+                <div class="price-container">
+                    <span class="price-tag precio-prod">S/ 50</span> 
+                    <span class="reno-tag">Reno: S/ 7 c/u</span>
+                </div>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 50</span> 
-                <span class="reno-tag">Reno: S/ 7 c/u</span>
-            </div>
-        </div>
-    </a>
+        </a>
 
-    <div class="category-title">👤 PROMOCIONES INDIVIDUALES</div>
+        <div class="category-title">👤 PROMOCIONES INDIVIDUALES</div>
 
-    <a href="#" class="promo-link agotado">
-        <div class="vip-card">
-            <div class="batch-badge">INDIVIDUAL</div>
-            <img src="../img/spotify.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">SPOTIFY PREMIUM</h3>
-                <span class="manual-desc">A tu propio correo • 1 Mes.</span>
+        <a href="#" class="promo-link agotado" data-aos="fade-up">
+            <div class="vip-card">
+                <div class="batch-badge">INDIVIDUAL</div>
+                <img src="../img/spotify.png" class="service-logo">
+                <div class="service-text">
+                    <h3 class="nombre-prod">SPOTIFY PREMIUM</h3>
+                    <span class="manual-desc">A tu propio correo • 1 Mes.</span>
+                </div>
+                <div class="price-container">
+                    <span class="price-tag precio-prod">S/ 7</span> 
+                </div>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 7</span> 
-            </div>
-        </div>
-    </a>
+        </a>
 
-    <a href="#" class="promo-link agotado">
-        <div class="vip-card">
-            <div class="batch-badge">PROMO</div>
-            <img src="../img/prime.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">PRIME VIDEO</h3>
-                <span class="manual-desc">Cuenta Completa • Original.</span>
+        <a href="#" class="promo-link agotado" data-aos="fade-up">
+            <div class="vip-card">
+                <div class="batch-badge">PROMO</div>
+                <img src="../img/prime.png" class="service-logo">
+                <div class="service-text">
+                    <h3 class="nombre-prod">PRIME VIDEO</h3>
+                    <span class="manual-desc">Cuenta Completa • Original.</span>
+                </div>
+                <div class="price-container">
+                    <span class="price-tag precio-prod">S/ 10</span> 
+                </div>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 10</span> 
-            </div>
-        </div>
-    </a>
+        </a>
+    </div>
+    
+    <div id="noResults" class="no-results">No se encontraron plataformas con ese nombre.</div>
 
 </div>
 
@@ -178,7 +190,14 @@
     <i class="fa-brands fa-whatsapp"></i> PEDIR POR WHATSAPP
 </a>
 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
+    // Inicializar AOS
+    AOS.init({
+        duration: 800,
+        once: false // Permitir que la animación se repita al filtrar
+    });
+
     function actualizarCronometros() {
         const tarjetasConTiempo = document.querySelectorAll('.promo-link.time:not(.agotado)');
         tarjetasConTiempo.forEach(tarjeta => {
@@ -208,9 +227,8 @@
         tarjetas.forEach(t => {
             const nombre = t.querySelector('.nombre-prod')?.innerText;
             const precio = t.querySelector('.precio-prod')?.innerText;
-            const descripcion = t.querySelector('.manual-desc')?.innerText; // Captura el manual-desc
+            const descripcion = t.querySelector('.manual-desc')?.innerText;
             
-            // Mensaje estructurado con la descripción detallada
             const msg = `Hola Alex Store, quiero la promo:\n\n` +
                         `👑 *Promo:* ${nombre}\n` +
                         `💰 *Precio:* ${precio}\n` +
@@ -220,6 +238,39 @@
             t.target = "_blank";
         });
     }
+
+    // --- LÓGICA DEL BUSCADOR ---
+    const buscador = document.getElementById('buscador');
+    const promos = document.querySelectorAll('.promo-link');
+    const titulosCategorias = document.querySelectorAll('.category-title');
+    const noResults = document.getElementById('noResults');
+
+    buscador.addEventListener('input', () => {
+        const term = buscador.value.toLowerCase();
+        let hayResultados = false;
+
+        promos.forEach(promo => {
+            const nombre = promo.querySelector('.nombre-prod').innerText.toLowerCase();
+            const desc = promo.querySelector('.manual-desc').innerText.toLowerCase();
+            
+            if (nombre.includes(term) || desc.includes(term)) {
+                promo.style.display = "block";
+                hayResultados = true;
+            } else {
+                promo.style.display = "none";
+            }
+        });
+
+        // Ocultar títulos de categorías si se está buscando
+        titulosCategorias.forEach(titulo => {
+            titulo.style.display = term === "" ? "flex" : "none";
+        });
+
+        noResults.style.display = hayResultados ? "none" : "block";
+        
+        // CRÍTICO: Refrescar AOS para que las tarjetas filtradas aparezcan
+        AOS.refresh();
+    });
 
     window.onload = () => {
         configurarWhatsApp();
