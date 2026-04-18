@@ -51,6 +51,16 @@
             top: 0;
             z-index: 2000;
         }
+
+        /* ESTILO LOGO AÑADIDO */
+        .brand-logo {
+            width: 75px;
+            height: 75px;
+            object-fit: contain;
+            border-radius: 18px;
+            margin-bottom: 10px;
+        }
+
         header h1 { 
             font-size: 2.2rem; 
             font-weight: 800; 
@@ -58,6 +68,32 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: 2px;
+        }
+
+        /* ESTILO BARRA CONFIANZA AÑADIDO */
+        .trust-bar {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+            padding: 10px;
+            background: var(--glass);
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+        }
+        .trust-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.55rem;
+            font-weight: 600;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .trust-item i {
+            color: var(--primary);
+            font-size: 1rem;
+            margin-bottom: 4px;
         }
 
         .search-container { max-width: 600px; margin: 15px auto 0; position: relative; }
@@ -84,7 +120,6 @@
 
         .category-title { margin: 30px 0 15px; font-size: 0.9rem; font-weight: 700; color: var(--primary); letter-spacing: 3px; }
 
-        /* ESTILO PREMIUM SIMPLIFICADO */
         .premium .service-card {
             border: 1px solid #d4af37 !important;
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(0,0,0,0));
@@ -151,10 +186,16 @@
 <body>
 
 <header>
+    <img src="../img/logo.png" alt="Logo Alex Store" class="brand-logo" data-aos="zoom-in">
     <h1 data-aos="fade-down">ALEX STORE</h1>
     <p style="color: #555; font-size: 0.7rem; letter-spacing: 5px; font-weight: 700; margin-top: 5px;">PREMIUM DIGITAL CATALOG</p>
     <div class="search-container" data-aos="fade-up">
         <input type="text" id="search-input" placeholder="Buscar plataforma (Netflix, Disney...)" onkeyup="filtrarProductos()">
+        <div class="trust-bar">
+            <div class="trust-item"><i class="fas fa-headset"></i>Soporte 24/7</div>
+            <div class="trust-item"><i class="fas fa-shield-alt"></i>Garantía Real</div>
+            <div class="trust-item"><i class="fas fa-bolt"></i>Entrega Veloz</div>
+        </div>
     </div>
 </header>
 
@@ -475,6 +516,22 @@
             </div>
         </div>
     </div>
+
+    <div class="service-item premium oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="badge-oferta">MÁS SOLICITADO 🔥</div>
+        <div class="service-card">
+            <div class="check-icon">✓</div>
+            <img src="../img/youtube.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">Youtube Premium (1 mes)</h3>
+                <span class="manual-desc">• Sin anuncios • A tu correo (correo nuevo creado).</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 8</span>
+                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div id="whatsapp-btn" class="floating-btn hidden">
@@ -560,7 +617,8 @@
     function toggleCarrito(elemento) {
         if (elemento.classList.contains('agotado')) return;
         const nombre = elemento.querySelector('.nombre-prod').innerText;
-        const precio = parseFloat(elemento.querySelector('.precio-prod').innerText.replace('S/', ''));
+        const precioText = elemento.querySelector('.precio-prod').innerText.replace('S/', '').trim();
+        const precio = parseFloat(precioText);
         const idx = carrito.findIndex(i => i.nombre === nombre);
 
         if (idx > -1) { 
