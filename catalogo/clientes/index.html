@@ -13,8 +13,8 @@
             --primary: #00d4ff;
             --secondary: #0055ff;
             --dark: #050505;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
             --whatsapp: #25d366;
             --promo: #f4d03f;
             --promo-dark: #d4af37;
@@ -106,11 +106,12 @@
             color: var(--primary); letter-spacing: 3px;
         }
 
-        .service-item { cursor: pointer; margin-bottom: 15px; outline: none; }
+        .service-item { cursor: pointer; margin-bottom: 15px; outline: none; position: relative; }
         .service-card { 
             background: var(--glass); border-radius: 22px; padding: 18px; 
             display: flex; align-items: center; border: 1px solid var(--glass-border); 
             transition: 0.4s; gap: 15px; position: relative; overflow: hidden;
+            backdrop-filter: blur(10px);
         }
         .service-logo { width: 60px; height: 60px; object-fit: cover; border-radius: 15px; flex-shrink: 0; }
         .service-text { flex-grow: 1; } 
@@ -129,9 +130,18 @@
             color: var(--primary); 
             font-weight: 700; 
             font-size: 1.25rem; 
-            white-space: nowrap; 
+            white-space: nowrap;
+            display: inline-flex;
+            gap: 2px;
         }
-        .selected .service-card { border-color: var(--primary); background: rgba(0, 212, 255, 0.08); }
+        
+        /* Feedback de selección */
+        .selected .service-card { border-color: var(--primary); background: rgba(0, 212, 255, 0.12); transform: scale(1.02); }
+        .selected-check {
+            position: absolute; top: 10px; right: 10px; color: var(--primary);
+            font-size: 1rem; display: none;
+        }
+        .selected .selected-check { display: block; }
 
         .btn-consultar-neon {
             display: none; 
@@ -142,7 +152,7 @@
 
         .service-item.agotado .btn-consultar-neon { display: block; }
         .service-item.agotado .price-tag { display: none; }
-        .service-item.agotado .service-card { opacity: 0.5; filter: grayscale(0.5); }
+        .service-item.agotado .service-card { opacity: 0.5; filter: grayscale(0.5); pointer-events: none; }
 
         @keyframes shine-red { 0%, 100% { text-shadow: 0 0 5px #ff0000; color: #ff3333; } 50% { text-shadow: 0 0 20px #ff0000; color: #fff; } }
 
@@ -153,21 +163,26 @@
             text-decoration: none; font-weight: 700; width: 92%; max-width: 480px;
             display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000;
             box-shadow: 0 15px 40px rgba(0,0,0,0.6); backdrop-filter: blur(10px);
+            transition: 0.3s;
         }
+        .floating-btn:active { transform: translateX(-50%) scale(0.95); }
         .cart-row { width: 100%; display: flex; justify-content: space-between; align-items: center; }
         .discount-notice { font-size: 0.7rem; color: #f4d03f; font-weight: 600; margin-top: 5px; display: none; }
 
         .modal-overlay, .modal-pass { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; 
             justify-content: center; align-items: flex-end; z-index: 3000;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(15px);
         }
         .modal-content { 
-            background: #111; padding: 35px 25px; border-radius: 35px 35px 0 0; 
+            background: #0a0a0a; padding: 35px 25px; border-radius: 35px 35px 0 0; 
             width: 100%; max-width: 500px; border: 1px solid var(--glass-border); text-align: center;
         }
         #input-pass { width: 100%; padding: 15px; margin: 20px 0; border-radius: 15px; background: #000; border: 1px solid #333; color: var(--primary); text-align: center; font-size: 1.5rem; letter-spacing: 5px; }
         .hidden { display: none; }
+        
+        /* Estilos de inputs */
+        input:focus { outline: none; border-color: var(--primary) !important; box-shadow: 0 0 10px rgba(0, 212, 255, 0.2); }
     </style>
 </head>
 <body>
@@ -188,6 +203,7 @@
     <div class="category-title" data-aos="fade-right">🎬 STREAMING Y CINE</div>
     
     <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <span class="selected-check">✔</span>
         <div class="service-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
             <div class="service-text">
@@ -202,11 +218,12 @@
     </div>
 
     <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <span class="selected-check">✔</span>
         <div class="service-card">
             <img src="../img/disneyp.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Disney Premium</h3>
-                <span class="manual-desc">•Cliente nuevo (Activación a TV)• Todo los canales ESPN • Perfil privado.</span>
+                <span class="manual-desc">• Activación a TV • ESPN • Perfil privado.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 10</span>
@@ -214,13 +231,14 @@
             </div>
         </div>
     </div>
-    
+
     <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <span class="selected-check">✔</span>
         <div class="service-card">
             <img src="../img/disneys.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Disney Premium (Sin ESPN)</h3>
-                <span class="manual-desc">•Cliente nuevo (Activación a TV)• No contiene canales ESPN • Perfil privado.</span>
+                <span class="manual-desc">• Activación a TV • Perfil privado.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 7</span>
@@ -230,11 +248,12 @@
     </div>
     
     <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <span class="selected-check">✔</span>
         <div class="service-card">
             <img src="../img/max.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Max Standard</h3>
-                <span class="manual-desc">• 1 mes •Full HD • Perfil privado.</span>
+                <span class="manual-desc">• 1 mes • Full HD • Perfil privado.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 5</span>
@@ -244,11 +263,12 @@
     </div>
 
     <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <span class="selected-check">✔</span>
         <div class="service-card">
             <img src="../img/max.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">MAX Platino</h3>
-                <span class="manual-desc">• 1 mes • premium 4K • Perfil privado .</span>
+                <span class="manual-desc">• 1 mes • 4K UHD • Perfil privado.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 8</span>
@@ -258,11 +278,12 @@
     </div>
     
     <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <span class="selected-check">✔</span>
         <div class="service-card">
             <img src="../img/prime.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">PRIME VIDEO (TV)</h3>
-                <span class="manual-desc">• 1 mes • Perfil privado • Activacion solo a TV.</span>
+                <span class="manual-desc">• Perfil privado • Activación solo a TV.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 5</span>
@@ -272,11 +293,12 @@
     </div>
 
     <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <span class="selected-check">✔</span>
         <div class="service-card">
             <img src="../img/prime.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">PRIME VIDEO</h3>
-                <span class="manual-desc">• 1 mes • Perfil privado • se entrega correo y contraseña.</span>
+                <span class="manual-desc">• Cuenta Completa • Correo y contraseña.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 8</span>
@@ -286,11 +308,12 @@
     </div>
     
     <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <span class="selected-check">✔</span>
         <div class="service-card">
             <img src="../img/vix.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">VIX PREMIUM</h3>
-                <span class="manual-desc">• 1 mes • perfil privado • premium.</span>
+                <span class="manual-desc">• 1 mes • Perfil privado • Todo desbloqueado.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 5</span>
@@ -300,11 +323,12 @@
     </div>
     
     <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <span class="selected-check">✔</span>
         <div class="service-card">
             <img src="../img/paramount.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">PARAMOUNT</h3>
-                <span class="manual-desc">•1 mes  • plan premium • perfil privado.</span>
+                <span class="manual-desc">• 1 mes • Plan Premium • Perfil privado.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 6</span>
@@ -314,11 +338,12 @@
     </div>
 
     <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <span class="selected-check">✔</span>
         <div class="service-card">
             <img src="../img/crunchyroll.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">CRUNCHYROLL </h3>
-                <span class="manual-desc">•1 mes  • plan premium • perfil privado.</span>
+                <span class="manual-desc">• 1 mes • Sin anuncios • Perfil privado.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 5</span>
@@ -329,7 +354,8 @@
     
     <div class="category-title" data-aos="fade-right">💻 DISEÑOS Y MAS</div>
 
-    <div class="service-item " onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <span class="selected-check">✔</span>
         <div class="service-card"> 
             <img src="../img/canva.png" class="service-logo"> 
             <div class="service-text">
@@ -343,7 +369,8 @@
         </div>
     </div>
     
-    <div class="service-item " onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <span class="selected-check">✔</span>
         <div class="service-card"> 
             <img src="../img/canva.png" class="service-logo"> 
             <div class="service-text">
@@ -356,57 +383,16 @@
             </div>
         </div>
     </div>
-    
-    <div class="service-item " onclick="toggleCarrito(this)" data-aos="fade-up">
-        <div class="service-card"> 
-            <img src="../img/canva.png" class="service-logo"> 
-            <div class="service-text">
-                <h3 class="nombre-prod">CANVA PRO (6 meses) </h3>
-                <span class="manual-desc">• Plan EDU • Invitación a tu correo.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 17</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="service-item " onclick="toggleCarrito(this)" data-aos="fade-up">
-        <div class="service-card"> 
-            <img src="../img/canva.png" class="service-logo"> 
-            <div class="service-text">
-                <h3 class="nombre-prod">CANVA PRO (12 meses) </h3>
-                <span class="manual-desc">• Plan EDU • Invitación a tu correo.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 25</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
-            </div>
-        </div>
-    </div>
-    
+
     <div class="category-title" data-aos="fade-right">📺 TELEVISIÓN DIGITAL</div>
 
-    <div class="service-item " onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <span class="selected-check">✔</span>
         <div class="service-card"> 
             <img src="../img/movistar.png" class="service-logo"> 
             <div class="service-text">
                 <h3 class="nombre-prod">Movistar Play + Liga 1 Max</h3>
-                <span class="manual-desc">• Canal l1 Max • Activación a TV • Perfil privado.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 20</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
-        <div class="service-card">
-            <img src="../img/dgo.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Directv Go + l1 Max</h3>
-                <span class="manual-desc">•1 mes • Activación a TV• Todo los canales ESPN • Perfil privado.</span>
+                <span class="manual-desc">• Canal L1 Max • Activación a TV • Perfil privado.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 20</span>
@@ -416,72 +402,15 @@
     </div>
 
     <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <span class="selected-check">✔</span>
         <div class="service-card">
             <img src="../img/flujo.png" class="service-logo">
             <div class="service-text">
-                <h3 class="nombre-prod">Magis TV- Fluo TV</h3>
-                <span class="manual-desc">• 1 Perfil •+1200 Canales en vivo .</span>
+                <h3 class="nombre-prod">Magis TV - Fluo TV</h3>
+                <span class="manual-desc">• 1 Perfil • +1200 Canales en vivo.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 12</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
-        <div class="service-card">
-            <img src="../img/iptv.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">IPTV Smarters pro (1 dis)</h3>
-                <span class="manual-desc">•1 Dispositivo •6500 Canales en vivo •3000 Series •6000 Peliculas .</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 10</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
-        <div class="service-card">
-            <img src="../img/iptv.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">IPTV Smarters pro (3 dis)</h3>
-                <span class="manual-desc">•3 Dispositivos •6500 Canales en vivo •3000 Series •6000 Peliculas .</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 13</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="category-title" data-aos="fade-right">🎵 MÚSICA Y VIDEO SIN LÍMITES</div>
-
-    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
-        <div class="service-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Spotify Premium (1 mes)</h3>
-                <span class="manual-desc">• Sin anuncios • Se entrega con correo y contraseña.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 8</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
-        <div class="service-card">
-            <img src="../img/youtube.png" class="service-logo">
-            <div class="service-text">
-                <h3 class="nombre-prod">Youtube premium (1 mes)</h3>
-                <span class="manual-desc">• Sin anuncios • Activacion a tu correo (nuevo creado recién) • plan premium.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 8</span>
                 <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
@@ -505,24 +434,24 @@
     <div class="modal-content">
         <h2 style="color:var(--primary); font-weight: 800;">ACCESO PRIVADO</h2>
         <input type="password" id="input-pass" placeholder="****">
-        <button onclick="validarPass()" style="padding:15px; width:100%; border-radius:15px; background:var(--primary); font-weight:700; margin-top:10px; border:none;">INGRESAR</button>
+        <button onclick="validarPass()" style="padding:15px; width:100%; border-radius:15px; background:var(--primary); font-weight:700; margin-top:10px; border:none; cursor:pointer;">INGRESAR</button>
     </div>
 </div>
 
 <div id="modal-registro" class="modal-overlay">
     <div class="modal-content">
         <div id="paso-1">
-            <h2 style="color:var(--primary); margin-bottom:15px;">¿Ya eres/fuiste cliente?</h2>
+            <h2 style="color:var(--primary); margin-bottom:15px;">¿Ya eres cliente?</h2>
             <button class="btn-universal" style="background:#222; color:#fff; width:100%; margin-bottom:10px;" onclick="enviarWhatsApp('antiguo')">SÍ, YA COMPRÉ ANTES</button>
             <button class="btn-universal" style="background:var(--primary); color:#000; width:100%;" onclick="mostrarForm()">SOY NUEVO CLIENTE</button>
             <button class="btn-universal" style="background:transparent; color:#555; width:100%; margin-top:10px; font-size:0.6rem;" onclick="cerrarModalRegistro()">CANCELAR / VOLVER</button>
         </div>
         <div id="form-datos" style="display:none;">
-            <h2 style="color:var(--primary); margin-bottom:15px;">Registro de Pedido</h2>
+            <h2 style="color:var(--primary); margin-bottom:15px;">Tus Datos</h2>
             <input type="text" id="reg-nom" placeholder="Nombre Completo" style="width:100%; padding:15px; margin-bottom:10px; border-radius:15px; background:#000; color:#fff; border:1px solid #333;">
             <input type="tel" id="reg-cel" placeholder="Número Celular" style="width:100%; padding:15px; margin-bottom:10px; border-radius:15px; background:#000; color:#fff; border:1px solid #333;">
             <input type="text" id="reg-per" placeholder="Nombre para Perfil (Opcional)" style="width:100%; padding:15px; margin-bottom:10px; border-radius:15px; background:#000; color:#fff; border:1px solid #333;">
-            <p style="font-size: 0.65rem; color: #777; margin-bottom: 15px;">*Si la plataforma no requiere perfil, deje este campo vacío.</p>
+            <p style="font-size: 0.65rem; color: #777; margin-bottom: 15px;">*Tus datos para registrar la garantía.</p>
             <button class="btn-universal" style="background:var(--primary); color:#000; width:100%; margin-bottom:10px;" onclick="enviarWhatsApp('nuevo')">FINALIZAR Y ENVIAR</button>
             <button class="btn-universal" style="background:#222; color:#777; width:100%; border:1px solid #333;" onclick="volverPaso1()">← VOLVER</button>
         </div>
@@ -536,6 +465,7 @@
     let carrito = [];
     const numWhatsApp = "51918600000";
 
+    // Manejo de acceso
     (function() {
         const acceso = sessionStorage.getItem("acceso_concedido");
         if (acceso === "true") { document.documentElement.style.display = "block"; } 
@@ -554,6 +484,7 @@
         } else { alert("Código incorrecto"); }
     }
 
+    // Carrito y selección
     function toggleCarrito(elemento) {
         if (elemento.classList.contains('agotado')) return;
 
@@ -573,7 +504,7 @@
         actualizarUI();
     }
 
-    // MANTIENE TU LÓGICA DE DESCUENTO
+    // Tu Lógica de Descuento Intacta
     function calcularDescuento() {
         if (carrito.length < 2) return 0;
         let descuentoTotal = 0;
@@ -606,31 +537,40 @@
         document.getElementById('whatsapp-btn').classList.toggle('hidden', carrito.length === 0);
     }
 
+    // Modal
     function abrirModalRegistro() { document.getElementById('modal-registro').style.display = 'flex'; }
     function cerrarModalRegistro() { document.getElementById('modal-registro').style.display = 'none'; }
     function mostrarForm() { document.getElementById('paso-1').style.display = 'none'; document.getElementById('form-datos').style.display = 'block'; }
-    
-    // FUNCIÓN PARA VOLVER AL PASO 1 DESDE EL FORMULARIO
     function volverPaso1() { document.getElementById('form-datos').style.display = 'none'; document.getElementById('paso-1').style.display = 'block'; }
 
+    // Enviar WhatsApp con mejoras de validación y limpieza
     function enviarWhatsApp(tipo) {
         let nom = document.getElementById('reg-nom').value;
         let cel = document.getElementById('reg-cel').value;
         let per = document.getElementById('reg-per').value;
+
+        // Mejora: Validación de campos
+        if(tipo === 'nuevo' && (nom.trim() === "" || cel.trim() === "")) {
+            alert("Por favor, ingresa tu nombre y celular.");
+            return;
+        }
+
         const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
         const descuento = calcularDescuento();
         const totalFinal = subtotal - descuento;
+        
         let msg = `Hola *Alex Store*, deseo contratar:\n\n`;
         carrito.forEach(i => {
             msg += `🔹 *${i.nombre}*\n`;
-            msg += `   _${i.descripcion}_\n`;
             msg += `   Precio: S/ ${i.precio}\n\n`;
         });
+        
         if(descuento > 0) {
             msg += `💵 Subtotal: S/ ${subtotal}\n`;
             msg += `🎁 Descuento: -S/ ${descuento}\n`;
         }
         msg += `💰 *TOTAL A PAGAR: S/ ${totalFinal}*\n`;
+        
         if(tipo === 'nuevo') {
             msg += `\n───────────────\n`;
             msg += `📝 *DATOS DEL CLIENTE*\n`;
@@ -638,8 +578,16 @@
             msg += `📞 Celular: ${cel}\n`;
             if(per.trim() !== "") msg += `👤 Perfil: ${per}`;
         } else { msg += `\n✅ *YA SOY CLIENTE*`; }
+        
         window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
+        
+        // Mejora: Limpiar carrito después de enviar
         cerrarModalRegistro();
+        setTimeout(() => {
+            carrito = [];
+            document.querySelectorAll('.service-item.selected').forEach(el => el.classList.remove('selected'));
+            actualizarUI();
+        }, 1000);
     }
 
     function consultarStockManual(elemento, event) {
