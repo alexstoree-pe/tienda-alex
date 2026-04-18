@@ -469,4 +469,210 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 8</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">
+                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <img src="../img/youtube.png" class="service-logo">
+            <div class="service-text">
+                <h3 class="nombre-prod">Youtube premium (1 mes)</h3>
+                <span class="manual-desc">• Sin anuncios • Activacion a tu correo (nuevo creado recién) • plan premium.</span>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 8</span>
+                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="javascript:void(0)" id="whatsapp-btn" class="floating-btn hidden" onclick="abrirModalRegistro()">
+    <div class="cart-row">
+        <div class="cart-info">
+            <span id="cart-count" style="background: rgba(0,0,0,0.2); padding: 4px 12px; border-radius: 10px;">0</span>
+            <span style="font-size: 0.9rem; margin-left: 8px;">PEDIR AHORA</span>
+        </div>
+        <div class="total-info">
+            <span id="cart-total" style="font-size: 1.3rem;">S/ 0</span>
+        </div>
+    </div>
+    <div id="discount-label" class="discount-notice"></div>
+</a>
+
+<div id="modal-password" class="modal-pass">
+    <div class="modal-content">
+        <h2 style="color:var(--primary); font-weight: 800;">ACCESO PRIVADO</h2>
+        <input type="password" id="input-pass" placeholder="****">
+        <button onclick="validarPass()" style="padding:15px; width:100%; border-radius:15px; background:var(--primary); font-weight:700; margin-top:10px; border:none;">INGRESAR</button>
+    </div>
+</div>
+
+<div id="modal-registro" class="modal-overlay">
+    <div class="modal-content">
+        <div id="paso-1">
+            <h2 style="color:var(--primary); margin-bottom:15px;">¿Ya eres/fuiste cliente?</h2>
+            <button class="btn-universal" style="background:#222; color:#fff; width:100%; margin-bottom:10px;" onclick="enviarWhatsApp('antiguo')">SÍ, YA COMPRÉ ANTES</button>
+            <button class="btn-universal" style="background:var(--primary); color:#000; width:100%;" onclick="mostrarForm()">SOY NUEVO CLIENTE</button>
+            <button class="btn-universal" style="background:transparent; color:#555; width:100%; margin-top:10px; font-size:0.6rem;" onclick="cerrarModalRegistro()">CANCELAR / VOLVER</button>
+        </div>
+        <div id="form-datos" style="display:none;">
+            <h2 style="color:var(--primary); margin-bottom:15px;">Registro de Pedido</h2>
+            <input type="text" id="reg-nom" placeholder="Nombre Completo" style="width:100%; padding:15px; margin-bottom:10px; border-radius:15px; background:#000; color:#fff; border:1px solid #333;">
+            <input type="tel" id="reg-cel" placeholder="Número Celular" style="width:100%; padding:15px; margin-bottom:10px; border-radius:15px; background:#000; color:#fff; border:1px solid #333;">
+            <input type="text" id="reg-per" placeholder="Nombre para Perfil (Opcional)" style="width:100%; padding:15px; margin-bottom:10px; border-radius:15px; background:#000; color:#fff; border:1px solid #333;">
+            <p style="font-size: 0.65rem; color: #777; margin-bottom: 15px;">*Si la plataforma no requiere perfil, deje este campo vacío.</p>
+            <button class="btn-universal" style="background:var(--primary); color:#000; width:100%; margin-bottom:10px;" onclick="enviarWhatsApp('nuevo')">FINALIZAR Y ENVIAR</button>
+            <button class="btn-universal" style="background:#222; color:#777; width:100%; border:1px solid #333;" onclick="volverPaso1()">← VOLVER</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: true });
+    
+    let carrito = [];
+    const numWhatsApp = "51918600000";
+
+    (function() {
+        const acceso = sessionStorage.getItem("acceso_concedido");
+        if (acceso === "true") { document.documentElement.style.display = "block"; } 
+        else {
+            document.addEventListener("DOMContentLoaded", function() {
+                document.documentElement.style.display = "block";
+                document.getElementById('modal-password').style.display = 'flex';
+            });
+        }
+    })();
+
+    function validarPass() {
+        if (document.getElementById('input-pass').value === "cliente") { 
+            sessionStorage.setItem("acceso_concedido", "true"); 
+            location.reload(); 
+        } else { alert("Código incorrecto"); }
+    }
+
+    function toggleCarrito(elemento) {
+        if (elemento.classList.contains('agotado')) return;
+
+        const nombre = elemento.querySelector('.nombre-prod').innerText;
+        const precioText = elemento.querySelector('.precio-prod').innerText.replace('S/', '').trim();
+        const precio = parseFloat(precioText);
+        const descripcion = elemento.querySelector('.manual-desc').innerText;
+        
+        const idx = carrito.findIndex(i => i.nombre === nombre);
+        if (idx > -1) { 
+            carrito.splice(idx, 1); 
+            elemento.classList.remove('selected'); 
+        } else { 
+            carrito.push({nombre, precio, descripcion}); 
+            elemento.classList.add('selected'); 
+        }
+        actualizarUI();
+    }
+
+    function calcularDescuento() {
+        if (carrito.length < 2) return 0;
+        let descuentoTotal = 0;
+        const carritoOrdenado = [...carrito].sort((a, b) => b.precio - a.precio);
+        
+        for (let i = 1; i < carritoOrdenado.length; i++) {
+            const itemActual = carritoOrdenado[i];
+            const itemAnterior = carritoOrdenado[i-1];
+            
+            if (i === 1) {
+                // Lógica para el primer par (las dos más caras)
+                if (itemActual.precio >= 10 && itemAnterior.precio >= 10) { descuentoTotal += 2; } 
+                else { descuentoTotal += 1; }
+            } else {
+                // Lógica para la 3ra plataforma en adelante
+                if (itemActual.precio >= 10) { descuentoTotal += 2; } 
+                else { descuentoTotal += 1; }
+            }
+        }
+        return descuentoTotal;
+    }
+
+    function actualizarUI() {
+        const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
+        const descuento = calcularDescuento();
+        const totalFinal = subtotal - descuento;
+        document.getElementById('cart-count').innerText = carrito.length;
+        document.getElementById('cart-total').innerText = `S/ ${totalFinal}`;
+        const label = document.getElementById('discount-label');
+        if (descuento > 0) {
+            label.innerText = `¡Descuento aplicado: -S/ ${descuento}!`;
+            label.style.display = 'block';
+        } else { label.style.display = 'none'; }
+        document.getElementById('whatsapp-btn').classList.toggle('hidden', carrito.length === 0);
+    }
+
+    function abrirModalRegistro() { document.getElementById('modal-registro').style.display = 'flex'; }
+    function cerrarModalRegistro() { document.getElementById('modal-registro').style.display = 'none'; }
+    function mostrarForm() { document.getElementById('paso-1').style.display = 'none'; document.getElementById('form-datos').style.display = 'block'; }
+    function volverPaso1() { document.getElementById('form-datos').style.display = 'none'; document.getElementById('paso-1').style.display = 'block'; }
+
+    function enviarWhatsApp(tipo) {
+        let nom = document.getElementById('reg-nom').value;
+        let cel = document.getElementById('reg-cel').value;
+        let per = document.getElementById('reg-per').value;
+
+        // Validación de datos obligatorios para nuevos clientes
+        if (tipo === 'nuevo' && (nom.trim() === "" || cel.trim() === "")) {
+            alert("Por favor, ingresa tu nombre y número de celular para procesar el pedido.");
+            return;
+        }
+
+        const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
+        const descuento = calcularDescuento();
+        const totalFinal = subtotal - descuento;
+        
+        let msg = `Hola *Alex Store*, deseo contratar:\n\n`;
+        carrito.forEach(i => {
+            msg += `🔹 *${i.nombre}*\n`;
+            msg += `   _${i.descripcion}_\n`;
+            msg += `   Precio: S/ ${i.precio}\n\n`;
+        });
+        
+        if(descuento > 0) {
+            msg += `💵 Subtotal: S/ ${subtotal}\n`;
+            msg += `🎁 Descuento: -S/ ${descuento}\n`;
+        }
+        msg += `💰 *TOTAL A PAGAR: S/ ${totalFinal}*\n`;
+        
+        if(tipo === 'nuevo') {
+            msg += `\n───────────────\n`;
+            msg += `📝 *DATOS DEL CLIENTE*\n`;
+            msg += `👤 Nombre: ${nom}\n`;
+            msg += `📞 Celular: ${cel}\n`;
+            if(per.trim() !== "") msg += `👤 Perfil: ${per}`;
+        } else { 
+            msg += `\n✅ *YA SOY CLIENTE*`; 
+        }
+        
+        window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
+        cerrarModalRegistro();
+
+        // Limpieza automática del carrito después de enviar
+        setTimeout(() => {
+            carrito = [];
+            document.querySelectorAll('.service-item.selected').forEach(el => el.classList.remove('selected'));
+            actualizarUI();
+            // Reset de inputs
+            document.getElementById('reg-nom').value = "";
+            document.getElementById('reg-cel').value = "";
+            document.getElementById('reg-per').value = "";
+        }, 1000);
+    }
+
+    function consultarStockManual(elemento, event) {
+        event.stopPropagation();
+        const nombre = elemento.closest('.service-item').querySelector('.nombre-prod').innerText;
+        window.open(`https://wa.me/${numWhatsApp}?text=Hola Alex Store, ¿tienes stock de ${nombre}?`, '_blank');
+    }
+</script>
+</body>
+</html>
