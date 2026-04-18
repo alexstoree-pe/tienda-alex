@@ -48,25 +48,10 @@
         }
 
         /* --- ANIMACIONES --- */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.2); }
-            50% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
-            100% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.2); }
-        }
-        @keyframes shine-red {
-            0% { text-shadow: 0 0 8px #ff0000; color: #ff3333; border-color: #ff3333; }
-            50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #fff; border-color: #fff; }
-            100% { text-shadow: 0 0 8px #ff0000; color: #ff3333; border-color: #ff3333; }
-        }
-        @keyframes shake {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.05); }
-            75% { transform: scale(0.95); }
-        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse-glow { 0% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.2); } 50% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); } 100% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.2); } }
+        @keyframes shine-red { 0% { text-shadow: 0 0 8px #ff0000; color: #ff3333; border-color: #ff3333; } 50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #fff; border-color: #fff; } 100% { text-shadow: 0 0 8px #ff0000; color: #ff3333; border-color: #ff3333; } }
+        @keyframes shake { 0%, 100% { transform: scale(1); } 25% { transform: scale(1.05); } 75% { transform: scale(0.95); } }
         .shake { animation: shake 0.4s ease-in-out; }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -80,7 +65,6 @@
             overflow-x: hidden;
         }
 
-        /* --- HEADER --- */
         header {
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(15px);
@@ -92,219 +76,74 @@
             margin-bottom: 30px;
         }
         header h1 { 
-            font-size: 2.2rem; 
-            font-weight: 800; 
+            font-size: 2.2rem; font-weight: 800; 
             background: linear-gradient(to right, #fff, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             letter-spacing: 1px;
         }
         
-        /* BUSCADOR */
-        .search-container {
-            max-width: 500px;
-            margin: 20px auto 0;
-            position: relative;
-        }
+        .search-container { max-width: 500px; margin: 20px auto 0; position: relative; }
         .search-container input {
-            width: 100%;
-            padding: 12px 20px 12px 45px;
-            border-radius: 50px;
-            border: 1px solid var(--glass-border);
-            background: rgba(255,255,255,0.05);
-            color: white;
-            outline: none;
-            transition: 0.3s;
+            width: 100%; padding: 12px 20px 12px 45px; border-radius: 50px;
+            border: 1px solid var(--glass-border); background: rgba(255,255,255,0.05);
+            color: white; outline: none; transition: 0.3s;
         }
         .search-container i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--primary); }
-        .search-container input:focus { border-color: var(--primary); background: rgba(255,255,255,0.1); }
+        .update-tag { font-size: 0.8rem; color: var(--success); font-weight: 600; margin-top: 10px; background: rgba(46, 204, 113, 0.1); display: inline-block; padding: 4px 15px; border-radius: 50px; }
 
-        .update-tag { 
-            font-size: 0.8rem; 
-            color: var(--success); 
-            font-weight: 600; 
-            margin-top: 10px;
-            background: rgba(46, 204, 113, 0.1);
-            display: inline-block;
-            padding: 4px 15px;
-            border-radius: 50px;
-        }
+        .container { padding: 10px 20px; max-width: 650px; margin: auto; }
+        .btn-inicio-top { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; background: var(--glass-border); color: #fff; text-decoration: none; padding: 15px; border-radius: 20px; font-weight: 600; margin-bottom: 30px; border: 1px solid var(--glass-border); transition: 0.3s; backdrop-filter: blur(10px); }
 
-        .container { 
-            padding: 10px 20px; 
-            max-width: 650px; 
-            margin: auto;
-        }
+        .category-title { margin: 40px 0 15px; font-size: 0.85rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 10px; text-transform: uppercase; letter-spacing: 2px; }
+        .category-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, var(--primary), transparent); }
 
-        .btn-inicio-top {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            background: var(--glass-border);
-            color: #fff;
-            text-decoration: none;
-            padding: 15px;
-            border-radius: 20px;
-            font-weight: 600;
-            margin-bottom: 30px;
-            border: 1px solid var(--glass-border);
-            transition: 0.3s;
-            backdrop-filter: blur(10px);
-        }
-
-        .category-title {
-            margin: 40px 0 15px; 
-            font-size: 0.85rem; 
-            font-weight: 800; 
-            color: var(--primary); 
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        .category-title::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(to right, var(--primary), transparent);
-        }
-
-        /* --- MODO URGENCIA (OFERTA) --- */
         .service-link { position: relative; text-decoration: none; color: inherit; display: block; margin-bottom: 15px; transition: 0.4s; cursor: pointer; }
-        
-        /* GADGETS: OFERTA Y POPULAR */
-        .service-link.oferta::before, .service-link.popular::before {
+        .service-card { position: relative; background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 25px; padding: 18px; display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--glass-border); gap: 15px; min-height: 100px; }
+
+        .badge-manual {
             position: absolute;
             top: -10px;
-            right: 15px;
             font-size: 0.65rem;
             font-weight: 900;
             padding: 4px 12px;
             border-radius: 50px;
-            z-index: 10;
+            z-index: 20;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
         }
-        .service-link.oferta::before {
-            content: "🔥 OFERTA";
-            background: var(--danger-bright);
-            color: white;
-            box-shadow: 0 5px 10px rgba(255,0,0,0.3);
-        }
-        .service-link.popular::before {
-            content: "⭐ POPULAR";
-            background: var(--vip);
-            color: black;
-            box-shadow: 0 5px 10px rgba(212,175,55,0.4);
-        }
+        .oferta-text { left: 15px; background: var(--danger-bright); color: white; }
+        .popular-text { right: 15px; background: var(--vip); color: black; }
 
-        /* --- CHECK DE SELECCIÓN --- */
-        .check-icon {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: var(--primary);
-            color: black;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            opacity: 0;
-            transform: scale(0);
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 5;
-        }
+        .service-link.agotado .badge-manual { display: none !important; }
+
+        .check-icon { position: absolute; top: 10px; left: 10px; background: var(--primary); color: black; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; opacity: 0; transform: scale(0); transition: 0.3s; z-index: 5; }
         .service-link.selected .check-icon { opacity: 1; transform: scale(1); }
         .service-link.selected .service-card { border-color: var(--primary); background: rgba(0,212,255,0.05); }
 
-        .service-card { 
-            background: var(--card-bg); 
-            backdrop-filter: blur(10px);
-            border-radius: 25px; 
-            padding: 18px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            border: 1px solid var(--glass-border); 
-            gap: 15px; 
-            min-height: 100px;
-            position: relative;
-        }
-
-        .service-logo { 
-            width: 65px; 
-            height: 65px; 
-            object-fit: cover; 
-            border-radius: 18px; 
-            flex-shrink: 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
+        .service-logo { width: 65px; height: 65px; object-fit: cover; border-radius: 18px; flex-shrink: 0; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
         .service-text { flex-grow: 1; }
         .service-text h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
         .manual-desc { font-size: 0.75rem; color: var(--text-gray); display: block; line-height: 1.4; }
 
-        .price-container { 
-            text-align: right; 
-            margin-left: auto; 
-            min-width: 110px; 
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            justify-content: center;
-        }
-
+        .price-container { text-align: right; margin-left: auto; min-width: 110px; display: flex; flex-direction: column; align-items: flex-end; }
         .price-tag { color: var(--primary); font-weight: 800; font-size: 1.2rem; display: block; }
-        
-        .renovacion-info { 
-            display: none; 
-            font-size: 0.65rem; 
-            color: var(--renovacion-color); 
-            margin-top: 5px; 
-            font-weight: 700; 
-            background: rgba(241, 196, 15, 0.1); 
-            padding: 2px 6px; 
-            border-radius: 4px; 
-        }
+        .renovacion-info { display: none; font-size: 0.65rem; color: var(--renovacion-color); margin-top: 5px; font-weight: 700; background: rgba(241, 196, 15, 0.1); padding: 2px 6px; border-radius: 4px; }
         .service-link.con-renovacion .renovacion-info { display: inline-block; }
 
         .stock-status { display: block; margin-bottom: 5px; }
         .stock-status::before { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; padding: 2px 8px; border-radius: 50px; }
-        
         .disponible .stock-status::before { content: "● Disponible"; color: var(--success); background: rgba(46, 204, 113, 0.1); }
         .pocas .stock-status::before { content: "● Pocas Unidades"; color: var(--warning); background: rgba(244, 208, 63, 0.1); }
 
         .service-link.agotado { pointer-events: none; }
-        .service-link.agotado .service-logo, 
-        .service-link.agotado .service-text { opacity: 0.4; }
-
-        .service-link.agotado .price-tag, 
-        .service-link.agotado .renovacion-info,
-        .service-link.agotado .stock-status { 
-            display: none !important; 
-        }
-
-        .service-link.agotado .price-container::after {
-            content: "SIN STOCK"; 
-            font-size: 0.85rem; 
-            font-weight: 900;
-            border: 2px solid var(--danger-bright); 
-            padding: 6px 10px; 
-            border-radius: 12px; 
-            animation: shine-red 1.2s infinite;
-            display: block;
-            background: rgba(255, 0, 0, 0.1);
-            text-align: center;
-        }
+        .service-link.agotado .service-logo, .service-link.agotado .service-text { opacity: 0.4; }
+        .service-link.agotado .price-tag, .service-link.agotado .renovacion-info, .service-link.agotado .stock-status { display: none !important; }
+        .service-link.agotado .price-container::after { content: "SIN STOCK"; font-size: 0.85rem; font-weight: 900; border: 2px solid var(--danger-bright); padding: 6px 10px; border-radius: 12px; animation: shine-red 1.2s infinite; display: block; background: rgba(255, 0, 0, 0.1); text-align: center; }
 
         .floating-container { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 450px; display: flex; flex-direction: column; gap: 12px; z-index: 100; }
-        .floating-btn { background: var(--whatsapp); color: white; padding: 18px; border-radius: 20px; text-decoration: none; font-weight: 700; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; border: none; cursor: pointer; }
+        .floating-btn { background: var(--whatsapp); color: white; padding: 18px; border-radius: 20px; text-decoration: none; font-weight: 700; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; border: none; cursor: pointer; flex-grow: 1; }
         .btn-promo { background: var(--vip); color: #000; animation: pulse-glow 2s infinite; }
         .ahorro-tag { font-size: 0.8rem; color: var(--success); font-weight: 700; margin-bottom: 5px; display: none; text-align: center; background: rgba(46, 204, 113, 0.1); padding: 5px; border-radius: 10px; }
+        .btn-trash { background: #ff3333; color: white; width: 55px; border-radius: 20px; border: none; cursor: pointer; display: none; align-items: center; justify-content: center; font-size: 1.2rem; }
 
         .modal-pass { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); z-index: 5000; justify-content: center; align-items: center; }
         .modal-content { background: #111; padding: 40px; border-radius: 40px; width: 90%; max-width: 400px; border: 1px solid var(--primary); text-align: center; }
@@ -328,390 +167,437 @@
 
     <div class="category-title" data-aos="fade-right">👤 ZONA PERFILES</div>
 
-    <div class="service-link disponible popular" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">Netflix Perfil</h3>
-                <span class="manual-desc">Ultra HD 4K • 1 Pantalla • Renovable.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 12</span>
-                <span class="renovacion-info">🔄 Renova: S/ 12.00</span>
-            </div>
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">Netflix Perfil</h3>
+            <span class="manual-desc">Ultra HD 4K • 1 Pantalla • Renovable.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 12</span>
+            <span class="renovacion-info">🔄 Renova: S/ 12.00</span>
         </div>
     </div>
+</div>
 
-    <div class="service-link disponible" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/disneys.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">Disney standar Perfil</h3>
-                <span class="manual-desc">Sin ESPN • Calidad 4K • PIN privado.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 4</span>
-                <span class="renovacion-info">🔄 Renova: S/ 5.00</span>
-            </div>
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/disneys.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">Disney standar Perfil</h3>
+            <span class="manual-desc">Sin ESPN • Calidad 4K • PIN privado.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 4</span>
+            <span class="renovacion-info">🔄 Renova: S/ 5.00</span>
         </div>
     </div>
+</div>
 
-    <div class="service-link disponible popular" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/disneyp.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">Disney premium Perfil</h3>
-                <span class="manual-desc">Activacion a TV • Todo los canales ESPN • Calidad 4K.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 6</span>
-                <span class="renovacion-info">🔄 Renova: S/ 7.00</span>
-            </div>
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/disneyp.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">Disney premium Perfil</h3>
+            <span class="manual-desc">Activacion a TV • Todo los canales ESPN • Calidad 4K.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 6</span>
+            <span class="renovacion-info">🔄 Renova: S/ 7.00</span>
         </div>
     </div>
+</div>
 
-    <div class="service-link disponible" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/prime.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">AMAZON PRIME Perfil</h3>
-                <span class="manual-desc">1 perfil • Correo y contraseña.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 4</span>
-                <span class="renovacion-info">🔄 Renova: S/ 5.00</span>
-            </div>
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/prime.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">AMAZON PRIME Perfil</h3>
+            <span class="manual-desc">1 perfil • Correo y contraseña.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 4</span>
+            <span class="renovacion-info">🔄 Renova: S/ 5.00</span>
         </div>
     </div>
+</div>
 
-    <div class="service-link disponible" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/prime.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">AMAZON PRIME Perfil (TV)</h3>
-                <span class="manual-desc">1 perfil • Activación directa a TV.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 3</span>
-                <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
-            </div>
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/prime.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">AMAZON PRIME Perfil (TV)</h3>
+            <span class="manual-desc">1 perfil • Activación directa a TV.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 3</span>
+            <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
         </div>
     </div>
+</div>
 
-    <div class="service-link disponible" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/vix.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">VIX PREMIUM Perfil</h3>
-                <span class="manual-desc">Premium • Series y Telenovelas.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 3</span>
-                <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
-            </div>
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/vix.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">VIX PREMIUM Perfil</h3>
+            <span class="manual-desc">Premium • Series y Telenovelas.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 3</span>
+            <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
         </div>
     </div>
+</div>
 
-    <div class="service-link disponible" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/paramount.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">PARAMOUNT Perfil</h3>
-                <span class="manual-desc">Premium • Estrenos exclusivos.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 3</span>
-                <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
-            </div>
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/paramount.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">PARAMOUNT Perfil</h3>
+            <span class="manual-desc">Premium • Estrenos exclusivos.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 3</span>
+            <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
         </div>
     </div>
+</div>
 
-    <div class="service-link disponible" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/crunchyroll.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">CRUNCHYROLL Perfil</h3>
-                <span class="manual-desc">Premium • Sin anuncios.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 3</span>
-                <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
-            </div>
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/crunchyroll.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">CRUNCHYROLL Perfil</h3>
+            <span class="manual-desc">Premium • Sin anuncios.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 3</span>
+            <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
         </div>
     </div>
+</div>
 
-    <div class="service-link pocas popular" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/movistar.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">Movistar Play + Liga 1 Max Perfil</h3>
-                <span class="manual-desc">Activación TV • Incluye canales ESPN • +90 canales.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 12</span>
-                <span class="renovacion-info">🔄 Renova: S/ 15.00</span>
-            </div>
+<div class="service-link pocas popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/movistar.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">Movistar Play + Liga 1 Max Perfil</h3>
+            <span class="manual-desc">Activación TV • Incluye canales ESPN • +90 canales.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 12</span>
+            <span class="renovacion-info">🔄 Renova: S/ 15.00</span>
         </div>
     </div>
+</div>
 
-    <div class="service-link disponible" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/dgo.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">DGO + Liga 1 Max Perfil</h3>
-                <span class="manual-desc">Activación TV • Incluye ESPN.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 16</span>
-                <span class="renovacion-info">🔄 Renova: S/ 18.00</span>
-            </div>
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/dgo.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">DGO + Liga 1 Max Perfil</h3>
+            <span class="manual-desc">Activación TV • Incluye ESPN.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 16</span>
+            <span class="renovacion-info">🔄 Renova: S/ 18.00</span>
         </div>
     </div>
+</div>
 
-    <div class="category-title" data-aos="fade-right">🏠 ZONA CUENTAS COMPLETAS</div>
+<div class="category-title" data-aos="fade-right">🏠 ZONA CUENTAS COMPLETAS</div>
 
-    <div class="service-link disponible" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/paramount.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">PARAMOUNT PREMIUM</h3>
-                <span class="manual-desc">1 Mes • 6 Perfiles • Plan Premium.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 7</span>
-                <span class="renovacion-info">🔄 Renova: S/ 18.00</span>
-            </div>
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/paramount.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">PARAMOUNT PREMIUM</h3>
+            <span class="manual-desc">1 Mes • 6 Perfiles • Plan Premium.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 7</span>
+            <span class="renovacion-info">🔄 Renova: S/ 18.00</span>
         </div>
     </div>
-    
-    <div class="service-link agotado con-renovacion" data-aos="fade-up">
-        <div class="service-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">Netflix Completa</h3>
-                <span class="manual-desc">5 Perfiles • Renovable • Ultra HD.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 45</span>
-                <span class="renovacion-info">🔄 Renova: S/ 45.00</span>
-            </div>
-        </div>
-    </div>
+</div>
 
-    <div class="service-link disponible popular" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/disneys.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">Disney premium Completa(SIN ESPN)</h3>
-                <span class="manual-desc">1 Mes • 7 Perfiles • Sin canales ESPN.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 14</span>
-                <span class="renovacion-info">🔄 Renova: S/ 18.00</span>
-            </div>
+<div class="service-link agotado con-renovacion popular" data-aos="fade-up">
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">Netflix Completa</h3>
+            <span class="manual-desc">5 Perfiles • Renovable • Ultra HD.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 45</span>
+            <span class="renovacion-info">🔄 Renova: S/ 45.00</span>
         </div>
     </div>
+</div>
 
-    <div class="service-link pocas con-renovacion agotado" data-aos="fade-up">
-        <div class="service-card">
-            <img src="../img/disneyp.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">Disney Premium Completa</h3>
-                <span class="manual-desc">1 Mes • 7 Perfiles • 4 en simultaneo • Incluye canales ESPN.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 22</span>
-                <span class="renovacion-info">🔄 Renova: S/ 20.00</span>
-            </div>
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/disneys.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">Disney premium Completa(SIN ESPN)</h3>
+            <span class="manual-desc">1 Mes • 7 Perfiles • Sin canales ESPN.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 14</span>
+            <span class="renovacion-info">🔄 Renova: S/ 18.00</span>
         </div>
     </div>
+</div>
 
-    <div class="service-link agotado" data-aos="fade-up">
-        <div class="service-card">
-            <img src="../img/dgo.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">DGO + Liga 1 Max Completa</h3>
-                <span class="manual-desc">Plan Completo • 4 dispositivos (2 canal L1).</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 28</span>
-                <span class="renovacion-info">🔄 Renova: S/ 32.00</span>
-            </div>
+<div class="service-link  con-renovacion popular" data-aos="fade-up">
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/disneyp.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">Disney Premium Completa</h3>
+            <span class="manual-desc">1 Mes • 7 Perfiles • 4 en simultaneo • Incluye canales ESPN.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 22</span>
+            <span class="renovacion-info">🔄 Renova: S/ 20.00</span>
         </div>
     </div>
+</div>
 
-    <div class="service-link pocas" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/movistar.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">Movistar Play + Liga 1 Max Completa</h3>
-                <span class="manual-desc">Plan Completo • 2 dispositivos.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 22</span>
-                <span class="renovacion-info">🔄 Renova: S/ 25.00</span>
-            </div>
+<div class="service-link agotado popular" data-aos="fade-up">
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/dgo.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">DGO + Liga 1 Max Completa</h3>
+            <span class="manual-desc">Plan Completo • 4 dispositivos (2 canal L1).</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 28</span>
+            <span class="renovacion-info">🔄 Renova: S/ 32.00</span>
         </div>
     </div>
+</div>
 
-    <div class="service-link disponible popular" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/max.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">MAX PLATINO completa</h3>
-                <span class="manual-desc">5 perfiles • Ultra HD • 4 dispositivos.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 12</span>
-                <span class="renovacion-info">🔄 Renova: S/ 15.00</span>
-            </div>
+<div class="service-link pocas popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/movistar.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">Movistar Play + Liga 1 Max Completa</h3>
+            <span class="manual-desc">Plan Completo • 2 dispositivos.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 22</span>
+            <span class="renovacion-info">🔄 Renova: S/ 25.00</span>
         </div>
     </div>
-    
-    <div class="category-title" data-aos="fade-right">💻 DISEÑOS Y MAS</div>
-    
-    <div class="service-link disponible" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/canva.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">CANVA PRO(1 mes)</h3>
-                <span class="manual-desc">• 1 mes • Plan EDU • Invitación a tu correo.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 3</span>
-                <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
-            </div>
-        </div>
-    </div>
-    
-    <div class="service-link disponible" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/canva.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">CANVA PRO(3 meses)</h3>
-                <span class="manual-desc">• 3 meses • Plan EDU • Invitación a tu correo.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 7</span>
-                <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
-            </div>
-        </div>
-    </div>
-    
-    <div class="service-link disponible" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/canva.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">CANVA PRO(6 meses)</h3>
-                <span class="manual-desc">• 6 meses • Plan EDU • Invitación a tu correo.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 10</span>
-                <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
-            </div>
-        </div>
-    </div>
-    
-    <div class="service-link disponible popular" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/canva.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">CANVA PRO(12 meses)</h3>
-                <span class="manual-desc">• 12 meses • Plan EDU • Invitación a tu correo.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 15</span>
-                <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
-            </div>
-        </div>
-    </div>
-    
-    <div class="service-link disponible" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/canva.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">CANVA PRO(12 meses cond.)</h3>
-                <span class="manual-desc">• 6 meses de garantia ()• Plan EDU • Invitación a tu correo.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 10</span>
-                <span class="renovacion-info">🔄 Renova: S/ 10.00</span>
-            </div>
-        </div>
-    </div>
+</div>
 
-    <div class="category-title" data-aos="fade-right">👤 APPS DE PAGA</div>
-    
-    <div class="service-link disponible popular" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/ibo.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">IBO PLAYER (12 meses)</h3>
-                <span class="manual-desc">Licencia 1 año • Solo activación.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 13</span>
-                <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
-            </div>
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/max.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">MAX PLATINO completa</h3>
+            <span class="manual-desc">5 perfiles • Ultra HD • 4 dispositivos.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 12</span>
+            <span class="renovacion-info">🔄 Renova: S/ 15.00</span>
         </div>
     </div>
-    
-    <div class="service-link disponible" data-aos="fade-up">
-        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="service-card">
-            <img src="../img/ibopro.png" class="service-logo">
-            <div class="service-text">
-                <span class="stock-status"></span>
-                <h3 class="nombre-prod">IBOPRO (12 meses)</h3>
-                <span class="manual-desc">Licencia 1 año • Estabilidad Pro.</span>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 13</span>
-                <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
-            </div>
+</div>
+
+<div class="category-title" data-aos="fade-right">💻 DISEÑOS Y MAS</div>
+
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/canva.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">CANVA PRO(1 mes)</h3>
+            <span class="manual-desc">• 1 mes • Plan EDU • Invitación a tu correo.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 3</span>
+            <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
+        </div>
+    </div>
+</div>
+
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/canva.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">CANVA PRO(3 meses)</h3>
+            <span class="manual-desc">• 3 meses • Plan EDU • Invitación a tu correo.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 7</span>
+            <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
+        </div>
+    </div>
+</div>
+
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/canva.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">CANVA PRO(6 meses)</h3>
+            <span class="manual-desc">• 6 meses • Plan EDU • Invitación a tu correo.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 10</span>
+            <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
+        </div>
+    </div>
+</div>
+
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/canva.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">CANVA PRO(12 meses)</h3>
+            <span class="manual-desc">• 12 meses • Plan EDU • Invitación a tu correo.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 15</span>
+            <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
+        </div>
+    </div>
+</div>
+
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/canva.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">CANVA PRO(12 meses cond.)</h3>
+            <span class="manual-desc">• 6 meses de garantia • Plan EDU • Invitación a tu correo.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 10</span>
+            <span class="renovacion-info">🔄 Renova: S/ 10.00</span>
+        </div>
+    </div>
+</div>
+
+<div class="category-title" data-aos="fade-right">👤 APPS DE PAGA</div>
+
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/ibo.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">IBO PLAYER (12 meses)</h3>
+            <span class="manual-desc">Licencia 1 año • Solo activación.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 13</span>
+            <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
+        </div>
+    </div>
+</div>
+
+<div class="service-link disponible popular" data-aos="fade-up">
+    <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="service-card">
+        <span class="badge-manual oferta-text">OFERTA</span>
+        <span class="badge-manual popular-text">POPULAR</span>
+        <img src="../img/ibopro.png" class="service-logo">
+        <div class="service-text">
+            <span class="stock-status"></span>
+            <h3 class="nombre-prod">IBOPRO (12 meses)</h3>
+            <span class="manual-desc">Licencia 1 año • Estabilidad Pro.</span>
+        </div>
+        <div class="price-container">
+            <span class="price-tag precio-prod">S/ 13</span>
+            <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
         </div>
     </div>
 </div>
@@ -728,120 +614,111 @@
 <div class="floating-container">
     <div id="ahorro-display" class="ahorro-tag">¡Llevas 0 productos seleccionados! 🚀</div>
     <a href="../distribuidores-promos/" class="floating-btn btn-promo"><i class="fa-solid fa-crown"></i> ZONA PROMOS MAYORISTAS</a>
-    <button onclick="enviarPedido()" class="floating-btn" id="btn-whatsapp">
-        <i class="fa-brands fa-whatsapp"></i> PEDIR SELECCIONADOS (<span id="count-total">0</span>)
-    </button>
+    <div style="display: flex; gap: 10px; width: 100%;">
+        <button onclick="enviarPedido()" class="floating-btn" id="btn-whatsapp">
+            <i class="fa-brands fa-whatsapp"></i> PEDIR SELECCIONADOS (<span id="count-total">0</span>)
+        </button>
+        <button onclick="limpiarTodo()" id="btn-trash" class="btn-trash"><i class="fa-solid fa-trash-can"></i></button>
+    </div>
 </div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    // INICIALIZACIÓN DE ANIMACIONES
-    AOS.init({ 
-    duration: 1000, 
-    once: true,
-    mirror: true 
-});
+    AOS.init({ duration: 1000, once: true });
 
-    // BUSCADOR EN TIEMPO REAL (CORREGIDO CON SCROLL)
-document.getElementById('buscador').addEventListener('input', function(e) {
-    const term = e.target.value.toLowerCase();
-    let primerResultado = null;
-
-    document.querySelectorAll('.service-link').forEach(item => {
-        const nombre = item.querySelector('.nombre-prod').innerText.toLowerCase();
-
-        if (nombre.includes(term)) {
-            item.style.display = 'block';
-
-            if (!primerResultado) {
-                primerResultado = item;
-            }
-        } else {
-            item.style.display = 'none';
+    // BUSCADOR (Sigue funcionando suave)
+    document.getElementById('buscador').addEventListener('input', function(e) {
+        const term = e.target.value.toLowerCase();
+        let primerResultado = null;
+        document.querySelectorAll('.service-link').forEach(item => {
+            const nombre = item.querySelector('.nombre-prod').innerText.toLowerCase();
+            if (nombre.includes(term)) {
+                item.style.display = 'block';
+                if (!primerResultado) primerResultado = item;
+            } else { item.style.display = 'none'; }
+        });
+        AOS.refresh();
+        if (primerResultado) {
+            setTimeout(() => {
+                const headerOffset = 150;
+                const elementPosition = primerResultado.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            }, 100);
         }
     });
 
-    setTimeout(() => {
-        AOS.refreshHard();
-    }, 100);
-
-    if (primerResultado) {
-        setTimeout(() => {
-            primerResultado.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center'
-            });
-        }, 150);
-    } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-});
-
-    // SELECCIÓN Y ANIMACIÓN SHAKE
-    document.querySelectorAll('.service-link:not(.agotado)').forEach(tarjeta => {
-        tarjeta.addEventListener('click', function(e) {
-            e.preventDefault();
-            this.classList.toggle('selected');
-            
-            const btn = document.getElementById('btn-whatsapp');
-            btn.classList.remove('shake');
-            void btn.offsetWidth; 
-            btn.classList.add('shake');
-            
-            actualizarContadores();
+    // RECONEXIÓN DE LA SELECCIÓN (CARRITO)
+    function conectarSeleccion() {
+        document.querySelectorAll('.service-link:not(.agotado)').forEach(tarjeta => {
+            tarjeta.onclick = function(e) {
+                e.preventDefault();
+                this.classList.toggle('selected');
+                const btn = document.getElementById('btn-whatsapp');
+                btn.classList.remove('shake');
+                void btn.offsetWidth; 
+                btn.classList.add('shake');
+                actualizarContadores();
+            };
         });
-    });
+    }
 
     function actualizarContadores() {
-        const seleccionados = document.querySelectorAll('.service-link.selected');
-        document.getElementById('count-total').innerText = seleccionados.length;
-        
-        const ahorroDisplay = document.getElementById('ahorro-display');
-        if(seleccionados.length > 0) {
-            ahorroDisplay.style.display = 'block';
-            ahorroDisplay.innerText = `¡Llevas ${seleccionados.length} plataforma(s) lista(s)! 🚀`;
-        } else {
-            ahorroDisplay.style.display = 'none';
-        }
+        const num = document.querySelectorAll('.service-link.selected').length;
+        document.getElementById('count-total').innerText = num;
+        document.getElementById('ahorro-display').style.display = num > 0 ? 'block' : 'none';
+        document.getElementById('ahorro-display').style.background = "rgba(46, 204, 113, 0.1)";
+        document.getElementById('ahorro-display').innerText = `¡Llevas ${num} plataforma(s) lista(s)! 🚀`;
+        document.getElementById('btn-trash').style.display = num > 0 ? 'flex' : 'none';
     }
 
+    // LIMPIAR SIN CHROME ALERT
+    function limpiarTodo() {
+        document.querySelectorAll('.service-link.selected').forEach(el => el.classList.remove('selected'));
+        actualizarContadores();
+    }
+
+    // PEDIDO SIN CHROME ALERT (Aviso en HTML)
     function enviarPedido() {
         const seleccionados = document.querySelectorAll('.service-link.selected');
-        if (seleccionados.length === 0) { alert("Por favor, selecciona al menos un producto."); return; }
+        const display = document.getElementById('ahorro-display');
 
-        let lista = "";
-        let total = 0;
+        if (seleccionados.length === 0) { 
+            // Mostramos el aviso en tu etiqueta de ahorro para que sea profesional
+            display.style.display = 'block';
+            display.style.background = "rgba(255, 51, 51, 0.2)";
+            display.innerText = "⚠️ Primero selecciona una plataforma";
+            setTimeout(() => { actualizarContadores(); }, 2000);
+            return; 
+        }
+
+        let lista = ""; let total = 0;
         seleccionados.forEach(p => {
             const nombre = p.querySelector('.nombre-prod').innerText;
-            const precioTexto = p.querySelector('.precio-prod').innerText.replace('S/ ', '');
-            const precio = parseFloat(precioTexto);
+            const precio = parseFloat(p.querySelector('.precio-prod').innerText.replace('S/ ', ''));
             lista += `• ${nombre} (S/ ${precio})\n`;
             total += precio;
         });
-
         const msg = `Hola Alex Store, soy Distribuidor deseo adquirir:\n\n${lista}\n💰 *TOTAL A PAGAR: S/ ${total.toFixed(2)}*`;
         window.open(`https://wa.me/51918600000?text=${encodeURIComponent(msg)}`, '_blank');
-    }
-
-    function actualizarFecha() {
-        const fecha = new Date();
-        const opciones = { day: '2-digit', month: 'long' };
-        document.getElementById('fecha-actualizacion').innerText = "✅ Lista Actualizada: " + fecha.toLocaleDateString('es-ES', opciones);
     }
 
     function validarAcceso() {
         if (document.getElementById('input-dist-pass').value === "dis") {
             sessionStorage.setItem("acceso_distribuidor", "true");
             location.reload();
-        } else { alert("Contraseña incorrecta"); }
+        } else { alert("Acceso denegado"); }
     }
 
-    document.getElementById('input-dist-pass').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') { validarAcceso(); }
-    });
+    function actualizarFecha() {
+        const fecha = new Date();
+        document.getElementById('fecha-actualizacion').innerText = "✅ Lista Actualizada: " + fecha.toLocaleDateString('es-ES', { day: '2-digit', month: 'long' });
+    }
 
-    window.onload = actualizarFecha;
+    window.onload = function() {
+        actualizarFecha();
+        conectarSeleccion(); // Activa el carrito al cargar
+    };
 </script>
-
 </body>
 </html>
