@@ -63,9 +63,9 @@
             100% { text-shadow: 0 0 8px #ff0000; color: #ff3333; border-color: #ff3333; }
         }
         @keyframes shake {
-            0%, 100% { transform: translateX(-50%) scale(1); }
-            25% { transform: translateX(-52%) scale(1.02); }
-            75% { transform: translateX(-48%) scale(1.02); }
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.05); }
+            75% { transform: scale(0.95); }
         }
         .shake { animation: shake 0.4s ease-in-out; }
 
@@ -174,19 +174,29 @@
 
         /* --- MODO URGENCIA (OFERTA) --- */
         .service-link { position: relative; text-decoration: none; color: inherit; display: block; margin-bottom: 15px; transition: 0.4s; cursor: pointer; }
-        .service-link.oferta::before {
-            content: "🔥 OFERTA";
+        
+        /* GADGETS: OFERTA Y POPULAR */
+        .service-link.oferta::before, .service-link.popular::before {
             position: absolute;
             top: -10px;
             right: 15px;
-            background: var(--danger-bright);
-            color: white;
             font-size: 0.65rem;
             font-weight: 900;
             padding: 4px 12px;
             border-radius: 50px;
             z-index: 10;
+        }
+        .service-link.oferta::before {
+            content: "🔥 OFERTA";
+            background: var(--danger-bright);
+            color: white;
             box-shadow: 0 5px 10px rgba(255,0,0,0.3);
+        }
+        .service-link.popular::before {
+            content: "⭐ POPULAR";
+            background: var(--vip);
+            color: black;
+            box-shadow: 0 5px 10px rgba(212,175,55,0.4);
         }
 
         /* --- CHECK DE SELECCIÓN --- */
@@ -318,7 +328,7 @@
 
     <div class="category-title" data-aos="fade-right">👤 ZONA PERFILES</div>
 
-    <div class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible popular" data-aos="fade-up">
         <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
@@ -350,7 +360,7 @@
         </div>
     </div>
 
-    <div class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible popular" data-aos="fade-up">
         <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/disneyp.png" class="service-logo">
@@ -446,7 +456,7 @@
         </div>
     </div>
 
-    <div class="service-link pocas" data-aos="fade-up">
+    <div class="service-link pocas popular" data-aos="fade-up">
         <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/movistar.png" class="service-logo">
@@ -511,7 +521,7 @@
         </div>
     </div>
 
-    <div class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible popular" data-aos="fade-up">
         <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/disneys.png" class="service-logo">
@@ -573,7 +583,7 @@
         </div>
     </div>
 
-    <div class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible popular" data-aos="fade-up">
         <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/max.png" class="service-logo">
@@ -639,7 +649,7 @@
         </div>
     </div>
     
-    <div class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible popular" data-aos="fade-up">
         <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/canva.png" class="service-logo">
@@ -673,7 +683,7 @@
 
     <div class="category-title" data-aos="fade-right">👤 APPS DE PAGA</div>
     
-    <div class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible popular" data-aos="fade-up">
         <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/ibo.png" class="service-logo">
@@ -729,7 +739,7 @@
     AOS.init({ 
     duration: 1000, 
     once: true,
-    mirror: true // 👈 ayuda cuando aparecen dinámicamente
+    mirror: true 
 });
 
     // BUSCADOR EN TIEMPO REAL (CORREGIDO CON SCROLL)
@@ -751,12 +761,10 @@ document.getElementById('buscador').addEventListener('input', function(e) {
         }
     });
 
-    // 🔥 FORZAR ACTUALIZACIÓN DE AOS
     setTimeout(() => {
         AOS.refreshHard();
     }, 100);
 
-    // 🔥 SCROLL AL PRIMER RESULTADO
     if (primerResultado) {
         setTimeout(() => {
             primerResultado.scrollIntoView({
@@ -775,7 +783,6 @@ document.getElementById('buscador').addEventListener('input', function(e) {
             e.preventDefault();
             this.classList.toggle('selected');
             
-            // Animación Shake al botón
             const btn = document.getElementById('btn-whatsapp');
             btn.classList.remove('shake');
             void btn.offsetWidth; 
