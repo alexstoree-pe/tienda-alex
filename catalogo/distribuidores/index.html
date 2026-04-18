@@ -9,7 +9,7 @@
     
     <style>
         /* BLOQUEO DE SEGURIDAD */
-        html { display: none; background-color: #0a0a0a; } 
+        html { display: none; background-color: #0a0a0a; scroll-behavior: smooth; }
     </style>
 
     <script>
@@ -52,18 +52,22 @@
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes pulse-glow {
             0% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.2); }
             50% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
             100% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.2); }
         }
-
         @keyframes shine-red {
             0% { text-shadow: 0 0 8px #ff0000; color: #ff3333; border-color: #ff3333; }
             50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #fff; border-color: #fff; }
             100% { text-shadow: 0 0 8px #ff0000; color: #ff3333; border-color: #ff3333; }
         }
+        @keyframes shake {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            25% { transform: translateX(-52%) scale(1.02); }
+            75% { transform: translateX(-48%) scale(1.02); }
+        }
+        .shake { animation: shake 0.4s ease-in-out; }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -71,7 +75,7 @@
             font-family: 'Poppins', sans-serif; 
             background: radial-gradient(circle at top right, #1a1a1a, #050505);
             color: white; 
-            padding-bottom: 200px; 
+            padding-bottom: 220px; 
             line-height: 1.6;
             overflow-x: hidden;
         }
@@ -95,6 +99,26 @@
             -webkit-text-fill-color: transparent;
             letter-spacing: 1px;
         }
+        
+        /* BUSCADOR */
+        .search-container {
+            max-width: 500px;
+            margin: 20px auto 0;
+            position: relative;
+        }
+        .search-container input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255,255,255,0.05);
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+        .search-container i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--primary); }
+        .search-container input:focus { border-color: var(--primary); background: rgba(255,255,255,0.1); }
+
         .update-tag { 
             font-size: 0.8rem; 
             color: var(--success); 
@@ -148,8 +172,45 @@
             background: linear-gradient(to right, var(--primary), transparent);
         }
 
-        .service-link { text-decoration: none; color: inherit; display: block; margin-bottom: 15px; transition: 0.4s; }
-        
+        /* --- MODO URGENCIA (OFERTA) --- */
+        .service-link { position: relative; text-decoration: none; color: inherit; display: block; margin-bottom: 15px; transition: 0.4s; cursor: pointer; }
+        .service-link.oferta::before {
+            content: "🔥 OFERTA";
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            background: var(--danger-bright);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 900;
+            padding: 4px 12px;
+            border-radius: 50px;
+            z-index: 10;
+            box-shadow: 0 5px 10px rgba(255,0,0,0.3);
+        }
+
+        /* --- CHECK DE SELECCIÓN --- */
+        .check-icon {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--primary);
+            color: black;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            opacity: 0;
+            transform: scale(0);
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 5;
+        }
+        .service-link.selected .check-icon { opacity: 1; transform: scale(1); }
+        .service-link.selected .service-card { border-color: var(--primary); background: rgba(0,212,255,0.05); }
+
         .service-card { 
             background: var(--card-bg); 
             backdrop-filter: blur(10px);
@@ -231,8 +292,9 @@
         }
 
         .floating-container { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 450px; display: flex; flex-direction: column; gap: 12px; z-index: 100; }
-        .floating-btn { background: var(--whatsapp); color: white; padding: 18px; border-radius: 20px; text-decoration: none; font-weight: 700; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .floating-btn { background: var(--whatsapp); color: white; padding: 18px; border-radius: 20px; text-decoration: none; font-weight: 700; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; border: none; cursor: pointer; }
         .btn-promo { background: var(--vip); color: #000; animation: pulse-glow 2s infinite; }
+        .ahorro-tag { font-size: 0.8rem; color: var(--success); font-weight: 700; margin-bottom: 5px; display: none; text-align: center; background: rgba(46, 204, 113, 0.1); padding: 5px; border-radius: 10px; }
 
         .modal-pass { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); z-index: 5000; justify-content: center; align-items: center; }
         .modal-content { background: #111; padding: 40px; border-radius: 40px; width: 90%; max-width: 400px; border: 1px solid var(--primary); text-align: center; }
@@ -244,7 +306,11 @@
 <header data-aos="fade-down">
     <h1>SOLO DISTRIBUIDORES 🚀</h1>
     <p id="fecha-actualizacion" class="update-tag">Cargando fecha...</p>
-    <p style="opacity: 0.6; font-size: 0.75rem; margin-top: 5px;">ALEX STORE • PREMIUM EXPERIENCE</p>
+    
+    <div class="search-container">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="buscador" placeholder="Buscar plataforma...">
+    </div>
 </header>
 
 <div class="container">
@@ -252,7 +318,8 @@
 
     <div class="category-title" data-aos="fade-right">👤 ZONA PERFILES</div>
 
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
             <div class="service-text">
@@ -265,9 +332,10 @@
                 <span class="renovacion-info">🔄 Renova: S/ 12.00</span>
             </div>
         </div>
-    </a>
+    </div>
 
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/disneys.png" class="service-logo">
             <div class="service-text">
@@ -280,9 +348,10 @@
                 <span class="renovacion-info">🔄 Renova: S/ 5.00</span>
             </div>
         </div>
-    </a>
+    </div>
 
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/disneyp.png" class="service-logo">
             <div class="service-text">
@@ -295,9 +364,10 @@
                 <span class="renovacion-info">🔄 Renova: S/ 7.00</span>
             </div>
         </div>
-    </a>
+    </div>
 
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/prime.png" class="service-logo">
             <div class="service-text">
@@ -310,9 +380,10 @@
                 <span class="renovacion-info">🔄 Renova: S/ 5.00</span>
             </div>
         </div>
-    </a>
+    </div>
 
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/prime.png" class="service-logo">
             <div class="service-text">
@@ -325,9 +396,10 @@
                 <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
             </div>
         </div>
-    </a>
+    </div>
 
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/vix.png" class="service-logo">
             <div class="service-text">
@@ -340,9 +412,10 @@
                 <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
             </div>
         </div>
-    </a>
+    </div>
 
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/paramount.png" class="service-logo">
             <div class="service-text">
@@ -355,9 +428,10 @@
                 <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
             </div>
         </div>
-    </a>
+    </div>
 
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/crunchyroll.png" class="service-logo">
             <div class="service-text">
@@ -370,9 +444,10 @@
                 <span class="renovacion-info">🔄 Renova: S/ 4.00</span>
             </div>
         </div>
-    </a>
+    </div>
 
-    <a href="#" class="service-link pocas" data-aos="fade-up">
+    <div class="service-link pocas" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/movistar.png" class="service-logo">
             <div class="service-text">
@@ -385,9 +460,10 @@
                 <span class="renovacion-info">🔄 Renova: S/ 15.00</span>
             </div>
         </div>
-    </a>
+    </div>
 
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/dgo.png" class="service-logo">
             <div class="service-text">
@@ -400,11 +476,12 @@
                 <span class="renovacion-info">🔄 Renova: S/ 18.00</span>
             </div>
         </div>
-    </a>
+    </div>
 
     <div class="category-title" data-aos="fade-right">🏠 ZONA CUENTAS COMPLETAS</div>
 
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/paramount.png" class="service-logo">
             <div class="service-text">
@@ -417,9 +494,9 @@
                 <span class="renovacion-info">🔄 Renova: S/ 18.00</span>
             </div>
         </div>
-    </a>
+    </div>
     
-    <a href="#" class="service-link agotado con-renovacion" data-aos="fade-up">
+    <div class="service-link agotado con-renovacion" data-aos="fade-up">
         <div class="service-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
             <div class="service-text">
@@ -432,9 +509,10 @@
                 <span class="renovacion-info">🔄 Renova: S/ 45.00</span>
             </div>
         </div>
-    </a>
+    </div>
 
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/disneys.png" class="service-logo">
             <div class="service-text">
@@ -447,9 +525,9 @@
                 <span class="renovacion-info">🔄 Renova: S/ 18.00</span>
             </div>
         </div>
-    </a>
+    </div>
 
-    <a href="#" class="service-link pocas con-renovacion agotado" data-aos="fade-up">
+    <div class="service-link pocas con-renovacion agotado" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/disneyp.png" class="service-logo">
             <div class="service-text">
@@ -462,9 +540,9 @@
                 <span class="renovacion-info">🔄 Renova: S/ 20.00</span>
             </div>
         </div>
-    </a>
+    </div>
 
-    <a href="#" class="service-link agotado" data-aos="fade-up">
+    <div class="service-link agotado" data-aos="fade-up">
         <div class="service-card">
             <img src="../img/dgo.png" class="service-logo">
             <div class="service-text">
@@ -477,9 +555,10 @@
                 <span class="renovacion-info">🔄 Renova: S/ 32.00</span>
             </div>
         </div>
-    </a>
+    </div>
 
-    <a href="#" class="service-link pocas" data-aos="fade-up">
+    <div class="service-link pocas" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/movistar.png" class="service-logo">
             <div class="service-text">
@@ -492,9 +571,10 @@
                 <span class="renovacion-info">🔄 Renova: S/ 25.00</span>
             </div>
         </div>
-    </a>
+    </div>
 
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/max.png" class="service-logo">
             <div class="service-text">
@@ -507,11 +587,12 @@
                 <span class="renovacion-info">🔄 Renova: S/ 15.00</span>
             </div>
         </div>
-    </a>
+    </div>
     
     <div class="category-title" data-aos="fade-right">💻 DISEÑOS Y MAS</div>
     
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/canva.png" class="service-logo">
             <div class="service-text">
@@ -524,9 +605,10 @@
                 <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
             </div>
         </div>
-    </a>
+    </div>
     
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/canva.png" class="service-logo">
             <div class="service-text">
@@ -539,9 +621,10 @@
                 <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
             </div>
         </div>
-    </a>
+    </div>
     
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/canva.png" class="service-logo">
             <div class="service-text">
@@ -554,9 +637,10 @@
                 <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
             </div>
         </div>
-    </a>
+    </div>
     
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/canva.png" class="service-logo">
             <div class="service-text">
@@ -569,25 +653,28 @@
                 <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
             </div>
         </div>
-    </a>
+    </div>
     
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/canva.png" class="service-logo">
             <div class="service-text">
                 <span class="stock-status"></span>
                 <h3 class="nombre-prod">CANVA PRO(12 meses cond.)</h3>
-                <span class="manual-desc">• 6 meses de  garantia ()• Plan EDU • Invitación a tu correo.</span>
+                <span class="manual-desc">• 6 meses de garantia ()• Plan EDU • Invitación a tu correo.</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 10</span>
                 <span class="renovacion-info">🔄 Renova: S/ 10.00</span>
             </div>
         </div>
-    </a>
+    </div>
+
     <div class="category-title" data-aos="fade-right">👤 APPS DE PAGA</div>
     
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/ibo.png" class="service-logo">
             <div class="service-text">
@@ -600,9 +687,10 @@
                 <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
             </div>
         </div>
-    </a>
+    </div>
     
-    <a href="#" class="service-link disponible" data-aos="fade-up">
+    <div class="service-link disponible" data-aos="fade-up">
+        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
         <div class="service-card">
             <img src="../img/ibopro.png" class="service-logo">
             <div class="service-text">
@@ -615,7 +703,7 @@
                 <span class="renovacion-info">🔄 Renova: S/ 13.00</span>
             </div>
         </div>
-    </a>
+    </div>
 </div>
 
 <div id="modal-login-distribuidor" class="modal-pass">
@@ -628,17 +716,105 @@
 </div>
 
 <div class="floating-container">
+    <div id="ahorro-display" class="ahorro-tag">¡Llevas 0 productos seleccionados! 🚀</div>
     <a href="../distribuidores-promos/" class="floating-btn btn-promo"><i class="fa-solid fa-crown"></i> ZONA PROMOS MAYORISTAS</a>
-    <a href="https://wa.me/51918600000?text=Hola%20Alex%20Store" class="floating-btn"><i class="fa-brands fa-whatsapp"></i> SOPORTE WHATSAPP</a>
+    <button onclick="enviarPedido()" class="floating-btn" id="btn-whatsapp">
+        <i class="fa-brands fa-whatsapp"></i> PEDIR SELECCIONADOS (<span id="count-total">0</span>)
+    </button>
 </div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
     // INICIALIZACIÓN DE ANIMACIONES
-    AOS.init({
-        duration: 1000,
-        once: true
+    AOS.init({ 
+    duration: 1000, 
+    once: true,
+    mirror: true // 👈 ayuda cuando aparecen dinámicamente
+});
+
+    // BUSCADOR EN TIEMPO REAL (CORREGIDO CON SCROLL)
+document.getElementById('buscador').addEventListener('input', function(e) {
+    const term = e.target.value.toLowerCase();
+    let primerResultado = null;
+
+    document.querySelectorAll('.service-link').forEach(item => {
+        const nombre = item.querySelector('.nombre-prod').innerText.toLowerCase();
+
+        if (nombre.includes(term)) {
+            item.style.display = 'block';
+
+            if (!primerResultado) {
+                primerResultado = item;
+            }
+        } else {
+            item.style.display = 'none';
+        }
     });
+
+    // 🔥 FORZAR ACTUALIZACIÓN DE AOS
+    setTimeout(() => {
+        AOS.refreshHard();
+    }, 100);
+
+    // 🔥 SCROLL AL PRIMER RESULTADO
+    if (primerResultado) {
+        setTimeout(() => {
+            primerResultado.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }, 150);
+    } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+});
+
+    // SELECCIÓN Y ANIMACIÓN SHAKE
+    document.querySelectorAll('.service-link:not(.agotado)').forEach(tarjeta => {
+        tarjeta.addEventListener('click', function(e) {
+            e.preventDefault();
+            this.classList.toggle('selected');
+            
+            // Animación Shake al botón
+            const btn = document.getElementById('btn-whatsapp');
+            btn.classList.remove('shake');
+            void btn.offsetWidth; 
+            btn.classList.add('shake');
+            
+            actualizarContadores();
+        });
+    });
+
+    function actualizarContadores() {
+        const seleccionados = document.querySelectorAll('.service-link.selected');
+        document.getElementById('count-total').innerText = seleccionados.length;
+        
+        const ahorroDisplay = document.getElementById('ahorro-display');
+        if(seleccionados.length > 0) {
+            ahorroDisplay.style.display = 'block';
+            ahorroDisplay.innerText = `¡Llevas ${seleccionados.length} plataforma(s) lista(s)! 🚀`;
+        } else {
+            ahorroDisplay.style.display = 'none';
+        }
+    }
+
+    function enviarPedido() {
+        const seleccionados = document.querySelectorAll('.service-link.selected');
+        if (seleccionados.length === 0) { alert("Por favor, selecciona al menos un producto."); return; }
+
+        let lista = "";
+        let total = 0;
+        seleccionados.forEach(p => {
+            const nombre = p.querySelector('.nombre-prod').innerText;
+            const precioTexto = p.querySelector('.precio-prod').innerText.replace('S/ ', '');
+            const precio = parseFloat(precioTexto);
+            lista += `• ${nombre} (S/ ${precio})\n`;
+            total += precio;
+        });
+
+        const msg = `Hola Alex Store, soy Distribuidor deseo adquirir:\n\n${lista}\n💰 *TOTAL A PAGAR: S/ ${total.toFixed(2)}*`;
+        window.open(`https://wa.me/51918600000?text=${encodeURIComponent(msg)}`, '_blank');
+    }
 
     function actualizarFecha() {
         const fecha = new Date();
@@ -650,36 +826,14 @@
         if (document.getElementById('input-dist-pass').value === "dis") {
             sessionStorage.setItem("acceso_distribuidor", "true");
             location.reload();
-        } else {
-            alert("Contraseña incorrecta");
-        }
+        } else { alert("Contraseña incorrecta"); }
     }
 
     document.getElementById('input-dist-pass').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            validarAcceso();
-        }
+        if (e.key === 'Enter') { validarAcceso(); }
     });
 
-    window.onload = function() {
-        actualizarFecha();
-        const telefono = "51918600000";
-        document.querySelectorAll('.service-link:not(.agotado)').forEach(tarjeta => {
-            const nombre = tarjeta.querySelector('.nombre-prod')?.innerText;
-            const precio = tarjeta.querySelector('.precio-prod')?.innerText;
-            const descripcion = tarjeta.querySelector('.manual-desc')?.innerText; 
-
-            if (nombre && precio) {
-                const mensaje = `Hola Alex Store, soy Distribuidor deseo adquirir.\n\n` +
-                                `📌 *Producto:* ${nombre}\n` +
-                                `💰 *Precio:* ${precio}\n` +
-                                `📝 *Detalle:* ${descripcion || 'Sin descripción'}`;
-                                
-                tarjeta.href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-                tarjeta.target = "_blank";
-            }
-        });
-    }
+    window.onload = actualizarFecha;
 </script>
 
 </body>
