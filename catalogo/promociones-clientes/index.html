@@ -32,7 +32,7 @@
         header {
             background: rgba(255, 204, 0, 0.9);
             backdrop-filter: blur(15px);
-            padding: 45px 20px;
+            padding: 30px 20px;
             text-align: center;
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
@@ -44,15 +44,24 @@
         }
 
         header h1 { font-size: 2.2rem; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; }
-        
-        header p { 
-            font-size: 0.85rem; 
-            font-weight: 500; 
-            width: 98%; 
-            margin: 5 auto; 
-            display: block;
-            text-align: center; 
-            line-height: 1.3;
+        header p { font-size: 0.85rem; font-weight: 500; text-align: center; line-height: 1.3; margin-bottom: 15px; }
+
+        /* --- BUSCADOR DE PROMOS --- */
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+        #search-input {
+            width: 100%;
+            padding: 10px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.9);
+            color: #000;
+            font-family: 'Poppins';
+            outline: none;
+            font-size: 0.9rem;
         }
 
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
@@ -69,7 +78,6 @@
             border-radius: 15px;
         }
 
-        /* CORRECCIÓN DE TÍTULOS DE CATEGORÍA - MÁXIMA NITIDEZ */
         .category-title {
             margin: 45px 0 20px; 
             font-size: 0.95rem; 
@@ -79,25 +87,20 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            /* Eliminamos el degradado en el texto que causa el efecto borroso */
             color: var(--primary); 
-            -webkit-text-fill-color: initial; 
-            background: none;
-            /* Usamos una sombra de texto sólida y suave para legibilidad */
             text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
 
         .category-title::before {
             content: '';
-            width: 4px;
-            height: 18px;
+            width: 4px; height: 18px;
             background: var(--secondary);
             border-radius: 4px;
             box-shadow: 0 0 10px var(--secondary);
         }
 
         /* TARJETAS GRID */
-        .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 18px; }
+        .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 18px; outline: none; }
         
         .promo-card {
             background: var(--glass);
@@ -111,6 +114,13 @@
             position: relative;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             min-height: 100px;
+        }
+
+        /* SOLUCIÓN AOS + BUSCADOR */
+        .promo-link[style*="display: block"] {
+            opacity: 1 !important;
+            transform: none !important;
+            visibility: visible !important;
         }
 
         .promo-link:not(.agotado):hover .promo-card {
@@ -139,18 +149,13 @@
             box-shadow: 0 4px 15px rgba(255, 204, 0, 0.2);
         }
 
-        /* ESTADO SIN STOCK - RESTABLECIMIENTO DE BRILLO */
         @keyframes shine-red {
             0% { text-shadow: 0 0 5px #ff0000; color: #ff3333; border-color: #ff3333; }
             50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #ffffff; border-color: #ffffff; }
             100% { text-shadow: 0 0 5px #ff0000; color: #ff3333; border-color: #ff3333; }
         }
 
-        .promo-link.agotado { 
-            cursor: default; 
-            pointer-events: none; 
-        }
-        
+        .promo-link.agotado { cursor: default; pointer-events: none; }
         .promo-link.agotado .service-logo { filter: grayscale(1); opacity: 0.4; }
         .promo-link.agotado .service-text { opacity: 0.6; }
         .promo-link.agotado .price-tag { display: none !important; }
@@ -219,6 +224,9 @@
 <header>
     <h1 data-aos="fade-down">COMBOS OFERTAS ⚡</h1>
     <p>Alex Store • Máximo ahorro garantizado</p>
+    <div class="search-container" data-aos="fade-up">
+        <input type="text" id="search-input" placeholder="Buscar oferta..." onkeyup="filtrarPromos()">
+    </div>
 </header>
 
 <div class="container">
@@ -243,7 +251,7 @@
 
     <div class="category-title" data-aos="fade-right">🕒 PROMOCIONES INDIVIDUALES</div>
 
-    <a href="javascript:void(0)" class="promo-link " data-aos="fade-up">
+    <a href="javascript:void(0)" class="promo-link" data-aos="fade-up">
         <div class="promo-card">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" class="service-logo">
             <div class="service-text">
@@ -256,12 +264,12 @@
         </div>
     </a>
 
-    <a href="javascript:void(0)" class="promo-link " data-aos="fade-up">
+    <a href="javascript:void(0)" class="promo-link" data-aos="fade-up">
         <div class="promo-card">
             <img src="../img/youtube.png" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Youtube Premium (3 meses)</h3>
-                <span class="manual-desc">• 3 Meses • Sin anuncios • Activacion a  tu correo (correo nuevo creado).</span>
+                <span class="manual-desc">• 3 Meses • Sin anuncios • Activacion a tu correo (correo nuevo creado).</span>
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 22</span>
@@ -269,11 +277,11 @@
         </div>
     </a>
 
-    <a href="javascript:void(0)" class="promo-link " data-aos="fade-up">
+    <a href="javascript:void(0)" class="promo-link" data-aos="fade-up">
         <div class="promo-card">
             <img src="../img/max.png" class="service-logo">
             <div class="service-text">
-                <h3 class="nombre-prod">Max Standard  (3 meses)</h3>
+                <h3 class="nombre-prod">Max Standard (3 meses)</h3>
                 <span class="manual-desc">• 3 Meses • Full HD • Perfil privado.</span>
             </div>
             <div class="price-container">
@@ -282,7 +290,7 @@
         </div>
     </a>
 
-    <a href="javascript:void(0)" class="promo-link " data-aos="fade-up">
+    <a href="javascript:void(0)" class="promo-link" data-aos="fade-up">
         <div class="promo-card">
             <img src="../img/max.png" class="service-logo">
             <div class="service-text">
@@ -295,7 +303,7 @@
         </div>
     </a>
 
-    <a href="javascript:void(0)" class="promo-link " data-aos="fade-up">
+    <a href="javascript:void(0)" class="promo-link" data-aos="fade-up">
         <div class="promo-card">
             <img src="../img/crunchyroll.png" class="service-logo">
             <div class="service-text">
@@ -308,11 +316,11 @@
         </div>
     </a>
 
-    <a href="javascript:void(0)" class="promo-link " data-aos="fade-up">
+    <a href="javascript:void(0)" class="promo-link" data-aos="fade-up">
         <div class="promo-card">
             <img src="../img/vix.png" class="service-logo">
             <div class="service-text">
-                <h3 class="nombre-prod">VIX PREMIUM(3 meses)</h3>
+                <h3 class="nombre-prod">VIX PREMIUM (3 meses)</h3>
                 <span class="manual-desc">• 3 Meses • Plan premium • Perfil privado.</span>
             </div>
             <div class="price-container">
@@ -321,11 +329,11 @@
         </div>
     </a>
 
-    <a href="javascript:void(0)" class="promo-link " data-aos="fade-up">
+    <a href="javascript:void(0)" class="promo-link" data-aos="fade-up">
         <div class="promo-card">
             <img src="../img/paramount.png" class="service-logo">
             <div class="service-text">
-                <h3 class="nombre-prod">PARAMOUNT(3 meses)</h3>
+                <h3 class="nombre-prod">PARAMOUNT (3 meses)</h3>
                 <span class="manual-desc">• 3 Meses • Plan premium • Perfil privado.</span>
             </div>
             <div class="price-container">
@@ -334,7 +342,7 @@
         </div>
     </a>
     
-    <a href="javascript:void(0)" class="promo-link " data-aos="fade-up">
+    <a href="javascript:void(0)" class="promo-link" data-aos="fade-up">
         <div class="promo-card">
             <img src="../img/netflix.png" class="service-logo">
             <div class="service-text">
@@ -346,7 +354,6 @@
             </div>
         </div>
     </a>
-    
 </div>
 
 <div id="modal-password" class="modal-pass">
@@ -361,6 +368,31 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
     AOS.init({ duration: 800, once: true });
+
+    function filtrarPromos() {
+        const busqueda = document.getElementById('search-input').value.toLowerCase();
+        const items = document.querySelectorAll('.promo-link');
+        const titulos = document.querySelectorAll('.category-title');
+
+        items.forEach(item => {
+            const nombre = item.querySelector('.nombre-prod').innerText.toLowerCase();
+            if (nombre.includes(busqueda)) {
+                item.style.display = 'block';
+                item.style.opacity = "1";
+                item.style.transform = "none";
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        titulos.forEach(titulo => {
+            titulo.style.display = (busqueda !== "") ? 'none' : 'block';
+        });
+
+        if (typeof AOS !== 'undefined') {
+            AOS.refreshHard();
+        }
+    }
 
     function validarPassPromos() {
         const input = document.getElementById('input-pass');
@@ -389,11 +421,6 @@
                 
                 tarjeta.onclick = () => {
                     window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
-                };
-            } else {
-                tarjeta.onclick = (e) => {
-                    e.preventDefault();
-                    return false;
                 };
             }
         });
