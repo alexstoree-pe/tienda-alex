@@ -96,14 +96,26 @@
         .service-link.premium .service-card { border: 2px solid var(--vip); box-shadow: 0 0 15px rgba(212, 175, 55, 0.15); }
         .service-link.premium.selected .service-card { border-color: var(--primary); }
 
-        .badge-oferta { 
-            position: absolute; top: 0; left: 0; 
-            background: #f1c40f; color: #000; 
-            padding: 3px 20px 3px 10px; 
-            clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
-            font-size: 0.55rem; font-weight: 900; z-index: 100;
-            text-transform: uppercase;
-        }
+        /* El badge está oculto por defecto */
+.badge-oferta { 
+    display: none; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    background: #f1c40f; 
+    color: #000; 
+    padding: 3px 20px 3px 10px; 
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+    font-size: 0.55rem; 
+    font-weight: 900; 
+    z-index: 100;
+    text-transform: uppercase;
+}
+
+/* SOLO si el contenedor tiene la clase "oferta", el badge se muestra */
+.service-link.oferta .badge-oferta {
+    display: block;
+}
 
         .premium-text { 
             display: none; 
