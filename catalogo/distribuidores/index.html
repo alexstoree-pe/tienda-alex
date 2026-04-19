@@ -68,6 +68,8 @@
         .btn-universal { display: flex; align-items: center; justify-content: center; padding: 14px; border-radius: 15px; text-decoration: none; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; border: none; cursor: pointer; transition: 0.3s; }
         .btn-inicio { background: var(--glass); color: #fff; border: 1px solid var(--glass-border); }
         .btn-promo-distri { background: var(--gold-gradient); color: #000; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
+        .btn-iptv { background: var(--gold-gradient); color: #000; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
+        .contenedor-iptv { display: flex; justify-content: center; padding: 0 15px; margin-top: -8px; /* Reduce el espacio con los botones de arriba si es necesario */ margin-bottom: 20px; }
 
         .container { padding: 10px 15px; max-width: 600px; margin: auto; }
         .category-title { margin: 35px 0 15px; font-size: 0.9rem; font-weight: 800; color: var(--primary); letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
@@ -241,9 +243,14 @@
     <a href="../distribuidores-promos-/" class="btn-universal btn-promo-distri"><i class="fa-solid fa-crown"></i> PROMOS DISTRIBUIDORES</a>
 </div>
 
+    <div class="contenedor-iptv">
+    <a href="../iptv/" class="btn-universal btn-iptv">
+        <i class="fa-solid fa-tv" style="margin-right: 8px;"></i> SERVICIO IPTV</a>
+</div>
     <div class="container" id="lista-productos">
 
-        <div class="category-title" data-aos="fade-right"><i class="fa-solid fa-user"></i> ZONA PERFILES</div>
+    
+    <div class="category-title" data-aos="fade-right"><i class="fa-solid fa-user"></i> ZONA PERFILES</div>
 
     <div class="service-link premium disponible oferta" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
