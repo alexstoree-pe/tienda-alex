@@ -23,7 +23,14 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--dark-bg); color: var(--text-main); padding-bottom: 140px; }
+        
+        /* --- MODIFICACIÓN DE SEGURIDAD: Body oculto por defecto --- */
+        body { 
+            background-color: var(--dark-bg); 
+            color: var(--text-main); 
+            padding-bottom: 140px; 
+            visibility: hidden; /* <--- Oculto hasta validar PIN */
+        }
 
         /* --- CABECERA --- */
         header { padding: 40px 20px 20px; text-align: center; }
@@ -60,16 +67,15 @@
         .service-link.agotado .badge-culminada { display: none !important; }
 
         .timer-flash { display: none !important; position: absolute; top: 0; left: 50%; transform: translateX(-50%); background: var(--danger); color: white; padding: 2px 12px; font-size: 0.65rem; font-weight: 800; border-radius: 0 0 10px 10px; z-index: 50; align-items: center; gap: 5px; }
-        .service-link.flash .timer-flash { display: flex !important; }
+        .service-link.flash { display: flex !important; } /* Corregido para que use la clase flash directamente */
         .badge-izq { display: none; position: absolute; top: 0; left: 0; background: var(--primary); color: #000; padding: 4px 10px; font-size: 0.6rem; font-weight: 900; z-index: 5; clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%); }
         .service-link.oferta .badge-izq { display: block; }
         .badge-culminada { display: none !important; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-5deg); background: rgba(0,0,0,0.95); color: var(--danger); padding: 12px; font-weight: 900; border: 2px solid var(--danger); z-index: 110; text-align: center; width: 85%; }
         .service-link.flash-terminado .badge-culminada { display: block !important; }
 
-        /* AJUSTE PREMIUM TAG SOLICITADO */
         .premium-tag { 
             display: none; 
-            font-size: 0.5rem; /* Más pequeño */
+            font-size: 0.5rem;
             font-weight: 800; 
             color: var(--gold); 
             border: 1px solid var(--gold); 
@@ -77,7 +83,7 @@
             border-radius: 3px; 
             text-transform: uppercase; 
             margin-bottom: 2px;
-            margin-right: 15px; /* Lo desplaza a la izquierda del precio */
+            margin-right: 15px;
             letter-spacing: 0.5px;
         }
         .service-link.premium .premium-tag { display: inline-block; }
@@ -99,61 +105,58 @@
         .manual-desc { display: block; font-size: 10px; color: var(--text-dim); font-style: italic; margin-top: 2px; }
         
         .price-container { 
-    text-align: right; 
-    margin-left: auto; 
-    display: flex; 
-    flex-direction: column; /* Apila el precio y el unitario uno bajo el otro */
-    align-items: flex-end;   /* Alinea ambos al borde derecho */
-    justify-content: center;
-    min-width: 80px;        /* Espacio suficiente para que no se amontone */
-}
+            text-align: right; 
+            margin-left: auto; 
+            display: flex; 
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            min-width: 80px;
+        }
 
-.price-tag { 
-    color: var(--primary); 
-    font-weight: 900; 
-    font-size: 1.1rem; 
-    white-space: nowrap;    /* Mantiene S/ y el número juntos */
-}
+        .price-tag { 
+            color: var(--primary); 
+            font-weight: 900; 
+            font-size: 1.1rem; 
+            white-space: nowrap;
+        }
 
-.unit-price { 
-    display: block; 
-    font-size: 9px; 
-    color: var(--text-dim); 
-    font-weight: 600; 
-    margin-top: 2px;        /* Pequeña separación del precio principal */
-}
+        .unit-price { 
+            display: block; 
+            font-size: 9px; 
+            color: var(--text-dim); 
+            font-weight: 600; 
+            margin-top: 2px;
+        }
 
         /* --- STICKY TOOLS --- */
         .sticky-tools { position: sticky; top: 0; background: var(--dark-bg); z-index: 1000; padding: 15px 0; border-bottom: 1px solid var(--glass-border); }
         .search-container { max-width: 500px; margin: 0 auto 15px; padding: 0 20px; }
         .search-container input { width: 100%; padding: 12px 20px; border-radius: 30px; border: 1px solid var(--glass-border); background: #151515; color: white; outline: none; }
-        /* --- STICKY TOOLS CORREGIDO --- */
-.filter-buttons { 
-    display: flex; 
-    justify-content: flex-start; /* Alinea al inicio para que el scroll empiece bien */
-    gap: 10px; 
-    overflow-x: auto; /* Habilita el scroll horizontal */
-    padding: 10px 20px; 
-    scrollbar-width: none; /* Oculta barra en Firefox */
-    -webkit-overflow-scrolling: touch; /* Scroll suave en iPhone */
-}
+        
+        .filter-buttons { 
+            display: flex; 
+            justify-content: flex-start;
+            gap: 10px; 
+            overflow-x: auto;
+            padding: 10px 20px; 
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
 
-/* Oculta la barra de scroll en Chrome, Safari y Edge */
-.filter-buttons::-webkit-scrollbar { 
-    display: none; 
-}
+        .filter-buttons::-webkit-scrollbar { display: none; }
         .filter-btn { 
-    flex: 0 0 auto; /* IMPORTANTE: Evita que los botones se encojan */
-    padding: 10px 20px; 
-    border-radius: 20px; 
-    border: 1px solid var(--glass-border); 
-    background: var(--card-bg); 
-    color: white; 
-    cursor: pointer; 
-    font-size: 0.8rem; /* Un poco más grande para facilitar el toque con el dedo */
-    white-space: nowrap; /* Evita que el texto del botón se rompa en dos líneas */
-    transition: 0.3s;
-}
+            flex: 0 0 auto;
+            padding: 10px 20px; 
+            border-radius: 20px; 
+            border: 1px solid var(--glass-border); 
+            background: var(--card-bg); 
+            color: white; 
+            cursor: pointer; 
+            font-size: 0.8rem; 
+            white-space: nowrap;
+            transition: 0.3s;
+        }
         .filter-btn.active { background: var(--primary); color: black; font-weight: 800; }
 
         /* --- CARRITO --- */
@@ -162,38 +165,119 @@
         .cart-info { flex-grow: 1; color: black; font-weight: 800; font-size: 0.9rem; }
         .btn-clear { background: #f0f0f0; color: #ff0000; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; margin-left: 15px; }
         .whatsapp-icon-float { font-size: 1.5rem; margin-right: 15px; color: #25D366; }
-        /* --- NUEVOS ESTILOS DE SELECCIÓN EN CELESTE --- */
-.service-link.selected .service-card {
-    border-color: #00d4ff !important; /* Celeste brillante */
-    background: rgba(0, 212, 255, 0.05); /* Fondo celeste sutil */
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
-}
 
-.service-link.selected.premium .service-card {
-    border-color: #00d4ff !important; /* También celeste al seleccionar, aunque sea premium */
-    background: rgba(0, 212, 255, 0.05);
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
-}
+        /* --- SELECCIÓN CELESTE --- */
+        .service-link.selected .service-card {
+            border-color: #00d4ff !important;
+            background: rgba(0, 212, 255, 0.05);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+        .service-link.selected .service-card::before {
+            content: "\f058"; 
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            color: #00d4ff;
+            font-size: 1.1rem;
+            z-index: 10;
+        }
 
-.service-link.selected .service-card::before {
-    content: "\f058"; 
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    color: #00d4ff; /* Check en celeste */
-    font-size: 1.1rem;
-    z-index: 10;
-}
+        /* --- DISEÑO DEL MODAL DE ACCESO --- */
+        .modal-pass { 
+            display: none; 
+            position: fixed; 
+            inset: 0; 
+            background: #000; 
+            z-index: 99999; 
+            justify-content: center; 
+            align-items: center;
+            visibility: visible !important; /* <--- IMPORTANTE */
+        }
 
-.service-link.selected.premium .service-card::before {
-    color: #00d4ff; /* Check en celeste para premium también */
-}
+        .modal-content-pass { 
+            background: #0f0f0f; 
+            padding: 40px; 
+            border-radius: 30px; 
+            width: 90%; 
+            max-width: 400px; 
+            border: 1px solid var(--accent); 
+            text-align: center; 
+            box-shadow: 0 0 30px rgba(160, 32, 240, 0.2);
+        }
+
+        #input-dist-pass { 
+            width: 100%; 
+            padding: 15px; 
+            margin: 25px 0; 
+            border-radius: 12px; 
+            background: #000; 
+            color: white; 
+            text-align: center; 
+            font-size: 1.5rem; 
+            border: 1px solid #333; 
+            outline: none; 
+            letter-spacing: 5px;
+        }
+
+        .btn-entrar-vip {
+            width: 100%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+        }
     </style>
 </head>
 <body>
 
+<div id="modal-login-distribuidor" class="modal-pass">
+    <div class="modal-content-pass">
+        <i class="fas fa-lock" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
+        <h2 style="color:white; font-size: 1.2rem;">ACCESO DISTRIBUIDOR</h2>
+        <p style="font-size: 0.7rem; color: var(--text-dim); margin-top: 5px;">Ingrese su PIN para ver precios de mayorista</p>
+        <input type="password" id="input-dist-pass" placeholder="····" maxlength="8" onkeypress="if(event.key === 'Enter') validarAcceso()">
+        <button onclick="validarAcceso()" class="btn-entrar-vip">VER CATÁLOGO VIP</button>
+    </div>
+</div>
+
+<script>
+    (function() {
+        const acceso = sessionStorage.getItem("acceso_distribuidor");
+        if (acceso === "true") {
+            document.documentElement.style.visibility = "visible";
+            document.addEventListener("DOMContentLoaded", () => {
+                document.body.style.visibility = "visible";
+            });
+        } else {
+            document.addEventListener("DOMContentLoaded", () => {
+                const modal = document.getElementById('modal-login-distribuidor');
+                if (modal) {
+                    modal.style.display = 'flex';
+                    document.body.style.visibility = 'hidden'; 
+                    modal.style.visibility = 'visible';
+                }
+            });
+        }
+    })();
+
+    function validarAcceso() {
+        const inputPass = document.getElementById('input-dist-pass');
+        if (inputPass.value === "dis") { // Tu PIN
+            sessionStorage.setItem("acceso_distribuidor", "true");
+            location.reload();
+        } else {
+            alert("Acceso denegado.");
+            inputPass.value = "";
+        }
+    }
+</script>
+    
 <header>
     <div class="logo-container"><img src="../img/logo.png" alt="AlexStoree"></div>
     <h1>SMARTERSPRO <span class="mayoristas">MAYORISTAS</span></h1>
@@ -204,7 +288,7 @@
 
 <div class="sticky-tools">
     <div class="search-container">
-        <input type="text" id="searchInput" onkeyup="filtrarServicios()" placeholder="Buscar plataforma..." onkeyup="filterSearch()">
+        <input type="text" id="searchInput" onkeyup="filtrarServicios()" placeholder="Buscar plataforma...">
     </div>
     <div class="filter-buttons">
         <button class="filter-btn active" onclick="filterCat('all', this)">Todos</button>
@@ -636,6 +720,7 @@
 
 </div>
 
+
 <div id="cart-bar" onclick="sendWhatsapp()">
     <div class="cart-content">
         <i class="fa-brands fa-whatsapp whatsapp-icon-float"></i>
@@ -653,39 +738,35 @@
     let selectedItems = [];
 
     function toggleItem(el) {
-    if(el.classList.contains('agotado')) return;
-    el.classList.toggle('selected');
-    
-    const precio = parseFloat(el.querySelector('.price-tag').innerText.replace('S/ ', ''));
-    const nombre = el.querySelector('h3').innerText;
-    const desc = el.querySelector('.manual-desc').innerText; 
-    const unitario = el.querySelector('.unit-price') ? el.querySelector('.unit-price').innerText : ""; 
-    
-    if(el.classList.contains('selected')) {
-        total += precio; cant++;
-        selectedItems.push({nombre, precio, desc, unitario});
-    } else {
-        total -= precio; cant--;
-        selectedItems = selectedItems.filter(item => item.nombre !== nombre);
+        if(el.classList.contains('agotado')) return;
+        el.classList.toggle('selected');
+        
+        const precio = parseFloat(el.querySelector('.price-tag').innerText.replace('S/ ', ''));
+        const nombre = el.querySelector('h3').innerText;
+        const desc = el.querySelector('.manual-desc').innerText; 
+        const unitario = el.querySelector('.unit-price') ? el.querySelector('.unit-price').innerText : ""; 
+        
+        if(el.classList.contains('selected')) {
+            total += precio; cant++;
+            selectedItems.push({nombre, precio, desc, unitario});
+        } else {
+            total -= precio; cant--;
+            selectedItems = selectedItems.filter(item => item.nombre !== nombre);
+        }
+        updateCartUI();
     }
-    
-    // El color del borde ahora lo manejamos por CSS con la clase .selected
-    // para que sea más fácil de mantener.
-    updateCartUI();
-}
 
     function updateCartUI() {
         document.getElementById('cart-qty').innerText = cant;
         document.getElementById('cart-total').innerText = "S/ " + total.toFixed(2);
-        document.getElementById('cart-bar').style.display = cant > 0 ? "block" : "none";
+        // Además del conteo, verificamos si el acceso está validado para mostrar la barra
+        const acceso = sessionStorage.getItem("acceso_distribuidor");
+        document.getElementById('cart-bar').style.display = (cant > 0 && acceso === "true") ? "block" : "none";
     }
 
     function clearAll(event) {
         event.stopPropagation();
-        document.querySelectorAll('.service-link.selected').forEach(el => {
-            el.classList.remove('selected');
-            el.querySelector('.service-card').style.borderColor = el.classList.contains('premium') ? "var(--gold)" : "var(--glass-border)";
-        });
+        document.querySelectorAll('.service-link.selected').forEach(el => el.classList.remove('selected'));
         selectedItems = []; total = 0; cant = 0;
         updateCartUI();
     }
@@ -694,15 +775,12 @@
         if(selectedItems.length === 0) return;
         const numero = "51918600000";
         let msj = "¡Hola Alex Store! 👋 Deseo adquirir:\n\n";
-        
-        // --- EDITADO: Estructura del mensaje con descripción ---
         selectedItems.forEach(item => {
             msj += `✅ *${item.nombre}*\n`;
-            msj += `   _${item.desc}_\n`; // Descripción en cursiva
-            if(item.unitario) msj += `   [${item.unitario}]\n`; // Unitario si existe
+            msj += `   _${item.desc}_\n`; 
+            if(item.unitario) msj += `   [${item.unitario}]\n`; 
             msj += `   *Precio:* S/ ${item.precio.toFixed(2)}\n\n`;
         });
-        
         msj += `💰 *TOTAL A PAGAR: S/ ${total.toFixed(2)}*`;
         window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msj)}`, '_blank');
     }
@@ -711,19 +789,13 @@
         let input = document.getElementById('searchInput').value.toLowerCase();
         let cards = document.querySelectorAll('.service-link');
         let categories = document.querySelectorAll('.category-block');
-
         cards.forEach(card => {
             let texto = card.innerText.toLowerCase();
             card.style.display = texto.includes(input) ? "" : "none";
         });
-
         categories.forEach(category => {
             let cardsVisibles = category.querySelectorAll('.service-link:not([style*="display: none"])').length;
-            if (cardsVisibles > 0 || input === "") {
-                category.style.display = ""; 
-            } else {
-                category.style.display = "none"; 
-            }
+            category.style.display = (cardsVisibles > 0 || input === "") ? "" : "none";
         });
     }
 
