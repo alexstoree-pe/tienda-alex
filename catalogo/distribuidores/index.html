@@ -21,8 +21,16 @@
             --gold-gradient: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
         }
 
-        /* SEGURIDAD: Ocultar HTML inicialmente */
-        html { display: none; background-color: var(--dark); scroll-behavior: smooth; }
+        /* Cambia el display:none por opacidad para evitar bloqueos visuales */
+html { 
+    background-color: var(--dark); 
+    scroll-behavior: smooth; 
+}
+
+/* Esta clase asegurará que el contenido se oculte correctamente */
+.contenido-protegido {
+    display: none !important;
+}
 
         @keyframes shine-red { 
             0%, 100% { text-shadow: 0 0 10px var(--danger-neon), 0 0 20px var(--danger-neon); color: var(--danger-neon); border-color: var(--danger-neon); box-shadow: inset 0 0 10px var(--danger-neon), 0 0 10px var(--danger-neon); } 
@@ -30,13 +38,28 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background: #0a0a0a; color: white; padding-bottom: 200px; overflow-x: hidden; }
+        /* 1. Ocultamos TODO el cuerpo por defecto para evitar el "parpadeo" de botones */
+body { 
+    font-family: 'Poppins', sans-serif; 
+    background: #0a0a0a; 
+    color: white; 
+    padding-bottom: 200px; 
+    overflow-x: hidden;
+    visibility: hidden; /* <--- Esto es la clave: invisible hasta que el PIN sea correcto */
+}
 
-        /* ESTILOS DEL MODAL DE SEGURIDAD */
-        .modal-pass { 
-            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); 
-            backdrop-filter: blur(25px); z-index: 9999; justify-content: center; align-items: center; 
-        }
+/* 2. El modal debe ser lo ÚNICO visible cuando no hay acceso */
+.modal-pass { 
+    display: none; 
+    position: fixed; 
+    inset: 0; 
+    background: rgba(0,0,0,0.98); 
+    backdrop-filter: blur(25px); 
+    z-index: 9999; 
+    justify-content: center; 
+    align-items: center;
+    visibility: visible; /* <--- Esto permite que el modal se vea aunque el body esté oculto */
+}
         .modal-content-pass { 
             background: #111; padding: 40px; border-radius: 40px; width: 90%; max-width: 400px; 
             border: 1px solid var(--primary); text-align: center; box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
@@ -188,31 +211,57 @@
     </style>
 
     <script>
-        /* SCRIPT DE SEGURIDAD INTEGRADO */
-        (function() {
-            const acceso = sessionStorage.getItem("acceso_distribuidor");
-            if (acceso === "true") {
-                document.documentElement.style.display = "block";
-            } else {
-                document.addEventListener("DOMContentLoaded", function() {
-                    document.documentElement.style.display = "block";
-                    const mainContent = document.querySelectorAll('header, .search-container, .grid-botones, .container, .floating-btn');
-                    mainContent.forEach(el => { if(el) el.style.display = 'none'; });
-                    document.getElementById('modal-login-distribuidor').style.display = 'flex';
-                    document.getElementById('input-dist-pass').focus();
-                });
-            }
-        })();
-    </script>
+    // Usamos una función que se ejecuta de inmediato (antes de que carguen los botones)
+    (function() {
+        const acceso = sessionStorage.getItem("acceso_distribuidor");
+        
+        if (acceso === "true") {
+            // Si tiene acceso, hacemos todo visible de inmediato
+            document.documentElement.style.visibility = "visible";
+            document.addEventListener("DOMContentLoaded", () => {
+                document.body.style.visibility = "visible";
+            });
+        } else {
+            // Si no tiene acceso, esperamos al DOM solo para mostrar el modal
+            document.addEventListener("DOMContentLoaded", () => {
+                const modal = document.getElementById('modal-login-distribuidor');
+                if (modal) {
+                    modal.style.display = 'flex';
+                    // Mantenemos el body oculto pero el modal visible
+                    document.body.style.visibility = 'hidden'; 
+                    modal.style.visibility = 'visible';
+                }
+            });
+        }
+    })();
+
+    function validarAcceso() {
+        const inputPass = document.getElementById('input-dist-pass');
+        const pass = inputPass.value;
+        const PIN_CORRECTO = "dis"; // Tu PIN aquí
+
+        if (pass === PIN_CORRECTO) {
+            sessionStorage.setItem("acceso_distribuidor", "true");
+            // Al recargar, entrará en el primer "if" y todo será visible
+            location.reload();
+        } else {
+            alert("Acceso denegado.");
+            inputPass.value = "";
+            inputPass.focus();
+        }
+    }
+</script>
 </head>
 <body>
 
-<div id="modal-login-distribuidor" class="modal-pass">
+<div id="modal-login-distribuidor" class="modal-pass" style="display:none;">
     <div class="modal-content-pass">
-        <i class="fa-solid fa-lock" style="color:var(--primary); font-size: 3rem; margin-bottom: 20px;"></i>
-        <h2 style="color:var(--primary); margin-bottom:10px;">ACCESO PRIVADO</h2>
-        <input type="password" id="input-dist-pass" placeholder="••••" maxlength="8" onkeydown="if(event.key === 'Enter') validarAcceso()">
-        <button onclick="validarAcceso()" style="background:var(--primary); width:100%; padding:20px; border-radius:15px; font-weight:800; border:none; cursor:pointer; color:#000;">ENTRAR</button>
+        <i class="fas fa-lock" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+        <h2 style="color:var(--primary)">ACCESO PRIVADO</h2>
+        <input type="password" id="input-dist-pass" placeholder="PIN" maxlength="8">
+        <button onclick="validarAcceso()" class="btn-universal btn-promo-distri" style="width:100%; cursor:pointer;">
+            ENTRAR
+        </button>
     </div>
 </div>
 
@@ -707,27 +756,14 @@
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
+    // Inicialización de animaciones
     AOS.init({ duration: 800, once: true });
     
     let carrito = [];
 
-    function validarAcceso() {
-        const inputPass = document.getElementById('input-dist-pass');
-        const pass = inputPass.value;
-        if (pass === "dis") {
-            sessionStorage.setItem("acceso_distribuidor", "true");
-            location.reload();
-        } else {
-            alert("Acceso denegado. PIN incorrecto.");
-            inputPass.value = "";
-            inputPass.focus();
-        }
-    }
-
-    /* BUSCADOR ULTRA-REFORZADO */
+    // --- BUSCADOR ---
     function filtrarPlataformas() {
         const input = document.getElementById('buscador').value.trim().toLowerCase();
-        // Buscamos en todo el documento para asegurar que no se escape nada
         const tarjetas = document.querySelectorAll('.service-link');
         
         tarjetas.forEach(tarjeta => {
@@ -736,23 +772,19 @@
             
             if (nombre.includes(input) || descripcion.includes(input)) {
                 tarjeta.classList.remove('oculto-busqueda');
-                // Forzamos que AOS no bloquee la visibilidad al buscar
+                tarjeta.style.display = "block";
                 tarjeta.style.opacity = "1"; 
                 tarjeta.style.transform = "none";
-                tarjeta.style.display = "block";
             } else {
                 tarjeta.classList.add('oculto-busqueda');
                 tarjeta.style.display = "none";
             }
         });
         
-        // Manejo de títulos de categoría para que no queden "huérfanos"
         const categorias = document.querySelectorAll('.category-title');
         categorias.forEach(titulo => {
             let tieneHijosVisibles = false;
             let hermano = titulo.nextElementSibling;
-            
-            // Revisa todos los hermanos hasta el siguiente título o el fin del contenedor
             while(hermano && !hermano.classList.contains('category-title')) {
                 if(hermano.classList.contains('service-link') && !hermano.classList.contains('oculto-busqueda')) {
                     tieneHijosVisibles = true;
@@ -764,6 +796,7 @@
         });
     }
 
+    // --- LÓGICA DE SELECCIÓN ---
     function toggleSeleccion(elemento) {
         if(elemento.classList.contains('agotado')) return;
         elemento.classList.toggle('selected');
@@ -776,8 +809,10 @@
         seleccionados.forEach(el => {
             const nombre = el.querySelector('.nombre-prod').innerText;
             const precioText = el.querySelector('.precio-prod').innerText;
+            const caracteristicas = el.querySelector('.manual-desc') ? el.querySelector('.manual-desc').innerText : "Sin descripción";
             const precio = parseFloat(precioText.replace('S/ ', ''));
-            carrito.push({ nombre, precio });
+            
+            carrito.push({ nombre, precio, caracteristicas }); 
         });
         actualizarCarritoUI();
     }
@@ -798,8 +833,8 @@
         if(contador) contador.innerText = carrito.length;
         if(totalTxt) totalTxt.innerText = `S/ ${totalSoles.toFixed(2)}`;
         
+        // Solo mostrar si hay productos Y el acceso está validado
         if(barra) {
-            // Se muestra solo si hay productos y hay acceso
             if (carrito.length > 0 && sessionStorage.getItem("acceso_distribuidor") === "true") {
                 barra.style.display = 'block';
             } else {
@@ -808,24 +843,32 @@
         }
     }
 
-    function mostrarAlerta() {
-        const alert = document.getElementById('custom-alert');
-        if(alert) {
-            alert.classList.add('active');
-            setTimeout(() => alert.classList.remove('active'), 3000);
-        }
-    }
-
+    // --- ENVÍO A WHATSAPP ---
     function enviarPedido() {
         if (carrito.length === 0) {
             mostrarAlerta();
             return;
         }
         let totalSoles = carrito.reduce((sum, p) => sum + p.precio, 0);
-        let mensaje = "¡Hola Alex Store! 👋 Deseo adquirir estos servicios para distribuidores:\n\n";
-        carrito.forEach(p => mensaje += `✅ ${p.nombre} - S/ ${p.precio}\n`);
+        let mensaje = "¡Hola Alex Store! soy distribuidor 👋 Deseo adquirir:\n\n";
+        
+        carrito.forEach(p => {
+            mensaje += `⭐ *${p.nombre}*\n`;
+            mensaje += `📝 ${p.caracteristicas}\n`;
+            mensaje += `💵 Precio: S/ ${p.precio.toFixed(2)}\n`;
+            mensaje += `--------------------------\n`;
+        });
+        
         mensaje += `\n💰 *TOTAL A PAGAR: S/ ${totalSoles.toFixed(2)}*`;
         window.open(`https://wa.me/51918600000?text=${encodeURIComponent(mensaje)}`, '_blank');
+    }
+
+    function mostrarAlerta() {
+        const alert = document.getElementById('custom-alert');
+        if(alert) {
+            alert.classList.add('active');
+            setTimeout(() => alert.classList.remove('active'), 3000);
+        }
     }
 </script>
 </body>
