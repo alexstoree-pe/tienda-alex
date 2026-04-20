@@ -11,265 +11,643 @@
     <style>
         :root {
             --primary: #39ff14; 
-            --accent: #9d00ff;  
+            --accent: #a020f0;  
             --dark-bg: #050505;
             --card-bg: #0f0f0f;
             --text-main: #ffffff;
             --text-dim: #a0a0a0;
             --glass-border: rgba(255, 255, 255, 0.1);
             --danger: #ff0000;
-            --neon-red: #ff0000;
+            --gold: #ffd700;
+            --gold-shadow: rgba(255, 215, 0, 0.3);
         }
 
-        html { scroll-behavior: smooth; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--dark-bg); color: var(--text-main); padding-bottom: 120px; }
+        body { background-color: var(--dark-bg); color: var(--text-main); padding-bottom: 140px; }
 
-        header { text-align: center; padding: 40px 20px 10px; }
-        .brand-logo { width: 70px; margin-bottom: 15px; filter: drop-shadow(0 0 10px var(--accent)); }
-        h1 { font-size: 1.6rem; font-weight: 800; text-transform: uppercase; }
-        h1 span { color: var(--primary); }
-
-        /* NAVEGACIÓN ENTRE CARPETAS */
-        .nav-actions { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; padding: 0 20px; }
-        .btn-nav { 
-            background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); 
-            color: white; padding: 10px 20px; border-radius: 12px; 
-            text-decoration: none; font-size: 0.75rem; font-weight: 700; 
-            display: flex; align-items: center; gap: 8px; transition: 0.3s;
+        /* --- CABECERA --- */
+        header { padding: 40px 20px 20px; text-align: center; }
+        .logo-container img { 
+            width: 100px; height: 100px; border-radius: 50%; 
+            border: 3px solid var(--accent); background-color: #000;
+            box-shadow: 0 0 20px rgba(160, 32, 240, 0.4);
         }
-        .btn-nav:hover { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 15px var(--accent); }
+        h1 { font-size: 1.8rem; text-transform: uppercase; font-weight: 800; margin: 20px 0; }
+        h1 span.mayoristas { color: var(--primary); }
 
-        /* BUSCADOR Y FILTROS */
-        .sticky-tools { position: sticky; top: 0; background: var(--dark-bg); z-index: 100; padding: 10px 0; border-bottom: 1px solid var(--glass-border); }
-        .search-container { max-width: 500px; margin: 10px auto; padding: 0 20px; }
-        .search-input { width: 100%; background: var(--card-bg); border: 1px solid var(--glass-border); padding: 12px 20px; border-radius: 15px; color: white; font-size: 0.9rem; outline: none; transition: 0.3s; }
-        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(57, 255, 20, 0.2); }
+        .btn-volver { 
+            display: inline-flex; align-items: center; gap: 10px;
+            background-color: transparent; border: 2px solid var(--accent);
+            color: white; text-decoration: none; font-size: 0.8rem; font-weight: 800;
+            padding: 12px 25px; border-radius: 30px; transition: 0.4s ease;
+            cursor: pointer;
+        }
+        .btn-volver:hover { 
+            background-color: var(--accent);
+            box-shadow: 0 0 25px rgba(160, 32, 240, 1);
+            transform: translateY(-2px);
+        }
 
-        .filter-nav { display: flex; justify-content: center; gap: 8px; overflow-x: auto; white-space: nowrap; padding: 10px 20px; scrollbar-width: none; }
-        .filter-nav::-webkit-scrollbar { display: none; }
-        .filter-btn { background: var(--card-bg); border: 1px solid var(--glass-border); color: var(--text-dim); padding: 8px 15px; border-radius: 10px; font-size: 0.7rem; font-weight: 800; text-decoration: none; }
+        /* --- GADGETS AUTOMÁTICOS --- */
+        .service-link.agotado .service-card::after {
+            content: "NO DISPONIBLE"; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); color: white; font-weight: 900;
+            display: flex; justify-content: center; align-items: center; z-index: 200;
+        }
+        .service-link.agotado .badge-izq, 
+        .service-link.agotado .timer-flash, 
+        .service-link.agotado .badge-premium,
+        .service-link.agotado .badge-culminada { display: none !important; }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-        /* GADGETS Y ESTADOS */
-        .badge-izq { display: none; position: absolute; top: 0; left: 0; background: var(--primary); color: #000; padding: 4px 12px; font-size: 0.6rem; font-weight: 900; z-index: 5; clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%); }
+        .timer-flash { display: none !important; position: absolute; top: 0; left: 50%; transform: translateX(-50%); background: var(--danger); color: white; padding: 2px 12px; font-size: 0.65rem; font-weight: 800; border-radius: 0 0 10px 10px; z-index: 50; align-items: center; gap: 5px; }
+        .service-link.flash .timer-flash { display: flex !important; }
+        .badge-izq { display: none; position: absolute; top: 0; left: 0; background: var(--primary); color: #000; padding: 4px 10px; font-size: 0.6rem; font-weight: 900; z-index: 5; clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%); }
         .service-link.oferta .badge-izq { display: block; }
-        .badge-der { display: none; position: absolute; top: 0; right: 0; background: var(--accent); color: #fff; padding: 4px 12px; font-size: 0.6rem; font-weight: 900; z-index: 5; clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%); }
-        .service-link.nuevo .badge-der { display: block; }
+        .badge-culminada { display: none !important; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-5deg); background: rgba(0,0,0,0.95); color: var(--danger); padding: 12px; font-weight: 900; border: 2px solid var(--danger); z-index: 110; text-align: center; width: 85%; }
+        .service-link.flash-terminado .badge-culminada { display: block !important; }
 
-        .timer-flash { display: none; position: absolute; top: 0; left: 50%; transform: translateX(-50%); background: var(--danger); color: white; padding: 2px 10px; font-size: 0.65rem; font-weight: 800; border-radius: 0 0 10px 10px; z-index: 10; }
-        .service-link.flash .timer-flash { display: flex; align-items: center; gap: 5px; }
-
-        @keyframes neon-flicker { 0%, 100% { opacity: 1; text-shadow: 0 0 10px #f00; } 50% { opacity: 0.6; } }
-        .badge-culminada { display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-5deg); background: rgba(0,0,0,0.95); color: var(--neon-red); padding: 12px; font-weight: 900; border: 2px solid var(--neon-red); z-index: 110; animation: neon-flicker 1.5s infinite; text-align: center; width: 85%; pointer-events: none; }
-
-        /* CAPA GLOBAL NO DISPONIBLE */
-        .capa-no-disponible { 
-            display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.88); z-index: 150; flex-direction: column; 
-            justify-content: center; align-items: center; pointer-events: none;
+        /* AJUSTE PREMIUM TAG SOLICITADO */
+        .premium-tag { 
+            display: none; 
+            font-size: 0.5rem; /* Más pequeño */
+            font-weight: 800; 
+            color: var(--gold); 
+            border: 1px solid var(--gold); 
+            padding: 1px 4px; 
+            border-radius: 3px; 
+            text-transform: uppercase; 
+            margin-bottom: 2px;
+            margin-right: 15px; /* Lo desplaza a la izquierda del precio */
+            letter-spacing: 0.5px;
         }
-        .capa-no-disponible span { 
-            background: #1a1a1a; color: #fff; padding: 8px 20px; 
-            border: 2px solid #444; font-weight: 900; transform: rotate(-8deg);
-            box-shadow: 0 0 20px rgba(0,0,0,0.8); font-size: 0.8rem;
-        }
+        .service-link.premium .premium-tag { display: inline-block; }
+        .service-link.premium .service-card { border-color: var(--gold); box-shadow: 0 0 15px var(--gold-shadow); }
+        .service-link.premium .price-tag, .service-link.premium .unit-price { color: var(--gold) !important; }
 
-        .service-link.no-disponible { cursor: not-allowed !important; pointer-events: none; }
-        .service-link.no-disponible .capa-no-disponible { display: flex; }
-        .service-link.flash-terminado .badge-culminada { display: block; }
-        .service-link.flash-terminado, .service-link.no-disponible { filter: grayscale(1); opacity: 0.7; }
-
-        /* TARJETAS */
+        /* --- TARJETAS --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .category-header { margin: 40px 0 20px; border-left: 4px solid var(--accent); padding-left: 15px; }
+        .category-title { font-weight: 800; text-transform: uppercase; font-size: 1.2rem; color: #fff; }
+        .category-desc { color: var(--text-dim); font-size: 0.8rem; margin-top: 5px; display: block; }
         .grid-servicios { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px; }
-        .service-card { background: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 18px; display: flex; align-items: center; gap: 15px; height: 100%; position: relative; overflow: hidden; }
-        .service-logo { width: 55px; height: 55px; border-radius: 12px; object-fit: cover; }
-        .unit-price { display: block; font-size: 10px; font-weight: 700; color: var(--primary); }
-        .price-tag { display: block; font-size: 1.15rem; font-weight: 900; color: var(--primary); margin-left: auto; }
+        
+        .service-link { text-decoration: none; color: inherit; cursor: pointer; transition: 0.3s; -webkit-tap-highlight-color: transparent; }
+        .service-card { background: var(--card-bg); border: 2px solid var(--glass-border); border-radius: 20px; padding: 18px; display: flex; align-items: center; gap: 15px; position: relative; overflow: hidden; transition: 0.3s; }
+        .service-logo { width: 50px; height: 50px; border-radius: 12px; object-fit: cover; }
+        .service-text { flex-grow: 1; }
+        .service-text h3 { font-size: 0.9rem; margin-bottom: 2px; }
+        .manual-desc { display: block; font-size: 10px; color: var(--text-dim); font-style: italic; margin-top: 2px; }
+        
+        .price-container { 
+    text-align: right; 
+    margin-left: auto; 
+    display: flex; 
+    flex-direction: column; /* Apila el precio y el unitario uno bajo el otro */
+    align-items: flex-end;   /* Alinea ambos al borde derecho */
+    justify-content: center;
+    min-width: 80px;        /* Espacio suficiente para que no se amontone */
+}
 
-        .category-header { margin: 40px 0; scroll-margin-top: 150px; }
-        .category-title { font-weight: 800; font-size: 1.1rem; border-left: 4px solid var(--accent); padding-left: 15px; text-transform: uppercase; margin-bottom: 12px; }
-        .category-description { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 15px; margin-bottom: 20px; font-size: 0.8rem; color: var(--text-dim); border-left: 4px solid var(--primary); }
+.price-tag { 
+    color: var(--primary); 
+    font-weight: 900; 
+    font-size: 1.1rem; 
+    white-space: nowrap;    /* Mantiene S/ y el número juntos */
+}
 
-        #cart-bar { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 450px; background: #fff; color: #000; border-radius: 25px; padding: 15px; display: none; z-index: 2000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .btn-send { background: #000; color: #fff; width: 100%; padding: 14px; border-radius: 15px; text-align: center; font-weight: 800; display: flex; justify-content: center; align-items: center; gap: 10px; cursor: pointer; }
+.unit-price { 
+    display: block; 
+    font-size: 9px; 
+    color: var(--text-dim); 
+    font-weight: 600; 
+    margin-top: 2px;        /* Pequeña separación del precio principal */
+}
+
+        /* --- STICKY TOOLS --- */
+        .sticky-tools { position: sticky; top: 0; background: var(--dark-bg); z-index: 1000; padding: 15px 0; border-bottom: 1px solid var(--glass-border); }
+        .search-container { max-width: 500px; margin: 0 auto 15px; padding: 0 20px; }
+        .search-container input { width: 100%; padding: 12px 20px; border-radius: 30px; border: 1px solid var(--glass-border); background: #151515; color: white; outline: none; }
+        /* --- STICKY TOOLS CORREGIDO --- */
+.filter-buttons { 
+    display: flex; 
+    justify-content: flex-start; /* Alinea al inicio para que el scroll empiece bien */
+    gap: 10px; 
+    overflow-x: auto; /* Habilita el scroll horizontal */
+    padding: 10px 20px; 
+    scrollbar-width: none; /* Oculta barra en Firefox */
+    -webkit-overflow-scrolling: touch; /* Scroll suave en iPhone */
+}
+
+/* Oculta la barra de scroll en Chrome, Safari y Edge */
+.filter-buttons::-webkit-scrollbar { 
+    display: none; 
+}
+        .filter-btn { 
+    flex: 0 0 auto; /* IMPORTANTE: Evita que los botones se encojan */
+    padding: 10px 20px; 
+    border-radius: 20px; 
+    border: 1px solid var(--glass-border); 
+    background: var(--card-bg); 
+    color: white; 
+    cursor: pointer; 
+    font-size: 0.8rem; /* Un poco más grande para facilitar el toque con el dedo */
+    white-space: nowrap; /* Evita que el texto del botón se rompa en dos líneas */
+    transition: 0.3s;
+}
+        .filter-btn.active { background: var(--primary); color: black; font-weight: 800; }
+
+        /* --- CARRITO --- */
+        #cart-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 500px; background: white; border-radius: 25px; display: none; z-index: 1000; box-shadow: 0 10px 40px rgba(0,0,0,0.5); overflow: hidden; cursor: pointer; }
+        .cart-content { display: flex; align-items: center; padding: 12px 20px; width: 100%; }
+        .cart-info { flex-grow: 1; color: black; font-weight: 800; font-size: 0.9rem; }
+        .btn-clear { background: #f0f0f0; color: #ff0000; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; margin-left: 15px; }
+        .whatsapp-icon-float { font-size: 1.5rem; margin-right: 15px; color: #25D366; }
+        /* --- NUEVOS ESTILOS DE SELECCIÓN EN CELESTE --- */
+.service-link.selected .service-card {
+    border-color: #00d4ff !important; /* Celeste brillante */
+    background: rgba(0, 212, 255, 0.05); /* Fondo celeste sutil */
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+}
+
+.service-link.selected.premium .service-card {
+    border-color: #00d4ff !important; /* También celeste al seleccionar, aunque sea premium */
+    background: rgba(0, 212, 255, 0.05);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+}
+
+.service-link.selected .service-card::before {
+    content: "\f058"; 
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: #00d4ff; /* Check en celeste */
+    font-size: 1.1rem;
+    z-index: 10;
+}
+
+.service-link.selected.premium .service-card::before {
+    color: #00d4ff; /* Check en celeste para premium también */
+}
     </style>
 </head>
 <body>
 
 <header>
-    <img src="../img/logo.png" class="brand-logo">
-    <h1>SMARTERSPRO <span>MAYORISTAS</span></h1>
-</header>
-
-<div class="nav-actions">
-    <a href="../distribuidores/index.html" class="btn-nav">
+    <div class="logo-container"><img src="../img/logo.png" alt="AlexStoree"></div>
+    <h1>SMARTERSPRO <span class="mayoristas">MAYORISTAS</span></h1>
+    <a href="../distribuidores/index.html" class="btn-volver">
         <i class="fa-solid fa-arrow-left"></i> VOLVER A DISTRIBUIDORES
     </a>
-</div>
+</header>
 
 <div class="sticky-tools">
     <div class="search-container">
-        <input type="text" id="mainSearch" class="search-input" placeholder="Buscar plataforma o créditos..." onkeyup="filterProducts()">
+        <input type="text" id="searchInput" onkeyup="filtrarServicios()" placeholder="Buscar plataforma..." onkeyup="filterSearch()">
     </div>
-    <nav class="filter-nav">
-        <a href="#unidades" class="filter-btn">UNIDADES</a>
-        <a href="#flujo" class="filter-btn">FLUJO TV</a>
-        <a href="#europeo" class="filter-btn">IPTV EUROPEO</a>
-        <a href="#normal" class="filter-btn">IPTV NORMAL</a>
-    </nav>
+    <div class="filter-buttons">
+        <button class="filter-btn active" onclick="filterCat('all', this)">Todos</button>
+        <button class="filter-btn" onclick="filterCat('unidades', this)">Unidades</button>
+        <button class="filter-btn" onclick="filterCat('flujo', this)">Flujo TV</button>
+        <button class="filter-btn" onclick="filterCat('equilibrado', this)">IPTV Equilibrado</button>
+        <button class="filter-btn" onclick="filterCat('europeo', this)">Europeo</button>
+    </div>
 </div>
 
 <div class="container" id="productGrid">
 
-    <div class="category-header" id="unidades">
-        <div class="category-title">CUENTAS POR UNIDAD</div>
-        <div class="category-description">Cuentas completas para consumo final. Entrega inmediata.</div>
+    <div class="category-block active-cat" data-cat="unidades">
+        <div class="category-header">
+            <span class="category-title">Cuentas por Unidad</span>
+            <span class="category-desc">Planes mensuales directos para clientes finales.</span>
+        </div>
         <div class="grid-servicios">
-            <div class="service-link flash oferta" data-final="2026-04-20 23:59:59" onclick="toggleItem(this)">
+            
+            <div class="service-link" data-final="2026-04-25 23:59:59" onclick="toggleItem(this)">
                 <div class="service-card">
                     <div class="timer-flash"><i class="fa-solid fa-clock"></i> <span class="countdown">--:--:--</span></div>
-                    <div class="badge-culminada">OFERTA FLASH CULMINADA</div>
-                    <div class="capa-no-disponible"><span>NO DISPONIBLE</span></div>
-                    <span class="badge-izq">OFERTA</span><img src="../img/u1.png" class="service-logo">
-                    <div class="service-text"><h3>IPTV Premium - 1 Mes</h3><span class="unit-price">3 DISPOSITIVOS</span></div><div class="price-tag">S/ 10</div>
+                    <div class="badge-culminada">OFERTA CULMINADA</div>
+                    <span class="badge-izq">OFERTA</span>
+                    <img src="../img/u1.png" class="service-logo">
+                    <div class="service-text">
+                        <h3>IPTV Equilibrado 1 Mes</h3>
+                        <span class="manual-desc">3 dispositivos - +6500 canales - +25000 peliculas - +2000 series</span>
+                    </div>
+                    <div class="price-container">
+                        <span class="premium-tag">Premium</span>
+                        <div class="price-tag">S/ 7</div>
+                    </div>
                 </div>
             </div>
-            <div class="service-link" onclick="toggleItem(this)">
+
+            <div class="service-link" data-final="2026-04-25 23:59:59" onclick="toggleItem(this)">
                 <div class="service-card">
-                    <div class="capa-no-disponible"><span>NO DISPONIBLE</span></div>
-                    <img src="../img/u1.png" class="service-logo"><div class="service-text"><h3>IPTV Premium - 3 Meses</h3><span class="unit-price">AHORRO ESPECIAL</span></div><div class="price-tag">S/ 28</div>
+                    <div class="timer-flash"><i class="fa-solid fa-clock"></i> <span class="countdown">--:--:--</span></div>
+                    <div class="badge-culminada">OFERTA CULMINADA</div>
+                    <span class="badge-izq">OFERTA</span>
+                    <img src="../img/u1.png" class="service-logo">
+                    <div class="service-text">
+                        <h3>IPTV Equilibrado 3 Meses</h3>
+                        <span class="manual-desc">3 dispositivos - +6500 canales - +25000 peliculas - +2000 series</span>
+                    </div>
+                    <div class="price-container">
+                        <span class="premium-tag">Premium</span>
+                        <div class="price-tag">S/ 15</div>
+                    </div>
                 </div>
             </div>
-            <div class="service-link" onclick="toggleItem(this)">
+
+            <div class="service-link" data-final="2026-04-25 23:59:59" onclick="toggleItem(this)">
                 <div class="service-card">
-                    <div class="capa-no-disponible"><span>NO DISPONIBLE</span></div>
-                    <img src="../img/u1.png" class="service-logo"><div class="service-text"><h3>IPTV Premium - 6 Meses</h3><span class="unit-price">CLIENTE VIP</span></div><div class="price-tag">S/ 50</div>
+                    <div class="timer-flash"><i class="fa-solid fa-clock"></i> <span class="countdown">--:--:--</span></div>
+                    <div class="badge-culminada">OFERTA CULMINADA</div>
+                    <span class="badge-izq">OFERTA</span>
+                    <img src="../img/u1.png" class="service-logo">
+                    <div class="service-text">
+                        <h3>IPTV Equilibrado 6 Meses</h3>
+                        <span class="manual-desc">3 dispositivos - +6500 canales - +25000 peliculas - +2000 series</span>
+                    </div>
+                    <div class="price-container">
+                        <span class="premium-tag">Premium</span>
+                        <div class="price-tag">S/ 28</div>
+                    </div>
                 </div>
             </div>
-            <div class="service-link nuevo" onclick="toggleItem(this)">
+
+            <div class="service-link" data-final="2026-04-25 23:59:59" onclick="toggleItem(this)">
                 <div class="service-card">
-                    <div class="capa-no-disponible"><span>NO DISPONIBLE</span></div>
-                    <span class="badge-der">BEST</span><img src="../img/u1.png" class="service-logo"><div class="service-text"><h3>IPTV Premium - 12 Meses</h3><span class="unit-price">PLAN ANUAL</span></div><div class="price-tag">S/ 90</div>
+                    <div class="timer-flash"><i class="fa-solid fa-clock"></i> <span class="countdown">--:--:--</span></div>
+                    <div class="badge-culminada">OFERTA CULMINADA</div>
+                    <span class="badge-izq">OFERTA</span>
+                    <img src="../img/u1.png" class="service-logo">
+                    <div class="service-text">
+                        <h3>IPTV Equilibrado 12 Meses</h3>
+                        <span class="manual-desc">3 dispositivos - +6500 canales - +25000 peliculas - +2000 series</span>
+                    </div>
+                    <div class="price-container">
+                        <span class="premium-tag">Premium</span>
+                        <div class="price-tag">S/ 45</div>
+                    </div>
                 </div>
             </div>
+
+            <div class="service-link" data-final="2026-04-25 23:59:59" onclick="toggleItem(this)">
+                <div class="service-card">
+                    <div class="timer-flash"><i class="fa-solid fa-clock"></i> <span class="countdown">--:--:--</span></div>
+                    <div class="badge-culminada">OFERTA CULMINADA</div>
+                    <span class="badge-izq">OFERTA</span>
+                    <img src="../img/u1.png" class="service-logo">
+                    <div class="service-text">
+                        <h3>IPTV PREMIUM 1 Mes</h3>
+                        <span class="manual-desc">3 dispositivos - +10000 canales - +40000 peliculas - +3000 series</span>
+                    </div>
+                    <div class="price-container">
+                        <span class="premium-tag">Premium</span>
+                        <div class="price-tag">S/ 15</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-link oferta" data-final="2026-04-25 23:59:59" onclick="toggleItem(this)">
+                <div class="service-card">
+                    <div class="timer-flash"><i class="fa-solid fa-clock"></i> <span class="countdown">--:--:--</span></div>
+                    <div class="badge-culminada">OFERTA CULMINADA</div>
+                    <span class="badge-izq">+ 1 mes gratis</span>
+                    <img src="../img/u1.png" class="service-logo">
+                    <div class="service-text">
+                        <h3>IPTV PREMIUM 3 Meses</h3>
+                        <span class="manual-desc">3 dispositivos - +10000 canales - +40000 peliculas - +3000 series</span>
+                    </div>
+                    <div class="price-container">
+                        <span class="premium-tag">Premium</span>
+                        <div class="price-tag">S/ 45</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-link oferta" data-final="2026-04-25 23:59:59" onclick="toggleItem(this)">
+                <div class="service-card">
+                    <div class="timer-flash"><i class="fa-solid fa-clock"></i> <span class="countdown">--:--:--</span></div>
+                    <div class="badge-culminada">OFERTA CULMINADA</div>
+                    <span class="badge-izq">+ 2 mes gratis</span>
+                    <img src="../img/u1.png" class="service-logo">
+                    <div class="service-text">
+                        <h3>IPTV PREMIUM 6 Meses</h3>
+                        <span class="manual-desc">3 dispositivos - +10000 canales - +40000 peliculas - +3000 series</span>
+                    </div>
+                    <div class="price-container">
+                        <span class="premium-tag">Premium</span>
+                        <div class="price-tag">S/ 90</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-link oferta" data-final="2026-04-25 23:59:59" onclick="toggleItem(this)">
+                <div class="service-card">
+                    <div class="timer-flash"><i class="fa-solid fa-clock"></i> <span class="countdown">--:--:--</span></div>
+                    <div class="badge-culminada">OFERTA CULMINADA</div>
+                    <span class="badge-izq">+ 3 mes gratis</span>
+                    <img src="../img/u1.png" class="service-logo">
+                    <div class="service-text">
+                        <h3>IPTV PREMIUM 12 Meses</h3>
+                        <span class="manual-desc">3 dispositivos - +10000 canales - +40000 peliculas - +3000 series</span>
+                    </div>
+                    <div class="price-container">
+                        <span class="premium-tag">Premium</span>
+                        <div class="price-tag">S/ 180</div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <div class="category-header" id="flujo">
-        <div class="category-title">CUENTAS ESTABLES (FLUJO TV)</div>
-        <div class="category-description">La mejor App para Android TV y Firestick.</div>
+    <div class="category-block active-cat" data-cat="flujo">
+        <div class="category-header">
+            <span class="category-title">Cuentas Estables (Flujo TV) Antes MAGISTV</span>
+            <span class="category-desc">La mejor estabilidad en eventos deportivos • +900 canales •+10000 peliculas •+4000 series (solo compatibles con ANDROID-TV / TV BOX / FIRE STICK ).</span>
+        </div>
         <div class="grid-servicios">
-            <div class="service-link" onclick="toggleItem(this)">
+            
+            <div class="service-link" data-final="2026-12-31 23:59:59" onclick="toggleItem(this)">
                 <div class="service-card">
-                    <div class="capa-no-disponible"><span>NO DISPONIBLE</span></div>
-                    <img src="../img/flujotv.png" class="service-logo">
-                    <div class="service-text"><h3>Flujo TV Premium</h3><span class="unit-price">ANDROID / TV BOX</span></div>
-                    <div class="price-tag">S/ 15</div>
+                    <div class="timer-flash"><i class="fa-solid fa-clock"></i> <span class="countdown">--:--:--</span></div>
+                    <div class="badge-culminada">CULMINADA</div>
+                    <span class="badge-izq">OFERTA</span>
+                    <img src="../img/flujo.png" class="service-logo">
+                    <div class="service-text">
+                        <h3>Flujo TV (1 mes)</h3>
+                        <span class="manual-desc">3 dispositivos</span>
+                    </div>
+                    <div class="price-container">
+                        <span class="premium-tag">Premium</span>
+                        <div class="price-tag">S/ 12</div>
+                    </div>
                 </div>
             </div>
+
+            <div class="service-link" data-final="2026-12-31 23:59:59" onclick="toggleItem(this)">
+                <div class="service-card">
+                    <div class="timer-flash"><i class="fa-solid fa-clock"></i> <span class="countdown">--:--:--</span></div>
+                    <div class="badge-culminada">CULMINADA</div>
+                    <span class="badge-izq">OFERTA</span>
+                    <img src="../img/flujo.png" class="service-logo">
+                    <div class="service-text">
+                        <h3>Flujo TV (3 meses)</h3>
+                        <span class="manual-desc">3 dispositivos</span>
+                    </div>
+                    <div class="price-container">
+                        <span class="premium-tag">Premium</span>
+                        <div class="price-tag">S/ 35</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-link oferta" data-final="2026-12-31 23:59:59" onclick="toggleItem(this)">
+                <div class="service-card">
+                    <div class="timer-flash"><i class="fa-solid fa-clock"></i> <span class="countdown">--:--:--</span></div>
+                    <div class="badge-culminada">CULMINADA</div>
+                    <span class="badge-izq">+1 mes gratis</span>
+                    <img src="../img/flujo.png" class="service-logo">
+                    <div class="service-text">
+                        <h3>Flujo TV (6 meses)</h3>
+                        <span class="manual-desc">3 dispositivos</span>
+                    </div>
+                    <div class="price-container">
+                        <span class="premium-tag">Premium</span>
+                        <div class="price-tag">S/ 70</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-link oferta" data-final="2026-12-31 23:59:59" onclick="toggleItem(this)">
+                <div class="service-card">
+                    <div class="timer-flash"><i class="fa-solid fa-clock"></i> <span class="countdown">--:--:--</span></div>
+                    <div class="badge-culminada">CULMINADA</div>
+                    <span class="badge-izq">+2 meses gratis</span>
+                    <img src="../img/flujo.png" class="service-logo">
+                    <div class="service-text">
+                        <h3>Flujo TV (12 meses)</h3>
+                        <span class="manual-desc">3 dispositivos</span>
+                    </div>
+                    <div class="price-container">
+                        <span class="premium-tag">Premium</span>
+                        <div class="price-tag">S/ 132</div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <div class="category-header" id="europeo">
-        <div class="category-title">PANEL IPTV EUROPEO (4K)</div>
-        <div class="category-description">Contenido en 4K real, servidor en Europa.</div>
+   <div class="category-block active-cat" data-cat="equilibrado">
+        <div class="category-header">
+            <span class="category-title">Panel IPTV Equilibrado</span>
+            <span class="category-desc">Gestión de créditos con excelente relación calidad-precio (+6500 canales - +25000 peliculas - +2000 series).</span>
+        </div>
         <div class="grid-servicios">
-            <div class="service-link" onclick="toggleItem(this)"><div class="service-card"><div class="capa-no-disponible"><span>NO DISPONIBLE</span></div><img src="../img/p10.png" class="service-logo"><div class="service-text"><h3>Premium 10 Créditos</h3><span class="unit-price">S/ 8.00 x UNID.</span></div><div class="price-tag">S/ 80</div></div></div>
-            <div class="service-link" onclick="toggleItem(this)"><div class="service-card"><div class="capa-no-disponible"><span>NO DISPONIBLE</span></div><img src="../img/p20.png" class="service-logo"><div class="service-text"><h3>Premium 20 Créditos</h3><span class="unit-price">S/ 7.50 x UNID.</span></div><div class="price-tag">S/ 150</div></div></div>
-            <div class="service-link" onclick="toggleItem(this)"><div class="service-card"><div class="capa-no-disponible"><span>NO DISPONIBLE</span></div><img src="../img/p50.png" class="service-logo"><div class="service-text"><h3>Premium 50 Créditos</h3><span class="unit-price">S/ 7.00 x UNID.</span></div><div class="price-tag">S/ 350</div></div></div>
-            <div class="service-link oferta" onclick="toggleItem(this)"><div class="service-card"><div class="capa-no-disponible"><span>NO DISPONIBLE</span></div><span class="badge-izq">PRO</span><img src="../img/p100.png" class="service-logo"><div class="service-text"><h3>Premium 100 Créditos</h3><span class="unit-price">S/ 6.00 x UNID.</span></div><div class="price-tag">S/ 600</div></div></div>
-            <div class="service-link" onclick="toggleItem(this)"><div class="service-card"><div class="capa-no-disponible"><span>NO DISPONIBLE</span></div><img src="../img/p200.png" class="service-logo"><div class="service-text"><h3>Premium 200 Créditos</h3><span class="unit-price">S/ 5.50 x UNID.</span></div><div class="price-tag">S/ 1100</div></div></div>
-            <div class="service-link" onclick="toggleItem(this)"><div class="service-card"><div class="capa-no-disponible"><span>NO DISPONIBLE</span></div><img src="../img/p500.png" class="service-logo"><div class="service-text"><h3>Premium 500 Créditos</h3><span class="unit-price">S/ 5.00 x UNID.</span></div><div class="price-tag">S/ 2500</div></div></div>
+            
+            <div class="service-link" data-final="2026-12-31 23:59:59" onclick="toggleItem(this)">
+                <div class="service-card">
+                    <div class="timer-flash"><i class="fa-solid fa-clock"></i> <span class="countdown">--:--:--</span></div>
+                    <div class="badge-culminada">CULMINADA</div>
+                    <span class="badge-izq">OFERTA</span>
+                    <img src="../img/n10.png" class="service-logo">
+                    <div class="service-text">
+                        <h3>10 Créditos panel incluido</h3>
+                        <span class="manual-desc">Panel reseller gestión inmediata</span>
+                    </div>
+                    <div class="price-container">
+                        <span class="premium-tag">Premium</span>
+                        <div class="price-tag">S/ 40</div>
+                        <span class="unit-price">S/ 4.00 por unidad</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-link" data-final="2026-12-31 23:59:59" onclick="toggleItem(this)">
+                <div class="service-card">
+                    <div class="timer-flash"><i class="fa-solid fa-clock"></i> <span class="countdown">--:--:--</span></div>
+                    <div class="badge-culminada">CULMINADA</div>
+                    <span class="badge-izq">OFERTA</span>
+                    <img src="../img/n10.png" class="service-logo">
+                    <div class="service-text">
+                        <h3>50 Créditos panel incluido</h3>
+                        <span class="manual-desc">Precio especial para distribuidores</span>
+                    </div>
+                    <div class="price-container">
+                        <span class="premium-tag">Premium</span>
+                        <div class="price-tag">S/ 180</div>
+                        <span class="unit-price">S/ 3.60 por unidad</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-link" data-final="2026-12-31 23:59:59" onclick="toggleItem(this)">
+                <div class="service-card">
+                    <div class="timer-flash"><i class="fa-solid fa-clock"></i> <span class="countdown">--:--:--</span></div>
+                    <div class="badge-culminada">CULMINADA</div>
+                    <span class="badge-izq">OFERTA</span>
+                    <img src="../img/n10.png" class="service-logo">
+                    <div class="service-text">
+                        <h3>70 Créditos panel incluido</h3>
+                        <span class="manual-desc">Alta rentabilidad garantizada</span>
+                    </div>
+                    <div class="price-container">
+                        <span class="premium-tag">Premium</span>
+                        <div class="price-tag">S/ 230</div>
+                        <span class="unit-price">S/ 3.28 por unidad</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-link" data-final="2026-12-31 23:59:59" onclick="toggleItem(this)">
+                <div class="service-card">
+                    <div class="timer-flash"><i class="fa-solid fa-clock"></i> <span class="countdown">--:--:--</span></div>
+                    <div class="badge-culminada">CULMINADA</div>
+                    <span class="badge-izq">OFERTA</span>
+                    <img src="../img/n10.png" class="service-logo">
+                    <div class="service-text">
+                        <h3>100 Créditos super reseller</h3>
+                        <span class="manual-desc">Permite crear sub-paneles</span>
+                    </div>
+                    <div class="price-container">
+                        <span class="premium-tag">Premium</span>
+                        <div class="price-tag">S/ 300</div>
+                        <span class="unit-price">S/ 3.28 por unidad</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <div class="category-header" id="normal">
-        <div class="category-title">PANEL IPTV NORMAL (6500)</div>
-        <div class="category-description">Económico y masivo. El panel más vendido.</div>
+    <div class="category-block active-cat" data-cat="europeo">
+        <div class="category-header">
+            <span class="category-title">Panel IPTV Europeo</span>
+            <span class="category-desc">Servidores premium con contenido optimizado (+10000 canales - +40000 peliculas - +3000 series).</span>
+        </div>
         <div class="grid-servicios">
-            <div class="service-link" onclick="toggleItem(this)"><div class="service-card"><div class="capa-no-disponible"><span>NO DISPONIBLE</span></div><img src="../img/n10.png" class="service-logo"><div class="service-text"><h3>Normal 10 Créditos</h3><span class="unit-price">S/ 4.50 x UNID.</span></div><div class="price-tag">S/ 45</div></div></div>
-            <div class="service-link" onclick="toggleItem(this)"><div class="service-card"><div class="capa-no-disponible"><span>NO DISPONIBLE</span></div><img src="../img/n50.png" class="service-logo"><div class="service-text"><h3>Normal 50 Créditos</h3><span class="unit-price">S/ 4.00 x UNID.</span></div><div class="price-tag">S/ 200</div></div></div>
-            <div class="service-link oferta" onclick="toggleItem(this)"><div class="service-card"><div class="capa-no-disponible"><span>NO DISPONIBLE</span></div><span class="badge-izq">OFERTA</span><img src="../img/n100.png" class="service-logo"><div class="service-text"><h3>Normal 100 Créditos</h3><span class="unit-price">S/ 3.60 x UNID.</span></div><div class="price-tag">S/ 360</div></div></div>
-            <div class="service-link" onclick="toggleItem(this)"><div class="service-card"><div class="capa-no-disponible"><span>NO DISPONIBLE</span></div><img src="../img/n200.png" class="service-logo"><div class="service-text"><h3>Normal 200 Créditos</h3><span class="unit-price">S/ 3.30 x UNID.</span></div><div class="price-tag">S/ 660</div></div></div>
-            <div class="service-link" onclick="toggleItem(this)"><div class="service-card"><div class="capa-no-disponible"><span>NO DISPONIBLE</span></div><img src="../img/n500.png" class="service-logo"><div class="service-text"><h3>Normal 500 Créditos</h3><span class="unit-price">S/ 3.00 x UNID.</span></div><div class="price-tag">S/ 1500</div></div></div>
+            <div class="service-link premium" data-final="2026-12-31 23:59:59" onclick="toggleItem(this)">
+                <div class="service-card">
+                    <div class="timer-flash"><i class="fa-solid fa-clock"></i> <span class="countdown">--:--:--</span></div>
+                    <div class="badge-culminada">CULMINADA</div>
+                    <span class="badge-izq">OFERTA</span>
+                    <img src="../img/p10.png" class="service-logo">
+                    <div class="service-text">
+                        <h3>Europeo 10 Créditos</h3>
+                        <span class="manual-desc">Calidad Premium 4K estable</span>
+                    </div>
+                    <div class="price-container">
+                        <span class="premium-tag">Premium</span>
+                        <div class="price-tag">S/ 150</div>
+                        <span class="unit-price">S/ 15.00 por unidad</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
 </div>
 
-<div id="cart-bar">
-    <div class="btn-send" onclick="enviarWhatsApp()">
-        <span id="cart-qty" style="background:var(--primary);color:#000;padding:2px 8px;border-radius:5px">0</span> ENVIAR PEDIDO <span id="cart-total" style="margin-left:auto">S/ 0.00</span>
+<div id="cart-bar" onclick="sendWhatsapp()">
+    <div class="cart-content">
+        <i class="fa-brands fa-whatsapp whatsapp-icon-float"></i>
+        <div class="cart-info">
+            PEDIR <span id="cart-qty">0</span> ITEMS | TOTAL: <span id="cart-total">S/ 0.00</span>
+        </div>
+        <button class="btn-clear" onclick="clearAll(event)">
+            <i class="fa-solid fa-trash-can"></i>
+        </button>
     </div>
 </div>
 
 <script>
-    function filterProducts() {
-        const input = document.getElementById('mainSearch').value.toLowerCase();
-        const cards = document.querySelectorAll('.service-link');
-        cards.forEach(card => {
-            const title = card.querySelector('h3').innerText.toLowerCase();
-            const desc = card.querySelector('.unit-price') ? card.querySelector('.unit-price').innerText.toLowerCase() : "";
-            if (title.includes(input) || desc.includes(input)) {
-                card.style.display = "block";
-            } else {
-                card.style.display = "none";
-            }
-        });
-        document.querySelectorAll('.category-header').forEach(section => {
-            const visibleCards = section.querySelectorAll('.service-link[style="display: block;"]');
-            section.style.display = (visibleCards.length > 0 || input === "") ? "block" : "none";
-        });
-    }
+    let total = 0, cant = 0;
+    let selectedItems = [];
 
-    function updateTimers() {
-        const now = new Date().getTime();
-        document.querySelectorAll('.service-link.flash').forEach(card => {
-            const target = new Date(card.getAttribute('data-final')).getTime();
-            const dist = target - now;
-            const disp = card.querySelector('.countdown');
-            if (dist <= 0) {
-                card.classList.add('flash-terminado');
-                card.classList.remove('selected');
-                if (disp) disp.innerHTML = "00d 00h 00m 00s";
-                recalcular();
-            } else {
-                const d = Math.floor(dist/(1000*60*60*24)), h = Math.floor((dist%(1000*60*60*24))/(1000*60*60)), 
-                      m = Math.floor((dist%(1000*60*60))/(1000*60)), s = Math.floor((dist%(1000*60))/1000);
-                disp.innerHTML = `${d}d ${h}h ${m}m ${s}s`;
-            }
-        });
-    }
-    setInterval(updateTimers, 1000);
-
-    let carrito = [];
     function toggleItem(el) {
-        if(el.classList.contains('flash-terminado') || el.classList.contains('no-disponible')) return;
-        el.classList.toggle('selected');
-        el.querySelector('.service-card').style.borderColor = el.classList.contains('selected') ? "var(--primary)" : "var(--glass-border)";
-        recalcular();
+    if(el.classList.contains('agotado')) return;
+    el.classList.toggle('selected');
+    
+    const precio = parseFloat(el.querySelector('.price-tag').innerText.replace('S/ ', ''));
+    const nombre = el.querySelector('h3').innerText;
+    const desc = el.querySelector('.manual-desc').innerText; 
+    const unitario = el.querySelector('.unit-price') ? el.querySelector('.unit-price').innerText : ""; 
+    
+    if(el.classList.contains('selected')) {
+        total += precio; cant++;
+        selectedItems.push({nombre, precio, desc, unitario});
+    } else {
+        total -= precio; cant--;
+        selectedItems = selectedItems.filter(item => item.nombre !== nombre);
+    }
+    
+    // El color del borde ahora lo manejamos por CSS con la clase .selected
+    // para que sea más fácil de mantener.
+    updateCartUI();
+}
+
+    function updateCartUI() {
+        document.getElementById('cart-qty').innerText = cant;
+        document.getElementById('cart-total').innerText = "S/ " + total.toFixed(2);
+        document.getElementById('cart-bar').style.display = cant > 0 ? "block" : "none";
     }
 
-    function recalcular() {
-        carrito = [];
+    function clearAll(event) {
+        event.stopPropagation();
         document.querySelectorAll('.service-link.selected').forEach(el => {
-            const nombre = el.querySelector('h3').innerText;
-            const precio = parseFloat(el.querySelector('.price-tag').innerText.replace('S/ ', ''));
-            carrito.push({ nombre, precio });
+            el.classList.remove('selected');
+            el.querySelector('.service-card').style.borderColor = el.classList.contains('premium') ? "var(--gold)" : "var(--glass-border)";
         });
-        const suma = carrito.reduce((s, p) => s + p.precio, 0);
-        document.getElementById('cart-qty').innerText = carrito.length;
-        document.getElementById('cart-total').innerText = `S/ ${suma.toFixed(2)}`;
-        document.getElementById('cart-bar').style.display = (carrito.length > 0) ? 'flex' : 'none';
+        selectedItems = []; total = 0; cant = 0;
+        updateCartUI();
     }
 
-    function enviarWhatsApp() {
-        let msg = "¡Hola Alex Store! Deseo adquirir:\n\n";
-        carrito.forEach(p => msg += `✅ ${p.nombre} - S/ ${p.precio}\n`);
-        msg += `\n💰 TOTAL: S/ ${carrito.reduce((s, p) => s + p.precio, 0).toFixed(2)}`;
-        window.open(`https://wa.me/51918600000?text=${encodeURIComponent(msg)}`, '_blank');
+    function sendWhatsapp() {
+        if(selectedItems.length === 0) return;
+        const numero = "51918600000";
+        let msj = "¡Hola Alex Store! 👋 Deseo adquirir:\n\n";
+        
+        // --- EDITADO: Estructura del mensaje con descripción ---
+        selectedItems.forEach(item => {
+            msj += `✅ *${item.nombre}*\n`;
+            msj += `   _${item.desc}_\n`; // Descripción en cursiva
+            if(item.unitario) msj += `   [${item.unitario}]\n`; // Unitario si existe
+            msj += `   *Precio:* S/ ${item.precio.toFixed(2)}\n\n`;
+        });
+        
+        msj += `💰 *TOTAL A PAGAR: S/ ${total.toFixed(2)}*`;
+        window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msj)}`, '_blank');
+    }
+
+    function filtrarServicios() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let cards = document.querySelectorAll('.service-link');
+        let categories = document.querySelectorAll('.category-block');
+
+        cards.forEach(card => {
+            let texto = card.innerText.toLowerCase();
+            card.style.display = texto.includes(input) ? "" : "none";
+        });
+
+        categories.forEach(category => {
+            let cardsVisibles = category.querySelectorAll('.service-link:not([style*="display: none"])').length;
+            if (cardsVisibles > 0 || input === "") {
+                category.style.display = ""; 
+            } else {
+                category.style.display = "none"; 
+            }
+        });
+    }
+
+    function filterCat(cat, btn) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.category-block').forEach(block => {
+            block.style.display = (cat === 'all' || block.getAttribute('data-cat') === cat) ? "block" : "none";
+        });
     }
 </script>
 
