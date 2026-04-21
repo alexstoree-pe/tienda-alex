@@ -110,7 +110,40 @@ body {
             transform: scale(0.95);
             margin-bottom: 0;
         }
+        .oculto-filtro {
+    display: none !important;
+}
 
+        .filter-container {
+  display: flex;
+  overflow-x: auto; /* Permite el scroll horizontal */
+  white-space: nowrap; /* Evita que los botones salten a la siguiente línea */
+  gap: 10px; /* Espacio entre botones */
+  padding: 10px 5px;
+  scrollbar-width: none; /* Oculta la barra en Firefox */
+  -ms-overflow-style: none; /* Oculta la barra en IE/Edge */
+}
+
+/* Oculta la barra de scroll en Chrome, Safari y Opera */
+.filter-container::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-btn {
+  flex: 0 0 auto; /* Importante: evita que los botones se encojan */
+  padding: 8px 20px;
+  border-radius: 8px;
+  background-color: #1a1a1a; /* Ajusta al color de tu web */
+  color: white;
+  border: 1px solid #333;
+}
+
+.btn-filter.active {
+    background: var(--primary);
+    color: #000;
+    border-color: var(--primary);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+}
         .service-card { background: #0f0f0f; border-radius: 25px; padding: 22px; display: flex; align-items: center; border: 1px solid var(--glass-border); gap: 18px; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; z-index: 10; overflow: hidden; }
         
         .service-link.selected .service-card { border-color: var(--primary); background: rgba(0, 212, 255, 0.15); transform: scale(0.97); }
@@ -136,6 +169,7 @@ body {
     z-index: 100;
     text-transform: uppercase;
 }
+
 
 /* SOLO si el contenedor tiene la clase "oferta", el badge se muestra */
 .service-link.oferta .badge-oferta {
@@ -208,6 +242,40 @@ body {
             transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
         #custom-alert.active { top: 30px; }
+        .btn-filter {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    color: #888;
+    padding: 8px 18px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+.btn-filter.active {
+    background: var(--primary);
+    color: #000;
+    border-color: var(--primary);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+}
+
+/* Ocultar categorías por filtro */
+.oculto-filtro {
+    display: none !important;
+}
+        /* Esto asegura que los productos filtrados siempre sean visibles */
+.service-link:not(.oculto-filtro) {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.oculto-filtro {
+    display: none !important;
+}
     </style>
 
     <script>
@@ -258,7 +326,7 @@ body {
     <div class="modal-content-pass">
         <i class="fas fa-lock" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
         <h2 style="color:var(--primary)">ACCESO PRIVADO</h2>
-        <input type="password" id="input-dist-pass" placeholder="PIN" maxlength="8">
+        <input type="password" id="input-dist-pass" placeholder="****" maxlength="8" onkeydown="if(event.key==='Enter') validarAcceso()">
         <button onclick="validarAcceso()" class="btn-universal btn-promo-distri" style="width:100%; cursor:pointer;">
             ENTRAR
         </button>
@@ -285,6 +353,30 @@ body {
             <input type="text" id="buscador" placeholder="Buscar plataforma..." onkeyup="filtrarPlataformas()">
         </div>
     </div>
+
+    <div class="filter-wrapper" style="position: relative; max-width: 600px; margin: 0 auto 20px; display: flex; align-items: center;">
+    
+    <div class="arrow-filter" onclick="scrollFilters(-100)" 
+         style="position: absolute; left: 5px; top: 50%; transform: translateY(-50%); z-index: 10; cursor: pointer; color: #00e5ff; font-size: 18px; background: rgba(0,0,0,0.6); width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; border-radius: 50%; border: 1px solid #333;">
+         &#10094;
+    </div>
+
+    <div class="filter-container" id="filterScroll" 
+         style="padding: 10px 40px; display: flex; align-items: center; gap: 10px; overflow-x: auto; white-space: nowrap; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; width: 100%;">
+        
+        <button class="btn-filter active" onclick="filtrarCategoria('TODOS', this)">TODOS</button>
+        <button class="btn-filter" onclick="filtrarCategoria('ZONA PERFILES', this)">PERFILES</button>
+        <button class="btn-filter" onclick="filtrarCategoria('ZONA CUENTAS COMPLETAS', this)">CUENTAS COMPLETAS</button>
+        <button class="btn-filter" onclick="filtrarCategoria('DISEÑOS Y MAS', this)">DISEÑO</button>
+        <button class="btn-filter" onclick="filtrarCategoria('APPS DE PAGA', this)">APPS PAGA IPTV</button> 
+    </div>
+
+    <div class="arrow-filter" onclick="scrollFilters(100)" 
+         style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%); z-index: 10; cursor: pointer; color: #00e5ff; font-size: 18px; background: rgba(0,0,0,0.6); width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; border-radius: 50%; border: 1px solid #333;">
+         &#10095;
+    </div>
+</div>
+    
 </header>
 
 <div class="grid-botones">
@@ -296,6 +388,7 @@ body {
     <a href="../iptv/" class="btn-universal btn-iptv">
         <i class="fa-solid fa-tv" style="margin-right: 8px;"></i> SERVICIO IPTV</a>
 </div>
+    
     <div class="container" id="lista-productos">
 
     
@@ -757,12 +850,19 @@ body {
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
     // Inicialización de animaciones
-    AOS.init({ duration: 800, once: true });
+    AOS.init({ duration: 800, once: false , offset: 50    // Se activa un poco antes de llegar al elemento
+});
     
     let carrito = [];
 
     // --- BUSCADOR ---
     function filtrarPlataformas() {
+    // Al empezar a escribir, reseteamos los filtros visualmente
+    document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
+    const btnTodos = document.querySelector(".btn-filter[onclick*='TODOS']");
+    if(btnTodos) btnTodos.classList.add('active');
+    
+    // ... resto de tu código del buscador ...
         const input = document.getElementById('buscador').value.trim().toLowerCase();
         const tarjetas = document.querySelectorAll('.service-link');
         
@@ -795,6 +895,53 @@ body {
             titulo.style.display = (tieneHijosVisibles || input === "") ? "flex" : "none";
         });
     }
+    function filtrarCategoria(categoria, boton) {
+    // 1. Gestionar estado visual de los botones
+    document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
+    boton.classList.add('active');
+
+    const productos = document.querySelectorAll('.service-link');
+    const titulos = document.querySelectorAll('.category-title');
+
+    // 2. Lógica de filtrado
+    titulos.forEach(titulo => {
+        const textoTitulo = titulo.innerText.toUpperCase();
+        // Verificamos si debe mostrarse (Si es 'TODOS' o si el título coincide)
+        const coincide = (categoria === 'TODOS' || textoTitulo.includes(categoria.toUpperCase()));
+        
+        // Mostrar/Ocultar el título de la categoría
+        titulo.style.display = coincide ? 'flex' : 'none';
+
+        // Buscar productos que pertenecen a este título
+        let hermano = titulo.nextElementSibling;
+        while (hermano && !hermano.classList.contains('category-title')) {
+            if (hermano.classList.contains('service-link')) {
+                if (coincide) {
+                    hermano.classList.remove('oculto-filtro');
+                    // FORZAR VISIBILIDAD: Esto quita el efecto de AOS para que no se escondan
+                    hermano.style.opacity = "1";
+                    hermano.style.transform = "none";
+                    hermano.style.visibility = "visible";
+                } else {
+                    hermano.classList.add('oculto-filtro');
+                }
+            }
+            hermano = hermano.nextElementSibling;
+        }
+    });
+
+    // 3. Refrescar AOS para que reconozca los nuevos tamaños de la página
+    // IMPORTANTE: Fuera de cualquier bucle o 'if'
+    setTimeout(() => {
+        if (typeof AOS !== 'undefined') {
+            AOS.refreshHard(); 
+        }
+    }, 200);
+}
+function scrollFilters(val) {
+    const container = document.getElementById('filterScroll');
+    container.scrollBy({ left: val, behavior: 'smooth' });
+}
 
     // --- LÓGICA DE SELECCIÓN ---
     function toggleSeleccion(elemento) {
