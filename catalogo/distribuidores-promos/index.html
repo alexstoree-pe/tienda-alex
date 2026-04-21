@@ -33,11 +33,24 @@
         .container { padding: 20px 15px; max-width: 600px; margin: auto; }
 
         /* --- ESTILOS BUSCADOR --- */
-        .search-box { position: sticky; top: 10px; z-index: 1000; margin-bottom: 25px; }
+        .search-box { position: sticky; top: 10px; z-index: 1000; margin-bottom: 15px; }
         .search-input-wrapper { position: relative; width: 100%; }
         .search-input-wrapper i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--vip); }
         .search-input { width: 100%; padding: 12px 12px 12px 45px; border-radius: 50px; background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white; backdrop-filter: blur(10px); outline: none; transition: 0.3s; }
         .search-input:focus { border-color: var(--vip); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+
+        /* --- ESTILOS FILTROS MEJORADOS --- */
+        .filter-wrapper { position: relative; width: 100%; margin-bottom: 25px; display: flex; align-items: center; }
+        .filter-container { padding: 5px 35px; display: flex; gap: 10px; overflow-x: auto; white-space: nowrap; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; width: 100%; align-items: center; }
+        .filter-container::-webkit-scrollbar { display: none; }
+        
+        .btn-nav { background: var(--card-bg); border: 1px solid var(--glass-border); color: white; padding: 8px 18px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: 0.3s; flex: 0 0 auto; font-family: 'Poppins', sans-serif; }
+        .btn-nav.active { background: var(--vip); color: black; border-color: var(--vip); }
+        
+        .arrow-filter { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; cursor: pointer; color: var(--vip); background: rgba(0,0,0,0.7); width: 28px; height: 28px; display: flex; justify-content: center; align-items: center; border-radius: 50%; border: 1px solid var(--glass-border); transition: 0.2s; }
+        .arrow-filter:active { transform: translateY(-50%) scale(0.9); }
+        .left-arrow { left: 0; }
+        .right-arrow { right: 0; }
 
         .back-nav { margin-bottom: 25px; }
         .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--vip); text-decoration: none; font-size: 0.8rem; border: 1px solid var(--glass-border); background: var(--card-bg); padding: 8px 18px; border-radius: 50px; backdrop-filter: blur(10px); transition: 0.3s; }
@@ -46,13 +59,13 @@
         .category-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, var(--vip), transparent); }
 
         .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 20px; transition: transform 0.2s; }
+        .promo-link.oculto-busqueda { display: none; }
         .promo-link:active { transform: scale(0.98); }
 
         .vip-card { background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 22px; padding: 20px; display: flex; align-items: center; border: 1px solid var(--glass-border); gap: 15px; position: relative; }
         
         .batch-badge { position: absolute; top: -10px; left: 20px; background: var(--vip); color: #000; font-size: 0.65rem; font-weight: 900; padding: 3px 12px; border-radius: 50px; z-index: 5; }
         
-        /* --- ESTILO POPULAR TAG --- */
         .popular-tag { position: absolute; top: -10px; right: 20px; background: #ff3333; color: white; font-size: 0.6rem; font-weight: 800; padding: 3px 10px; border-radius: 50px; box-shadow: 0 0 10px rgba(255, 51, 51, 0.4); z-index: 5; animation: fadeInUp 0.5s ease; }
 
         .service-logo { width: 70px; height: 70px; border-radius: 15px; object-fit: cover; border: 1px solid var(--glass-border); }
@@ -94,13 +107,27 @@
     <div class="search-box">
         <div class="search-input-wrapper">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="buscador" class="search-input" placeholder="Buscar plataforma o servicio...">
+            <input type="text" id="buscador" class="search-input" placeholder="Buscar plataforma o servicio..." oninput="filtrarPlataformas()">
         </div>
     </div>
 
-    <div class="category-title">📦 PACKS DE CUENTAS COMPLETAS</div>
+    <div class="filter-wrapper">
+        <div class="arrow-filter left-arrow" onclick="scrollFilters(-100)">
+            <i class="fa-solid fa-chevron-left"></i>
+        </div>
+        <div class="filter-container" id="filterScroll">
+            <button class="btn-nav active" onclick="filtrarCategoria('TODOS', this)">TODOS</button>
+            <button class="btn-nav" onclick="filtrarCategoria('PACKS DE CUENTAS COMPLETAS', this)">CUENTAS COMPLETAS</button>
+            <button class="btn-nav" onclick="filtrarCategoria('PROMOCIONES INDIVIDUALES', this)">INDIVIDUALES</button>
+        </div>
+        <div class="arrow-filter right-arrow" onclick="scrollFilters(100)">
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+    </div>
 
     <div id="lista-promos">
+        <div class="category-title">📦 PACKS DE CUENTAS COMPLETAS</div>
+
         <a href="#" class="promo-link time popular" data-tiempo="2026-04-24 23:59" data-aos="fade-up">
             <div class="vip-card">
                 <div class="popular-tag"><i class="fa-solid fa-fire"></i> MÁS VENDIDO</div>
@@ -195,9 +222,136 @@
     // Inicializar AOS
     AOS.init({
         duration: 800,
-        once: false // Permitir que la animación se repita al filtrar
+        once: false 
     });
 
+    // Función para Scroll de Filtros
+    function scrollFilters(val) {
+        const container = document.getElementById('filterScroll');
+        container.scrollBy({ left: val, behavior: 'smooth' });
+    }
+
+    // --- FUNCIÓN FILTRAR PLATAFORMAS (BUSCADOR) ---
+    function filtrarPlataformas() {
+        const input = document.getElementById('buscador').value.trim().toLowerCase();
+        const tarjetas = document.querySelectorAll('.promo-link');
+        const categorias = document.querySelectorAll('.category-title');
+        const noResults = document.getElementById('noResults');
+        let hayResultadosGlobales = false;
+
+        // Reset visual de los botones al buscar
+        document.querySelectorAll('.btn-nav').forEach(btn => btn.classList.remove('active'));
+        const btnTodos = document.querySelector(".btn-nav[onclick*='TODOS']");
+        if(btnTodos) btnTodos.classList.add('active');
+        
+        tarjetas.forEach(tarjeta => {
+            const nombre = tarjeta.querySelector('.nombre-prod') ? tarjeta.querySelector('.nombre-prod').innerText.toLowerCase() : "";
+            const descripcion = tarjeta.querySelector('.manual-desc') ? tarjeta.querySelector('.manual-desc').innerText.toLowerCase() : "";
+            
+            if (nombre.includes(input) || descripcion.includes(input)) {
+                tarjeta.classList.remove('oculto-busqueda');
+                tarjeta.style.display = "block";
+                tarjeta.style.opacity = "1"; 
+                tarjeta.style.transform = "none";
+                hayResultadosGlobales = true;
+            } else {
+                tarjeta.classList.add('oculto-busqueda');
+                tarjeta.style.display = "none";
+            }
+        });
+        
+        categorias.forEach(titulo => {
+            let tieneHijosVisibles = false;
+            let hermano = titulo.nextElementSibling;
+            
+            while(hermano && !hermano.classList.contains('category-title')) {
+                if(hermano.classList.contains('promo-link') && !hermano.classList.contains('oculto-busqueda')) {
+                    tieneHijosVisibles = true;
+                    break;
+                }
+                hermano = hermano.nextElementSibling;
+            }
+            titulo.style.display = (tieneHijosVisibles || input === "") ? "flex" : "none";
+        });
+
+        noResults.style.display = hayResultadosGlobales ? "none" : "block";
+        AOS.refresh();
+    }
+
+   // 1. FUNCIÓN PRINCIPAL DE FILTRADO
+function filtrarCategoria(categoria, btn) {
+    // Limpiar buscador y resetear estado de botones
+    document.getElementById('buscador').value = "";
+    document.querySelectorAll('.btn-nav').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const term = categoria.toUpperCase();
+    const tarjetas = document.querySelectorAll('.promo-link');
+
+    tarjetas.forEach(t => {
+        const txt = t.innerText.toUpperCase();
+        
+        if (term === 'TODOS') {
+            t.style.display = "block";
+            t.classList.remove('oculto-busqueda');
+        } else {
+            // Lógica de palabras clave para que coincida con tus categorías
+            let coincide = false;
+            
+            // Si el botón es de Cuentas Completas
+            if (term.includes("PACK") || term.includes("COMPLETAS")) {
+                coincide = txt.includes("PACK") || txt.includes("COMPLETA");
+            } 
+            // Si el botón es de Individuales o Perfiles
+            else if (term.includes("INDIVIDUAL") || term.includes("PERFIL")) {
+                coincide = txt.includes("INDIVIDUAL") || txt.includes("PERFIL") || txt.includes("PROMO");
+            } 
+            // Para otros (DISEÑO, IPTV, etc.)
+            else {
+                coincide = txt.includes(term);
+            }
+
+            if (coincide) {
+                t.style.display = "block";
+                t.classList.remove('oculto-busqueda');
+            } else {
+                t.style.display = "none";
+                t.classList.add('oculto-busqueda');
+            }
+        }
+    });
+
+    // Llamamos a la función que muestra u oculta los títulos (ZONA PERFILES, etc.)
+    actualizarTitulos();
+
+    // Refrescar animaciones AOS
+    if (typeof AOS !== 'undefined') {
+        document.querySelectorAll('.promo-link').forEach(el => el.classList.remove('aos-animate'));
+        setTimeout(() => { AOS.refreshHard(); }, 100);
+    }
+}
+
+// 2. FUNCIÓN PARA GESTIONAR LOS TÍTULOS (ESTA ES LA QUE TRAE LA CATEGORÍA)
+function actualizarTitulos() {
+    const titulos = document.querySelectorAll('.category-title');
+    
+    titulos.forEach(titulo => {
+        let tieneHijosVisibles = false;
+        let hermano = titulo.nextElementSibling;
+        
+        // Buscamos productos visibles debajo de este título
+        while (hermano && !hermano.classList.contains('category-title')) {
+            if (hermano.classList.contains('promo-link') && hermano.style.display !== "none") {
+                tieneHijosVisibles = true;
+                break;
+            }
+            hermano = hermano.nextElementSibling;
+        }
+        
+        // Muestra el título (flex) si hay productos, si no, lo oculta (none)
+        titulo.style.display = tieneHijosVisibles ? "flex" : "none";
+    });
+}
     function actualizarCronometros() {
         const tarjetasConTiempo = document.querySelectorAll('.promo-link.time:not(.agotado)');
         tarjetasConTiempo.forEach(tarjeta => {
@@ -223,55 +377,25 @@
     }
 
     function configurarWhatsApp() {
-        const tarjetas = document.querySelectorAll('.promo-link:not(.agotado)');
-        tarjetas.forEach(t => {
-            const nombre = t.querySelector('.nombre-prod')?.innerText;
-            const precio = t.querySelector('.precio-prod')?.innerText;
-            const descripcion = t.querySelector('.manual-desc')?.innerText;
-            
-            const msg = `Hola Alex Store, quiero la promo:\n\n` +
-                        `👑 *Promo:* ${nombre}\n` +
-                        `💰 *Precio:* ${precio}\n` +
-                        `📝 *Detalle:* ${descripcion || 'Sin descripción'}`;
-            
-            t.href = `https://wa.me/51918600000?text=${encodeURIComponent(msg)}`;
-            t.target = "_blank";
-        });
-    }
-
-    // --- LÓGICA DEL BUSCADOR ---
-    const buscador = document.getElementById('buscador');
-    const promos = document.querySelectorAll('.promo-link');
-    const titulosCategorias = document.querySelectorAll('.category-title');
-    const noResults = document.getElementById('noResults');
-
-    buscador.addEventListener('input', () => {
-        const term = buscador.value.toLowerCase();
-        let hayResultados = false;
-
-        promos.forEach(promo => {
-            const nombre = promo.querySelector('.nombre-prod').innerText.toLowerCase();
-            const desc = promo.querySelector('.manual-desc').innerText.toLowerCase();
-            
-            if (nombre.includes(term) || desc.includes(term)) {
-                promo.style.display = "block";
-                hayResultados = true;
-            } else {
-                promo.style.display = "none";
-            }
-        });
-
-        // Ocultar títulos de categorías si se está buscando
-        titulosCategorias.forEach(titulo => {
-            titulo.style.display = term === "" ? "flex" : "none";
-        });
-
-        noResults.style.display = hayResultados ? "none" : "block";
+    const tarjetas = document.querySelectorAll('.promo-link:not(.agotado)');
+    tarjetas.forEach(t => {
+        // 1. CAPTURAMOS EL BADGE (PACK x10, INDIVIDUAL, etc.)
+        const badge = t.querySelector('.batch-badge')?.innerText || '';
+        const nombre = t.querySelector('.nombre-prod')?.innerText;
+        const precio = t.querySelector('.precio-prod')?.innerText;
+        const descripcion = t.querySelector('.manual-desc')?.innerText;
         
-        // CRÍTICO: Refrescar AOS para que las tarjetas filtradas aparezcan
-        AOS.refresh();
+        // 2. LO AGREGAMOS AL MENSAJE AL COSTADO DEL NOMBRE
+        // Usamos [${badge}] para que resalte en el mensaje
+        const msg = `Hola Alex Store! soy distribuidor, quiero la promo:\n\n` +
+                    `👑 *Promo:* ${nombre} [${badge}]\n` +
+                    `💰 *Precio:* ${precio}\n` +
+                    `📝 *Detalle:* ${descripcion || 'Sin descripción'}`;
+        
+        t.href = `https://wa.me/51918600000?text=${encodeURIComponent(msg)}`;
+        t.target = "_blank";
     });
-
+}
     window.onload = () => {
         configurarWhatsApp();
         setInterval(actualizarCronometros, 1000);
