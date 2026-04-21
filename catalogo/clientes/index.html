@@ -592,18 +592,47 @@
     const numWhatsApp = "51918600000";
 
     function filtrarProductos() {
-        const busqueda = document.getElementById('search-input').value.toLowerCase();
-        const items = document.querySelectorAll('.service-item');
-        const titulos = document.querySelectorAll('.category-title');
-        items.forEach(item => {
-            const nombre = item.querySelector('.nombre-prod').innerText.toLowerCase();
-            if (nombre.includes(busqueda)) {
-                item.style.display = 'block'; item.style.opacity = "1";
-            } else { item.style.display = 'none'; }
-        });
-        titulos.forEach(titulo => { titulo.style.display = (busqueda !== "") ? 'none' : 'block'; });
-        AOS.refreshHard();
-    }
+    const busqueda = document.getElementById('search-input').value.toLowerCase();
+    const items = document.querySelectorAll('.service-item');
+    const titulos = document.querySelectorAll('.category-title');
+    
+    // 1. Primero filtramos las plataformas (items)
+    items.forEach(item => {
+        const nombre = item.querySelector('.nombre-prod').innerText.toLowerCase();
+        if (nombre.includes(busqueda)) {
+            item.style.display = 'block';
+            item.style.opacity = "1";
+        } else {
+            item.style.display = 'none';
+        }
+    });
+
+    // 2. Lógica para mostrar títulos solo si tienen plataformas visibles debajo
+    titulos.forEach(titulo => {
+        let tieneHijosVisibles = false;
+        let hermano = titulo.nextElementSibling;
+
+        // Buscamos hacia abajo hasta encontrar el siguiente título o el final del contenedor
+        while (hermano && !hermano.classList.contains('category-title')) {
+            if (hermano.classList.contains('service-item') && hermano.style.display !== 'none') {
+                tieneHijosVisibles = true;
+                break;
+            }
+            hermano = hermano.nextElementSibling;
+        }
+
+        // Si hay resultados visibles en esa sección, mostramos el título
+        if (tieneHijosVisibles) {
+            titulo.style.display = 'block';
+        } else {
+            titulo.style.display = 'none';
+        }
+    });
+
+    // 3. Refrescar animaciones para que no se vea trabado
+    AOS.refreshHard();
+}
+
 
     (function() {
         if (sessionStorage.getItem("acceso_concedido") === "true") { document.documentElement.style.display = "block"; } 
