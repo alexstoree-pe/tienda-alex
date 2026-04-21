@@ -181,6 +181,72 @@
         }
         .modal-content { background: #111; padding: 35px 25px; border-radius: 35px 35px 0 0; width: 100%; max-width: 500px; border: 1px solid var(--glass-border); text-align: center; }
         #input-pass { width: 100%; padding: 15px; margin: 20px 0; border-radius: 15px; background: #000; border: 1px solid #333; color: var(--primary); text-align: center; font-size: 1.5rem; letter-spacing: 5px; }
+
+        /* REEMPLAZA LO ANTERIOR POR ESTO */
+.filter-wrapper { 
+    margin: 20px 0; 
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.filter-container { 
+    display: flex; 
+    gap: 10px; 
+    overflow-x: auto; 
+    padding: 10px 5px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+.filter-container::-webkit-scrollbar { display: none; }
+
+.scroll-indicator {
+    position: absolute;
+    background: linear-gradient(to right, var(--dark), transparent);
+    height: 100%;
+    width: 40px;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.scroll-indicator.right {
+    left: auto;
+    right: 0;
+    background: linear-gradient(to left, var(--dark), transparent);
+    justify-content: flex-end;
+}
+
+.scroll-indicator i {
+    color: var(--primary);
+    font-size: 1rem;
+    animation: bounceHorizontal 1.5s infinite;
+}
+
+@keyframes bounceHorizontal {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+}
+.btn-nav {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.3s;
+}
+.btn-nav.active {
+    background: var(--primary);
+    color: #000;
+    border-color: var(--primary);
+}
     </style>
 </head>
 <body>
@@ -189,14 +255,31 @@
     <img src="../img/logo.png" alt="Logo Alex Store" class="brand-logo" data-aos="zoom-in">
     <h1 data-aos="fade-down">ALEX STORE</h1>
     <p style="color: #555; font-size: 0.7rem; letter-spacing: 5px; font-weight: 700; margin-top: 5px;">PREMIUM DIGITAL CATALOG</p>
+    
     <div class="search-container" data-aos="fade-up">
-        <input type="text" id="search-input" placeholder="Buscar plataforma (Netflix, Disney...)" onkeyup="filtrarProductos()">
-        <div class="trust-bar">
+    <div class="trust-bar">
             <div class="trust-item"><i class="fas fa-headset"></i>Soporte Garantizado</div>
             <div class="trust-item"><i class="fas fa-shield-alt"></i>Garantía y Compromiso</div>
-            <div class="trust-item"><i class="fas fa-bolt"></i>Entrega en menos de 5 minutos
+            <div class="trust-item"><i class="fas fa-bolt"></i>Entrega en menos de 5 minutos</div>
         </div>
+        <input type="text" id="search-input" placeholder="Buscar plataforma (Netflix, Disney...)" onkeyup="filtrarProductos()">
+        
+    
+        <div class="filter-wrapper" data-aos="fade-up">
+            <div class="scroll-indicator"><i class="fas fa-chevron-left"></i></div>
+            
+    <div class="filter-container" id="filterScroll">
+        <button class="btn-nav active" onclick="filtrarCategoria('TODOS', this)">TODOS</button>
+        <button class="btn-nav" onclick="filtrarCategoria('🎬 STREAMING Y CINE', this)">PERFILES</button>
+        <button class="btn-nav" onclick="filtrarCategoria('DISEÑOS Y MAS', this)">DISEÑO</button>
+        <button class="btn-nav" onclick="filtrarCategoria('TELEVISIÓN DIGITAL', this)">TELEVISIÓN DIGITAL</button>
+        <button class="btn-nav" onclick="filtrarCategoria('MÚSICA Y VIDEO SIN LÍMITES', this)">MÚSICA</button> </div>
+       <div class="scroll-indicator right"><i class="fas fa-chevron-right"></i></div>
     </div>
+        
+ </div>
+     
+    
 </header>
 
 <div class="container">
@@ -633,7 +716,97 @@
     AOS.refreshHard();
 }
 
+    function filtrarCategoria(categoria, btn) {
+    // 1. Limpiar buscador y activar botón
+    document.getElementById('search-input').value = "";
+    document.querySelectorAll('.btn-nav').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
 
+    const term = categoria.toUpperCase();
+    const items = document.querySelectorAll('.service-item');
+
+    items.forEach(item => {
+        // Buscamos el texto de la tarjeta O el título de la categoría que tiene arriba
+        const textoCard = item.innerText.toUpperCase();
+        
+        // Buscamos el título de la categoría más cercano hacia arriba
+        let tituloCerca = "";
+        let previo = item.previousElementSibling;
+        while (previo) {
+            if (previo.classList.contains('category-title')) {
+                tituloCerca = previo.innerText.toUpperCase();
+                break;
+            }
+            previo = previo.previousElementSibling;
+        }
+
+        if (term === 'TODOS') {
+            item.style.display = 'block';
+            item.classList.add('aos-animate'); // Fix para AOS
+        } else {
+            // Coincide si el texto de la tarjeta tiene la palabra O si el título de su categoría coincide
+            const coincide = textoCard.includes(term) || tituloCerca.includes(term);
+            
+            if (coincide) {
+                item.style.display = 'block';
+                item.style.opacity = "1";
+                item.classList.add('aos-animate'); // Fix para AOS
+            } else {
+                item.style.display = 'none';
+                item.classList.remove('aos-animate');
+            }
+        }
+    });
+
+    // 2. Actualizar los títulos
+    actualizarTitulos();
+    
+    // 3. Refrescar AOS con un pequeño delay para que detecte los cambios
+    setTimeout(() => {
+        AOS.refreshHard();
+    }, 100);
+}
+
+function actualizarTitulos() {
+    const titulos = document.querySelectorAll('.category-title');
+    titulos.forEach(titulo => {
+        let tieneHijosVisibles = false;
+        let hermano = titulo.nextElementSibling;
+        
+        while (hermano && !hermano.classList.contains('category-title')) {
+            if (hermano.classList.contains('service-item') && hermano.style.display !== 'none') {
+                tieneHijosVisibles = true;
+                break;
+            }
+            hermano = hermano.nextElementSibling;
+        }
+        
+        if (tieneHijosVisibles) {
+            titulo.style.display = 'block';
+            titulo.classList.add('aos-animate');
+        } else {
+            titulo.style.display = 'none';
+            titulo.classList.remove('aos-animate');
+        }
+    });
+}
+    // >>> EL CÓDIGO DE LAS FLECHAS PONLO AQUÍ AL FINAL <<<
+const scrollContainer = document.getElementById('filterScroll');
+const indicators = document.querySelectorAll('.scroll-indicator');
+
+if (scrollContainer) {
+    // Esto detecta cuando el usuario mueve los botones con el dedo
+    scrollContainer.addEventListener('scroll', () => {
+        const leftInd = indicators[0];
+        const rightInd = indicators[1];
+        
+        leftInd.style.opacity = scrollContainer.scrollLeft > 20 ? "1" : "0";
+        
+        const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+        rightInd.style.opacity = scrollContainer.scrollLeft >= maxScroll - 20 ? "0" : "1";
+    });
+}
+    
     (function() {
         if (sessionStorage.getItem("acceso_concedido") === "true") { document.documentElement.style.display = "block"; } 
         else {
