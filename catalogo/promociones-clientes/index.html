@@ -390,47 +390,63 @@
     AOS.init({ duration: 800, once: true });
 
     function filtrarPromos() {
-        const busqueda = document.getElementById('search-input').value.toLowerCase();
-        const items = document.querySelectorAll('.promo-link');
-        const titulos = document.querySelectorAll('.category-title');
+    const busqueda = document.getElementById('search-input').value.toLowerCase();
+    const items = document.querySelectorAll('.promo-link');
+    const titulos = document.querySelectorAll('.category-title');
 
-        items.forEach((item, index) => {
-            const nombre = item.querySelector('.nombre-prod').innerText.toLowerCase();
-            const desc = item.querySelector('.manual-desc').innerText.toLowerCase();
-            
-            if (nombre.includes(busqueda) || desc.includes(busqueda)) {
-                // Remover clase oculta y añadir visible
-                item.classList.remove('promo-hidden');
-                item.classList.add('promo-visible');
-                
-                // Pequeño delay para que no aparezcan todos al mismo tiempo
-                item.style.transitionDelay = (index * 0.05) + "s";
-                
-                // Forzar que el display sea block para que ocupe espacio
-                setTimeout(() => { item.style.display = 'block'; }, 0);
-            } else {
-                // Añadir clase oculta
-                item.classList.add('promo-hidden');
-                item.classList.remove('promo-visible');
-                item.style.transitionDelay = "0s";
-                
-                // Esperar a que termine la animación para poner display none
-                setTimeout(() => { 
-                    if(item.classList.contains('promo-hidden')) item.style.display = 'none'; 
-                }, 400);
-            }
-        });
+    // 1. Filtrar los productos
+    items.forEach((item, index) => {
+        const nombre = item.querySelector('.nombre-prod').innerText.toLowerCase();
+        const desc = item.querySelector('.manual-desc').innerText.toLowerCase();
+        
+        if (nombre.includes(busqueda) || desc.includes(busqueda)) {
+            item.classList.remove('promo-hidden');
+            item.classList.add('promo-visible');
+            item.style.transitionDelay = (index * 0.05) + "s";
+            item.style.display = 'block'; 
+        } else {
+            item.classList.add('promo-hidden');
+            item.classList.remove('promo-visible');
+            item.style.transitionDelay = "0s";
+            // Usamos un pequeño delay para el display none para no romper la animación de salida
+            setTimeout(() => { 
+                if(item.classList.contains('promo-hidden')) item.style.display = 'none'; 
+            }, 400);
+        }
+    });
 
-        titulos.forEach(titulo => {
-            if (busqueda !== "") {
-                titulo.style.opacity = "0";
-                setTimeout(() => { titulo.style.display = 'none'; }, 400);
-            } else {
-                titulo.style.display = 'flex';
-                setTimeout(() => { titulo.style.opacity = "1"; }, 10);
+    // 2. MODIFICACIÓN: Lógica inteligente para los títulos
+    titulos.forEach(titulo => {
+        let tieneProductosVisibles = false;
+        let hermano = titulo.nextElementSibling;
+
+        // Buscamos hacia abajo hasta encontrar el siguiente título o el final
+        while (hermano && !hermano.classList.contains('category-title')) {
+            // Si el hermano es un producto y no está oculto por la búsqueda
+            if (hermano.classList.contains('promo-link') && !hermano.classList.contains('promo-hidden')) {
+                tieneProductosVisibles = true;
+                break;
             }
-        });
+            hermano = hermano.nextElementSibling;
+        }
+
+        // Si hay productos que coinciden, mostramos el título, si no, lo ocultamos
+        if (tieneProductosVisibles) {
+            titulo.style.display = 'flex';
+            setTimeout(() => { titulo.style.opacity = "1"; }, 10);
+        } else {
+            titulo.style.opacity = "0";
+            setTimeout(() => { 
+                if (titulo.style.opacity === "0") titulo.style.display = 'none'; 
+            }, 400);
+        }
+    });
+
+    // Refrescar AOS para evitar que se queden elementos invisibles
+    if (typeof AOS !== 'undefined') {
+        AOS.refreshHard();
     }
+}
 
     function validarPassPromos() {
         const input = document.getElementById('input-pass');
