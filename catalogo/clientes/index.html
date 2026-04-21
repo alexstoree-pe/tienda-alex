@@ -126,14 +126,27 @@
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
         }
         .premium .price-tag { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
-        .premium::after { content: 'PREMIUM'; position: absolute; top: 10px; right: 40px; font-size: 0.5rem; font-weight: 900; color: #d4af37; letter-spacing: 1px; border: 1px solid #d4af37; padding: 1px 5px; border-radius: 4px; }
+        .premium::after { content: 'PREMIUM'; position: absolute; top: 10px; right: 15px; font-size: 0.5rem; font-weight: 900; color: #d4af37; letter-spacing: 1px; border: 1px solid #d4af37; padding: 1px 5px; border-radius: 4px; }
 
         .service-item { cursor: pointer; margin-bottom: 15px; position: relative; transition: 0.3s; }
         .service-card { 
             background: var(--glass); border-radius: 22px; padding: 18px; 
             display: flex; align-items: center; border: 1px solid var(--glass-border); 
-            transition: 0.4s; gap: 15px; position: relative; overflow: hidden;
+            transition: 0.3s; gap: 15px; position: relative; overflow: hidden;
         }
+        /* Este código detecta cuando el mouse pasa por encima */
+.service-item:hover .service-card {
+    border-color: var(--primary) !important; /* El borde se vuelve azul brillante */
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2); /* Crea un resplandor suave */
+    background: rgba(255, 255, 255, 0.06); /* Se aclara un poquito el fondo */
+    transform: translateY(-3px); /* Hace que la tarjeta "flote" ligeramente */
+}
+
+        .service-item.premium:hover .service-card {
+    border-color: #f4d03f !important;
+    box-shadow: 0 0 20px rgba(244, 208, 63, 0.25);
+    background: linear-gradient(100deg, rgba(212, 175, 55, 0.1), rgba(0,0,0,0));
+}
 
         .check-icon { position: absolute; top: 10px; right: 10px; background: var(--primary); color: #000; width: 22px; height: 22px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold; z-index: 10; }
         .selected .check-icon { display: flex; }
