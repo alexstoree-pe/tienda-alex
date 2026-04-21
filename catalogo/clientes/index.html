@@ -562,7 +562,7 @@
     <div class="modal-content">
         <div id="paso-1">
             <h2 style="color:var(--primary); margin-bottom:15px;">¿Ya eres/fuiste cliente?</h2>
-            <button class="btn-universal" style="background:#222; color:#fff; width:100%; margin-bottom:10px;" onclick="enviarWhatsApp('antiguo')">SÍ, YA COMPRÉ ANTES</button>
+            <button class="btn-universal" style="background:#222; color:#fff; width:100%; margin-bottom:10px;" onclick="mostrarFormAntiguo()">SÍ, YA COMPRÉ ANTES</button>
             <button class="btn-universal" style="background:var(--primary); color:#000; width:100%;" onclick="mostrarForm()">SOY NUEVO CLIENTE</button>
             <button class="btn-universal" style="background:transparent; color:#555; width:100%; margin-top:10px; font-size:0.6rem;" onclick="cerrarModalRegistro()">CANCELAR / VOLVER</button>
         </div>
@@ -574,6 +574,13 @@
             <button class="btn-universal" style="background:var(--primary); color:#000; width:100%; margin-bottom:10px;" onclick="enviarWhatsApp('nuevo')">FINALIZAR Y ENVIAR</button>
             <button class="btn-universal" style="background:#222; color:#777; width:100%; border:1px solid #333;" onclick="volverPaso1()">← VOLVER</button>
         </div>
+        <div id="form-antiguo" style="display:none;">
+    <h2 style="color:var(--primary); margin-bottom:15px;">Confirmar Perfil</h2>
+    <p style="font-size: 0.8rem; color: #aaa; margin-bottom: 15px;">Si tu plataforma requiere un nombre de perfil específico, escríbelo aquí:</p>
+    <input type="text" id="antiguo-per" placeholder="Nombre para Perfil (Opcional)" style="width:100%; padding:15px; margin-bottom:10px; border-radius:15px; background:#000; color:#fff; border:1px solid #333;">
+    <button class="btn-universal" style="background:var(--primary); color:#000; width:100%; margin-bottom:10px;" onclick="enviarWhatsApp('antiguo')">FINALIZAR Y ENVIAR</button>
+    <button class="btn-universal" style="background:#222; color:#777; width:100%; border:1px solid #333;" onclick="volverPaso1_Antiguo()">← VOLVER</button>
+</div>
     </div>
 </div>
 
@@ -662,25 +669,41 @@
     function abrirModalRegistro() { document.getElementById('modal-registro').style.display = 'flex'; }
     function cerrarModalRegistro() { document.getElementById('modal-registro').style.display = 'none'; }
     function mostrarForm() { document.getElementById('paso-1').style.display = 'none'; document.getElementById('form-datos').style.display = 'block'; }
+    function mostrarFormAntiguo() { document.getElementById('paso-1').style.display = 'none'; document.getElementById('form-antiguo').style.display = 'block'; }
+    function volverPaso1_Antiguo() { document.getElementById('form-antiguo').style.display = 'none'; document.getElementById('paso-1').style.display = 'block'; }
     function volverPaso1() { document.getElementById('form-datos').style.display = 'none'; document.getElementById('paso-1').style.display = 'block'; }
 
     function enviarWhatsApp(tipo) {
-        let nom = document.getElementById('reg-nom').value;
-        let cel = document.getElementById('reg-cel').value;
-        let per = document.getElementById('reg-per').value;
-        if (tipo === 'nuevo' && (nom.trim() === "" || cel.trim() === "")) { alert("Datos incompletos."); return; }
-        const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
-        const desc = calcularDescuento();
-        let msg = `Hola *Alex Store*, deseo contratar:\n\n`;
-        carrito.forEach(i => msg += `🔹 *${i.nombre}* (S/ ${i.precio})\n`);
-        if(desc > 0) msg += `\n🎁 Ahorro: -S/ ${desc}`;
-        msg += `\n💰 *TOTAL: S/ ${subtotal - desc}*`;
-        if(tipo === 'nuevo') { msg += `\n\n👤 Cliente: ${nom}\n📞 Cel: ${cel}`; if(per.trim() !== "") msg += `\n👤 Perfil: ${per}`; } 
-        else { msg += `\n\n✅ *YA SOY CLIENTE*`; }
-        window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
-        cerrarModalRegistro();
+    let nom = document.getElementById('reg-nom').value;
+    let cel = document.getElementById('reg-cel').value;
+    // Detectamos el perfil según el formulario abierto
+    let per = (tipo === 'nuevo') ? document.getElementById('reg-per').value : document.getElementById('antiguo-per').value;
+    if (tipo === 'nuevo' && (nom.trim() === "" || cel.trim() === "")) { 
+        alert("Datos incompletos."); 
+        return; 
     }
-
+    const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
+    const desc = calcularDescuento();
+    let msg = `Hola *Alex Store*, deseo contratar:\n\n`;
+    // RECORREMOS EL CARRITO Y PONEMOS EL PERFIL AQUÍ
+    carrito.forEach(i => {
+        msg += `🔹 *${i.nombre}* (S/ ${i.precio})`;
+        // Si el cliente escribió un perfil, lo ponemos al lado de la plataforma
+        if(per.trim() !== "") {
+            msg += `\n 👤 *Nombre del Perfil:* ${per}`;
+        }
+        msg += `\n`;
+    });
+    if(desc > 0) msg += `\n🎁 *Ahorro:* -S/ ${desc}`;
+    msg += `\n💰 *TOTAL: S/ ${subtotal - desc}*`;
+    if(tipo === 'nuevo') { 
+        msg += `\n\n👤 Cliente: ${nom}\n📞 Cel: ${cel}`; 
+    } else { 
+        msg += `\n\n✅ *YA SOY CLIENTE*`; 
+    }
+    window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
+    cerrarModalRegistro();
+}
     function consultarStockManual(elemento, event) {
         event.stopPropagation();
         const nombre = elemento.closest('.service-item').querySelector('.nombre-prod').innerText;
