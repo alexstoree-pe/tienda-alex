@@ -6,17 +6,16 @@
     <title>Catálogo Premium | Alex Store</title>
 
     <link rel="icon" type="image/png" href="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.webp">
+    <link rel="apple-touch-icon" href="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.webp">
 
-<link rel="apple-touch-icon" href="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.webp">
-
-<meta property="og:title" content="Alex Store | Catálogo Premium">
-<meta property="og:description" content="Tus cuentas streaming favoritas al mejor precio.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://alexstoree-pe.github.io/tienda-alex/catalogo/clientes/">
-<meta property="og:image" content="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.webp">
-<meta property="og:image:width" content="500">
-<meta property="og:image:height" content="500">
-<meta property="og:image:type" content="image/webp">
+    <meta property="og:title" content="Alex Store | Catálogo Premium">
+    <meta property="og:description" content="Tus cuentas streaming favoritas al mejor precio.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexstoree-pe.github.io/tienda-alex/catalogo/clientes/">
+    <meta property="og:image" content="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.webp">
+    <meta property="og:image:width" content="500">
+    <meta property="og:image:height" content="500">
+    <meta property="og:image:type" content="image/webp">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -58,7 +57,6 @@
             z-index: 2000;
         }
 
-        /* ESTILO LOGO AÑADIDO */
         .brand-logo {
             width: 50px;
             height: 50px;
@@ -76,14 +74,12 @@
             letter-spacing: 1px;
         }
         
-        /* Reducimos el texto secundario del logo */
-header p[style*="letter-spacing: 5px"] {
-    letter-spacing: 2px !important;
-    font-size: 0.6rem !important;
-    margin-top: 2px !important;
-}
+        header p[style*="letter-spacing: 5px"] {
+            letter-spacing: 2px !important;
+            font-size: 0.6rem !important;
+            margin-top: 2px !important;
+        }
 
-        /* ESTILO BARRA CONFIANZA AÑADIDO */
         .trust-bar {
             display: flex;
             justify-content: space-around;
@@ -147,52 +143,53 @@ header p[style*="letter-spacing: 5px"] {
             display: flex; align-items: center; border: 1px solid var(--glass-border); 
             transition: 0.3s; gap: 15px; position: relative; overflow: hidden;
         }
-        /* Este código detecta cuando el mouse pasa por encima */
-.service-item:hover .service-card {
-    border-color: var(--primary) !important; /* El borde se vuelve azul brillante */
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2); /* Crea un resplandor suave */
-    background: rgba(255, 255, 255, 0.06); /* Se aclara un poquito el fondo */
-    transform: translateY(-3px); /* Hace que la tarjeta "flote" ligeramente */
-}
-        /* Sutil escala al hacer clic (efecto botón físico) */
-.service-item:active {
-    transform: scale(0.95);
-    transition: 0.1s;
-}
 
-    /* Estado seleccionado para tarjetas PREMIUM (Dorado) */
-.service-item.premium.selected .service-card {
-    border-color: #f4d03f !important;
-    background: linear-gradient(135deg, rgba(244, 208, 63, 0.15), rgba(0,0,0,0.4)) !important;
-    box-shadow: 0 0 25px rgba(244, 208, 63, 0.3), inset 0 0 10px rgba(244, 208, 63, 0.1);
-}
-        /* Si es premium, el check también es dorado */
-.service-item.premium .check-icon {
-    background: #f4d03f;
-}
+        .service-item:hover .service-card {
+            border-color: var(--primary) !important;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-3px);
+        }
+
+        .service-item:active { transform: scale(0.95); transition: 0.1s; }
+
+        .service-item.premium.selected .service-card {
+            border-color: #f4d03f !important;
+            background: linear-gradient(135deg, rgba(244, 208, 63, 0.15), rgba(0,0,0,0.4)) !important;
+            box-shadow: 0 0 25px rgba(244, 208, 63, 0.3), inset 0 0 10px rgba(244, 208, 63, 0.1);
+        }
+
+        .service-item.premium .check-icon { background: #f4d03f; }
 
         .check-icon {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: var(--primary); /* O #f4d03f para premium si quieres ser detallista */
-    color: #000;
-    width: 26px; /* Un poco más grande */
-    height: 26px;
-    border-radius: 50%;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.85rem;
-    font-weight: 900;
-    z-index: 20;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-}
-.selected .check-icon {
-    display: flex !important;
-    animation: popCheck 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-        .selected .service-card { border-color: var(--primary); background: rgba(0, 212, 255, 0.08); }
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--primary);
+            color: #000;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 900;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .selected .check-icon {
+            display: flex !important;
+            animation: popCheck 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .service-item.selected .service-card {
+            border-color: var(--primary) !important;
+            background: rgba(0, 212, 255, 0.12) !important;
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.25), inset 0 0 10px rgba(0, 212, 255, 0.1);
+            transform: scale(0.98);
+        }
 
         .badge-oferta { position: absolute; top: 0; left: 20px; background: var(--promo); color: #000; padding: 2px 12px; border-radius: 0 0 10px 10px; font-size: 0.6rem; font-weight: 800; text-transform: uppercase; display: none; z-index: 11; }
         .service-item.oferta .badge-oferta { display: block; }
@@ -237,100 +234,104 @@ header p[style*="letter-spacing: 5px"] {
         .modal-content { background: #111; padding: 35px 25px; border-radius: 35px 35px 0 0; width: 100%; max-width: 500px; border: 1px solid var(--glass-border); text-align: center; }
         #input-pass { width: 100%; padding: 15px; margin: 20px 0; border-radius: 15px; background: #000; border: 1px solid #333; color: var(--primary); text-align: center; font-size: 1.5rem; letter-spacing: 5px; }
 
-        /* REEMPLAZA LO ANTERIOR POR ESTO */
-.filter-wrapper { 
-    margin: 10px 0; 
-    position: relative;
-    display: flex;
-    align-items: center;
-}
+        .filter-wrapper { margin: 10px 0; position: relative; display: flex; align-items: center; }
+        .filter-container { display: flex; gap: 10px; overflow-x: auto; padding: 10px 5px; scroll-behavior: smooth; scrollbar-width: none; }
+        .filter-container::-webkit-scrollbar { display: none; }
 
-.filter-container { 
-    display: flex; 
-    gap: 10px; 
-    overflow-x: auto; 
-    padding: 10px 5px;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-}
-.filter-container::-webkit-scrollbar { display: none; }
+        .scroll-indicator {
+            position: absolute; background: linear-gradient(to right, var(--dark), transparent);
+            height: 100%; width: 40px; left: 0; z-index: 2; display: flex; align-items: center; pointer-events: none; transition: 0.3s;
+        }
+        .scroll-indicator.right { left: auto; right: 0; background: linear-gradient(to left, var(--dark), transparent); justify-content: flex-end; }
+        .scroll-indicator i { color: var(--primary); font-size: 1rem; animation: bounceHorizontal 1.5s infinite; }
 
-.scroll-indicator {
-    position: absolute;
-    background: linear-gradient(to right, var(--dark), transparent);
-    height: 100%;
-    width: 40px;
-    left: 0;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    pointer-events: none;
-    transition: 0.3s;
-}
+        @keyframes bounceHorizontal { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+        @keyframes popCheck { 0% { transform: scale(0) rotate(-45deg); opacity: 0; } 100% { transform: scale(1) rotate(0); opacity: 1; } }
 
-.scroll-indicator.right {
-    left: auto;
-    right: 0;
-    background: linear-gradient(to left, var(--dark), transparent);
-    justify-content: flex-end;
-}
+        .btn-nav { background: var(--glass); border: 1px solid var(--glass-border); color: white; padding: 8px 20px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: 0.3s; }
+        .btn-nav.active { background: var(--primary); color: #000; border-color: var(--primary); }
 
-.scroll-indicator i {
-    color: var(--primary);
-    font-size: 1rem;
-    animation: bounceHorizontal 1.5s infinite;
-}
+        #input-pass { border: 2px solid #222; transition: 0.3s; }
+        #input-pass:focus { border-color: var(--primary); box-shadow: 0 0 20px rgba(0, 212, 255, 0.1); }
 
-@keyframes bounceHorizontal {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(5px); }
-}
-        @keyframes popCheck {
-    0% { transform: scale(0) rotate(-45deg); opacity: 0; }
-    100% { transform: scale(1) rotate(0); opacity: 1; }
-}
-.btn-nav {
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    color: white;
-    padding: 8px 20px;
-    border-radius: 50px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: 0.3s;
-}
-.btn-nav.active {
-    background: var(--primary);
-    color: #000;
-    border-color: var(--primary);
-}
-  /* Estado seleccionado para tarjetas normales */
-.service-item.selected .service-card {
-    border-color: var(--primary) !important;
-    background: rgba(0, 212, 255, 0.12) !important; /* Un azul muy suave de fondo */
-    box-shadow: 0 0 25px rgba(0, 212, 255, 0.25), inset 0 0 10px rgba(0, 212, 255, 0.1);
-    transform: scale(0.98); /* Se hunde un poquito al estar seleccionada */
-}
-/* Transición suave para cuando los productos aparecen/desaparecen */
-.service-item {
-    transition: transform 0.3s ease, opacity 0.3s ease, display 0.3s allow-discrete;
-}
+        .view-controls { display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin: 10px 20px; }
+        .view-label { font-size: 0.7rem; color: #666; font-weight: 800; }
+        .btn-view { background: #111; border: 1px solid #333; color: #666; padding: 8px 12px; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .btn-view.active { color: var(--primary); border-color: var(--primary); background: rgba(0, 212, 255, 0.1); }
 
-/* Estilo del modal de contraseña para que se vea imponente */
-#input-pass {
-    border: 2px solid #222;
-    transition: 0.3s;
-}
-#input-pass:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
-}
+        /* --- CONFIGURACIÓN GRID RESPONSIVA --- */
+        .container.grid-mode { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 12px; 
+            padding: 10px; 
+            max-width: 100%; 
+        }
+
+        @media (min-width: 600px) {
+            .container.grid-mode { 
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+                gap: 15px;
+            }
+        }
+
+        .grid-mode .category-title { grid-column: 1 / -1; margin-top: 20px; }
+        .grid-mode .service-item { margin-bottom: 0; }
+
+        .grid-mode .service-card { 
+            flex-direction: column; 
+            align-items: center; 
+            text-align: center; 
+            padding: 15px 10px; 
+            min-height: 180px; 
+            justify-content: flex-start;
+        }
+
+        .grid-mode .service-logo { 
+            width: 55px; 
+            height: 55px; 
+            margin-bottom: 10px; 
+            margin-right: 0; 
+        }
+
+        .grid-mode .service-text h3 { 
+            font-size: 0.85rem; 
+            line-height: 1.2;
+            margin-bottom: 3px;
+        }
+
+        /* En celular, la descripción siempre está visible para que sepan qué compran */
+        .grid-mode .manual-desc { 
+            display: block !important; 
+            opacity: 1; 
+            font-size: 0.65rem;
+            color: #aaa;
+            margin-top: 4px;
+            margin-bottom: 8px;
+        }
+
+        .grid-mode .price-container { 
+            margin-top: auto; 
+            width: 100%; 
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            padding-top: 5px;
+        }
+
+        .grid-mode .price-tag { font-size: 1.1rem; }
+
+        .grid-mode .check-icon {
+            top: 8px;
+            right: 8px;
+            width: 22px;
+            height: 22px;
+            font-size: 0.7rem;
+        }
     </style>
 </head>
 <body>
-
+    
 <header>
     <img src="../img/logo.webp" alt="Logo Alex Store" class="brand-logo" data-aos="zoom-in">
     <h1 data-aos="fade-down">ALEX STORE</h1>
@@ -356,7 +357,15 @@ header p[style*="letter-spacing: 5px"] {
         <button class="btn-nav" onclick="filtrarCategoria('MÚSICA Y VIDEO SIN LÍMITES', this)">MÚSICA</button> </div>
        <div class="scroll-indicator right"><i class="fas fa-chevron-right"></i></div>
     </div>
-        
+        <div class="view-controls" data-aos="fade-in">
+    <span class="view-label">VISTA:</span>
+    <button class="btn-view active" onclick="cambiarVista('list', this)" title="Vista de Lista">
+        <i class="fas fa-list"></i>
+    </button>
+    <button class="btn-view" onclick="cambiarVista('grid', this)" title="Vista de Cuadrícula">
+        <i class="fas fa-th-large"></i>
+    </button>
+</div>
  </div>
      
     
@@ -754,6 +763,24 @@ header p[style*="letter-spacing: 5px"] {
     let carrito = [];
     const numWhatsApp = "51918600000";
 
+    function cambiarVista(modo, btn) {
+    const contenedor = document.querySelector('.container');
+    const botones = document.querySelectorAll('.btn-view');
+    
+    // 1. Quitar clase activa de botones y ponerla al actual
+    botones.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    // 2. Cambiar modo en el contenedor
+    if (modo === 'grid') {
+        contenedor.classList.add('grid-mode');
+    } else {
+        contenedor.classList.remove('grid-mode');
+    }
+    
+    // 3. Refrescar AOS para que las animaciones se ajusten a la nueva posición
+    AOS.refresh();
+}
     function filtrarProductos() {
     const busqueda = document.getElementById('search-input').value.toLowerCase();
     const items = document.querySelectorAll('.service-item');
