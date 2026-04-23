@@ -328,6 +328,43 @@
             height: 22px;
             font-size: 0.7rem;
         }
+        /* --- CORRECCIÓN FINAL PARA ETIQUETA PREMIUM EN CUADRÍCULA --- */
+.grid-mode .premium::after {
+    /* Reposicionamos la etiqueta para que no se salga */
+    right: 8px !important;    
+    top: 35px !important;     /* La bajamos para que no choque con el check azul ✓ */
+    
+    /* Ajustamos el tamaño para que quepa bien en el cuadro pequeño */
+    font-size: 0.45rem !important;
+    padding: 1px 4px !important;
+    letter-spacing: 0.5px !important;
+    
+    /* Mejoramos visibilidad */
+    background: rgba(0, 0, 0, 0.7) !important;
+    backdrop-filter: blur(4px);
+    z-index: 15; /* Asegura que esté por encima de la imagen */
+}
+
+/* Si la tarjeta tiene el banner de "MÁS SOLICITADO", bajamos el PREMIUM un poco más */
+.grid-mode .service-item.oferta.premium::after {
+    top: 42px !important; 
+}
+        /* Ajuste para centrar etiquetas de oferta en modo cuadrícula */
+.grid-mode .service-item.oferta .badge-oferta {
+    left: 50% !important;
+    transform: translateX(-50%) !important; /* El truco mágico para centrar */
+    width: 85% !important;                  /* Un poco más angosto para que luzca mejor */
+    text-align: center !important;
+    white-space: nowrap !important;         /* Evita que el texto se rompa en dos líneas */
+    font-size: 0.55rem !important;          /* Tamaño optimizado para celular */
+    top: -5px !important;                   /* Ajuste de altura */
+}
+
+/* Ajuste para la etiqueta PREMIUM cuando hay un badge arriba */
+.grid-mode .service-item.oferta.premium::after {
+    top: 38px !important; /* La bajamos para que no se encime con el banner amarillo */
+    right: 10px !important;
+}
     </style>
 </head>
 <body>
