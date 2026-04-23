@@ -291,6 +291,11 @@ body {
 .oculto-filtro {
     display: none !important;
 }
+        .btn-view.active {
+    background: var(--primary) !important;
+    color: #000 !important;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+}
     </style>
 
     <script>
@@ -392,6 +397,20 @@ body {
          &#10095;
     </div>
 </div>
+
+    <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 5px; padding-bottom: 10px;">
+        <span style="font-size: 0.6rem; font-weight: 800; color: #555; letter-spacing: 1px;">VISTA:</span>
+        <div style="display: flex; background: var(--glass); padding: 4px; border-radius: 10px; border: 1px solid var(--glass-border);">
+            <button class="btn-view active" id="btn-list" onclick="cambiarVista('list', this)" 
+                style="padding: 6px 12px; border-radius: 7px; border: none; background: transparent; color: #888; cursor: pointer; transition: 0.3s;">
+                <i class="fas fa-list"></i>
+            </button>
+            <button class="btn-view" id="btn-grid" onclick="cambiarVista('grid', this)" 
+                style="padding: 6px 12px; border-radius: 7px; border: none; background: transparent; color: #888; cursor: pointer; transition: 0.3s;">
+                <i class="fas fa-th-large"></i>
+            </button>
+        </div>
+    </div>
     
 </header>
 
@@ -909,6 +928,26 @@ body {
     
     let carrito = [];
 
+    function cambiarVista(modo, btn) {
+    const contenedor = document.querySelector('.container');
+    const botones = document.querySelectorAll('.btn-view');
+    
+    // 1. Cambiar estado visual de los botones
+    botones.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    // 2. Aplicar o quitar la clase de cuadrícula
+    if (modo === 'grid') {
+        contenedor.classList.add('grid-mode');
+    } else {
+        contenedor.classList.remove('grid-mode');
+    }
+    
+    // 3. Refrescar animaciones AOS para evitar que los cuadros queden invisibles
+    if (typeof AOS !== 'undefined') {
+        AOS.refresh();
+    }
+}
     // --- BUSCADOR ---
     function filtrarPlataformas() {
     // Al empezar a escribir, reseteamos los filtros visualmente
