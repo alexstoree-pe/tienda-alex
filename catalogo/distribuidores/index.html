@@ -1,303 +1,562 @@
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Distribución VIP | Alex Store</title>
+
+
 
     <link rel="icon" type="image/webp" href="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.webp">
 
     <link rel="apple-touch-icon" href="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.webp">
+
     <meta name="apple-mobile-web-app-title" content="Alex Distribución">
+
     <meta name="mobile-web-app-capable" content="yes">
+
     <meta name="theme-color" content="#050505">
 
+
+
     <meta property="og:title" content="Distribución VIP | Alex Store">
+
     <meta property="og:description" content="Precios exclusivos para distribuidores. Panel de servicios streaming 24/7.">
+
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://alexstoree-pe.github.io/tienda-alex/catalogo/distribuidores/"> <meta property="og:image" content="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.webp">
+
+    <meta property="og:url" content="https://alexstoree-pe.github.io/tienda-alex/catalogo/distribuidores/"> 
+
+    <meta property="og:image" content="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.webp">
+
     <meta property="og:image:width" content="500">
+
     <meta property="og:image:height" content="500">
+
     <meta property="og:image:type" content="image/png">
 
+
+
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    :root {
+        --primary: #00d4ff; 
+        --dark: #050505;
+        --glass: rgba(255, 255, 255, 0.03);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --danger-neon: #ff0000;
+        --vip: #d4af37;
+        --success-neon: #39ff14;
+        --gold-gradient: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    }
+
+    html { 
+        background-color: var(--dark); 
+        scroll-behavior: smooth; 
+    }
+
+    .contenido-protegido {
+        display: none !important;
+    }
+
+    @keyframes shine-red { 
+        0%, 100% { text-shadow: 0 0 10px var(--danger-neon), 0 0 20px var(--danger-neon); color: var(--danger-neon); border-color: var(--danger-neon); box-shadow: inset 0 0 10px var(--danger-neon), 0 0 10px var(--danger-neon); } 
+        50% { text-shadow: 0 0 30px var(--danger-neon), 0 0 50px var(--danger-neon); color: #fff; border-color: #fff; box-shadow: inset 0 0 20px var(--danger-neon), 0 0 25px var(--danger-neon); } 
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body { 
+        font-family: 'Poppins', sans-serif; 
+        background: #0a0a0a; 
+        color: white; 
+        padding-bottom: 200px; 
+        overflow-x: hidden;
+        visibility: hidden;
+    }
+
+    .modal-pass { 
+        display: none; 
+        position: fixed; 
+        inset: 0; 
+        background: rgba(0,0,0,0.98); 
+        backdrop-filter: blur(25px); 
+        z-index: 9999; 
+        justify-content: center; 
+        align-items: center;
+        visibility: visible;
+    }
+
+    .modal-content-pass { 
+        background: #111; padding: 40px; border-radius: 40px; width: 90%; max-width: 400px; 
+        border: 1px solid var(--primary); text-align: center; box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+    }
+
+    #input-dist-pass { 
+        width: 100%; padding: 20px; margin: 25px 0; border-radius: 15px; background: #000; 
+        color: white; text-align: center; font-size: 1.5rem; border: 1px solid #333; outline: none; letter-spacing: 5px;
+    }
+
+    header { 
+        background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px); padding: 10px 15px 0px; 
+        text-align: center; border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 2000; 
+    }
+
+    .brand-logo { width: 45px; height: 45px; object-fit: contain; border-radius: 18px; margin-bottom: 5px; }
+    header h1 { font-size: 1.1rem; letter-spacing: 0.9px; margin-bottom: 5px; }
+
+    .garantia-header { display: flex; justify-content: center; gap: 15px; margin-top: 5px; }
+    .garantia-mini-item { text-align: center; min-width: 60px; }
+    .garantia-mini-item i { font-size: 0.7rem; color: var(--primary); margin-bottom: 2px; }
+    .garantia-mini-item p { font-size: 0.35rem; font-weight: 700; text-transform: uppercase; color: #bbb; line-height: 1.1; }
+
+    .search-container { 
+        position: sticky; 
+        top: 110px; 
+        z-index: 1900; 
+        padding: 5px 15px; 
+        background: #0a0a0a; 
+    }
+
+    .search-wrapper { position: relative; max-width: 500px; margin: auto; }
+    .search-wrapper i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--primary); }
+    #buscador { width: 100%; padding: 8px 15px 8px 40px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: white; font-family: 'Poppins'; transition: 0.3s; }
+    #buscador:focus { border-color: var(--primary); outline: none; background: rgba(255,255,255,0.05); }
+
+    .grid-botones { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 10px auto; max-width: 500px; padding: 0 15px; }
+    .btn-universal { display: flex; align-items: center; justify-content: center; padding: 14px; border-radius: 15px; text-decoration: none; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; border: none; cursor: pointer; transition: 0.3s; }
+    .btn-inicio { background: var(--glass); color: #fff; border: 1px solid var(--glass-border); }
+    .btn-promo-distri { background: var(--gold-gradient); color: #000; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
+    .btn-iptv { background: var(--gold-gradient); color: #000; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
+    .contenedor-iptv { display: flex; justify-content: center; padding: 0 15px; margin-top: -8px; margin-bottom: 20px; }
+
+    .container { padding: 10px 15px; max-width: 600px; margin: auto; }
+    .category-title { margin: 35px 0 15px; font-size: 0.9rem; font-weight: 800; color: var(--primary); letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
+
+    .service-link { 
+        position: relative; text-decoration: none; color: inherit; display: block; margin-bottom: 30px; cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
     
-    <style>
-        :root {
-            --primary: #00d4ff; 
-            --dark: #050505;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --danger-neon: #ff0000;
-            --vip: #d4af37;
-            --success-neon: #39ff14;
-            --gold-gradient: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    .oculto-busqueda {
+        display: none !important;
+        opacity: 0;
+        transform: scale(0.95);
+        margin-bottom: 0;
+    }
+
+    .filter-container {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        gap: 10px;
+        padding: 10px 5px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .filter-container::-webkit-scrollbar { display: none; }
+
+    .filter-btn {
+        flex: 0 0 auto;
+        padding: 8px 20px;
+        border-radius: 8px;
+        background-color: #1a1a1a;
+        color: white;
+        border: 1px solid #333;
+    }
+
+    .filter-wrapper {
+        display: block !important;
+        min-height: 50px;
+        margin-bottom: 10px;
+    }  
+
+    .service-card { background: #0f0f0f; border-radius: 25px; padding: 22px; display: flex; align-items: center; border: 1px solid var(--glass-border); gap: 18px; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; z-index: 10; overflow: hidden; }
+/* --- INICIO CAMBIO SELECCIÓN PROFESIONAL --- */
+    
+    @keyframes popCheck { 
+        0% { transform: scale(0) rotate(-45deg); opacity: 0; } 
+        100% { transform: scale(1) rotate(0); opacity: 1; } 
+    }
+
+    /* 1. MANTENER EL BORDE PREMIUM SIEMPRE (Incluso sin seleccionar) */
+    .service-link.premium .service-card {
+        border: 2px solid var(--vip) !important;
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+    }
+
+    /* 2. ESTADO SELECCIONADO: Efecto de presión y fondo limpio */
+    .service-link.selected .service-card { 
+        transform: scale(0.96) translateY(2px) !important; 
+        transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 50;
+        background: rgba(255, 255, 255, 0.03) !important; 
+    }
+
+    /* 3. BRILLO NEÓN PARA TARJETAS NORMALES SELECCIONADAS (Borde celeste) */
+    .service-link.selected:not(.premium) .service-card {
+        border: 2px solid var(--primary) !important;
+        box-shadow: 0 0 25px rgba(0, 212, 255, 0.5), 
+                    inset 0 0 15px rgba(0, 212, 255, 0.1) !important;
+    }
+
+    /* 4. BRILLO NEÓN PARA TARJETAS PREMIUM SELECCIONADAS (Respeta el borde VIP) */
+    .service-link.premium.selected .service-card { 
+        border: 2px solid var(--vip) !important; /* Aquí forzamos que siga siendo dorado */
+        box-shadow: 0 0 35px rgba(212, 175, 55, 0.6), 
+                    inset 0 0 15px rgba(212, 175, 55, 0.2) !important;
+    }
+
+    /* 5. DISEÑO DEL CHECK ANIMADO */
+    .check-icon { 
+        position: absolute; 
+        top: -5px; 
+        right: -5px; 
+        width: 28px; 
+        height: 28px; 
+        border-radius: 50%; 
+        display: none; 
+        align-items: center; 
+        justify-content: center; 
+        font-size: 0.9rem; 
+        z-index: 101; 
+        border: 2px solid #000;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .service-link.selected .check-icon { 
+        display: flex !important;
+        background: var(--primary) !important;
+        color: #000 !important;
+        animation: popCheck 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    /* Check dorado si la tarjeta es premium */
+    .service-link.premium.selected .check-icon { 
+        background: var(--vip) !important;
+    }
+    
+    /* --- FIN CAMBIO SELECCIÓN PROFESIONAL --- */
+    .badge-oferta { 
+        display: none; 
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        background: #f1c40f; 
+        color: #000; 
+        padding: 3px 20px 3px 10px; 
+        clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+        font-size: 0.55rem; 
+        font-weight: 900; 
+        z-index: 100;
+        text-transform: uppercase;
+    }
+
+    .service-link.oferta .badge-oferta { display: block; }
+
+    .premium-text { 
+        display: none; 
+        border: 1px solid #bf953f; padding: 2px 8px; border-radius: 4px;
+        background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        font-size: 0.6rem; font-weight: 900; text-transform: uppercase; margin-right: 15px; margin-bottom: 4px; 
+    }
+    .premium .premium-text { display: inline-block; }
+
+    .status-badge { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; margin-top: 5px; margin-bottom: 2px; display: flex; align-items: center; gap: 5px; }
+    .disponible .status-badge::before { content: "● DISPONIBLE"; color: var(--success-neon); }
+    .pocas .status-badge::before { content: "● POCAS UNIDADES"; color: #ff3333; }
+
+    .service-logo { width: 65px; height: 65px; object-fit: cover; border-radius: 18px; }
+    .service-text h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
+    .manual-desc { font-size: 0.75rem; color: #888; display: block; }
+    
+    .price-container { display: flex; flex-direction: column; align-items: flex-end; margin-left: auto; }
+    .price-tag { color: var(--primary); font-weight: 800; font-size: 1.4rem; }
+    .premium .price-tag { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: var(--vip); }
+
+    .badge-renovacion { display: none; color: #f1c40f; font-size: 0.55rem; font-weight: 700; margin-top: 3px; text-transform: uppercase; }
+    .renovacion .badge-renovacion { display: inline-block; }
+
+    .service-link.agotado { pointer-events: none; }
+    .service-link.agotado .service-card { opacity: 0.3; border-color: var(--glass-border); filter: grayscale(1); }
+    .service-link.agotado .price-container,
+    .service-link.agotado .badge-oferta,
+    .service-link.agotado .status-badge,
+    .service-link.agotado .badge-renovacion,
+    .service-link.agotado .check-icon { display: none !important; }
+    
+    .service-link.agotado::after { 
+        content: "SIN STOCK"; position: absolute; top: 50%; right: 25px; transform: translateY(-50%);
+        font-size: 0.8rem; font-weight: 900; border: 2.5px solid var(--danger-neon); 
+        padding: 8px 15px; border-radius: 12px; animation: shine-red 1.5s infinite; 
+        z-index: 200; background: #000;
+    }
+
+    .floating-btn { 
+        position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); 
+        background: linear-gradient(135deg, #25d366, #128c7e); color: white; 
+        padding: 0; border-radius: 22px; width: 92%; max-width: 480px; 
+        z-index: 3000; display: none; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        overflow: hidden;
+    }
+
+    .cart-content-wrapper { display: flex; align-items: center; width: 100%; height: 70px; }
+    .btn-send-order { flex-grow: 1; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; cursor: pointer; height: 100%; }
+
+    .btn-clear-cart {
+        background: rgba(255, 0, 0, 0.2); color: #ff4d4d; border: none;
+        width: 50px; height: 50px; border-radius: 15px;
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer; transition: 0.3s; margin-left: 10px; z-index: 3001;
+    }
+
+    #custom-alert {
+        position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
+        background: #111; border: 1.5px solid var(--primary);
+        padding: 15px 30px; border-radius: 20px; z-index: 5000;
+        box-shadow: 0 15px 45px rgba(0,0,0,0.9);
+        display: flex; align-items: center; gap: 15px;
+        transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    #custom-alert.active { top: 30px; }
+
+    .btn-filter {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        color: #888;
+        padding: 8px 18px;
+        border-radius: 10px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s;
+        text-transform: uppercase;
+    }
+
+    .btn-filter.active {
+        background: var(--primary);
+        color: #000;
+        border-color: var(--primary);
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+    }
+
+    .oculto-filtro {
+        display: none !important;
+    }
+
+    .service-link:not(.oculto-filtro) {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    /* SISTEMA DE VISTAS */
+    .view-controls {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 10px;
+        max-width: 600px;
+        margin: 5px auto;
+        padding: 0 15px;
+    }
+
+    .view-btn {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        color: #666;
+        width: 35px;
+        height: 35px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .view-btn.active {
+        background: var(--primary);
+        color: #000;
+        border-color: var(--primary);
+    }
+
+    .container.grid-mode {
+        display: grid !important;
+        gap: 15px !important;
+        grid-template-columns: repeat(2, 1fr) !important; 
+    }
+
+    @media (min-width: 768px) {
+        .container.grid-mode {
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .container {
+            max-width: 95% !important; 
+            padding: 0 30px;
         }
 
-        /* Cambia el display:none por opacidad para evitar bloqueos visuales */
-html { 
-    background-color: var(--dark); 
-    scroll-behavior: smooth; 
-}
-
-/* Esta clase asegurará que el contenido se oculte correctamente */
-.contenido-protegido {
-    display: none !important;
-}
-
-        @keyframes shine-red { 
-            0%, 100% { text-shadow: 0 0 10px var(--danger-neon), 0 0 20px var(--danger-neon); color: var(--danger-neon); border-color: var(--danger-neon); box-shadow: inset 0 0 10px var(--danger-neon), 0 0 10px var(--danger-neon); } 
-            50% { text-shadow: 0 0 30px var(--danger-neon), 0 0 50px var(--danger-neon); color: #fff; border-color: #fff; box-shadow: inset 0 0 20px var(--danger-neon), 0 0 25px var(--danger-neon); } 
+        .container.grid-mode {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+            gap: 20px !important;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        /* 1. Ocultamos TODO el cuerpo por defecto para evitar el "parpadeo" de botones */
-body { 
-    font-family: 'Poppins', sans-serif; 
-    background: #0a0a0a; 
-    color: white; 
-    padding-bottom: 200px; 
-    overflow-x: hidden;
-    visibility: hidden; /* <--- Esto es la clave: invisible hasta que el PIN sea correcto */
-}
-
-/* 2. El modal debe ser lo ÚNICO visible cuando no hay acceso */
-.modal-pass { 
-    display: none; 
-    position: fixed; 
-    inset: 0; 
-    background: rgba(0,0,0,0.98); 
-    backdrop-filter: blur(25px); 
-    z-index: 9999; 
-    justify-content: center; 
-    align-items: center;
-    visibility: visible; /* <--- Esto permite que el modal se vea aunque el body esté oculto */
-}
-        .modal-content-pass { 
-            background: #111; padding: 40px; border-radius: 40px; width: 90%; max-width: 400px; 
-            border: 1px solid var(--primary); text-align: center; box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
-        }
-        #input-dist-pass { 
-            width: 100%; padding: 20px; margin: 25px 0; border-radius: 15px; background: #000; 
-            color: white; text-align: center; font-size: 1.5rem; border: 1px solid #333; outline: none; letter-spacing: 5px;
+        .grid-mode .category-title {
+            grid-column: 1 / -1; 
+            width: 100%;
+            margin: 40px 0 20px;
         }
 
-        header { 
-            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px); padding: 25px 20px 15px; 
-            text-align: center; border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 2000; 
+        .container:not(.grid-mode) {
+            max-width: 700px !important;
+            margin: 0 auto;
         }
-        .brand-logo { width: 65px; height: 65px; object-fit: contain; border-radius: 18px; margin-bottom: 8px; }
-        header h1 { font-size: 1.1rem; letter-spacing: 1px; margin-bottom: 10px; }
+    }
 
-        .garantia-header { display: flex; justify-content: center; gap: 15px; margin-top: 5px; }
-        .garantia-mini-item { text-align: center; min-width: 60px; }
-        .garantia-mini-item i { font-size: 0.9rem; color: var(--primary); margin-bottom: 2px; }
-        .garantia-mini-item p { font-size: 0.45rem; font-weight: 700; text-transform: uppercase; color: #bbb; line-height: 1.1; }
+    .grid-mode .service-link {
+        margin-bottom: 0 !important;
+    }
 
-        .search-container { position: sticky; top: 165px; z-index: 1900; padding: 10px 15px; background: #0a0a0a; }
-        .search-wrapper { position: relative; max-width: 500px; margin: auto; }
-        .search-wrapper i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--primary); }
-        #buscador { width: 100%; padding: 12px 15px 12px 45px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: white; font-family: 'Poppins'; transition: 0.3s; }
-        #buscador:focus { border-color: var(--primary); outline: none; background: rgba(255,255,255,0.05); }
+    .grid-mode .service-card {
+        flex-direction: column !important;
+        text-align: center;
+        padding: 15px 10px !important;
+        height: 100%;
+        justify-content: space-between;
+    }
 
-        .grid-botones { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px auto; max-width: 500px; padding: 0 15px; }
-        .btn-universal { display: flex; align-items: center; justify-content: center; padding: 14px; border-radius: 15px; text-decoration: none; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; border: none; cursor: pointer; transition: 0.3s; }
-        .btn-inicio { background: var(--glass); color: #fff; border: 1px solid var(--glass-border); }
-        .btn-promo-distri { background: var(--gold-gradient); color: #000; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
-        .btn-iptv { background: var(--gold-gradient); color: #000; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
-        .contenedor-iptv { display: flex; justify-content: center; padding: 0 15px; margin-top: -8px; /* Reduce el espacio con los botones de arriba si es necesario */ margin-bottom: 20px; }
+    .grid-mode .service-logo {
+        width: 60px !important;
+        height: 60px !important;
+        margin-bottom: 10px;
+    }
 
-        .container { padding: 10px 15px; max-width: 600px; margin: auto; }
-        .category-title { margin: 35px 0 15px; font-size: 0.9rem; font-weight: 800; color: var(--primary); letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
+    .grid-mode .service-text { width: 100%; }
+    .grid-mode .service-text h3 { font-size: 0.85rem !important; line-height: 1.2; }
+    .grid-mode .manual-desc { font-size: 0.65rem !important; }
 
-        /* TRANSICIÓN SUAVE DEL BUSCADOR */
-        .service-link { 
-            position: relative; text-decoration: none; color: inherit; display: block; margin-bottom: 30px; cursor: pointer;
-            transition: opacity 0.4s ease, transform 0.4s ease, margin-bottom 0.4s ease;
+    .grid-mode .price-container {
+        margin-left: 0 !important;
+        margin-top: 10px;
+        align-items: center !important;
+        width: 100%;
+    }
+
+    .grid-mode .price-tag { font-size: 1.1rem !important; }
+
+    .grid-mode .badge-oferta {
+        width: 100%;
+        text-align: center;
+        clip-path: none;
+        border-radius: 0 0 10px 10px;
+    }
+
+    /* --- CORRECCIÓN PARA VISTA CUADRÍCULA --- */
+
+    /* 1. Aseguramos que el texto premium esté oculto por defecto en el grid */
+    .grid-mode .premium-text {
+        display: none !important;
+    }
+
+    /* 2. Solo lo mostramos si la tarjeta tiene la clase 'premium' */
+    .grid-mode .service-link.premium .premium-text {
+        display: block !important;
+        margin-right: 0;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+
+    /* 3. Ajuste de imagen (logo) en el grid para que no se vea vacía si falta link */
+    .grid-mode .service-logo {
+        width: 60px !important;
+        height: 60px !important;
+        margin-bottom: 10px;
+        object-fit: cover;
+        background: #222; /* Fondo por si la imagen falla */
+    }
+    .grid-mode .category-title {
+        grid-column: 1 / -1;
+        width: 100%;
+        border-bottom: 1px solid var(--glass-border);
+        padding-bottom: 10px;
+    }
+
+    .grid-mode .service-link.agotado::after {
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        right: auto !important;
+        margin: 0 !important;
+        white-space: nowrap !important;
+        width: auto !important;
+        display: block !important;
+        z-index: 100;
+    }
+
+    @media (max-width: 480px) {
+        .filter-wrapper {
+            margin-top: 5px;
+            padding-top: 5px;
         }
-        
-        /* CLASE PARA OCULTAR CON SUAVE FADE */
-        .oculto-busqueda {
-            display: none !important;
-            opacity: 0;
-            transform: scale(0.95);
-            margin-bottom: 0;
-        }
-        .oculto-filtro {
-    display: none !important;
-}
-
-        .filter-container {
-  display: flex;
-  overflow-x: auto; /* Permite el scroll horizontal */
-  white-space: nowrap; /* Evita que los botones salten a la siguiente línea */
-  gap: 10px; /* Espacio entre botones */
-  padding: 10px 5px;
-  scrollbar-width: none; /* Oculta la barra en Firefox */
-  -ms-overflow-style: none; /* Oculta la barra en IE/Edge */
-}
-
-/* Oculta la barra de scroll en Chrome, Safari y Opera */
-.filter-container::-webkit-scrollbar {
-  display: none;
-}
-
-.filter-btn {
-  flex: 0 0 auto; /* Importante: evita que los botones se encojan */
-  padding: 8px 20px;
-  border-radius: 8px;
-  background-color: #1a1a1a; /* Ajusta al color de tu web */
-  color: white;
-  border: 1px solid #333;
-}
-
-.btn-filter.active {
-    background: var(--primary);
-    color: #000;
-    border-color: var(--primary);
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
-}
-        .service-card { background: #0f0f0f; border-radius: 25px; padding: 22px; display: flex; align-items: center; border: 1px solid var(--glass-border); gap: 18px; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; z-index: 10; overflow: hidden; }
-        
-        .service-link.selected .service-card { border-color: var(--primary); background: rgba(0, 212, 255, 0.15); transform: scale(0.97); }
-        
-        .check-icon { position: absolute; top: -5px; right: -5px; background: var(--primary); color: #000; width: 28px; height: 28px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 0.9rem; z-index: 101; border: 2px solid #000; }
-        .service-link.selected .check-icon { display: flex; }
-
-        .service-link.premium .service-card { border: 2px solid var(--vip); box-shadow: 0 0 15px rgba(212, 175, 55, 0.15); }
-        .service-link.premium.selected .service-card { border-color: var(--primary); }
-
-        /* El badge está oculto por defecto */
-.badge-oferta { 
-    display: none; 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    background: #f1c40f; 
-    color: #000; 
-    padding: 3px 20px 3px 10px; 
-    clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
-    font-size: 0.55rem; 
-    font-weight: 900; 
-    z-index: 100;
-    text-transform: uppercase;
-}
-
-
-/* SOLO si el contenedor tiene la clase "oferta", el badge se muestra */
-.service-link.oferta .badge-oferta {
-    display: block;
-}
-
-        .premium-text { 
-            display: none; 
-            border: 1px solid #bf953f; padding: 2px 8px; border-radius: 4px;
-            background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            font-size: 0.6rem; font-weight: 900; text-transform: uppercase; margin-right: 15px; margin-bottom: 4px; 
-        }
-        .premium .premium-text { display: inline-block; }
-
-        .status-badge { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; margin-top: 5px; margin-bottom: 2px; display: flex; align-items: center; gap: 5px; }
-        .disponible .status-badge::before { content: "● DISPONIBLE"; color: var(--success-neon); }
-        .pocas .status-badge::before { content: "● POCAS UNIDADES"; color: #ff3333; }
-
-        .service-logo { width: 65px; height: 65px; object-fit: cover; border-radius: 18px; }
-        .service-text h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
-        .manual-desc { font-size: 0.75rem; color: #888; display: block; }
-        
-        .price-container { display: flex; flex-direction: column; align-items: flex-end; margin-left: auto; }
-        .price-tag { color: var(--primary); font-weight: 800; font-size: 1.4rem; }
-        .premium .price-tag { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: var(--vip); }
-
-        .badge-renovacion { display: none; color: #f1c40f; font-size: 0.55rem; font-weight: 700; margin-top: 3px; text-transform: uppercase; }
-        .renovacion .badge-renovacion { display: inline-block; }
-
-        .service-link.agotado { pointer-events: none; }
-        .service-link.agotado .service-card { opacity: 0.3; border-color: var(--glass-border); filter: grayscale(1); }
-        .service-link.agotado .price-container,
-        .service-link.agotado .badge-oferta,
-        .service-link.agotado .status-badge,
-        .service-link.agotado .badge-renovacion,
-        .service-link.agotado .check-icon { display: none !important; }
-        
-        .service-link.agotado::after { 
-            content: "SIN STOCK"; position: absolute; top: 50%; right: 25px; transform: translateY(-50%);
-            font-size: 0.8rem; font-weight: 900; border: 2.5px solid var(--danger-neon); 
-            padding: 8px 15px; border-radius: 12px; animation: shine-red 1.5s infinite; 
-            z-index: 200; background: #000;
-        }
-
-        .floating-btn { 
-            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); 
-            background: linear-gradient(135deg, #25d366, #128c7e); color: white; 
-            padding: 0; border-radius: 22px; width: 92%; max-width: 480px; 
-            z-index: 3000; display: none; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            overflow: hidden;
-        }
-
-        .cart-content-wrapper { display: flex; align-items: center; width: 100%; height: 70px; }
-
-        .btn-send-order { flex-grow: 1; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; cursor: pointer; height: 100%; }
-
-        .btn-clear-cart {
-            background: rgba(255, 0, 0, 0.2); color: #ff4d4d; border: none;
-            width: 50px; height: 50px; border-radius: 15px;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: 0.3s; margin-left: 10px; z-index: 3001;
-        }
-
-        #custom-alert {
-            position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
-            background: #111; border: 1.5px solid var(--primary);
-            padding: 15px 30px; border-radius: 20px; z-index: 5000;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.9);
-            display: flex; align-items: center; gap: 15px;
-            transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-        #custom-alert.active { top: 30px; }
         .btn-filter {
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    color: #888;
-    padding: 8px 18px;
-    border-radius: 10px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.3s;
-    text-transform: uppercase;
-}
+            padding: 8px 15px;
+            font-size: 12px;
+        }
+    }
 
-.btn-filter.active {
-    background: var(--primary);
-    color: #000;
-    border-color: var(--primary);
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
-}
+    #filterScroll {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        overflow-x: auto;
+        white-space: nowrap;
+        gap: 10px;
+        padding: 10px 5px;
+        z-index: 100;
+    }
 
-/* Ocultar categorías por filtro */
-.oculto-filtro {
-    display: none !important;
-}
-        /* Esto asegura que los productos filtrados siempre sean visibles */
-.service-link:not(.oculto-filtro) {
-    display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-}
+    .container:not(.grid-mode) .service-card {
+        width: 100%;
+        max-width: 100%;
+    }
 
-.oculto-filtro {
-    display: none !important;
-}
-        .btn-view.active {
-    background: var(--primary) !important;
-    color: #000 !important;
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
-}
-    </style>
+    .service-link:hover .service-card {
+        border-color: var(--primary) !important;
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.4), 
+                    inset 0 0 10px rgba(0, 212, 255, 0.1) !important;
+        transform: translateY(-4px) scale(1.01);
+        background: rgba(255, 255, 255, 0.05) !important;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        z-index: 2;
+    }
 
+    .grid-mode .service-link:hover .service-card {
+        transform: translateY(-6px) scale(1.02);
+    }
+
+    .service-link.premium:hover .service-card {
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(0, 0, 0, 0.1)) !important;
+        border-color: var(--primary) !important;
+        box-shadow: 0 0 25px rgba(0, 212, 255, 0.5) !important;
+    }
+
+    /* AJUSTE PARA EL CHECK EN MODO GRID */
+    .grid-mode .service-link.selected .check-icon {
+        top: 5px;
+        right: 5px;
+    }
+</style>
     <script>
     // Usamos una función que se ejecuta de inmediato (antes de que carguen los botones)
     (function() {
@@ -396,8 +655,16 @@ body {
          style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%); z-index: 10; cursor: pointer; color: #00e5ff; font-size: 18px; background: rgba(0,0,0,0.6); width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; border-radius: 50%; border: 1px solid #333;">
          &#10095;
     </div>
+       
 </div>
-
+ <div class="view-controls">
+    <button class="view-btn active" id="btn-list" onclick="cambiarDiseno('lista')">
+        <i class="fa-solid fa-list"></i>
+    </button>
+    <button class="view-btn" id="btn-grid" onclick="cambiarDiseno('cuadricula')">
+        <i class="fa-solid fa-table-cells-large"></i>
+    </button>
+</div>
 </header>
 
 <div class="grid-botones">
@@ -633,7 +900,7 @@ body {
         </div>
     </div>
 
-    <div class="service-link agotado renovacion oferta agotado" data-aos="fade-up">
+    <div class="service-link agotado renovacion oferta agotado" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">Mas Solicitado🔥</span>
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
@@ -650,14 +917,14 @@ body {
         </div>
     </div>
 
-    <div class="service-link disponible pocasr" onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible pocas" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
             <img src="../img/disneys.webp" class="service-logo">
             <div class="service-text">
                 <div class="status-badge"></div>
-                <h3 class="nombre-prod">Disney premium Completa(SIN ESPN)</h3>
+                <h3 class="nombre-prod">Disney Completa(SIN ESPN)</h3>
                 <span class="manual-desc">1 Mes • 7 Perfiles • Sin canales ESPN.</span>
             </div>
             <div class="price-container">
@@ -668,9 +935,10 @@ body {
         </div>
     </div>
 
-    <div class="service-link agotado renovacion oferta premium" data-aos="fade-up">
+    <div class="service-link  renovacion oferta premium" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">Mas Solicitado🔥 </span>
+            <div class="check-icon"><i class="fa-solid fa-check"></i></div>
             <img src="../img/disneyp.webp" class="service-logo">
             <div class="service-text">
                 <div class="status-badge"></div>
@@ -909,11 +1177,51 @@ body {
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
     // Inicialización de animaciones
-    AOS.init({ duration: 800, once: false , offset: 50    // Se activa un poco antes de llegar al elemento
-});
+    AOS.init({ 
+        duration: 800, 
+        once: true,    // <--- CAMBIA ESTO A TRUE: La animación solo ocurre una vez
+        offset: 50,
+        mirror: false  // <--- ASEGÚRATE QUE ESTÉ EN FALSE: Evita que se animen al subir
+    });
     
     let carrito = [];
 
+    function cambiarDiseno(modo, btn) {
+        const contenedor = document.querySelector('.container');
+        const btnList = document.getElementById('btn-list');
+        const btnGrid = document.getElementById('btn-grid');
+
+        // 1. Gestión de clases activas para los botones
+        if (btn) {
+            // Si pasas el botón directamente (como en la script anterior)
+            document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        } else {
+            // Si usas la lógica de IDs (btn-list / btn-grid)
+            if (modo === 'cuadricula') {
+                btnGrid.classList.add('active');
+                btnList.classList.remove('active');
+            } else {
+                btnList.classList.add('active');
+                btnGrid.classList.remove('active');
+            }
+        }
+
+        // 2. Aplicar el modo al contenedor
+        if (modo === 'cuadricula' || modo === 'grid') {
+            contenedor.classList.add('grid-mode');
+        } else {
+            contenedor.classList.remove('grid-mode');
+        }
+
+        // 3. Refrescar AOS para ajustar animaciones a la nueva posición
+        // Esto evita que los elementos desaparezcan al cambiar de vista
+        setTimeout(() => {
+            if (typeof AOS !== 'undefined') {
+                AOS.refreshHard();
+            }
+        }, 100);
+    }
     // --- BUSCADOR ---
     function filtrarPlataformas() {
     // Al empezar a escribir, reseteamos los filtros visualmente
