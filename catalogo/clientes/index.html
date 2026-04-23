@@ -154,15 +154,44 @@ header p[style*="letter-spacing: 5px"] {
     background: rgba(255, 255, 255, 0.06); /* Se aclara un poquito el fondo */
     transform: translateY(-3px); /* Hace que la tarjeta "flote" ligeramente */
 }
-
-        .service-item.premium:hover .service-card {
-    border-color: #f4d03f !important;
-    box-shadow: 0 0 20px rgba(244, 208, 63, 0.25);
-    background: linear-gradient(100deg, rgba(212, 175, 55, 0.1), rgba(0,0,0,0));
+        /* Sutil escala al hacer clic (efecto botón físico) */
+.service-item:active {
+    transform: scale(0.95);
+    transition: 0.1s;
 }
 
-        .check-icon { position: absolute; top: 10px; right: 10px; background: var(--primary); color: #000; width: 22px; height: 22px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold; z-index: 10; }
-        .selected .check-icon { display: flex; }
+    /* Estado seleccionado para tarjetas PREMIUM (Dorado) */
+.service-item.premium.selected .service-card {
+    border-color: #f4d03f !important;
+    background: linear-gradient(135deg, rgba(244, 208, 63, 0.15), rgba(0,0,0,0.4)) !important;
+    box-shadow: 0 0 25px rgba(244, 208, 63, 0.3), inset 0 0 10px rgba(244, 208, 63, 0.1);
+}
+        /* Si es premium, el check también es dorado */
+.service-item.premium .check-icon {
+    background: #f4d03f;
+}
+
+        .check-icon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--primary); /* O #f4d03f para premium si quieres ser detallista */
+    color: #000;
+    width: 26px; /* Un poco más grande */
+    height: 26px;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 900;
+    z-index: 20;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.selected .check-icon {
+    display: flex !important;
+    animation: popCheck 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
         .selected .service-card { border-color: var(--primary); background: rgba(0, 212, 255, 0.08); }
 
         .badge-oferta { position: absolute; top: 0; left: 20px; background: var(--promo); color: #000; padding: 2px 12px; border-radius: 0 0 10px 10px; font-size: 0.6rem; font-weight: 800; text-transform: uppercase; display: none; z-index: 11; }
@@ -256,6 +285,10 @@ header p[style*="letter-spacing: 5px"] {
     0%, 100% { transform: translateX(0); }
     50% { transform: translateX(5px); }
 }
+        @keyframes popCheck {
+    0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
+}
 .btn-nav {
     background: var(--glass);
     border: 1px solid var(--glass-border);
@@ -272,6 +305,27 @@ header p[style*="letter-spacing: 5px"] {
     background: var(--primary);
     color: #000;
     border-color: var(--primary);
+}
+  /* Estado seleccionado para tarjetas normales */
+.service-item.selected .service-card {
+    border-color: var(--primary) !important;
+    background: rgba(0, 212, 255, 0.12) !important; /* Un azul muy suave de fondo */
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.25), inset 0 0 10px rgba(0, 212, 255, 0.1);
+    transform: scale(0.98); /* Se hunde un poquito al estar seleccionada */
+}
+/* Transición suave para cuando los productos aparecen/desaparecen */
+.service-item {
+    transition: transform 0.3s ease, opacity 0.3s ease, display 0.3s allow-discrete;
+}
+
+/* Estilo del modal de contraseña para que se vea imponente */
+#input-pass {
+    border: 2px solid #222;
+    transition: 0.3s;
+}
+#input-pass:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
 }
     </style>
 </head>
@@ -819,6 +873,8 @@ function actualizarTitulos() {
     // >>> EL CÓDIGO DE LAS FLECHAS PONLO AQUÍ AL FINAL <<<
 const scrollContainer = document.getElementById('filterScroll');
 const indicators = document.querySelectorAll('.scroll-indicator');
+    indicators[0].onclick = () => scrollContainer.scrollBy({ left: -150, behavior: 'smooth' });
+indicators[1].onclick = () => scrollContainer.scrollBy({ left: 150, behavior: 'smooth' });
 
 if (scrollContainer) {
     // Esto detecta cuando el usuario mueve los botones con el dedo
@@ -850,20 +906,27 @@ if (scrollContainer) {
     }
 
     function toggleCarrito(elemento) {
-        if (elemento.classList.contains('agotado')) return;
-        const nombre = elemento.querySelector('.nombre-prod').innerText;
-        const precioText = elemento.querySelector('.precio-prod').innerText.replace('S/', '').trim();
-        const precio = parseFloat(precioText);
-        const idx = carrito.findIndex(i => i.nombre === nombre);
+    if (elemento.classList.contains('agotado')) return;
 
-        if (idx > -1) { 
-            carrito.splice(idx, 1); elemento.classList.remove('selected'); 
-        } else { 
-            carrito.push({nombre, precio}); elemento.classList.add('selected'); 
-        }
-        actualizarUI();
+    // Feedback táctil para celulares (vibración corta de 10ms)
+    if (window.navigator && window.navigator.vibrate) {
+        window.navigator.vibrate(10);
     }
 
+    const nombre = elemento.querySelector('.nombre-prod').innerText;
+    const precioText = elemento.querySelector('.precio-prod').innerText.replace('S/', '').trim();
+    const precio = parseFloat(precioText);
+    const idx = carrito.findIndex(i => i.nombre === nombre);
+
+    if (idx > -1) { 
+        carrito.splice(idx, 1); 
+        elemento.classList.remove('selected'); 
+    } else { 
+        carrito.push({nombre, precio}); 
+        elemento.classList.add('selected'); 
+    }
+    actualizarUI();
+}
     function limpiarCarrito() {
         carrito = [];
         document.querySelectorAll('.service-item.selected').forEach(el => el.classList.remove('selected'));
