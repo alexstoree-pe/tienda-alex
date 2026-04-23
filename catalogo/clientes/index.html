@@ -44,13 +44,13 @@
             background: radial-gradient(circle at top right, #0a0a0a, #050505);
             color: white; 
             line-height: 1.6; 
-            padding-bottom: 100px; 
+            padding-bottom: 160px; 
         }
 
         header {
             background: rgba(10, 10, 10, 0.7);
             backdrop-filter: blur(20px);
-            padding: 15px 15px 10px; 
+            padding: 40px 20px 20px; 
             text-align: center;
             border-bottom: 1px solid var(--glass-border);
             position: sticky;
@@ -60,28 +60,28 @@
 
         /* ESTILO LOGO AÑADIDO */
         .brand-logo {
-            width: 50px;
-            height: 50px;
+            width: 75px;
+            height: 75px;
             object-fit: contain;
-            border-radius: 12px;
-            margin-bottom: 5px;
+            border-radius: 18px;
+            margin-bottom: 10px;
         }
 
         header h1 { 
-            font-size: 1.5rem; 
+            font-size: 2.2rem; 
             font-weight: 800; 
             background: linear-gradient(to right, #fff, var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         /* ESTILO BARRA CONFIANZA AÑADIDO */
         .trust-bar {
             display: flex;
             justify-content: space-around;
-            margin-top: 10px;
-            padding: 5px;
+            margin-top: 15px;
+            padding: 10px;
             background: var(--glass);
             border-radius: 15px;
             border: 1px solid var(--glass-border);
@@ -90,7 +90,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-size: 0.45rem;
+            font-size: 0.55rem;
             font-weight: 600;
             color: #aaa;
             text-transform: uppercase;
@@ -102,9 +102,9 @@
             margin-bottom: 4px;
         }
 
-        .search-container { max-width: 600px; margin: 10px auto 0; position: relative; }
+        .search-container { max-width: 600px; margin: 15px auto 0; position: relative; }
         #search-input {
-            width: 100%; padding: 8px 15px; border-radius: 15px; border: 1px solid var(--glass-border);
+            width: 100%; padding: 12px 20px; border-radius: 15px; border: 1px solid var(--glass-border);
             background: rgba(255,255,255,0.05); color: white; font-family: 'Poppins';
             outline: none; transition: 0.3s;
         }
@@ -124,7 +124,7 @@
         .btn-combos-premium { background: linear-gradient(45deg, var(--promo-dark), var(--promo)); color: #000; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
         .btn-comunidad { background: linear-gradient(45deg, #25d366, #128c7e); color: #fff; box-shadow: 0 0 15px rgba(37, 211, 102, 0.3); }
 
-        .category-title { margin: 15px 0 10px; font-size: 0.9rem; font-weight: 700; color: var(--primary); letter-spacing: 3px; }
+        .category-title { margin: 30px 0 15px; font-size: 0.9rem; font-weight: 700; color: var(--primary); letter-spacing: 3px; }
 
         .premium .service-card {
             border: 1px solid #d4af37 !important;
@@ -178,11 +178,11 @@
         .service-item.agotado .price-tag { display: none; }
 
         .floating-btn {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
             background: linear-gradient(135deg, #25d366, #128c7e);
-            color: white; padding: 15px; border-radius: 20px;
-            width: 92%; max-width: 440px; z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6); backdrop-filter: blur(10px);
+            color: white; padding: 20px; border-radius: 25px;
+            width: 92%; max-width: 480px; z-index: 1000;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6); backdrop-filter: blur(10px);
         }
         .cart-row { width: 100%; display: flex; justify-content: space-between; align-items: center; }
         .btn-clear-cart {
@@ -203,7 +203,7 @@
 
         /* REEMPLAZA LO ANTERIOR POR ESTO */
 .filter-wrapper { 
-    margin: 10px 0; 
+    margin: 20px 0; 
     position: relative;
     display: flex;
     align-items: center;
@@ -266,67 +266,6 @@
     color: #000;
     border-color: var(--primary);
 }
-        .faq-container {
-    margin: 20px 0;
-    text-align: left;
-}
-
-.faq-item {
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    border-radius: 18px;
-    margin-bottom: 12px;
-    overflow: hidden;
-    transition: 0.3s;
-}
-
-.faq-question {
-    padding: 18px 22px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-}
-
-.faq-question h3 {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #fff;
-}
-
-.faq-question i {
-    font-size: 0.8rem;
-    color: var(--primary);
-    transition: 0.4s;
-}
-
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.4s ease;
-    background: rgba(0, 0, 0, 0.2);
-}
-
-.faq-answer p {
-    padding: 0 22px 18px;
-    color: #888;
-    font-size: 0.8rem;
-    line-height: 1.6;
-}
-
-/* Estado cuando se abre */
-.faq-item.active {
-    border-color: var(--primary);
-    background: rgba(0, 212, 255, 0.05);
-}
-
-.faq-item.active .faq-answer {
-    max-height: 200px;
-}
-
-.faq-item.active .faq-question i {
-    transform: rotate(45deg);
-}
     </style>
 </head>
 <body>
@@ -368,40 +307,6 @@
         <a href="https://drive.google.com/file/d/1MPAECoht01Udr-oa7NcerexfZMC6h-5i/view?usp=sharing" target="_blank" class="btn-universal btn-referencias">⭐ NUESTRAS REFERENCIAS</a>
         <a href="../promociones-clientes/" class="btn-universal btn-combos-premium">🎁 VER COMBOS Y PROMOCIONES</a>
         <a href="https://chat.whatsapp.com/Dhp57nuChw89kT6pb5kggS" target="_blank" class="btn-universal btn-comunidad">👥 COMUNIDAD</a>
-
-        <div class="category-title" data-aos="fade-up">RESUELVE TUS DUDAS</div>
-
-<div class="faq-container" data-aos="fade-up">
-    <div class="faq-item">
-        <div class="faq-question">
-            <h3>¿Cómo recibo mi cuenta?</h3>
-            <i class="fas fa-plus"></i>
-        </div>
-        <div class="faq-answer">
-            <p>Tras verificar tu pago, los accesos se envían directamente a tu WhatsApp en menos de 5 a 15 minutos.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <div class="faq-question">
-            <h3>¿Qué pasa si la cuenta falla?</h3>
-            <i class="fas fa-plus"></i>
-        </div>
-        <div class="faq-answer">
-            <p>Contamos con garantía total. Si surge un inconveniente, nuestro equipo de soporte técnico lo resuelve de inmediato o te brindamos una cuenta nueva.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <div class="faq-question">
-            <h3>¿Cuáles son los medios de pago?</h3>
-            <i class="fas fa-plus"></i>
-        </div>
-        <div class="faq-answer">
-            <p>Aceptamos Yape, Plin , (Lemon)Dale y Transferencias Bancarias (BCP e Interbank). .</p>
-        </div>
-    </div>
-</div>
     </div>
 
     <div class="category-title" data-aos="fade-right">🎬 STREAMING Y CINE</div>
@@ -1025,19 +930,6 @@ if (scrollContainer) {
         const nombre = elemento.closest('.service-item').querySelector('.nombre-prod').innerText;
         window.open(`https://wa.me/${numWhatsApp}?text=¿Stock de ${nombre}?`, '_blank');
     }
-    // Lógica para el Acordeón de FAQ
-    document.querySelectorAll('.faq-question').forEach(button => {
-        button.addEventListener('click', () => {
-            const faqItem = button.parentElement;
-            
-            // Opcional: Cerrar otros cuando uno se abre
-            document.querySelectorAll('.faq-item').forEach(otherItem => {
-                if (otherItem !== faqItem) otherItem.classList.remove('active');
-            });
-
-            faqItem.classList.toggle('active');
-        });
-    });
 </script>
 </body>
 </html>
