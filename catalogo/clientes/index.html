@@ -61,6 +61,11 @@
         z-index: 1500; transition: 0.4s;
     }
     body.searching #search-overlay { opacity: 1; visibility: visible; }
+    /* También los títulos de categorías para que no se pierdan */
+body.searching .category-title {
+    position: relative;
+    z-index: 2200;
+}
     body.searching header { z-index: 2100; }
     body.searching .service-item { position: relative; z-index: 2200; }
 
@@ -91,8 +96,8 @@
         border-bottom: 1px solid var(--glass-border);
         position: sticky;
         top: 0;
-        z-index: 2000;
-    }
+        z-index: 3000 !important;
+}
 
     .brand-logo { width: 35px; height: 35px; object-fit: contain; border-radius: 10px; margin-bottom: 2px; }
     header h1 { font-size: 1.1rem; font-weight: 800; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
@@ -258,6 +263,23 @@
 
     .hidden { display: none !important; }
     @keyframes popCheck { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+    /* Cuando estamos buscando, eliminamos el espacio muerto arriba */
+body.searching .container {
+    padding-top: 0 !important;
+}
+
+body.searching .grid-botones {
+    display: none; /* Ocultamos los botones de Inicio/Referencias para ganar espacio */
+}
+
+body.searching .category-title {
+    margin-top: 10px !important; /* Pegamos el título de la categoría más arriba */
+}
+
+/* Reducimos el espacio del header para que no ocupe media pantalla al buscar */
+body.searching header {
+    padding-bottom: 0;
+}
 </style>
 </head>
 <body>
@@ -274,24 +296,39 @@
         <div class="trust-item"><i class="fas fa-shield-alt"></i>Garantía Total</div>
         <div class="trust-item"><i class="fas fa-bolt"></i>Entrega en 5 a 15 min</div>
     </div>
-    <div class="search-container">
-        <input type="text" id="search-input" placeholder="Buscar plataforma..." autocomplete="off" name="search-alex-store-secure" onfocus="iniciarBusqueda()" onblur="finalizarBusqueda()" onkeyup="filtrarProductos()">
-        <div class="filter-wrapper">
-            <div class="scroll-indicator" id="scrollPrev"><i class="fas fa-chevron-left"></i></div>
-            <div class="filter-container" id="filterScroll">
-                <button class="btn-nav active" onclick="filtrarCategoria('TODOS', this)">TODOS</button>
-                <button class="btn-nav" onclick="filtrarCategoria('🎬 STREAMING Y CINE', this)">PERFILES</button>
-                <button class="btn-nav" onclick="filtrarCategoria('DISEÑOS Y MAS', this)">DISEÑO</button>
-                <button class="btn-nav" onclick="filtrarCategoria('TELEVISIÓN DIGITAL', this)">TV DIGITAL</button>
-                <button class="btn-nav" onclick="filtrarCategoria('MÚSICA Y VIDEO SIN LÍMITES', this)">MÚSICA</button>
-            </div>
-            <div class="scroll-indicator" id="scrollNext"><i class="fas fa-chevron-right"></i></div>
-        </div>
-        <div class="view-controls">
-            <button class="btn-view active" onclick="cambiarVista('list', this)"><i class="fas fa-list"></i></button>
-            <button class="btn-view" onclick="cambiarVista('grid', this)"><i class="fas fa-th-large"></i></button>
-        </div>
+   <div class="search-container">
+    <div style="position: absolute; visibility: hidden; height: 0;">
+        <input type="text" name="fake_user">
+        <input type="password" name="fake_pass">
     </div>
+
+    <input type="text" 
+           id="search-input" 
+           placeholder="Buscar plataforma..." 
+           autocomplete="off" 
+           name="no_pass_alex_search" 
+           inputmode="search"
+           onfocus="iniciarBusqueda()" 
+           onblur="finalizarBusqueda()" 
+           onkeyup="filtrarProductos()">
+
+    <div class="filter-wrapper">
+        <div class="scroll-indicator" id="scrollPrev"><i class="fas fa-chevron-left"></i></div>
+        <div class="filter-container" id="filterScroll">
+            <button class="btn-nav active" onclick="filtrarCategoria('TODOS', this)">TODOS</button>
+            <button class="btn-nav" onclick="filtrarCategoria('🎬 STREAMING Y CINE', this)">PERFILES</button>
+            <button class="btn-nav" onclick="filtrarCategoria('DISEÑOS Y MAS', this)">DISEÑO</button>
+            <button class="btn-nav" onclick="filtrarCategoria('TELEVISIÓN DIGITAL', this)">TV DIGITAL</button>
+            <button class="btn-nav" onclick="filtrarCategoria('MÚSICA Y VIDEO SIN LÍMITES', this)">MÚSICA</button>
+        </div>
+        <div class="scroll-indicator" id="scrollNext"><i class="fas fa-chevron-right"></i></div>
+    </div>
+    
+    <div class="view-controls">
+        <button class="btn-view active" onclick="cambiarVista('list', this)"><i class="fas fa-list"></i></button>
+        <button class="btn-view" onclick="cambiarVista('grid', this)"><i class="fas fa-th-large"></i></button>
+    </div>
+</div>
 </header>
 
     <div class="container" id="product-container">
@@ -753,20 +790,27 @@
     }
 
     function filtrarProductos() {
-        const bus = document.getElementById('search-input').value.toLowerCase();
-        document.querySelectorAll('.service-item').forEach(item => {
-            const nom = item.querySelector('.nombre-prod').innerText.toLowerCase();
-            item.style.display = nom.includes(bus) ? 'block' : 'none';
-        });
+    const bus = document.getElementById('search-input').value.toLowerCase();
+    const items = document.querySelectorAll('.service-item');
+    
+    items.forEach(item => {
+        const nom = item.querySelector('.nombre-prod').innerText.toLowerCase();
+        item.style.display = nom.includes(bus) ? 'block' : 'none';
+    });
 
-        // MEJORA: Quitar difuminado si el buscador queda vacío
-        if (bus === "") {
-            document.body.classList.remove('searching');
-        } else {
-            document.body.classList.add('searching');
-        }
-        actualizarTitulos();
+    if (bus === "") {
+        document.body.classList.remove('searching');
+        // Restauramos AOS para que se vea bien al volver al catálogo normal
+        AOS.refresh();
+    } else {
+        document.body.classList.add('searching');
+        // Forzamos a que las tarjetas suban de inmediato
+        window.scrollTo({ top: 0, behavior: 'instant' });
     }
+    
+    actualizarTitulos();
+    AOS.refresh();
+}
 
     function filtrarCategoria(cat, btn) {
         document.querySelectorAll('.btn-nav').forEach(b => b.classList.remove('active'));
