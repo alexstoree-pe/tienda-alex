@@ -13,15 +13,12 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://alexstoree-pe.github.io/tienda-alex/catalogo/clientes/">
     <meta property="og:image" content="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.webp">
-    <meta property="og:image:width" content="500">
-    <meta property="og:image:height" content="500">
-    <meta property="og:image:type" content="image/webp">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
- <style>
+<style>
     :root {
         --primary: #00d4ff;
         --secondary: #0055ff;
@@ -32,7 +29,7 @@
         --promo: #f4d03f;
         --promo-dark: #d4af37;
         --danger: #ff4444; 
-        --gold-gradient: linear-gradient(45deg, #d4af37, #f4d03f);
+        --gold-gradient: linear-gradient(45deg, #d4af37, #f4d03f, #b38728);
     }
 
     html { display: none; background-color: var(--dark); scroll-behavior: smooth; }
@@ -42,14 +39,15 @@
         font-family: 'Poppins', sans-serif; 
         background: radial-gradient(circle at top right, #0a0a0a, #050505);
         color: white; 
-        line-height: 1.6; 
+        line-height: 1.4; 
         padding-bottom: 100px; 
     }
 
+    /* --- HEADER --- */
     header {
-        background: rgba(10, 10, 10, 0.7);
+        background: rgba(10, 10, 10, 0.85);
         backdrop-filter: blur(20px);
-        padding: 15px 15px 10px; 
+        padding: 8px 10px 5px; 
         text-align: center;
         border-bottom: 1px solid var(--glass-border);
         position: sticky;
@@ -57,371 +55,173 @@
         z-index: 2000;
     }
 
-    .brand-logo {
-        width: 50px;
-        height: 50px;
-        object-fit: contain;
-        border-radius: 18px;
-        margin-bottom: 5px;
-    }
-
-    header h1 { 
-        font-size: 1.4rem; 
-        font-weight: 800; 
-        background: linear-gradient(to right, #fff, var(--primary));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        letter-spacing: 1px;
-    }
+    .brand-logo { width: 35px; height: 35px; object-fit: contain; border-radius: 10px; margin-bottom: 2px; }
+    header h1 { font-size: 1.1rem; font-weight: 800; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
     
-    header p[style*="letter-spacing: 5px"] {
-        letter-spacing: 2px !important;
-        font-size: 0.6rem !important;
-        margin-top: 2px !important;
-    }
+    .trust-bar { display: flex; justify-content: center; gap: 12px; margin: 4px 0; }
+    .trust-item { display: flex; align-items: center; gap: 4px; font-size: 0.35rem; font-weight: 600; color: #888; text-transform: uppercase; }
+    .trust-item i { color: var(--primary); font-size: 0.6rem; }
 
-    .trust-bar {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 10px;
-        padding: 5px;
-        background: var(--glass);
-        border-radius: 15px;
-        border: 1px solid var(--glass-border);
-    }
-    .trust-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 0.40rem;
-        font-weight: 600;
-        color: #aaa;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-    .trust-item i {
-        color: var(--primary);
-        font-size: 1rem;
-        margin-bottom: 4px;
-    }
+    /* --- FILTROS --- */
+    .search-container { max-width: 600px; margin: 5px auto 0; position: relative; }
+    #search-input { width: 100%; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.05); color: white; font-family: 'Poppins'; outline: none; font-size: 0.8rem; margin-bottom: 10px;}
 
-    .search-container { max-width: 600px; margin: 10px auto 0; position: relative; }
-    #search-input {
-        width: 100%; padding: 8px 15px; border-radius: 15px; border: 1px solid var(--glass-border);
-        background: rgba(255,255,255,0.05); color: white; font-family: 'Poppins';
-        outline: none; transition: 0.3s;
-    }
-    #search-input:focus { border-color: var(--primary); background: rgba(255,255,255,0.1); }
-
-    .container { padding: 20px 15px; max-width: 600px; margin: auto; }
-
-    .grid-botones { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0 30px; }
-    .btn-universal {
-        display: flex; align-items: center; justify-content: center; padding: 15px 10px;
-        border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 0.7rem;
-        text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; border: none;
-        cursor: pointer; text-align: center;
-    }
-    .btn-inicio-top { background: var(--glass); color: #fff; border: 1px solid var(--glass-border); }
-    .btn-referencias { background: linear-gradient(45deg, var(--primary), var(--secondary)); color: #000; box-shadow: 0 0 15px rgba(0, 212, 255, 0.4); }
-    .btn-combos-premium { background: linear-gradient(45deg, var(--promo-dark), var(--promo)); color: #000; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
-    .btn-comunidad { background: linear-gradient(45deg, #25d366, #128c7e); color: #fff; box-shadow: 0 0 15px rgba(37, 211, 102, 0.3); }
-
-    .category-title { margin: 15px 0 10px; font-size: 0.9rem; font-weight: 700; color: var(--primary); letter-spacing: 3px; }
-
-    /* Estilos Premium para Vista Lista */
-    .premium .service-card {
-        border: 1px solid #d4af37 !important;
-        background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(0,0,0,0));
-        box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
-    }
-    .premium .price-tag { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
-    .premium::after { content: 'PREMIUM'; position: absolute; top: 10px; right: 45px; font-size: 0.5rem; font-weight: 900; color: #d4af37; letter-spacing: 1px; border: 1px solid #d4af37; padding: 1px 5px; border-radius: 4px; }
-
-    .service-item { cursor: pointer; margin-bottom: 15px; position: relative; transition: 0.3s; }
-    .service-card { 
-        background: var(--glass); border-radius: 22px; padding: 18px; 
-        display: flex; align-items: center; border: 1px solid var(--glass-border); 
-        transition: 0.3s; gap: 15px; position: relative; overflow: hidden;
-    }
-
-    .service-item:hover .service-card {
-        border-color: var(--primary) !important;
-        box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
-        background: rgba(255, 255, 255, 0.06);
-        transform: translateY(-3px);
-    }
-
-    .service-item:active { transform: scale(0.95); transition: 0.1s; }
-
-    .service-item.premium.selected .service-card {
-        border-color: #f4d03f !important;
-        background: linear-gradient(135deg, rgba(244, 208, 63, 0.15), rgba(0,0,0,0.4)) !important;
-        box-shadow: 0 0 25px rgba(244, 208, 63, 0.3), inset 0 0 10px rgba(244, 208, 63, 0.1);
-    }
-
-    .service-item.premium .check-icon { background: #f4d03f; }
-
-    .check-icon {
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        background: var(--primary);
-        color: #000;
-        width: 26px;
-        height: 26px;
-        border-radius: 50%;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.85rem;
-        font-weight: 900;
-        z-index: 20;
-        box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    }
-
-    .selected .check-icon {
-        display: flex !important;
-        animation: popCheck 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .service-item.selected .service-card {
-        border-color: var(--primary) !important;
-        background: rgba(0, 212, 255, 0.12) !important;
-        box-shadow: 0 0 25px rgba(0, 212, 255, 0.25), inset 0 0 10px rgba(0, 212, 255, 0.1);
-        transform: scale(0.98);
-    }
-
-    .badge-oferta { position: absolute; top: 0; left: 20px; background: var(--promo); color: #000; padding: 2px 12px; border-radius: 0 0 10px 10px; font-size: 0.6rem; font-weight: 800; text-transform: uppercase; display: none; z-index: 11; }
-    .service-item.oferta .badge-oferta { display: block; }
-
-    .service-logo { width: 60px; height: 60px; object-fit: cover; border-radius: 15px; flex-shrink: 0; }
-    .service-text { flex-grow: 1; } 
-    .service-text h3 { font-size: 1.05rem; font-weight: 600; color: #fff; }
-    .manual-desc { font-size: 0.75rem; color: #777; }
-
-    .price-container { display: flex; flex-direction: column; align-items: flex-end; min-width: 85px; }
-    .price-tag { color: var(--primary); font-weight: 700; font-size: 1.25rem; white-space: nowrap; }
-
-    .btn-consultar-neon {
-        display: none; color: #ff3333; font-size: 0.85rem; font-weight: 900; 
-        border: 2px solid var(--danger); padding: 8px 10px; border-radius: 10px;
-        background: rgba(255, 0, 0, 0.1); text-transform: uppercase;
-    }
-    .service-item.agotado .btn-consultar-neon { display: block; }
-    .service-item.agotado .price-tag { display: none; }
-
-    .floating-btn {
-        position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
-        background: linear-gradient(135deg, #25d366, #128c7e);
-        color: white; padding: 20px; border-radius: 25px;
-        width: 92%; max-width: 480px; z-index: 1000;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.6); backdrop-filter: blur(10px);
-    }
-    .cart-row { width: 100%; display: flex; justify-content: space-between; align-items: center; }
-    .btn-clear-cart {
-        background: rgba(255, 68, 68, 0.2); border: 1px solid rgba(255, 68, 68, 0.4); color: #ffcccc;
-        width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-left: 10px; transition: 0.3s;
-    }
-    .btn-clear-cart:active { transform: scale(0.8); background: var(--danger); }
-    .discount-notice { font-size: 0.7rem; color: #f4d03f; font-weight: 600; margin-top: 5px; display: none; }
-    .hidden { display: none; }
-
-    .modal-overlay, .modal-pass { 
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; 
-        justify-content: center; align-items: flex-end; z-index: 3000;
-        background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
-    }
-    .modal-content { background: #111; padding: 35px 25px; border-radius: 35px 35px 0 0; width: 100%; max-width: 500px; border: 1px solid var(--glass-border); text-align: center; }
-    #input-pass { width: 100%; padding: 15px; margin: 20px 0; border-radius: 15px; background: #000; border: 1px solid #333; color: var(--primary); text-align: center; font-size: 1.5rem; letter-spacing: 5px; }
-
-    .filter-wrapper { margin: 10px 0; position: relative; display: flex; align-items: center; }
-    .filter-container { display: flex; gap: 10px; overflow-x: auto; padding: 10px 5px; scroll-behavior: smooth; scrollbar-width: none; }
+    .filter-wrapper { margin: 5px 0; position: relative; display: flex; align-items: center; gap: 5px; padding: 0 10px; }
+    .filter-container { display: flex; gap: 10px; overflow-x: auto; padding: 10px 5px; scrollbar-width: none; scroll-behavior: smooth; flex-grow: 1; }
     .filter-container::-webkit-scrollbar { display: none; }
+    .scroll-indicator { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); color: var(--primary); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5; flex-shrink: 0; }
 
-    .scroll-indicator {
-        position: absolute; background: linear-gradient(to right, var(--dark), transparent);
-        height: 100%; width: 40px; left: 0; z-index: 2; display: flex; align-items: center; pointer-events: none; transition: 0.3s;
-    }
-    .scroll-indicator.right { left: auto; right: 0; background: linear-gradient(to left, var(--dark), transparent); justify-content: flex-end; }
-    .scroll-indicator i { color: var(--primary); font-size: 1rem; animation: bounceHorizontal 1.5s infinite; }
-
-    @keyframes bounceHorizontal { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
-    @keyframes popCheck { 0% { transform: scale(0) rotate(-45deg); opacity: 0; } 100% { transform: scale(1) rotate(0); opacity: 1; } }
-
-    .btn-nav { background: var(--glass); border: 1px solid var(--glass-border); color: white; padding: 8px 20px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: 0.3s; }
+    .btn-nav { background: var(--glass); border: 1px solid var(--glass-border); color: white; padding: 6px 16px; border-radius: 50px; font-size: 0.65rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: 0.3s; }
     .btn-nav.active { background: var(--primary); color: #000; border-color: var(--primary); }
 
-    #input-pass { border: 2px solid #222; transition: 0.3s; }
-    #input-pass:focus { border-color: var(--primary); box-shadow: 0 0 20px rgba(0, 212, 255, 0.1); }
-
-    .view-controls { display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin: 10px 20px; }
-    .view-label { font-size: 0.7rem; color: #666; font-weight: 800; }
-    .btn-view { background: #111; border: 1px solid #333; color: #666; padding: 8px 12px; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+    .view-controls { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; }
+    .btn-view { background: #111; border: 1px solid #333; color: #666; padding: 6px 12px; border-radius: 8px; cursor: pointer; transition: 0.3s; }
     .btn-view.active { color: var(--primary); border-color: var(--primary); background: rgba(0, 212, 255, 0.1); }
 
-    /* --- CONFIGURACIÓN GRID RESPONSIVA CORREGIDA --- */
-    .container.grid-mode { 
-        display: grid; 
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 12px; 
-        padding: 10px; 
-        max-width: 100%; 
-    }
+    /* --- CONTENEDOR Y BOTONES --- */
+    .container { padding: 10px 15px; max-width: 600px; margin: auto; transition: all 0.4s ease; }
+    .grid-botones { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0 15px; }
+    .btn-universal { display: flex; align-items: center; justify-content: center; padding: 10px 8px; border-radius: 50px; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; cursor: pointer; text-decoration: none; border: none; text-align: center; transition: 0.3s; }
 
-    @media (min-width: 600px) {
-        .container.grid-mode { 
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
-            gap: 15px;
-        }
-    }
+    /* --- CATEGORIAS --- */
+    .category-title { margin: 30px 0 15px; padding: 10px 15px; font-size: 0.85rem; font-weight: 700; color: var(--primary); letter-spacing: 2px; background: rgba(255,255,255,0.03); border-radius: 12px; border-left: 4px solid var(--primary); text-transform: uppercase; display: flex; align-items: center; }
 
-    .grid-mode .category-title { grid-column: 1 / -1; margin-top: 20px; }
+    /* --- TARJETAS --- */
+    .service-item { cursor: pointer; margin-bottom: 12px; position: relative; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .service-item.selected { transform: scale(0.95) !important; }
+    .service-card { background: var(--glass); border-radius: 22px; padding: 18px; display: flex; align-items: center; border: 1px solid var(--glass-border); gap: 15px; position: relative; overflow: visible; transition: 0.4s ease; }
     
-    .grid-mode .service-item { 
-        margin-bottom: 0;
-        height: 100%; /* Para que todos los items de la misma fila midan lo mismo */
-    }
+    .service-item.selected .service-card { background: rgba(0, 212, 255, 0.12) !important; border-color: var(--primary) !important; box-shadow: 0 0 25px rgba(0, 212, 255, 0.3); }
+    .service-item.premium.selected .service-card { background: rgba(212, 175, 55, 0.15) !important; border-color: var(--promo) !important; box-shadow: 0 0 30px rgba(212, 175, 55, 0.5); }
+    .premium .service-card { border: 1px solid #d4af37 !important; background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(0,0,0,0)); }
+    .premium::after { content: 'PREMIUM'; position: absolute; top: 10px; right: 45px; font-size: 0.5rem; font-weight: 900; color: #d4af37; border: 1px solid #d4af37; padding: 1px 5px; border-radius: 4px; z-index: 11; }
 
-    .grid-mode .service-card { 
-        flex-direction: column; 
-        align-items: center; 
-        text-align: center; 
-        padding: 25px 10px 15px; 
-        min-height: 250px; /* ALTURA UNIFORME PARA TODAS */
-        height: 100%;
-        justify-content: space-between; /* Empuja el precio hacia abajo */
-    }
+    .price-container { display: flex; flex-direction: column; align-items: flex-end; margin-left: auto; min-width: 85px; }
+    .price-tag { color: var(--primary); font-weight: 700; font-size: 1.25rem; white-space: nowrap; }
+    .premium .price-tag { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-    .grid-mode .service-logo { 
-        width: 60px; 
-        height: 60px; 
-        margin-bottom: 10px; 
-        margin-right: 0; 
-    }
+    .badge-oferta { position: absolute; top: -1px; left: 20px; background: var(--promo); color: #000; padding: 2px 12px; border-radius: 0 0 10px 10px; font-size: 0.6rem; font-weight: 800; text-transform: uppercase; display: none; z-index: 11; }
+    .service-item.oferta .badge-oferta { display: block; }
 
-    .grid-mode .service-text {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
+    .check-icon { position: absolute; top: 12px; right: 12px; background: var(--primary); color: #000; width: 26px; height: 26px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 900; z-index: 20; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+    .selected .check-icon { display: flex !important; animation: popCheck 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .service-item.premium.selected .check-icon { background: var(--gold-gradient) !important; }
 
-    .grid-mode .service-text h3 { 
-        font-size: 0.85rem; 
-        line-height: 1.2;
-        margin-bottom: 3px;
-    }
+    .service-logo { width: 60px; height: 60px; object-fit: cover; border-radius: 15px; flex-shrink: 0; }
+    .service-text h3 { font-size: 1.05rem; color: #fff; }
+    .manual-desc { font-size: 0.75rem; color: #777; }
 
-    .grid-mode .manual-desc { 
-        display: block !important; 
-        opacity: 1; 
-        font-size: 0.65rem;
-        color: #aaa;
-        margin-top: 4px;
-        margin-bottom: 8px;
-    }
+    /* --- VISTA CUADRÍCULA --- */
+    .container.grid-mode { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 95% !important; width: 100%; padding: 15px; }
+    @media (min-width: 900px) { .container.grid-mode { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); } }
+    .grid-mode .category-title { grid-column: 1 / -1; width: 100%; margin-top: 30px; display: flex; }
+    .grid-mode .service-card { flex-direction: column; text-align: center; min-height: 290px; justify-content: space-between; padding-top: 35px; }
+    .grid-mode .service-logo { margin-right: 0; margin-bottom: 10px; }
+    .grid-mode .price-container { margin-left: 0; align-items: center; width: 100%; }
+    .grid-mode .premium::after { display: none !important; }
+    .grid-mode .premium .premium-tag-inner { display: inline-block; font-size: 0.55rem; font-weight: 900; color: var(--promo); border: 1px solid var(--promo); padding: 2px 8px; border-radius: 5px; margin-bottom: 5px; }
+    .premium-tag-inner { display: none; }
 
-    /* --- CONTENEDOR DE PRECIO Y PREMIUM (ESTILO IMAGEN) --- */
-    .grid-mode .price-container { 
-        margin-top: auto; 
-        width: 100%; 
-        display: flex;
-        flex-direction: column;
-        align-items: center; 
-        padding-top: 5px;
-    }
+    /* --- WHATSAPP BAR --- */
+    .floating-btn { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #25d366, #128c7e); color: white; padding: 20px; border-radius: 25px; width: 92%; max-width: 480px; z-index: 1000; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+    .discount-label { font-size: 0.7rem; color: var(--promo); margin-top: 5px; font-weight: 700; display: none; text-align: center;}
 
-    .grid-mode .price-tag { 
-        font-size: 1.3rem;
-        color: #00d4ff !important;
-        background: none;
-        -webkit-text-fill-color: initial;
-    }
+    /* --- FORMULARIOS (DISEÑO EXACTO IMAGE_42B447.PNG) --- */
+    .modal-overlay, .modal-pass { position: fixed; inset: 0; display: none; justify-content: center; align-items: center; z-index: 3000; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); }
+    .modal-content { background: #0d0d0d; padding: 35px 25px; border-radius: 35px; width: 90%; max-width: 420px; text-align: center; border: 1px solid #222; }
+    .modal-content h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 20px; color: var(--primary); }
+    .modal-content p { color: #888; font-size: 0.85rem; margin-bottom: 20px; line-height: 1.4; }
+    .modal-content input { width: 100%; padding: 18px; margin-bottom: 15px; border-radius: 18px; background: #000; color: #fff; border: 1px solid #222; font-family: 'Poppins'; outline: none; font-size: 0.7rem; text-align: center; }
+    
+    .btn-modal-main { background: var(--primary) !important; color: #000 !important; font-weight: 800; width: 100%; padding: 18px; border-radius: 50px; margin-top: 10px; font-size: 0.95rem; text-transform: uppercase; border: none; cursor: pointer; }
+    .btn-modal-back { background: #1a1a1a !important; color: #fff !important; width: 100%; padding: 16px; border-radius: 50px; margin-top: 12px; font-size: 0.85rem; text-transform: uppercase; border: 1px solid #222 !important; cursor: pointer; opacity: 0.7; }
+     /* Ajuste para que los textos largos quepan en el celular */
+.modal-content input::placeholder {
+    font-size: 0.75rem !important; /* Letra más pequeña para el placeholder */
+    color: #555;
+}
 
-    /* --- PREMIUM ENCIMA DEL PRECIO --- */
-    .grid-mode .premium::after {
-        position: static !important; /* Lo saca del modo flotante */
-        display: inline-block !important;
-        content: 'PREMIUM' !important;
-        font-size: 0.55rem !important;
-        color: #f4d03f !important;
-        border: 1px solid #f4d03f !important;
-        padding: 2px 8px !important;
-        border-radius: 5px !important;
-        margin-bottom: 5px !important;
-        background: transparent !important;
-        letter-spacing: 1px !important;
-        width: auto !important;
-    }
+/* Estilo exacto de la imagen: Botón cápsula celeste */
+.btn-modal-main {
+    background: var(--primary) !important;
+    color: #000 !important;
+    font-weight: 800;
+    width: 100%;
+    padding: 16px;
+    border-radius: 50px; /* Forma de cápsula */
+    margin-top: 10px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+}
 
-    .grid-mode .check-icon {
-        top: 8px;
-        right: 8px;
-        width: 22px;
-        height: 22px;
-        font-size: 0.7rem;
-    }
+/* Botón Volver Oscuro */
+.btn-modal-back {
+    background: #1a1a1a !important;
+    color: #fff !important;
+    width: 100%;
+    padding: 16px;
+    border-radius: 50px;
+    margin-top: 12px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    border: 1px solid #222 !important;
+    cursor: pointer;
+    opacity: 0.7;
+}
+    /* --- SEGURIDAD --- */
+    .input-wrapper { position: relative; width: 100%; display: flex; justify-content: center; margin-bottom: 30px; }
+    .stars-bg { position: absolute; color: #222; font-size: 2.2rem; letter-spacing: 12px; pointer-events: none; z-index: 1; transition: 0.2s; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .hide-stars { opacity: 0 !important; }
+    #input-pass { width: 220px; background: transparent !important; border: none !important; border-bottom: 2px solid #222 !important; color: #fff; font-size: 2.2rem; text-align: center; letter-spacing: 12px; outline: none; z-index: 2; position: relative; padding: 10px 0; }
+    .btn-desbloquear { background: #fff !important; color: #000 !important; font-weight: 800; width: 100%; padding: 18px; border-radius: 25px; font-size: 1rem; border: none; cursor: pointer; margin-bottom: 10px; transition: 0.3s; text-transform: uppercase; }
+    .link-regresar { display: block; color: #333; font-size: 0.75rem; text-decoration: none; cursor: pointer; }
 
-    /* Ajuste para centrar etiquetas de oferta en modo cuadrícula */
-    .grid-mode .service-item.oferta .badge-oferta {
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        width: 85% !important; 
-        text-align: center !important;
-        white-space: nowrap !important;
-        font-size: 0.55rem !important; 
-        top: 0px !important; 
-    }
+    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
+    .error-shake { animation: shake 0.3s ease-in-out; border-bottom-color: var(--danger) !important; }
+
+    .hidden { display: none; }
+    @keyframes popCheck { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+    
 </style>
 </head>
 <body>
-    
+
 <header>
-    <img src="../img/logo.webp" alt="Logo Alex Store" class="brand-logo" data-aos="zoom-in">
+    <img src="../img/logo.webp" class="brand-logo" data-aos="zoom-in">
     <h1 data-aos="fade-down">ALEX STORE</h1>
-    <p style="color: #555; font-size: 0.7rem; letter-spacing: 5px; font-weight: 700; margin-top: 5px;">PREMIUM DIGITAL CATALOG</p>
-    
-    <div class="search-container" data-aos="fade-up">
     <div class="trust-bar">
-            <div class="trust-item"><i class="fas fa-headset"></i>Soporte Garantizado</div>
-            <div class="trust-item"><i class="fas fa-shield-alt"></i>Garantía y Compromiso</div>
-            <div class="trust-item"><i class="fas fa-bolt"></i>Entrega en menos de 5 minutos</div>
-        </div>
-        <input type="text" id="search-input" placeholder="Buscar plataforma (Netflix, Disney...)" onkeyup="filtrarProductos()">
-        
-    
-        <div class="filter-wrapper" data-aos="fade-up">
-            <div class="scroll-indicator"><i class="fas fa-chevron-left"></i></div>
-            
-    <div class="filter-container" id="filterScroll">
-        <button class="btn-nav active" onclick="filtrarCategoria('TODOS', this)">TODOS</button>
-        <button class="btn-nav" onclick="filtrarCategoria('🎬 STREAMING Y CINE', this)">PERFILES</button>
-        <button class="btn-nav" onclick="filtrarCategoria('DISEÑOS Y MAS', this)">DISEÑO</button>
-        <button class="btn-nav" onclick="filtrarCategoria('TELEVISIÓN DIGITAL', this)">TELEVISIÓN DIGITAL</button>
-        <button class="btn-nav" onclick="filtrarCategoria('MÚSICA Y VIDEO SIN LÍMITES', this)">MÚSICA</button> </div>
-       <div class="scroll-indicator right"><i class="fas fa-chevron-right"></i></div>
+        <div class="trust-item"><i class="fas fa-headset"></i>Soporte</div>
+        <div class="trust-item"><i class="fas fa-shield-alt"></i>Garantía</div>
+        <div class="trust-item"><i class="fas fa-bolt"></i>Rápido</div>
     </div>
-        <div class="view-controls" data-aos="fade-in">
-    <span class="view-label">VISTA:</span>
-    <button class="btn-view active" onclick="cambiarVista('list', this)" title="Vista de Lista">
-        <i class="fas fa-list"></i>
-    </button>
-    <button class="btn-view" onclick="cambiarVista('grid', this)" title="Vista de Cuadrícula">
-        <i class="fas fa-th-large"></i>
-    </button>
-</div>
- </div>
-     
-    
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Buscar plataforma..." onkeyup="filtrarProductos()">
+        <div class="filter-wrapper">
+            <div class="scroll-indicator" id="scrollPrev"><i class="fas fa-chevron-left"></i></div>
+            <div class="filter-container" id="filterScroll">
+                <button class="btn-nav active" onclick="filtrarCategoria('TODOS', this)">TODOS</button>
+                <button class="btn-nav" onclick="filtrarCategoria('🎬 STREAMING Y CINE', this)">PERFILES</button>
+                <button class="btn-nav" onclick="filtrarCategoria('DISEÑOS Y MAS', this)">DISEÑO</button>
+                <button class="btn-nav" onclick="filtrarCategoria('TELEVISIÓN DIGITAL', this)">TV DIGITAL</button>
+                <button class="btn-nav" onclick="filtrarCategoria('MÚSICA Y VIDEO SIN LÍMITES', this)">MÚSICA</button>
+            </div>
+            <div class="scroll-indicator" id="scrollNext"><i class="fas fa-chevron-right"></i></div>
+        </div>
+        <div class="view-controls">
+            <button class="btn-view active" onclick="cambiarVista('list', this)"><i class="fas fa-list"></i></button>
+            <button class="btn-view" onclick="cambiarVista('grid', this)"><i class="fas fa-th-large"></i></button>
+        </div>
+    </div>
 </header>
 
-<div class="container">
+<div class="container" id="product-container">
     <div class="grid-botones" data-aos="zoom-in">
-        <a href="../" class="btn-universal btn-inicio-top">🏠 VOLVER AL INICIO</a>
-        <a href="https://drive.google.com/file/d/1MPAECoht01Udr-oa7NcerexfZMC6h-5i/view?usp=sharing" target="_blank" class="btn-universal btn-referencias">⭐ NUESTRAS REFERENCIAS</a>
-        <a href="../promociones-clientes/" class="btn-universal btn-combos-premium">🎁 VER COMBOS Y PROMOCIONES</a>
-        <a href="https://chat.whatsapp.com/Dhp57nuChw89kT6pb5kggS" target="_blank" class="btn-universal btn-comunidad">👥 COMUNIDAD</a>
+        <a href="../" class="btn-universal" style="background:var(--glass); color:#fff; border:1px solid var(--glass-border);">🏠 INICIO</a>
+        <a href="https://drive.google.com/file/d/1MPAECoht01Udr-oa7NcerexfZMC6h-5i/view?usp=sharing" target="_blank" class="btn-universal" style="background:linear-gradient(45deg, var(--primary), var(--secondary)); color:#000;">⭐ REFERENCIAS</a>
+        <a href="../promociones-clientes/" class="btn-universal" style="background:linear-gradient(45deg, var(--promo-dark), var(--promo)); color:#000;">🎁 PROMOCIONES</a>
+        <a href="https://chat.whatsapp.com/Dhp57nuChw89kT6pb5kggS" target="_blank" class="btn-universal" style="background:linear-gradient(45deg, #25d366, #128c7e); color:#fff;">👥 COMUNIDAD</a>
     </div>
 
     <div class="category-title" data-aos="fade-right">🎬 STREAMING Y CINE</div>
@@ -436,8 +236,8 @@
                 <span class="manual-desc">• Perfil Privado • 4K UHD.</span>
             </div>
             <div class="price-container">
+                <span class="premium-tag-inner">PREMIUM</span>
                 <span class="price-tag precio-prod">S/ 16</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -452,8 +252,8 @@
                 <span class="manual-desc">•Cliente nuevo (Activación a TV)• Todo los canales ESPN • Perfil privado.</span>
             </div>
             <div class="price-container">
+                <span class="premium-tag-inner">PREMIUM</span>
                 <span class="price-tag precio-prod">S/ 10</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -468,7 +268,6 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 7</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -483,7 +282,6 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 5</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -498,7 +296,6 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 8</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -513,7 +310,6 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 5</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -528,7 +324,6 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 8</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -542,8 +337,8 @@
                 <span class="manual-desc">• 1 mes • perfil privado • premium.</span>
             </div>
             <div class="price-container">
+                <span class="premium-tag-inner">PREMIUM</span>
                 <span class="price-tag precio-prod">S/ 5</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -558,7 +353,6 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 6</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -573,7 +367,6 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 5</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -590,7 +383,6 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 5</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -605,7 +397,6 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 12</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -620,7 +411,6 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 17</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -635,7 +425,6 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 25</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -652,7 +441,6 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 20</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -667,7 +455,6 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 20</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -682,7 +469,6 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 12</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -697,7 +483,6 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 10</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -712,7 +497,6 @@
             </div>
             <div class="price-container">
                 <span class="price-tag precio-prod">S/ 13</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -728,8 +512,8 @@
                 <span class="manual-desc">• Sin anuncios • Se entrega con correo y contraseña.</span>
             </div>
             <div class="price-container">
+                <span class="premium-tag-inner">PREMIUM</span>
                 <span class="price-tag precio-prod">S/ 8</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
@@ -744,334 +528,227 @@
                 <span class="manual-desc">• Sin anuncios • A tu correo (correo nuevo creado).</span>
             </div>
             <div class="price-container">
+                <span class="premium-tag-inner">PREMIUM</span>
                 <span class="price-tag precio-prod">S/ 8</span>
-                <div class="btn-consultar-neon" onclick="consultarStockManual(this, event)">SIN STOCK 📲</div>
             </div>
         </div>
     </div>
 </div>
-
 <div id="whatsapp-btn" class="floating-btn hidden">
-    <div class="cart-row">
-        <div class="cart-info" onclick="abrirModalRegistro()" style="flex-grow: 1; display: flex; align-items: center; cursor: pointer;">
-            <span id="cart-count" style="background: rgba(0,0,0,0.2); padding: 4px 12px; border-radius: 10px;">0</span>
-            <span style="font-size: 0.9rem; margin-left: 8px;">PEDIR AHORA</span>
+    <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="abrirModalRegistro()">
+        <div style="display:flex; align-items:center; gap:10px;">
+            <span id="cart-count" style="background:rgba(0,0,0,0.2); padding:4px 12px; border-radius:10px; font-weight:800;">0</span>
+            <span style="font-weight:800; font-size:0.9rem;">PEDIR POR WHATSAPP</span>
         </div>
-        <div class="total-info" style="display: flex; align-items: center;">
-            <span id="cart-total" style="font-size: 1.3rem; margin-right: 5px;">S/ 0</span>
-            <div class="btn-clear-cart" onclick="limpiarCarrito()" title="Eliminar selección">
-                <i class="fas fa-trash-alt"></i>
-            </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+            <span id="cart-total" style="font-size:1.3rem; font-weight:800;">S/ 0</span>
+            <div onclick="event.stopPropagation(); limpiarCarrito();" style="background:rgba(255,0,0,0.2); width:35px; height:35px; border-radius:50%; display:flex; align-items:center; justify-content:center;"><i class="fas fa-trash-alt" style="font-size:0.8rem;"></i></div>
         </div>
     </div>
-    <div id="discount-label" class="discount-notice"></div>
-</div>
-
-<div id="modal-password" class="modal-pass">
-    <div class="modal-content">
-        <h2 style="color:var(--primary); font-weight: 800;">ACCESO PRIVADO</h2>
-        <input type="password" id="input-pass" placeholder="****" onkeydown="if(event.key==='Enter') validarPass()">
-        <button onclick="validarPass()" style="padding:15px; width:100%; border-radius:15px; background:var(--primary); font-weight:700; margin-top:10px; border:none;">INGRESAR</button>
-    </div>
+    <div id="discount-label" class="discount-label"></div>
 </div>
 
 <div id="modal-registro" class="modal-overlay">
     <div class="modal-content">
         <div id="paso-1">
-            <h2 style="color:var(--primary); margin-bottom:15px;">¿Ya eres/fuiste cliente?</h2>
-            <button class="btn-universal" style="background:#222; color:#fff; width:100%; margin-bottom:10px;" onclick="mostrarFormAntiguo()">SÍ, YA COMPRÉ ANTES</button>
-            <button class="btn-universal" style="background:var(--primary); color:#000; width:100%;" onclick="mostrarForm()">SOY NUEVO CLIENTE</button>
-            <button class="btn-universal" style="background:transparent; color:#555; width:100%; margin-top:10px; font-size:0.6rem;" onclick="cerrarModalRegistro()">CANCELAR / VOLVER</button>
+            <h2 style="color:var(--primary);">¿Ya eres cliente?</h2>
+            <button class="btn-modal-main" style="background:#222 !important; color:#fff !important;" onclick="mostrarFormAntiguo()">SÍ, YA COMPRÉ ANTES</button>
+            <button class="btn-modal-main" onclick="mostrarForm()">SOY NUEVO CLIENTE</button>
+            <button class="btn-modal-back" onclick="cerrarModalRegistro()">CANCELAR</button>
         </div>
+        
         <div id="form-datos" style="display:none;">
-            <h2 style="color:var(--primary); margin-bottom:15px;">Registro de Pedido</h2>
-            <input type="text" id="reg-nom" placeholder="Nombre Completo" style="width:100%; padding:15px; margin-bottom:10px; border-radius:15px; background:#000; color:#fff; border:1px solid #333;">
-            <input type="tel" id="reg-cel" placeholder="Número Celular" style="width:100%; padding:15px; margin-bottom:10px; border-radius:15px; background:#000; color:#fff; border:1px solid #333;">
-            <input type="text" id="reg-per" placeholder="Nombre para Perfil (Opcional)" style="width:100%; padding:15px; margin-bottom:10px; border-radius:15px; background:#000; color:#fff; border:1px solid #333;">
-            <button class="btn-universal" style="background:var(--primary); color:#000; width:100%; margin-bottom:10px;" onclick="enviarWhatsApp('nuevo')">FINALIZAR Y ENVIAR</button>
-            <button class="btn-universal" style="background:#222; color:#777; width:100%; border:1px solid #333;" onclick="volverPaso1()">← VOLVER</button>
+            <h2 style="color:var(--primary);">Registro de Pedido</h2>
+            <div id="error-reg" style="color: #ff4444; font-size: 0.75rem; margin-bottom: 10px; font-weight: 600; height: 1.2rem; text-transform: uppercase;"></div>
+            
+            <p>Rellene los datos requeridos para una rápida atención:</p>
+            <input type="text" id="reg-nom" placeholder="Nombre Completo">
+            <input type="tel" id="reg-cel" placeholder="Número Celular">
+            <input type="text" id="reg-per" placeholder="Nombre para el Perfil (Si lo requiere)">
+            
+            <button class="btn-modal-main" onclick="enviarWhatsApp('nuevo')">FINALIZAR Y ENVIAR</button>
+            <button class="btn-modal-back" onclick="volverPaso1()">← VOLVER</button>
         </div>
+
         <div id="form-antiguo" style="display:none;">
-    <h2 style="color:var(--primary); margin-bottom:15px;">Confirmar Perfil</h2>
-    <p style="font-size: 0.8rem; color: #aaa; margin-bottom: 15px;">Si tu plataforma requiere un nombre de perfil específico, escríbelo aquí:</p>
-    <input type="text" id="antiguo-per" placeholder="Nombre para Perfil (Opcional)" style="width:100%; padding:15px; margin-bottom:10px; border-radius:15px; background:#000; color:#fff; border:1px solid #333;">
-    <button class="btn-universal" style="background:var(--primary); color:#000; width:100%; margin-bottom:10px;" onclick="enviarWhatsApp('antiguo')">FINALIZAR Y ENVIAR</button>
-    <button class="btn-universal" style="background:#222; color:#777; width:100%; border:1px solid #333;" onclick="volverPaso1_Antiguo()">← VOLVER</button>
+            <h2 style="color:var(--primary);">Confirmar Perfil</h2>
+            <p>Si tu plataforma requiere un nombre de perfil específico, escríbelo aquí:</p>
+            <input type="text" id="antiguo-per" placeholder="Nombre para Perfil (Opcional)">
+            <button class="btn-modal-main" onclick="enviarWhatsApp('antiguo')">FINALIZAR Y ENVIAR</button>
+            <button class="btn-modal-back" onclick="volverPaso1()">← VOLVER</button>
+        </div>
+    </div>
 </div>
+
+<div id="modal-password" class="modal-pass">
+    <div class="modal-content" style="border-radius:40px;">
+        <h2 style="color:var(--primary); font-weight: 800;">ACCESO CLIENTE</h2>
+        <div id="error-msg" style="color: #ff4444; font-size: 0.8rem; margin-bottom: 10px; font-weight: 600; height: 1.2rem;"></div>
+        <div class="input-wrapper">
+            <input type="password" id="input-pass" maxlength="10" oninput="checkInput(this)" onkeydown="if(event.key==='Enter') validarPass()" autocomplete="off">
+            <div id="stars-placeholder" class="stars-bg">* * * *</div>
+        </div>
+        <button onclick="validarPass()" class="btn-desbloquear">DESBLOQUEAR</button>
+        <span class="link-regresar" onclick="window.history.back()">Regresar al portal</span>
     </div>
 </div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    AOS.init({ duration: 800, once: true });
-
+    AOS.init({ duration: 400, once: true, offset: 0, delay: 50 });
     let carrito = [];
     const numWhatsApp = "51918600000";
 
-    function cambiarVista(modo, btn) {
-    const contenedor = document.querySelector('.container');
-    const botones = document.querySelectorAll('.btn-view');
-    
-    // 1. Quitar clase activa de botones y ponerla al actual
-    botones.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    
-    // 2. Cambiar modo en el contenedor
-    if (modo === 'grid') {
-        contenedor.classList.add('grid-mode');
-    } else {
-        contenedor.classList.remove('grid-mode');
-    }
-    
-    // 3. Refrescar AOS para que las animaciones se ajusten a la nueva posición
-    AOS.refresh();
-}
-    function filtrarProductos() {
-    const busqueda = document.getElementById('search-input').value.toLowerCase();
-    const items = document.querySelectorAll('.service-item');
-    const titulos = document.querySelectorAll('.category-title');
-    
-    // 1. Primero filtramos las plataformas (items)
-    items.forEach(item => {
-        const nombre = item.querySelector('.nombre-prod').innerText.toLowerCase();
-        if (nombre.includes(busqueda)) {
-            item.style.display = 'block';
-            item.style.opacity = "1";
-        } else {
-            item.style.display = 'none';
-        }
-    });
-
-    // 2. Lógica para mostrar títulos solo si tienen plataformas visibles debajo
-    titulos.forEach(titulo => {
-        let tieneHijosVisibles = false;
-        let hermano = titulo.nextElementSibling;
-
-        // Buscamos hacia abajo hasta encontrar el siguiente título o el final del contenedor
-        while (hermano && !hermano.classList.contains('category-title')) {
-            if (hermano.classList.contains('service-item') && hermano.style.display !== 'none') {
-                tieneHijosVisibles = true;
-                break;
-            }
-            hermano = hermano.nextElementSibling;
-        }
-
-        // Si hay resultados visibles en esa sección, mostramos el título
-        if (tieneHijosVisibles) {
-            titulo.style.display = 'block';
-        } else {
-            titulo.style.display = 'none';
-        }
-    });
-
-    // 3. Refrescar animaciones para que no se vea trabado
-    AOS.refreshHard();
-}
-
-    function filtrarCategoria(categoria, btn) {
-    // 1. Limpiar buscador y activar botón
-    document.getElementById('search-input').value = "";
-    document.querySelectorAll('.btn-nav').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    const term = categoria.toUpperCase();
-    const items = document.querySelectorAll('.service-item');
-
-    items.forEach(item => {
-        // Buscamos el texto de la tarjeta O el título de la categoría que tiene arriba
-        const textoCard = item.innerText.toUpperCase();
-        
-        // Buscamos el título de la categoría más cercano hacia arriba
-        let tituloCerca = "";
-        let previo = item.previousElementSibling;
-        while (previo) {
-            if (previo.classList.contains('category-title')) {
-                tituloCerca = previo.innerText.toUpperCase();
-                break;
-            }
-            previo = previo.previousElementSibling;
-        }
-
-        if (term === 'TODOS') {
-            item.style.display = 'block';
-            item.classList.add('aos-animate'); // Fix para AOS
-        } else {
-            // Coincide si el texto de la tarjeta tiene la palabra O si el título de su categoría coincide
-            const coincide = textoCard.includes(term) || tituloCerca.includes(term);
-            
-            if (coincide) {
-                item.style.display = 'block';
-                item.style.opacity = "1";
-                item.classList.add('aos-animate'); // Fix para AOS
-            } else {
-                item.style.display = 'none';
-                item.classList.remove('aos-animate');
-            }
-        }
-    });
-
-    // 2. Actualizar los títulos
-    actualizarTitulos();
-    
-    // 3. Refrescar AOS con un pequeño delay para que detecte los cambios
-    setTimeout(() => {
-        AOS.refreshHard();
-    }, 100);
-}
-
-function actualizarTitulos() {
-    const titulos = document.querySelectorAll('.category-title');
-    titulos.forEach(titulo => {
-        let tieneHijosVisibles = false;
-        let hermano = titulo.nextElementSibling;
-        
-        while (hermano && !hermano.classList.contains('category-title')) {
-            if (hermano.classList.contains('service-item') && hermano.style.display !== 'none') {
-                tieneHijosVisibles = true;
-                break;
-            }
-            hermano = hermano.nextElementSibling;
-        }
-        
-        if (tieneHijosVisibles) {
-            titulo.style.display = 'block';
-            titulo.classList.add('aos-animate');
-        } else {
-            titulo.style.display = 'none';
-            titulo.classList.remove('aos-animate');
-        }
-    });
-}
-    // >>> EL CÓDIGO DE LAS FLECHAS PONLO AQUÍ AL FINAL <<<
-const scrollContainer = document.getElementById('filterScroll');
-const indicators = document.querySelectorAll('.scroll-indicator');
-    indicators[0].onclick = () => scrollContainer.scrollBy({ left: -150, behavior: 'smooth' });
-indicators[1].onclick = () => scrollContainer.scrollBy({ left: 150, behavior: 'smooth' });
-
-if (scrollContainer) {
-    // Esto detecta cuando el usuario mueve los botones con el dedo
-    scrollContainer.addEventListener('scroll', () => {
-        const leftInd = indicators[0];
-        const rightInd = indicators[1];
-        
-        leftInd.style.opacity = scrollContainer.scrollLeft > 20 ? "1" : "0";
-        
-        const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-        rightInd.style.opacity = scrollContainer.scrollLeft >= maxScroll - 20 ? "0" : "1";
-    });
-}
-    
+    // SEGURIDAD ORIGEN
     (function() {
         if (sessionStorage.getItem("acceso_concedido") === "true") { document.documentElement.style.display = "block"; } 
         else {
-            document.addEventListener("DOMContentLoaded", () => {
-                document.documentElement.style.display = "block";
-                document.getElementById('modal-password').style.display = 'flex';
-            });
+            const vieneDeInicio = document.referrer.includes("tienda-alex") || document.referrer.includes("github.io");
+            if (vieneDeInicio) { sessionStorage.setItem("acceso_concedido", "true"); document.documentElement.style.display = "block"; } 
+            else { document.addEventListener("DOMContentLoaded", () => { document.documentElement.style.display = "block"; document.getElementById('modal-password').style.display = 'flex'; }); }
         }
     })();
 
+    // LÓGICA FILTROS
+    const filterScroll = document.getElementById('filterScroll');
+    document.getElementById('scrollNext').onclick = () => filterScroll.scrollBy({ left: 150, behavior: 'smooth' });
+    document.getElementById('scrollPrev').onclick = () => filterScroll.scrollBy({ left: -150, behavior: 'smooth' });
+
+    function checkInput(el) {
+        const stars = document.getElementById('stars-placeholder');
+        if (el.value.length > 0) stars.classList.add('hide-stars');
+        else stars.classList.remove('hide-stars');
+    }
+
     function validarPass() {
-        if (document.getElementById('input-pass').value === "cliente") { 
-            sessionStorage.setItem("acceso_concedido", "true"); location.reload(); 
-        } else { alert("Código incorrecto"); }
+        const input = document.getElementById('input-pass');
+        const errorMsg = document.getElementById('error-msg');
+        if (input.value.toLowerCase() === "cliente") { sessionStorage.setItem("acceso_concedido", "true"); location.reload(); } 
+        else { errorMsg.innerText = "CONTRASEÑA INCORRECTA"; input.classList.add('error-shake'); input.value = ""; setTimeout(() => { input.classList.remove('error-shake'); errorMsg.innerText = ""; }, 3000); }
     }
 
     function toggleCarrito(elemento) {
-    if (elemento.classList.contains('agotado')) return;
-
-    // Feedback táctil para celulares (vibración corta de 10ms)
-    if (window.navigator && window.navigator.vibrate) {
-        window.navigator.vibrate(10);
-    }
-
-    const nombre = elemento.querySelector('.nombre-prod').innerText;
-    const precioText = elemento.querySelector('.precio-prod').innerText.replace('S/', '').trim();
-    const precio = parseFloat(precioText);
-    const idx = carrito.findIndex(i => i.nombre === nombre);
-
-    if (idx > -1) { 
-        carrito.splice(idx, 1); 
-        elemento.classList.remove('selected'); 
-    } else { 
-        carrito.push({nombre, precio}); 
-        elemento.classList.add('selected'); 
-    }
-    actualizarUI();
-}
-    function limpiarCarrito() {
-        carrito = [];
-        document.querySelectorAll('.service-item.selected').forEach(el => el.classList.remove('selected'));
+        elemento.classList.toggle('selected');
+        const nombre = elemento.querySelector('.nombre-prod').innerText;
+        const manual = elemento.querySelector('.manual-desc').innerText;
+        const precio = parseFloat(elemento.querySelector('.precio-prod').innerText.replace('S/', ''));
+        const idx = carrito.findIndex(i => i.nombre === nombre);
+        if (idx > -1) carrito.splice(idx, 1); else carrito.push({nombre, manual, precio});
         actualizarUI();
-    }
-
-    function calcularDescuento() {
-        if (carrito.length < 2) return 0;
-        let desc = 0;
-        const ordenado = [...carrito].sort((a, b) => b.precio - a.precio);
-        for (let i = 1; i < ordenado.length; i++) {
-            if (i === 1) { desc += (ordenado[i].precio >= 10 && ordenado[0].precio >= 10) ? 2 : 1; }
-            else { desc += (ordenado[i].precio >= 10) ? 2 : 1; }
-        }
-        return desc;
     }
 
     function actualizarUI() {
         const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
-        const desc = calcularDescuento();
+        let desc = 0;
+        if (carrito.length >= 2) {
+            const ordenado = [...carrito].sort((a,b) => b.precio - a.precio);
+            for(let i=1; i<ordenado.length; i++) desc += (ordenado[i].precio >= 10) ? 2 : 1;
+        }
         document.getElementById('cart-count').innerText = carrito.length;
         document.getElementById('cart-total').innerText = `S/ ${subtotal - desc}`;
         const label = document.getElementById('discount-label');
-        if (desc > 0) {
-            label.innerText = `¡Ahorro aplicado: S/ ${desc}! 🎁`;
-            label.style.display = 'block';
-        } else { label.style.display = 'none'; }
+        if (desc > 0) { label.innerText = `¡Ahorro aplicado: S/ ${desc}! 🎁`; label.style.display = 'block'; }
+        else { label.style.display = 'none'; }
         document.getElementById('whatsapp-btn').classList.toggle('hidden', carrito.length === 0);
+    }
+
+    function enviarWhatsApp(tipo) {
+    let nom = document.getElementById('reg-nom').value;
+    let cel = document.getElementById('reg-cel').value;
+    let errorReg = document.getElementById('error-reg'); // El div de error
+    let per = (tipo === 'nuevo') ? document.getElementById('reg-per').value : document.getElementById('antiguo-per').value;
+
+    // VALIDACIÓN SIN ALERTAS
+    if (tipo === 'nuevo' && (nom.trim() === "" || cel.trim() === "")) {
+        errorReg.innerText = "Por favor, completa tus datos";
+        
+        // Animación de vibración en campos vacíos
+        if(nom.trim() === "") document.getElementById('reg-nom').classList.add('error-shake');
+        if(cel.trim() === "") document.getElementById('reg-cel').classList.add('error-shake');
+
+        setTimeout(() => {
+            errorReg.innerText = "";
+            document.getElementById('reg-nom').classList.remove('error-shake');
+            document.getElementById('reg-cel').classList.remove('error-shake');
+        }, 3000);
+        return; 
+    }
+
+    // Lógica de envío (WhatsApp)
+    const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
+    let desc = 0;
+    if (carrito.length >= 2) {
+        const ordenado = [...carrito].sort((a,b) => b.precio - a.precio);
+        for(let i=1; i<ordenado.length; i++) desc += (ordenado[i].precio >= 10) ? 2 : 1;
+    }
+
+    let msg = `Hola *Alex Store*, deseo contratar:\n\n`;
+    carrito.forEach(i => {
+        msg += `⭐ *${i.nombre}*\n📝 ${i.manual}\n`;
+        if(per.trim() !== "") msg += `👤 Perfil: ${per}\n`;
+        msg += `--------------------------\n`;
+    });
+    if(desc > 0) msg += `\n🎁 *Ahorro:* -S/ ${desc}`;
+    msg += `\n💰 *TOTAL A PAGAR: S/ ${subtotal - desc}*`;
+    
+    if(tipo === 'nuevo') msg += `\n\n👤 Cliente: ${nom}\n📞 Cel: ${cel}`;
+    else msg += `\n\n✅ *YA SOY CLIENTE*`;
+
+    window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`);
+    cerrarModalRegistro();
+}
+
+    function cambiarVista(modo, btn) {
+        const cont = document.querySelector('.container');
+        document.querySelectorAll('.btn-view').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        cont.className = modo === 'grid' ? 'container grid-mode' : 'container';
+        setTimeout(() => { AOS.refreshHard(); }, 100);
+    }
+
+    function filtrarProductos() {
+        const bus = document.getElementById('search-input').value.toLowerCase();
+        document.querySelectorAll('.service-item').forEach(item => {
+            const nom = item.querySelector('.nombre-prod').innerText.toLowerCase();
+            item.style.display = nom.includes(bus) ? 'block' : 'none';
+        });
+        actualizarTitulos();
+    }
+
+    function filtrarCategoria(cat, btn) {
+        document.querySelectorAll('.btn-nav').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const term = cat.toUpperCase();
+        document.querySelectorAll('.service-item').forEach(item => {
+            let catItem = "";
+            let ant = item.previousElementSibling;
+            while(ant) { if(ant.classList.contains('category-title')) { catItem = ant.innerText.toUpperCase(); break; } ant = ant.previousElementSibling; }
+            if (term === 'TODOS') item.style.display = 'block';
+            else item.style.display = (item.innerText.toUpperCase().includes(term) || catItem.includes(term)) ? 'block' : 'none';
+        });
+        actualizarTitulos();
+        AOS.refreshHard();
+    }
+
+    function actualizarTitulos() {
+        document.querySelectorAll('.category-title').forEach(titulo => {
+            let has = false;
+            let hermano = titulo.nextElementSibling;
+            while (hermano && !hermano.classList.contains('category-title')) {
+                if (hermano.classList.contains('service-item') && hermano.style.display !== 'none') { has = true; break; }
+                hermano = hermano.nextElementSibling;
+            }
+            titulo.style.display = has ? 'block' : 'none';
+        });
     }
 
     function abrirModalRegistro() { document.getElementById('modal-registro').style.display = 'flex'; }
     function cerrarModalRegistro() { document.getElementById('modal-registro').style.display = 'none'; }
     function mostrarForm() { document.getElementById('paso-1').style.display = 'none'; document.getElementById('form-datos').style.display = 'block'; }
     function mostrarFormAntiguo() { document.getElementById('paso-1').style.display = 'none'; document.getElementById('form-antiguo').style.display = 'block'; }
-    function volverPaso1_Antiguo() { document.getElementById('form-antiguo').style.display = 'none'; document.getElementById('paso-1').style.display = 'block'; }
-    function volverPaso1() { document.getElementById('form-datos').style.display = 'none'; document.getElementById('paso-1').style.display = 'block'; }
-
-    function enviarWhatsApp(tipo) {
-    let nom = document.getElementById('reg-nom').value;
-    let cel = document.getElementById('reg-cel').value;
-    // Detectamos el perfil según el formulario abierto
-    let per = (tipo === 'nuevo') ? document.getElementById('reg-per').value : document.getElementById('antiguo-per').value;
-    if (tipo === 'nuevo' && (nom.trim() === "" || cel.trim() === "")) { 
-        alert("Datos incompletos."); 
-        return; 
-    }
-    const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
-    const desc = calcularDescuento();
-    let msg = `Hola *Alex Store*, deseo contratar:\n\n`;
-    // RECORREMOS EL CARRITO Y PONEMOS EL PERFIL AQUÍ
-    carrito.forEach(i => {
-        msg += `🔹 *${i.nombre}* (S/ ${i.precio})`;
-        // Si el cliente escribió un perfil, lo ponemos al lado de la plataforma
-        if(per.trim() !== "") {
-            msg += `\n 👤 *Nombre del Perfil:* ${per}`;
-        }
-        msg += `\n`;
-    });
-    if(desc > 0) msg += `\n🎁 *Ahorro:* -S/ ${desc}`;
-    msg += `\n💰 *TOTAL: S/ ${subtotal - desc}*`;
-    if(tipo === 'nuevo') { 
-        msg += `\n\n👤 Cliente: ${nom}\n📞 Cel: ${cel}`; 
-    } else { 
-        msg += `\n\n✅ *YA SOY CLIENTE*`; 
-    }
-    window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
-    cerrarModalRegistro();
-}
-    function consultarStockManual(elemento, event) {
-        event.stopPropagation();
-        const nombre = elemento.closest('.service-item').querySelector('.nombre-prod').innerText;
-        window.open(`https://wa.me/${numWhatsApp}?text=¿Stock de ${nombre}?`, '_blank');
-    }
+    function volverPaso1() { document.getElementById('paso-1').style.display = 'block'; document.getElementById('form-datos').style.display = 'none'; document.getElementById('form-antiguo').style.display = 'none'; }
+    function limpiarCarrito() { carrito = []; document.querySelectorAll('.service-item.selected').forEach(el => el.classList.remove('selected')); actualizarUI(); }
+    window.onload = () => { document.documentElement.style.display = "block"; const input = document.getElementById('input-pass'); if(input) input.value = ""; };
 </script>
 </body>
 </html>
