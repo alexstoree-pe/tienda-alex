@@ -78,16 +78,15 @@
     .btn-view { background: #111; border: 1px solid #333; color: #666; padding: 6px 12px; border-radius: 8px; cursor: pointer; transition: 0.3s; }
     .btn-view.active { color: var(--primary); border-color: var(--primary); background: rgba(0, 212, 255, 0.1); }
 
-    /* --- CONTENEDOR Y BOTONES --- */
+    /* --- CONTENEDOR --- */
     .container { padding: 10px 15px; max-width: 600px; margin: auto; transition: all 0.4s ease; }
     .grid-botones { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0 15px; }
     .btn-universal { display: flex; align-items: center; justify-content: center; padding: 10px 8px; border-radius: 50px; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; cursor: pointer; text-decoration: none; border: none; text-align: center; transition: 0.3s; }
 
-    /* --- CATEGORIAS --- */
     .category-title { margin: 30px 0 15px; padding: 10px 15px; font-size: 0.85rem; font-weight: 700; color: var(--primary); letter-spacing: 2px; background: rgba(255,255,255,0.03); border-radius: 12px; border-left: 4px solid var(--primary); text-transform: uppercase; display: flex; align-items: center; }
 
     /* --- TARJETAS --- */
-    .service-item { cursor: pointer; margin-bottom: 12px; position: relative; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .service-item { cursor: pointer; margin-bottom: 12px; position: relative; transition: 0.3s; }
     .service-item.selected { transform: scale(0.95) !important; }
     .service-card { background: var(--glass); border-radius: 22px; padding: 18px; display: flex; align-items: center; border: 1px solid var(--glass-border); gap: 15px; position: relative; overflow: visible; transition: 0.4s ease; }
     
@@ -100,8 +99,7 @@
     .price-tag { color: var(--primary); font-weight: 700; font-size: 1.25rem; white-space: nowrap; }
     .premium .price-tag { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-    .badge-oferta { position: absolute; top: -1px; left: 20px; background: var(--promo); color: #000; padding: 2px 12px; border-radius: 0 0 10px 10px; font-size: 0.6rem; font-weight: 800; text-transform: uppercase; display: none; z-index: 11; }
-    .service-item.oferta .badge-oferta { display: block; }
+    .badge-oferta { position: absolute; top: -1px; left: 20px; background: var(--promo); color: #000; padding: 2px 12px; border-radius: 0 0 10px 10px; font-size: 0.6rem; font-weight: 800; text-transform: uppercase; display: block; z-index: 11; }
 
     .check-icon { position: absolute; top: 12px; right: 12px; background: var(--primary); color: #000; width: 26px; height: 26px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 900; z-index: 20; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
     .selected .check-icon { display: flex !important; animation: popCheck 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
@@ -110,6 +108,37 @@
     .service-logo { width: 60px; height: 60px; object-fit: cover; border-radius: 15px; flex-shrink: 0; }
     .service-text h3 { font-size: 1.05rem; color: #fff; }
     .manual-desc { font-size: 0.75rem; color: #777; }
+
+    /* --- LÓGICA AGOTADO (REFORZADA) --- */
+    .service-item.agotado { pointer-events: none; }
+    .service-item.agotado .service-card { opacity: 0.5; filter: grayscale(0.8); }
+    .service-item.agotado .price-tag, 
+    .service-item.agotado .badge-oferta, 
+    .service-item.agotado::after,
+    .service-item.agotado .premium-tag-inner { display: none !important; }
+
+    .sin-stock-badge {
+        display: none;
+        background: #700000;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 900;
+        border: 2px solid #ff0000;
+        box-shadow: 0 0 15px #ff0000;
+        text-transform: uppercase;
+        white-space: nowrap;
+        animation: blinkNeon 1.5s infinite;
+        z-index: 100;
+    }
+    .service-item.agotado .sin-stock-badge { display: block !important; }
+
+    @keyframes blinkNeon {
+        0% { box-shadow: 0 0 5px #ff0000; opacity: 1; }
+        50% { box-shadow: 0 0 25px #ff0000, 0 0 40px #ff0000; opacity: 0.8; transform: scale(1.05); }
+        100% { box-shadow: 0 0 5px #ff0000; opacity: 1; }
+    }
 
     /* --- VISTA CUADRÍCULA --- */
     .container.grid-mode { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 95% !important; width: 100%; padding: 15px; }
@@ -121,55 +150,22 @@
     .grid-mode .premium::after { display: none !important; }
     .grid-mode .premium .premium-tag-inner { display: inline-block; font-size: 0.55rem; font-weight: 900; color: var(--promo); border: 1px solid var(--promo); padding: 2px 8px; border-radius: 5px; margin-bottom: 5px; }
     .premium-tag-inner { display: none; }
+    .grid-mode .badge-oferta { left: 50% !important; transform: translateX(-50%) !important; width: 85% !important; text-align: center; }
 
-    /* --- WHATSAPP BAR --- */
     .floating-btn { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #25d366, #128c7e); color: white; padding: 20px; border-radius: 25px; width: 92%; max-width: 480px; z-index: 1000; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
     .discount-label { font-size: 0.7rem; color: var(--promo); margin-top: 5px; font-weight: 700; display: none; text-align: center;}
 
-    /* --- FORMULARIOS (DISEÑO EXACTO IMAGE_42B447.PNG) --- */
+    /* --- FORMULARIOS --- */
     .modal-overlay, .modal-pass { position: fixed; inset: 0; display: none; justify-content: center; align-items: center; z-index: 3000; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); }
     .modal-content { background: #0d0d0d; padding: 35px 25px; border-radius: 35px; width: 90%; max-width: 420px; text-align: center; border: 1px solid #222; }
     .modal-content h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 20px; color: var(--primary); }
     .modal-content p { color: #888; font-size: 0.85rem; margin-bottom: 20px; line-height: 1.4; }
     .modal-content input { width: 100%; padding: 18px; margin-bottom: 15px; border-radius: 18px; background: #000; color: #fff; border: 1px solid #222; font-family: 'Poppins'; outline: none; font-size: 0.7rem; text-align: center; }
-    
+    .modal-content input::placeholder { font-size: 0.75rem !important; color: #555; }
+
     .btn-modal-main { background: var(--primary) !important; color: #000 !important; font-weight: 800; width: 100%; padding: 18px; border-radius: 50px; margin-top: 10px; font-size: 0.95rem; text-transform: uppercase; border: none; cursor: pointer; }
     .btn-modal-back { background: #1a1a1a !important; color: #fff !important; width: 100%; padding: 16px; border-radius: 50px; margin-top: 12px; font-size: 0.85rem; text-transform: uppercase; border: 1px solid #222 !important; cursor: pointer; opacity: 0.7; }
-     /* Ajuste para que los textos largos quepan en el celular */
-.modal-content input::placeholder {
-    font-size: 0.75rem !important; /* Letra más pequeña para el placeholder */
-    color: #555;
-}
 
-/* Estilo exacto de la imagen: Botón cápsula celeste */
-.btn-modal-main {
-    background: var(--primary) !important;
-    color: #000 !important;
-    font-weight: 800;
-    width: 100%;
-    padding: 16px;
-    border-radius: 50px; /* Forma de cápsula */
-    margin-top: 10px;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    border: none;
-    cursor: pointer;
-}
-
-/* Botón Volver Oscuro */
-.btn-modal-back {
-    background: #1a1a1a !important;
-    color: #fff !important;
-    width: 100%;
-    padding: 16px;
-    border-radius: 50px;
-    margin-top: 12px;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    border: 1px solid #222 !important;
-    cursor: pointer;
-    opacity: 0.7;
-}
     /* --- SEGURIDAD --- */
     .input-wrapper { position: relative; width: 100%; display: flex; justify-content: center; margin-bottom: 30px; }
     .stars-bg { position: absolute; color: #222; font-size: 2.2rem; letter-spacing: 12px; pointer-events: none; z-index: 1; transition: 0.2s; top: 50%; left: 50%; transform: translate(-50%, -50%); }
@@ -183,7 +179,6 @@
 
     .hidden { display: none; }
     @keyframes popCheck { 0% { transform: scale(0); } 100% { transform: scale(1); } }
-    
 </style>
 </head>
 <body>
@@ -238,22 +233,24 @@
             <div class="price-container">
                 <span class="premium-tag-inner">PREMIUM</span>
                 <span class="price-tag precio-prod">S/ 16</span>
+                <div class="sin-stock-badge">SIN STOCK</div>
             </div>
         </div>
     </div>
 
-    <div class="service-item oferta premium" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item oferta premium agotado" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="badge-oferta">MUY SOLICITADO 🎁</div>
         <div class="service-card">
             <div class="check-icon">✓</div>
             <img src="../img/disneyp.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Disney Premium</h3>
-                <span class="manual-desc">•Cliente nuevo (Activación a TV)• Todo los canales ESPN • Perfil privado.</span>
+                <span class="manual-desc">• Activación TV • ESPN • Perfil privado.</span>
             </div>
             <div class="price-container">
                 <span class="premium-tag-inner">PREMIUM</span>
                 <span class="price-tag precio-prod">S/ 10</span>
+                <div class="sin-stock-badge">SIN STOCK</div>
             </div>
         </div>
     </div>
@@ -264,11 +261,9 @@
             <img src="../img/disneys.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Disney Premium (Sin ESPN)</h3>
-                <span class="manual-desc">•Cliente nuevo (Activación a TV)• No contiene canales ESPN • Perfil privado.</span>
+                <span class="manual-desc">• Sin ESPN • Perfil privado.</span>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 7</span>
-            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 7</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
 
@@ -278,11 +273,9 @@
             <img src="../img/max.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Max Standard</h3>
-                <span class="manual-desc">• 1 mes •Full HD • Perfil privado.</span>
+                <span class="manual-desc">• 1 mes • Full HD • Perfil privado.</span>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 5</span>
-            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 5</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
 
@@ -292,11 +285,9 @@
             <img src="../img/max.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">MAX Platino</h3>
-                <span class="manual-desc">• 1 mes • premium 4K • Perfil privado .</span>
+                <span class="manual-desc">• 1 mes • premium 4K • Perfil privado.</span>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 8</span>
-            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 8</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
 
@@ -308,9 +299,7 @@
                 <h3 class="nombre-prod">PRIME VIDEO (TV)</h3>
                 <span class="manual-desc">• 1 mes • Perfil privado • Activacion solo a TV.</span>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 5</span>
-            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 5</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
 
@@ -320,11 +309,9 @@
             <img src="../img/prime.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">PRIME VIDEO</h3>
-                <span class="manual-desc">• 1 mes • Perfil privado • se entrega correo y contraseña.</span>
+                <span class="manual-desc">• 1 mes • Perfil privado • Correo y contraseña.</span>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 8</span>
-            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 8</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
 
@@ -336,10 +323,7 @@
                 <h3 class="nombre-prod">VIX PREMIUM</h3>
                 <span class="manual-desc">• 1 mes • perfil privado • premium.</span>
             </div>
-            <div class="price-container">
-                <span class="premium-tag-inner">PREMIUM</span>
-                <span class="price-tag precio-prod">S/ 5</span>
-            </div>
+            <div class="price-container"><span class="premium-tag-inner">PREMIUM</span><span class="price-tag precio-prod">S/ 5</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
 
@@ -349,11 +333,9 @@
             <img src="../img/paramount.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">PARAMOUNT</h3>
-                <span class="manual-desc">•1 mes  • plan premium • perfil privado.</span>
+                <span class="manual-desc">• 1 mes • premium • perfil privado.</span>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 6</span>
-            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 6</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
 
@@ -363,11 +345,9 @@
             <img src="../img/crunchyroll.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">CRUNCHYROLL </h3>
-                <span class="manual-desc">•1 mes  • plan premium • perfil privado.</span>
+                <span class="manual-desc">• 1 mes • premium • perfil privado.</span>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 5</span>
-            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 5</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
 
@@ -381,9 +361,7 @@
                 <h3 class="nombre-prod">CANVA PRO (1 mes) </h3>
                 <span class="manual-desc">• Plan EDU • Invitación a tu correo.</span>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 5</span>
-            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 5</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
 
@@ -395,9 +373,7 @@
                 <h3 class="nombre-prod">CANVA PRO (3 meses) </h3>
                 <span class="manual-desc">• Plan EDU • Invitación a tu correo.</span>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 12</span>
-            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 12</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
 
@@ -409,9 +385,7 @@
                 <h3 class="nombre-prod">CANVA PRO (6 meses) </h3>
                 <span class="manual-desc">• Plan EDU • Invitación a tu correo.</span>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 17</span>
-            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 17</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
 
@@ -423,9 +397,7 @@
                 <h3 class="nombre-prod">CANVA PRO (12 meses) </h3>
                 <span class="manual-desc">• Plan EDU • Invitación a tu correo.</span>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 25</span>
-            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 25</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
 
@@ -437,11 +409,9 @@
             <img src="../img/movistar.webp" class="service-logo"> 
             <div class="service-text">
                 <h3 class="nombre-prod">Movistar Play + Liga 1 Max</h3>
-                <span class="manual-desc">• Canal l1 Max • Activación a TV • Perfil privado.</span>
+                <span class="manual-desc">• Canal l1 Max • Activación a TV.</span>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 20</span>
-            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 20</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
 
@@ -451,11 +421,9 @@
             <img src="../img/dgo.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Directv Go + l1 Max</h3>
-                <span class="manual-desc">•1 mes • Activación a TV• Todo los canales ESPN • Perfil privado.</span>
+                <span class="manual-desc">• 1 mes • Activación a TV • Perfil privado.</span>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 20</span>
-            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 20</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
 
@@ -465,11 +433,9 @@
             <img src="../img/flujo.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Magis TV- Fluo TV</h3>
-                <span class="manual-desc">• 1 Perfil •+1200 Canales en vivo .</span>
+                <span class="manual-desc">• 1 Perfil • +1200 Canales en vivo.</span>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 12</span>
-            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 12</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
 
@@ -479,11 +445,9 @@
             <img src="../img/iptv.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">IPTV Smarters pro (1 dis)</h3>
-                <span class="manual-desc">•1 Dispositivo •6500 Canales en vivo .</span>
+                <span class="manual-desc">• 1 Dispositivo • 6500 Canales.</span>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 10</span>
-            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 10</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
 
@@ -493,11 +457,9 @@
             <img src="../img/iptv.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">IPTV Smarters pro (3 dis)</h3>
-                <span class="manual-desc">•3 Dispositivos •6500 Canales en vivo .</span>
+                <span class="manual-desc">• 3 Dispositivos • 6500 Canales.</span>
             </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 13</span>
-            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 13</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
 
@@ -509,11 +471,12 @@
             <img src="../img/spotify.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Spotify Premium (1 mes)</h3>
-                <span class="manual-desc">• Sin anuncios • Se entrega con correo y contraseña.</span>
+                <span class="manual-desc">• Sin anuncios • Correo propio.</span>
             </div>
             <div class="price-container">
                 <span class="premium-tag-inner">PREMIUM</span>
                 <span class="price-tag precio-prod">S/ 8</span>
+                <div class="sin-stock-badge">SIN STOCK</div>
             </div>
         </div>
     </div>
@@ -525,15 +488,17 @@
             <img src="../img/youtube.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Youtube Premium (1 mes)</h3>
-                <span class="manual-desc">• Sin anuncios • A tu correo (correo nuevo creado).</span>
+                <span class="manual-desc">• Sin anuncios • A tu correo.</span>
             </div>
             <div class="price-container">
                 <span class="premium-tag-inner">PREMIUM</span>
                 <span class="price-tag precio-prod">S/ 8</span>
+                <div class="sin-stock-badge">SIN STOCK</div>
             </div>
         </div>
     </div>
 </div>
+
 <div id="whatsapp-btn" class="floating-btn hidden">
     <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="abrirModalRegistro()">
         <div style="display:flex; align-items:center; gap:10px;">
@@ -556,24 +521,20 @@
             <button class="btn-modal-main" onclick="mostrarForm()">SOY NUEVO CLIENTE</button>
             <button class="btn-modal-back" onclick="cerrarModalRegistro()">CANCELAR</button>
         </div>
-        
         <div id="form-datos" style="display:none;">
             <h2 style="color:var(--primary);">Registro de Pedido</h2>
             <div id="error-reg" style="color: #ff4444; font-size: 0.75rem; margin-bottom: 10px; font-weight: 600; height: 1.2rem; text-transform: uppercase;"></div>
-            
             <p>Rellene los datos requeridos para una rápida atención:</p>
             <input type="text" id="reg-nom" placeholder="Nombre Completo">
             <input type="tel" id="reg-cel" placeholder="Número Celular">
             <input type="text" id="reg-per" placeholder="Nombre para el Perfil (Si lo requiere)">
-            
             <button class="btn-modal-main" onclick="enviarWhatsApp('nuevo')">FINALIZAR Y ENVIAR</button>
             <button class="btn-modal-back" onclick="volverPaso1()">← VOLVER</button>
         </div>
-
         <div id="form-antiguo" style="display:none;">
             <h2 style="color:var(--primary);">Confirmar Perfil</h2>
-            <p>Si tu plataforma requiere un nombre de perfil específico, escríbelo aquí:</p>
-            <input type="text" id="antiguo-per" placeholder="Nombre para Perfil (Opcional)">
+            <p>Si tu plataforma requiere un nombre específico, escríbelo aquí:</p>
+            <input type="text" id="antiguo-per" placeholder="Nombre para Perfil">
             <button class="btn-modal-main" onclick="enviarWhatsApp('antiguo')">FINALIZAR Y ENVIAR</button>
             <button class="btn-modal-back" onclick="volverPaso1()">← VOLVER</button>
         </div>
@@ -599,7 +560,6 @@
     let carrito = [];
     const numWhatsApp = "51918600000";
 
-    // SEGURIDAD ORIGEN
     (function() {
         if (sessionStorage.getItem("acceso_concedido") === "true") { document.documentElement.style.display = "block"; } 
         else {
@@ -609,7 +569,6 @@
         }
     })();
 
-    // LÓGICA FILTROS
     const filterScroll = document.getElementById('filterScroll');
     document.getElementById('scrollNext').onclick = () => filterScroll.scrollBy({ left: 150, behavior: 'smooth' });
     document.getElementById('scrollPrev').onclick = () => filterScroll.scrollBy({ left: -150, behavior: 'smooth' });
@@ -628,6 +587,7 @@
     }
 
     function toggleCarrito(elemento) {
+        if (elemento.classList.contains('agotado')) return; 
         elemento.classList.toggle('selected');
         const nombre = elemento.querySelector('.nombre-prod').innerText;
         const manual = elemento.querySelector('.manual-desc').innerText;
@@ -653,50 +613,32 @@
     }
 
     function enviarWhatsApp(tipo) {
-    let nom = document.getElementById('reg-nom').value;
-    let cel = document.getElementById('reg-cel').value;
-    let errorReg = document.getElementById('error-reg'); // El div de error
-    let per = (tipo === 'nuevo') ? document.getElementById('reg-per').value : document.getElementById('antiguo-per').value;
-
-    // VALIDACIÓN SIN ALERTAS
-    if (tipo === 'nuevo' && (nom.trim() === "" || cel.trim() === "")) {
-        errorReg.innerText = "Por favor, completa tus datos";
-        
-        // Animación de vibración en campos vacíos
-        if(nom.trim() === "") document.getElementById('reg-nom').classList.add('error-shake');
-        if(cel.trim() === "") document.getElementById('reg-cel').classList.add('error-shake');
-
-        setTimeout(() => {
-            errorReg.innerText = "";
-            document.getElementById('reg-nom').classList.remove('error-shake');
-            document.getElementById('reg-cel').classList.remove('error-shake');
-        }, 3000);
-        return; 
+        let nom = document.getElementById('reg-nom').value;
+        let cel = document.getElementById('reg-cel').value;
+        let errorReg = document.getElementById('error-reg');
+        let per = (tipo === 'nuevo') ? document.getElementById('reg-per').value : document.getElementById('antiguo-per').value;
+        if (tipo === 'nuevo' && (nom.trim() === "" || cel.trim() === "")) {
+            errorReg.innerText = "Por favor, completa tus datos";
+            if(nom.trim() === "") document.getElementById('reg-nom').classList.add('error-shake');
+            if(cel.trim() === "") document.getElementById('reg-cel').classList.add('error-shake');
+            setTimeout(() => { errorReg.innerText = ""; document.getElementById('reg-nom').classList.remove('error-shake'); document.getElementById('reg-cel').classList.remove('error-shake'); }, 3000);
+            return; 
+        }
+        const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
+        let desc = 0;
+        if (carrito.length >= 2) {
+            const ordenado = [...carrito].sort((a,b) => b.precio - a.precio);
+            for(let i=1; i<ordenado.length; i++) desc += (ordenado[i].precio >= 10) ? 2 : 1;
+        }
+        let msg = `Hola *Alex Store*, deseo contratar:\n\n`;
+        carrito.forEach(i => { msg += `⭐ *${i.nombre}*\n📝 ${i.manual}\n`; if(per) msg += `👤 Perfil: ${per}\n`; msg += `--------------------------\n`; });
+        if(desc > 0) msg += `\n🎁 *Ahorro:* -S/ ${desc}`;
+        msg += `\n💰 *TOTAL A PAGAR: S/ ${subtotal - desc}*`;
+        if(tipo === 'nuevo') msg += `\n\n👤 Cliente: ${nom}\n📞 Cel: ${cel}`;
+        else msg += `\n\n✅ *YA SOY CLIENTE*`;
+        window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`);
+        cerrarModalRegistro();
     }
-
-    // Lógica de envío (WhatsApp)
-    const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
-    let desc = 0;
-    if (carrito.length >= 2) {
-        const ordenado = [...carrito].sort((a,b) => b.precio - a.precio);
-        for(let i=1; i<ordenado.length; i++) desc += (ordenado[i].precio >= 10) ? 2 : 1;
-    }
-
-    let msg = `Hola *Alex Store*, deseo contratar:\n\n`;
-    carrito.forEach(i => {
-        msg += `⭐ *${i.nombre}*\n📝 ${i.manual}\n`;
-        if(per.trim() !== "") msg += `👤 Perfil: ${per}\n`;
-        msg += `--------------------------\n`;
-    });
-    if(desc > 0) msg += `\n🎁 *Ahorro:* -S/ ${desc}`;
-    msg += `\n💰 *TOTAL A PAGAR: S/ ${subtotal - desc}*`;
-    
-    if(tipo === 'nuevo') msg += `\n\n👤 Cliente: ${nom}\n📞 Cel: ${cel}`;
-    else msg += `\n\n✅ *YA SOY CLIENTE*`;
-
-    window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`);
-    cerrarModalRegistro();
-}
 
     function cambiarVista(modo, btn) {
         const cont = document.querySelector('.container');
