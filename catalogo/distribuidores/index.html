@@ -101,7 +101,7 @@
         border: 1px solid var(--primary); text-align: center; box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
     }
 
-    #input-dist-pass { 
+     { 
         width: 100%; padding: 20px; margin: 25px 0; border-radius: 15px; background: #000; 
         color: white; text-align: center; font-size: 1.5rem; border: 1px solid #333; outline: none; letter-spacing: 5px;
     }
@@ -556,6 +556,79 @@
         top: 5px;
         right: 5px;
     }
+    /* --- NUEVO ESTILO DE SEGURIDAD (ESTRELLAS FANTASMA) --- */
+.input-wrapper { 
+    position: relative; 
+    width: 80%; 
+    display: flex; 
+    justify-content: center; 
+    margin-bottom: 30px; 
+}
+
+.stars-bg { 
+    position: absolute; 
+    color: #222; 
+    font-size: 2.2rem; 
+    letter-spacing: 12px; 
+    pointer-events: none; 
+    z-index: 1; 
+    transition: 0.2s; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+}
+
+.hide-stars { opacity: 0 !important; }
+
+#input-dist-pass { 
+    width: 200px; 
+    background: transparent !important; 
+    border: none !important; 
+    border-bottom: 2px solid #222 !important; 
+    color: var(--primary); 
+    font-size: 2.2rem; 
+    text-align: center; 
+    letter-spacing: 12px; 
+    outline: none; 
+    z-index: 2; 
+    position: relative; 
+    padding: 5px 0; 
+    margin: 0 !important; /* Reseteamos el margen original */
+}
+
+/* --- BOTÓN VOLVER ARRIBA NEÓN --- */
+#back-to-top {
+    position: fixed;
+    bottom: 110px; /* Un poco más arriba para no tapar la barra de WhatsApp */
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    background: var(--primary);
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 2500;
+    border: none;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: translateY(20px);
+}
+
+#back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Efecto sacudida error */
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
+.error-shake { animation: shake 0.3s ease-in-out; border-bottom-color: var(--danger-neon) !important; }
 </style>
     <script>
     // Usamos una función que se ejecuta de inmediato (antes de que carguen los botones)
@@ -582,33 +655,70 @@
         }
     })();
 
-    function validarAcceso() {
-        const inputPass = document.getElementById('input-dist-pass');
-        const pass = inputPass.value;
-        const PIN_CORRECTO = "dis"; // Tu PIN aquí
+    // Función para las estrellas fantasma
+function checkInputPass(el) {
+    const stars = document.getElementById('stars-placeholder');
+    if (el.value.length > 0) stars.classList.add('hide-stars');
+    else stars.classList.remove('hide-stars');
+}
 
-        if (pass === PIN_CORRECTO) {
-            sessionStorage.setItem("acceso_distribuidor", "true");
-            // Al recargar, entrará en el primer "if" y todo será visible
-            location.reload();
-        } else {
-            alert("Acceso denegado.");
-            inputPass.value = "";
-            inputPass.focus();
-        }
+// Validación corregida con efectos
+function validarAcceso() {
+    const inputPass = document.getElementById('input-dist-pass');
+    const errorMsg = document.getElementById('error-msg');
+    const PIN_CORRECTO = "dis"; 
+
+    if (inputPass.value.toLowerCase() === PIN_CORRECTO) {
+        sessionStorage.setItem("acceso_distribuidor", "true");
+        location.reload();
+    } else {
+        errorMsg.innerText = "PIN INCORRECTO";
+        inputPass.classList.add('error-shake');
+        inputPass.value = "";
+        document.getElementById('stars-placeholder').classList.remove('hide-stars');
+        
+        setTimeout(() => { 
+            inputPass.classList.remove('error-shake'); 
+            errorMsg.innerText = ""; 
+        }, 3000);
     }
+}
+
+// Lógica de Scroll: Botón subir
+window.onscroll = function() {
+    const btnSubir = document.getElementById("back-to-top");
+    if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+        btnSubir.classList.add("show");
+    } else {
+        btnSubir.classList.remove("show");
+    }
+};
+
+document.getElementById("back-to-top").onclick = function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};
 </script>
 </head>
 <body>
 
+<button id="back-to-top" title="Volver Arriba"><i class="fas fa-chevron-up"></i></button>
+
 <div id="modal-login-distribuidor" class="modal-pass" style="display:none;">
-    <div class="modal-content-pass">
-        <i class="fas fa-lock" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
-        <h2 style="color:var(--primary)">ACCESO PRIVADO</h2>
-        <input type="password" id="input-dist-pass" placeholder="****" maxlength="8" onkeydown="if(event.key==='Enter') validarAcceso()">
-        <button onclick="validarAcceso()" class="btn-universal btn-promo-distri" style="width:100%; cursor:pointer;">
+    <div class="modal-content-pass" style="border-radius:40px; border:none; background:#0d0d0d;">
+        <h2 style="color:var(--primary); font-weight: 800; margin-bottom:10px;">ACCESO PRIVADO</h2>
+        <p style="color:#555; font-size:0.8rem; margin-bottom:20px;">Ingresa tu código de distribuidor</p>
+        
+        <div id="error-msg" style="color: var(--danger-neon); font-size: 0.8rem; margin-bottom: 10px; font-weight: 600; height: 1.2rem;"></div>
+        
+        <div class="input-wrapper" style="display: flex; justify-content: center; align-items: center; width: 100%; position: relative; height: 60px; margin: 20px 0;">
+    <input type="password" id="input-dist-pass" maxlength="8" oninput="checkInputPass(this)" onkeydown="if(event.key==='Enter') validarAcceso()" autocomplete="new-password">
+    <div id="stars-placeholder" class="stars-bg">* * * *</div>
+</div>
+
+        <button onclick="validarAcceso()" class="btn-universal btn-promo-distri" style="width:100%; padding:20px; border-radius:25px; margin-top:20px;">
             ENTRAR
         </button>
+        <span style="display:block; margin-top:20px; color:#333; font-size:0.7rem; cursor:pointer;" onclick="window.history.back()">Regresar al portal</span>
     </div>
 </div>
 
