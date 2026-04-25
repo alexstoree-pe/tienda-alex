@@ -1471,9 +1471,38 @@ function scrollFilters(val) {
             const caracteristicas = el.querySelector('.manual-desc') ? el.querySelector('.manual-desc').innerText : "Sin descripción";
             const precio = parseFloat(precioText.replace('S/ ', ''));
             
-            carrito.push({ nombre, precio, caracteristicas }); 
+            // --- NUEVO: CAPTURAR RENOVACIÓN ---
+            const renovacionEl = el.querySelector('.badge-renovacion');
+            const renovacion = renovacionEl ? renovacionEl.innerText : null;
+            
+            carrito.push({ nombre, precio, caracteristicas, renovacion }); 
         });
         actualizarCarritoUI();
+    }
+    //enviar whatsapp
+    function enviarPedido() {
+        if (carrito.length === 0) {
+            mostrarAlerta();
+            return;
+        }
+        let totalSoles = carrito.reduce((sum, p) => sum + p.precio, 0);
+        let mensaje = "¡Hola Alex Store! soy distribuidor 👋 Deseo adquirir:\n\n";
+        
+        carrito.forEach(p => {
+            mensaje += `⭐ *${p.nombre}*\n`;
+            mensaje += `📝 ${p.caracteristicas}\n`;
+            mensaje += `💵 Precio: S/ ${p.precio.toFixed(2)}\n`; // El precio primero
+            
+            // --- LA RENOVACIÓN AHORA ESTÁ DEBAJO DEL PRECIO ---
+            if (p.renovacion) {
+                mensaje += `🔄 ${p.renovacion}\n`;
+            }
+            
+            mensaje += `--------------------------\n`;
+        });
+        
+        mensaje += `\n💰 *TOTAL A PAGAR: S/ ${totalSoles.toFixed(2)}*`;
+        window.open(`https://wa.me/51918600000?text=${encodeURIComponent(mensaje)}`, '_blank');
     }
 
     function limpiarTodo(e) {
@@ -1500,26 +1529,6 @@ function scrollFilters(val) {
                 barra.style.display = 'none';
             }
         }
-    }
-
-    // --- ENVÍO A WHATSAPP ---
-    function enviarPedido() {
-        if (carrito.length === 0) {
-            mostrarAlerta();
-            return;
-        }
-        let totalSoles = carrito.reduce((sum, p) => sum + p.precio, 0);
-        let mensaje = "¡Hola Alex Store! soy distribuidor 👋 Deseo adquirir:\n\n";
-        
-        carrito.forEach(p => {
-            mensaje += `⭐ *${p.nombre}*\n`;
-            mensaje += `📝 ${p.caracteristicas}\n`;
-            mensaje += `💵 Precio: S/ ${p.precio.toFixed(2)}\n`;
-            mensaje += `--------------------------\n`;
-        });
-        
-        mensaje += `\n💰 *TOTAL A PAGAR: S/ ${totalSoles.toFixed(2)}*`;
-        window.open(`https://wa.me/51918600000?text=${encodeURIComponent(mensaje)}`, '_blank');
     }
 
     function mostrarAlerta() {
