@@ -1471,9 +1471,12 @@ function scrollFilters(val) {
             const caracteristicas = el.querySelector('.manual-desc') ? el.querySelector('.manual-desc').innerText : "Sin descripción";
             const precio = parseFloat(precioText.replace('S/ ', ''));
             
-            // --- NUEVO: CAPTURAR RENOVACIÓN ---
-            const renovacionEl = el.querySelector('.badge-renovacion');
-            const renovacion = renovacionEl ? renovacionEl.innerText : null;
+            // --- VALIDACIÓN POR CLASE 'renovacion' ---
+            let renovacion = null;
+            if (el.classList.contains('renovacion')) {
+                const renovacionEl = el.querySelector('.badge-renovacion');
+                renovacion = renovacionEl ? renovacionEl.innerText : null;
+            }
             
             carrito.push({ nombre, precio, caracteristicas, renovacion }); 
         });
