@@ -791,29 +791,47 @@ body.searching header {
         let cel = document.getElementById('reg-cel').value;
         let errorReg = document.getElementById('error-reg');
         let per = (tipo === 'nuevo') ? document.getElementById('reg-per').value : document.getElementById('antiguo-per').value;
+        
         if (tipo === 'nuevo' && (nom.trim() === "" || cel.trim() === "")) {
             errorReg.innerText = "Por favor, completa tus datos";
             if(nom.trim() === "") document.getElementById('reg-nom').classList.add('error-shake');
             if(cel.trim() === "") document.getElementById('reg-cel').classList.add('error-shake');
-            setTimeout(() => { errorReg.innerText = ""; document.getElementById('reg-nom').classList.remove('error-shake'); document.getElementById('reg-cel').classList.remove('error-shake'); }, 3000);
+            setTimeout(() => { 
+                errorReg.innerText = ""; 
+                document.getElementById('reg-nom').classList.remove('error-shake'); 
+                document.getElementById('reg-cel').classList.remove('error-shake'); 
+            }, 3000);
             return; 
         }
+
         const subtotal = carrito.reduce((s, i) => s + i.precio, 0);
         let desc = 0;
         if (carrito.length >= 2) {
             const ordenado = [...carrito].sort((a,b) => b.precio - a.precio);
             for(let i=1; i<ordenado.length; i++) desc += (ordenado[i].precio >= 10) ? 2 : 1;
         }
+
         let msg = `Hola *Alex Store*, deseo contratar:\n\n`;
-        carrito.forEach(i => { msg += `⭐ *${i.nombre}*\n📝 ${i.manual}\n`; if(per) msg += `👤 Perfil: ${per}\n`; msg += `--------------------------\n`; });
+        
+        // --- SECCIÓN MODIFICADA ---
+        carrito.forEach(i => { 
+            msg += `⭐ *${i.nombre}*\n`;
+            msg += `📝 ${i.manual}\n`;
+            if(per) msg += `👤 Perfil: ${per}\n`;
+            msg += `💵 Precio: S/ ${i.precio}\n`; // Aquí se añade el precio individual
+            msg += `--------------------------\n`; 
+        });
+        // --------------------------
+
         if(desc > 0) msg += `\n🎁 *Ahorro:* -S/ ${desc}`;
         msg += `\n💰 *TOTAL A PAGAR: S/ ${subtotal - desc}*`;
+        
         if(tipo === 'nuevo') msg += `\n\n👤 Cliente: ${nom}\n📞 Cel: ${cel}`;
         else msg += `\n\n✅ *YA SOY CLIENTE*`;
+
         window.open(`https://wa.me/${numWhatsApp}?text=${encodeURIComponent(msg)}`);
         cerrarModalRegistro();
     }
-
     function cambiarVista(modo, btn) {
         const cont = document.querySelector('.container');
         document.querySelectorAll('.btn-view').forEach(b => b.classList.remove('active'));
