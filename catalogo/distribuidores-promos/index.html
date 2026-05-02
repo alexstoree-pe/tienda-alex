@@ -111,7 +111,6 @@
             display: none !important; 
         }
         
-        /* El SIN STOCK parpadea sincronizado porque la animación inicia con la carga del DOM */
         .promo-link .price-container::after { 
             content: "SIN STOCK"; 
             display: none; /* Oculto por defecto */
@@ -170,7 +169,8 @@
     <div id="lista-promos">
         <div class="category-title">📦 PACKS DE CUENTAS COMPLETAS</div>
 
-        <a href="#" class="promo-link popular agotado" data-tiempo="2026-04-24 23:59" data-aos="fade-up">
+        <!-- Se añade clase 'reno' para prueba de mensaje WhatsApp -->
+        <a href="#" class="promo-link popular agotado reno" data-tiempo="2026-04-24 23:59" data-aos="fade-up">
             <div class="vip-card">
                 <div class="popular-tag"><i class="fa-solid fa-fire"></i> MÁS VENDIDO</div>
                 <div class="batch-badge">PACK x10</div>
@@ -187,7 +187,7 @@
             </div>
         </a>
 
-        <a href="#" class="promo-link time" data-tiempo="2026-05-07 23:59:59" data-aos="fade-up">
+        <a href="#" class="promo-link time reno" data-tiempo="2026-05-07 23:59:59" data-aos="fade-up">
             <div class="vip-card">
                 <div class="batch-badge">PACK x10</div>
                 <img src="../img/vix.webp" class="service-logo">
@@ -203,7 +203,7 @@
             </div>
         </a>
 
-        <a href="#" class="promo-link popular time" data-tiempo="2026-05-5 23:59" data-aos="fade-up">
+        <a href="#" class="promo-link popular time reno" data-tiempo="2026-05-5 23:59" data-aos="fade-up">
             <div class="vip-card">
                 <div class="popular-tag"><i class="fa-solid fa-star"></i> MAS SOLICITADO</div>
                 <div class="batch-badge">PACK x10</div>
@@ -400,9 +400,18 @@
             const precio = t.querySelector('.precio-prod')?.innerText;
             const descripcion = t.querySelector('.manual-desc')?.innerText;
             
+            // --- CORRECCIÓN: Lógica para incluir reno-tag si existe clase 'reno' ---
+            let textoReno = "";
+            if (t.classList.contains('reno')) {
+                const renoBadge = t.querySelector('.reno-tag')?.innerText;
+                if (renoBadge) {
+                    textoReno = `\n🔄 *Renovación:* ${renoBadge}`;
+                }
+            }
+
             const msg = `Hola Alex Store! soy distribuidor, quiero la promo:\n\n` +
                         `👑 *Promo:* ${nombre} [${badge}]\n` +
-                        `💰 *Precio:* ${precio}\n` +
+                        `💰 *Precio:* ${precio}${textoReno}\n` +
                         `📝 *Detalle:* ${descripcion || 'Sin descripción'}`;
             
             t.href = `https://wa.me/51918600000?text=${encodeURIComponent(msg)}`;
