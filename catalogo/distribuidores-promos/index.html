@@ -1,10 +1,11 @@
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promos Mayoristas | Alex Store</title>
 
     <link rel="icon" type="image/png" href="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.webp">
-
     <link rel="apple-touch-icon" href="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.webp">
     <meta name="apple-mobile-web-app-title" content="Alex Mayoristas">
     <meta name="mobile-web-app-capable" content="yes">
@@ -13,7 +14,8 @@
     <meta property="og:title" content="Promos Mayoristas | Alex Store">
     <meta property="og:description" content="Aprovecha nuestras promociones exclusivas por volumen. ¡El mejor margen de ganancia!">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://alexstoree-pe.github.io/tienda-alex/catalogo/mayoristas/"> <meta property="og:image" content="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.png">
+    <meta property="og:url" content="https://alexstoree-pe.github.io/tienda-alex/catalogo/mayoristas/"> 
+    <meta property="og:image" content="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.png">
     <meta property="og:image:width" content="500">
     <meta property="og:image:height" content="500">
     <meta property="og:image:type" content="image/png">
@@ -34,7 +36,12 @@
         }
 
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes shine-red { 0%, 100% { text-shadow: 0 0 8px #ff0000; color: #ff3333; border-color: #ff3333; } 50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #fff; border-color: #fff; } }
+        
+        /* Animación sincronizada: Siempre corre globalmente */
+        @keyframes shine-red { 
+            0%, 100% { text-shadow: 0 0 8px #ff0000; color: #ff3333; border-color: #ff3333; } 
+            50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; color: #fff; border-color: #fff; } 
+        }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Poppins', sans-serif; background: radial-gradient(circle at top right, #1a1a1a, #050505); color: white; padding-bottom: 120px; line-height: 1.6; min-height: 100vh; }
@@ -51,7 +58,7 @@
         .search-input { width: 100%; padding: 12px 12px 12px 45px; border-radius: 50px; background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white; backdrop-filter: blur(10px); outline: none; transition: 0.3s; }
         .search-input:focus { border-color: var(--vip); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
 
-        /* --- ESTILOS FILTROS MEJORADOS --- */
+        /* --- ESTILOS FILTROS --- */
         .filter-wrapper { position: relative; width: 100%; margin-bottom: 25px; display: flex; align-items: center; }
         .filter-container { padding: 5px 35px; display: flex; gap: 10px; overflow-x: auto; white-space: nowrap; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; width: 100%; align-items: center; }
         .filter-container::-webkit-scrollbar { display: none; }
@@ -60,7 +67,6 @@
         .btn-nav.active { background: var(--vip); color: black; border-color: var(--vip); }
         
         .arrow-filter { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; cursor: pointer; color: var(--vip); background: rgba(0,0,0,0.7); width: 28px; height: 28px; display: flex; justify-content: center; align-items: center; border-radius: 50%; border: 1px solid var(--glass-border); transition: 0.2s; }
-        .arrow-filter:active { transform: translateY(-50%) scale(0.9); }
         .left-arrow { left: 0; }
         .right-arrow { right: 0; }
 
@@ -72,13 +78,10 @@
 
         .promo-link { text-decoration: none; color: inherit; display: block; margin-bottom: 20px; transition: transform 0.2s; }
         .promo-link.oculto-busqueda { display: none; }
-        .promo-link:active { transform: scale(0.98); }
 
         .vip-card { background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 22px; padding: 20px; display: flex; align-items: center; border: 1px solid var(--glass-border); gap: 15px; position: relative; }
-        
         .batch-badge { position: absolute; top: -10px; left: 20px; background: var(--vip); color: #000; font-size: 0.65rem; font-weight: 900; padding: 3px 12px; border-radius: 50px; z-index: 5; }
-        
-        .popular-tag { position: absolute; top: -10px; right: 20px; background: #ff3333; color: white; font-size: 0.6rem; font-weight: 800; padding: 3px 10px; border-radius: 50px; box-shadow: 0 0 10px rgba(255, 51, 51, 0.4); z-index: 5; animation: fadeInUp 0.5s ease; }
+        .popular-tag { position: absolute; top: -10px; right: 20px; background: #ff3333; color: white; font-size: 0.6rem; font-weight: 800; padding: 3px 10px; border-radius: 50px; box-shadow: 0 0 10px rgba(255, 51, 51, 0.4); z-index: 5; }
 
         .service-logo { width: 70px; height: 70px; border-radius: 15px; object-fit: cover; border: 1px solid var(--glass-border); }
 
@@ -89,17 +92,44 @@
         .service-text h3 { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
         .manual-desc { font-size: 0.7rem; color: var(--text-gray); display: block; }
 
-        .price-container { text-align: right; min-width: 100px; }
+        .price-container { text-align: right; min-width: 100px; position: relative; }
         .price-tag { color: #fff; font-weight: 800; font-size: 1.3rem; }
         .reno-tag { font-size: 0.6rem; color: var(--whatsapp); font-weight: 700; background: rgba(37, 211, 102, 0.1); padding: 2px 8px; border-radius: 50px; display: block; margin-top: 4px; }
 
-        .promo-link.agotado { pointer-events: none; }
-        .promo-link.agotado .vip-card { opacity: 0.4; }
-        .promo-link.agotado .price-tag, .promo-link.agotado .reno-tag, .promo-link.agotado .countdown-timer, .promo-link.agotado .popular-tag { display: none !important; }
-        .promo-link.agotado .price-container::after { content: "SIN STOCK"; font-size: 0.75rem; font-weight: 900; border: 1px solid var(--danger-bright); padding: 6px 10px; border-radius: 10px; animation: shine-red 1.2s infinite; display: block; background: rgba(255, 0, 0, 0.1); }
+        /* --- ESTILOS AGOTADO / EXPIRADO --- */
+        .promo-link.agotado {
+            pointer-events: none !important;
+            cursor: default !important;
+        }
+        .promo-link.agotado .vip-card {
+            opacity: 0.5;
+        }
+        .promo-link.agotado .price-tag, 
+        .promo-link.agotado .reno-tag, 
+        .promo-link.agotado .countdown-timer, 
+        .promo-link.agotado .popular-tag { 
+            display: none !important; 
+        }
+        
+        /* El SIN STOCK parpadea sincronizado porque la animación inicia con la carga del DOM */
+        .promo-link .price-container::after { 
+            content: "SIN STOCK"; 
+            display: none; /* Oculto por defecto */
+            font-size: 0.75rem; 
+            font-weight: 900; 
+            border: 1px solid var(--danger-bright); 
+            padding: 6px 10px; 
+            border-radius: 10px; 
+            animation: shine-red 1.2s infinite both; 
+            background: rgba(255, 0, 0, 0.1); 
+            text-align: center;
+        }
+
+        .promo-link.agotado .price-container::after {
+            display: block !important;
+        }
 
         .floating-btn { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--vip); color: #000; padding: 15px; border-radius: 15px; text-decoration: none; font-weight: 800; width: 90%; max-width: 400px; text-align: center; z-index: 100; box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
-        
         .no-results { display: none; text-align: center; padding: 40px; color: var(--text-gray); font-size: 0.9rem; }
     </style>
 </head>
@@ -140,7 +170,7 @@
     <div id="lista-promos">
         <div class="category-title">📦 PACKS DE CUENTAS COMPLETAS</div>
 
-        <a href="#" class="promo-link  popular agotado" data-tiempo="2026-04-24 23:59" data-aos="fade-up">
+        <a href="#" class="promo-link popular agotado" data-tiempo="2026-04-24 23:59" data-aos="fade-up">
             <div class="vip-card">
                 <div class="popular-tag"><i class="fa-solid fa-fire"></i> MÁS VENDIDO</div>
                 <div class="batch-badge">PACK x10</div>
@@ -157,7 +187,7 @@
             </div>
         </a>
 
-        <a href="#" class="promo-link time" data-tiempo="2026-05-02 17:06" data-aos="fade-up">
+        <a href="#" class="promo-link " data-tiempo="2026-05-02 17:06" data-aos="fade-up">
             <div class="vip-card">
                 <div class="batch-badge">PACK x10</div>
                 <img src="../img/vix.webp" class="service-logo">
@@ -173,7 +203,7 @@
             </div>
         </a>
 
-        <a href="#" class="promo-link  popular time" data-tiempo="2026-05-5 23:59" data-aos="fade-up">
+        <a href="#" class="promo-link popular time" data-tiempo="2026-05-5 23:59" data-aos="fade-up">
             <div class="vip-card">
                 <div class="popular-tag"><i class="fa-solid fa-star"></i> MAS SOLICITADO</div>
                 <div class="batch-badge">PACK x10</div>
@@ -231,40 +261,30 @@
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    // Inicializar AOS
-    AOS.init({
-        duration: 800,
-        once: false 
-    });
+    AOS.init({ duration: 800, once: false });
 
-    // Función para Scroll de Filtros
     function scrollFilters(val) {
         const container = document.getElementById('filterScroll');
         container.scrollBy({ left: val, behavior: 'smooth' });
     }
 
-    // --- FUNCIÓN FILTRAR PLATAFORMAS (BUSCADOR) ---
     function filtrarPlataformas() {
         const input = document.getElementById('buscador').value.trim().toLowerCase();
         const tarjetas = document.querySelectorAll('.promo-link');
-        const categorias = document.querySelectorAll('.category-title');
         const noResults = document.getElementById('noResults');
         let hayResultadosGlobales = false;
 
-        // Reset visual de los botones al buscar
         document.querySelectorAll('.btn-nav').forEach(btn => btn.classList.remove('active'));
         const btnTodos = document.querySelector(".btn-nav[onclick*='TODOS']");
         if(btnTodos) btnTodos.classList.add('active');
         
         tarjetas.forEach(tarjeta => {
-            const nombre = tarjeta.querySelector('.nombre-prod') ? tarjeta.querySelector('.nombre-prod').innerText.toLowerCase() : "";
-            const descripcion = tarjeta.querySelector('.manual-desc') ? tarjeta.querySelector('.manual-desc').innerText.toLowerCase() : "";
+            const nombre = tarjeta.querySelector('.nombre-prod')?.innerText.toLowerCase() || "";
+            const descripcion = tarjeta.querySelector('.manual-desc')?.innerText.toLowerCase() || "";
             
             if (nombre.includes(input) || descripcion.includes(input)) {
                 tarjeta.classList.remove('oculto-busqueda');
                 tarjeta.style.display = "block";
-                tarjeta.style.opacity = "1"; 
-                tarjeta.style.transform = "none";
                 hayResultadosGlobales = true;
             } else {
                 tarjeta.classList.add('oculto-busqueda');
@@ -272,146 +292,128 @@
             }
         });
         
-        categorias.forEach(titulo => {
+        actualizarTitulos();
+        noResults.style.display = hayResultadosGlobales ? "none" : "block";
+        AOS.refresh();
+    }
+
+    function filtrarCategoria(categoria, btn) {
+        document.getElementById('buscador').value = "";
+        document.querySelectorAll('.btn-nav').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const term = categoria.toUpperCase();
+        const tarjetas = document.querySelectorAll('.promo-link');
+
+        tarjetas.forEach(t => {
+            const txt = t.innerText.toUpperCase();
+            if (term === 'TODOS') {
+                t.style.display = "block";
+                t.classList.remove('oculto-busqueda');
+            } else {
+                let coincide = false;
+                if (term.includes("PACK") || term.includes("COMPLETAS")) {
+                    coincide = txt.includes("PACK") || txt.includes("COMPLETA");
+                } else if (term.includes("INDIVIDUAL") || term.includes("PERFIL")) {
+                    coincide = txt.includes("INDIVIDUAL") || txt.includes("PERFIL") || txt.includes("PROMO");
+                } else {
+                    coincide = txt.includes(term);
+                }
+                t.style.display = coincide ? "block" : "none";
+                t.classList.toggle('oculto-busqueda', !coincide);
+            }
+        });
+
+        actualizarTitulos();
+        AOS.refreshHard();
+    }
+
+    function actualizarTitulos() {
+        const titulos = document.querySelectorAll('.category-title');
+        titulos.forEach(titulo => {
             let tieneHijosVisibles = false;
             let hermano = titulo.nextElementSibling;
-            
-            while(hermano && !hermano.classList.contains('category-title')) {
-                if(hermano.classList.contains('promo-link') && !hermano.classList.contains('oculto-busqueda')) {
+            while (hermano && !hermano.classList.contains('category-title')) {
+                if (hermano.classList.contains('promo-link') && hermano.style.display !== "none") {
                     tieneHijosVisibles = true;
                     break;
                 }
                 hermano = hermano.nextElementSibling;
             }
-            titulo.style.display = (tieneHijosVisibles || input === "") ? "flex" : "none";
+            titulo.style.display = tieneHijosVisibles ? "flex" : "none";
         });
-
-        noResults.style.display = hayResultadosGlobales ? "none" : "block";
-        AOS.refresh();
     }
 
-   // 1. FUNCIÓN PRINCIPAL DE FILTRADO
-function filtrarCategoria(categoria, btn) {
-    // Limpiar buscador y resetear estado de botones
-    document.getElementById('buscador').value = "";
-    document.querySelectorAll('.btn-nav').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    const term = categoria.toUpperCase();
-    const tarjetas = document.querySelectorAll('.promo-link');
-
-    tarjetas.forEach(t => {
-        const txt = t.innerText.toUpperCase();
-        
-        if (term === 'TODOS') {
-            t.style.display = "block";
-            t.classList.remove('oculto-busqueda');
-        } else {
-            // Lógica de palabras clave para que coincida con tus categorías
-            let coincide = false;
-            
-            // Si el botón es de Cuentas Completas
-            if (term.includes("PACK") || term.includes("COMPLETAS")) {
-                coincide = txt.includes("PACK") || txt.includes("COMPLETA");
-            } 
-            // Si el botón es de Individuales o Perfiles
-            else if (term.includes("INDIVIDUAL") || term.includes("PERFIL")) {
-                coincide = txt.includes("INDIVIDUAL") || txt.includes("PERFIL") || txt.includes("PROMO");
-            } 
-            // Para otros (DISEÑO, IPTV, etc.)
-            else {
-                coincide = txt.includes(term);
-            }
-
-            if (coincide) {
-                t.style.display = "block";
-                t.classList.remove('oculto-busqueda');
-            } else {
-                t.style.display = "none";
-                t.classList.add('oculto-busqueda');
-            }
-        }
-    });
-
-    // Llamamos a la función que muestra u oculta los títulos (ZONA PERFILES, etc.)
-    actualizarTitulos();
-
-    // Refrescar animaciones AOS
-    if (typeof AOS !== 'undefined') {
-        document.querySelectorAll('.promo-link').forEach(el => el.classList.remove('aos-animate'));
-        setTimeout(() => { AOS.refreshHard(); }, 100);
-    }
-}
-
-// 2. FUNCIÓN PARA GESTIONAR LOS TÍTULOS (ESTA ES LA QUE TRAE LA CATEGORÍA)
-function actualizarTitulos() {
-    const titulos = document.querySelectorAll('.category-title');
-    
-    titulos.forEach(titulo => {
-        let tieneHijosVisibles = false;
-        let hermano = titulo.nextElementSibling;
-        
-        // Buscamos productos visibles debajo de este título
-        while (hermano && !hermano.classList.contains('category-title')) {
-            if (hermano.classList.contains('promo-link') && hermano.style.display !== "none") {
-                tieneHijosVisibles = true;
-                break;
-            }
-            hermano = hermano.nextElementSibling;
-        }
-        
-        // Muestra el título (flex) si hay productos, si no, lo oculta (none)
-        titulo.style.display = tieneHijosVisibles ? "flex" : "none";
-    });
-}
     function actualizarCronometros() {
-        const tarjetasConTiempo = document.querySelectorAll('.promo-link.time:not(.agotado)');
+        const tarjetasConTiempo = document.querySelectorAll('.promo-link.time');
+        
         tarjetasConTiempo.forEach(tarjeta => {
             const timerDisplay = tarjeta.querySelector('.timer');
+            const timerContainer = tarjeta.querySelector('.countdown-timer');
             const fechaLimiteStr = tarjeta.getAttribute('data-tiempo');
+            
             if (!fechaLimiteStr) return;
+
             const fechaLimite = new Date(fechaLimiteStr.replace(/-/g, "/")).getTime();
             const ahora = new Date().getTime();
             const distancia = fechaLimite - ahora;
-            if (distancia < 0) {
-                timerDisplay.innerText = "EXPIRADO";
+
+            if (distancia <= 0) {
+                if (!tarjeta.classList.contains('agotado')) {
+                    tarjeta.classList.add('agotado');
+                    tarjeta.classList.remove('time'); 
+                    tarjeta.href = "javascript:void(0)";
+                    tarjeta.style.pointerEvents = "none";
+                    tarjeta.removeAttribute('target');
+
+                    if (timerContainer) timerContainer.style.display = 'none';
+                    
+                    const priceTag = tarjeta.querySelector('.price-tag');
+                    const renoTag = tarjeta.querySelector('.reno-tag');
+                    const popularTag = tarjeta.querySelector('.popular-tag');
+
+                    if (priceTag) priceTag.style.display = 'none';
+                    if (renoTag) renoTag.style.display = 'none';
+                    if (popularTag) popularTag.style.display = 'none';
+                }
                 return;
             }
+
             const d = Math.floor(distancia / (1000 * 60 * 60 * 24));
             const h = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const m = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((distancia % (1000 * 60)) / 1000);
+            
             let formato = "";
             if (d > 0) formato += d + "d ";
             formato += h + "h " + m + "m " + s + "s";
-            timerDisplay.innerText = formato;
+            
+            if (timerDisplay) timerDisplay.innerText = formato;
         });
     }
 
     function configurarWhatsApp() {
-    const tarjetas = document.querySelectorAll('.promo-link:not(.agotado)');
-    tarjetas.forEach(t => {
-        // 1. CAPTURAMOS EL BADGE (PACK x10, INDIVIDUAL, etc.)
-        const badge = t.querySelector('.batch-badge')?.innerText || '';
-        const nombre = t.querySelector('.nombre-prod')?.innerText;
-        const precio = t.querySelector('.precio-prod')?.innerText;
-        const descripcion = t.querySelector('.manual-desc')?.innerText;
-        
-        // 2. LO AGREGAMOS AL MENSAJE AL COSTADO DEL NOMBRE
-        // Usamos [${badge}] para que resalte en el mensaje
-        const msg = `Hola Alex Store! soy distribuidor, quiero la promo:\n\n` +
-                    `👑 *Promo:* ${nombre} [${badge}]\n` +
-                    `💰 *Precio:* ${precio}\n` +
-                    `📝 *Detalle:* ${descripcion || 'Sin descripción'}`;
-        
-        t.href = `https://wa.me/51918600000?text=${encodeURIComponent(msg)}`;
-        t.target = "_blank";
-    });
-}
+        const tarjetas = document.querySelectorAll('.promo-link:not(.agotado)');
+        tarjetas.forEach(t => {
+            const badge = t.querySelector('.batch-badge')?.innerText || '';
+            const nombre = t.querySelector('.nombre-prod')?.innerText;
+            const precio = t.querySelector('.precio-prod')?.innerText;
+            const descripcion = t.querySelector('.manual-desc')?.innerText;
+            
+            const msg = `Hola Alex Store! soy distribuidor, quiero la promo:\n\n` +
+                        `👑 *Promo:* ${nombre} [${badge}]\n` +
+                        `💰 *Precio:* ${precio}\n` +
+                        `📝 *Detalle:* ${descripcion || 'Sin descripción'}`;
+            
+            t.href = `https://wa.me/51918600000?text=${encodeURIComponent(msg)}`;
+            t.target = "_blank";
+        });
+    }
+
     window.onload = () => {
+        actualizarCronometros();
         configurarWhatsApp();
         setInterval(actualizarCronometros, 1000);
-        actualizarCronometros();
     };
 </script>
 
