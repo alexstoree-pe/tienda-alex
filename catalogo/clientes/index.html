@@ -775,7 +775,7 @@ body.searching header {
     function validarPass() {
         const input = document.getElementById('input-pass');
         const errorMsg = document.getElementById('error-msg');
-        if (input.value.toLowerCase() === "cliente") { sessionStorage.setItem("acceso_concedido", "true"); location.reload(); } 
+        if (input.value.toLowerCase() === "1122") { sessionStorage.setItem("acceso_concedido", "true"); location.reload(); } 
         else { errorMsg.innerText = "CONTRASEÑA INCORRECTA"; input.classList.add('error-shake'); input.value = ""; setTimeout(() => { input.classList.remove('error-shake'); errorMsg.innerText = ""; }, 3000); }
     }
 
