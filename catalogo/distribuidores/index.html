@@ -1485,35 +1485,40 @@ document.getElementById("back-to-top").onclick = function() {
         }, 100);
     }
     // --- BUSCADOR ---
+    // --- BUSCADOR OPTIMIZADO ---
     function filtrarPlataformas() {
-    // Al empezar a escribir, reseteamos los filtros visualmente
-    document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
-    const btnTodos = document.querySelector(".btn-filter[onclick*='TODOS']");
-    if(btnTodos) btnTodos.classList.add('active');
-    
-    // ... resto de tu código del buscador ...
+        // 1. Resetear visualmente los botones de filtro de categorías al escribir
+        document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
+        const btnTodos = document.querySelector(".btn-filter[onclick*='TODOS']");
+        if(btnTodos) btnTodos.classList.add('active');
+        
         const input = document.getElementById('buscador').value.trim().toLowerCase();
         const tarjetas = document.querySelectorAll('.service-link');
         
+        // 2. Filtrar cada una de las tarjetas de producto
         tarjetas.forEach(tarjeta => {
             const nombre = tarjeta.querySelector('.nombre-prod') ? tarjeta.querySelector('.nombre-prod').innerText.toLowerCase() : "";
             const descripcion = tarjeta.querySelector('.manual-desc') ? tarjeta.querySelector('.manual-desc').innerText.toLowerCase() : "";
             
-            if (nombre.includes(input) || descripcion.includes(input)) {
-                tarjeta.classList.remove('oculto-busqueda');
-                tarjeta.style.display = "block";
+            if (input === "" || nombre.includes(input) || descripcion.includes(input)) {
+                tarjeta.classList.remove('oculto-busqueda', 'oculto-filtro');
+                tarjeta.style.setProperty('display', 'block', 'important');
                 tarjeta.style.opacity = "1"; 
                 tarjeta.style.transform = "none";
+                tarjeta.style.visibility = "visible";
             } else {
                 tarjeta.classList.add('oculto-busqueda');
-                tarjeta.style.display = "none";
+                tarjeta.style.setProperty('display', 'none', 'important');
             }
         });
         
+        // 3. Ocultar los títulos de las categorías si no les queda ninguna tarjeta visible debajo
         const categorias = document.querySelectorAll('.category-title');
         categorias.forEach(titulo => {
             let tieneHijosVisibles = false;
             let hermano = titulo.nextElementSibling;
+            
+            // Recorremos los elementos siguientes hasta encontrar el próximo título de categoría
             while(hermano && !hermano.classList.contains('category-title')) {
                 if(hermano.classList.contains('service-link') && !hermano.classList.contains('oculto-busqueda')) {
                     tieneHijosVisibles = true;
@@ -1521,8 +1526,17 @@ document.getElementById("back-to-top").onclick = function() {
                 }
                 hermano = hermano.nextElementSibling;
             }
-            titulo.style.display = (tieneHijosVisibles || input === "") ? "flex" : "none";
+            
+            // Si no hay productos que coincidan en esta sección, ocultamos el título por completo
+            titulo.style.setProperty('display', (tieneHijosVisibles || input === "") ? "flex" : "none", 'important');
         });
+
+        // 4. Forzar refresco de AOS para evitar que desaparezcan elementos por scroll
+        setTimeout(() => {
+            if (typeof AOS !== 'undefined') {
+                AOS.refreshHard(); 
+            }
+        }, 100);
     }
     function filtrarCategoria(categoria, boton) {
     // 1. Gestionar estado visual de los botones
