@@ -1538,13 +1538,13 @@ document.getElementById("back-to-top").onclick = function() {
             }
         }, 100);
     }
-    function filtrarCategoria(categoria, boton) {
+   function filtrarCategoria(categoria, boton) {
     // 1. Gestionar estado visual de los botones
     document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
     boton.classList.add('active');
 
-    const productos = document.querySelectorAll('.service-link');
     const titulos = document.querySelectorAll('.category-title');
+    let primerElementoVisible = null;
 
     // 2. Lógica de filtrado
     titulos.forEach(titulo => {
@@ -1553,7 +1553,12 @@ document.getElementById("back-to-top").onclick = function() {
         const coincide = (categoria === 'TODOS' || textoTitulo.includes(categoria.toUpperCase()));
         
         // Mostrar/Ocultar el título de la categoría
-        titulo.style.display = coincide ? 'flex' : 'none';
+        titulo.style.setProperty('display', coincide ? 'flex' : 'none', 'important');
+        
+        // Guardar el primer título visible para hacer scroll después
+        if (coincide && !primerElementoVisible) {
+            primerElementoVisible = titulo;
+        }
 
         // Buscar productos que pertenecen a este título
         let hermano = titulo.nextElementSibling;
@@ -1561,37 +1566,53 @@ document.getElementById("back-to-top").onclick = function() {
             if (hermano.classList.contains('service-link')) {
                 if (coincide) {
                     hermano.classList.remove('oculto-filtro');
-                    // FORZAR VISIBILIDAD: Esto quita el efecto de AOS para que no se escondan
+                    hermano.style.setProperty('display', 'block', 'important');
                     hermano.style.opacity = "1";
                     hermano.style.transform = "none";
                     hermano.style.visibility = "visible";
                 } else {
                     hermano.classList.add('oculto-filtro');
+                    hermano.style.setProperty('display', 'none', 'important');
                 }
             }
             hermano = hermano.nextElementSibling;
         }
     });
 
-    // 3. Refrescar AOS para que reconozca los nuevos tamaños de la página
-    // IMPORTANTE: Fuera de cualquier bucle o 'if'
+    // 3. Auto-scroll con retraso controlado para evitar desfases de altura
+    setTimeout(() => {
+        if (categoria !== 'TODOS' && primerElementoVisible) {
+            // Ajuste de margen para que el título no quede tapado por tu buscador/header pegajoso
+            const yOffset = -310; 
+            const y = primerElementoVisible.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            
+            // Ejecuta el desplazamiento suave al inicio real de la sección
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        } else if (categoria === 'TODOS') {
+            // Si regresan a "TODOS", sube suavemente al inicio absoluto del catálogo
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, 100); // 100 milisegundos son suficientes para que el DOM se reorganice
+
+    // 4. Refrescar AOS para que reconozca los nuevos tamaños y posiciones de la página
     setTimeout(() => {
         if (typeof AOS !== 'undefined') {
             AOS.refreshHard(); 
         }
-    }, 200);
+    }, 250);
 }
+
 function scrollFilters(val) {
     const container = document.getElementById('filterScroll');
     container.scrollBy({ left: val, behavior: 'smooth' });
 }
 
-    // --- LÓGICA DE SELECCIÓN ---
-    function toggleSeleccion(elemento) {
-        if(elemento.classList.contains('agotado')) return;
-        elemento.classList.toggle('selected');
-        reconstruirCarritoDesdeUI();
-    }
+// --- LÓGICA DE SELECCIÓN ---
+function toggleSeleccion(elemento) {
+    if(elemento.classList.contains('agotado')) return;
+    elemento.classList.toggle('selected');
+    reconstruirCarritoDesdeUI();
+}
 
     function reconstruirCarritoDesdeUI() {
         carrito = [];
