@@ -280,8 +280,20 @@
     .service-text h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
     .manual-desc { font-size: 0.75rem; color: #888; display: block; }
     
-    .price-container { display: flex; flex-direction: column; align-items: flex-end; margin-left: auto; }
-    .price-tag { color: var(--primary); font-weight: 800; font-size: 1.4rem; }
+    .price-container { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-end; 
+    margin-left: auto; 
+    min-width: 80px; /* 1. Asegura un ancho mínimo para que no se aplaste */
+}
+    .price-tag { 
+    color: var(--primary); 
+    font-weight: 800; 
+    font-size: 1.4rem; 
+    white-space: nowrap; /* 2. Evita que el número se baje a la siguiente línea */
+    display: inline-block; /* 3. Fuerza al S/ y al número a comportarse como un solo bloque */
+}
     .premium .price-tag { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: var(--vip); }
 
     .badge-renovacion { display: none; color: #f1c40f; font-size: 0.55rem; font-weight: 700; margin-top: 3px; text-transform: uppercase; }
