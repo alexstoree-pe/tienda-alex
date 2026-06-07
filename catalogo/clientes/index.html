@@ -35,12 +35,12 @@
     html { display: none; background-color: var(--dark); scroll-behavior: smooth; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* --- FONDO CON LA MISMA ACLARACIÓN DEL ENCABEZADO --- */
+    /* --- FONDO DEL MUNDIAL TOTALMENTE ACLARADO (SIN FILTRO NEGRO) --- */
     body { 
         font-family: 'Poppins', sans-serif; 
         
-        /* Usamos exactamente el mismo tono translúcido del header en todo el fondo */
-        background: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)), 
+        /* Cambiamos el filtro negro por un destello blanco translúcido que aclara la foto original */
+        background: linear-gradient(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.08)), 
                     url("../img/fondo-mundial.jpg") no-repeat center center fixed;
         background-size: cover;
         
