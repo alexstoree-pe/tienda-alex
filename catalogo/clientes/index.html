@@ -91,17 +91,21 @@
         box-shadow: 0 0 10px var(--primary);
     }
 
-    /* --- OPCIÓN 2: HEADER CRISTAL DINÁMICO --- */
+    /* --- HEADER CRISTAL DINÁMICO MEJORADO --- */
     header {
-        background: rgba(10, 10, 10, 0.7);
-        backdrop-filter: blur(25px) saturate(180%);
-        -webkit-backdrop-filter: blur(25px) saturate(180%);
-        padding: 8px 10px 5px; 
+        /* Cambiamos el fondo a un cristal claro que resalte sobre el fondo oscuro */
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(30px) saturate(200%);
+        -webkit-backdrop-filter: blur(30px) saturate(200%);
+        padding: 12px 10px 8px; 
         text-align: center;
-        border-bottom: 1px solid var(--glass-border);
+        /* Le damos un borde inferior un poco más visible para definir el área */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
         position: sticky;
         top: 0;
         z-index: 3000 !important;
+        /* Un sombreado suave hacia abajo para despegarlo del catálogo */
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
     }
 
     .brand-logo { width: 35px; height: 35px; object-fit: contain; border-radius: 10px; margin-bottom: 2px; }
