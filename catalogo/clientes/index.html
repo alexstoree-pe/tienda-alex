@@ -35,12 +35,16 @@
     html { display: none; background-color: var(--dark); scroll-behavior: smooth; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* --- TEXTURA DE RUIDO SUTIL --- */
+    /* --- TEXTURA Y FONDO DEL MUNDIAL 2026 MEJORADO --- */
     body { 
         font-family: 'Poppins', sans-serif; 
-        background: radial-gradient(circle at top right, #0a0a0a, #050505);
+        /* Subimos levemente la opacidad del gradiente (0.9 y 0.94) para proteger la legibilidad */
+        background: linear-gradient(rgba(5, 5, 5, 0.90), rgba(5, 5, 5, 0.94)), 
+                    url("../img/fondo-mundial.jpg") no-repeat center top fixed;
+        /* cover asegura que llene toda la pantalla sin importar el monitor */
+        background-size: cover;
         color: white; 
-        line-height: 2.5; 
+        line-height: 1.4; 
         padding-bottom: 100px; 
         position: relative;
     }
