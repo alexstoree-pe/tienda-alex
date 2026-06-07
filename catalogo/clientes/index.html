@@ -293,7 +293,16 @@
     .discount-label { font-size: 0.7rem; color: var(--promo); margin-top: 5px; font-weight: 700; display: none; text-align: center;}
 
     /* --- FORMULARIOS --- */
-    .modal-overlay, .modal-pass { position: fixed; inset: 0; display: none; justify-content: center; align-items: center; z-index: 3000; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); }
+    .modal-overlay { 
+        position: fixed; 
+        inset: 0; 
+        display: none; 
+        justify-content: center; 
+        align-items: center; 
+        z-index: 3000; 
+        background: rgba(0,0,0,0.9); 
+        backdrop-filter: blur(10px); 
+    }
     .modal-content { background: #0d0d0d; padding: 35px 25px; border-radius: 35px; width: 90%; max-width: 420px; text-align: center; border: 1px solid #222; }
     .modal-content h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 20px; color: var(--primary); }
     .modal-content p { color: #888; font-size: 0.85rem; margin-bottom: 20px; line-height: 1.4; }
@@ -333,9 +342,221 @@
     body.searching header {
         padding-bottom: 0;
     }
+
+    /* --- COMPONENTES PARA LOS COSTADOS VACÍOS --- */
+    .sidebar-lateral {
+        position: fixed;
+        top: 320px; /* Se alinea debajo de tu cabecera */
+        width: 240px;
+        display: none; /* Por defecto oculto en pantallas pequeñas */
+        flex-direction: column;
+        gap: 20px;
+        z-index: 100;
+    }
+    
+    /* Posicionamiento en cada extremo */
+    .sidebar-lateral.izquierdo {
+        left: 4%;
+    }
+    .sidebar-lateral.derecho {
+        right: 4%;
+    }
+
+    /* Estilo de tarjeta de cristal idéntico a tus componentes */
+    .sidebar-card {
+        background: rgba(10, 10, 10, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 20px;
+        padding: 20px;
+        color: #fff;
+        backdrop-filter: blur(20px) saturate(160%);
+        -webkit-backdrop-filter: blur(20px) saturate(160%);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .sidebar-card h3 {
+        font-size: 0.9rem;
+        color: var(--primary);
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .sidebar-card p {
+        font-size: 0.75rem;
+        color: #ccc;
+        line-height: 1.5;
+        margin-bottom: 6px;
+    }
+    
+    .sidebar-card p strong {
+        color: var(--primary);
+    }
+
+    /* RESPONSIVE: Solo se muestran si la pantalla mide más de 1200px de ancho */
+    @media (min-width: 1200px) {
+        .sidebar-lateral {
+            display: flex;
+        }
+    }
+
+    /* --- BOTÓN FLOTANTE DE INFO (SOLO MÓVIL) --- */
+    #btn-info-movil {
+        position: fixed;
+        bottom: 25px;
+        left: 20px;
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: var(--primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        cursor: pointer;
+        z-index: 2500;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        transition: 0.3s ease;
+    }
+    
+    /* Si el carrito flotante de WhatsApp aparece, movemos el botón un poco arriba para que no estorbe al texto */
+    body:not(.hidden) #btn-info-movil {
+        bottom: 180px;
+    }
+
+    .modal-cristal {
+        background: rgba(10, 10, 10, 0.85) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        backdrop-filter: blur(25px) !important;
+        -webkit-backdrop-filter: blur(25px) !important;
+        
+        /* CORRECCIÓN: Limitamos la altura máxima y agregamos scroll interno */
+        max-height: 80vh;
+        overflow-y: auto;
+        
+        /* CORRECCIÓN: Añadimos más espacio arriba y abajo para empujar el texto */
+        padding: 40px 24px 30px !important; 
+        box-sizing: border-box;
+    }
+    
+    .info-seccion {
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 12px 0;
+    }
+    
+    .info-seccion h3 {
+        font-size: 0.85rem;
+        color: var(--primary);
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    
+    .info-seccion p {
+        font-size: 0.75rem !important;
+        color: #ccc !important;
+        line-height: 1.4 !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* RESPONSIVE: Si la pantalla es grande (PC), ocultamos este botón móvil */
+    @media (min-width: 1200px) {
+        #btn-info-movil {
+            display: none !important;
+        }
+    }
+    .modal-cristal h2 {
+        margin-top: 10px !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* CORRECCIÓN EXCLUSIVA MÓVIL: Empuja la ventana hacia abajo de la cabecera */
+    @media (max-width: 1199px) {
+        #modal-info-lateral {
+            top: 175px; 
+            align-items: flex-start; 
+        }
+        #modal-info-lateral .modal-cristal {
+            margin-top: 15px; 
+            max-height: calc(100vh - 210px); 
+        }
+    }
 </style>
 </head>
 <body>
+
+
+
+
+    <!-- BOTÓN FLOTANTE PARA CELULARES (INFO) -->
+<button id="btn-info-movil" onclick="abrirModalInfo()"><i class="fas fa-info-circle"></i></button>
+
+<!-- VENTANA MODAL DE INFORMACIÓN -->
+<div id="modal-info-lateral" class="modal-overlay" onclick="cerrarModalInfo(event)">
+    <div class="modal-content modal-cristal" onclick="event.stopPropagation()">
+        <h2 style="color: var(--primary); font-size: 1.3rem;"><i class="fas fa-star"></i> INFORMACIÓN ÚTIL</h2>
+        <p style="font-size: 0.8rem; margin-bottom: 25px;">Todo lo que necesitas saber antes de tu compra en Alex Store.</p>
+        
+        <div class="info-seccion">
+            <h3><i class="fas fa-shopping-cart"></i> ¿Cómo Comprar?</h3>
+            <p>1. Selecciona tus plataformas favoritas.</p>
+            <p>2. Presiona el botón de WhatsApp abajo.</p>
+            <p>3. Coordina el pago y recibe en minutos.</p>
+        </div>
+        
+        <div class="info-seccion">
+            <h3><i class="fas fa-clock"></i> Horario de Atención</h3>
+            <p>Lunes a viernes: <strong>9:30 AM - 5:00 PM y 8:30 PM - 11:00 PM</strong></p>
+            <p>Domingo: <strong>10:00 AM - 2:30 PM y 6:30 PM - 10:30 PM</strong></p>
+        </div>
+
+        <div class="info-seccion" style="border-bottom: none; padding-bottom: 0;">
+            <h3><i class="fas fa-gift"></i> Promoción Activa</h3>
+            <p>¡Llevando 2 o más cuentas obtienes un descuento automático en tu carrito! 🎁</p>
+        </div>
+        
+        <button class="btn-modal-back" onclick="document.getElementById('modal-info-lateral').style.display = 'none'" style="margin-top: 25px;">ENTENDIDO</button>
+    </div>
+</div>
+
+    
+    <!-- BANNERS LATERALES FLOTANTES -->
+<div class="sidebar-lateral izquierdo">
+    <div class="sidebar-card">
+        <h3><i class="fas fa-shopping-cart"></i> ¿Cómo Comprar?</h3>
+        <p>1. Selecciona tus plataformas favoritas.</p>
+        <p>2. Presiona el botón de WhatsApp abajo.</p>
+        <p>3. Coordina el pago y recibe en minutos.</p>
+    </div>
+    <div class="sidebar-card">
+        <h3><i class="fas fa-star"></i> Beneficios</h3>
+        <p>• Cuentas estables y renovables.</p>
+        <p>• Garantía completa contratada.</p>
+    </div>
+</div>
+
+<div class="sidebar-lateral derecho">
+    <div class="sidebar-card">
+        <h3><i class="fas fa-clock"></i> Horario de Atención</h3>
+        <p>Lunes a viernes: <strong>9:30 AM - 5:00 PM y 8:30 PM - 11:00 PM</strong></p>
+        <p>Domingo: <strong>10:00 AM - 2:30 PM y 6:30 PM - 10:30 PM</strong></p>
+    </div>
+    <div class="sidebar-card" style="border-color: var(--promo);">
+        <h3><i class="fas fa-gift"></i> Promoción Activa</h3>
+        <p>¡Llevando 2 o más cuentas obtienes un descuento automático en tu carrito! 🎁</p>
+    </div>
+</div>
+
+    
     <div id="search-overlay"></div>
     <div id="progress-container"><div id="progress-bar"></div></div>
 
@@ -1109,6 +1330,21 @@
     document.getElementById("back-to-top").onclick = function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
+
+
+    // --- LÓGICA MODAL INFORMATIVA MÓVIL ---
+    function abrirModalInfo() {
+        document.getElementById('modal-info-lateral').style.display = 'flex';
+    }
+
+    function cerrarModalInfo(event) {
+        // Cierra la ventana si el cliente hace clic fuera del cuadro central
+        if (event.target.id === 'modal-info-lateral') {
+            document.getElementById('modal-info-lateral').style.display = 'none';
+        }
+    }
+    
+    
 </script>
 </body>
 </html>
