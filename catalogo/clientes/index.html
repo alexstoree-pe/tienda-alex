@@ -35,14 +35,18 @@
     html { display: none; background-color: var(--dark); scroll-behavior: smooth; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* --- TEXTURA Y FONDO DEL MUNDIAL 2026 MEJORADO --- */
+    /* --- FONDO CON LA MISMA ACLARACIÓN DEL ENCABEZADO --- */
     body { 
         font-family: 'Poppins', sans-serif; 
-        /* Subimos levemente la opacidad del gradiente (0.9 y 0.94) para proteger la legibilidad */
-        background: radial-gradient(circle at top, #1c1f24, #0f1115), 
-                    url("../img/fondo-mundial.jpg") no-repeat center top fixed;
-        /* cover asegura que llene toda la pantalla sin importar el monitor */
+        
+        /* Usamos exactamente el mismo tono translúcido del header en todo el fondo */
+        background: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)), 
+                    url("../img/fondo-mundial.jpg") no-repeat center center fixed;
         background-size: cover;
+        
+        /* Forzamos a que el fondo oscuro original de abajo se aclare por completo */
+        background-blend-mode: overlay;
+        
         color: white; 
         line-height: 1.4; 
         padding-bottom: 100px; 
