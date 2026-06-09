@@ -37,19 +37,6 @@
 
     /* --- FONDO DEL MUNDIAL TOTALMENTE ACLARADO (SIN FILTRO NEGRO) --- */
     body { 
-        font-family: 'Poppins', sans-serif; 
-        
-        /* Cambiamos el filtro negro por un destello blanco translúcido que aclara la foto original */
-        background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)), 
-                    url("../img/fondo-mundial.jpg") no-repeat center center fixed;
-        background-size: cover;
-        
-        color: white; 
-        line-height: 1.4; 
-        padding-bottom: 100px; 
-        position: relative;
-    }
-    body { 
     font-family: 'Poppins', sans-serif; 
     background: linear-gradient(rgba(5, 5, 5, 0.88), rgba(5, 5, 5, 0.95)), 
                 url("../img/fondo-mundial.jpg") no-repeat center center fixed;
@@ -479,9 +466,9 @@
         margin-bottom: 15px !important;
     }
 
-    /* CORRECCIÓN EXCLUSIVA MÓVIL: Empuja la ventana hacia abajo de la cabecera */
+    /* --- CORRECCIÓN EXCLUSIVA MÓVIL: SOLO AFECTA AL MODAL DE INFO --- */
     @media (max-width: 1199px) {
-        #modal-info-lateral {
+        #modal-info-lateral.modal-overlay {
             top: 175px; 
             align-items: flex-start; 
         }
