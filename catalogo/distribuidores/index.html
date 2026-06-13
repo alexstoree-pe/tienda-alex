@@ -829,6 +829,7 @@ document.getElementById("back-to-top").onclick = function() {
          style="padding: 10px 40px; display: flex; align-items: center; gap: 10px; overflow-x: auto; white-space: nowrap; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; width: 100%;">
         
         <button class="btn-filter active" onclick="filtrarCategoria('TODOS', this)">TODOS</button>
+        <button class="btn-filter" onclick="filtrarCategoria('⚽EL MUNDIAL POR ⚽', this)">⚽MUNDIAL⚽</button>
         <button class="btn-filter" onclick="filtrarCategoria('ZONA PERFILES', this)">PERFILES</button>
         <button class="btn-filter" onclick="filtrarCategoria('ZONA CUENTAS COMPLETAS', this)">CUENTAS COMPLETAS</button>
         <button class="btn-filter" onclick="filtrarCategoria('DISEÑOS Y MAS', this)">DISEÑO</button>
@@ -1082,7 +1083,135 @@ document.getElementById("back-to-top").onclick = function() {
             </div>
         </div>
     </div>
+    <div class="category-title" data-aos="fade-right"><i class="fa-solid fa-house"></i>⚽EL MUNDIAL POR ⚽</div>
 
+        <div class="service-link disponible pocas oferta premium " onclick="toggleSeleccion(this)" data-aos="fade-up">
+        <div class="service-card">
+            <span class="badge-oferta">EL MUNDIAL POR 👇</span>
+            <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+            <img src="../img/dgo.webp" class="service-logo">
+            <div class="service-text">
+                <div class="status-badge"></div>
+                <h3 class="nombre-prod">DGO + Liga 1 Max Perfil</h3>
+                <span class="manual-desc">Activación TV • Incluye ESPN.• Los 104 partidos</span>
+            </div>
+            <div class="price-container">
+                <span class="premium-text">Premium</span>
+                <span class="price-tag precio-prod">S/ 18</span>
+                <span class="badge-renovacion">🔄 Renova: S/ 18.00</span>
+            </div>
+        </div>
+    </div>
+
+         <div class="service-link disponible oferta premium" onclick="toggleSeleccion(this)" data-aos="fade-up">
+        <div class="service-card">
+            <span class="badge-oferta">EL MUNDIAL POR 👇</span>
+            <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+            <img src="../img/paramount.webp" class="service-logo">
+            <div class="service-text">
+                <div class="status-badge"></div>
+                <h3 class="nombre-prod">PARAMOUNT PREMIUM PERFIL</h3>
+                <span class="manual-desc"> • 1 dispositivo • Plan Premium. • Los 104 partidos</span>
+            </div>
+            <div class="price-container">
+                <span class="premium-text">Premium</span>
+                <span class="price-tag precio-prod">S/ 10</span>
+                <span class="badge-renovacion">🔄 Renova: S/ 18.00</span>
+            </div>
+        </div>
+    </div>
+
+        <div class="service-link premium oferta" onclick="toggleSeleccion(this)" data-aos="fade-up">
+        <div class="service-card">
+            <span class="badge-oferta">EL MUNDIAL POR 👇</span>
+            <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+            <img src="../img/disneyp.webp" class="service-logo">
+            <div class="service-text">
+                <div class="status-badge"></div>
+                <h3 class="nombre-prod">Disney Premium Perfil</h3>
+                <span class="manual-desc">• Activacion a TV • 1 dispositivo• Incluye canales ESPN. • 30 partidos del mundial</span>
+            </div>
+            <div class="price-container">
+                <span class="premium-text">Premium</span>
+                <span class="price-tag precio-prod">S/ 10</span>
+                <span class="badge-renovacion">🔄 Renova: S/ 20.00</span>
+            </div>
+        </div>
+    </div>
+
+        <div class="service-link oferta" onclick="toggleSeleccion(this)" data-aos="fade-up">
+        <div class="service-card">
+            <span class="badge-oferta">EL MUNDIAL POR 👇</span>
+            <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+            <img src="../img/lamtv.webp" class="service-logo">
+            <div class="service-text">
+                <div class="status-badge"></div>
+                <h3 class="nombre-prod">IPTV STANDAR CUENTA COMPLETA</h3>
+                <span class="manual-desc">• 3 DISPOSITIVOS  • los 104 partidos del mundial</span>
+            </div>
+            <div class="price-container">
+                <span class="premium-text">Premium</span>
+                <span class="price-tag precio-prod">S/ 7</span>
+                <span class="badge-renovacion">🔄 Renova: S/ 20.00</span>
+            </div>
+        </div>
+    </div>
+
+        <div class="service-link oferta" onclick="toggleSeleccion(this)" data-aos="fade-up">
+        <div class="service-card">
+            <span class="badge-oferta">EL MUNDIAL POR 👇</span>
+            <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+            <img src="../img/weib.webp" class="service-logo">
+            <div class="service-text">
+                <div class="status-badge"></div>
+                <h3 class="nombre-prod">IPTV PREMIUM CUENTA COMPLETA</h3>
+                <span class="manual-desc">• 3 DISPOSITIVOS  • los 104 partidos del mundial</span>
+            </div>
+            <div class="price-container">
+                <span class="premium-text">Premium</span>
+                <span class="price-tag precio-prod">S/ 15</span>
+                <span class="badge-renovacion">🔄 Renova: S/ 20.00</span>
+            </div>
+        </div>
+    </div>
+
+        <div class="service-link  oferta" onclick="toggleSeleccion(this)" data-aos="fade-up">
+        <div class="service-card">
+            <span class="badge-oferta">EL MUNDIAL POR 👇</span>
+            <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+            <img src="../img/flujo.webp" class="service-logo">
+            <div class="service-text">
+                <div class="status-badge"></div>
+                <h3 class="nombre-prod">FLUJO TV PERFIL</h3>
+                <span class="manual-desc">• 1 DISPOSITIVO  • los 104 partidos del mundial</span>
+            </div>
+            <div class="price-container">
+                <span class="premium-text">Premium</span>
+                <span class="price-tag precio-prod">S/ 8</span>
+                <span class="badge-renovacion">🔄 Renova: S/ 20.00</span>
+            </div>
+        </div>
+    </div>
+
+        <div class="service-link   oferta" onclick="toggleSeleccion(this)" data-aos="fade-up">
+        <div class="service-card">
+            <span class="badge-oferta">EL MUNDIAL POR 👇</span>
+            <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+            <img src="../img/flujo.webp" class="service-logo">
+            <div class="service-text">
+                <div class="status-badge"></div>
+                <h3 class="nombre-prod">FLUJO TV CUENTA COMPLETA</h3>
+                <span class="manual-desc">• 3 DISPOSITIVOs  • los 104 partidos del mundial</span>
+            </div>
+            <div class="price-container">
+                <span class="premium-text">Premium</span>
+                <span class="price-tag precio-prod">S/ 13</span>
+                <span class="badge-renovacion">🔄 Renova: S/ 20.00</span>
+            </div>
+        </div>
+    </div>
+        
+        
     <div class="category-title" data-aos="fade-right"><i class="fa-solid fa-house"></i> ZONA CUENTAS COMPLETAS</div>
 
     <div class="service-link disponible agotado" onclick="toggleSeleccion(this)" data-aos="fade-up">
@@ -1121,6 +1250,7 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
+    
     <div class="service-link agotado renovacion oferta agotado" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">Mas Solicitado🔥</span>
