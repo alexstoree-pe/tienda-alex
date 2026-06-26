@@ -494,6 +494,54 @@
             margin-top: 15px; 
             max-height: calc(100vh - 210px); 
         }
+        /* --- ANIMACIÓN LOGOS VIVOS --- */
+.service-logo {
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease;
+}
+
+/* Cuando el usuario pasa el mouse por encima de la tarjeta */
+.service-item:hover .service-logo {
+    transform: scale(1.1) rotate(2deg); /* Se agranda y gira un toque */
+    box-shadow: 0 0 15px var(--primary); /* Crea un brillo del color de tu tienda */
+}
+
+/* Si es una tarjeta Premium, que brille en dorado */
+.service-item.premium:hover .service-logo {
+    box-shadow: 0 0 15px var(--promo);
+}
+        /* --- MEJORA BADGE CON REFLEJO DINÁMICO --- */
+.badge-oferta {
+    position: relative;
+    overflow: hidden; /* Vital para que el reflejo no se salga */
+}
+
+.badge-oferta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: skewX(-20deg);
+    animation: brilloPasajero 4s infinite ease-in-out;
+}
+
+@keyframes brilloPasajero {
+    0% { left: -150%; }
+    30% { left: 150%; } /* Pasa rápido los primeros segundos */
+    100% { left: 150%; } /* Se queda esperando en pausa hasta reiniciar */
+}
+        /* --- ANIMACIÓN LOGO PRINCIPAL --- */
+.brand-logo {
+    animation: flotarLogo 3s infinite ease-in-out;
+}
+
+@keyframes flotarLogo {
+    0% { transform: translateY(0px); filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.2)); }
+    50% { transform: translateY(-5px); filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.6)); }
+    100% { transform: translateY(0px); filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.2)); }
+}
     }
 </style>
 </head>
