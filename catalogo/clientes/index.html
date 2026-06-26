@@ -36,10 +36,11 @@
     html { display: none; background-color: var(--dark); scroll-behavior: smooth; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* --- FONDO ULTRA-PREMIUM CON ILUMINACIÓN DINÁMICA --- */
+    /* --- FONDO ULTRA-PREMIUM CON HERO SHADOW DEGRADADO --- */
     body { 
         font-family: 'Poppins', sans-serif; 
         background: radial-gradient(circle at 50% 0%, rgba(0, 212, 255, 0.07), transparent 45%),
+                    linear-gradient(to bottom, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.4) 30%, transparent 100%),
                     linear-gradient(rgba(5, 5, 5, 0.82), rgba(5, 5, 5, 0.92)), 
                     url("../img/fondo-mundial.jpg") no-repeat center center fixed;
         background-size: cover;
@@ -257,13 +258,17 @@
     }
     .btn-universal { display: flex; align-items: center; justify-content: center; padding: 10px 8px; border-radius: 50px; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; cursor: pointer; text-decoration: none; border: none; text-align: center; transition: 0.3s; }
     
-    /* --- MEJORA: VIDRIO INTELIGENTE EN TARJETAS --- */
+    /* --- MEJORA: VIDRIO INTELIGENTE EN TARJETAS CON EFECTO HÁPTICO TÁCTIL MÓVIL --- */
     .service-item { 
         cursor: pointer; 
         margin-bottom: 16px; 
         position: relative; 
-        transition: 0.3s; 
+        transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s; 
         animation: flotarCapa 6s infinite ease-in-out;
+    }
+    
+    .service-item:active {
+        transform: scale(0.96) !important; /* Feedback Táctil Elástico Inmediato */
     }
     
     .service-item:nth-child(2n) { animation-delay: -1.5s; }
@@ -290,7 +295,7 @@
     
     .service-item:hover .service-card { 
         box-shadow: 0 10px 30px rgba(0, 212, 255, 0.08);
-        transform: translateY(-4px) !important;
+        transform: translateY(-4px);
         background-image: linear-gradient(rgba(15, 15, 15, 0.6), rgba(15, 15, 15, 0.6)), linear-gradient(135deg, rgba(0,212,255,0.4), rgba(255,255,255,0.05) 50%, rgba(0,85,255,0.2));
     }
     .service-item:hover .service-logo {
@@ -315,8 +320,6 @@
         box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); 
         background-image: none !important;
     }
-
-    .service-item.selected { transform: none !important; }
 
     .premium .service-card { 
         background-image: linear-gradient(rgba(12, 10, 5, 0.5), rgba(5, 5, 5, 0.5)), linear-gradient(135deg, #d4af37, rgba(255,255,255,0.02) 60%, transparent);
@@ -757,14 +760,14 @@
     <div class="filter-wrapper">
         <div class="scroll-indicator" id="scrollPrev"><i class="fas fa-chevron-left"></i></div>
         <div class="filter-container" id="filterScroll">
-            <button class="btn-nav active" onclick="filtrarCategoria('TODOS', this)">TODOS</button>
-            <button class="btn-nav" onclick="filtrarCategoria('⚽EL MUNDIAL⚽', this)">⚽EL MUNDIAL⚽</button>
-            <button class="btn-nav" onclick="filtrarCategoria('📺 IPTV Y FLUJO TV', this)">IPTV Y FLUJO TV</button>
-            <button class="btn-nav" onclick="filtrarCategoria('🎬 STREAMING Y CINE', this)">PERFILES</button>
-            <button class="btn-nav" onclick="filtrarCategoria('TELEVISIÓN DIGITAL', this)">TV DIGITAL</button>
-            <button class="btn-nav" onclick="filtrarCategoria('📺 APPS PARA IPTV', this)">APPS PARA IPTV</button>
-            <button class="btn-nav" onclick="filtrarCategoria('DISEÑOS Y MAS', this)">DISEÑO</button>
-            <button class="btn-nav" onclick="filtrarCategoria('MÚSICA Y VIDEO SIN LÍMITES', this)">MÚSICA</button>
+            <button class="btn-nav active" onclick="filtrarCategoria('TODOS', this)"><i class="fas fa-th-list"></i> TODOS</button>
+            <button class="btn-nav" onclick="filtrarCategoria('⚽EL MUNDIAL⚽', this)"><i class="fas fa-trophy"></i> EL MUNDIAL</button>
+            <button class="btn-nav" onclick="filtrarCategoria('📺 IPTV Y FLUJO TV', this)"><i class="fas fa-tv"></i> IPTV Y FLUJO TV</button>
+            <button class="btn-nav" onclick="filtrarCategoria('🎬 STREAMING Y CINE', this)"><i class="fas fa-user-circle"></i> PERFILES</button>
+            <button class="btn-nav" onclick="filtrarCategoria('TELEVISIÓN DIGITAL', this)"><i class="fas fa-satellite-dish"></i> TV DIGITAL</button>
+            <button class="btn-nav" onclick="filtrarCategoria('📺 APPS PARA IPTV', this)"><i class="fas fa-cubes"></i> APPS PARA IPTV</button>
+            <button class="btn-nav" onclick="filtrarCategoria('DISEÑOS Y MAS', this)"><i class="fas fa-palette"></i> DISEÑO</button>
+            <button class="btn-nav" onclick="filtrarCategoria('MÚSICA Y VIDEO SIN LÍMITES', this)"><i class="fas fa-music"></i> MÚSICA</button>
         </div>
         <div class="scroll-indicator" id="scrollNext"><i class="fas fa-chevron-right"></i></div>
     </div>
@@ -784,11 +787,11 @@
         <a href="https://chat.whatsapp.com/Dhp57nuChw89kT6pb5kggS" target="_blank" class="btn-universal" style="background:linear-gradient(45deg, #25d366, #128c7e); color:#fff;">👥 COMUNIDAD</a>
     </div>
 
-    <div class="category-title" data-aos="fade-right">🎬 STREAMING Y CINE</div>
+    <div class="category-title" data-aos="fade-right"><i class="fas fa-film"></i> STREAMING Y CINE</div>
 
     <div class="service-item oferta premium" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
-            <div class="badge-oferta">🔥MÁS SOLICITADO</div>
+            <div class="badge-oferta">🔥 MÁS SOLICITADO</div>
             <div class="check-icon">✓</div>
             <img src="../img/netflix.webp" class="service-logo">
             <div class="service-text">
@@ -904,7 +907,7 @@
         </div>
     </div>
 
-    <div class="category-title" data-aos="fade-right">💻 DISEÑOS Y MAS</div>
+    <div class="category-title" data-aos="fade-right"><i class="fas fa-laptop-code"></i> DISEÑOS Y MAS</div>
 
     <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card"> 
@@ -954,7 +957,7 @@
         </div>
     </div>
      
-    <div class="category-title" data-aos="fade-right">📺 TELEVISIÓN DIGITAL</div>
+    <div class="category-title" data-aos="fade-right"><i class="fas fa-satellite-dish"></i> TELEVISIÓN DIGITAL</div>
 
     <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card"> 
@@ -968,7 +971,7 @@
         </div>
     </div>
         
-        <div class="category-title" data-aos="fade-right">⚽EL MUNDIAL⚽</div>
+        <div class="category-title" data-aos="fade-right"><i class="fas fa-trophy"></i> EL MUNDIAL</div>
 
             <div class="service-item premium oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
@@ -1065,7 +1068,7 @@
             <div class="price-container"><span class="price-tag precio-prod">S/ 10</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
-              <div class="category-title" data-aos="fade-right">📺 IPTV Y FLUJO TV</div>
+              <div class="category-title" data-aos="fade-right"><i class="fas fa-tv"></i> IPTV Y FLUJO TV</div>
 
         <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
@@ -1116,7 +1119,7 @@
     </div>
 
 
-           <div class="category-title" data-aos="fade-right">📺 APPS PARA IPTV</div>
+           <div class="category-title" data-aos="fade-right"><i class="fas fa-box"></i> APPS PARA IPTV</div>
 
     <div class="service-item premium" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
@@ -1166,7 +1169,7 @@
         </div>
     </div>    
         
-    <div class="category-title" data-aos="fade-right">🎵 MÚSICA Y VIDEO SIN LÍMITES</div>
+    <div class="category-title" data-aos="fade-right"><i class="fas fa-music"></i> MÚSICA Y VIDEO SIN LÍMITES</div>
 
     <div class="service-item premium" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
