@@ -168,7 +168,19 @@
     .category-title { margin: 30px 0 15px; padding: 10px 15px; font-size: 0.85rem; font-weight: 700; color: var(--primary); letter-spacing: 2px; background: rgba(255,255,255,0.03); border-radius: 12px; border-left: 4px solid var(--primary); text-transform: uppercase; display: flex; align-items: center; }
 
     /* --- MEJORA: VIDRIO INTELIGENTE EN TARJETAS --- */
-    .service-item { cursor: pointer; margin-bottom: 12px; position: relative; transition: 0.3s; }
+    /* Modificado: Se añade la animación global flotarCapa de forma infinita */
+    .service-item { 
+        cursor: pointer; 
+        margin-bottom: 12px; 
+        position: relative; 
+        transition: 0.3s; 
+        animation: flotarCapa 6s infinite ease-in-out;
+    }
+    
+    /* Variaciones de retraso para que las tarjetas no floten al mismo tiempo de manera rígida */
+    .service-item:nth-child(2n) { animation-delay: -1.5s; }
+    .service-item:nth-child(3n) { animation-delay: -3s; }
+    .service-item:nth-child(4n) { animation-delay: -4.5s; }
     
 .service-card { 
         background: rgba(255, 255, 255, 0.03); /* Un toque muy sutil de color blanco */
@@ -190,7 +202,7 @@
     .service-item:hover .service-card { 
         border-color: rgba(0, 212, 255, 0.5); 
         box-shadow: 0 0 25px rgba(0, 212, 255, 0.15); 
-        transform: translateY(-3px);
+        transform: translateY(-5px) !important;
     }
     .service-item:hover .service-logo {
         transform: scale(1.1) rotate(2deg);
@@ -360,7 +372,7 @@
     .hide-stars { opacity: 0 !important; }
     #input-pass { width: 220px; background: transparent !important; border: none !important; border-bottom: 2px solid #222 !important; color: #fff; font-size: 2.2rem; text-align: center; letter-spacing: 12px; outline: none; z-index: 2; position: relative; padding: 10px 0; }
     .btn-desbloquear { background: #fff !important; color: #000 !important; font-weight: 800; width: 100%; padding: 18px; border-radius: 25px; font-size: 1rem; border: none; cursor: pointer; margin-bottom: 10px; transition: 0.3s; text-transform: uppercase; }
-    .link-regresar { display: block; color: #333; font-size: 0.75rem; text-decoration: none; cursor: pointer; }
+    .input-pass { display: block; color: #333; font-size: 0.75rem; text-decoration: none; cursor: pointer; }
 
     @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
     .error-shake { animation: shake 0.3s ease-in-out; border-bottom-color: var(--danger) !important; }
@@ -386,6 +398,7 @@
     }
 
     /* --- COMPONENTES PARA LOS COSTADOS VACÍOS --- */
+    /* Modificado: Añadido flotarCapa dinámico a los banners laterales */
     .sidebar-lateral {
         position: fixed;
         top: 320px; /* Se alinea debajo de tu cabecera */
@@ -399,9 +412,11 @@
     /* Posicionamiento en cada extremo */
     .sidebar-lateral.izquierdo {
         left: 4%;
+        animation: flotarCapa 7s infinite ease-in-out -1s;
     }
     .sidebar-lateral.derecho {
         right: 4%;
+        animation: flotarCapa 8s infinite ease-in-out -2.5s;
     }
 
     /* Estilo de tarjeta de cristal idéntico a tus componentes */
@@ -466,6 +481,7 @@
         -webkit-backdrop-filter: blur(10px);
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
         transition: 0.3s ease;
+        animation: flotarCapa 4s infinite ease-in-out;
     }
     
     /* Si el carrito flotante de WhatsApp aparece, movemos el botón un poco arriba para que no estorbe al texto */
@@ -532,6 +548,13 @@
         0% { transform: translateY(0px); filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.2)); }
         50% { transform: translateY(-5px); filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.6)); }
         100% { transform: translateY(0px); filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.2)); }
+    }
+
+    /* Nueva Animación: Oscilación sutil que da el efecto antigravedad */
+    @keyframes flotarCapa {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-4px); }
+        100% { transform: translateY(0px); }
     }
 
     /* --- CORRECCIÓN EXCLUSIVA MÓVIL: SOLO AFECTA AL MODAL DE INFO --- */
