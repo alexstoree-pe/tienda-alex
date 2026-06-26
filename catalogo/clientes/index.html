@@ -499,28 +499,6 @@
     .btn-modal-back { background: #16161a !important; color: #a0a0b0 !important; width: 100%; padding: 15px; border-radius: 50px; margin-top: 12px; font-size: 0.8rem; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.04) !important; cursor: pointer; opacity: 0.8; transition: 0.3s; }
     .btn-modal-back:hover { opacity: 1; background: #202025 !important; }
 
-    /* --- SEGURIDAD --- */
-    .input-wrapper { position: relative; width: 100%; display: flex; justify-content: center; margin-bottom: 30px; }
-    .stars-bg { position: absolute; color: #223; font-size: 2.2rem; letter-spacing: 12px; pointer-events: none; z-index: 1; transition: 0.2s; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-    .hide-stars { opacity: 0 !important; }
-    #input-pass { width: 220px; background: transparent !important; border: none !important; border-bottom: 2px solid #223 !important; color: #fff; font-size: 2.2rem; text-align: center; letter-spacing: 12px; outline: none; z-index: 2; position: relative; padding: 10px 0; transition: border-color 0.3s; }
-    #input-pass:focus { border-bottom-color: var(--primary) !important; }
-    .btn-desbloquear { background: #fff !important; color: #000 !important; font-weight: 800; width: 100%; padding: 16px; border-radius: 25px; font-size: 0.95rem; border: none; cursor: pointer; margin-bottom: 10px; transition: 0.3s; text-transform: uppercase; }
-    .btn-desbloquear:hover { background: var(--primary) !important; transform: translateY(-2px); }
-    .input-pass { display: block; color: #445; font-size: 0.75rem; text-decoration: none; cursor: pointer; }
-
-    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
-    .error-shake { animation: shake 0.3s ease-in-out; border-bottom-color: var(--danger) !important; }
-
-    .hidden { display: none !important; }
-    @keyframes popCheck { 0% { transform: scale(0); } 100% { transform: scale(1); } }
-    
-    /* Ajustes modo búsqueda */
-    body.searching .container { padding-top: 10px !important; }
-    body.searching .grid-botones { display: none; }
-    body.searching .category-title { margin-top: 5px !important; }
-    body.searching header { padding-bottom: 0; }
-
     /* --- COMPONENTES PARA LOS COSTADOS VACÍOS --- */
     .sidebar-lateral {
         position: fixed;
@@ -587,7 +565,7 @@
         }
     }
 
-    /* --- BOTÓN FLOTANTE DE INFO (SOLO MÓVIL) --- */
+    /* --- BOTÓN FLOTANTE DE INFO --- */
     #btn-info-movil {
         position: fixed;
         bottom: 25px;
@@ -658,7 +636,7 @@
         margin-bottom: 15px !important;
     }
 
-    /* --- DECLARACIÓN DE KEYFRAMES PARA LAS ANIMACIONES --- */
+    /* --- KEYFRAMES --- */
     @keyframes brilloPasajero {
         0% { left: -150%; }
         30% { left: 150%; }
@@ -1045,9 +1023,9 @@
         </div>
     </div>
         
-        <div class="category-title" data-aos="fade-right"><i class="fas fa-trophy"></i> EL MUNDIAL</div>
+    <div class="category-title" data-aos="fade-right"><i class="fas fa-trophy"></i> EL MUNDIAL</div>
 
-            <div class="service-item premium oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item premium oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">EL MUNDIAL POR 👇</div> <div class="check-icon">✓</div>
             <img src="../img/paramount.webp" class="service-logo">
@@ -1063,7 +1041,7 @@
         </div>
     </div>
         
-        <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">EL MUNDIAL POR 👇</div> <div class="check-icon">✓</div>
             <img src="../img/dgo.webp" class="service-logo">
@@ -1111,7 +1089,7 @@
         </div>
     </div>
 
-        <div class="service-item premium oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item premium oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">EL MUNDIAL POR 👇</div> <div class="check-icon">✓</div>
             <img src="../img/iptvp.webp" class="service-logo">
@@ -1127,7 +1105,7 @@
         </div>
     </div>
 
-        <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">EL MUNDIAL POR 👇</div> <div class="check-icon">✓</div>
             <img src="../img/flujo.webp" class="service-logo">
@@ -1143,19 +1121,19 @@
         </div>
     </div>
 
-        <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">EL MUNDIAL POR 👇</div> <div class="check-icon">✓</div>
             <img src="../img/flujo.webp" class="service-logo">
             <div class="service-text">
-                <h3 class="nombre-prod">Magis TV-Flujo TV</h3>
+                <h3 class="nombre-prod">Magis TV-Flujo TV CUENTA COMPLETA</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-user"></i>Cuenta Completa</span>
+                    <span class="tag-prop"><i class="fas fa-box-open"></i> Cuenta Completa</span>
                     <span class="tag-prop"><i class="fas fa-list-ol"></i> +1200 Vivos</span>
                     <span class="tag-prop"><i class="fas fa-star"></i> 104 Partidos</span>
                 </div>
             </div>
-            <div class="price-container"><span class="price-tag precio-prod">S/ 12</span><div class="sin-stock-badge">SIN STOCK</div></div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 25</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
 
@@ -1166,15 +1144,16 @@
             <div class="service-text">
                 <h3 class="nombre-prod">IPTV Smarters basico(3 dis)</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-user"></i>Cuenta Completa</span>
-                    <span class="tag-prop"><i class="fas fa-list-ol"></i> +3500 canales</span>
+                    <span class="tag-prop"><i class="fas fa-box-open"></i> Cuenta Completa</span>
+                    <span class="tag-prop"><i class="fas fa-list-ol"></i> +3500 Canales</span>
                     <span class="tag-prop"><i class="fas fa-star"></i> 104 Partidos</span>
                 </div>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 12</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
     </div>
-             <div class="category-title" data-aos="fade-right"><i class="fas fa-tv"></i> IPTV Y FLUJO TV</div>
+
+    <div class="category-title" data-aos="fade-right"><i class="fas fa-tv"></i> IPTV Y FLUJO TV</div>
 
     <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
@@ -1678,33 +1657,6 @@
             }
             titulo.style.display = has ? 'block' : 'none';
         });
-    }
-
-    window.onload = () => { document.documentElement.style.display = "block"; const input = document.getElementById('input-pass'); if(input) input.value = ""; };
-
-    window.onscroll = function() {
-        let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        let scrolled = (winScroll / height) * 100;
-        document.getElementById("progress-bar").style.width = scrolled + "%";
-
-        const btnSubir = document.getElementById("back-to-top");
-        if (winScroll > 300) { btnSubir.classList.add("show"); } 
-        else { btnSubir.classList.remove("show"); }
-    };
-
-    document.getElementById("back-to-top").onclick = function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    function abrirModalInfo() {
-        document.getElementById('modal-info-lateral').style.display = 'flex';
-    }
-
-    function cerrarModalInfo(event) {
-        if (event.target.id === 'modal-info-lateral') {
-            document.getElementById('modal-info-lateral').style.display = 'none';
-        }
     }
 </script>
 </body>
