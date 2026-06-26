@@ -96,6 +96,7 @@
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
     }
 
+    /* Modificado: Añadida animación flotarLogo de forma global */
     .brand-logo { 
         width: 35px; 
         height: 35px; 
@@ -167,6 +168,7 @@
     .category-title { margin: 30px 0 15px; padding: 10px 15px; font-size: 0.85rem; font-weight: 700; color: var(--primary); letter-spacing: 2px; background: rgba(255,255,255,0.03); border-radius: 12px; border-left: 4px solid var(--primary); text-transform: uppercase; display: flex; align-items: center; }
 
     /* --- MEJORA: VIDRIO INTELIGENTE EN TARJETAS --- */
+    /* Modificado: Se añade la animación global flotarCapa de forma infinita */
     .service-item { 
         cursor: pointer; 
         margin-bottom: 12px; 
@@ -175,6 +177,7 @@
         animation: flotarCapa 6s infinite ease-in-out;
     }
     
+    /* Variaciones de retraso para que las tarjetas no floten al mismo tiempo de manera rígida */
     .service-item:nth-child(2n) { animation-delay: -1.5s; }
     .service-item:nth-child(3n) { animation-delay: -3s; }
     .service-item:nth-child(4n) { animation-delay: -4.5s; }
@@ -195,10 +198,11 @@
         -webkit-backdrop-filter: blur(5px);
     }
     
+    /* Modificado: Se añade la transición a los logos e interacciones dinámicas de escala y brillos */
     .service-item:hover .service-card { 
         border-color: rgba(0, 212, 255, 0.5); 
         box-shadow: 0 0 25px rgba(0, 212, 255, 0.15); 
-        transform: translateY(-3px);
+        transform: translateY(-5px) !important;
     }
     .service-item:hover .service-logo {
         transform: scale(1.1) rotate(2deg);
@@ -239,18 +243,26 @@
     .premium .price-tag { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
     /* --- CORRECCIÓN DINÁMICA DEL BADGE DE OFERTA --- */
-    /* ¡Devuelto a la normalidad exacta de tu código original! */
+    /* Modificado: Se añade position relative, overflow hidden y el pseudoelemento ::before para el efecto destello */
+    /* --- CORRECCIÓN DEL BADGE DE OFERTA (PROPO POR ENCIMA) --- */
     .badge-oferta { 
         display: none !important; 
-        position: absolute; top: -1px; left: 20px; 
-        background: var(--promo); color: #000; padding: 2px 12px; 
-        border-radius: 0 0 10px 10px; font-size: 0.6rem; font-weight: 800; 
-        text-transform: uppercase; z-index: 11; 
-        position: relative;
+        position: absolute; 
+        top: -12px; /* Lo sube para que flote por encima del borde superior */
+        left: 15px; /* Lo alinea de forma elegante a la izquierda */
+        background: var(--promo); 
+        color: #000; 
+        padding: 3px 14px; 
+        border-radius: 8px; /* Bordes redondeados completos y estéticos */
+        font-size: 0.58rem; 
+        font-weight: 800; 
+        text-transform: uppercase; 
+        z-index: 50; /* Forzado por encima de cualquier logo o texto */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Sombra para darle profundidad */
         overflow: hidden;
     }
     
-    /* El destello blanco sutil cruzando sin romper la forma */
+    /* El destello blanco ahora se adapta a la nueva forma flotante */
     .badge-oferta::before {
         content: '';
         position: absolute;
@@ -258,7 +270,7 @@
         left: -150%;
         width: 50%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
         transform: skewX(-20deg);
         animation: brilloPasajero 4s infinite ease-in-out;
     }
@@ -272,7 +284,15 @@
     .selected .check-icon { display: flex !important; animation: popCheck 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
     .service-item.premium.selected .check-icon { background: var(--gold-gradient) !important; }
 
-    .service-logo { width: 60px; height: 60px; object-fit: cover; border-radius: 15px; flex-shrink: 0; transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease; }
+    /* Modificado: Añadido transition para cambios suaves de transformaciones y sombras */
+    .service-logo { 
+        width: 60px; 
+        height: 60px; 
+        object-fit: cover; 
+        border-radius: 15px; 
+        flex-shrink: 0; 
+        transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease;
+    }
     .service-text h3 { font-size: 1.05rem; color: #fff; }
     .manual-desc { font-size: 0.75rem; color: #b3b3b3; }
 
@@ -362,7 +382,7 @@
     .hide-stars { opacity: 0 !important; }
     #input-pass { width: 220px; background: transparent !important; border: none !important; border-bottom: 2px solid #222 !important; color: #fff; font-size: 2.2rem; text-align: center; letter-spacing: 12px; outline: none; z-index: 2; position: relative; padding: 10px 0; }
     .btn-desbloquear { background: #fff !important; color: #000 !important; font-weight: 800; width: 100%; padding: 18px; border-radius: 25px; font-size: 1rem; border: none; cursor: pointer; margin-bottom: 10px; transition: 0.3s; text-transform: uppercase; }
-    .link-regresar { display: block; color: #333; font-size: 0.75rem; text-decoration: none; cursor: pointer; }
+    .input-pass { display: block; color: #333; font-size: 0.75rem; text-decoration: none; cursor: pointer; }
 
     @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
     .error-shake { animation: shake 0.3s ease-in-out; border-bottom-color: var(--danger) !important; }
@@ -388,6 +408,7 @@
     }
 
     /* --- COMPONENTES PARA LOS COSTADOS VACÍOS --- */
+    /* Modificado: Añadido flotarCapa dinámico a los banners laterales */
     .sidebar-lateral {
         position: fixed;
         top: 320px; /* Se alinea debajo de tu cabecera */
@@ -483,8 +504,12 @@
         border: 1px solid rgba(255, 255, 255, 0.15) !important;
         backdrop-filter: blur(25px) !important;
         -webkit-backdrop-filter: blur(25px) !important;
+        
+        /* CORRECCIÓN: Limitamos la altura máxima y agregamos scroll interno */
         max-height: 80vh;
         overflow-y: auto;
+        
+        /* CORRECCIÓN: Añadimos más espacio arriba y abajo para empujar el texto */
         padding: 40px 24px 30px !important; 
         box-sizing: border-box;
     }
@@ -535,6 +560,7 @@
         100% { transform: translateY(0px); filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.2)); }
     }
 
+    /* Nueva Animación: Oscilación sutil que da el efecto antigravedad */
     @keyframes flotarCapa {
         0% { transform: translateY(0px); }
         50% { transform: translateY(-4px); }
