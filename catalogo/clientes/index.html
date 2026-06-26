@@ -64,18 +64,17 @@
     #progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 3000; background: transparent; }
     #progress-bar { height: 100%; width: 0%; background: var(--primary); box-shadow: 0 0 10px var(--primary); }
 
-    /* --- HEADER CRISTAL CINEMÁTICO (REDISEÑO TOP PREMIUM) --- */
+    /* --- HEADER INTEGRADO NATURALMENTE A LA PÁGINA --- */
     header {
-        background: linear-gradient(to bottom, rgba(10, 10, 12, 0.65), rgba(5, 5, 5, 0.25));
+        background: linear-gradient(to bottom, rgba(10, 10, 12, 0.75), rgba(5, 5, 5, 0.4));
         backdrop-filter: blur(25px) saturate(180%);
         -webkit-backdrop-filter: blur(25px) saturate(180%);
-        padding: 24px 15px 16px; 
+        padding: 30px 15px 10px; /* Reducido el relleno inferior para acercarlo a los botones */
         text-align: center;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        position: sticky;
-        top: 0;
-        z-index: 3000 !important;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+        position: relative; /* <-- Cambiado de sticky a relative para que se desplace con el scroll */
+        z-index: 2100;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
     .brand-logo { 
