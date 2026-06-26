@@ -4,18 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo Premium | Alex Store</title>
+
     <link rel="icon" type="image/png" href="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.webp">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root { --primary: #00d4ff; --secondary: #0055ff; --dark: #050505; --glass: rgba(255, 255, 255, 0.02); --whatsapp: #25d366; --promo: #f4d03f; }
-        html { display: none; background-color: var(--dark); scroll-behavior: smooth; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        .video-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
-        .video-background video { min-width: 100%; min-height: 100%; object-fit: cover; }
-        body { font-family: 'Poppins', sans-serif; color: white; }
-        /* (Aquí pegarías el resto de tu CSS original que ya tienes) */
+    <link rel="apple-touch-icon" href="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.webp">
 
     <meta property="og:title" content="Alex Store | Catálogo Premium">
     <meta property="og:description" content="Tus cuentas streaming favoritas al mejor precio.">
@@ -740,12 +731,7 @@
 </style>
 </head>
 <body>
-<div class="video-background">
-    <video autoplay loop muted playsinline poster="../img/fondo-mundial.jpg">
-        <source src="../img/tu-video-nombre.mp4" type="video/mp4">
-    </video>
-    <div class="video-overlay"></div>
-</div>
+
 <button id="btn-info-movil" onclick="abrirModalInfo()"><i class="fas fa-info-circle"></i></button>
 
 <div id="modal-info-lateral" class="modal-overlay" onclick="cerrarModalInfo(event)">
@@ -1755,20 +1741,6 @@
             titulo.style.display = has ? 'block' : 'none';
         });
     }
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.documentElement.style.display = "block";
-        AOS.init();
-        const video = document.querySelector('.video-background video');
-        if(video) {
-            video.play().catch(e => console.log("Video necesita interacción del usuario para autoplay"));
-        }
-    });
-    // (Aquí pegas tus funciones: filtrarProductos, toggleCarrito, etc.)
-</script>
-</body>
-</html>
 </script>
 </body>
 </html>
