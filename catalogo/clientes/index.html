@@ -64,17 +64,17 @@
     #progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 3000; background: transparent; }
     #progress-bar { height: 100%; width: 0%; background: var(--primary); box-shadow: 0 0 10px var(--primary); }
 
-    /* --- HEADER INTEGRADO NATURALMENTE A LA PÁGINA --- */
+    /* --- HEADER TOTALMENTE TRANSPARENTE E INTEGRADO --- */
     header {
-        background: linear-gradient(to bottom, rgba(10, 10, 12, 0.75), rgba(5, 5, 5, 0.4));
-        backdrop-filter: blur(25px) saturate(180%);
-        -webkit-backdrop-filter: blur(25px) saturate(180%);
-        padding: 30px 15px 10px; /* Reducido el relleno inferior para acercarlo a los botones */
+        background: transparent; /* <-- Quita el fondo oscuro / degradado */
+        backdrop-filter: none; /* <-- Quita el desenfoque que opaca el fondo */
+        -webkit-backdrop-filter: none;
+        padding: 30px 15px 10px; 
         text-align: center;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        position: relative; /* <-- Cambiado de sticky a relative para que se desplace con el scroll */
+        border-bottom: none; /* <-- Quita la línea divisoria inferior para una transición limpia */
+        position: relative; 
         z-index: 2100;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        box-shadow: none; /* <-- Quita la sombra para eliminar cualquier rastro oscuro artificial */
     }
 
     .brand-logo { 
