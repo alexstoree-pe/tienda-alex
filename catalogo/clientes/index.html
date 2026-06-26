@@ -309,8 +309,8 @@
     @keyframes blinkNeon { 0% { box-shadow: 0 0 5px #ff0000; opacity: 1; } 50% { box-shadow: 0 0 25px #ff0000, 0 0 40px #ff0000; opacity: 0.8; transform: scale(1.05); } 100% { box-shadow: 0 0 5px #ff0000; opacity: 1; } }
 
     /* --- VISTA CUADRÍCULA --- */
-    .container.grid-mode { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 95% !important; width: 100%; padding: 15px; }
-    @media (min-width: 900px) { .container.grid-mode { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); } }
+    .container.grid-mode { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 90% !important; width: 100%; padding: 15px; }
+    @media (min-width: 900px) { .container.grid-mode { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); } }
     .grid-mode .category-title { grid-column: 1 / -1; width: 100%; margin-top: 30px; display: flex; }
     .grid-mode .service-card { flex-direction: column; text-align: center; min-height: 290px; justify-content: space-between; padding-top: 35px; }
     .grid-mode .service-logo { margin-right: 0; margin-bottom: 10px; }
@@ -431,7 +431,7 @@
 
     /* Estilo de tarjeta de cristal idéntico a tus componentes */
     .sidebar-card {
-        background: rgba(10, 10, 10, 0.7);
+        background: rgba(10, 10, 10, 0.85); /* Subido de 0.7 a 0.85 para evitar transparencias molestas */
         border: 1px solid rgba(255, 255, 255, 0.15);
         border-radius: 20px;
         padding: 20px;
@@ -467,6 +467,14 @@
     @media (min-width: 1200px) {
         .sidebar-lateral {
             display: flex;
+        }
+    }
+
+    /* Ocultar dinámicamente si la cuadrícula está activa en pantallas menores a 1650px */
+    @media (max-width: 1650px) {
+        .grid-mode ~ .sidebar-lateral,
+        body:has(.grid-mode) .sidebar-lateral {
+            display: none !important;
         }
     }
 
