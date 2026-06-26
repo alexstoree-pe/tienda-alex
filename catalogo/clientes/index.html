@@ -1203,7 +1203,7 @@
         </div>
     </div>
 
-    <div class="service-item  premium" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item premium" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">MÁS SOLICITADO 🔥</div>
             <div class="check-icon">✓</div>
@@ -1474,13 +1474,39 @@
     function filtrarCategoria(cat, btn) {
         document.querySelectorAll('.btn-nav').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        const term = cat.toUpperCase();
+        
+        // Limpiamos los emojis/iconos del botón pulsado para extraer el texto puro de comparación
+        const term = cat.replace(/[^\w\s📺🎬🎵💻⚽]/gi, '').trim().toUpperCase();
+        
         document.querySelectorAll('.service-item').forEach(item => {
             let catItem = "";
             let ant = item.previousElementSibling;
-            while(ant) { if(ant.classList.contains('category-title')) { catItem = ant.innerText.toUpperCase(); break; } ant = ant.previousElementSibling; }
-            if (term === 'TODOS') item.style.display = 'block';
-            else item.style.display = (item.innerText.toUpperCase().includes(term) || catItem.includes(term)) ? 'block' : 'none';
+            while(ant) { 
+                if(ant.classList.contains('category-title')) { 
+                    catItem = ant.innerText.toUpperCase(); 
+                    break; 
+                } 
+                ant = ant.previousElementSibling; 
+            }
+            
+            if (cat === 'TODOS') {
+                item.style.display = 'block';
+            } else {
+                // Buscamos coincidencia entre el texto del botón y el título de la categoría
+                const matchMundial = (cat.includes('MUNDIAL') && catItem.includes('MUNDIAL'));
+                const matchIptv = (cat.includes('IPTV Y FLUJO') && catItem.includes('IPTV Y FLUJO'));
+                const matchPerfiles = (cat.includes('STREAMING') && catItem.includes('STREAMING'));
+                const matchTv = (cat.includes('TELEVISIÓN') && catItem.includes('TELEVISIÓN'));
+                const matchApps = (cat.includes('APPS') && catItem.includes('APPS'));
+                const matchDiseno = (cat.includes('DISEÑOS') && catItem.includes('DISEÑOS'));
+                const matchMusica = (cat.includes('MÚSICA') && catItem.includes('MÚSICA'));
+
+                if (matchMundial || matchIptv || matchPerfiles || matchTv || matchApps || matchDiseno || matchMusica) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            }
         });
         actualizarTitulos();
         AOS.refreshHard();
