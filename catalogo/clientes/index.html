@@ -754,7 +754,12 @@
 </style>
 </head>
 <body>
-
+<div class="video-background">
+    <video autoplay loop muted playsinline poster="../img/fondo-mundial.jpg">
+        <source src="../img/tu-video-nombre.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+</div>
 <button id="btn-info-movil" onclick="abrirModalInfo()"><i class="fas fa-info-circle"></i></button>
 
 <div id="modal-info-lateral" class="modal-overlay" onclick="cerrarModalInfo(event)">
@@ -1764,12 +1769,7 @@
             titulo.style.display = has ? 'block' : 'none';
         });
     }
-    <div class="video-background">
-    <video autoplay loop muted playsinline poster="../img/fondo-mundial.jpg">
-        <source src="../img/fondovideo.mp4" type="video/mp4">
-    </video>
-    <div class="video-overlay"></div>
-</div>
+
 </script>
 </body>
 </html>
