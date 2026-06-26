@@ -244,15 +244,25 @@
 
     /* --- CORRECCIÓN DINÁMICA DEL BADGE DE OFERTA --- */
     /* Modificado: Se añade position relative, overflow hidden y el pseudoelemento ::before para el efecto destello */
+    /* --- CORRECCIÓN DEL BADGE DE OFERTA (PROPO POR ENCIMA) --- */
     .badge-oferta { 
         display: none !important; 
-        position: absolute; top: -1px; left: 20px; 
-        background: var(--promo); color: #000; padding: 2px 12px; 
-        border-radius: 0 0 10px 10px; font-size: 0.6rem; font-weight: 800; 
-        text-transform: uppercase; z-index: 11; 
-        position: relative;
+        position: absolute; 
+        top: -12px; /* Lo sube para que flote por encima del borde superior */
+        left: 15px; /* Lo alinea de forma elegante a la izquierda */
+        background: var(--promo); 
+        color: #000; 
+        padding: 3px 14px; 
+        border-radius: 8px; /* Bordes redondeados completos y estéticos */
+        font-size: 0.58rem; 
+        font-weight: 800; 
+        text-transform: uppercase; 
+        z-index: 50; /* Forzado por encima de cualquier logo o texto */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Sombra para darle profundidad */
         overflow: hidden;
     }
+    
+    /* El destello blanco ahora se adapta a la nueva forma flotante */
     .badge-oferta::before {
         content: '';
         position: absolute;
@@ -260,7 +270,7 @@
         left: -150%;
         width: 50%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
         transform: skewX(-20deg);
         animation: brilloPasajero 4s infinite ease-in-out;
     }
