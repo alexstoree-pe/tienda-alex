@@ -586,6 +586,10 @@
             max-height: calc(100vh - 210px); 
         }
     }
+    /* --- CORRECCIÓN ABSOLUTA PARA OCULTAR BARRAS EN MODO CUADRÍCULA --- */
+    body.grid-activa .sidebar-lateral {
+        display: none !important;
+    }
 </style>
 </head>
 <body>
@@ -1372,7 +1376,15 @@
         const cont = document.querySelector('.container');
         document.querySelectorAll('.btn-view').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        cont.className = modo === 'grid' ? 'container grid-mode' : 'container';
+        
+        if (modo === 'grid') {
+            cont.className = 'container grid-mode';
+            document.body.classList.add('grid-activa'); // <-- ESTO BORRARÁ LAS BARRAS
+        } else {
+            cont.className = 'container';
+            document.body.classList.remove('grid-activa');
+        }
+        
         setTimeout(() => { AOS.refreshHard(); }, 100);
     }
 
