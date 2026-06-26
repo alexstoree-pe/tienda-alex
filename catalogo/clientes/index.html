@@ -40,7 +40,7 @@
     body { 
         font-family: 'Poppins', sans-serif; 
         background: radial-gradient(circle at 50% 30%, transparent 10%, rgba(5, 5, 5, 0.65) 60%, rgba(5, 5, 5, 0.95) 100%),
-                    linear-gradient(to bottom, rgba(5, 5, 5, 0.85) 0%, rgba(5, 5, 5, 0.3) 20%, rgba(5, 5, 5, 0.75) 50%, rgba(5, 5, 5, 0.95) 100%), 
+                    linear-gradient(to bottom, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.3) 20%, rgba(5, 5, 5, 0.75) 50%, rgba(5, 5, 5, 0.95) 100%), 
                     linear-gradient(rgba(5, 5, 5, 0.82), rgba(5, 5, 5, 0.92)), 
                     url("../img/fondo-mundial.jpg") no-repeat center center fixed;
         background-size: cover;
@@ -130,10 +130,11 @@
 
     /* --- FILTROS Y BUSCADOR MEJORADO --- */
     .search-container { max-width: 600px; margin: 0 auto; position: relative; }
+    .search-container i.fa-search { position: absolute; left: 20px; top: 18px; color: rgba(255,255,255,0.4); z-index: 2300; pointer-events: none; font-size: 0.9rem; }
     
     #search-input { 
         width: 100%; 
-        padding: 14px 20px; 
+        padding: 14px 20px 14px 45px; 
         border-radius: 14px; 
         border: 1px solid rgba(255, 255, 255, 0.12); 
         background: rgba(5, 5, 5, 0.75); 
@@ -152,6 +153,7 @@
         background: rgba(0, 0, 0, 0.85);
         box-shadow: 0 0 20px rgba(0, 212, 255, 0.15), inset 0 2px 4px rgba(0,0,0,0.4);
     }
+    #search-input:focus + i.fa-search { color: var(--primary); }
     #search-input::placeholder {
         color: rgba(255, 255, 255, 0.5) !important;
         text-shadow: 0 1px 2px rgba(0,0,0,0.5);
@@ -192,14 +194,14 @@
         text-shadow: 0 1px 3px rgba(0,0,0,0.5);
     }
     .btn-nav:hover { color: #fff; border-color: rgba(255,255,255,0.25); background: rgba(0, 0, 0, 0.7); }
-    .btn-nav.active { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #000; border-color: transparent; font-weight: 700; box-shadow: 0 4px 15px rgba(0, 212, 255, 0.35); text-shadow: none; }
+    .btn-nav.active { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #000; border-color: transparent; font-weight: 700; box-shadow: 0 4px 20px rgba(0, 212, 255, 0.45); text-shadow: none; }
 
     .view-controls { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 14px; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 14px; }
     .btn-view { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); color: #555566; padding: 8px 16px; border-radius: 10px; cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
     .btn-view:hover { color: #aaa; }
     .btn-view.active { color: var(--primary); border-color: rgba(0, 212, 255, 0.3); background: rgba(0, 212, 255, 0.08); box-shadow: 0 0 10px rgba(0, 212, 255, 0.1); }
     
-    /* --- RECOMENDACIÓN MAESTRA: BOTÓN SUBIR INTELIGENTE --- */
+    /* --- BOTÓN SUBIR INTELIGENTE --- */
     #back-to-top {
         position: fixed;
         bottom: 100px;
@@ -228,7 +230,7 @@
         transform: translateY(0);
     }
    
-    /* --- AJUSTES DE COMPRESIÓN DE ESPACIOS (SIN BRECHAS) --- */
+    /* --- AJUSTES DE COMPRESIÓN DE ESPACIOS --- */
     .container { 
         padding: 0 15px 10px; 
         max-width: 650px; 
@@ -258,7 +260,7 @@
     }
     .btn-universal { display: flex; align-items: center; justify-content: center; padding: 10px 8px; border-radius: 50px; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; cursor: pointer; text-decoration: none; border: none; text-align: center; transition: 0.3s; }
     
-    /* --- MEJORA: VIDRIO INTELIGENTE EN TARJETAS CON EFECTO HÁPTICO TÁCTIL MÓVIL --- */
+    /* --- VIDRIO INTELIGENTE EN TARJETAS CON EFECTO HÁPTICO TÁCTIL MÓVIL --- */
     .service-item { 
         cursor: pointer; 
         margin-bottom: 16px; 
@@ -306,19 +308,19 @@
         box-shadow: 0 0 20px rgba(244, 208, 63, 0.3);
     }
 
-    /* --- PULSO DE LUZ PERIMETRAL AL SELECCIONAR (SUGERENCIA PREMIUM) --- */
+    /* --- PULSO DE LUZ PERIMETRAL AL SELECCIONAR --- */
     .service-item.selected .service-card { 
         transform: scale(0.97) !important; 
-        background: rgba(0, 212, 255, 0.1) !important; 
+        background: rgba(0, 212, 255, 0.12) !important; 
         border-color: var(--primary) !important; 
-        box-shadow: 0 0 25px rgba(0, 212, 255, 0.4); 
+        box-shadow: 0 0 25px rgba(0, 212, 255, 0.45); 
         background-image: none !important;
     }
     
     .service-item.premium.selected .service-card { 
-        background: rgba(212, 175, 55, 0.1) !important; 
+        background: rgba(212, 175, 55, 0.12) !important; 
         border-color: var(--promo) !important; 
-        box-shadow: 0 0 30px rgba(212, 175, 55, 0.4); 
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.45); 
         background-image: none !important;
     }
 
@@ -337,7 +339,7 @@
     .price-tag { color: var(--primary); font-weight: 700; font-size: 1.25rem; white-space: nowrap; transition: 0.3s; text-shadow: 0 2px 8px rgba(0,212,255,0.2); }
     .premium .price-tag { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: none; font-weight: 800; }
 
-    /* --- CORRECCIÓN DINÁMICA DEL BADGE DE OFERTA --- */
+    /* --- BADGE DE OFERTA EN CASCADA --- */
     .badge-oferta { 
         display: none !important; 
         position: absolute; 
@@ -388,7 +390,7 @@
     .service-text { padding-right: 20px; flex-grow: 1; }
     .service-text h3 { font-size: 1.05rem; color: #fff; font-weight: 600; margin-bottom: 4px; }
     
-    /* --- CAPSULAS DE ATRIBUTOS EN BLOQUES FLEX PREMIUM --- */
+    /* --- CAPSULAS DE ATRIBUTOS FLEX --- */
     .product-tags {
         display: flex;
         flex-wrap: wrap;
@@ -441,24 +443,81 @@
     .premium-tag-inner { display: none; }
     .grid-mode .badge-oferta { left: 50% !important; transform: translateX(-50%) !important; width: 85% !important; text-align: center; top: -10px; }
 
-    /* --- FEEDBACK VISUAL --- */
-    @keyframes pulseOrder {
-        0% { transform: translateX(-50%) scale(1); box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
-        50% { transform: translateX(-50%) scale(1.02); box-shadow: 0 15px 40px rgba(37, 211, 102, 0.3); }
-        100% { transform: translateX(-50%) scale(1); box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
-    }
+    /* --- FEEDBACK VISUAL WHATSAPP --- */
     .floating-btn:not(.hidden) { 
         position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); 
         background: linear-gradient(135deg, #25d366, #128c7e); color: white; 
         padding: 18px; border-radius: 22px; width: 92%; max-width: 480px; 
         z-index: 1000; box-shadow: 0 15px 40px rgba(0,0,0,0.6);
         animation: pulseOrder 2s infinite ease-in-out;
-        border: 1px solid rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
     }
     #cart-total { transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: inline-block; }
     .total-bump { transform: scale(1.2); color: var(--promo); }
 
     .discount-label { font-size: 0.7rem; color: var(--promo); margin-top: 5px; font-weight: 700; display: none; text-align: center;}
+
+    /* --- COMPONENTES ACORDEÓN FAQ (SUPER PREMIUM) --- */
+    .faq-container {
+        margin-top: 40px;
+        padding: 10px 5px;
+        border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .faq-title {
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #ffffff;
+        text-align: center;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+    .faq-item {
+        background: rgba(10, 10, 10, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 14px;
+        margin-bottom: 10px;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition: border-color 0.3s;
+    }
+    .faq-question {
+        padding: 16px 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #ffffff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+    }
+    .faq-question i {
+        color: var(--primary);
+        font-size: 0.8rem;
+        transition: transform 0.3s;
+    }
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+        padding: 0 20px;
+        font-size: 0.78rem;
+        color: #b3b3b3;
+        line-height: 1.6;
+    }
+    .faq-item.active .faq-answer {
+        max-height: 300px;
+        padding-bottom: 16px;
+        transition: max-height 0.3s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+    }
+    .faq-item.active .faq-question i {
+        transform: rotate(180deg);
+    }
+    .faq-item.active {
+        border-color: rgba(0, 212, 255, 0.25);
+    }
 
     /* --- FORMULARIOS --- */
     .modal-overlay { 
@@ -754,8 +813,9 @@
            name="no_pass_alex_search" 
            inputmode="search"
            onfocus="iniciarBusqueda()" 
-           onblur="finalizarBusqueda()" 
+           onblur="finalizerBusqueda()" 
            onkeyup="filtrarProductos()">
+    <i class="fas fa-search"></i>
 
     <div class="filter-wrapper">
         <div class="scroll-indicator" id="scrollPrev"><i class="fas fa-chevron-left"></i></div>
@@ -799,7 +859,7 @@
                 <div class="product-tags">
                     <span class="tag-prop"><i class="fas fa-user-shield"></i> Perfil Privado</span>
                     <span class="tag-prop"><i class="fas fa-video"></i> 4K UHD</span>
-                    <span class="tag-prop"><i class="fas fa-mobile-alt"></i> 1 Disp.</span>
+                    <span class="tag-prop"><i class="fas fa-bolt"></i> Auto-Entrega</span>
                 </div>
             </div>
             <div class="price-container">
@@ -1386,6 +1446,25 @@
             </div>
         </div>
     </div>
+
+    <div class="faq-container" data-aos="fade-up">
+        <h2 class="faq-title"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">¿Cómo es el proceso de entrega? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer">Una vez enviado el pedido por WhatsApp, coordinamos el método de pago (Yape/Plin). Al confirmar la transferencia, te enviamos las credenciales de tu cuenta (perfil privado, correo y contraseña) en un lapso de 5 a 15 minutos de forma 100% segura.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">¿Las cuentas tienen garantía total? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer">Sí, todas nuestras cuentas contratadas en Alex Store cuentan con garantía completa durante el mes o tiempo adquirido. Ante cualquier inconveniente técnico o caída del servicio, te brindamos soporte inmediato y reestablecemos tu perfil de inmediato.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">¿Puedo renovar mi misma cuenta el próximo mes? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer">¡Por supuesto! La gran mayoría de nuestras plataformas son renovables de mes a mes, lo que te permite conservar tus mismos perfiles de reproducción, listas de favoritos e historial sin necesidad de cambiar de cuenta.</div>
+        </div>
+    </div>
 </div>
 
     <div id="whatsapp-btn" class="floating-btn hidden">
@@ -1449,7 +1528,12 @@
     let carrito = [];
     const numWhatsApp = "51918600000";
 
-    // --- MEJORA: MODO ENFOQUE EN BÚSQUEDA ---
+    // --- MEJORA: LÓGICA DE INTERACCIÓN INTERNA PARA ACORDEÓN FAQ ---
+    function toggleFaq(element) {
+        const item = element.parentElement;
+        item.classList.toggle('active');
+    }
+
     function iniciarBusqueda() {
         document.body.classList.add('searching');
     }
@@ -1492,7 +1576,6 @@
         elemento.classList.toggle('selected');
         const nombre = elemento.querySelector('.nombre-prod').innerText;
         
-        // CORRECCIÓN PREVENTIVA EXTRA: Soporta la lectura limpia tanto si es texto corrido o si usa el nuevo sistema de tags
         const tagsEl = elemento.querySelector('.product-tags');
         const manual = tagsEl ? tagsEl.innerText.replace(/\n/g, ' • ') : elemento.querySelector('.manual-desc').innerText;
         
