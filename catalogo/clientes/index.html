@@ -36,11 +36,11 @@
     html { display: none; background-color: var(--dark); scroll-behavior: smooth; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* --- FONDO ULTRA-PREMIUM CON HERO SHADOW DEGRADADO --- */
+    /* --- FONDO ULTRA-PREMIUM CON MÁSCARA DE ENFOQUE TEATRAL (CORREGIDO) --- */
     body { 
         font-family: 'Poppins', sans-serif; 
-        background: radial-gradient(circle at 50% 0%, rgba(0, 212, 255, 0.07), transparent 45%),
-                    linear-gradient(to bottom, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.4) 30%, transparent 100%),
+        background: radial-gradient(circle at 50% 30%, transparent 10%, rgba(5, 5, 5, 0.65) 60%, rgba(5, 5, 5, 0.95) 100%),
+                    linear-gradient(to bottom, rgba(5, 5, 5, 0.85) 0%, rgba(5, 5, 5, 0.3) 20%, rgba(5, 5, 5, 0.75) 50%, rgba(5, 5, 5, 0.95) 100%), 
                     linear-gradient(rgba(5, 5, 5, 0.82), rgba(5, 5, 5, 0.92)), 
                     url("../img/fondo-mundial.jpg") no-repeat center center fixed;
         background-size: cover;
@@ -268,7 +268,7 @@
     }
     
     .service-item:active {
-        transform: scale(0.96) !important; /* Feedback Táctil Elástico Inmediato */
+        transform: scale(0.96) !important; 
     }
     
     .service-item:nth-child(2n) { animation-delay: -1.5s; }
@@ -306,18 +306,19 @@
         box-shadow: 0 0 20px rgba(244, 208, 63, 0.3);
     }
 
+    /* --- PULSO DE LUZ PERIMETRAL AL SELECCIONAR (SUGERENCIA PREMIUM) --- */
     .service-item.selected .service-card { 
         transform: scale(0.97) !important; 
         background: rgba(0, 212, 255, 0.1) !important; 
         border-color: var(--primary) !important; 
-        box-shadow: 0 0 25px rgba(0, 212, 255, 0.25); 
+        box-shadow: 0 0 25px rgba(0, 212, 255, 0.4); 
         background-image: none !important;
     }
     
     .service-item.premium.selected .service-card { 
         background: rgba(212, 175, 55, 0.1) !important; 
         border-color: var(--promo) !important; 
-        box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); 
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.4); 
         background-image: none !important;
     }
 
@@ -384,20 +385,41 @@
         transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
         box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
-    .service-text { padding-right: 40px; }
-    .service-text h3 { font-size: 1.05rem; color: #fff; font-weight: 600; margin-bottom: 2px; }
+    .service-text { padding-right: 20px; flex-grow: 1; }
+    .service-text h3 { font-size: 1.05rem; color: #fff; font-weight: 600; margin-bottom: 4px; }
     
-    .manual-desc { 
-        font-size: 0.72rem; 
-        color: #a3a3b3; 
-        display: block;
-        line-height: 1.5;
+    /* --- CAPSULAS DE ATRIBUTOS EN BLOQUES FLEX PREMIUM --- */
+    .product-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 6px;
+    }
+    .grid-mode .product-tags {
+        justify-content: center;
+    }
+    .tag-prop {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-size: 0.65rem;
+        color: #d1d1d6;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        white-space: nowrap;
+    }
+    .tag-prop i {
+        color: var(--primary);
+        font-size: 0.6rem;
     }
 
     /* --- LÓGICA AGOTADO --- */
     .service-item.agotado { pointer-events: none; }
     .service-item.agotado .service-card { opacity: 0.4; filter: grayscale(0.9); }
-    .service-item.agotado .price-tag, .service-item.agotado .badge-oferta, .service-item.agotado::after, .service-item.agotado .premium-tag-inner { display: none !important; }
+    .service-item.agotado .price-tag, .service-item.agotado .badge-oferta, .service-item.agotado::after, .service-item.agotado .premium-tag-inner, .service-item.agotado .product-tags { display: none !important; }
 
     .sin-stock-badge {
         display: none; background: #600000; color: white; padding: 6px 14px; border-radius: 10px; font-size: 0.7rem; font-weight: 900;
@@ -411,7 +433,7 @@
     @media (min-width: 900px) { .container.grid-mode { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); } }
     .grid-mode .category-title { grid-column: 1 / -1; width: 100%; margin-top: 30px; display: flex; }
     .grid-mode .service-card { flex-direction: column; text-align: center; min-height: 295px; justify-content: space-between; padding: 25px 15px 20px; }
-    .grid-mode .service-text { padding-right: 0; }
+    .grid-mode .service-text { padding-right: 0; width: 100%; }
     .grid-mode .service-logo { margin-right: 0; margin-bottom: 8px; width: 65px; height: 65px; }
     .grid-mode .price-container { margin-left: 0; align-items: center; width: 100%; }
     .grid-mode .premium .service-card::after { display: none !important; }
@@ -796,7 +818,11 @@
             <img src="../img/netflix.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Netflix Premium</h3>
-                <span class="manual-desc">• Perfil Privado • 4K UHD • 1 dispositivo en simultaneo.</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-user-shield"></i> Perfil Privado</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> 4K UHD</span>
+                    <span class="tag-prop"><i class="fas fa-mobile-alt"></i> 1 Disp.</span>
+                </div>
             </div>
             <div class="price-container">
                 <span class="premium-tag-inner">PREMIUM</span>
@@ -813,7 +839,11 @@
             <img src="../img/disneyp.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Disney Premium</h3>
-                <span class="manual-desc">• Activación TV (para clientes nuevos)• todo los canalaes ESPN • Perfil privado.</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-tv"></i> Act. TV (Nuevos)</span>
+                    <span class="tag-prop"><i class="fas fa-bolt"></i> ESPN Total</span>
+                    <span class="tag-prop"><i class="fas fa-user-shield"></i> Privado</span>
+                </div>
             </div>
             <div class="price-container">
                 <span class="premium-tag-inner">PREMIUM</span>
@@ -829,7 +859,11 @@
             <img src="../img/disneys.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Disney Premium (Sin ESPN)</h3>
-                <span class="manual-desc">• Sin Canales ESPN • Perfil privado • 1 dispositivo en simultaneo.</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-eye-slash"></i> Sin ESPN</span>
+                    <span class="tag-prop"><i class="fas fa-user-shield"></i> Privado</span>
+                    <span class="tag-prop"><i class="fas fa-mobile-alt"></i> 1 Disp.</span>
+                </div>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 7</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
@@ -841,7 +875,11 @@
             <img src="../img/max.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Hbo Max Standard</h3>
-                <span class="manual-desc">• 1 mes • Full HD • Perfil privado.</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Full HD</span>
+                    <span class="tag-prop"><i class="fas fa-user-shield"></i> Privado</span>
+                </div>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 5</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
@@ -853,7 +891,11 @@
             <img src="../img/max.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Hbo MAX Platino</h3>
-                <span class="manual-desc">• 1 mes • premium 4K • Perfil privado.</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
+                    <span class="tag-prop"><i class="fas fa-crown"></i> Platino 4K</span>
+                    <span class="tag-prop"><i class="fas fa-user-shield"></i> Privado</span>
+                </div>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 8</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
@@ -865,7 +907,11 @@
             <img src="../img/prime.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">PRIME VIDEO (TV)</h3>
-                <span class="manual-desc">• 1 mes • Perfil privado • Activacion solo a TV.</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
+                    <span class="tag-prop"><i class="fas fa-user-shield"></i> Privado</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> Solo TV</span>
+                </div>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 5</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
@@ -877,7 +923,11 @@
             <img src="../img/prime.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">PRIME VIDEO</h3>
-                <span class="manual-desc">• 1 mes • Perfil privado • Correo y contraseña.</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
+                    <span class="tag-prop"><i class="fas fa-user-shield"></i> Privado</span>
+                    <span class="tag-prop"><i class="fas fa-envelope"></i> Datos Propios</span>
+                </div>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 8</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
@@ -889,7 +939,11 @@
             <img src="../img/vix.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">VIX PREMIUM</h3>
-                <span class="manual-desc">• 1 mes • perfil privado • premium.</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
+                    <span class="tag-prop"><i class="fas fa-user-shield"></i> Privado</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Premium</span>
+                </div>
             </div>
             <div class="price-container"><span class="premium-tag-inner">PREMIUM</span><span class="price-tag precio-prod">S/ 5</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
@@ -901,7 +955,11 @@
             <img src="../img/crunchyroll.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">CRUNCHYROLL</h3>
-                <span class="manual-desc">• 1 mes • premium • perfil privado.</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Premium</span>
+                    <span class="tag-prop"><i class="fas fa-user-shield"></i> Privado</span>
+                </div>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 5</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
@@ -915,7 +973,10 @@
             <img src="../img/canva.webp" class="service-logo"> 
             <div class="service-text">
                 <h3 class="nombre-prod">CANVA PRO (1 mes)</h3>
-                <span class="manual-desc">• Plan EDU • Invitación a tu correo.</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-graduation-cap"></i> Plan EDU</span>
+                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Invitación Correo</span>
+                </div>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 5</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
@@ -927,7 +988,10 @@
             <img src="../img/canva.webp" class="service-logo"> 
             <div class="service-text">
                 <h3 class="nombre-prod">CANVA PRO (3 meses)</h3>
-                <span class="manual-desc">• Plan EDU • Invitación a tu correo.</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-graduation-cap"></i> Plan EDU</span>
+                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Invitación Correo</span>
+                </div>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 12</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
@@ -939,7 +1003,10 @@
             <img src="../img/canva.webp" class="service-logo"> 
             <div class="service-text">
                 <h3 class="nombre-prod">CANVA PRO (6 meses)</h3>
-                <span class="manual-desc">• Plan EDU • Invitación a tu correo.</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-graduation-cap"></i> Plan EDU</span>
+                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Invitación Correo</span>
+                </div>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 17</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
@@ -951,7 +1018,10 @@
             <img src="../img/canva.webp" class="service-logo"> 
             <div class="service-text">
                 <h3 class="nombre-prod">CANVA PRO (12 meses)</h3>
-                <span class="manual-desc">• Plan EDU • Invitación a tu correo.</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-graduation-cap"></i> Plan EDU</span>
+                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Invitación Correo</span>
+                </div>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 25</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
@@ -965,7 +1035,11 @@
             <img src="../img/movistar.webp" class="service-logo"> 
             <div class="service-text">
                 <h3 class="nombre-prod">Movistar Play + Liga 1 Max</h3>
-                <span class="manual-desc">• Canal l1 Max  • Activación a TV. • +87 canales</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> L1 Max</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> Act. TV</span>
+                    <span class="tag-prop"><i class="fas fa-list-ol"></i> +87 Canales</span>
+                </div>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 20</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
@@ -979,7 +1053,11 @@
             <img src="../img/paramount.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">PARAMOUNT</h3>
-                <span class="manual-desc">• 1 mes • premium • perfil privado. • 104 partidos del mundial</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
+                    <span class="tag-prop"><i class="fas fa-user-shield"></i> Privado</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> 104 Partidos</span>
+                </div>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 15</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
@@ -991,7 +1069,11 @@
             <img src="../img/dgo.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Directv Go + l1 Max</h3>
-                <span class="manual-desc">• 1 mes • Activación a TV • Perfil privado. • 104 partidos del mundial</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> Act. TV</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> 104 Partidos</span>
+                </div>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 33</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
@@ -1003,7 +1085,11 @@
             <img src="../img/iptv.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">IPTV Smarters Standar (1 dis)</h3>
-                <span class="manual-desc">• 1 Dispositivo • 6500 Canales. • 104 partidos del mundial</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-mobile-alt"></i> 1 Disp.</span>
+                    <span class="tag-prop"><i class="fas fa-list-ol"></i> 6500 Canales</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> 104 Partidos</span>
+                </div>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 10</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
@@ -1015,7 +1101,11 @@
             <img src="../img/iptv.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">IPTV Smarters Standar (3 dis)</h3>
-                <span class="manual-desc">• 3 Dispositivos • 6500 Canales.• 104 partidos del mundial</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-users"></i> 3 Disp.</span>
+                    <span class="tag-prop"><i class="fas fa-list-ol"></i> 6500 Canales</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> 104 Partidos</span>
+                </div>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 13</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
@@ -1027,7 +1117,11 @@
             <img src="../img/iptvp.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">IPTV Premium (3 dis)</h3>
-                <span class="manual-desc">• 3 Dispositivos • 10000 Canales. • 104 partidos del mundial</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-users"></i> 3 Disp.</span>
+                    <span class="tag-prop"><i class="fas fa-crown"></i> 10000 Canales</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> 104 Partidos</span>
+                </div>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 25</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
@@ -1039,7 +1133,11 @@
             <img src="../img/flujo.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Magis TV-Flujo TV</h3>
-                <span class="manual-desc">• 1 Perfil • +1200 Canales en vivo. • 104 partidos del mundial</span>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-user"></i> 1 Perfil</span>
+                    <span class="tag-prop"><i class="fas fa-list-ol"></i> +1200 Vivos</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> 104 Partidos</span>
+                </div>
             </div>
             <div class="price-container"><span class="price-tag precio-prod">S/ 12</span><div class="sin-stock-badge">SIN STOCK</div></div>
         </div>
@@ -1358,7 +1456,11 @@
         if (elemento.classList.contains('agotado')) return;
         elemento.classList.toggle('selected');
         const nombre = elemento.querySelector('.nombre-prod').innerText;
-        const manual = elemento.querySelector('.manual-desc').innerText;
+        
+        // CORRECCIÓN PREVENTIVA EXTRA: Soporta la lectura limpia tanto si es texto corrido o si usa el nuevo sistema de tags
+        const tagsEl = elemento.querySelector('.product-tags');
+        const manual = tagsEl ? tagsEl.innerText.replace(/\n/g, ' • ') : elemento.querySelector('.manual-desc').innerText;
+        
         const precio = parseFloat(elemento.querySelector('.precio-prod').innerText.replace('S/', ''));
         const idx = carrito.findIndex(i => i.nombre === nombre);
         if (idx > -1) carrito.splice(idx, 1); else carrito.push({nombre, manual, precio});
@@ -1475,8 +1577,7 @@
         document.querySelectorAll('.btn-nav').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         
-        // Limpiamos los emojis/iconos del botón pulsado para extraer el texto puro de comparación
-        const term = cat.replace(/[^\w\s📺🎬🎵💻⚽]/gi, '').trim().toUpperCase();
+        const term = cat.toUpperCase();
         
         document.querySelectorAll('.service-item').forEach(item => {
             let catItem = "";
@@ -1492,7 +1593,6 @@
             if (cat === 'TODOS') {
                 item.style.display = 'block';
             } else {
-                // Buscamos coincidencia entre el texto del botón y el título de la categoría
                 const matchMundial = (cat.includes('MUNDIAL') && catItem.includes('MUNDIAL'));
                 const matchIptv = (cat.includes('IPTV Y FLUJO') && catItem.includes('IPTV Y FLUJO'));
                 const matchPerfiles = (cat.includes('STREAMING') && catItem.includes('STREAMING'));
@@ -1524,16 +1624,8 @@
         });
     }
 
-    function abrirModalRegistro() { document.getElementById('modal-registro').style.display = 'flex'; }
-    function cerrarModalRegistro() { document.getElementById('modal-registro').style.display = 'none'; }
-    function mostrarForm() { document.getElementById('paso-1').style.display = 'none'; document.getElementById('form-datos').style.display = 'block'; }
-    function mostrarFormAntiguo() { document.getElementById('paso-1').style.display = 'none'; document.getElementById('form-antiguo').style.display = 'block'; }
-    function volverPaso1() { document.getElementById('paso-1').style.display = 'block'; document.getElementById('form-datos').style.display = 'none'; document.getElementById('form-antiguo').style.display = 'none'; }
-    function limpiarCarrito() { carrito = []; document.querySelectorAll('.service-item.selected').forEach(el => el.classList.remove('selected')); actualizarUI(); }
-
     window.onload = () => { document.documentElement.style.display = "block"; const input = document.getElementById('input-pass'); if(input) input.value = ""; };
 
-    // LÓGICA COMPLEMENTARIA
     window.onscroll = function() {
         let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -1549,7 +1641,6 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // --- LÓGICA MODAL INFORMATIVA MÓVIL ---
     function abrirModalInfo() {
         document.getElementById('modal-info-lateral').style.display = 'flex';
     }
