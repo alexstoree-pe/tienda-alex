@@ -1,51 +1,27 @@
 <!DOCTYPE html>
-
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Distribución VIP | Alex Store</title>
 
-
-
     <link rel="icon" type="image/webp" href="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.webp">
-
     <link rel="apple-touch-icon" href="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.webp">
-
     <meta name="apple-mobile-web-app-title" content="Alex Distribución">
-
     <meta name="mobile-web-app-capable" content="yes">
-
     <meta name="theme-color" content="#050505">
 
-
-
     <meta property="og:title" content="Distribución VIP | Alex Store">
-
     <meta property="og:description" content="Precios exclusivos para distribuidores. Panel de servicios streaming 24/7.">
-
     <meta property="og:type" content="website">
-
     <meta property="og:url" content="https://alexstoree-pe.github.io/tienda-alex/catalogo/distribuidores/"> 
-
     <meta property="og:image" content="https://alexstoree-pe.github.io/tienda-alex/catalogo/img/logo.webp">
-
     <meta property="og:image:width" content="500">
-
     <meta property="og:image:height" content="500">
-
     <meta property="og:image:type" content="image/png">
 
-
-
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
     :root {
@@ -75,14 +51,58 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    /* --- FONDO ULTRA-PREMIUM CON PARALLAX --- */
     body { 
         font-family: 'Poppins', sans-serif; 
-        background: #0a0a0a; 
         color: white; 
         padding-bottom: 200px; 
         overflow-x: hidden;
         visibility: hidden;
+        position: relative;
+        background-color: var(--dark);
     }
+
+    body::before {
+        content: "";
+        position: fixed;
+        top: -5%; 
+        left: -5%;
+        width: 110%;
+        height: 110%;
+        z-index: -2;
+        background: radial-gradient(circle at 50% 30%, transparent 10%, rgba(5, 5, 5, 0.65) 60%, rgba(5, 5, 5, 0.95) 100%),
+                    linear-gradient(to bottom, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.3) 20%, rgba(5, 5, 5, 0.75) 50%, rgba(5, 5, 5, 0.95) 100%), 
+                    linear-gradient(rgba(5, 5, 5, 0.82), rgba(5, 5, 5, 0.92)), 
+                    url("../img/fondo-mundial.jpg") no-repeat center center;
+        background-size: cover;
+        transition: transform 0.1s ease-out; 
+        will-change: transform;
+    }
+
+    /* --- PARTÍCULAS CSS PURO --- */
+    .particles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; overflow: hidden; }
+    .particle { position: absolute; background: var(--vip); border-radius: 50%; opacity: 0.3; animation: floatUp 15s infinite linear; filter: blur(3px); }
+    .particle:nth-child(1) { width: 8px; height: 8px; left: 10%; bottom: -10px; animation-duration: 25s; }
+    .particle:nth-child(2) { width: 15px; height: 15px; left: 30%; bottom: -20px; animation-duration: 20s; animation-delay: 5s; opacity: 0.1; }
+    .particle:nth-child(3) { width: 5px; height: 5px; left: 50%; bottom: -5px; animation-duration: 30s; animation-delay: 2s; background: var(--primary); }
+    .particle:nth-child(4) { width: 10px; height: 10px; left: 70%; bottom: -15px; animation-duration: 18s; animation-delay: 8s; background: var(--primary); }
+    .particle:nth-child(5) { width: 20px; height: 20px; left: 90%; bottom: -25px; animation-duration: 22s; animation-delay: 1s; opacity: 0.15; }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0) translateX(0); opacity: 0; }
+        20% { opacity: 0.4; }
+        80% { opacity: 0.4; }
+        100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+    }
+
+    /* --- TOAST NOTIFICATIONS --- */
+    #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+    .toast { background: rgba(10, 10, 15, 0.95); border-left: 4px solid var(--success-neon); border-radius: 8px; padding: 12px 20px; color: white; font-size: 0.8rem; font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,0.5); backdrop-filter: blur(10px); animation: slideInRight 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; display: flex; align-items: center; gap: 10px; }
+    .toast.remove { border-left-color: var(--danger-neon); }
+    .toast.fadeOut { animation: fadeOutRight 0.4s forwards; }
+
+    @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes fadeOutRight { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
 
     .modal-pass { 
         display: none; 
@@ -101,11 +121,6 @@
         border: 1px solid var(--primary); text-align: center; box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
     }
 
-     { 
-        width: 100%; padding: 20px; margin: 25px 0; border-radius: 15px; background: #000; 
-        color: white; text-align: center; font-size: 1.5rem; border: 1px solid #333; outline: none; letter-spacing: 5px;
-    }
-
     header { 
         background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px); padding: 10px 15px 0px; 
         text-align: center; border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 2000; 
@@ -119,12 +134,16 @@
     .garantia-mini-item i { font-size: 0.7rem; color: var(--primary); margin-bottom: 2px; }
     .garantia-mini-item p { font-size: 0.35rem; font-weight: 700; text-transform: uppercase; color: #bbb; line-height: 1.1; }
 
+    /* --- MENÚ DE CATEGORÍAS FIJO (STICKY TOP) --- */
     .search-container { 
         position: sticky; 
-        top: 110px; 
+        top: 108px; 
         z-index: 1900; 
-        padding: 5px 15px; 
-        background: #0a0a0a; 
+        padding: 10px 15px 5px; 
+        background: rgba(10, 10, 10, 0.85); 
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
     .search-wrapper { position: relative; max-width: 500px; margin: auto; }
@@ -139,161 +158,88 @@
     .btn-iptv { background: var(--gold-gradient); color: #000; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
     .contenedor-iptv { display: flex; justify-content: center; padding: 0 15px; margin-top: -8px; margin-bottom: 20px; }
 
-    .container { padding: 10px 15px; max-width: 600px; margin: auto; }
-    .category-title { margin: 35px 0 15px; font-size: 0.9rem; font-weight: 800; color: var(--primary); letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
+    .container { padding: 10px 15px; max-width: 600px; margin: auto; transition: all 0.4s ease; }
+    
+    /* FILTROS ANIMADOS PARA CATEGORÍAS */
+    .category-title { 
+        margin: 35px 0 15px; font-size: 0.9rem; font-weight: 800; color: var(--primary); letter-spacing: 1px; display: flex; align-items: center; gap: 10px; 
+        transition: opacity 0.3s ease, height 0.3s ease, margin 0.3s ease;
+        overflow: hidden;
+    }
 
+    /* EFECTO 3D EN LAS TARJETAS */
     .service-link { 
         position: relative; text-decoration: none; color: inherit; display: block; margin-bottom: 30px; cursor: pointer;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: opacity 0.3s ease, transform 0.3s ease, margin 0.3s ease, padding 0.3s ease;
+        transform-style: preserve-3d;
     }
     
-    .oculto-busqueda {
-        display: none !important;
-        opacity: 0;
-        transform: scale(0.95);
-        margin-bottom: 0;
+    /* FILTRADO SUAVE */
+    .oculto-busqueda, .oculto-filtro {
+        opacity: 0 !important;
+        transform: scale(0.9) !important;
+        margin-bottom: 0 !important;
+        pointer-events: none !important;
+        position: absolute !important;
+        visibility: hidden !important;
     }
 
     .filter-container {
-        display: flex;
-        overflow-x: auto;
-        white-space: nowrap;
-        gap: 10px;
-        padding: 10px 5px;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
+        display: flex; overflow-x: auto; white-space: nowrap; gap: 10px; padding: 10px 5px; scrollbar-width: none; -ms-overflow-style: none;
     }
-
     .filter-container::-webkit-scrollbar { display: none; }
+    .filter-btn { flex: 0 0 auto; padding: 8px 20px; border-radius: 8px; background-color: #1a1a1a; color: white; border: 1px solid #333; cursor: pointer; transition: 0.3s; }
+    .filter-wrapper { display: block !important; min-height: 50px; margin-bottom: 10px; }  
 
-    .filter-btn {
-        flex: 0 0 auto;
-        padding: 8px 20px;
-        border-radius: 8px;
-        background-color: #1a1a1a;
-        color: white;
-        border: 1px solid #333;
+    /* TARJETA CON PERSPECTIVA */
+    .service-card { 
+        background: #0f0f0f; border-radius: 25px; padding: 22px; display: flex; align-items: center; border: 1px solid var(--glass-border); gap: 18px; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; z-index: 10; overflow: hidden; 
+        transform: translateZ(20px);
     }
 
-    .filter-wrapper {
-        display: block !important;
-        min-height: 50px;
-        margin-bottom: 10px;
-    }  
-
-    .service-card { background: #0f0f0f; border-radius: 25px; padding: 22px; display: flex; align-items: center; border: 1px solid var(--glass-border); gap: 18px; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; z-index: 10; overflow: hidden; }
-/* --- INICIO CAMBIO SELECCIÓN PROFESIONAL --- */
-    
     @keyframes popCheck { 
-        0% { transform: scale(0) rotate(-45deg); opacity: 0; } 
-        100% { transform: scale(1) rotate(0); opacity: 1; } 
+        0% { transform: scale(0) rotate(-45deg) translateZ(30px); opacity: 0; } 
+        100% { transform: scale(1) rotate(0) translateZ(30px); opacity: 1; } 
     }
 
-    /* 1. MANTENER EL BORDE PREMIUM SIEMPRE (Incluso sin seleccionar) */
-    .service-link.premium .service-card {
-        border: 2px solid var(--vip) !important;
-        box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
-    }
+    .service-link.premium .service-card { border: 2px solid var(--vip) !important; box-shadow: 0 0 15px rgba(212, 175, 55, 0.15); }
+    .service-link.selected .service-card { transform: scale(0.96) translateY(2px) translateZ(20px) !important; transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 50; background: rgba(255, 255, 255, 0.03) !important; }
+    .service-link.selected:not(.premium) .service-card { border: 2px solid var(--primary) !important; box-shadow: 0 0 25px rgba(0, 212, 255, 0.5), inset 0 0 15px rgba(0, 212, 255, 0.1) !important; }
+    .service-link.premium.selected .service-card { border: 2px solid var(--vip) !important; box-shadow: 0 0 35px rgba(212, 175, 55, 0.6), inset 0 0 15px rgba(212, 175, 55, 0.2) !important; }
 
-    /* 2. ESTADO SELECCIONADO: Efecto de presión y fondo limpio */
-    .service-link.selected .service-card { 
-        transform: scale(0.96) translateY(2px) !important; 
-        transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        z-index: 50;
-        background: rgba(255, 255, 255, 0.03) !important; 
-    }
-
-    /* 3. BRILLO NEÓN PARA TARJETAS NORMALES SELECCIONADAS (Borde celeste) */
-    .service-link.selected:not(.premium) .service-card {
-        border: 2px solid var(--primary) !important;
-        box-shadow: 0 0 25px rgba(0, 212, 255, 0.5), 
-                    inset 0 0 15px rgba(0, 212, 255, 0.1) !important;
-    }
-
-    /* 4. BRILLO NEÓN PARA TARJETAS PREMIUM SELECCIONADAS (Respeta el borde VIP) */
-    .service-link.premium.selected .service-card { 
-        border: 2px solid var(--vip) !important; /* Aquí forzamos que siga siendo dorado */
-        box-shadow: 0 0 35px rgba(212, 175, 55, 0.6), 
-                    inset 0 0 15px rgba(212, 175, 55, 0.2) !important;
-    }
-
-    /* 5. DISEÑO DEL CHECK ANIMADO */
     .check-icon { 
-        position: absolute; 
-        top: -5px; 
-        right: -5px; 
-        width: 28px; 
-        height: 28px; 
-        border-radius: 50%; 
-        display: none; 
-        align-items: center; 
-        justify-content: center; 
-        font-size: 0.9rem; 
-        z-index: 101; 
-        border: 2px solid #000;
-        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        position: absolute; top: -5px; right: -5px; width: 28px; height: 28px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 0.9rem; z-index: 101; border: 2px solid #000; box-shadow: 0 0 10px rgba(0,0,0,0.5); 
+        transform: translateZ(30px);
     }
-
-    .service-link.selected .check-icon { 
-        display: flex !important;
-        background: var(--primary) !important;
-        color: #000 !important;
-        animation: popCheck 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    }
-
-    /* Check dorado si la tarjeta es premium */
-    .service-link.premium.selected .check-icon { 
-        background: var(--vip) !important;
-    }
+    .service-link.selected .check-icon { display: flex !important; background: var(--primary) !important; color: #000 !important; animation: popCheck 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+    .service-link.premium.selected .check-icon { background: var(--vip) !important; }
     
-    /* --- FIN CAMBIO SELECCIÓN PROFESIONAL --- */
     .badge-oferta { 
-        display: none; 
-        position: absolute; 
-        top: 0; 
-        left: 0; 
-        background: #f1c40f; 
-        color: #000; 
-        padding: 3px 20px 3px 10px; 
-        clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
-        font-size: 0.55rem; 
-        font-weight: 900; 
-        z-index: 100;
-        text-transform: uppercase;
+        display: none; position: absolute; top: 0; left: 0; background: #f1c40f; color: #000; padding: 3px 20px 3px 10px; clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%); font-size: 0.55rem; font-weight: 900; z-index: 100; text-transform: uppercase; 
+        transform: translateZ(15px);
     }
-
     .service-link.oferta .badge-oferta { display: block; }
 
-    .premium-text { 
-        display: none; 
-        border: 1px solid #bf953f; padding: 2px 8px; border-radius: 4px;
-        background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        font-size: 0.6rem; font-weight: 900; text-transform: uppercase; margin-right: 15px; margin-bottom: 4px; 
-    }
+    .premium-text { display: none; border: 1px solid #bf953f; padding: 2px 8px; border-radius: 4px; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 0.6rem; font-weight: 900; text-transform: uppercase; margin-right: 15px; margin-bottom: 4px; }
     .premium .premium-text { display: inline-block; }
 
     .status-badge { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; margin-top: 5px; margin-bottom: 2px; display: flex; align-items: center; gap: 5px; }
     .disponible .status-badge::before { content: "● DISPONIBLE"; color: var(--success-neon); }
     .pocas .status-badge::before { content: "● POCAS UNIDADES"; color: #ff3333; }
 
-    .service-logo { width: 65px; height: 65px; object-fit: cover; border-radius: 18px; }
+    /* INDICADORES DE CARGA SKELETON */
+    .img-wrapper { position: relative; width: 65px; height: 65px; border-radius: 18px; flex-shrink: 0; overflow: hidden; transform: translateZ(20px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+    .skeleton { position: absolute; inset: 0; background: #1a1a1a; animation: pulseSkeleton 1.5s infinite; z-index: 1; border-radius: 18px; }
+    .service-logo { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 2; transition: opacity 0.3s; opacity: 0; }
+    .service-logo.loaded { opacity: 1; }
+    @keyframes pulseSkeleton { 0% { background: #111; } 50% { background: #222; } 100% { background: #111; } }
+
+    .service-text { transform: translateZ(10px); }
     .service-text h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
     .manual-desc { font-size: 0.75rem; color: #888; display: block; }
     
-    .price-container { 
-    display: flex; 
-    flex-direction: column; 
-    align-items: flex-end; 
-    margin-left: auto; 
-    min-width: 80px; /* 1. Asegura un ancho mínimo para que no se aplaste */
-}
-    .price-tag { 
-    color: var(--primary); 
-    font-weight: 800; 
-    font-size: 1.4rem; 
-    white-space: nowrap; /* 2. Evita que el número se baje a la siguiente línea */
-    display: inline-block; /* 3. Fuerza al S/ y al número a comportarse como un solo bloque */
-}
+    .price-container { display: flex; flex-direction: column; align-items: flex-end; margin-left: auto; min-width: 80px; transform: translateZ(25px); }
+    .price-tag { color: var(--primary); font-weight: 800; font-size: 1.4rem; white-space: nowrap; display: inline-block; }
     .premium .price-tag { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: var(--vip); }
 
     .badge-renovacion { display: none; color: #f1c40f; font-size: 0.55rem; font-weight: 700; margin-top: 3px; text-transform: uppercase; }
@@ -301,11 +247,7 @@
 
     .service-link.agotado { pointer-events: none; }
     .service-link.agotado .service-card { opacity: 0.3; border-color: var(--glass-border); filter: grayscale(1); }
-    .service-link.agotado .price-container,
-    .service-link.agotado .badge-oferta,
-    .service-link.agotado .status-badge,
-    .service-link.agotado .badge-renovacion,
-    .service-link.agotado .check-icon { display: none !important; }
+    .service-link.agotado .price-container, .service-link.agotado .badge-oferta, .service-link.agotado .status-badge, .service-link.agotado .badge-renovacion, .service-link.agotado .check-icon { display: none !important; }
     
     .service-link.agotado::after { 
         content: "SIN STOCK"; position: absolute; top: 50%; right: 25px; transform: translateY(-50%);
@@ -324,385 +266,88 @@
 
     .cart-content-wrapper { display: flex; align-items: center; width: 100%; height: 70px; }
     .btn-send-order { flex-grow: 1; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; cursor: pointer; height: 100%; }
+    .btn-clear-cart { background: rgba(255, 0, 0, 0.2); color: #ff4d4d; border: none; width: 50px; height: 50px; border-radius: 15px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; margin-left: 10px; z-index: 3001; }
 
-    .btn-clear-cart {
-        background: rgba(255, 0, 0, 0.2); color: #ff4d4d; border: none;
-        width: 50px; height: 50px; border-radius: 15px;
-        display: flex; align-items: center; justify-content: center;
-        cursor: pointer; transition: 0.3s; margin-left: 10px; z-index: 3001;
-    }
-
-    #custom-alert {
-        position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
-        background: #111; border: 1.5px solid var(--primary);
-        padding: 15px 30px; border-radius: 20px; z-index: 5000;
-        box-shadow: 0 15px 45px rgba(0,0,0,0.9);
-        display: flex; align-items: center; gap: 15px;
-        transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
+    #custom-alert { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: #111; border: 1.5px solid var(--primary); padding: 15px 30px; border-radius: 20px; z-index: 5000; box-shadow: 0 15px 45px rgba(0,0,0,0.9); display: flex; align-items: center; gap: 15px; transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
     #custom-alert.active { top: 30px; }
 
-    .btn-filter {
-        background: var(--glass);
-        border: 1px solid var(--glass-border);
-        color: #888;
-        padding: 8px 18px;
-        border-radius: 10px;
-        font-size: 0.7rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: 0.3s;
-        text-transform: uppercase;
-    }
-
-    .btn-filter.active {
-        background: var(--primary);
-        color: #000;
-        border-color: var(--primary);
-        box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
-    }
-
-    .oculto-filtro {
-        display: none !important;
-    }
-
-    .service-link:not(.oculto-filtro) {
-        display: block !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
+    .btn-filter { background: var(--glass); border: 1px solid var(--glass-border); color: #888; padding: 8px 18px; border-radius: 10px; font-size: 0.7rem; font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
+    .btn-filter.active { background: var(--primary); color: #000; border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 212, 255, 0.3); }
 
     /* SISTEMA DE VISTAS */
-    .view-controls {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 10px;
-        max-width: 600px;
-        margin: 5px auto;
-        padding: 0 15px;
-    }
+    .view-controls { display: flex; justify-content: flex-end; align-items: center; gap: 10px; max-width: 600px; margin: 5px auto; padding: 0 15px; }
+    .view-btn { background: var(--glass); border: 1px solid var(--glass-border); color: #666; width: 35px; height: 35px; border-radius: 10px; cursor: pointer; transition: 0.3s; }
+    .view-btn.active { background: var(--primary); color: #000; border-color: var(--primary); }
 
-    .view-btn {
-        background: var(--glass);
-        border: 1px solid var(--glass-border);
-        color: #666;
-        width: 35px;
-        height: 35px;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    .view-btn.active {
-        background: var(--primary);
-        color: #000;
-        border-color: var(--primary);
-    }
-
-    .container.grid-mode {
-        display: grid !important;
-        gap: 15px !important;
-        grid-template-columns: repeat(2, 1fr) !important; 
-    }
-
-    @media (min-width: 768px) {
-        .container.grid-mode {
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
-        }
-    }
-
+    .container.grid-mode { display: grid !important; gap: 15px !important; grid-template-columns: repeat(2, 1fr) !important; }
+    @media (min-width: 768px) { .container.grid-mode { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important; } }
     @media (min-width: 1024px) {
-        .container {
-            max-width: 95% !important; 
-            padding: 0 30px;
-        }
-
-        .container.grid-mode {
-            display: grid !important;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
-            gap: 20px !important;
-        }
-
-        .grid-mode .category-title {
-            grid-column: 1 / -1; 
-            width: 100%;
-            margin: 40px 0 20px;
-        }
-
-        .container:not(.grid-mode) {
-            max-width: 700px !important;
-            margin: 0 auto;
-        }
+        .container { max-width: 95% !important; padding: 0 30px; }
+        .container.grid-mode { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important; gap: 20px !important; }
+        .grid-mode .category-title { grid-column: 1 / -1; width: 100%; margin: 40px 0 20px; }
+        .container:not(.grid-mode) { max-width: 700px !important; margin: 0 auto; }
     }
 
-    .grid-mode .service-link {
-        margin-bottom: 0 !important;
-    }
-
-    .grid-mode .service-card {
-        flex-direction: column !important;
-        text-align: center;
-        padding: 15px 10px !important;
-        height: 100%;
-        justify-content: space-between;
-    }
-
-    .grid-mode .service-logo {
-        width: 60px !important;
-        height: 60px !important;
-        margin-bottom: 10px;
-    }
-
+    .grid-mode .service-link { margin-bottom: 0 !important; }
+    .grid-mode .service-card { flex-direction: column !important; text-align: center; padding: 15px 10px !important; height: 100%; justify-content: space-between; }
+    .grid-mode .img-wrapper { width: 60px !important; height: 60px !important; margin: 0 auto 10px; border-radius: 14px; }
+    .grid-mode .skeleton { border-radius: 14px; }
+    .grid-mode .service-logo { width: 100% !important; height: 100% !important; margin-bottom: 0; background: #222; }
     .grid-mode .service-text { width: 100%; }
     .grid-mode .service-text h3 { font-size: 0.85rem !important; line-height: 1.2; }
     .grid-mode .manual-desc { font-size: 0.65rem !important; }
-
-    .grid-mode .price-container {
-        margin-left: 0 !important;
-        margin-top: 10px;
-        align-items: center !important;
-        width: 100%;
-    }
-
+    .grid-mode .price-container { margin-left: 0 !important; margin-top: 10px; align-items: center !important; width: 100%; }
     .grid-mode .price-tag { font-size: 1.1rem !important; }
-
-    .grid-mode .badge-oferta {
-        width: 100%;
-        text-align: center;
-        clip-path: none;
-        border-radius: 0 0 10px 10px;
-    }
-
-    /* --- CORRECCIÓN PARA VISTA CUADRÍCULA --- */
-
-    /* 1. Aseguramos que el texto premium esté oculto por defecto en el grid */
-    .grid-mode .premium-text {
-        display: none !important;
-    }
-
-    /* 2. Solo lo mostramos si la tarjeta tiene la clase 'premium' */
-    .grid-mode .service-link.premium .premium-text {
-        display: block !important;
-        margin-right: 0;
-        margin-bottom: 5px;
-        text-align: center;
-    }
-
-    /* 3. Ajuste de imagen (logo) en el grid para que no se vea vacía si falta link */
-    .grid-mode .service-logo {
-        width: 60px !important;
-        height: 60px !important;
-        margin-bottom: 10px;
-        object-fit: cover;
-        background: #222; /* Fondo por si la imagen falla */
-    }
-    .grid-mode .category-title {
-        grid-column: 1 / -1;
-        width: 100%;
-        border-bottom: 1px solid var(--glass-border);
-        padding-bottom: 10px;
-    }
-
-    .grid-mode .service-link.agotado::after {
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        right: auto !important;
-        margin: 0 !important;
-        white-space: nowrap !important;
-        width: auto !important;
-        display: block !important;
-        z-index: 100;
-    }
+    .grid-mode .badge-oferta { width: 100%; text-align: center; clip-path: none; border-radius: 0 0 10px 10px; }
+    .grid-mode .premium-text { display: none !important; }
+    .grid-mode .service-link.premium .premium-text { display: block !important; margin-right: 0; margin-bottom: 5px; text-align: center; }
+    .grid-mode .category-title { grid-column: 1 / -1; width: 100%; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; }
+    .grid-mode .service-link.agotado::after { top: 50% !important; left: 50% !important; transform: translate(-50%, -50%) !important; right: auto !important; margin: 0 !important; white-space: nowrap !important; width: auto !important; display: block !important; z-index: 100; }
+    .grid-mode .service-link.selected .check-icon { top: 5px; right: 5px; }
 
     @media (max-width: 480px) {
-        .filter-wrapper {
-            margin-top: 5px;
-            padding-top: 5px;
-        }
-        .btn-filter {
-            padding: 8px 15px;
-            font-size: 12px;
-        }
+        .filter-wrapper { margin-top: 5px; padding-top: 5px; }
+        .btn-filter { padding: 8px 15px; font-size: 12px; }
     }
 
-    #filterScroll {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        overflow-x: auto;
-        white-space: nowrap;
-        gap: 10px;
-        padding: 10px 5px;
-        z-index: 100;
-    }
+    #filterScroll { display: flex !important; visibility: visible !important; opacity: 1 !important; overflow-x: auto; white-space: nowrap; gap: 10px; padding: 10px 5px; z-index: 100; }
+    .container:not(.grid-mode) .service-card { width: 100%; max-width: 100%; }
+    
+    .service-link:hover .service-card { border-color: var(--primary) !important; box-shadow: 0 0 20px rgba(0, 212, 255, 0.4), inset 0 0 10px rgba(0, 212, 255, 0.1) !important; background: rgba(255, 255, 255, 0.05) !important; z-index: 2; }
+    .grid-mode .service-link:hover .service-card { transform: translateY(-6px) scale(1.02); }
+    .service-link.premium:hover .service-card { background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(0, 0, 0, 0.1)) !important; border-color: var(--primary) !important; box-shadow: 0 0 25px rgba(0, 212, 255, 0.5) !important; }
 
-    .container:not(.grid-mode) .service-card {
-        width: 100%;
-        max-width: 100%;
-    }
+    .input-wrapper { position: relative; width: 80%; display: flex; justify-content: center; margin-bottom: 30px; }
+    .stars-bg { position: absolute; color: #222; font-size: 2.2rem; letter-spacing: 12px; pointer-events: none; z-index: 1; transition: 0.2s; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .hide-stars { opacity: 0 !important; }
+    #input-dist-pass { width: 200px; background: transparent !important; border: none !important; border-bottom: 2px solid #222 !important; color: var(--primary); font-size: 2.2rem; text-align: center; letter-spacing: 12px; outline: none; z-index: 2; position: relative; padding: 5px 0; margin: 0 !important; }
 
-    .service-link:hover .service-card {
-        border-color: var(--primary) !important;
-        box-shadow: 0 0 20px rgba(0, 212, 255, 0.4), 
-                    inset 0 0 10px rgba(0, 212, 255, 0.1) !important;
-        transform: translateY(-4px) scale(1.01);
-        background: rgba(255, 255, 255, 0.05) !important;
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        z-index: 2;
-    }
+    #back-to-top { position: fixed; bottom: 110px; right: 20px; width: 45px; height: 45px; background: var(--primary); color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; z-index: 2500; border: none; box-shadow: 0 0 15px rgba(0, 212, 255, 0.5); opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform: translateY(20px); }
+    #back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
 
-    .grid-mode .service-link:hover .service-card {
-        transform: translateY(-6px) scale(1.02);
-    }
-
-    .service-link.premium:hover .service-card {
-        background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(0, 0, 0, 0.1)) !important;
-        border-color: var(--primary) !important;
-        box-shadow: 0 0 25px rgba(0, 212, 255, 0.5) !important;
-    }
-
-    /* AJUSTE PARA EL CHECK EN MODO GRID */
-    .grid-mode .service-link.selected .check-icon {
-        top: 5px;
-        right: 5px;
-    }
-    /* --- NUEVO ESTILO DE SEGURIDAD (ESTRELLAS FANTASMA) --- */
-.input-wrapper { 
-    position: relative; 
-    width: 80%; 
-    display: flex; 
-    justify-content: center; 
-    margin-bottom: 30px; 
-}
-
-.stars-bg { 
-    position: absolute; 
-    color: #222; 
-    font-size: 2.2rem; 
-    letter-spacing: 12px; 
-    pointer-events: none; 
-    z-index: 1; 
-    transition: 0.2s; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-}
-
-.hide-stars { opacity: 0 !important; }
-
-#input-dist-pass { 
-    width: 200px; 
-    background: transparent !important; 
-    border: none !important; 
-    border-bottom: 2px solid #222 !important; 
-    color: var(--primary); 
-    font-size: 2.2rem; 
-    text-align: center; 
-    letter-spacing: 12px; 
-    outline: none; 
-    z-index: 2; 
-    position: relative; 
-    padding: 5px 0; 
-    margin: 0 !important; /* Reseteamos el margen original */
-}
-
-/* --- BOTÓN VOLVER ARRIBA NEÓN --- */
-#back-to-top {
-    position: fixed;
-    bottom: 110px; /* Un poco más arriba para no tapar la barra de WhatsApp */
-    right: 20px;
-    width: 45px;
-    height: 45px;
-    background: var(--primary);
-    color: #000;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    cursor: pointer;
-    z-index: 2500;
-    border: none;
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    transform: translateY(20px);
-}
-
-#back-to-top.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-/* Efecto sacudida error */
-@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
-.error-shake { animation: shake 0.3s ease-in-out; border-bottom-color: var(--danger-neon) !important; }
-    /* --- ESTILOS DEL MODAL DE REGISTRO --- */
-.modal-pedido {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.9);
-    backdrop-filter: blur(15px);
-    z-index: 10000;
-    justify-content: center;
-    align-items: center;
-}
-.modal-pedido-content {
-    background: #111;
-    padding: 30px;
-    border-radius: 30px;
-    width: 90%;
-    max-width: 400px;
-    border: 1px solid var(--primary);
-    text-align: center;
-}
-.modal-pedido-content h2 { color: var(--primary); margin-bottom: 15px; font-size: 1.4rem; }
-.modal-pedido-content p { font-size: 0.85rem; color: #bbb; margin-bottom: 20px; }
-.input-pedido {
-    width: 100%;
-    padding: 15px;
-    border-radius: 12px;
-    background: #000;
-    border: 1px solid #333;
-    color: white;
-    margin-bottom: 20px;
-    outline: none;
-    text-align: center;
-}
-.btn-finalizar {
-    background: var(--gold-gradient);
-    color: #000;
-    width: 100%;
-    padding: 15px;
-    border-radius: 15px;
-    font-weight: 800;
-    border: none;
-    cursor: pointer;
-}
+    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
+    .error-shake { animation: shake 0.3s ease-in-out; border-bottom-color: var(--danger-neon) !important; }
+    
+    .modal-pedido { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(15px); z-index: 10000; justify-content: center; align-items: center; }
+    .modal-pedido-content { background: #111; padding: 30px; border-radius: 30px; width: 90%; max-width: 400px; border: 1px solid var(--primary); text-align: center; }
+    .modal-pedido-content h2 { color: var(--primary); margin-bottom: 15px; font-size: 1.4rem; }
+    .modal-pedido-content p { font-size: 0.85rem; color: #bbb; margin-bottom: 20px; }
+    .input-pedido { width: 100%; padding: 15px; border-radius: 12px; background: #000; border: 1px solid #333; color: white; margin-bottom: 20px; outline: none; text-align: center; }
+    .btn-finalizar { background: var(--gold-gradient); color: #000; width: 100%; padding: 15px; border-radius: 15px; font-weight: 800; border: none; cursor: pointer; }
 </style>
-    <script>
-    // Usamos una función que se ejecuta de inmediato (antes de que carguen los botones)
+<script>
     (function() {
         const acceso = sessionStorage.getItem("acceso_distribuidor");
-        
         if (acceso === "true") {
-            // Si tiene acceso, hacemos todo visible de inmediato
             document.documentElement.style.visibility = "visible";
             document.addEventListener("DOMContentLoaded", () => {
                 document.body.style.visibility = "visible";
             });
         } else {
-            // Si no tiene acceso, esperamos al DOM solo para mostrar el modal
             document.addEventListener("DOMContentLoaded", () => {
                 const modal = document.getElementById('modal-login-distribuidor');
                 if (modal) {
                     modal.style.display = 'flex';
-                    // Mantenemos el body oculto pero el modal visible
                     document.body.style.visibility = 'hidden'; 
                     modal.style.visibility = 'visible';
                 }
@@ -710,57 +355,64 @@
         }
     })();
 
-    // Función para las estrellas fantasma
-function checkInputPass(el) {
-    const stars = document.getElementById('stars-placeholder');
-    if (el.value.length > 0) stars.classList.add('hide-stars');
-    else stars.classList.remove('hide-stars');
-}
-
-// Validación corregida con efectos
-function validarAcceso() {
-    const inputPass = document.getElementById('input-dist-pass');
-    const errorMsg = document.getElementById('error-msg');
-    const PIN_CORRECTO = "dis"; 
-
-    if (inputPass.value.toLowerCase() === PIN_CORRECTO) {
-        sessionStorage.setItem("acceso_distribuidor", "true");
-        location.reload();
-    } else {
-        errorMsg.innerText = "PIN INCORRECTO";
-        inputPass.classList.add('error-shake');
-        inputPass.value = "";
-        document.getElementById('stars-placeholder').classList.remove('hide-stars');
-        
-        setTimeout(() => { 
-            inputPass.classList.remove('error-shake'); 
-            errorMsg.innerText = ""; 
-        }, 3000);
+    function checkInputPass(el) {
+        const stars = document.getElementById('stars-placeholder');
+        if (el.value.length > 0) stars.classList.add('hide-stars');
+        else stars.classList.remove('hide-stars');
     }
-}
 
-// Lógica de Scroll: Botón subir
-window.onscroll = function() {
-    const btnSubir = document.getElementById("back-to-top");
-    if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
-        btnSubir.classList.add("show");
-    } else {
-        btnSubir.classList.remove("show");
+    function validarAcceso() {
+        const inputPass = document.getElementById('input-dist-pass');
+        const errorMsg = document.getElementById('error-msg');
+        const PIN_CORRECTO = "dis"; 
+
+        if (inputPass.value.toLowerCase() === PIN_CORRECTO) {
+            sessionStorage.setItem("acceso_distribuidor", "true");
+            location.reload();
+        } else {
+            errorMsg.innerText = "PIN INCORRECTO";
+            inputPass.classList.add('error-shake');
+            inputPass.value = "";
+            document.getElementById('stars-placeholder').classList.remove('hide-stars');
+            
+            setTimeout(() => { 
+                inputPass.classList.remove('error-shake'); 
+                errorMsg.innerText = ""; 
+            }, 3000);
+        }
     }
-};
 
-document.getElementById("back-to-top").onclick = function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-};
+    window.onscroll = function() {
+        const btnSubir = document.getElementById("back-to-top");
+        if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+            btnSubir.classList.add("show");
+        } else {
+            btnSubir.classList.remove("show");
+        }
+    };
+
 </script>
 </head>
-    <div id="modal-pedido-vip" class="modal-pedido">
+<body>
+
+<!-- Elementos decorativos (Partículas) -->
+<div class="particles-container">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+</div>
+
+<div id="toast-container"></div>
+
+<div id="modal-pedido-vip" class="modal-pedido">
     <div class="modal-pedido-content">
         <div id="paso-seleccion">
             <h2>¿QUÉ ADQUIRISTE?</h2>
             <p>Selecciona que opción adquiriste:</p>
             <button class="btn-finalizar" style="margin-bottom: 15px;" onclick="irAPasoNombre()">👤 PERFIL</button>
-                <button class="btn-finalizar" style="background: #222; color: #fff; border: 1px solid #333;" onclick="finalizarSinNombre()"> Otra categoría</button>
+            <button class="btn-finalizar" style="background: #222; color: #fff; border: 1px solid #333;" onclick="finalizarSinNombre()"> Otra categoría</button>
         </div>
 
         <div id="paso-nombre" style="display: none;">
@@ -774,7 +426,6 @@ document.getElementById("back-to-top").onclick = function() {
         <span style="display:block; margin-top:15px; color:#444; font-size:0.7rem; cursor:pointer;" onclick="cerrarModalPedido()">Cancelar</span>
     </div>
 </div>
-<body>
 
 <button id="back-to-top" title="Volver Arriba"><i class="fas fa-chevron-up"></i></button>
 
@@ -810,15 +461,15 @@ document.getElementById("back-to-top").onclick = function() {
         <div class="garantia-mini-item"><i class="fa-solid fa-shield-halved"></i><p>Garantía<br>Total</p></div>
         <div class="garantia-mini-item"><i class="fa-solid fa-bolt"></i><p>Entrega<br>Rápida</p></div>
     </div>
-    
-    <div class="search-container">
-        <div class="search-wrapper">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="buscador" placeholder="Buscar plataforma..." onkeyup="filtrarPlataformas()">
-        </div>
+</header>
+
+<div class="search-container">
+    <div class="search-wrapper">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="buscador" placeholder="Buscar plataforma..." onkeyup="filtrarPlataformas()">
     </div>
 
-    <div class="filter-wrapper" style="position: relative; max-width: 600px; margin: 0 auto 20px; display: flex; align-items: center;">
+    <div class="filter-wrapper" style="position: relative; max-width: 600px; margin: 15px auto 5px; display: flex; align-items: center;">
     
     <div class="arrow-filter" onclick="scrollFilters(-100)" 
          style="position: absolute; left: 5px; top: 50%; transform: translateY(-50%); z-index: 10; cursor: pointer; color: #00e5ff; font-size: 18px; background: rgba(0,0,0,0.6); width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; border-radius: 50%; border: 1px solid #333;">
@@ -842,7 +493,7 @@ document.getElementById("back-to-top").onclick = function() {
          &#10095;
     </div>
        
-</div>
+    </div>
  <div class="view-controls">
     <button class="view-btn active" id="btn-list" onclick="cambiarDiseno('lista')">
         <i class="fa-solid fa-list"></i>
@@ -850,8 +501,8 @@ document.getElementById("back-to-top").onclick = function() {
     <button class="view-btn" id="btn-grid" onclick="cambiarDiseno('cuadricula')">
         <i class="fa-solid fa-table-cells-large"></i>
     </button>
+ </div>
 </div>
-</header>
 
 <div class="grid-botones">
     <a href="../" class="btn-universal btn-inicio"><i class="fa-solid fa-house"></i> VOLVER AL INICIO</a>
@@ -868,11 +519,11 @@ document.getElementById("back-to-top").onclick = function() {
     
     <div class="category-title" data-aos="fade-right"><i class="fa-solid fa-user"></i> ZONA PERFILES</div>
 
-    <div class="service-link premium disponible " onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link premium disponible" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">Mas solicitado 🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/netflix.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/netflix.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">Netflix Perfil</h3>
@@ -886,11 +537,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-    <div class="service-link disponible " onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/disneys.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/disneys.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">Disney standar Perfil</h3>
@@ -904,11 +555,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-    <div class="service-link disponible " onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/disneyp.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/disneyp.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">Disney premium Perfil</h3>
@@ -922,11 +573,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-    <div class="service-link disponible " onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/prime.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/prime.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">AMAZON PRIME Perfil</h3>
@@ -940,11 +591,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-    <div class="service-link disponible " onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/prime.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/prime.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">AMAZON PRIME Perfil (TV)</h3>
@@ -958,11 +609,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-    <div class="service-link disponible " onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/vix.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/vix.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">VIX PREMIUM Perfil</h3>
@@ -976,11 +627,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-    <div class="service-link disponible oferta" onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible oferta" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">EL MUNDIAL POR 👇</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/paramount.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/paramount.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">PARAMOUNT Perfil</h3>
@@ -994,11 +645,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-    <div class="service-link disponible " onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/crunchyroll.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/crunchyroll.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">CRUNCHYROLL Perfil</h3>
@@ -1012,11 +663,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-        <div class="service-link  " onclick="toggleSeleccion(this)" data-aos="fade-up">
+        <div class="service-link" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">Mas Solicitado🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/max.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/max.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">HBO Max Standard  perfil</h3>
@@ -1030,11 +681,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
             
-            <div class="service-link disponible pocas oferta premium" onclick="toggleSeleccion(this)" data-aos="fade-up">
+            <div class="service-link disponible pocas oferta premium" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">Mas Solicitado🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/max.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/max.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod"> HBO Max Platino </h3>
@@ -1048,11 +699,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
      </div>
         
-    <div class="service-link pocas oferta premium" onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link pocas oferta premium" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">Mas Solicitado🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/movistar.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/movistar.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">Movistar Play + Liga 1 Max Perfil</h3>
@@ -1068,11 +719,11 @@ document.getElementById("back-to-top").onclick = function() {
 
     <div class="category-title" data-aos="fade-right"><i class="fa-solid fa-house"></i>⚽EL MUNDIAL POR ⚽</div>
 
-        <div class="service-link disponible oferta premium " onclick="toggleSeleccion(this)" data-aos="fade-up">
+        <div class="service-link disponible oferta premium " data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">EL MUNDIAL POR 👇</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/dgo.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/dgo.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">DGO + Liga 1 Max Perfil</h3>
@@ -1086,11 +737,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-         <div class="service-link disponible oferta premium" onclick="toggleSeleccion(this)" data-aos="fade-up">
+         <div class="service-link disponible oferta premium" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">EL MUNDIAL POR 👇</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/paramount.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/paramount.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">PARAMOUNT PREMIUM PERFIL</h3>
@@ -1104,11 +755,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-        <div class="service-link premium oferta" onclick="toggleSeleccion(this)" data-aos="fade-up">
+        <div class="service-link premium oferta" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">EL MUNDIAL POR 👇</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/disneyp.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/disneyp.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">Disney Premium Perfil</h3>
@@ -1122,11 +773,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-        <div class="service-link oferta" onclick="toggleSeleccion(this)" data-aos="fade-up">
+        <div class="service-link oferta" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">EL MUNDIAL POR 👇</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/lamtv.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/lamtv.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">IPTV STANDAR CUENTA COMPLETA</h3>
@@ -1140,11 +791,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-        <div class="service-link oferta" onclick="toggleSeleccion(this)" data-aos="fade-up">
+        <div class="service-link oferta" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">EL MUNDIAL POR 👇</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/iptvp.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/iptvp.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">IPTV PREMIUM CUENTA COMPLETA</h3>
@@ -1158,11 +809,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-        <div class="service-link  oferta" onclick="toggleSeleccion(this)" data-aos="fade-up">
+        <div class="service-link  oferta" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">EL MUNDIAL POR 👇</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/flujo.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/flujo.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">FLUJO TV PERFIL</h3>
@@ -1176,11 +827,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-        <div class="service-link   oferta" onclick="toggleSeleccion(this)" data-aos="fade-up">
+        <div class="service-link   oferta" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">EL MUNDIAL POR 👇</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/flujo.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/flujo.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">FLUJO TV CUENTA COMPLETA</h3>
@@ -1197,11 +848,11 @@ document.getElementById("back-to-top").onclick = function() {
         
     <div class="category-title" data-aos="fade-right"><i class="fa-solid fa-house"></i> ZONA CUENTAS COMPLETAS</div>
 
-    <div class="service-link disponible agotado" onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible agotado" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/paramount.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/paramount.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">PARAMOUNT PREMIUM</h3>
@@ -1215,11 +866,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-        <div class="service-link pocas oferta " onclick="toggleSeleccion(this)" data-aos="fade-up">
+        <div class="service-link pocas oferta " data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">🔥 muy solicitado</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/prime.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/prime.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">PRIME VIDEO COMPLETA</h3>
@@ -1234,10 +885,10 @@ document.getElementById("back-to-top").onclick = function() {
     </div>
 
     
-    <div class="service-link agotado renovacion oferta agotado" onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link agotado renovacion oferta agotado" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">Mas Solicitado🔥</span>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">Netflix Completa</h3>
@@ -1251,11 +902,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-    <div class="service-link disponible pocas" onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible pocas" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/disneys.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/disneys.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">Disney Premium Completa (SIN ESPN)</h3>
@@ -1269,11 +920,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-    <div class="service-link pocas oferta premium" onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link pocas oferta premium" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">2 unidades disponible🔥 </span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/disneyp.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/disneyp.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">Disney Premium Completa</h3>
@@ -1287,11 +938,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-    <div class="service-link oferta pocas premium agotado" onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link oferta pocas premium agotado" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">Mas solicitado🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/dgo.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/dgo.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">DGO + Liga 1 Max Completa</h3>
@@ -1305,11 +956,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-    <div class="service-link pocas oferta premium " onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link pocas oferta premium " data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">Mas Solicitado🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/movistar.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/movistar.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">Movistar Play + Liga 1 Max Completa</h3>
@@ -1323,11 +974,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-    <div class="service-link disponible oferta pocas premium agotado" onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible oferta pocas premium agotado" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">Mas solicitado🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/max.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/max.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">HBO MAX PLATINO completa</h3>
@@ -1341,11 +992,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-        <div class="service-link disponible oferta pocas" onclick="toggleSeleccion(this)" data-aos="fade-up">
+        <div class="service-link disponible oferta pocas" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">Mas solicitado🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/max.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/max.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">HBO MAX STANDARD  completa</h3>
@@ -1358,11 +1009,11 @@ document.getElementById("back-to-top").onclick = function() {
             </div>
         </div>
     </div>
-        <div class="service-link disponible " onclick="toggleSeleccion(this)" data-aos="fade-up">
+        <div class="service-link disponible " data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">Mas solicitado🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/vix.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/vix.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">VIX PREMIUM</h3>
@@ -1375,11 +1026,11 @@ document.getElementById("back-to-top").onclick = function() {
             </div>
         </div>
     </div>
-        <div class="service-link pocas" onclick="toggleSeleccion(this)" data-aos="fade-up">
+        <div class="service-link pocas" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">Mas solicitado🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/crunchyroll.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/crunchyroll.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">crunchyroll Cuenta Completa</h3>
@@ -1396,11 +1047,11 @@ document.getElementById("back-to-top").onclick = function() {
 
          <div class="category-title" data-aos="fade-right"><i class="fa-solid fa-laptop-code"></i>MUSICA</div>
 
-    <div class="service-link disponible premium agotado" onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible premium agotado" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/spotify.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/spotify.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">SPOTIFY PREMIUM (1 mes)</h3>
@@ -1416,11 +1067,11 @@ document.getElementById("back-to-top").onclick = function() {
         
     <div class="category-title" data-aos="fade-right"><i class="fa-solid fa-laptop-code"></i> DISEÑOS Y MAS</div>
 
-    <div class="service-link disponible " onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible " data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/canva.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/canva.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">CANVA PRO(1 mes)</h3>
@@ -1434,11 +1085,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-    <div class="service-link disponible " onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible " data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/canva.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/canva.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">CANVA PRO(3 meses)</h3>
@@ -1452,11 +1103,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-    <div class="service-link disponible " onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible " data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/canva.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/canva.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">CANVA PRO(6 meses)</h3>
@@ -1470,11 +1121,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-    <div class="service-link disponible " onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible " data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/canva.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/canva.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">CANVA PRO(12 meses)</h3>
@@ -1488,11 +1139,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-    <div class="service-link disponible " onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible " data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">🔥</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/canva.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/canva.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">CANVA PRO(12 meses cond.)</h3>
@@ -1508,11 +1159,11 @@ document.getElementById("back-to-top").onclick = function() {
 
     <div class="category-title" data-aos="fade-right"><i class="fa-solid fa-mobile-screen-button"></i> APPS DE PAGA</div>
 
-    <div class="service-link disponible popular" onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible popular" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">OFERTA</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/ibo.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/ibo.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">IBO PLAYER (12 meses)</h3>
@@ -1526,11 +1177,11 @@ document.getElementById("back-to-top").onclick = function() {
         </div>
     </div>
 
-    <div class="service-link disponible popular" onclick="toggleSeleccion(this)" data-aos="fade-up">
+    <div class="service-link disponible popular" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleSeleccion(this)" data-aos="fade-up">
         <div class="service-card">
             <span class="badge-oferta">OFERTA</span>
             <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-            <img src="../img/ibopro.webp" class="service-logo">
+            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/ibopro.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <div class="status-badge"></div>
                 <h3 class="nombre-prod">IBO PLAYER PRO (12 meses)</h3>
@@ -1543,7 +1194,7 @@ document.getElementById("back-to-top").onclick = function() {
             </div>
         </div>
     </div>
-
+</div>
         
 <div id="whatsapp-btn" class="floating-btn">
     <div class="cart-content-wrapper">
@@ -1562,29 +1213,48 @@ document.getElementById("back-to-top").onclick = function() {
 </div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
 <script>
-    // Inicialización de animaciones
     AOS.init({ 
         duration: 800, 
-        once: true,    // <--- CAMBIA ESTO A TRUE: La animación solo ocurre una vez
+        once: true,
         offset: 50,
-        mirror: false  // <--- ASEGÚRATE QUE ESTÉ EN FALSE: Evita que se animen al subir
+        mirror: false  
     });
     
     let carrito = [];
+
+    // --- EFECTO PARALLAX SUAVE EN EL FONDO ---
+    document.addEventListener("mousemove", (e) => {
+        const x = (window.innerWidth / 2 - e.pageX) / 50;
+        const y = (window.innerHeight / 2 - e.pageY) / 50;
+        const bg = document.querySelector('body::before');
+        if(bg) bg.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    // --- SISTEMA DE TOASTS NOTIFICATIONS ---
+    function showToast(message, isAdded = true) {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = `toast ${isAdded ? '' : 'remove'}`;
+        toast.innerHTML = `<i class="fa-solid ${isAdded ? 'fa-check-circle' : 'fa-minus-circle'}"></i> ${message}`;
+        container.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.classList.add('fadeOut');
+            setTimeout(() => toast.remove(), 400);
+        }, 2500);
+    }
 
     function cambiarDiseno(modo, btn) {
         const contenedor = document.querySelector('.container');
         const btnList = document.getElementById('btn-list');
         const btnGrid = document.getElementById('btn-grid');
 
-        // 1. Gestión de clases activas para los botones
         if (btn) {
-            // Si pasas el botón directamente (como en la script anterior)
             document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
         } else {
-            // Si usas la lógica de IDs (btn-list / btn-grid)
             if (modo === 'cuadricula') {
                 btnGrid.classList.add('active');
                 btnList.classList.remove('active');
@@ -1594,25 +1264,21 @@ document.getElementById("back-to-top").onclick = function() {
             }
         }
 
-        // 2. Aplicar el modo al contenedor
         if (modo === 'cuadricula' || modo === 'grid') {
             contenedor.classList.add('grid-mode');
         } else {
             contenedor.classList.remove('grid-mode');
         }
 
-        // 3. Refrescar AOS para ajustar animaciones a la nueva posición
-        // Esto evita que los elementos desaparezcan al cambiar de vista
         setTimeout(() => {
             if (typeof AOS !== 'undefined') {
                 AOS.refreshHard();
             }
         }, 100);
     }
-    // --- BUSCADOR ---
-    // --- BUSCADOR OPTIMIZADO ---
+    
+    // --- BUSCADOR OPTIMIZADO FLUIDO ---
     function filtrarPlataformas() {
-        // 1. Resetear visualmente los botones de filtro de categorías al escribir
         document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
         const btnTodos = document.querySelector(".btn-filter[onclick*='TODOS']");
         if(btnTodos) btnTodos.classList.add('active');
@@ -1620,30 +1286,22 @@ document.getElementById("back-to-top").onclick = function() {
         const input = document.getElementById('buscador').value.trim().toLowerCase();
         const tarjetas = document.querySelectorAll('.service-link');
         
-        // 2. Filtrar cada una de las tarjetas de producto
         tarjetas.forEach(tarjeta => {
             const nombre = tarjeta.querySelector('.nombre-prod') ? tarjeta.querySelector('.nombre-prod').innerText.toLowerCase() : "";
             const descripcion = tarjeta.querySelector('.manual-desc') ? tarjeta.querySelector('.manual-desc').innerText.toLowerCase() : "";
             
             if (input === "" || nombre.includes(input) || descripcion.includes(input)) {
                 tarjeta.classList.remove('oculto-busqueda', 'oculto-filtro');
-                tarjeta.style.setProperty('display', 'block', 'important');
-                tarjeta.style.opacity = "1"; 
-                tarjeta.style.transform = "none";
-                tarjeta.style.visibility = "visible";
             } else {
                 tarjeta.classList.add('oculto-busqueda');
-                tarjeta.style.setProperty('display', 'none', 'important');
             }
         });
         
-        // 3. Ocultar los títulos de las categorías si no les queda ninguna tarjeta visible debajo
         const categorias = document.querySelectorAll('.category-title');
         categorias.forEach(titulo => {
             let tieneHijosVisibles = false;
             let hermano = titulo.nextElementSibling;
             
-            // Recorremos los elementos siguientes hasta encontrar el próximo título de categoría
             while(hermano && !hermano.classList.contains('category-title')) {
                 if(hermano.classList.contains('service-link') && !hermano.classList.contains('oculto-busqueda')) {
                     tieneHijosVisibles = true;
@@ -1652,92 +1310,120 @@ document.getElementById("back-to-top").onclick = function() {
                 hermano = hermano.nextElementSibling;
             }
             
-            // Si no hay productos que coincidan en esta sección, ocultamos el título por completo
-            titulo.style.setProperty('display', (tieneHijosVisibles || input === "") ? "flex" : "none", 'important');
+            if(tieneHijosVisibles || input === "") {
+                titulo.style.display = 'flex';
+                titulo.style.opacity = '1';
+                titulo.style.height = 'auto';
+                titulo.style.margin = '35px 0 15px';
+            } else {
+                titulo.style.opacity = '0';
+                titulo.style.height = '0';
+                titulo.style.margin = '0';
+                setTimeout(() => {
+                    if (titulo.style.opacity === '0') titulo.style.display = 'none';
+                }, 300);
+            }
         });
 
-        // 4. Forzar refresco de AOS para evitar que desaparezcan elementos por scroll
         setTimeout(() => {
             if (typeof AOS !== 'undefined') {
-                AOS.refreshHard(); 
+                AOS.refresh(); 
             }
-        }, 100);
+        }, 300);
     }
-   function filtrarCategoria(categoria, boton) {
-    // 1. Gestionar estado visual de los botones
-    document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
-    boton.classList.add('active');
+    
+    function filtrarCategoria(categoria, boton) {
+        document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
+        boton.classList.add('active');
 
-    const titulos = document.querySelectorAll('.category-title');
-    let primerElementoVisible = null;
+        const titulos = document.querySelectorAll('.category-title');
+        let primerElementoVisible = null;
 
-    // 2. Lógica de filtrado
-    titulos.forEach(titulo => {
-        const textoTitulo = titulo.innerText.toUpperCase();
-        // Verificamos si debe mostrarse (Si es 'TODOS' o si el título coincide)
-        const coincide = (categoria === 'TODOS' || textoTitulo.includes(categoria.toUpperCase()));
-        
-        // Mostrar/Ocultar el título de la categoría
-        titulo.style.setProperty('display', coincide ? 'flex' : 'none', 'important');
-        
-        // Guardar el primer título visible para hacer scroll después
-        if (coincide && !primerElementoVisible) {
-            primerElementoVisible = titulo;
-        }
-
-        // Buscar productos que pertenecen a este título
-        let hermano = titulo.nextElementSibling;
-        while (hermano && !hermano.classList.contains('category-title')) {
-            if (hermano.classList.contains('service-link')) {
-                if (coincide) {
-                    hermano.classList.remove('oculto-filtro');
-                    hermano.style.setProperty('display', 'block', 'important');
-                    hermano.style.opacity = "1";
-                    hermano.style.transform = "none";
-                    hermano.style.visibility = "visible";
-                } else {
-                    hermano.classList.add('oculto-filtro');
-                    hermano.style.setProperty('display', 'none', 'important');
-                }
-            }
-            hermano = hermano.nextElementSibling;
-        }
-    });
-
-    // 3. Auto-scroll con retraso controlado para evitar desfases de altura
-    setTimeout(() => {
-        if (categoria !== 'TODOS' && primerElementoVisible) {
-            // Ajuste de margen para que el título no quede tapado por tu buscador/header pegajoso
-            const yOffset = -310; 
-            const y = primerElementoVisible.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        titulos.forEach(titulo => {
+            const textoTitulo = titulo.innerText.toUpperCase();
+            const coincide = (categoria === 'TODOS' || textoTitulo.includes(categoria.toUpperCase()));
             
-            // Ejecuta el desplazamiento suave al inicio real de la sección
-            window.scrollTo({ top: y, behavior: 'smooth' });
-        } else if (categoria === 'TODOS') {
-            // Si regresan a "TODOS", sube suavemente al inicio absoluto del catálogo
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (coincide && !primerElementoVisible) {
+                primerElementoVisible = titulo;
+            }
+
+            let hermano = titulo.nextElementSibling;
+            while (hermano && !hermano.classList.contains('category-title')) {
+                if (hermano.classList.contains('service-link')) {
+                    if (coincide) {
+                        hermano.classList.remove('oculto-filtro');
+                    } else {
+                        hermano.classList.add('oculto-filtro');
+                    }
+                }
+                hermano = hermano.nextElementSibling;
+            }
+        });
+        actualizarTitulos();
+
+        setTimeout(() => {
+            if (categoria !== 'TODOS' && primerElementoVisible) {
+                const yOffset = -310; 
+                const y = primerElementoVisible.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            } else if (categoria === 'TODOS') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }, 100); 
+
+        setTimeout(() => {
+            if (typeof AOS !== 'undefined') {
+                AOS.refresh(); 
+            }
+        }, 300);
+    }
+
+    function actualizarTitulos() {
+        document.querySelectorAll('.category-title').forEach(titulo => {
+            let has = false;
+            let hermano = titulo.nextElementSibling;
+            while (hermano && !hermano.classList.contains('category-title')) {
+                if (hermano.classList.contains('service-link') && !hermano.classList.contains('oculto-filtro') && !hermano.classList.contains('oculto-busqueda')) { has = true; break; }
+                hermano = hermano.nextElementSibling;
+            }
+            if(has) {
+                titulo.style.display = 'flex';
+                titulo.style.opacity = '1';
+                titulo.style.height = 'auto';
+                titulo.style.margin = '35px 0 15px';
+            } else {
+                titulo.style.opacity = '0';
+                titulo.style.height = '0';
+                titulo.style.margin = '0';
+                setTimeout(() => {
+                    if (titulo.style.opacity === '0') titulo.style.display = 'none';
+                }, 300);
+            }
+        });
+    }
+
+    function scrollFilters(val) {
+        const container = document.getElementById('filterScroll');
+        container.scrollBy({ left: val, behavior: 'smooth' });
+    }
+
+    // --- LÓGICA DE SELECCIÓN CON TOASTS ---
+    function toggleSeleccion(elemento) {
+        if(elemento.classList.contains('agotado')) return;
+        
+        const wasSelected = elemento.classList.contains('selected');
+        elemento.classList.toggle('selected');
+        
+        const nombre = elemento.querySelector('.nombre-prod').innerText;
+
+        if (wasSelected) {
+            showToast(`Quitaste ${nombre}`, false);
+        } else {
+            showToast(`Añadiste ${nombre}`, true);
         }
-    }, 100); // 100 milisegundos son suficientes para que el DOM se reorganice
 
-    // 4. Refrescar AOS para que reconozca los nuevos tamaños y posiciones de la página
-    setTimeout(() => {
-        if (typeof AOS !== 'undefined') {
-            AOS.refreshHard(); 
-        }
-    }, 250);
-}
-
-function scrollFilters(val) {
-    const container = document.getElementById('filterScroll');
-    container.scrollBy({ left: val, behavior: 'smooth' });
-}
-
-// --- LÓGICA DE SELECCIÓN ---
-function toggleSeleccion(elemento) {
-    if(elemento.classList.contains('agotado')) return;
-    elemento.classList.toggle('selected');
-    reconstruirCarritoDesdeUI();
-}
+        reconstruirCarritoDesdeUI();
+    }
 
     function reconstruirCarritoDesdeUI() {
         carrito = [];
@@ -1746,9 +1432,8 @@ function toggleSeleccion(elemento) {
             const nombre = el.querySelector('.nombre-prod').innerText;
             const precioText = el.querySelector('.precio-prod').innerText;
             const caracteristicas = el.querySelector('.manual-desc') ? el.querySelector('.manual-desc').innerText : "Sin descripción";
-            const precio = parseFloat(precioText.replace('S/ ', ''));
+            const precio = parseFloat(precioText.replace('S/', '').trim());
             
-            // --- VALIDACIÓN POR CLASE 'renovacion' ---
             let renovacion = null;
             if (el.classList.contains('renovacion')) {
                 const renovacionEl = el.querySelector('.badge-renovacion');
@@ -1759,14 +1444,12 @@ function toggleSeleccion(elemento) {
         });
         actualizarCarritoUI();
     }
-    //enviar whatsapp
-   // Abrir el modal al presionar el botón verde de WhatsApp
+    
     function enviarPedido() {
         if (carrito.length === 0) {
             mostrarAlerta();
             return;
         }
-        // Reiniciar el modal a la pantalla 1
         document.getElementById('paso-seleccion').style.display = 'block';
         document.getElementById('paso-nombre').style.display = 'none';
         document.getElementById('modal-pedido-vip').style.display = 'flex';
@@ -1776,7 +1459,6 @@ function toggleSeleccion(elemento) {
         document.getElementById('modal-pedido-vip').style.display = 'none';
     }
 
-    // Navegación entre pasos
     function irAPasoNombre() {
         document.getElementById('paso-seleccion').style.display = 'none';
         document.getElementById('paso-nombre').style.display = 'block';
@@ -1787,9 +1469,8 @@ function toggleSeleccion(elemento) {
         document.getElementById('paso-nombre').style.display = 'none';
     }
 
-    // Lógica de finalización
     function finalizarSinNombre() {
-        ejecutarEnvioWhatsApp(""); // Envía sin nombre de perfil
+        ejecutarEnvioWhatsApp(""); 
         cerrarModalPedido();
     }
 
@@ -1803,7 +1484,6 @@ function toggleSeleccion(elemento) {
         cerrarModalPedido();
     }
 
-    // Función maestra de envío
     function ejecutarEnvioWhatsApp(nombreDelPerfil) {
         let totalSoles = carrito.reduce((sum, p) => sum + p.precio, 0);
         let mensaje = "¡Hola Alex Store! soy distribuidor 👋 Deseo adquirir:\n\n";
@@ -1813,12 +1493,10 @@ function toggleSeleccion(elemento) {
             mensaje += `📝 ${p.caracteristicas}\n`;
             mensaje += `💵 Precio: S/ ${p.precio.toFixed(2)}\n`;
             
-            // Agregar renovación si existe
             if (p.renovacion) {
                 mensaje += `🔄 ${p.renovacion}\n`;
             }
             
-            // Si el usuario escribió un nombre en el formulario, lo agregamos
             if (nombreDelPerfil !== "") {
                 mensaje += `👤 Nombre del Perfil: *${nombreDelPerfil}*\n`;
             }
@@ -1828,7 +1506,6 @@ function toggleSeleccion(elemento) {
         
         mensaje += `\n💰 *TOTAL A PAGAR: S/ ${totalSoles.toFixed(2)}*`;
         
-
         window.open(`https://wa.me/51918600000?text=${encodeURIComponent(mensaje)}`, '_blank');
     }
 
@@ -1836,6 +1513,7 @@ function toggleSeleccion(elemento) {
         if(e) e.stopPropagation();
         carrito = [];
         document.querySelectorAll('.service-link').forEach(t => t.classList.remove('selected'));
+        showToast("Selección limpiada", false);
         actualizarCarritoUI();
     }
 
@@ -1848,7 +1526,6 @@ function toggleSeleccion(elemento) {
         if(contador) contador.innerText = carrito.length;
         if(totalTxt) totalTxt.innerText = `S/ ${totalSoles.toFixed(2)}`;
         
-        // Solo mostrar si hay productos Y el acceso está validado
         if(barra) {
             if (carrito.length > 0 && sessionStorage.getItem("acceso_distribuidor") === "true") {
                 barra.style.display = 'block';
@@ -1865,7 +1542,6 @@ function toggleSeleccion(elemento) {
             setTimeout(() => alert.classList.remove('active'), 3000);
         }
     }
-    
 </script>
 </body>
 </html>
