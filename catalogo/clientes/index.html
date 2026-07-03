@@ -36,7 +36,7 @@
     html { display: none; background-color: var(--dark); scroll-behavior: smooth; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* --- FONDO ULTRA-PREMIUM CON MÁSCARA DE ENFOQUE TEATRAL Y PARALLAX --- */
+    /* --- FONDO ULTRA-PREMIUM CON MÁSCARA DE ENFOQUE TEATRAL (CORREGIDO DE ERRORES VISUALES) --- */
     body { 
         font-family: 'Poppins', sans-serif; 
         color: white; 
@@ -44,56 +44,23 @@
         padding-bottom: 100px; 
         position: relative;
         background-color: var(--dark);
-        overflow-x: hidden;
     }
 
+    /* Solución al glitch visual de fondo en móviles */
     body::before {
         content: "";
         position: fixed;
-        top: -5%; /* Margen para el parallax */
-        left: -5%;
-        width: 110%;
-        height: 110%;
-        z-index: -2;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
         background: radial-gradient(circle at 50% 30%, transparent 10%, rgba(5, 5, 5, 0.65) 60%, rgba(5, 5, 5, 0.95) 100%),
                     linear-gradient(to bottom, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.3) 20%, rgba(5, 5, 5, 0.75) 50%, rgba(5, 5, 5, 0.95) 100%), 
                     linear-gradient(rgba(5, 5, 5, 0.82), rgba(5, 5, 5, 0.92)), 
                     url("../img/fondo-mundial.jpg") no-repeat center center;
         background-size: cover;
-        transition: transform 0.1s ease-out; /* Suavidad del parallax */
-        will-change: transform;
     }
-
-    /* --- PARTÍCULAS CSS PURO --- */
-    .particles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; overflow: hidden; }
-    .particle { position: absolute; background: var(--primary); border-radius: 50%; opacity: 0.3; animation: floatUp 15s infinite linear; filter: blur(3px); }
-    .particle:nth-child(1) { width: 8px; height: 8px; left: 10%; bottom: -10px; animation-duration: 25s; }
-    .particle:nth-child(2) { width: 15px; height: 15px; left: 30%; bottom: -20px; animation-duration: 20s; animation-delay: 5s; opacity: 0.1; }
-    .particle:nth-child(3) { width: 5px; height: 5px; left: 50%; bottom: -5px; animation-duration: 30s; animation-delay: 2s; }
-    .particle:nth-child(4) { width: 10px; height: 10px; left: 70%; bottom: -15px; animation-duration: 18s; animation-delay: 8s; background: var(--promo); }
-    .particle:nth-child(5) { width: 20px; height: 20px; left: 90%; bottom: -25px; animation-duration: 22s; animation-delay: 1s; opacity: 0.15; }
-
-    @keyframes floatUp {
-        0% { transform: translateY(0) translateX(0); opacity: 0; }
-        20% { opacity: 0.4; }
-        80% { opacity: 0.4; }
-        100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
-    }
-
-    /* --- TOAST NOTIFICATIONS --- */
-    #toast-container {
-        position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none;
-    }
-    .toast {
-        background: rgba(10, 10, 15, 0.95); border-left: 4px solid var(--primary); border-radius: 8px; padding: 12px 20px; color: white;
-        font-size: 0.8rem; font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,0.5); backdrop-filter: blur(10px);
-        animation: slideInRight 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; display: flex; align-items: center; gap: 10px;
-    }
-    .toast.remove { border-left-color: var(--danger); }
-    .toast.fadeOut { animation: fadeOutRight 0.4s forwards; }
-
-    @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-    @keyframes fadeOutRight { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
 
     /* --- MEJORA: MODO ENFOQUE (OVERLAY) --- */
     #search-overlay {
@@ -147,58 +114,96 @@
         filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
     }
 
-    /* BARRA DE CONFIANZA REDISEÑADA */
+    /* BARRA DE CONFIANZA REDISEÑADA (CON LETRAS BLANCAS Y ALTA LEGIBILIDAD) */
     .trust-bar { 
-        display: flex; justify-content: center; gap: 16px; margin: 8px auto 18px; max-width: 500px; flex-wrap: wrap;
+        display: flex; 
+        justify-content: center; 
+        gap: 16px; 
+        margin: 8px auto 18px;
+        max-width: 500px;
+        flex-wrap: wrap;
     }
     .trust-item { 
-        display: flex; align-items: center; gap: 6px; font-size: 0.65rem; font-weight: 700; color: #ffffff; 
-        text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0, 0, 0, 0.4); padding: 5px 12px;
-        border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.08); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8); 
+        display: flex; 
+        align-items: center; 
+        gap: 6px; 
+        font-size: 0.65rem; 
+        font-weight: 700; 
+        color: #ffffff; 
+        text-transform: uppercase; 
+        letter-spacing: 0.5px;
+        background: rgba(0, 0, 0, 0.4); 
+        padding: 5px 12px;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8); 
     }
     .trust-item i { color: var(--primary); font-size: 0.75rem; filter: drop-shadow(0 0 4px var(--primary)); }
 
-    /* --- FILTROS Y BUSCADOR MEJORADO + STICKY --- */
-    .search-container-wrapper {
-        position: sticky;
-        top: 0;
-        z-index: 2300;
-        background: linear-gradient(to bottom, rgba(5,5,5,0.95) 60%, transparent);
-        padding-top: 10px;
-        padding-bottom: 15px;
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-    }
+    /* --- FILTROS Y BUSCADOR MEJORADO --- */
     .search-container { max-width: 600px; margin: 0 auto; position: relative; }
     .search-container i.fa-search { position: absolute; left: 20px; top: 18px; color: rgba(255,255,255,0.4); z-index: 2300; pointer-events: none; font-size: 0.9rem; }
     
     #search-input { 
-        width: 100%; padding: 14px 20px 14px 45px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.12); 
-        background: rgba(5, 5, 5, 0.75); color: white; font-family: 'Poppins'; outline: none; font-size: 0.85rem; 
-        margin-bottom: 14px; position: relative; z-index: 2200; box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+        width: 100%; 
+        padding: 14px 20px 14px 45px; 
+        border-radius: 14px; 
+        border: 1px solid rgba(255, 255, 255, 0.12); 
+        background: rgba(5, 5, 5, 0.75); 
+        color: white; 
+        font-family: 'Poppins'; 
+        outline: none; 
+        font-size: 0.85rem; 
+        margin-bottom: 14px; 
+        position: relative; 
+        z-index: 2200;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
         transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
     #search-input:focus { 
-        border-color: var(--primary); background: rgba(0, 0, 0, 0.85);
+        border-color: var(--primary); 
+        background: rgba(0, 0, 0, 0.85);
         box-shadow: 0 0 20px rgba(0, 212, 255, 0.15), inset 0 2px 4px rgba(0,0,0,0.4);
     }
     #search-input:focus + i.fa-search { color: var(--primary); }
-    #search-input::placeholder { color: rgba(255, 255, 255, 0.5) !important; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+    #search-input::placeholder {
+        color: rgba(255, 255, 255, 0.5) !important;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
 
     .filter-wrapper { margin: 8px 0; position: relative; display: flex; align-items: center; gap: 8px; padding: 0; }
     .filter-container { display: flex; gap: 8px; overflow-x: auto; padding: 6px 2px; scrollbar-width: none; scroll-behavior: smooth; flex-grow: 1; }
     .filter-container::-webkit-scrollbar { display: none; }
     
     .scroll-indicator { 
-        background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); color: #ffffff; width: 34px; height: 34px; 
-        border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5; flex-shrink: 0; transition: 0.2s; 
+        background: rgba(0, 0, 0, 0.5); 
+        border: 1px solid rgba(255, 255, 255, 0.1); 
+        color: #ffffff; 
+        width: 34px; 
+        height: 34px; 
+        border-radius: 50%; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        cursor: pointer; 
+        z-index: 5; 
+        flex-shrink: 0; 
+        transition: 0.2s; 
     }
     .scroll-indicator:hover { background: rgba(0, 212, 255, 0.1); border-color: var(--primary); }
 
     .btn-nav { 
-        background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.85); 
-        padding: 8px 18px; border-radius: 50px; font-size: 0.7rem; font-weight: 600; cursor: pointer; white-space: nowrap; 
-        transition: all 0.3s ease; text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        background: rgba(0, 0, 0, 0.5); 
+        border: 1px solid rgba(255, 255, 255, 0.1); 
+        color: rgba(255, 255, 255, 0.85); 
+        padding: 8px 18px; 
+        border-radius: 50px; 
+        font-size: 0.7rem; 
+        font-weight: 600; 
+        cursor: pointer; 
+        white-space: nowrap; 
+        transition: all 0.3s ease; 
+        text-shadow: 0 1px 3px rgba(0,0,0,0.5);
     }
     .btn-nav:hover { color: #fff; border-color: rgba(255,255,255,0.25); background: rgba(0, 0, 0, 0.7); }
     .btn-nav.active { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #000; border-color: transparent; font-weight: 700; box-shadow: 0 4px 20px rgba(0, 212, 255, 0.45); text-shadow: none; }
@@ -210,121 +215,230 @@
     
     /* --- BOTÓN SUBIR INTELIGENTE --- */
     #back-to-top {
-        position: fixed; bottom: 100px; right: 20px; width: 45px; height: 45px; background: var(--primary); color: #000;
-        border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer;
-        z-index: 999; border: none; box-shadow: 0 0 15px rgba(0, 212, 255, 0.5); opacity: 0; visibility: hidden;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform: translateY(20px);
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        background: var(--primary);
+        color: #000;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        cursor: pointer;
+        z-index: 999;
+        border: none;
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transform: translateY(20px);
     }
-    #back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+    #back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
    
     /* --- AJUSTES DE COMPRESIÓN DE ESPACIOS --- */
-    .container { padding: 0 15px 10px; max-width: 650px; margin: auto; transition: all 0.4s ease; }
+    .container { 
+        padding: 0 15px 10px; 
+        max-width: 650px; 
+        margin: auto; 
+        transition: all 0.4s ease; 
+    }
 
-    .grid-botones { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0 0; }
-    
-    /* FILTRADO FLUIDO */
+    .grid-botones { 
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        gap: 8px; 
+        margin: 12px 0 0; 
+    }
     .category-title { 
-        margin: 16px 0 12px; padding: 10px 15px; font-size: 0.85rem; font-weight: 700; color: var(--primary); 
-        letter-spacing: 2px; background: rgba(255,255,255,0.02); border-radius: 12px; border-left: 4px solid var(--primary); 
-        text-transform: uppercase; display: flex; align-items: center;
-        transition: opacity 0.3s, transform 0.3s, margin 0.3s, padding 0.3s, height 0.3s;
-        overflow: hidden;
+        margin: 16px 0 12px; 
+        padding: 10px 15px; 
+        font-size: 0.85rem; 
+        font-weight: 700; 
+        color: var(--primary); 
+        letter-spacing: 2px; 
+        background: rgba(255,255,255,0.02); 
+        border-radius: 12px; 
+        border-left: 4px solid var(--primary); 
+        text-transform: uppercase; 
+        display: flex; 
+        align-items: center; 
     }
     .btn-universal { display: flex; align-items: center; justify-content: center; padding: 10px 8px; border-radius: 50px; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; cursor: pointer; text-decoration: none; border: none; text-align: center; transition: 0.3s; }
     
-    /* --- VIDRIO INTELIGENTE EN TARJETAS CON EFECTO 3D (TILT) --- */
+    /* --- VIDRIO INTELIGENTE EN TARJETAS CON EFECTO HÁPTICO TÁCTIL MÓVIL --- */
     .service-item { 
-        cursor: pointer; margin-bottom: 16px; position: relative; 
-        transition: opacity 0.3s ease, transform 0.3s ease, height 0.3s ease, margin 0.3s ease, padding 0.3s ease; 
+        cursor: pointer; 
+        margin-bottom: 16px; 
+        position: relative; 
+        transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s; 
         animation: flotarCapa 6s infinite ease-in-out;
-        transform-style: preserve-3d; /* Para el Tilt */
     }
     
-    .service-item.oculto-filtro {
-        opacity: 0; transform: scale(0.9); margin-bottom: 0; pointer-events: none; position: absolute; visibility: hidden;
+    .service-item:active {
+        transform: scale(0.96) !important; 
     }
     
-    .service-item:active { transform: scale(0.96) !important; }
     .service-item:nth-child(2n) { animation-delay: -1.5s; }
     .service-item:nth-child(3n) { animation-delay: -3s; }
     .service-item:nth-child(4n) { animation-delay: -4.5s; }
     
     .service-card { 
-        background: rgba(10, 10, 10, 0.4); border-radius: 22px; padding: 18px; display: flex; align-items: center; 
-        border: 1px solid transparent; background-image: linear-gradient(rgba(10, 10, 10, 0.4), rgba(10, 10, 10, 0.4)), var(--border-glow);
-        background-origin: border-box; background-clip: padding-box, border-box; gap: 15px; position: relative; 
-        overflow: visible; transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
-        backdrop-filter: blur(12px) saturate(140%); -webkit-backdrop-filter: blur(12px) saturate(140%);
-        transform: translateZ(20px); /* Efecto 3D Profundidad */
+        background: rgba(10, 10, 10, 0.4);
+        border-radius: 22px; 
+        padding: 18px; 
+        display: flex; 
+        align-items: center; 
+        border: 1px solid transparent;
+        background-image: linear-gradient(rgba(10, 10, 10, 0.4), rgba(10, 10, 10, 0.4)), var(--border-glow);
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+        gap: 15px; 
+        position: relative; 
+        overflow: visible; 
+        transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
+        backdrop-filter: blur(12px) saturate(140%);
+        -webkit-backdrop-filter: blur(12px) saturate(140%);
     }
     
     .service-item:hover .service-card { 
-        box-shadow: 0 15px 35px rgba(0, 212, 255, 0.1);
+        box-shadow: 0 10px 30px rgba(0, 212, 255, 0.08);
+        transform: translateY(-4px);
         background-image: linear-gradient(rgba(15, 15, 15, 0.6), rgba(15, 15, 15, 0.6)), linear-gradient(135deg, rgba(0,212,255,0.4), rgba(255,255,255,0.05) 50%, rgba(0,85,255,0.2));
     }
-    .service-item:hover .service-logo { transform: scale(1.06) rotate(1deg) translateZ(30px); box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
-    .service-item.premium:hover .service-logo { box-shadow: 0 0 20px rgba(244, 208, 63, 0.3); }
+    .service-item:hover .service-logo {
+        transform: scale(1.06) rotate(1deg);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    }
+    .service-item.premium:hover .service-logo {
+        box-shadow: 0 0 20px rgba(244, 208, 63, 0.3);
+    }
 
     /* --- PULSO DE LUZ PERIMETRAL AL SELECCIONAR --- */
     .service-item.selected .service-card { 
-        background: rgba(0, 212, 255, 0.12) !important; border-color: var(--primary) !important; 
-        box-shadow: 0 0 25px rgba(0, 212, 255, 0.45); background-image: none !important;
+        transform: scale(0.97) !important; 
+        background: rgba(0, 212, 255, 0.12) !important; 
+        border-color: var(--primary) !important; 
+        box-shadow: 0 0 25px rgba(0, 212, 255, 0.45); 
+        background-image: none !important;
     }
+    
     .service-item.premium.selected .service-card { 
-        background: rgba(212, 175, 55, 0.12) !important; border-color: var(--promo) !important; 
-        box-shadow: 0 0 30px rgba(212, 175, 55, 0.45); background-image: none !important;
+        background: rgba(212, 175, 55, 0.12) !important; 
+        border-color: var(--promo) !important; 
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.45); 
+        background-image: none !important;
     }
 
-    .premium .service-card { background-image: linear-gradient(rgba(12, 10, 5, 0.5), rgba(5, 5, 5, 0.5)), linear-gradient(135deg, #d4af37, rgba(255,255,255,0.02) 60%, transparent); }
+    .premium .service-card { 
+        background-image: linear-gradient(rgba(12, 10, 5, 0.5), rgba(5, 5, 5, 0.5)), linear-gradient(135deg, #d4af37, rgba(255,255,255,0.02) 60%, transparent);
+    }
+    
     .premium .service-card::after { 
-        content: 'PREMIUM'; position: absolute; top: 12px; right: 20px; font-size: 0.5rem; font-weight: 900; color: #d4af37; 
+        content: 'PREMIUM'; position: absolute; top: 12px; right: 20px; 
+        font-size: 0.5rem; font-weight: 900; color: #d4af37; 
         border: 1px solid rgba(212, 175, 55, 0.4); padding: 2px 6px; border-radius: 4px; z-index: 11; letter-spacing: 0.5px;
-        background: rgba(0, 0, 0, 0.3); transform: translateZ(10px);
+        background: rgba(0, 0, 0, 0.3);
     }
 
-    .price-container { display: flex; flex-direction: column; align-items: flex-end; margin-left: auto; min-width: 85px; z-index: 5; transform: translateZ(25px); }
+    .price-container { display: flex; flex-direction: column; align-items: flex-end; margin-left: auto; min-width: 85px; z-index: 5; }
     .price-tag { color: var(--primary); font-weight: 700; font-size: 1.25rem; white-space: nowrap; transition: 0.3s; text-shadow: 0 2px 8px rgba(0,212,255,0.2); }
     .premium .price-tag { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: none; font-weight: 800; }
 
     /* --- BADGE DE OFERTA EN CASCADA --- */
     .badge-oferta { 
-        display: none !important; position: absolute; top: -10px; left: 15px; background: var(--promo); color: #000; 
-        padding: 3px 14px; border-radius: 8px; font-size: 0.55rem; font-weight: 800; text-transform: uppercase; 
-        z-index: 50; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); overflow: hidden; letter-spacing: 0.5px; transform: translateZ(15px);
+        display: none !important; 
+        position: absolute; 
+        top: -10px; 
+        left: 15px; 
+        background: var(--promo); 
+        color: #000; 
+        padding: 3px 14px; 
+        border-radius: 8px; 
+        font-size: 0.55rem; 
+        font-weight: 800; 
+        text-transform: uppercase; 
+        z-index: 50; 
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); 
+        overflow: hidden;
+        letter-spacing: 0.5px;
     }
+    
     .badge-oferta::before {
-        content: ''; position: absolute; top: 0; left: -150%; width: 50%; height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent); transform: skewX(-20deg);
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -150%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+        transform: skewX(-20deg);
         animation: brilloPasajero 4s infinite ease-in-out;
     }
-    .service-item.oferta .badge-oferta { display: block !important; }
 
-    .check-icon { position: absolute; top: 12px; right: 12px; background: var(--primary); color: #000; width: 26px; height: 26px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 900; z-index: 20; box-shadow: 0 0 10px rgba(0,0,0,0.5); transform: translateZ(30px); }
+    .service-item.oferta .badge-oferta { 
+        display: block !important; 
+    }
+
+    .check-icon { position: absolute; top: 12px; right: 12px; background: var(--primary); color: #000; width: 26px; height: 26px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 900; z-index: 20; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
     .selected .check-icon { display: flex !important; animation: popCheck 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
     .service-item.premium.selected .check-icon { background: var(--gold-gradient) !important; }
 
-    /* INDICADOR DE CARGA SKELETON PARA LOGOS */
-    .img-wrapper { position: relative; width: 60px; height: 60px; border-radius: 16px; flex-shrink: 0; overflow: hidden; }
-    .grid-mode .img-wrapper { width: 65px; height: 65px; margin: 0 auto 8px; }
-    .skeleton { position: absolute; inset: 0; background: #1a1a1a; animation: pulseSkeleton 1.5s infinite; z-index: 1; border-radius: 16px; }
-    .service-logo { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 2; transition: opacity 0.3s, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 12px rgba(0,0,0,0.3); opacity: 0; }
-    .service-logo.loaded { opacity: 1; }
-    @keyframes pulseSkeleton { 0% { background: #111; } 50% { background: #222; } 100% { background: #111; } }
-
-    .service-text { padding-right: 20px; flex-grow: 1; transform: translateZ(10px); }
+    .service-logo { 
+        width: 60px; 
+        height: 60px; 
+        object-fit: cover; 
+        border-radius: 16px; 
+        flex-shrink: 0; 
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .service-text { padding-right: 20px; flex-grow: 1; }
     .service-text h3 { font-size: 1.05rem; color: #fff; font-weight: 600; margin-bottom: 4px; }
     
-    .product-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
-    .grid-mode .product-tags { justify-content: center; }
-    .tag-prop { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.07); padding: 3px 8px; border-radius: 6px; font-size: 0.65rem; color: #d1d1d6; font-weight: 500; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
-    .tag-prop i { color: var(--primary); font-size: 0.6rem; }
+    /* --- CAPSULAS DE ATRIBUTOS FLEX --- */
+    .product-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 6px;
+    }
+    .grid-mode .product-tags {
+        justify-content: center;
+    }
+    .tag-prop {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-size: 0.65rem;
+        color: #d1d1d6;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        white-space: nowrap;
+    }
+    .tag-prop i {
+        color: var(--primary);
+        font-size: 0.6rem;
+    }
 
     /* --- LÓGICA AGOTADO --- */
     .service-item.agotado { pointer-events: none; }
     .service-item.agotado .service-card { opacity: 0.4; filter: grayscale(0.9); }
     .service-item.agotado .price-tag, .service-item.agotado .badge-oferta, .service-item.agotado::after, .service-item.agotado .premium-tag-inner, .service-item.agotado .product-tags { display: none !important; }
 
-    .sin-stock-badge { display: none; background: #600000; color: white; padding: 6px 14px; border-radius: 10px; font-size: 0.7rem; font-weight: 900; border: 1px solid #ff2222; box-shadow: 0 0 15px rgba(255,0,0,0.4); text-transform: uppercase; white-space: nowrap; animation: blinkNeon 1.5s infinite; z-index: 100; letter-spacing: 0.5px; }
+    .sin-stock-badge {
+        display: none; background: #600000; color: white; padding: 6px 14px; border-radius: 10px; font-size: 0.7rem; font-weight: 900;
+        border: 1px solid #ff2222; box-shadow: 0 0 15px rgba(255,0,0,0.4); text-transform: uppercase; white-space: nowrap; animation: blinkNeon 1.5s infinite; z-index: 100; letter-spacing: 0.5px;
+    }
     .service-item.agotado .sin-stock-badge { display: block !important; }
     @keyframes blinkNeon { 0% { opacity: 1; } 50% { opacity: 0.7; transform: scale(1.02); } 100% { opacity: 1; } }
 
@@ -334,11 +448,12 @@
     .grid-mode .category-title { grid-column: 1 / -1; width: 100%; margin-top: 30px; display: flex; }
     .grid-mode .service-card { flex-direction: column; text-align: center; min-height: 295px; justify-content: space-between; padding: 25px 15px 20px; }
     .grid-mode .service-text { padding-right: 0; width: 100%; }
+    .grid-mode .service-logo { margin-right: 0; margin-bottom: 8px; width: 65px; height: 65px; }
     .grid-mode .price-container { margin-left: 0; align-items: center; width: 100%; }
     .grid-mode .premium .service-card::after { display: none !important; }
     .grid-mode .premium .premium-tag-inner { display: inline-block; font-size: 0.55rem; font-weight: 900; color: var(--promo); border: 1px solid rgba(244, 208, 63, 0.4); padding: 2px 8px; border-radius: 5px; margin-bottom: 5px; background: rgba(0,0,0,0.2); }
     .premium-tag-inner { display: none; }
-    .grid-mode .badge-oferta { left: 50% !important; transform: translateX(-50%) translateZ(15px) !important; width: 85% !important; text-align: center; top: -10px; }
+    .grid-mode .badge-oferta { left: 50% !important; transform: translateX(-50%) !important; width: 85% !important; text-align: center; top: -10px; }
 
     /* --- FEEDBACK VISUAL WHATSAPP --- */
     .floating-btn:not(.hidden) { 
@@ -346,80 +461,288 @@
         background: linear-gradient(135deg, #25d366, #128c7e); color: white; 
         padding: 18px; border-radius: 22px; width: 92%; max-width: 480px; 
         z-index: 1000; box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-        animation: pulseOrder 2s infinite ease-in-out; border: 1px solid rgba(255,255,255,0.2); display: none !important;
+        animation: pulseOrder 2s infinite ease-in-out;
+        border: 1px solid rgba(255,255,255,0.2);
     }
     #cart-total { transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: inline-block; }
     .total-bump { transform: scale(1.2); color: var(--promo); }
+
     .discount-label { font-size: 0.7rem; color: var(--promo); margin-top: 5px; font-weight: 700; display: none; text-align: center;}
 
-    /* --- COMPONENTES ACORDEÓN FAQ --- */
-    .faq-container { margin-top: 40px; padding: 10px 5px; border-top: 1px solid rgba(255,255,255,0.05); }
-    .faq-title { font-size: 1.1rem; font-weight: 800; color: #ffffff; text-align: center; margin-bottom: 20px; letter-spacing: 1px; text-transform: uppercase; }
-    .faq-item { background: rgba(10, 10, 10, 0.3); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 14px; margin-bottom: 10px; overflow: hidden; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: border-color 0.3s; }
-    .faq-question { padding: 16px 20px; font-size: 0.85rem; font-weight: 600; color: #ffffff; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
-    .faq-question i { color: var(--primary); font-size: 0.8rem; transition: transform 0.3s; }
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0, 1, 0, 1); padding: 0 20px; font-size: 0.78rem; color: #b3b3b3; line-height: 1.6; }
-    .faq-item.active .faq-answer { max-height: 300px; padding-bottom: 16px; transition: max-height 0.3s cubic-bezier(0.95, 0.05, 0.795, 0.035); }
-    .faq-item.active .faq-question i { transform: rotate(180deg); }
-    .faq-item.active { border-color: rgba(0, 212, 255, 0.25); }
+    /* --- COMPONENTES ACORDEÓN FAQ (SUPER PREMIUM) --- */
+    .faq-container {
+        margin-top: 40px;
+        padding: 10px 5px;
+        border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .faq-title {
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #ffffff;
+        text-align: center;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+    .faq-item {
+        background: rgba(10, 10, 10, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 14px;
+        margin-bottom: 10px;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition: border-color 0.3s;
+    }
+    .faq-question {
+        padding: 16px 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #ffffff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+    }
+    .faq-question i {
+        color: var(--primary);
+        font-size: 0.8rem;
+        transition: transform 0.3s;
+    }
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+        padding: 0 20px;
+        font-size: 0.78rem;
+        color: #b3b3b3;
+        line-height: 1.6;
+    }
+    .faq-item.active .faq-answer {
+        max-height: 300px;
+        padding-bottom: 16px;
+        transition: max-height 0.3s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+    }
+    .faq-item.active .faq-question i {
+        transform: rotate(180deg);
+    }
+    .faq-item.active {
+        border-color: rgba(0, 212, 255, 0.25);
+    }
 
     /* --- FORMULARIOS --- */
-    .modal-overlay, .modal-pass { position: fixed; inset: 0; display: none; justify-content: center; align-items: center; z-index: 3000; background: rgba(0,0,0,0.92); backdrop-filter: blur(12px); }
-    .modal-pass { z-index: 4000; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); align-items: center !important; }
-    .modal-pass .modal-content { margin: auto !important; }
+    .modal-overlay { 
+        position: fixed; 
+        inset: 0; 
+        display: none; 
+        justify-content: center; 
+        align-items: center; 
+        z-index: 3000; 
+        background: rgba(0,0,0,0.92); 
+        backdrop-filter: blur(12px); 
+    }
+
+    .modal-pass { 
+        position: fixed; 
+        inset: 0; 
+        display: none; 
+        justify-content: center !important; 
+        align-items: center !important; 
+        z-index: 4000; 
+        background: rgba(0,0,0,0.95); 
+        backdrop-filter: blur(15px); 
+    }
+
+    .modal-pass .modal-content {
+        margin: auto !important;
+    }
+
     .modal-content { background: #0b0b0c; padding: 35px 25px; border-radius: 32px; width: 90%; max-width: 420px; text-align: center; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
     .modal-content h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 15px; color: var(--primary); letter-spacing: 0.5px; }
     .modal-content p { color: #889; font-size: 0.85rem; margin-bottom: 20px; line-height: 1.5; }
     .modal-content input { width: 100%; padding: 16px; margin-bottom: 15px; border-radius: 16px; background: #000; color: #fff; border: 1px solid #223; font-family: 'Poppins'; outline: none; font-size: 0.75rem; text-align: center; transition: border-color 0.3s; }
     .modal-content input:focus { border-color: var(--primary); }
     .modal-content input::placeholder { font-size: 0.75rem !important; color: #445; }
+
     .btn-modal-main { background: var(--primary) !important; color: #000 !important; font-weight: 800; width: 100%; padding: 16px; border-radius: 50px; margin-top: 10px; font-size: 0.9rem; text-transform: uppercase; border: none; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,212,255,0.2); }
     .btn-modal-main:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,212,255,0.4); }
     .btn-modal-back { background: #16161a !important; color: #a0a0b0 !important; width: 100%; padding: 15px; border-radius: 50px; margin-top: 12px; font-size: 0.8rem; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.04) !important; cursor: pointer; opacity: 0.8; transition: 0.3s; }
     .btn-modal-back:hover { opacity: 1; background: #202025 !important; }
 
-    /* --- SIDEBAR LATERALES --- */
-    .sidebar-lateral { position: fixed; top: 320px; width: 240px; display: none; flex-direction: column; gap: 20px; z-index: 100; }
-    .sidebar-lateral.izquierdo { left: 4%; animation: flotarCapa 7s infinite ease-in-out -1s; }
-    .sidebar-lateral.derecho { right: 4%; animation: flotarCapa 8s infinite ease-in-out -2.5s; }
-    .sidebar-card { background: rgba(10, 10, 10, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 20px; color: #fff; backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
-    .sidebar-card h3 { font-size: 0.9rem; color: var(--primary); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
-    .sidebar-card p { font-size: 0.75rem; color: #ccc; line-height: 1.5; margin-bottom: 6px; }
-    .sidebar-card p strong { color: var(--primary); }
-    @media (min-width: 1250px) { .sidebar-lateral { display: flex; } }
-    @media (max-width: 1650px) { .grid-mode ~ .sidebar-lateral, body:has(.grid-mode) .sidebar-lateral { display: none !important; } }
+    /* --- COMPONENTES PARA LOS COSTADOS VACÍOS --- */
+    .sidebar-lateral {
+        position: fixed;
+        top: 320px; 
+        width: 240px;
+        display: none; 
+        flex-direction: column;
+        gap: 20px;
+        z-index: 100;
+    }
+    
+    .sidebar-lateral.izquierdo {
+        left: 4%;
+        animation: flotarCapa 7s infinite ease-in-out -1s;
+    }
+    .sidebar-lateral.derecho {
+        right: 4%;
+        animation: flotarCapa 8s infinite ease-in-out -2.5s;
+    }
 
-    /* --- BOTÓN INFO MÓVIL --- */
-    #btn-info-movil { position: fixed; bottom: 25px; left: 20px; width: 50px; height: 50px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; cursor: pointer; z-index: 2500; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); transition: 0.3s ease; animation: flotarCapa 4s infinite ease-in-out; }
-    body:not(.hidden) #btn-info-movil { bottom: 180px; }
-    .modal-cristal { background: rgba(10, 10, 10, 0.9) !important; border: 1px solid rgba(255, 255, 255, 0.12) !important; backdrop-filter: blur(25px) !important; -webkit-backdrop-filter: blur(25px) !important; max-height: 80vh; overflow-y: auto; padding: 40px 24px 30px !important; box-sizing: border-box; }
-    .info-seccion { text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.06); padding: 14px 0; }
-    .info-seccion h3 { font-size: 0.85rem; color: var(--primary); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-    .info-seccion p { font-size: 0.75rem !important; color: #ccc !important; line-height: 1.4 !important; margin-bottom: 0 !important; }
-    @media (min-width: 1250px) { #btn-info-movil { display: none !important; } }
-    .modal-cristal h2 { margin-top: 10px !important; margin-bottom: 15px !important; }
+    .sidebar-card {
+        background: rgba(10, 10, 10, 0.85); 
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 20px;
+        color: #fff;
+        backdrop-filter: blur(20px) saturate(160%);
+        -webkit-backdrop-filter: blur(20px) saturate(160%);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+
+    .sidebar-card h3 {
+        font-size: 0.9rem;
+        color: var(--primary);
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .sidebar-card p {
+        font-size: 0.75rem;
+        color: #ccc;
+        line-height: 1.5;
+        margin-bottom: 6px;
+    }
+    
+    .sidebar-card p strong {
+        color: var(--primary);
+    }
+
+    @media (min-width: 1250px) {
+        .sidebar-lateral {
+            display: flex;
+        }
+    }
+
+    @media (max-width: 1650px) {
+        .grid-mode ~ .sidebar-lateral,
+        body:has(.grid-mode) .sidebar-lateral {
+            display: none !important;
+        }
+    }
+
+    /* --- BOTÓN FLOTANTE DE INFO --- */
+    #btn-info-movil {
+        position: fixed;
+        bottom: 25px;
+        left: 20px;
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: var(--primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        cursor: pointer;
+        z-index: 2500;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        transition: 0.3s ease;
+        animation: flotarCapa 4s infinite ease-in-out;
+    }
+    
+    body:not(.hidden) #btn-info-movil {
+        bottom: 180px;
+    }
+
+    .modal-cristal {
+        background: rgba(10, 10, 10, 0.9) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        backdrop-filter: blur(25px) !important;
+        -webkit-backdrop-filter: blur(25px) !important;
+        max-height: 80vh;
+        overflow-y: auto;
+        padding: 40px 24px 30px !important; 
+        box-sizing: border-box;
+    }
+    
+    .info-seccion {
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 14px 0;
+    }
+    
+    .info-seccion h3 {
+        font-size: 0.85rem;
+        color: var(--primary);
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    
+    .info-seccion p {
+        font-size: 0.75rem !important;
+        color: #ccc !important;
+        line-height: 1.4 !important;
+        margin-bottom: 0 !important;
+    }
+
+    @media (min-width: 1250px) {
+        #btn-info-movil {
+            display: none !important;
+        }
+    }
+    .modal-cristal h2 {
+        margin-top: 10px !important;
+        margin-bottom: 15px !important;
+    }
 
     /* --- KEYFRAMES --- */
-    @keyframes brilloPasajero { 0% { left: -150%; } 30% { left: 150%; } 100% { left: 150%; } }
-    @keyframes flotarLogo { 0% { transform: translateY(0px); filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.2)); } 50% { transform: translateY(-4px); filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.5)); } 100% { transform: translateY(0px); filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.2)); } }
-    @keyframes flotarCapa { 0% { transform: translateY(0px); } 50% { transform: translateY(-4px); } 100% { transform: translateY(0px); } }
+    @keyframes brilloPasajero {
+        0% { left: -150%; }
+        30% { left: 150%; }
+        100% { left: 150%; }
+    }
 
-    @media (max-width: 1199px) { #modal-info-lateral.modal-overlay { top: 175px; align-items: flex-start; } #modal-info-lateral .modal-cristal { margin-top: 15px; max-height: calc(100vh - 210px); } }
-    body.grid-activa .sidebar-lateral { display: none !important; }
+    @keyframes flotarLogo {
+        0% { transform: translateY(0px); filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.2)); }
+        50% { transform: translateY(-4px); filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.5)); }
+        100% { transform: translateY(0px); filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.2)); }
+    }
+
+    @keyframes flotarCapa {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-4px); }
+        100% { transform: translateY(0px); }
+    }
+
+    @media (max-width: 1199px) {
+        #modal-info-lateral.modal-overlay {
+            top: 175px; 
+            align-items: flex-start; 
+        }
+        #modal-info-lateral .modal-cristal {
+            margin-top: 15px; 
+            max-height: calc(100vh - 210px); 
+        }
+    }
+    
+    body.grid-activa .sidebar-lateral {
+        display: none !important;
+    }
 </style>
 </head>
 <body>
-
-<!-- Elementos decorativos (Partículas) -->
-<div class="particles-container">
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-</div>
-
-<div id="toast-container"></div>
 
 <button id="btn-info-movil" onclick="abrirModalInfo()"><i class="fas fa-info-circle"></i></button>
 
@@ -489,9 +812,6 @@
         <div class="trust-item"><i class="fas fa-shield-alt"></i>Garantía Total</div>
         <div class="trust-item"><i class="fas fa-bolt"></i>Entrega en 5 a 15 min</div>
     </div>
-</header>
-
-<div class="search-container-wrapper">
    <div class="search-container">
     <div style="position: absolute; visibility: hidden; height: 0;">
         <input type="text" name="fake_user">
@@ -528,8 +848,8 @@
         <button class="btn-view active" onclick="cambiarVista('list', this)"><i class="fas fa-list"></i></button>
         <button class="btn-view" onclick="cambiarVista('grid', this)"><i class="fas fa-th-large"></i></button>
     </div>
-   </div>
 </div>
+</header>
 
     <div class="container" id="product-container">
     <div class="grid-botones" data-aos="zoom-in">
@@ -541,11 +861,11 @@
 
     <div class="category-title" data-aos="fade-right"><i class="fas fa-film"></i> STREAMING Y CINE</div>
 
-    <div class="service-item oferta premium" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item oferta premium" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">🔥 MÁS SOLICITADO</div>
             <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/netflix.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/netflix.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Netflix Premium</h3>
                 <div class="product-tags">
@@ -562,11 +882,11 @@
         </div>
     </div>
 
-    <div class="service-item oferta premium" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item oferta premium" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">MUY SOLICITADO 🎁</div>
             <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/disneyp.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/disneyp.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Disney Premium</h3>
                 <div class="product-tags">
@@ -583,10 +903,10 @@
         </div>
     </div>
   
-    <div class="service-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/disneys.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/disneys.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Disney Premium (Sin ESPN)</h3>
                 <div class="product-tags">
@@ -599,10 +919,10 @@
         </div>
     </div>
 
-    <div class="service-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/max.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/max.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Hbo Max Standard</h3>
                 <div class="product-tags">
@@ -615,10 +935,10 @@
         </div>
     </div>
    
-    <div class="service-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/max.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/max.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Hbo MAX Platino</h3>
                 <div class="product-tags">
@@ -631,10 +951,10 @@
         </div>
     </div>
 
-    <div class="service-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/prime.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/prime.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">PRIME VIDEO (TV)</h3>
                 <div class="product-tags">
@@ -647,10 +967,10 @@
         </div>
     </div>
 
-    <div class="service-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/prime.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/prime.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">PRIME VIDEO</h3>
                 <div class="product-tags">
@@ -663,10 +983,10 @@
         </div>
     </div>
 
-    <div class="service-item premium" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item premium" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/vix.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/vix.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">VIX PREMIUM</h3>
                 <div class="product-tags">
@@ -679,10 +999,10 @@
         </div>
     </div>
 
-    <div class="service-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/crunchyroll.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/crunchyroll.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">CRUNCHYROLL</h3>
                 <div class="product-tags">
@@ -697,10 +1017,10 @@
 
     <div class="category-title" data-aos="fade-right"><i class="fas fa-laptop-code"></i> DISEÑOS Y MAS</div>
 
-    <div class="service-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card"> 
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/canva.webp" class="service-logo" onload="this.classList.add('loaded')"></div> 
+            <img src="../img/canva.webp" class="service-logo"> 
             <div class="service-text">
                 <h3 class="nombre-prod">CANVA PRO (1 mes)</h3>
                 <div class="product-tags">
@@ -712,10 +1032,10 @@
         </div>
     </div>
 
-    <div class="service-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card"> 
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/canva.webp" class="service-logo" onload="this.classList.add('loaded')"></div> 
+            <img src="../img/canva.webp" class="service-logo"> 
             <div class="service-text">
                 <h3 class="nombre-prod">CANVA PRO (3 meses)</h3>
                 <div class="product-tags">
@@ -727,10 +1047,10 @@
         </div>
     </div>
 
-    <div class="service-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card"> 
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/canva.webp" class="service-logo" onload="this.classList.add('loaded')"></div> 
+            <img src="../img/canva.webp" class="service-logo"> 
             <div class="service-text">
                 <h3 class="nombre-prod">CANVA PRO (6 meses)</h3>
                 <div class="product-tags">
@@ -742,10 +1062,10 @@
         </div>
     </div>
 
-    <div class="service-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card"> 
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/canva.webp" class="service-logo" onload="this.classList.add('loaded')"></div> 
+            <img src="../img/canva.webp" class="service-logo"> 
             <div class="service-text">
                 <h3 class="nombre-prod">CANVA PRO (12 meses)</h3>
                 <div class="product-tags">
@@ -759,10 +1079,10 @@
      
     <div class="category-title" data-aos="fade-right"><i class="fas fa-satellite-dish"></i> TELEVISIÓN DIGITAL</div>
 
-    <div class="service-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card"> 
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/movistar.webp" class="service-logo" onload="this.classList.add('loaded')"></div> 
+            <img src="../img/movistar.webp" class="service-logo"> 
             <div class="service-text">
                 <h3 class="nombre-prod">Movistar Play + Liga 1 Max</h3>
                 <div class="product-tags">
@@ -777,10 +1097,10 @@
         
     <div class="category-title" data-aos="fade-right"><i class="fas fa-trophy"></i> EL MUNDIAL</div>
 
-    <div class="service-item premium oferta" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item premium oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">EL MUNDIAL POR 👇</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/paramount.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/paramount.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">PARAMOUNT</h3>
                 <div class="product-tags">
@@ -793,10 +1113,10 @@
         </div>
     </div>
         
-    <div class="service-item oferta" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">EL MUNDIAL POR 👇</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/dgo.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/dgo.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Directv Go + l1 Max</h3>
                 <div class="product-tags">
@@ -809,10 +1129,10 @@
         </div>
     </div>
         
-    <div class="service-item oferta" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">EL MUNDIAL POR 👇</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/iptv.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/iptv.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">IPTV Smarters Standar (1 dis)</h3>
                 <div class="product-tags">
@@ -825,10 +1145,10 @@
         </div>
     </div>
 
-    <div class="service-item oferta" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">EL MUNDIAL POR 👇</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/iptv.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/iptv.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">IPTV Smarters Standar (3 dis)</h3>
                 <div class="product-tags">
@@ -841,10 +1161,10 @@
         </div>
     </div>
 
-    <div class="service-item premium oferta" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item premium oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">EL MUNDIAL POR 👇</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/iptvp.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/iptvp.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">IPTV Premium (3 dis)</h3>
                 <div class="product-tags">
@@ -857,10 +1177,10 @@
         </div>
     </div>
 
-    <div class="service-item oferta" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">EL MUNDIAL POR 👇</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/flujo.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/flujo.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Magis TV-Flujo TV</h3>
                 <div class="product-tags">
@@ -873,10 +1193,10 @@
         </div>
     </div>
 
-    <div class="service-item oferta" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">EL MUNDIAL POR 👇</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/flujo.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/flujo.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Magis TV-Flujo TV CUENTA COMPLETA</h3>
                 <div class="product-tags">
@@ -889,10 +1209,10 @@
         </div>
     </div>
 
-    <div class="service-item oferta" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">EL MUNDIAL POR 👇</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/mundo.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/mundo.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">IPTV Smarters basico(3 dis)</h3>
                 <div class="product-tags">
@@ -907,10 +1227,10 @@
 
     <div class="category-title" data-aos="fade-right"><i class="fas fa-tv"></i> IPTV Y FLUJO TV</div>
 
-    <div class="service-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/iptv.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/iptv.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">IPTV Smarters Standar (3 meses)</h3>
                 <div class="product-tags">
@@ -923,10 +1243,10 @@
         </div>
     </div>
 
-    <div class="service-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/iptv.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/iptv.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">IPTV Smarters Standar (6 meses)</h3>
                 <div class="product-tags">
@@ -939,10 +1259,10 @@
         </div>
     </div>
 
-    <div class="service-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/iptv.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/iptv.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">IPTV Smarters Standar (12 meses)</h3>
                 <div class="product-tags">
@@ -955,10 +1275,10 @@
         </div>
     </div>
 
-    <div class="service-item oferta" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/iptv.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/iptv.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">IPTV Smarters Standar (12 meses) + 1 Licencia gratis</h3>
                 <div class="product-tags">
@@ -974,10 +1294,10 @@
 
 <div class="category-title" data-aos="fade-right"><i class="fas fa-box"></i> APPS PARA IPTV</div>
 
-    <div class="service-item premium" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item premium" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/ibo.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/ibo.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">IBO PLAYER (12 meses)</h3>
                 <div class="product-tags">
@@ -994,10 +1314,10 @@
         </div>
     </div>     
 
-    <div class="service-item premium" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item premium" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/ibopro.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/ibopro.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">IBOPRO PLAYER (12 meses)</h3>
                 <div class="product-tags">
@@ -1014,10 +1334,10 @@
         </div>
     </div>    
 
-    <div class="service-item premium" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item premium" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/one.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/one.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">SMARTONE IPTV (12 meses)</h3>
                 <div class="product-tags">
@@ -1036,10 +1356,10 @@
         
 <div class="category-title" data-aos="fade-right"><i class="fas fa-music"></i> MÚSICA Y VIDEO SIN LÍMITES</div>
 
-    <div class="service-item premium" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item premium" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/spotify.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/spotify.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Spotify Premium (1 mes)</h3>
                 <div class="product-tags">
@@ -1056,10 +1376,10 @@
         </div>
     </div>
 
-    <div class="service-item premium" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item premium" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/spotify.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/spotify.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Spotify Premium (3 meses)</h3>
                 <div class="product-tags">
@@ -1076,11 +1396,11 @@
         </div>
     </div>
 
-    <div class="service-item premium" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item premium" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">MÁS SOLICITADO 🔥</div>
             <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/youtube.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/youtube.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Youtube Premium (1 mes)</h3>
                 <div class="product-tags">
@@ -1097,11 +1417,11 @@
         </div>
     </div>
 
-    <div class="service-item premium" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item premium" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">MÁS SOLICITADO 🔥</div>
             <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/youtube.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/youtube.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Youtube Premium (3 meses)</h3>
                 <div class="product-tags">
@@ -1118,11 +1438,11 @@
         </div>
     </div>
 
-    <div class="service-item premium oferta" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item premium oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">MÁS SOLICITADO 🔥</div>
             <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="../img/youtube.webp" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <img src="../img/youtube.webp" class="service-logo">
             <div class="service-text">
                 <h3 class="nombre-prod">Youtube Premium (1 mes)</h3>
                 <div class="product-tags">
@@ -1215,37 +1535,12 @@
 </div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<!-- Librería para el efecto 3D de tarjetas -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
 <script>
     AOS.init({ duration: 400, once: true, offset: 0, delay: 50 });
     let carrito = [];
     const numWhatsApp = "51918600000";
 
-    // --- EFECTO PARALLAX SUAVE EN EL FONDO ---
-    document.addEventListener("mousemove", (e) => {
-        const x = (window.innerWidth / 2 - e.pageX) / 50;
-        const y = (window.innerHeight / 2 - e.pageY) / 50;
-        document.body.style.setProperty('--x', `${x}px`);
-        document.body.style.setProperty('--y', `${y}px`);
-        const bg = document.querySelector('body::before');
-        if(bg) bg.style.transform = `translate(${x}px, ${y}px)`;
-    });
-
-    // --- SISTEMA DE TOASTS NOTIFICATIONS ---
-    function showToast(message, isAdded = true) {
-        const container = document.getElementById('toast-container');
-        const toast = document.createElement('div');
-        toast.className = `toast ${isAdded ? '' : 'remove'}`;
-        toast.innerHTML = `<i class="fas ${isAdded ? 'fa-check-circle' : 'fa-minus-circle'}"></i> ${message}`;
-        container.appendChild(toast);
-        
-        setTimeout(() => {
-            toast.classList.add('fadeOut');
-            setTimeout(() => toast.remove(), 400);
-        }, 2500);
-    }
-
+    // --- MEJORA: LÓGICA DE INTERACCIÓN INTERNA PARA ACORDEÓN FAQ ---
     function toggleFaq(element) {
         const item = element.parentElement;
         item.classList.toggle('active');
@@ -1294,17 +1589,11 @@
         const nombre = elemento.querySelector('.nombre-prod').innerText;
         
         const tagsEl = elemento.querySelector('.product-tags');
-        const manual = tagsEl ? tagsEl.innerText.replace(/\n/g, ' • ') : (elemento.querySelector('.manual-desc') ? elemento.querySelector('.manual-desc').innerText : '');
+        const manual = tagsEl ? tagsEl.innerText.replace(/\n/g, ' • ') : elemento.querySelector('.manual-desc').innerText;
         
         const precio = parseFloat(elemento.querySelector('.precio-prod').innerText.replace('S/', ''));
         const idx = carrito.findIndex(i => i.nombre === nombre);
-        if (idx > -1) {
-            carrito.splice(idx, 1);
-            showToast(`Quitaste ${nombre}`, false);
-        } else {
-            carrito.push({nombre, manual, precio});
-            showToast(`Añadiste ${nombre}`, true);
-        }
+        if (idx > -1) carrito.splice(idx, 1); else carrito.push({nombre, manual, precio});
         actualizarUI();
     }
 
@@ -1393,34 +1682,32 @@
         setTimeout(() => { AOS.refreshHard(); }, 100);
     }
 
-    /* SISTEMA DE FILTRADO FLUIDO MEJORADO */
     function filtrarProductos() {
         const bus = document.getElementById('search-input').value.toLowerCase();
         const items = document.querySelectorAll('.service-item');
         
         items.forEach(item => {
             const nom = item.querySelector('.nombre-prod').innerText.toLowerCase();
-            if(nom.includes(bus)){
-                item.classList.remove('oculto-filtro');
-            } else {
-                item.classList.add('oculto-filtro');
-            }
+            item.style.display = nom.includes(bus) ? 'block' : 'none';
         });
 
         if (bus === "") {
             document.body.classList.remove('searching');
+            AOS.refresh();
         } else {
             document.body.classList.add('searching');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: 'instant' });
         }
         
         actualizarTitulos();
-        setTimeout(() => AOS.refresh(), 300);
+        AOS.refresh();
     }
 
     function filtrarCategoria(cat, btn) {
         document.querySelectorAll('.btn-nav').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+        
+        const term = cat.toUpperCase();
         
         document.querySelectorAll('.service-item').forEach(item => {
             let catItem = "";
@@ -1434,7 +1721,7 @@
             }
             
             if (cat === 'TODOS') {
-                item.classList.remove('oculto-filtro');
+                item.style.display = 'block';
             } else {
                 const matchMundial = (cat.includes('MUNDIAL') && catItem.includes('MUNDIAL'));
                 const matchIptv = (cat.includes('IPTV Y FLUJO') && catItem.includes('IPTV Y FLUJO'));
@@ -1445,14 +1732,14 @@
                 const matchMusica = (cat.includes('MÚSICA') && catItem.includes('MÚSICA'));
 
                 if (matchMundial || matchIptv || matchPerfiles || matchTv || matchApps || matchDiseno || matchMusica) {
-                    item.classList.remove('oculto-filtro');
+                    item.style.display = 'block';
                 } else {
-                    item.classList.add('oculto-filtro');
+                    item.style.display = 'none';
                 }
             }
         });
         actualizarTitulos();
-        setTimeout(() => AOS.refresh(), 300);
+        AOS.refreshHard();
     }
 
     function actualizarTitulos() {
@@ -1460,32 +1747,58 @@
             let has = false;
             let hermano = titulo.nextElementSibling;
             while (hermano && !hermano.classList.contains('category-title')) {
-                if (hermano.classList.contains('service-item') && !hermano.classList.contains('oculto-filtro')) { has = true; break; }
+                if (hermano.classList.contains('service-item') && hermano.style.display !== 'none') { has = true; break; }
                 hermano = hermano.nextElementSibling;
             }
-            if(has) {
-                titulo.style.display = 'flex';
-                titulo.style.opacity = '1';
-                titulo.style.height = 'auto';
-            } else {
-                titulo.style.opacity = '0';
-                setTimeout(() => titulo.style.display = 'none', 300);
-            }
+            titulo.style.display = has ? 'block' : 'none';
         });
     }
 
-    function abrirModalInfo() { document.getElementById('modal-info-lateral').style.display = 'flex'; }
-    function cerrarModalInfo(event) { if(event.target.id === 'modal-info-lateral') { document.getElementById('modal-info-lateral').style.display = 'none'; } }
-    function abrirModalRegistro() { document.getElementById('modal-registro').style.display = 'flex'; }
-    function cerrarModalRegistro() { document.getElementById('modal-registro').style.display = 'none'; volverPaso1(); }
-    function mostrarFormAntiguo() { document.getElementById('paso-1').style.display = 'none'; document.getElementById('form-antiguo').style.display = 'block'; }
-    function mostrarForm() { document.getElementById('paso-1').style.display = 'none'; document.getElementById('form-datos').style.display = 'block'; }
-    function volverPaso1() { document.getElementById('form-datos').style.display = 'none'; document.getElementById('form-antiguo').style.display = 'none'; document.getElementById('paso-1').style.display = 'block'; }
+    /* --- FUNCIONES JS FALTANTES PARA LOS MODALES DE UI AÑADIDAS --- */
+    function abrirModalInfo() {
+        document.getElementById('modal-info-lateral').style.display = 'flex';
+    }
 
+    function cerrarModalInfo(event) {
+        if(event.target.id === 'modal-info-lateral') {
+            document.getElementById('modal-info-lateral').style.display = 'none';
+        }
+    }
+
+    function abrirModalRegistro() {
+        document.getElementById('modal-registro').style.display = 'flex';
+    }
+
+    function cerrarModalRegistro() {
+        document.getElementById('modal-registro').style.display = 'none';
+        volverPaso1(); /* Resetea el paso al cerrar */
+    }
+
+    function mostrarFormAntiguo() {
+        document.getElementById('paso-1').style.display = 'none';
+        document.getElementById('form-antiguo').style.display = 'block';
+    }
+
+    function mostrarForm() {
+        document.getElementById('paso-1').style.display = 'none';
+        document.getElementById('form-datos').style.display = 'block';
+    }
+
+    function volverPaso1() {
+        document.getElementById('form-datos').style.display = 'none';
+        document.getElementById('form-antiguo').style.display = 'none';
+        document.getElementById('paso-1').style.display = 'block';
+    }
+
+    /* ¡AQUÍ ESTÁ LA CORRECCIÓN! AHORA QUITA LAS SELECCIONES VISUALES */
     function limpiarCarrito() {
         carrito = [];
-        document.querySelectorAll('.service-item.selected').forEach(item => { item.classList.remove('selected'); });
-        showToast("Carrito vaciado", false);
+        
+        // Buscar todas las tarjetas que están seleccionadas y quitarles la clase
+        document.querySelectorAll('.service-item.selected').forEach(item => {
+            item.classList.remove('selected');
+        });
+        
         actualizarUI();
     }
 </script>
