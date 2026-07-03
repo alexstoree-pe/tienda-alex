@@ -456,6 +456,8 @@
     .grid-mode .badge-oferta { left: 50% !important; transform: translateX(-50%) !important; width: 85% !important; text-align: center; top: -10px; }
 
     /* --- FEEDBACK VISUAL WHATSAPP --- */
+    .hidden { display: none !important; }
+
     .floating-btn:not(.hidden) { 
         position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); 
         background: linear-gradient(135deg, #25d366, #128c7e); color: white; 
@@ -1589,7 +1591,7 @@
         const nombre = elemento.querySelector('.nombre-prod').innerText;
         
         const tagsEl = elemento.querySelector('.product-tags');
-        const manual = tagsEl ? tagsEl.innerText.replace(/\n/g, ' • ') : elemento.querySelector('.manual-desc').innerText;
+        const manual = tagsEl ? tagsEl.innerText.replace(/\n/g, ' • ') : (elemento.querySelector('.manual-desc') ? elemento.querySelector('.manual-desc').innerText : '');
         
         const precio = parseFloat(elemento.querySelector('.precio-prod').innerText.replace('S/', ''));
         const idx = carrito.findIndex(i => i.nombre === nombre);
