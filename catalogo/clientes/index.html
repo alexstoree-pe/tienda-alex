@@ -36,18 +36,30 @@
     html { display: none; background-color: var(--dark); scroll-behavior: smooth; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* --- FONDO ULTRA-PREMIUM CON MÁSCARA DE ENFOQUE TEATRAL (CORREGIDO) --- */
+    /* --- FONDO ULTRA-PREMIUM CON MÁSCARA DE ENFOQUE TEATRAL (CORREGIDO DE ERRORES VISUALES) --- */
     body { 
         font-family: 'Poppins', sans-serif; 
-        background: radial-gradient(circle at 50% 30%, transparent 10%, rgba(5, 5, 5, 0.65) 60%, rgba(5, 5, 5, 0.95) 100%),
-                    linear-gradient(to bottom, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.3) 20%, rgba(5, 5, 5, 0.75) 50%, rgba(5, 5, 5, 0.95) 100%), 
-                    linear-gradient(rgba(5, 5, 5, 0.82), rgba(5, 5, 5, 0.92)), 
-                    url("../img/fondo-mundial.jpg") no-repeat center center fixed;
-        background-size: cover;
         color: white; 
         line-height: 1.4; 
         padding-bottom: 100px; 
         position: relative;
+        background-color: var(--dark);
+    }
+
+    /* Solución al glitch visual de fondo en móviles */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: radial-gradient(circle at 50% 30%, transparent 10%, rgba(5, 5, 5, 0.65) 60%, rgba(5, 5, 5, 0.95) 100%),
+                    linear-gradient(to bottom, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.3) 20%, rgba(5, 5, 5, 0.75) 50%, rgba(5, 5, 5, 0.95) 100%), 
+                    linear-gradient(rgba(5, 5, 5, 0.82), rgba(5, 5, 5, 0.92)), 
+                    url("../img/fondo-mundial.jpg") no-repeat center center;
+        background-size: cover;
     }
 
     /* --- MEJORA: MODO ENFOQUE (OVERLAY) --- */
@@ -813,7 +825,7 @@
            name="no_pass_alex_search" 
            inputmode="search"
            onfocus="iniciarBusqueda()" 
-           onblur="finalizerBusqueda()" 
+           onblur="finalizarBusqueda()" 
            onkeyup="filtrarProductos()">
     <i class="fas fa-search"></i>
 
@@ -1740,6 +1752,47 @@
             }
             titulo.style.display = has ? 'block' : 'none';
         });
+    }
+
+    /* --- FUNCIONES JS FALTANTES PARA LOS MODALES DE UI AÑADIDAS --- */
+    function abrirModalInfo() {
+        document.getElementById('modal-info-lateral').style.display = 'flex';
+    }
+
+    function cerrarModalInfo(event) {
+        if(event.target.id === 'modal-info-lateral') {
+            document.getElementById('modal-info-lateral').style.display = 'none';
+        }
+    }
+
+    function abrirModalRegistro() {
+        document.getElementById('modal-registro').style.display = 'flex';
+    }
+
+    function cerrarModalRegistro() {
+        document.getElementById('modal-registro').style.display = 'none';
+        volverPaso1(); /* Resetea el paso al cerrar */
+    }
+
+    function mostrarFormAntiguo() {
+        document.getElementById('paso-1').style.display = 'none';
+        document.getElementById('form-antiguo').style.display = 'block';
+    }
+
+    function mostrarForm() {
+        document.getElementById('paso-1').style.display = 'none';
+        document.getElementById('form-datos').style.display = 'block';
+    }
+
+    function volverPaso1() {
+        document.getElementById('form-datos').style.display = 'none';
+        document.getElementById('form-antiguo').style.display = 'none';
+        document.getElementById('paso-1').style.display = 'block';
+    }
+
+    function limpiarCarrito() {
+        carrito = [];
+        actualizarUI();
     }
 </script>
 </body>
