@@ -1790,8 +1790,15 @@
         document.getElementById('paso-1').style.display = 'block';
     }
 
+    /* ¡AQUÍ ESTÁ LA CORRECCIÓN! AHORA QUITA LAS SELECCIONES VISUALES */
     function limpiarCarrito() {
         carrito = [];
+        
+        // Buscar todas las tarjetas que están seleccionadas y quitarles la clase
+        document.querySelectorAll('.service-item.selected').forEach(item => {
+            item.classList.remove('selected');
+        });
+        
         actualizarUI();
     }
 </script>
