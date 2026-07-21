@@ -304,6 +304,31 @@
     @keyframes brilloPasajero { 0% { left: -150%; } 30% { left: 150%; } 100% { left: 150%; } }
     @keyframes flotarLogo { 0% { transform: translateY(0px); filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.2)); } 50% { transform: translateY(-4px); filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.5)); } 100% { transform: translateY(0px); filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.2)); } }
     @keyframes flotarCapa { 0% { transform: translateY(0px); } 50% { transform: translateY(-4px); } 100% { transform: translateY(0px); } }
+    /* --- CONTROLES DE CANTIDAD (+ / -) --- */
+    .qty-controls {
+        position: absolute; top: 10px; right: 10px;
+        display: none; align-items: center; gap: 8px;
+        background: rgba(10, 10, 15, 0.95); border: 1px solid var(--primary);
+        border-radius: 20px; padding: 4px 6px; z-index: 30;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+    .service-item.selected .qty-controls { display: flex; animation: popCheck 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .service-item.selected .check-icon { display: none !important; } /* Ocultamos el check antiguo */
+    
+    .qty-btn {
+        background: rgba(0, 212, 255, 0.15); color: var(--primary); border: none; width: 26px; height: 26px;
+        border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s;
+    }
+    .qty-btn:hover { background: var(--primary); color: #000; }
+    .premium.selected .qty-controls { border-color: var(--vip); }
+    .premium.selected .qty-btn { background: rgba(212, 175, 55, 0.15); color: var(--vip); }
+    .premium.selected .qty-btn:hover { background: var(--gold-gradient); color: #000; }
+    .qty-display { color: #fff; font-weight: 800; min-width: 15px; text-align: center; font-size: 0.9rem; }
+    
+    /* Input dinámico del modal */
+    .nombre-perfil-input-dynamic { width: 100%; padding: 12px 16px; margin-bottom: 10px; border-radius: 12px; background: rgba(0,0,0,0.5); color: #fff; border: 1px solid #333; font-family: 'Poppins'; outline: none; font-size: 0.85rem; }
+    .nombre-perfil-input-dynamic:focus { border-color: var(--primary); }
+    .label-dynamic { color: var(--primary); font-size: 0.75rem; font-weight: 700; margin-bottom: 4px; display: block; text-transform: uppercase; }
 </style>
 <script>
     (function() {
@@ -386,13 +411,15 @@
 
         <div id="paso-nombre" style="display: none;">
             <h2>DATOS DEL PERFIL</h2>
-            <p>Ingresa el nombre que deseas para tus perfiles:</p>
-            <input type="text" id="nombre-perfil-input" placeholder="Ej: Juan/sonia">
+            <p>Ingresa los nombres para tus perfiles/cuentas:</p>
+            
+            <!-- Contenedor donde se generarán los inputs dinámicos -->
+            <div id="dynamic-inputs-container" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px; padding-right: 5px; text-align: left;">
+            </div>
+
             <button class="btn-modal-main" onclick="finalizarConNombre()">FINALIZAR PEDIDO</button>
             <button class="btn-modal-back" onclick="volverAPaso1()">← Volver</button>
         </div>
-    </div>
-</div>
 
 <button id="back-to-top" title="Volver Arriba"><i class="fas fa-chevron-up"></i></button>
 
