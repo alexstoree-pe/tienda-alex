@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Distribución VIP | Alex Store</title>
 
+   <!-- ANTI-CACHÉ GLOBAL -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <!-- ... (tu logo y demás código) ... -->
+
     <link rel="icon" type="image/webp" href="{{ url_for('static', filename='img/logo.webp') }}">
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/logo.webp') }}">
     <meta name="apple-mobile-web-app-title" content="Alex Distribución">
@@ -12,7 +19,7 @@
     <meta name="theme-color" content="#050505">
 
     <!-- Enlazar tu hoja de estilos desde Flask -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}?v=1.1">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -201,7 +208,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
 
 <!-- Enlazar tu archivo JS de Flask -->
-<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/scripts.js') }}?v=1.1"></script>
 
 </body>
 </html>
