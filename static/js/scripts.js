@@ -465,18 +465,57 @@ function limpiarTodo(e) {
 function actualizarCarritoUI() {
     const contador = document.getElementById('cart-count');
     const totalTxt = document.getElementById('cart-total');
+    const originalTxt = document.getElementById('cart-original-price'); 
     const barra = document.getElementById('whatsapp-btn');
+    const labelDescuento = document.getElementById('discount-label'); 
     
     let totalItems = carrito.reduce((sum, p) => sum + p.cantidad, 0);
-    let totalSoles = carrito.reduce((sum, p) => sum + (p.precio * p.cantidad), 0);
+    let totalOriginal = carrito.reduce((sum, p) => sum + (p.precio * p.cantidad), 0);
+    let totalSoles = totalOriginal; 
+    
+    // Leemos la ruta exacta
+    const path = window.location.pathname.toLowerCase();
+    
+    // AQUÍ ESTÁ EL CANDADO EXACTO:
+    // Aseguramos que la ruta termine exactamente en "/clientes" o sea "clientes.html"
+    // y que NO sea la página de promociones.
+    const esSoloClientes = (path.endsWith("/clientes") || path.endsWith("/clientes.html")) && !path.includes("promociones"); 
+    
+    // ==========================================
+    // LÓGICA DE DESCUENTO (SÓLO PARA CLIENTES.HTML)
+    // ==========================================
+    
+    if (esSoloClientes && totalItems >= 2) {
+        
+        let descuento = 2.00; // 👇 Tu descuento configurado
+        totalSoles = totalOriginal - descuento; 
+        
+        if (originalTxt) {
+            originalTxt.innerText = `S/ ${totalOriginal.toFixed(2)}`;
+            originalTxt.style.display = 'block';
+        }
+        
+        if (labelDescuento) {
+            labelDescuento.innerText = `¡AHORRAS S/ ${descuento.toFixed(2)}!`;
+            labelDescuento.style.display = 'inline-block';
+        }
+        
+    } else {
+        // Si está en Promociones, o en Distribuidores, o lleva 1 solo item, paga el precio normal.
+        if (originalTxt) originalTxt.style.display = 'none';
+        if (labelDescuento) {
+            labelDescuento.style.display = 'none';
+            labelDescuento.innerText = '';
+        }
+    }
     
     if(contador) contador.innerText = totalItems; 
     if(totalTxt) totalTxt.innerText = `S/ ${totalSoles.toFixed(2)}`;
     
     if(barra) {
-        if (carrito.length > 0 && sessionStorage.getItem("acceso_distribuidor") === "true") {
+        if (carrito.length > 0) {
             barra.classList.remove('hidden');
-            barra.style.display = 'block';
+            barra.style.display = 'flex'; 
         } else {
             barra.classList.add('hidden');
             barra.style.display = 'none';

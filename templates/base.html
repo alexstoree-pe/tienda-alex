@@ -179,7 +179,19 @@
                 <span id="cart-count" style="background:rgba(0,0,0,0.3); padding:5px 12px; border-radius:12px; font-weight:800;">0</span>
                 <span style="font-weight:800; text-transform:uppercase; font-size:0.9rem;">Pedir WhatsApp</span>
             </div>
-            <span id="cart-total" style="font-weight:800; font-size:1.2rem;">S/ 0.00</span>
+            
+            <!-- Contenedor del precio y el descuento -->
+            <div style="display:flex; flex-direction:column; align-items:flex-end; line-height: 1.2;">
+                <!-- Precio original tachado (Oculto por defecto) -->
+                <span id="cart-original-price" style="display:none; font-size: 0.75rem; text-decoration: line-through; color: rgba(255,255,255,0.7); font-weight: 600;">S/ 0.00</span>
+                
+                <!-- Precio Final -->
+                <span id="cart-total" style="font-weight:900; font-size:1.3rem; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">S/ 0.00</span>
+                
+                <!-- Etiqueta de Ahorro tipo "Píldora" -->
+                <span id="discount-label" style="display:none; background: var(--promo); color: #000; font-size: 0.65rem; font-weight: 900; padding: 2px 8px; border-radius: 6px; margin-top: 2px; letter-spacing: 0.5px; text-transform: uppercase; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"></span>
+            </div>
+
         </div>
     </div>
 </div>

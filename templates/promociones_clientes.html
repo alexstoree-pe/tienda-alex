@@ -37,6 +37,26 @@
         </div>
     </div>
 
+    <div class="service-item " data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥 MÁS SOLICITADO</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/max.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">HBO MAX STANDAR (3 meses)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-user-shield"></i> Perfil Privado</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i>FULL HD</span>
+                    <span class="tag-prop"><i class="fas fa-bolt"></i> alquiler mensual</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 13</span>
+                <div class="sin-stock-badge">SIN STOCK</div>
+            </div>
+        </div>
+    </div>
+
     <!-- PEGA AQUÍ TUS TARJETAS DE PROMOCIONES PARA CLIENTES -->
 
 </div>
