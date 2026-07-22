@@ -427,8 +427,36 @@ function finalizarConNombre() {
 }
 
 function ejecutarEnvioWhatsApp(nombresData) {
-    let totalSoles = carrito.reduce((sum, p) => sum + (p.precio * p.cantidad), 0);
-    let mensaje = "¡Hola Alex Store! soy distribuidor 👋 Deseo adquirir:\n\n";
+    let totalItems = carrito.reduce((sum, p) => sum + p.cantidad, 0);
+    let totalOriginal = carrito.reduce((sum, p) => sum + (p.precio * p.cantidad), 0);
+    let totalSoles = totalOriginal;
+    let descuento = 0;
+
+    const path = window.location.pathname.toLowerCase();
+    const esSoloClientes = (path.endsWith("/clientes") || path.endsWith("/clientes.html")) && !path.includes("promociones"); 
+    
+    // Calculamos el descuento exacto que se mostró en pantalla
+    if (esSoloClientes && totalItems >= 2) {
+        let precios = [];
+        carrito.forEach(p => {
+            for (let i = 0; i < p.cantidad; i++) {
+                precios.push(p.precio);
+            }
+        });
+        precios.sort((a, b) => b - a);
+        
+        for (let i = 1; i < precios.length; i++) {
+            if (precios[i] >= 10) {
+                descuento += 2.00;
+            } else {
+                descuento += 1.00;
+            }
+        }
+        totalSoles = totalOriginal - descuento;
+    }
+
+    let tipoUsuario = esSoloClientes ? "cliente" : "distribuidor";
+    let mensaje = `¡Hola Alex Store! soy ${tipoUsuario} 👋 Deseo adquirir:\n\n`;
     
     carrito.forEach(p => {
         mensaje += `⭐ *${p.cantidad}x ${p.nombre}*\n`;
@@ -447,7 +475,12 @@ function ejecutarEnvioWhatsApp(nombresData) {
         mensaje += `--------------------------\n`;
     });
     
+    if (descuento > 0) {
+        mensaje += `\n🎁 *Descuento aplicado:* -S/ ${descuento.toFixed(2)}`;
+    }
+    
     mensaje += `\n💰 *TOTAL A PAGAR: S/ ${totalSoles.toFixed(2)}*`;
+    
     window.open(`https://wa.me/51918600000?text=${encodeURIComponent(mensaje)}`, '_blank');
 }
 
@@ -473,35 +506,53 @@ function actualizarCarritoUI() {
     let totalOriginal = carrito.reduce((sum, p) => sum + (p.precio * p.cantidad), 0);
     let totalSoles = totalOriginal; 
     
-    // Leemos la ruta exacta
     const path = window.location.pathname.toLowerCase();
-    
-    // AQUÍ ESTÁ EL CANDADO EXACTO:
-    // Aseguramos que la ruta termine exactamente en "/clientes" o sea "clientes.html"
-    // y que NO sea la página de promociones.
     const esSoloClientes = (path.endsWith("/clientes") || path.endsWith("/clientes.html")) && !path.includes("promociones"); 
     
     // ==========================================
-    // LÓGICA DE DESCUENTO (SÓLO PARA CLIENTES.HTML)
+    // LÓGICA DE DESCUENTO: 1er item normal, 
+    // desde el 2do en adelante aplican descuentos.
     // ==========================================
+    let descuento = 0;
     
     if (esSoloClientes && totalItems >= 2) {
+        // 1. Desglosamos el carrito en unidades individuales
+        let precios = [];
+        carrito.forEach(p => {
+            for (let i = 0; i < p.cantidad; i++) {
+                precios.push(p.precio);
+            }
+        });
         
-        let descuento = 2.00; // 👇 Tu descuento configurado
+        // 2. Ordenamos de mayor a menor. El más caro es el "principal"
+        precios.sort((a, b) => b - a);
+        
+        // 3. A partir del 2do producto (índice 1), aplicamos el descuento individualmente
+        for (let i = 1; i < precios.length; i++) {
+            if (precios[i] >= 10) {
+                descuento += 2.00; // Si es mayor o igual a 10, descuenta 2 soles
+            } else {
+                descuento += 1.00; // Si es menor a 10, descuenta 1 sol
+            }
+        }
+        
+        // Aplicamos el descuento al total
         totalSoles = totalOriginal - descuento; 
-        
+    }
+    
+    // ==========================================
+    // RENDERIZADO VISUAL
+    // ==========================================
+    if (descuento > 0) {
         if (originalTxt) {
             originalTxt.innerText = `S/ ${totalOriginal.toFixed(2)}`;
             originalTxt.style.display = 'block';
         }
-        
         if (labelDescuento) {
             labelDescuento.innerText = `¡AHORRAS S/ ${descuento.toFixed(2)}!`;
             labelDescuento.style.display = 'inline-block';
         }
-        
     } else {
-        // Si está en Promociones, o en Distribuidores, o lleva 1 solo item, paga el precio normal.
         if (originalTxt) originalTxt.style.display = 'none';
         if (labelDescuento) {
             labelDescuento.style.display = 'none';
