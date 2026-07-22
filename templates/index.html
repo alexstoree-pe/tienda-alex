@@ -298,9 +298,11 @@
         let claveCorrecta = esRutaMayorista ? CLAVE_DISTRIBUIDORES : CLAVE_CLIENTES;
 
         if (pass === claveCorrecta) {
-            sessionStorage.setItem("acceso_concedido", "true");
+            // AQUÍ ESTABA EL ERROR: Ahora entregamos las llaves con el nombre exacto que busca scripts.js
             if (esRutaMayorista) {
                 sessionStorage.setItem("acceso_distribuidor", "true");
+            } else {
+                sessionStorage.setItem("acceso_cliente", "true");
             }
             window.location.href = urlDestino;
         } else {
