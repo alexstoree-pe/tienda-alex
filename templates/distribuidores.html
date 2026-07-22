@@ -20,9 +20,9 @@
             <div class="scroll-indicator" onclick="scrollFilters(-100)"><i class="fas fa-chevron-left"></i></div>
             <div class="filter-container" id="filterScroll">
                 <button class="btn-nav active" onclick="filtrarCategoria('TODOS', this)">TODOS</button>
-                <button class="btn-nav" onclick="filtrarCategoria('⚽EL MUNDIAL POR ⚽', this)"><i class="fas fa-trophy"></i> MUNDIAL</button>
                 <button class="btn-nav" onclick="filtrarCategoria('ZONA PERFILES', this)"><i class="fas fa-user-circle"></i> PERFILES</button>
                 <button class="btn-nav" onclick="filtrarCategoria('ZONA CUENTAS COMPLETAS', this)"><i class="fas fa-users"></i> COMPLETAS</button>
+                <button class="btn-nav" onclick="filtrarCategoria('IPTV Y FLUJO', this)"><i class="fas fa-users"></i> IPTV Y FLUJO</button>
                 <button class="btn-nav" onclick="filtrarCategoria('DISEÑOS Y MAS', this)"><i class="fas fa-palette"></i> DISEÑO</button>
                 <button class="btn-nav" onclick="filtrarCategoria('APPS DE PAGA', this)"><i class="fas fa-cubes"></i> APPS IPTV</button> 
                 <button class="btn-nav" onclick="filtrarCategoria('MUSICA', this)"><i class="fas fa-music"></i> MÚSICA</button> 
@@ -255,9 +255,8 @@
         </div>
     </div>
 
-    <div class="category-title" data-aos="fade-right"><i class="fas fa-futbol"></i> ⚽EL MUNDIAL POR ⚽</div>
 
-    <div class="service-item premium oferta disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item premium  disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">EL MUNDIAL POR 👇</div>
             <div class="check-icon">✓</div>
@@ -276,46 +275,9 @@
         </div>
     </div>
 
-    <div class="service-item premium oferta disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
-        <div class="service-card">
-            <div class="badge-oferta">EL MUNDIAL POR 👇</div>
-            <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/paramount.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
-            <div class="service-text">
-                <h3 class="nombre-prod">PARAMOUNT PREMIUM PERFIL</h3>
-                <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-desktop"></i> 1 Dispositivo</span>
-                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Premium</span>
-                    <span class="tag-prop"><i class="fas fa-trophy"></i> 104 Partidos</span>
-                </div>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 8</span>
-            </div>
-        </div>
-    </div>
+   <div class="category-title" data-aos="fade-right"><i class="fas fa-user-circle"></i>IPTV Y FLUJO</div>
 
-    <div class="service-item premium oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
-        <div class="service-card">
-            <div class="badge-oferta">EL MUNDIAL POR 👇</div>
-            <div class="check-icon">✓</div>
-            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/disneyp.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
-            <div class="service-text">
-                <h3 class="nombre-prod">Disney Premium Perfil</h3>
-                <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-tv"></i> Act. a TV</span>
-                    <span class="tag-prop"><i class="fas fa-desktop"></i> 1 Dispositivo</span>
-                    <span class="tag-prop"><i class="fas fa-futbol"></i> ESPN Total</span>
-                    <span class="tag-prop"><i class="fas fa-trophy"></i> 30 Partidos</span>
-                </div>
-            </div>
-            <div class="price-container">
-                <span class="price-tag precio-prod">S/ 8</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item " onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">EL MUNDIAL POR 👇</div>
             <div class="check-icon">✓</div>
@@ -351,7 +313,7 @@
         </div>
     </div>
 
-    <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item " onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">EL MUNDIAL POR 👇</div>
             <div class="check-icon">✓</div>
@@ -369,7 +331,7 @@
         </div>
     </div>
 
-    <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item " onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">EL MUNDIAL POR 👇</div>
             <div class="check-icon">✓</div>
@@ -388,6 +350,7 @@
     </div>
         
     <div class="category-title" data-aos="fade-right"><i class="fas fa-users"></i> ZONA CUENTAS COMPLETAS</div>
+    
 
     <div class="service-item premium " onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
@@ -395,7 +358,7 @@
             <div class="check-icon">✓</div>
             <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/paramount.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
-                <h3 class="nombre-prod">PARAMOUNT PREMIUM</h3>
+                <h3 class="nombre-prod">PARAMOUNT STANDARD CUENTA COMPLETA</h3>
                 <div class="product-tags">
                     <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
                     <span class="tag-prop"><i class="fas fa-users"></i> 4 Pantallas</span>
@@ -403,7 +366,26 @@
                 </div>
             </div>
             <div class="price-container">
-                <span class="price-tag precio-prod">S/ 20</span>
+                <span class="price-tag precio-prod">S/ 8</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium " onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/paramount.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">PARAMOUNT PREMIUM CUENTA COMPLETA</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 4 Pantallas</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Premium</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 12</span>
             </div>
         </div>
     </div>
@@ -466,9 +448,9 @@
         </div>
     </div>
 
-    <div class="service-item premium " onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item premium oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
-            <div class="badge-oferta">2 unidades disponible🔥</div>
+            <div class="badge-oferta">4 unidades disponible🔥</div>
             <div class="check-icon">✓</div>
             <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/disneyp.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
@@ -499,7 +481,7 @@
                 </div>
             </div>
             <div class="price-container">
-                <span class="price-tag precio-prod">S/ 40</span>
+                <span class="price-tag precio-prod">S/ 35</span>
             </div>
         </div>
     </div>
@@ -536,7 +518,7 @@
                 </div>
             </div>
             <div class="price-container">
-                <span class="price-tag precio-prod">S/ 10</span>
+                <span class="price-tag precio-prod">S/ 12</span>
             </div>
         </div>
     </div>
@@ -593,7 +575,7 @@
                 </div>
             </div>
             <div class="price-container">
-                <span class="price-tag precio-prod">S/ 7</span>
+                <span class="price-tag precio-prod">S/ 8</span>
             </div>
         </div>
     </div>
