@@ -1,0 +1,761 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header data-aos="fade-down">
+    <img src="{{ url_for('static', filename='img/logo.webp') }}" class="brand-logo">
+    <h1>SOLO DISTRIBUIDORES</h1>
+    <div class="trust-bar">
+        <div class="trust-item"><i class="fas fa-headset"></i>Soporte 24/7</div>
+        <div class="trust-item"><i class="fas fa-shield-alt"></i>Garantía Total</div>
+        <div class="trust-item"><i class="fas fa-bolt"></i>Entrega Rápida</div>
+    </div>
+</header>
+
+<div class="search-container-wrapper">
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Buscar plataforma..." autocomplete="off" onkeyup="filtrarPlataformas()">
+        <i class="fas fa-search"></i>
+
+        <div class="filter-wrapper">
+            <div class="scroll-indicator" onclick="scrollFilters(-100)"><i class="fas fa-chevron-left"></i></div>
+            <div class="filter-container" id="filterScroll">
+                <button class="btn-nav active" onclick="filtrarCategoria('TODOS', this)">TODOS</button>
+                <button class="btn-nav" onclick="filtrarCategoria('⚽EL MUNDIAL POR ⚽', this)"><i class="fas fa-trophy"></i> MUNDIAL</button>
+                <button class="btn-nav" onclick="filtrarCategoria('ZONA PERFILES', this)"><i class="fas fa-user-circle"></i> PERFILES</button>
+                <button class="btn-nav" onclick="filtrarCategoria('ZONA CUENTAS COMPLETAS', this)"><i class="fas fa-users"></i> COMPLETAS</button>
+                <button class="btn-nav" onclick="filtrarCategoria('DISEÑOS Y MAS', this)"><i class="fas fa-palette"></i> DISEÑO</button>
+                <button class="btn-nav" onclick="filtrarCategoria('APPS DE PAGA', this)"><i class="fas fa-cubes"></i> APPS IPTV</button> 
+                <button class="btn-nav" onclick="filtrarCategoria('MUSICA', this)"><i class="fas fa-music"></i> MÚSICA</button> 
+            </div>
+            <div class="scroll-indicator" onclick="scrollFilters(100)"><i class="fas fa-chevron-right"></i></div>
+        </div>
+        
+        <div class="view-controls">
+            <button class="btn-view active" id="btn-list" onclick="cambiarVista('lista', this)"><i class="fas fa-list"></i></button>
+            <button class="btn-view" id="btn-grid" onclick="cambiarVista('cuadricula', this)"><i class="fas fa-th-large"></i></button>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="padding-top: 0;">
+    <div class="grid-botones" data-aos="zoom-in">
+        <a href="{{ url_for('inicio') }}" class="btn-universal" style="background:var(--glass); color:#fff; border:1px solid var(--glass-border);"><i class="fas fa-home" style="margin-right: 5px;"></i> INICIO</a>
+        <a href="{{ url_for('distribuidores_promos') }}" class="btn-universal" style="background:var(--gold-gradient); color:#000;"><i class="fas fa-crown" style="margin-right: 5px;"></i> PROMOS VIP</a>
+    </div>
+    <div class="grid-botones" style="grid-template-columns: 1fr; margin-top: 8px;" data-aos="zoom-in">
+        <a href="{{ url_for('iptv') }}" class="btn-universal" style="background:linear-gradient(135deg, var(--primary), var(--secondary)); color:#fff;"><i class="fas fa-tv" style="margin-right: 5px;"></i> SERVICIO IPTV</a>
+    </div>
+</div>
+    
+<div class="container" id="product-container">
+
+    <div class="category-title" data-aos="fade-right"><i class="fas fa-user-circle"></i> ZONA PERFILES</div>
+
+    <div class="service-item premium oferta disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">Mas solicitado 🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/netflix.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            
+            <div class="service-text">
+                <h3 class="nombre-prod">Netflix Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-video"></i> Ultra HD 4K</span>
+                    <span class="tag-prop"><i class="fas fa-desktop"></i> 1 Pantalla</span>
+                    <span class="tag-prop"><i class="fas fa-sync-alt"></i> Renovable</span>
+                </div>
+            </div>
+            <div class="price-container">
+            <span class="price-tag precio-prod">S/ 12</span>    
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item  disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/disneys.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">Disney standar Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-eye-slash"></i> Sin ESPN</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Calidad 4K</span>
+                    <span class="tag-prop"><i class="fas fa-lock"></i> PIN privado</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> Act. Nuevos</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 4</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/disneyp.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">Disney premium Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-tv"></i> Act. a TV</span>
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> ESPN Total</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Calidad 4K</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 8</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item  disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/prime.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">AMAZON PRIME Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-user"></i> 1 Perfil</span>
+                    <span class="tag-prop"><i class="fas fa-envelope"></i> Correo Total</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 4</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/prime.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">AMAZON PRIME Perfil (TV)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-user"></i> 1 Perfil</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> Act. TV</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/vix.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">VIX PREMIUM Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-star"></i> Premium</span>
+                    <span class="tag-prop"><i class="fas fa-film"></i> Telenovelas</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">EL MUNDIAL POR 👇</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/paramount.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">PARAMOUNT Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-star"></i> Premium</span>
+                    <span class="tag-prop"><i class="fas fa-ticket-alt"></i> Estrenos</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 8</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/crunchyroll.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">CRUNCHYROLL Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-star"></i> Premium</span>
+                    <span class="tag-prop"><i class="fas fa-ad"></i> Sin Ads</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item " onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">Mas Solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/max.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">HBO Max Standard  perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-desktop"></i> 1 Dispositivo</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Full HD</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+            </div>
+        </div>
+    </div>
+            
+    <div class="service-item premium  disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">Mas Solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/max.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod"> HBO Max Platino </h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-desktop"></i> 1 Dispositivo</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> 4K UHD</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 4</span>
+            </div>
+        </div>
+     </div>
+        
+    <div class="service-item premium oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">Mas Solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/movistar.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">Movistar Play + Liga 1 Max Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-tv"></i> Act. a TV</span>
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> ESPN Total</span>
+                    <span class="tag-prop"><i class="fas fa-list-ol"></i> +90 Canales</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 13</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-title" data-aos="fade-right"><i class="fas fa-futbol"></i> ⚽EL MUNDIAL POR ⚽</div>
+
+    <div class="service-item premium oferta disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">EL MUNDIAL POR 👇</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/dgo.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">DGO + Liga 1 Max Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-tv"></i> Act. a TV</span>
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> ESPN Total</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> 104 Partidos</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 20</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium oferta disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">EL MUNDIAL POR 👇</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/paramount.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">PARAMOUNT PREMIUM PERFIL</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-desktop"></i> 1 Dispositivo</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Premium</span>
+                    <span class="tag-prop"><i class="fas fa-trophy"></i> 104 Partidos</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 8</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">EL MUNDIAL POR 👇</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/disneyp.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">Disney Premium Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-tv"></i> Act. a TV</span>
+                    <span class="tag-prop"><i class="fas fa-desktop"></i> 1 Dispositivo</span>
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> ESPN Total</span>
+                    <span class="tag-prop"><i class="fas fa-trophy"></i> 30 Partidos</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 8</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">EL MUNDIAL POR 👇</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/lamtv.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">IPTV STANDAR CUENTA COMPLETA</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-users"></i> 3 Dispositivos</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> 104 Partidos</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 7</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">EL MUNDIAL POR 👇</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/iptvp.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">IPTV PREMIUM CUENTA COMPLETA</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-users"></i> 3 Dispositivos</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> 104 Partidos</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 15</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">EL MUNDIAL POR 👇</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/flujo.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">FLUJO TV PERFIL</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-desktop"></i> 1 Dispositivo</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> 104 Partidos</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 8</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">EL MUNDIAL POR 👇</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/flujo.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">FLUJO TV CUENTA COMPLETA</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-users"></i> 3 Dispositivos</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> 104 Partidos</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 13</span>
+            </div>
+        </div>
+    </div>
+        
+    <div class="category-title" data-aos="fade-right"><i class="fas fa-users"></i> ZONA CUENTAS COMPLETAS</div>
+
+    <div class="service-item premium " onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/paramount.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">PARAMOUNT PREMIUM</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 4 Pantallas</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Premium</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 20</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥 Muy solicitado</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/prime.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">PRIME VIDEO COMPLETA</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 6 Perfiles</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Premium</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 10</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium oferta agotado renovacion" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">Mas Solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <!-- Esta imagen es externa de Wikipedia, por lo que no lleva url_for -->
+            <div class="img-wrapper"><div class="skeleton"></div><img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">Netflix Completa</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 Perfiles</span>
+                    <span class="tag-prop"><i class="fas fa-sync-alt"></i> Renovable</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Ultra HD 4K</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 42</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/disneys.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">Disney Premium Completa (SIN ESPN)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 7 Perfiles</span>
+                    <span class="tag-prop"><i class="fas fa-eye-slash"></i> Sin ESPN</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 14</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium " onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">2 unidades disponible🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/disneyp.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">Disney Premium Completa</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 7 Perfiles</span>
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> ESPN Total</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 22</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium oferta " onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">Mas solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/dgo.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">DGO + Liga 1 Max Completa</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-box-open"></i> Plan Completo</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 4 Disp.</span>
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> 2 Canales L1</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 40</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">Mas Solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/movistar.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">Movistar Play + Liga 1 Max Completa</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-box-open"></i> Plan Completo</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 2 Disp.</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 25</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium oferta disponible agotado" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">Mas solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/max.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">HBO MAX PLATINO completa</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 Perfiles</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Ultra HD 4K</span>
+                    <span class="tag-prop"><i class="fas fa-desktop"></i> 4 Disp.</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 10</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item oferta disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">Mas solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/max.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">HBO MAX STANDARD completa</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 Perfiles</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Full HD</span>
+                    <span class="tag-prop"><i class="fas fa-desktop"></i> 2 Disp.</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 7</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item oferta disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">Mas solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/vix.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">VIX PREMIUM</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 Perfiles</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Ultra HD</span>
+                    <span class="tag-prop"><i class="fas fa-desktop"></i> 3 Disp.</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 5</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">Mas solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/crunchyroll.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">crunchyroll Cuenta Completa</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 Perfiles</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Ultra HD</span>
+                    <span class="tag-prop"><i class="fas fa-desktop"></i> 3 Disp.</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 7</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-title" data-aos="fade-right"><i class="fas fa-music"></i> MUSICA</div>
+
+    <div class="service-item premium oferta disponible agotado" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/spotify.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">SPOTIFY PREMIUM (1 mes)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
+                    <span class="tag-prop"><i class="fas fa-envelope"></i> Cuenta Total</span>
+                    <span class="tag-prop"><i class="fas fa-sync-alt"></i> Renovable</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 6</span>
+            </div>
+        </div>
+    </div>
+        
+    <div class="category-title" data-aos="fade-right"><i class="fas fa-palette"></i> DISEÑOS Y MAS</div>
+
+    <div class="service-item disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/canva.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">CANVA PRO(1 mes)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
+                    <span class="tag-prop"><i class="fas fa-graduation-cap"></i> Plan EDU</span>
+                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Inv. Correo</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item  disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/canva.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">CANVA PRO(3 meses)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 3 Meses</span>
+                    <span class="tag-prop"><i class="fas fa-graduation-cap"></i> Plan EDU</span>
+                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Inv. Correo</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 7</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/canva.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">CANVA PRO(6 meses)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 6 Meses</span>
+                    <span class="tag-prop"><i class="fas fa-graduation-cap"></i> Plan EDU</span>
+                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Inv. Correo</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 10</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/canva.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">CANVA PRO(12 meses)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 12 Meses</span>
+                    <span class="tag-prop"><i class="fas fa-graduation-cap"></i> Plan EDU</span>
+                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Inv. Correo</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 15</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/canva.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">CANVA PRO(12 meses cond.)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-shield-alt"></i> 6 Meses Gar.</span>
+                    <span class="tag-prop"><i class="fas fa-graduation-cap"></i> Plan EDU</span>
+                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Inv. Correo</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 10</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-title" data-aos="fade-right"><i class="fas fa-cubes"></i> APPS DE PAGA</div>
+
+    <div class="service-item premium oferta disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">OFERTA</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/ibo.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">IBO PLAYER (12 meses)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-key"></i> Licencia 1 Año</span>
+                    <span class="tag-prop"><i class="fas fa-mobile-alt"></i> Solo Act.</span>
+                    <span class="tag-prop"><i class="fas fa-folder-minus"></i> Sin Listas</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 13</span>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium oferta disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">OFERTA</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/ibopro.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">IBO PLAYER PRO (12 meses)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-key"></i> Licencia 1 Año</span>
+                    <span class="tag-prop"><i class="fas fa-mobile-alt"></i> Solo Act.</span>
+                    <span class="tag-prop"><i class="fas fa-folder-minus"></i> Sin Listas</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 13</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
