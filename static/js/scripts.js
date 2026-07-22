@@ -600,3 +600,176 @@ function cambiarCantidad(event, delta, btn) {
     // 6. Le decimos al sistema que reconstruya el carrito y los precios
     reconstruirCarritoDesdeUI();
 }
+// =========================================================
+// EFECTO DINÁMICO 1: LLUVIA DE LOGOS
+// =========================================================
+function crearLluviaDeLogos() {
+    const container = document.createElement('div');
+    container.className = 'falling-logos-container';
+    document.body.appendChild(container);
+
+    // 👇 CAMBIA ESTAS RUTAS POR LOS LOGOS REALES DE TU CARPETA IMG
+    const logos = [
+        '/static/img/netflix.webp', // o .png, .jpg, lo que uses
+        '/static/img/disney.webp',
+        '/static/img/prime.webp',
+        '/static/img/max.webp'
+    ];
+
+    // Crea 15 logos flotando en el fondo
+    for(let i = 0; i < 15; i++) {
+        const logo = document.createElement('div');
+        logo.className = 'falling-logo';
+        const randomLogo = logos[Math.floor(Math.random() * logos.length)];
+        logo.style.backgroundImage = `url('${randomLogo}')`;
+        
+        logo.style.left = `${Math.random() * 100}vw`; // Posición horizontal aleatoria
+        
+        const size = Math.random() * 30 + 30; // Tamaño entre 30px y 60px
+        logo.style.width = `${size}px`;
+        logo.style.height = `${size}px`;
+        
+        logo.style.animationDuration = `${Math.random() * 15 + 15}s`; // Caen entre 15s y 30s
+        logo.style.animationDelay = `-${Math.random() * 20}s`; // Desfase para que sea natural
+        
+        logo.style.filter = `blur(${Math.random() * 3 + 2}px)`; // Nivel de desenfoque
+        logo.style.opacity = Math.random() * 0.15 + 0.05; // Transparencia sutil
+        
+        container.appendChild(logo);
+    }
+}
+
+// =========================================================
+// EFECTOS VISUALES (Logos y Notificaciones)
+// =========================================================
+function crearLluviaDeLogos() {
+    // Si el contenedor ya existe, no hacemos nada (evita duplicados)
+    if(document.querySelector('.falling-logos-container')) return;
+
+    const container = document.createElement('div');
+    container.className = 'falling-logos-container';
+    
+    // Lo agregamos justo al principio del body para que quede detrás del contenido
+    document.body.prepend(container); 
+
+    // RUTAS CORREGIDAS (Tus nombres exactos de imagen)
+    const logos = [
+        '/static/img/netflix.webp', 
+        '/static/img/disneyp.webp', // Antes era disney.webp, por eso se rompía
+        '/static/img/prime.webp',
+        '/static/img/max.webp'
+    ];
+
+    for(let i = 0; i < 15; i++) {
+        const logo = document.createElement('div');
+        logo.className = 'falling-logo';
+        const randomLogo = logos[Math.floor(Math.random() * logos.length)];
+        logo.style.backgroundImage = `url('${randomLogo}')`;
+        logo.style.left = `${Math.random() * 100}vw`; 
+        
+        // Hacemos los logos un poco más grandes para que destaquen
+        const size = Math.random() * 20 + 25; 
+        logo.style.width = `${size}px`;
+        logo.style.height = `${size}px`;
+        
+        logo.style.animationDuration = `${Math.random() * 15 + 15}s`; 
+        logo.style.animationDelay = `-${Math.random() * 20}s`; 
+        
+        // ==========================================
+        // MÁXIMO PROTAGONISMO Y BRILLO
+        // ==========================================
+        // 1. Desenfoque casi invisible (para que se note qué plataforma es)
+        const blurAmount = Math.random() * 0.1 + 0.1; 
+        
+        // 2. Agregamos brightness(1.4) para iluminar la imagen original
+        // y un drop-shadow mucho más intenso e intocable
+        logo.style.setProperty('filter', `brightness(1.2) drop-shadow(0 0 15px rgba(0, 212, 255, 1)) blur(${blurAmount}px)`, 'important'); 
+        
+        // 3. Opacidad altísima (entre 60% y 95% de visibilidad)
+        const opacidadFuerte = Math.random() * 0.15 + 0.35;
+        logo.style.setProperty('opacity', opacidadFuerte, 'important'); 
+        
+        container.appendChild(logo);
+    }
+}
+
+function iniciarNotificacionesCompras() {
+    if(document.querySelector('.sales-popup')) return;
+
+    const popup = document.createElement('div');
+    popup.className = 'sales-popup';
+    popup.innerHTML = `
+        <img id="sales-img" src="" alt="Producto">
+        <div class="sales-popup-text">
+            <span id="sales-name">Alguien</span> compró <br>
+            <strong id="sales-product">Un perfil</strong>
+            <div class="sales-popup-time" id="sales-time">Hace unos instantes</div>
+        </div>
+    `;
+    document.body.appendChild(popup);
+
+    // LISTA DE NOMBRES AMPLIADA (35 opciones)
+    const nombres = [
+        "Carlos M.", "Juan P.", "María L.", "Luis A.", "Fernando R.", 
+        "Ana C.", "Distribuidor VIP", "Jorge H.", "Diego F.", "Lucía V.",
+        "Miguel S.", "Rosa M.", "Pedro G.", "Carmen T.", "Roberto C.",
+        "Valeria N.", "Cliente Nuevo", "Andrés D.", "Sofía B.", "Javier E.",
+        "Gabriela C.", "Hugo V.", "Daniela Z.", "Esteban Q.", "Distribuidor Activo",
+        "Martín L.", "Camila R.", "Renzo F.", "Andrea P.", "Sebastián M.",
+        "Diana G.", "Eduardo J.", "Patricia V.", "Héctor A.", "Mónica S."
+    ];
+    
+    // TODAS LAS PLATAFORMAS (Catálogo completo)
+    const productos = [
+        { nombre: "Netflix Premium VIP", img: "/static/img/netflix.webp" }, 
+        { nombre: "Disney+ Premium", img: "/static/img/disneyp.webp" }, 
+        { nombre: "Disney+ (Sin ESPN)", img: "/static/img/disneyp.webp" }, 
+        { nombre: "Prime Video 4K", img: "/static/img/prime.webp" },
+        { nombre: "Max Platino", img: "/static/img/max.webp" },     
+        { nombre: "Paramount+ Standard", img: "/static/img/paramount.webp" },
+        { nombre: "Paramount+ Completa", img: "/static/img/paramount.webp" },
+        { nombre: "YouTube Premium", img: "/static/img/youtube.webp" }, 
+        { nombre: "Spotify Premium", img: "/static/img/spotify.webp" },
+        { nombre: "Crunchyroll Mega Fan", img: "/static/img/crunchyroll.webp" },
+        { nombre: "Vix Premium", img: "/static/img/vix.webp" },
+        { nombre: "Canva Pro (Diseño)", img: "/static/img/canva.webp" },
+        { nombre: "Servicio IPTV Digital", img: "/static/img/iptv.webp" },
+        { nombre: "Movistar Play", img: "/static/img/movistar.webp" },
+        { nombre: "DiRECTV GO+L1MAX", img: "/static/img/dgo.webp" }
+    ];
+
+    // TIEMPOS MÁS VARIADOS
+    const tiempos = [
+        "Hace 1 min", "Hace 2 min", "Hace 3 min", "Hace 5 min", 
+        "Hace unos instantes", "Hace 8 min", "Hace 10 min", 
+        "Hace 12 min", "Hace 15 min"
+    ];
+
+    function mostrarNotificacion() {
+        const nombreRandom = nombres[Math.floor(Math.random() * nombres.length)];
+        const prodRandom = productos[Math.floor(Math.random() * productos.length)];
+        const tiempoRandom = tiempos[Math.floor(Math.random() * tiempos.length)];
+
+        document.getElementById('sales-name').innerText = nombreRandom;
+        document.getElementById('sales-product').innerText = prodRandom.nombre;
+        document.getElementById('sales-img').src = prodRandom.img; // Esta imagen ya no se romperá
+        document.getElementById('sales-time').innerText = tiempoRandom;
+
+        popup.classList.add('show');
+        setTimeout(() => { popup.classList.remove('show'); }, 4500);
+
+        const tiempoEsperaRandom = Math.floor(Math.random() * (60000 - 30000 + 1)) + 30000;
+        setTimeout(mostrarNotificacion, tiempoEsperaRandom);
+    }
+
+    setTimeout(mostrarNotificacion, 8000);
+}
+
+// INICIALIZADOR GLOBAL DE EFECTOS
+document.addEventListener("DOMContentLoaded", () => {
+    // Retrasamos la creación de los efectos 500ms
+    setTimeout(() => {
+        crearLluviaDeLogos();
+        iniciarNotificacionesCompras();
+    }, 500);
+});
