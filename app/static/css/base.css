@@ -164,9 +164,49 @@ header h1 { font-size: 1.5rem; font-weight: 800; background: var(--gold-gradient
 
 .premium .service-card { 
     background-image: linear-gradient(rgba(12, 10, 5, 0.5), rgba(5, 5, 5, 0.5)), linear-gradient(135deg, #d4af37, rgba(255,255,255,0.02) 60%, transparent); 
-    border: 1px solid var(--vip) !important; 
+    border: 1px solid transparent !important; 
     /* Cambiamos el brillo estático o rápido por una animación suave de 4 segundos */
     animation: pulseGoldSlow 4s infinite ease-in-out; 
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease !important;
+    /* Estabilizador adicional para suavizar los bordes en navegadores rebeldes */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    overflow: hidden;
+}
+
+/* 2. Creamos la franja de luz dorada */
+.premium .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 40%;
+    height: 250%;
+    /* Gradiente dorado semitransparente (color VIP) */
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.35), transparent);
+    transform: skewX(-25deg); /* Inclinación de la luz */
+    z-index: 2; /* Pasa por el fondo, debajo de tu texto e iconos */
+    pointer-events: none; /* MUY IMPORTANTE: para que no bloquee los clics al carrito */
+    
+    /* Animación de 6 segundos en bucle */
+    animation: destelloPremium 6s infinite;
+}
+
+/* 3. Definimos la velocidad del destello */
+@keyframes destelloPremium {
+    0% { left: -150%; }
+    15% { left: 50%; }  /* Cruza toda la tarjeta rápidamente (en el 15% del tiempo) */
+    100% { left: 100%; } /* Se queda pausado el resto del tiempo antes de repetir */
+}
+
+/* 2. Tarjeta Premium al pasar el cursor (Hover) */
+.service-item.premium:hover .service-card {
+    animation: none !important; 
+    box-shadow: 0 15px 35px rgba(212, 175, 55, 0.25) !important;
+    background-image: linear-gradient(rgba(15, 15, 15, 0.6), rgba(15, 15, 15, 0.6)), linear-gradient(135deg, rgba(212, 175, 55, 0.4), rgba(255,255,255,0.05) 50%, rgba(212, 175, 55, 0.1)) !important;
+    
+    /* Nos aseguramos de que el hover también mantenga el borde transparente */
+    border: 1px solid transparent !important; 
 }
 .premium .service-card::after { content: 'PREMIUM VIP'; position: absolute; top: 12px; right: 20px; font-size: 0.5rem; font-weight: 900; color: #d4af37; border: 1px solid rgba(212, 175, 55, 0.4); padding: 2px 6px; border-radius: 4px; z-index: 11; letter-spacing: 0.5px; background: rgba(0, 0, 0, 0.3); }
 
