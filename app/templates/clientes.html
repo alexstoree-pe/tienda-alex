@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+<!-- ELIMINAMOS EL BLOQUE DE CUSTOM CSS PORQUE YA TODO VIVE EN BASE.CSS -->
+
+{% block content %}
+<!-- Encabezado para Clientes -->
+<header data-aos="fade-down">
+    <img src="{{ url_for('static', filename='img/logo.webp') }}" class="brand-logo">
+    <h1>CATÁLOGO CLIENTES</h1>
+    <div class="trust-bar">
+        <div class="trust-item"><i class="fas fa-headset"></i>Soporte 24/7</div>
+        <div class="trust-item"><i class="fas fa-shield-alt"></i>Garantía Total</div>
+        <div class="trust-item"><i class="fas fa-bolt"></i>Entrega Rápida</div>
+    </div>
+</header>
+
+<!-- Botones de navegación superior -->
+<div class="container contenedor-navegacion-superior">
+    <div class="grid-botones" data-aos="zoom-in">
+        <a href="{{ url_for('main.inicio') }}" class="btn-universal btn-home"><i class="fas fa-home"></i> INICIO</a>
+        <a href="{{ url_for('clientes.promociones') }}" class="btn-universal btn-promo"><i class="fas fa-fire"></i> PROMOCIONES</a>
+    </div>
+    
+    <div class="grid-botones botones-segunda-fila" data-aos="zoom-in">
+        <a href="https://drive.google.com/file/d/1MPAECoht01Udr-oa7NcerexfZMC6h-5i/view?usp=sharing" class="btn-universal btn-referencias" target="_blank"><i class="fas fa-star"></i> REFERENCIAS</a>
+        <a href="https://chat.whatsapp.com/Dhp57nuChw89kT6pb5kggS" class="btn-universal btn-comunidad" target="_blank"><i class="fas fa-users"></i> COMUNIDAD</a>
+    </div>
+</div>
+    
+<!-- Buscador y Filtros -->
+<div class="search-container-wrapper">
+    <div class="search-container">
+        <!-- Buscador con evento onkeyup -->
+        <input type="text" id="search-input" placeholder="Buscar plataforma..." autocomplete="off" onkeyup="filtrarPlataformas()">
+        <i class="fas fa-search"></i>
+        
+        <div class="filter-wrapper">
+            <!-- Flecha Izquierda -->
+            <div class="scroll-indicator" onclick="scrollFilters(-100)"><i class="fas fa-chevron-left"></i></div>
+            
+            <!-- Botones de Filtro con onclick -->
+            <div class="filter-container" id="filterScroll">
+                <button class="btn-nav active" onclick="filtrarCategoria('TODOS', this)">TODOS</button>
+                <button class="btn-nav" onclick="filtrarCategoria('STREAMING Y CINE', this)"><i class="fas fa-trophy"></i> PERFILES</button>
+                <button class="btn-nav" onclick="filtrarCategoria('DISEÑOS Y MAS', this)">DISEÑO</button>
+                <button class="btn-nav" onclick="filtrarCategoria('TELEVISIÓN DIGITAL', this)">TV DIGITAL</button>
+                <button class="btn-nav" onclick="filtrarCategoria('IPTV Y FLUJO TV', this)">IPTV</button>
+                <button class="btn-nav" onclick="filtrarCategoria('APPS PARA IPTV', this)">APPS</button>
+                <button class="btn-nav" onclick="filtrarCategoria('MÚSICA Y VIDEO', this)">MÚSICA</button>
+            </div>
+            
+            <!-- Flecha Derecha -->
+            <div class="scroll-indicator" onclick="scrollFilters(100)"><i class="fas fa-chevron-right"></i></div>
+        </div>
+        
+        <!-- Botones de Vista Cuadrícula/Lista -->
+        <div class="view-controls">
+            <button class="btn-view active" onclick="cambiarVista('lista', this)"><i class="fas fa-list"></i></button>
+            <button class="btn-view" onclick="cambiarVista('grid', this)"><i class="fas fa-th-large"></i></button>
+        </div>
+    </div>
+</div>
+
+<!-- Contenedor de las tarjetas -->
+<div class="container" id="product-container">
+    <div class="category-title" data-aos="fade-right"><i class="fas fa-film"></i> STREAMING Y CINE</div>
+
+    <div class="service-item oferta premium" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥 MÁS SOLICITADO</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/netflix.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">NETFLIX PREMIUM PERFIL</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-user-shield"></i> Perfil Privado</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> 4K UHD</span>
+                    <span class="tag-prop"><i class="fas fa-bolt"></i> Activacion por codigo</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 16</span>
+                <div class="sin-stock-badge">SIN STOCK</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item oferta premium" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">MUY SOLICITADO 🎁</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/disneyp.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">Disney Premium</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-tv"></i> Act. TV (Nuevos)</span>
+                    <span class="tag-prop"><i class="fas fa-bolt"></i> ESPN Total</span>
+                    <span class="tag-prop"><i class="fas fa-user-shield"></i> Privado</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 12</span>
+                <div class="sin-stock-badge">SIN STOCK</div>
+            </div>
+        </div>
+    </div>
+  
+    <div class="service-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/disneys.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">Disney Premium (Sin ESPN)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-eye-slash"></i> Sin ESPN</span>
+                    <span class="tag-prop"><i class="fas fa-user-shield"></i> Privado</span>
+                    <span class="tag-prop"><i class="fas fa-mobile-alt"></i> 1 Disp.</span>
+                </div>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 7</span><div class="sin-stock-badge">SIN STOCK</div></div>
+        </div>
+    </div>
+
+    <!-- ... (El resto de tus tarjetas de productos van aquí abajo exactamente igual) ... -->
+
+</div>
+
+<!-- ELIMINAMOS EL BLOQUE DE CUSTOM JS PORQUE YA TODO VIVE EN BASE.JS -->
+
+{% endblock %}

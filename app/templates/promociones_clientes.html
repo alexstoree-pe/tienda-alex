@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header data-aos="fade-down">
+    <img src="{{ url_for('static', filename='img/logo.webp') }}" class="brand-logo">
+    <h1 style="background: linear-gradient(45deg, #25d366, #128c7e); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">COMBOS Y PROMOCIONES</h1>
+    <p style="color: #ccc; font-size: 0.9rem; margin-top: 5px;">Ahorra comprando por más meses</p>
+</header>
+
+<div class="container" style="padding-top: 0;">
+    <div class="grid-botones" data-aos="zoom-in">
+        <a href="{{ url_for('main.inicio') }}" class="btn-universal" style="background:var(--glass); color:#fff; border:1px solid var(--glass-border);"><i class="fas fa-home" style="margin-right: 5px;"></i> INICIO</a>
+        <a href="{{ url_for('clientes.catalogo') }}" class="btn-universal" style="background:var(--primary); color:#000;"><i class="fas fa-store" style="margin-right: 5px;"></i> VER CATÁLOGO NORMAL</a>
+    </div>
+</div>
+    
+<div class="container" id="product-container">
+    <div class="category-title" data-aos="fade-right" style="border-left-color: var(--success); color: var(--success);"><i class="fas fa-fire"></i> OFERTAS ACTIVAS</div>
+
+    <div class="service-item oferta premium" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥 MÁS SOLICITADO</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/netflix.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">NETFLIX PREMIUM PERFIL (3 meses)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-user-shield"></i> Perfil Privado</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> 4K UHD</span>
+                    <span class="tag-prop"><i class="fas fa-bolt"></i> Activacion por codigo</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 43</span>
+                <div class="sin-stock-badge">SIN STOCK</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item " data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥 MÁS SOLICITADO</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/max.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">HBO MAX STANDAR (3 meses)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-user-shield"></i> Perfil Privado</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i>FULL HD</span>
+                    <span class="tag-prop"><i class="fas fa-bolt"></i> alquiler mensual</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 13</span>
+                <div class="sin-stock-badge">SIN STOCK</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PEGA AQUÍ TUS TARJETAS DE PROMOCIONES PARA CLIENTES -->
+
+</div>
+
+<!-- ... tus productos arriba ... -->
+
+    <!-- Inyectamos el modal y su script limpiamente -->
+    {% include 'modales/modal_clientes.html' %}
+{% endblock %}

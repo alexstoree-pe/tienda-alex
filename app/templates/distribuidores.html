@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <!-- Enlazamos el CSS exclusivo de distribuidores -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/distribuidores.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<!-- HEADER ESPECÍFICO PARA DISTRIBUIDORES -->
+<header>
+    <img src="{{ url_for('static', filename='img/logo.webp') }}" alt="Logo" class="brand-logo">
+    <h1>PANEL VIP DISTRIBUIDORES</h1>
+    
+    <div class="trust-bar">
+        <div class="trust-item"><i class="fas fa-shield-alt"></i> Stock Garantizado</div>
+        <div class="trust-item"><i class="fas fa-bolt"></i> Entrega Inmediata</div>
+        <div class="trust-item"><i class="fas fa-crown"></i> Precios Mayoristas</div>
+    </div>
+</header>
+
+<!-- BUSCADOR Y FILTROS DE CATEGORÍAS -->
+<div class="search-container-wrapper">
+    <div class="search-container">
+        <i class="fas fa-search"></i>
+        <input type="text" id="search-input" placeholder="Buscar servicio al por mayor..." onkeyup="filtrarPlataformas()">
+    </div>
+
+    <div class="filter-wrapper">
+        <div class="scroll-indicator" onclick="scrollFilters(-200)"><i class="fas fa-chevron-left"></i></div>
+        <div class="filter-container" id="filterScroll">
+            <button class="btn-nav active" onclick="filtrarCategoria('TODOS', this)">TODOS</button>
+            <button class="btn-nav" onclick="filtrarCategoria('STREAMING', this)">STREAMING</button>
+            <button class="btn-nav" onclick="filtrarCategoria('IPTV', this)">IPTV & DEPORTES</button>
+            <button class="btn-nav" onclick="filtrarCategoria('HERRAMIENTAS', this)">HERRAMIENTAS</button>
+        </div>
+        <div class="scroll-indicator" onclick="scrollFilters(200)"><i class="fas fa-chevron-right"></i></div>
+    </div>
+
+    <div class="view-controls">
+        <button class="btn-view active" onclick="cambiarVista('lista', this)" title="Vista Lista"><i class="fas fa-list"></i></button>
+        <button class="btn-view" onclick="cambiarVista('grid', this)" title="Vista Cuadrícula"><i class="fas fa-th-large"></i></button>
+    </div>
+</div>
+
+<!-- BOTONES DE NAVEGACIÓN -->
+<div class="container" style="padding-top: 0;">
+    <div class="grid-botones" data-aos="zoom-in">
+    <a href="{{ url_for('main.inicio') }}" class="btn-universal" style="background:var(--glass); color:#fff; border:1px solid var(--glass-border);"><i class="fas fa-home" style="margin-right: 5px;"></i> INICIO</a>
+    <!-- Botón temporalmente desactivado con "#" -->
+    <a href="{{ url_for('distribuidores.promos_vip') }}" class="btn-universal" style="background:var(--gold-gradient); color:#000;"><i class="fas fa-crown" style="margin-right: 5px;"></i> PROMOS VIP</a>
+</div>
+<div class="grid-botones" style="grid-template-columns: 1fr; margin-top: 8px;" data-aos="zoom-in">
+    <!-- Botón temporalmente desactivado con "#" -->
+    <a href="{{ url_for('distribuidores.servicio_iptv') }}" class="btn-universal" style="background:linear-gradient(135deg, var(--primary), var(--secondary)); color:#fff;"><i class="fas fa-tv" style="margin-right: 5px;"></i> SERVICIO IPTV</a>
+</div>
+</div> 
+
+
+<!-- CONTENEDOR PRINCIPAL DE PRODUCTOS MAYORISTAS -->
+<div class="container" id="product-container" style="position: relative; z-index: 5;">
+
+    <div class="category-title"><i class="fas fa-tv"></i> Streaming Mayorista</div>
+
+    <!-- Producto 1 -->
+    <!-- Agregué el onclick y los efectos visuales data-tilt -->
+    <div class="service-item premium" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-cantidad="0">
+        <div class="badge-oferta">Mayorista</div>
+        <div class="service-card">
+            <div class="check-icon"><i class="fas fa-check"></i></div>
+            <div class="img-wrapper">
+                <div class="skeleton"></div>
+                <img src="{{ url_for('static', filename='img/netflix.webp') }}" class="service-logo" alt="Netflix" onload="this.classList.add('loaded')">
+            </div>
+            <div class="service-text">
+                <h3 class="nombre-prod">Netflix Premium VIP (Mayorista)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-user-shield"></i> 1 Mes</span>
+                    <span class="tag-prop"><i class="fas fa-bolt"></i> Ultra HD</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <!-- Agregué la clase precio-prod aquí -->
+                <span class="price-tag precio-prod">S/ 12.00</span>
+                <span class="badge-renovacion">Renovable</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Asegúrate de inyectar el modal al final si lo vas a usar -->
+{% include 'modales/modal_clientes.html' %}
+{% endblock %}

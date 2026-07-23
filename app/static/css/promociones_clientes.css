@@ -1,0 +1,64 @@
+/* ========================================================= */
+/* ESTILOS DE OFERTAS Y ETIQUETAS PROMOCIONALES              */
+/* ========================================================= */
+
+.badge-oferta { 
+    display: none !important; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    background: var(--promo); 
+    color: #000; 
+    padding: 4px 14px; 
+    border-radius: 20px 0 20px 0; 
+    font-size: 0.55rem; 
+    font-weight: 800; 
+    text-transform: uppercase; 
+    z-index: 50; 
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4); 
+    overflow: hidden; 
+    letter-spacing: 0.5px; 
+}
+
+.badge-oferta::before { 
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    left: -150%; 
+    width: 50%; 
+    height: 100%; 
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent); 
+    transform: skewX(-20deg); 
+    animation: brilloPasajero 4s infinite ease-in-out; 
+}
+
+.service-item.oferta .badge-oferta { 
+    display: block !important; 
+}
+
+@keyframes brilloPasajero { 
+    0% { left: -150%; } 
+    30% { left: 150%; } 
+    100% { left: 150%; } 
+}
+
+/* Modificadores del Carrito Flotante para Promociones */
+#cart-original-price {
+    font-size: 0.75rem; 
+    text-decoration: line-through; 
+    color: rgba(255,255,255,0.7); 
+    font-weight: 600;
+}
+
+#discount-label {
+    background: var(--promo); 
+    color: #000; 
+    font-size: 0.65rem; 
+    font-weight: 900; 
+    padding: 2px 8px; 
+    border-radius: 6px; 
+    margin-top: 2px; 
+    letter-spacing: 0.5px; 
+    text-transform: uppercase; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}

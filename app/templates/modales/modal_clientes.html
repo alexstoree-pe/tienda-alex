@@ -1,0 +1,43 @@
+<!-- ================================================== -->
+<!-- MODAL LIMPIO PARA CLIENTES NORMALES              -->
+<!-- ================================================== -->
+<div id="modal-registro" class="modal-overlay">
+    <div class="modal-content modal-cristal">
+        
+        <!-- PASO 1 -->
+        <div id="paso-1">
+            <h2 class="titulo-modal">¿Ya eres o fuiste cliente?</h2>
+            <button class="btn-modal-main btn-outline-modal" id="btn-ya-compre">SÍ, YA COMPRÉ ANTERIORMENTE</button>
+            <button class="btn-modal-main" id="btn-soy-nuevo">SOY NUEVO CLIENTE</button>
+            <button class="btn-modal-back" id="btn-cancelar-registro">CANCELAR</button>
+        </div>
+        
+        <!-- FORMULARIO NUEVO CLIENTE -->
+        <div id="form-datos" style="display:none;">
+            <h2 class="titulo-modal">Registro de Pedido</h2>
+            <div id="error-reg" class="input-error"></div>
+            
+            <p class="subtitulo-modal">Rellene sus datos personales:</p>
+            <input type="text" id="reg-nom" placeholder="Nombre Completo" autocomplete="off" class="input-modal">
+            <input type="tel" id="reg-cel" placeholder="Número Celular" autocomplete="off" class="input-modal">
+            
+            <!-- Aquí aparecerán los campos dinámicos de perfiles -->
+            <div id="perfiles-nuevo-container"></div>
+            
+            <button class="btn-modal-main" id="btn-finalizar-nuevo">FINALIZAR Y ENVIAR</button>
+            <button class="btn-modal-back" id="btn-volver-nuevo">← VOLVER</button>
+        </div>
+        
+        <!-- FORMULARIO CLIENTE ANTIGUO -->
+        <div id="form-antiguo" style="display:none;">
+            <h2 class="titulo-modal">Confirmar Perfiles</h2>
+            <p class="subtitulo-modal">Ingresa los nombres para tus accesos:</p>
+            
+            <!-- Aquí aparecerán los campos dinámicos de perfiles -->
+            <div id="perfiles-antiguo-container"></div>
+            
+            <button class="btn-modal-main" id="btn-finalizar-antiguo">FINALIZAR Y ENVIAR</button>
+            <button class="btn-modal-back" id="btn-volver-antiguo">← VOLVER</button>
+        </div>
+    </div>
+</div>

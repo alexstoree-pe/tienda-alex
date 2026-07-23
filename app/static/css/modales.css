@@ -1,0 +1,156 @@
+/* ========================================================= */
+/* ESTILOS EXCLUSIVOS: MODALES DE REGISTRO                   */
+/* ========================================================= */
+
+.modal-overlay { 
+    position: fixed; 
+    inset: 0; 
+    display: none; 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 3000; 
+    background: rgba(0,0,0,0.92); 
+    backdrop-filter: blur(12px); 
+}
+
+.modal-content { 
+    background: #0b0b0c; 
+    padding: 35px 25px; 
+    border-radius: 32px; 
+    width: 90%; 
+    max-width: 420px; 
+    text-align: center; 
+    border: 1px solid var(--primary); 
+    box-shadow: 0 20px 50px rgba(0, 212, 255, 0.15); 
+}
+
+.modal-cristal { 
+    background: rgba(10, 10, 10, 0.9) !important; 
+    border: 1px solid rgba(255, 255, 255, 0.12) !important; 
+    backdrop-filter: blur(25px) !important; 
+    -webkit-backdrop-filter: blur(25px) !important; 
+    max-height: 80vh; 
+    overflow-y: auto; 
+    padding: 40px 24px 30px !important; 
+    box-sizing: border-box; 
+}
+
+/* Títulos y Subtítulos */
+.titulo-modal {
+    font-size: 1.5rem; 
+    font-weight: 800; 
+    margin-bottom: 15px; 
+    color: var(--primary) !important; 
+    letter-spacing: 0.5px;
+}
+
+.subtitulo-modal {
+    color: #889; 
+    font-size: 0.85rem; 
+    margin-bottom: 20px; 
+    line-height: 1.5;
+}
+
+/* Botones del Modal */
+.btn-outline-modal {
+    background: rgba(255,255,255,0.1) !important; 
+    color: #fff !important; 
+    border: 1px solid rgba(255,255,255,0.2) !important;
+}
+
+.btn-modal-main { 
+    background: var(--gold-gradient) !important; 
+    color: #000 !important; 
+    font-weight: 800; 
+    width: 100%; 
+    padding: 16px; 
+    border-radius: 50px; 
+    margin-top: 10px; 
+    font-size: 0.9rem; 
+    text-transform: uppercase; 
+    border: none; 
+    cursor: pointer; 
+    transition: 0.3s; 
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); 
+}
+
+.btn-modal-main:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4); 
+}
+
+.btn-modal-back { 
+    background: #16161a !important; 
+    color: #a0a0b0 !important; 
+    width: 100%; 
+    padding: 15px; 
+    border-radius: 50px; 
+    margin-top: 12px; 
+    font-size: 0.8rem; 
+    text-transform: uppercase; 
+    border: 1px solid rgba(255,255,255,0.04) !important; 
+    cursor: pointer; 
+    opacity: 0.8; 
+    transition: 0.3s; 
+}
+
+.btn-modal-back:hover { 
+    opacity: 1; 
+    background: #202025 !important; 
+}
+
+/* Inputs y Errores */
+.input-modal {
+    width: 100%; 
+    padding: 12px 16px; 
+    margin-bottom: 10px; 
+    border-radius: 12px; 
+    background: rgba(0,0,0,0.5); 
+    color: #fff; 
+    border: 1px solid #333; 
+    font-family: 'Poppins'; 
+    outline: none; 
+    font-size: 0.85rem; 
+    text-align: center;
+}
+
+.input-modal:focus { 
+    border-color: var(--primary); 
+}
+
+.input-error { 
+    color: #ff4444; 
+    font-size: 0.75rem; 
+    margin-bottom: 10px; 
+    font-weight: 600; 
+    height: 1.2rem; 
+    text-transform: uppercase; 
+}
+
+/* Labels dinámicos para los perfiles en el modal */
+.label-dynamic { 
+    color: var(--primary); 
+    font-size: 0.75rem; 
+    font-weight: 700; 
+    margin-bottom: 4px; 
+    display: block; 
+    text-transform: uppercase; 
+    text-align: left;
+}
+
+.nombre-perfil-input-dynamic { 
+    width: 100%; 
+    padding: 12px 16px; 
+    margin-bottom: 10px; 
+    border-radius: 12px; 
+    background: rgba(0,0,0,0.5); 
+    color: #fff; 
+    border: 1px solid #333; 
+    font-family: 'Poppins'; 
+    outline: none; 
+    font-size: 0.85rem; 
+}
+
+.nombre-perfil-input-dynamic:focus { 
+    border-color: var(--primary); 
+}
