@@ -185,7 +185,7 @@ header h1 { font-size: 1.5rem; font-weight: 800; background: var(--gold-gradient
     /* Gradiente dorado semitransparente (color VIP) */
     background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.35), transparent);
     transform: skewX(-25deg); /* Inclinación de la luz */
-    z-index: 2; /* Pasa por el fondo, debajo de tu texto e iconos */
+    z-index: 1; /* Pasa por el fondo, debajo de tu texto e iconos */
     pointer-events: none; /* MUY IMPORTANTE: para que no bloquee los clics al carrito */
     
     /* Animación de 6 segundos en bucle */

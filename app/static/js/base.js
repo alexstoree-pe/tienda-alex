@@ -271,9 +271,31 @@ document.addEventListener("DOMContentLoaded", () => {
     // 2. Iniciamos librerías visuales
     if (typeof AOS !== 'undefined') AOS.init({ duration: 800, once: true, offset: 50, mirror: false });
     const esMovil = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    if (!esMovil && typeof VanillaTilt !== 'undefined') {
-        VanillaTilt.init(document.querySelectorAll(".service-item"), { max: 10, speed: 400, glare: true, "max-glare": 0.2 });
+    
+    /* ========================================================= */
+    /* FIX: LIMPIEZA DE DOBLE BRILLO (VANILLA TILT)              */
+    /* ========================================================= */
+    if (typeof VanillaTilt !== 'undefined') {
+        const tarjetas = document.querySelectorAll(".service-item");
+        
+        // Paso A: Destruimos los brillos duplicados generados por el HTML
+        tarjetas.forEach(item => {
+            if (item.vanillaTilt) {
+                item.vanillaTilt.destroy(); 
+            }
+        });
+        
+        // Paso B: Creamos un solo brillo limpio, estable y solo para PC
+        if (!esMovil) {
+            VanillaTilt.init(tarjetas, { 
+                max: 10, 
+                speed: 400, 
+                glare: true, 
+                "max-glare": 0.2 
+            });
+        }
     }
+    /* ========================================================= */
     
     document.querySelectorAll('.service-logo').forEach(img => {
         img.addEventListener('load', () => img.classList.add('loaded'));
