@@ -150,6 +150,7 @@ window.cambiarVista = function(modo, btn) {
 };
 
 window.filtrarPlataformas = function() {
+    // Opcional: si quieres que al buscar se marque el botón "TODOS"
     document.querySelectorAll('.btn-nav').forEach(btn => btn.classList.remove('active'));
     const btnTodos = document.querySelector(".btn-nav[onclick*='TODOS']");
     if(btnTodos) btnTodos.classList.add('active');
@@ -161,13 +162,15 @@ window.filtrarPlataformas = function() {
         const nombre = tarjeta.querySelector('.nombre-prod') ? tarjeta.querySelector('.nombre-prod').innerText.toLowerCase() : "";
         const tags = tarjeta.querySelector('.product-tags') ? tarjeta.querySelector('.product-tags').innerText.toLowerCase() : "";
         
+        // Si el buscador está vacío, o el nombre/tags coinciden con lo que se escribe
         if (input === "" || nombre.includes(input) || tags.includes(input)) {
-            tarjeta.classList.remove('oculto-busqueda', 'oculto-filtro');
+            tarjeta.classList.remove('oculto-filtro'); // Mostramos la tarjeta
         } else {
-            tarjeta.classList.add('oculto-busqueda');
+            tarjeta.classList.add('oculto-filtro');    // Ocultamos la tarjeta correctamente
         }
     });
-    actualizarTitulos();
+    
+    actualizarTitulos(); // Reorganiza los títulos de las categorías dinámicamente
     setTimeout(() => { if (typeof AOS !== 'undefined') AOS.refresh(); }, 300);
 };
 
@@ -211,18 +214,28 @@ function actualizarTitulos() {
         let has = false;
         let hermano = titulo.nextElementSibling;
         while (hermano && !hermano.classList.contains('category-title')) {
-            if (hermano.classList.contains('service-item') && !hermano.classList.contains('oculto-filtro') && !hermano.classList.contains('oculto-busqueda')) { has = true; break; }
+            if (hermano.classList.contains('service-item') && !hermano.classList.contains('oculto-filtro')) { 
+                has = true; 
+                break; 
+            }
             hermano = hermano.nextElementSibling;
         }
-        if(has) {
-            titulo.style.display = 'flex'; titulo.style.opacity = '1'; titulo.style.height = 'auto'; titulo.style.margin = '16px 0 12px';
+        
+        if (has) {
+            titulo.style.opacity = '1'; 
+            titulo.style.maxHeight = '60px'; 
+            titulo.style.margin = '16px 0 12px';
+            titulo.style.padding = '10px 15px';
+            titulo.style.pointerEvents = 'auto';
         } else {
-            titulo.style.opacity = '0'; titulo.style.height = '0'; titulo.style.margin = '0';
-            setTimeout(() => { if (titulo.style.opacity === '0') titulo.style.display = 'none'; }, 300);
+            titulo.style.opacity = '0'; 
+            titulo.style.maxHeight = '0'; 
+            titulo.style.margin = '0';
+            titulo.style.padding = '0 15px';
+            titulo.style.pointerEvents = 'none';
         }
     });
 }
-
 window.scrollFilters = function(val) {
     const container = document.getElementById('filterScroll');
     if(container) container.scrollBy({ left: val, behavior: 'smooth' });
