@@ -58,11 +58,12 @@
             <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/netflix.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
             
             <div class="service-text">
-                <h3 class="nombre-prod">Netflix Perfil</h3>
+                <h3 class="nombre-prod">Netflix PREMIUM Perfil</h3>
                 <div class="product-tags">
                     <span class="tag-prop"><i class="fas fa-video"></i> Ultra HD 4K</span>
-                    <span class="tag-prop"><i class="fas fa-desktop"></i> 1 Pantalla</span>
-                    <span class="tag-prop"><i class="fas fa-sync-alt"></i> Renovable</span>
+                    <span class="tag-prop"><i class="fas fa-desktop"></i> 1 Pantalla en simultaneo</span>
+                    <span class="tag-prop"><i class="fas fa-sync-alt"></i> Renovable(no pierdes historial si deseas)</span>
+                    <span class="tag-prop"><i class="fas fa-house-signal"></i> Activación por codigo</span>
                 </div>
             </div>
             <div class="price-container">
@@ -79,10 +80,10 @@
             <div class="service-text">
                 <h3 class="nombre-prod">Disney standar Perfil</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-eye-slash"></i> Sin ESPN</span>
-                    <span class="tag-prop"><i class="fas fa-video"></i> Calidad 4K</span>
+                    <span class="tag-prop"><i class="fas fa-circle-xmark"></i> Sin ESPN</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Calidad premium 4K</span>
                     <span class="tag-prop"><i class="fas fa-lock"></i> PIN privado</span>
-                    <span class="tag-prop"><i class="fas fa-tv"></i> Act. Nuevos</span>
+                    <span class="tag-prop"><i class="fas fa-house-signal"></i> Activacion por codigo(clientes nuevos ) </span>
                 </div>
             </div>
             <div class="price-container">
@@ -99,9 +100,10 @@
             <div class="service-text">
                 <h3 class="nombre-prod">Disney premium Perfil</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-tv"></i> Act. a TV</span>
-                    <span class="tag-prop"><i class="fas fa-futbol"></i> ESPN Total</span>
-                    <span class="tag-prop"><i class="fas fa-video"></i> Calidad 4K</span>
+                    <span class="tag-prop"><i class="fas fa-house-signal"></i> Activacion por codigo(clientes nuevos ) </span>
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> Con Canales ESPN</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Calidad premium 4K</span>
+                    <span class="tag-prop"><i class="fas fa-eye-slash"></i> Perfil privado</span>
                 </div>
             </div>
             <div class="price-container">
@@ -118,8 +120,9 @@
             <div class="service-text">
                 <h3 class="nombre-prod">AMAZON PRIME Perfil</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-user"></i> 1 Perfil</span>
-                    <span class="tag-prop"><i class="fas fa-envelope"></i> Correo Total</span>
+                    <span class="tag-prop"><i class="fas fa-user"></i> 1 Perfil en simultaneo</span>
+                    <span class="tag-prop"><i class="fas fa-envelope"></i> Se entrega Correo y Contrasñea</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion 4K</span>
                 </div>
             </div>
             <div class="price-container">
@@ -136,8 +139,9 @@
             <div class="service-text">
                 <h3 class="nombre-prod">AMAZON PRIME Perfil (TV)</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-user"></i> 1 Perfil</span>
-                    <span class="tag-prop"><i class="fas fa-tv"></i> Act. TV</span>
+                    <span class="tag-prop"><i class="fas fa-user"></i> 1 Perfil </span>
+                    <span class="tag-prop"><i class="fas fa-house-signal"></i> activacion a tv(por codigo)</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolcion 4K</span>
                 </div>
             </div>
             <div class="price-container">
@@ -154,8 +158,29 @@
             <div class="service-text">
                 <h3 class="nombre-prod">VIX PREMIUM Perfil</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-star"></i> Premium</span>
-                    <span class="tag-prop"><i class="fas fa-film"></i> Telenovelas</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i>plan Premium </span>
+                    <span class="tag-prop"><i class="fas fa-film"></i> Telenovelas Mexicanas</span>
+                    <span class="tag-prop"><i class="fas fa-user"></i> 1 dispositivo en simultaneo </span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="service-item premium disponible" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">EL MUNDIAL POR 👇</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/paramount.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">PARAMOUNT STANDARD Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 mes</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i>Resolucion FULL HD</span>
+                    <span class="tag-prop"><i class="fas fa-user"></i> para 1 dispositivo </span>
+                    <span class="tag-prop"><i class="fas fa-ticket-alt"></i> Estrenos y deportes en vivo</span>
                 </div>
             </div>
             <div class="price-container">
@@ -170,14 +195,16 @@
             <div class="check-icon">✓</div>
             <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/paramount.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
-                <h3 class="nombre-prod">PARAMOUNT Perfil</h3>
+                <h3 class="nombre-prod">PARAMOUNT PREMIUM Perfil</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-star"></i> Premium</span>
-                    <span class="tag-prop"><i class="fas fa-ticket-alt"></i> Estrenos</span>
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 mes</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i>Resolucion Premium 4K</span>
+                    <span class="tag-prop"><i class="fas fa-user"></i> para 1 dispositivo </span>
+                    <span class="tag-prop"><i class="fas fa-ticket-alt"></i> Estrenos y deportes en vivo</span>
                 </div>
             </div>
             <div class="price-container">
-                <span class="price-tag precio-prod">S/ 8</span>
+                <span class="price-tag precio-prod">S/ 5</span>
             </div>
         </div>
     </div>
@@ -190,12 +217,13 @@
             <div class="service-text">
                 <h3 class="nombre-prod">CRUNCHYROLL Perfil</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-star"></i> Premium</span>
-                    <span class="tag-prop"><i class="fas fa-ad"></i> Sin Ads</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion Full HD</span>
+                    <span class="tag-prop"><i class="fas fa-eye-slash"></i> Perfil Privado</span>
+                    <span class="tag-prop"><i class="fas fa-envelope"></i> Se entrega correo y contraseña</span>
                 </div>
             </div>
             <div class="price-container">
-                <span class="price-tag precio-prod">S/ 3</span>
+                <span class="price-tag precio-prod">S/ 4</span>
             </div>
         </div>
     </div>
@@ -208,8 +236,9 @@
             <div class="service-text">
                 <h3 class="nombre-prod">HBO Max Standard  perfil</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-desktop"></i> 1 Dispositivo</span>
-                    <span class="tag-prop"><i class="fas fa-video"></i> Full HD</span>
+                    <span class="tag-prop"><i class="fas fa-user"></i> 1 Dispositivo en simultaneo</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion Full HD</span>
+                    <span class="tag-prop"><i class="fas fa-eye-slash"></i> Perfil Privado</span>
                 </div>
             </div>
             <div class="price-container">
@@ -226,8 +255,9 @@
             <div class="service-text">
                 <h3 class="nombre-prod"> HBO Max Platino </h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-desktop"></i> 1 Dispositivo</span>
-                    <span class="tag-prop"><i class="fas fa-video"></i> 4K UHD</span>
+                    <span class="tag-prop"><i class="fas fa-user"></i> 1 Dispositivo en simultaneo</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolcuion premium 4K</span>
+                    <span class="tag-prop"><i class="fas fa-eye-slash"></i> Perfil Privado</span>
                 </div>
             </div>
             <div class="price-container">
@@ -244,9 +274,10 @@
             <div class="service-text">
                 <h3 class="nombre-prod">Movistar Play + Liga 1 Max Perfil</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-tv"></i> Act. a TV</span>
-                    <span class="tag-prop"><i class="fas fa-futbol"></i> ESPN Total</span>
+                    <span class="tag-prop"><i class="fas fa-house-signal"></i> Activacion por codigo</span>
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> Todo los canales ESPN</span>
                     <span class="tag-prop"><i class="fas fa-list-ol"></i> +90 Canales</span>
+                    <span class="tag-prop"><i class="fas fa-circle-check"></i> Canal L1max disponible</span>
                 </div>
             </div>
             <div class="price-container">
@@ -264,9 +295,10 @@
             <div class="service-text">
                 <h3 class="nombre-prod">DGO + Liga 1 Max Perfil</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-tv"></i> Act. a TV</span>
-                    <span class="tag-prop"><i class="fas fa-futbol"></i> ESPN Total</span>
-                    <span class="tag-prop"><i class="fas fa-star"></i> 104 Partidos</span>
+                    <span class="tag-prop"><i class="fas fa-house-signal"></i> Activacion por codigo</span>
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> Todo los canales ESPN</span>
+                    <span class="tag-prop"><i class="fas fa-list-ol"></i> +97 Canales</span>
+                    <span class="tag-prop"><i class="fas fa-circle-check"></i> Canal L1max disponible</span>
                 </div>
             </div>
             <div class="price-container">
@@ -285,8 +317,10 @@
             <div class="service-text">
                 <h3 class="nombre-prod">IPTV STANDAR CUENTA COMPLETA</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-users"></i> 3 Dispositivos</span>
-                    <span class="tag-prop"><i class="fas fa-star"></i> 104 Partidos</span>
+                    <span class="tag-prop"><i class="fas fa-list-ol"></i> +6500 Canales</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> +2300 Series</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> +25000 Peliculas</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> Para 3 Dispositivos simultaneamente</span>
                 </div>
             </div>
             <div class="price-container">
@@ -295,7 +329,7 @@
         </div>
     </div>
 
-    <div class="service-item premium oferta" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item premium" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
             <div class="badge-oferta">EL MUNDIAL POR 👇</div>
             <div class="check-icon">✓</div>
@@ -303,8 +337,10 @@
             <div class="service-text">
                 <h3 class="nombre-prod">IPTV PREMIUM CUENTA COMPLETA</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-users"></i> 3 Dispositivos</span>
-                    <span class="tag-prop"><i class="fas fa-star"></i> 104 Partidos</span>
+                    <span class="tag-prop"><i class="fas fa-list-ol"></i> +9500 Canales</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> +3000 Series</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> +40000 Peliculas</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> Para 3 Dispositivos simultaneamente</span>
                 </div>
             </div>
             <div class="price-container">
@@ -321,8 +357,10 @@
             <div class="service-text">
                 <h3 class="nombre-prod">FLUJO TV PERFIL</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-desktop"></i> 1 Dispositivo</span>
-                    <span class="tag-prop"><i class="fas fa-star"></i> 104 Partidos</span>
+                    <span class="tag-prop"><i class="fas fa-desktop"></i> para 1 dispositivo</span>
+                    <span class="tag-prop"><i class="fas fa-list-ol"></i> +1000 Canales</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> +3000 Series</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> +40000 Peliculas</span>
                 </div>
             </div>
             <div class="price-container">
@@ -339,8 +377,10 @@
             <div class="service-text">
                 <h3 class="nombre-prod">FLUJO TV CUENTA COMPLETA</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-users"></i> 3 Dispositivos</span>
-                    <span class="tag-prop"><i class="fas fa-star"></i> 104 Partidos</span>
+                    <span class="tag-prop"><i class="fas fa-list-ol"></i> +10000 Canales</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> +3000 Series</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> +40000 Peliculas</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> Para 3 Dispositivos simultaneamente</span>
                 </div>
             </div>
             <div class="price-container">
@@ -360,10 +400,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">PARAMOUNT STANDARD CUENTA COMPLETA</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
-                    <span class="tag-prop"><i class="fas fa-users"></i> 2 Pantallas simultaneamente</span>
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> 2 Pantallas simultaneamente</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 6 perfiles disponible</span>
                     <span class="tag-prop"><i class="fas fa-star"></i> Plan Standar</span>
-                    <span class="tag-prop"><i class="fas fa-video"></i> Full HD</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolcion Full HD</span>
                 </div>
             </div>
             <div class="price-container">
@@ -380,10 +421,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">PARAMOUNT PREMIUM CUENTA COMPLETA</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
-                    <span class="tag-prop"><i class="fas fa-users"></i> 4 Pantallas simultaneamente</span>
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> 4 Pantallas simultaneamente</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 6 perfiles disponible</span>
                     <span class="tag-prop"><i class="fas fa-star"></i> Plan Premium</span>
-                    <span class="tag-prop"><i class="fas fa-video"></i> Resoluciion 4K</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion 4K</span>
                 </div>
             </div>
             <div class="price-container">
@@ -398,11 +440,13 @@
             <div class="check-icon">✓</div>
             <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/prime.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
-                <h3 class="nombre-prod">PRIME VIDEO COMPLETA</h3>
+                <h3 class="nombre-prod">PRIME VIDEO CUENTA COMPLETA</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
-                    <span class="tag-prop"><i class="fas fa-users"></i> 6 Perfiles</span>
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> 3 Pantallas simultaneamente</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 6 perfiles disponible</span>
                     <span class="tag-prop"><i class="fas fa-star"></i> Plan Premium</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion 4K</span>
                 </div>
             </div>
             <div class="price-container">
@@ -420,9 +464,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">Netflix Completa</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-users"></i> 5 Perfiles</span>
-                    <span class="tag-prop"><i class="fas fa-sync-alt"></i> Renovable</span>
-                    <span class="tag-prop"><i class="fas fa-video"></i> Ultra HD 4K</span>
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> 4 Pantallas simultaneamente</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Premium</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion 4K</span>
                 </div>
             </div>
             <div class="price-container">
@@ -439,9 +485,12 @@
             <div class="service-text">
                 <h3 class="nombre-prod">Disney Premium Completa (SIN ESPN)</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
-                    <span class="tag-prop"><i class="fas fa-users"></i> 7 Perfiles</span>
-                    <span class="tag-prop"><i class="fas fa-eye-slash"></i> Sin ESPN</span>
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> 4 Pantallas simultaneamente</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 7 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Premium</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion 4K</span>
+                    <span class="tag-prop"><i class="fas fa-circle-xmark"></i> No Contiene Canales ESPN</span>
                 </div>
             </div>
             <div class="price-container">
@@ -450,17 +499,20 @@
         </div>
     </div>
 
-    <div class="service-item premium oferta agotado" onclick="toggleCarrito(this)" data-aos="fade-up">
+    <div class="service-item premium oferta " onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
-            <div class="badge-oferta">4 unidades disponible🔥</div>
+            <div class="badge-oferta">Ultimas unidades disponible🔥</div>
             <div class="check-icon">✓</div>
             <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/disneyp.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
             <div class="service-text">
                 <h3 class="nombre-prod">Disney Premium Completa</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
-                    <span class="tag-prop"><i class="fas fa-users"></i> 7 Perfiles</span>
-                    <span class="tag-prop"><i class="fas fa-futbol"></i> ESPN Total</span>
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> 4 Pantallas simultaneamente</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 7 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Premium</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion 4K</span>
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> Contiene Canales ESPN</span>
                 </div>
             </div>
             <div class="price-container">
@@ -477,9 +529,13 @@
             <div class="service-text">
                 <h3 class="nombre-prod">DGO + Liga 1 Max Completa</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-box-open"></i> Plan Completo</span>
-                    <span class="tag-prop"><i class="fas fa-users"></i> 4 Disp.</span>
-                    <span class="tag-prop"><i class="fas fa-futbol"></i> 2 Canales L1</span>
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Oro o Plata aletorio</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion full HD</span>
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> Contiene Canales ESPN</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> Canal l1max disponible(2 simultaneamente)</span>
+                    <span class="tag-prop"><i class="fas fa-circle-play"></i> 4 Pantallas simultaneamente(El resto de canales)</span>
                 </div>
             </div>
             <div class="price-container">
@@ -496,8 +552,13 @@
             <div class="service-text">
                 <h3 class="nombre-prod">Movistar Play + Liga 1 Max Completa</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-box-open"></i> Plan Completo</span>
-                    <span class="tag-prop"><i class="fas fa-users"></i> 2 Disp.</span>
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Full Hd</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion full HD</span>
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> Contiene Canales ESPN</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> Canal l1max disponible(2 simultaneamente)</span>
+                    <span class="tag-prop"><i class="fas fa-circle-play"></i> 2 Pantallas simultaneamente(El resto de canales)</span>
                 </div>
             </div>
             <div class="price-container">
@@ -514,9 +575,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">HBO MAX PLATINO completa</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-users"></i> 5 Perfiles</span>
-                    <span class="tag-prop"><i class="fas fa-video"></i> Ultra HD 4K</span>
-                    <span class="tag-prop"><i class="fas fa-desktop"></i> 4 Disp.</span>
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Platino </span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion 4K</span>
+                    <span class="tag-prop"><i class="fas fa-circle-play"></i> 4 Dispositivos simultaneamente</span>
                 </div>
             </div>
             <div class="price-container">
@@ -533,9 +596,12 @@
             <div class="service-text">
                 <h3 class="nombre-prod">HBO MAX STANDARD completa</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-users"></i> 5 Perfiles</span>
-                    <span class="tag-prop"><i class="fas fa-video"></i> Full HD</span>
-                    <span class="tag-prop"><i class="fas fa-desktop"></i> 2 Disp.</span>
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Standard </span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion full HD</span>
+                    <span class="tag-prop"><i class="fas fa-circle-play"></i> 2 Dispositivos simultaneamente</span>
+                </div>
                 </div>
             </div>
             <div class="price-container">
@@ -552,9 +618,12 @@
             <div class="service-text">
                 <h3 class="nombre-prod">VIX PREMIUM</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-users"></i> 5 Perfiles</span>
-                    <span class="tag-prop"><i class="fas fa-video"></i> Ultra HD</span>
-                    <span class="tag-prop"><i class="fas fa-desktop"></i> 3 Disp.</span>
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Premum </span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion Full HD</span>
+                    <span class="tag-prop"><i class="fas fa-circle-play"></i> 3 Dispositivos simultaneamente</span>
+                </div>
                 </div>
             </div>
             <div class="price-container">
@@ -571,9 +640,11 @@
             <div class="service-text">
                 <h3 class="nombre-prod">crunchyroll Cuenta Completa</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-users"></i> 5 Perfiles</span>
-                    <span class="tag-prop"><i class="fas fa-video"></i> Ultra HD</span>
-                    <span class="tag-prop"><i class="fas fa-desktop"></i> 3 Disp.</span>
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan MegaFan</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion Full HD</span>
+                    <span class="tag-prop"><i class="fas fa-circle-play"></i> 3 Dispositivos simultaneamente</span>
                 </div>
             </div>
             <div class="price-container">
@@ -593,12 +664,33 @@
                 <h3 class="nombre-prod">SPOTIFY PREMIUM (1 mes)</h3>
                 <div class="product-tags">
                     <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
-                    <span class="tag-prop"><i class="fas fa-envelope"></i> Cuenta Total</span>
-                    <span class="tag-prop"><i class="fas fa-sync-alt"></i> Renovable</span>
+                    <span class="tag-prop"><i class="fas fa-envelope"></i> Cuenta Indivudual</span>
+                    <span class="tag-prop"><i class="fas fa-spotify"></i> Plan Premium</span>
+                    <span class="tag-prop"><i class="fas fa-sync-alt"></i> Renovable </span>
                 </div>
             </div>
             <div class="price-container">
-                <span class="price-tag precio-prod">S/ 6</span>
+                <span class="price-tag precio-prod">S/ 6.50</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium oferta disponible agotado" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/spotify.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">SPOTIFY PREMIUM (3 meses)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 3 Meses</span>
+                    <span class="tag-prop"><i class="fas fa-envelope"></i> Cuenta Indivudual</span>
+                    <span class="tag-prop"><i class="fas fa-spotify"></i> Plan Premium</span>
+                    <span class="tag-prop"><i class="fas fa-sync-alt"></i> Renovable </span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 17</span>
             </div>
         </div>
     </div>
@@ -615,7 +707,7 @@
                 <div class="product-tags">
                     <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 Mes</span>
                     <span class="tag-prop"><i class="fas fa-graduation-cap"></i> Plan EDU</span>
-                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Inv. Correo</span>
+                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Invitacion a tu  Correo</span>
                 </div>
             </div>
             <div class="price-container">
@@ -634,7 +726,7 @@
                 <div class="product-tags">
                     <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 3 Meses</span>
                     <span class="tag-prop"><i class="fas fa-graduation-cap"></i> Plan EDU</span>
-                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Inv. Correo</span>
+                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Invitacion a tu  Correo</span>
                 </div>
             </div>
             <div class="price-container">
@@ -653,7 +745,7 @@
                 <div class="product-tags">
                     <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 6 Meses</span>
                     <span class="tag-prop"><i class="fas fa-graduation-cap"></i> Plan EDU</span>
-                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Inv. Correo</span>
+                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Invitacion a tu  Correo</span>
                 </div>
             </div>
             <div class="price-container">
@@ -672,7 +764,7 @@
                 <div class="product-tags">
                     <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 12 Meses</span>
                     <span class="tag-prop"><i class="fas fa-graduation-cap"></i> Plan EDU</span>
-                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Inv. Correo</span>
+                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Invitacion a tu  Correo</span>
                 </div>
             </div>
             <div class="price-container">
@@ -689,9 +781,9 @@
             <div class="service-text">
                 <h3 class="nombre-prod">CANVA PRO(12 meses cond.)</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-shield-alt"></i> 6 Meses Gar.</span>
+                    <span class="tag-prop"><i class="fas fa-shield-alt"></i> 8 Meses de Garantia</span>
                     <span class="tag-prop"><i class="fas fa-graduation-cap"></i> Plan EDU</span>
-                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Inv. Correo</span>
+                    <span class="tag-prop"><i class="fas fa-envelope-open-text"></i> Invitacion a tu  Correo</span>
                 </div>
             </div>
             <div class="price-container">
@@ -710,9 +802,9 @@
             <div class="service-text">
                 <h3 class="nombre-prod">IBO PLAYER (12 meses)</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-key"></i> Licencia 1 Año</span>
-                    <span class="tag-prop"><i class="fas fa-mobile-alt"></i> Solo Act.</span>
-                    <span class="tag-prop"><i class="fas fa-folder-minus"></i> Sin Listas</span>
+                    <span class="tag-prop"><i class="fas fa-key"></i> Licencia por 1 Año</span>
+                    <span class="tag-prop"><i class="fas fa-circle-check"></i> Solo Activamos la aplicacion </span>
+                    <span class="tag-prop"><i class="fas fa-video-slash"></i> No contiene la lista de canales y peliculas(ese servicio es aparte)</span>
                 </div>
             </div>
             <div class="price-container">
@@ -729,9 +821,9 @@
             <div class="service-text">
                 <h3 class="nombre-prod">IBO PLAYER PRO (12 meses)</h3>
                 <div class="product-tags">
-                    <span class="tag-prop"><i class="fas fa-key"></i> Licencia 1 Año</span>
-                    <span class="tag-prop"><i class="fas fa-mobile-alt"></i> Solo Act.</span>
-                    <span class="tag-prop"><i class="fas fa-folder-minus"></i> Sin Listas</span>
+                    <span class="tag-prop"><i class="fas fa-key"></i> Licencia por 1 Año</span>
+                    <span class="tag-prop"><i class="fas fa-circle-check"></i> Solo Activamos la aplicacion </span>
+                    <span class="tag-prop"><i class="fas fa-video-slash"></i> No contiene la lista de canales y peliculas(ese servicio es aparte)</span>
                 </div>
             </div>
             <div class="price-container">

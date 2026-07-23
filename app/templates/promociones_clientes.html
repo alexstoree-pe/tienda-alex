@@ -15,7 +15,7 @@
 </div>
     
 <div class="container" id="product-container">
-    <div class="category-title" data-aos="fade-right" style="border-left-color: var(--success); color: var(--success);"><i class="fas fa-fire"></i> OFERTAS ACTIVAS</div>
+    <div class="category-title" data-aos="fade-right" style="border-left-color: var(--success); color: var(--success);"><i class="fas fa-fire"></i> OFERTAS ACTIVAS POR 3 MESES</div>
 
     <div class="service-item oferta premium" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
         <div class="service-card">
@@ -26,8 +26,8 @@
                 <h3 class="nombre-prod">NETFLIX PREMIUM PERFIL (3 meses)</h3>
                 <div class="product-tags">
                     <span class="tag-prop"><i class="fas fa-user-shield"></i> Perfil Privado</span>
-                    <span class="tag-prop"><i class="fas fa-video"></i> 4K UHD</span>
-                    <span class="tag-prop"><i class="fas fa-bolt"></i> Activacion por codigo</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> premium 4K UHD</span>
+                    <span class="tag-prop"><i class="fas fa-bolt"></i> Activacion por codigo(celular,tv o pc)</span>
                 </div>
             </div>
             <div class="price-container">
@@ -56,6 +56,103 @@
             </div>
         </div>
     </div>
+
+    <div class="service-item premium" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥 MÁS SOLICITADO</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/vix.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">VIX PREMIUM  (3 meses)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-user-shield"></i> Perfil Privado</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i>FULL HD</span>
+                    <span class="tag-prop"><i class="fas fa-bolt"></i> alquiler mensual</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 13</span>
+                <div class="sin-stock-badge">SIN STOCK</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item oferta premium" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥 DSPORTS DISPONIBLE</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/paramount.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod"> PARAMOUNT STANDARD (3 meses)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler por 3 meses</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i>Resoluciion FULL HD</span>
+                    <span class="tag-prop"><i class="fas fa-user"></i> para 1 dispositivo </span>
+                    <span class="tag-prop"><i class="fas fa-ticket-alt"></i> Estrenos y deportes en vivo</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 13</span>
+                <div class="sin-stock-badge">SIN STOCK</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item oferta premium" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">🔥 DSPORTS DISPONIBLE</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/paramount.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod"> PARAMOUNT PREMIUM (3 meses)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler por 3 meses</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i>Resoluciion premium 4K</span>
+                    <span class="tag-prop"><i class="fas fa-user"></i> para 1 dispositivo </span>
+                    <span class="tag-prop"><i class="fas fa-ticket-alt"></i> Estrenos y deportes en vivo</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 21</span>
+                <div class="sin-stock-badge">SIN STOCK</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/prime.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">PRIME VIDEO (TV) 3 MESES</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-list-ol"></i>  Alquiler por 3 meses</span>
+                    <span class="tag-prop"><i class="fas fa-user"></i>  Perfil Privado </span>
+                    <span class="tag-prop"><i class="fas fa-house-signal"></i> activacion a tv(por codigo)</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion 4K</span>
+                </div>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 13</span><div class="sin-stock-badge">SIN STOCK</div></div>
+        </div>
+    </div>
+
+    <div class="service-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" onclick="toggleCarrito(this)" data-aos="fade-up">
+        <div class="service-card">
+            <div class="badge-oferta">En Oferta 🎁</div> <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/prime.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">PRIME VIDEO 3 MESES</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-list-ol"></i>  Alquiler por 3 meses</span>
+                    <span class="tag-prop"><i class="fas fa-user"></i>  Perfil Privado </span>
+                    <span class="tag-prop"><i class="fas fa-house-envelope"></i> Se entrega correo y contraseña</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion 4K</span>
+                </div>
+            </div>
+            <div class="price-container"><span class="price-tag precio-prod">S/ 21</span><div class="sin-stock-badge">SIN STOCK</div></div>
+        </div>
+    </div>
+
 
     <!-- PEGA AQUÍ TUS TARJETAS DE PROMOCIONES PARA CLIENTES -->
 

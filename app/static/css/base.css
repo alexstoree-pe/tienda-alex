@@ -160,9 +160,14 @@ header h1 { font-size: 1.5rem; font-weight: 800; background: var(--gold-gradient
 .service-item.premium:hover .service-logo { box-shadow: 0 0 20px rgba(244, 208, 63, 0.3); }
 
 .service-item.selected .service-card { background: rgba(0, 212, 255, 0.12) !important; border-color: var(--primary) !important; box-shadow: 0 0 25px rgba(0, 212, 255, 0.45); background-image: none !important; }
-.service-item.premium.selected .service-card { background: rgba(212, 175, 55, 0.12) !important; border-color: var(--promo) !important; box-shadow: 0 0 30px rgba(212, 175, 55, 0.45); background-image: none !important; }
 
-.premium .service-card { background-image: linear-gradient(rgba(12, 10, 5, 0.5), rgba(5, 5, 5, 0.5)), linear-gradient(135deg, #d4af37, rgba(255,255,255,0.02) 60%, transparent); border: 1px solid var(--vip) !important; box-shadow: 0 0 15px rgba(212, 175, 55, 0.1); }
+
+.premium .service-card { 
+    background-image: linear-gradient(rgba(12, 10, 5, 0.5), rgba(5, 5, 5, 0.5)), linear-gradient(135deg, #d4af37, rgba(255,255,255,0.02) 60%, transparent); 
+    border: 1px solid var(--vip) !important; 
+    /* Cambiamos el brillo estático o rápido por una animación suave de 4 segundos */
+    animation: pulseGoldSlow 4s infinite ease-in-out; 
+}
 .premium .service-card::after { content: 'PREMIUM VIP'; position: absolute; top: 12px; right: 20px; font-size: 0.5rem; font-weight: 900; color: #d4af37; border: 1px solid rgba(212, 175, 55, 0.4); padding: 2px 6px; border-radius: 4px; z-index: 11; letter-spacing: 0.5px; background: rgba(0, 0, 0, 0.3); }
 
 .price-container { display: flex; flex-direction: column; align-items: flex-end; justify-content: center; margin-left: auto; padding-left: 10px; min-width: max-content; flex-shrink: 0; z-index: 5; }
