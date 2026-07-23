@@ -216,52 +216,58 @@
         <div class="zone-line"></div>
     </div>
     
-    <div class="buttons-grid">
-        <!-- CORREGIDO: URL de Clientes referenciando su Blueprint -->
-        <div onclick="solicitarAcceso('{{ url_for('clientes.catalogo') }}')" class="btn-access btn-clients">
-            <i class="fa-solid fa-store"></i>
-            <div class="btn-info">
-                <strong>Catálogo Completo</strong>
-                <span>Streaming, Musica y más</span>
-            </div>
-        </div>
-        <!-- Esta asume que promociones_clientes sigue definida globalmente en __init__.py -->
-        <!-- Si creas un blueprint para promos, tendrás que actualizarla igual que clientes -->
-        <div onclick="solicitarAcceso('{{ url_for('clientes.promociones') }}')" class="btn-access btn-promos-c">
-            <i class="fa-solid fa-fire"></i>
-            <div class="btn-info">
-                <strong>Combos y Promociones</strong>
-                <span>Ahorro máximo por meses</span>
-            </div>
+<div class="buttons-grid">
+    <!-- Clientes (false) -->
+    <div onclick="solicitarAccesso('{{ url_for('clientes.catalogo') }}', false)" class="btn-access btn-clients">
+        <i class="fa-solid fa-store"></i>
+        <div class="btn-info">
+            <strong>Catálogo Completo</strong>
+            <span>Streaming, Musica y más</span>
         </div>
     </div>
-
-    <div class="zone-header" style="margin-top: 60px;">
-        <span>Panel de Socios</span>
-        <div class="zone-line"></div>
-    </div>
-
-    <div class="buttons-grid">
-        <!-- CORREGIDO: URL de Distribuidores referenciando su Blueprint -->
-        <div onclick="solicitarAcceso('{{ url_for('distribuidores.distribuidores') }}')" class="btn-access btn-dist">
-            <i class="fa-solid fa-briefcase"></i>
-            <div class="btn-info">
-                <strong>Zona Distribuidor</strong>
-                <span>Precios para distribuidores</span>
-            </div>
-        </div>
-        <!-- IMPORTANTE: Si aún no has definido la función "distribuidores_promos" en Python, esto dará error.
-             Si te da error, temporalmente quítale las llaves de Jinja a esta URL hasta que crees la ruta -->
-        <div onclick="solicitarAcceso('{{ url_for('distribuidores.promos_vip') }}')" class="btn-access btn-promos-d">
-            <i class="fa-solid fa-crown"></i>
-            <div class="btn-info">
-                <strong>Promos Mayoristas</strong>
-                <span>Stock limitado exclusivo</span>
-            </div>
+    
+    <div onclick="solicitarAccesso('{{ url_for('clientes.promociones') }}', false)" class="btn-access btn-promos-c">
+        <i class="fa-solid fa-fire"></i>
+        <div class="btn-info">
+            <strong>Combos y Promociones</strong>
+            <span>Ahorro máximo por meses</span>
         </div>
     </div>
 </div>
 
+<div class="zone-header" style="margin-top: 60px;">
+    <span>Panel de Socios</span>
+    <div class="zone-line"></div>
+</div>
+
+<div class="buttons-grid">
+    <!-- Mayoristas (true) -->
+    <div onclick="solicitarAccesso('{{ url_for('distribuidores.distribuidores') }}', true)" class="btn-access btn-dist">
+        <i class="fa-solid fa-briefcase"></i>
+        <div class="btn-info">
+            <strong>Zona Distribuidor</strong>
+            <span>Precios para distribuidores</span>
+        </div>
+    </div>
+    
+    <div onclick="solicitarAccesso('{{ url_for('distribuidores.promos_vip') }}', true)" class="btn-access btn-promos-d"> <!-- Nota: aquí corregimos también -->
+        <i class="fa-solid fa-crown"></i>
+        <div class="btn-info">
+            <strong>promo distribuidor</strong>
+            <span>Stock limitado exclusivo</span>
+        </div>
+    </div>
+
+    <div onclick="solicitarAccesso('{{ url_for('distribuidores.servicio_iptv') }}', true)" class="btn-access btn-promos-d">
+        <i class="fa-solid fa-video"></i>
+        <div class="btn-info">
+            <strong>Servicio iptv y flujo</strong>
+            <span>Paneles exclusivos</span>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
 <div id="modal-pass" class="modal-pass">
     <div class="modal-content" id="modal-box">
         <h2 id="modal-titulo">SEGURIDAD</h2>
@@ -273,14 +279,16 @@
 
 <script>
     let urlDestino = "";
+    let esRutaMayorista = false; // Nueva variable para rastrear el tipo de zona
 
-    function solicitarAcceso(url) {
+    function solicitarAccesso(url, esMayorista) { // <-- Cambiamos la función para recibir una pista clara
         urlDestino = url;
+        esRutaMayorista = esMayorista; // Guardamos si es mayorista o no de forma directa
+        
         const modal = document.getElementById('modal-pass');
         const titulo = document.getElementById('modal-titulo');
         
-        // Verifica si la palabra "distribuidores" está en la URL generada por Flask
-        if (url.includes('distribuidores')) {
+        if (esRutaMayorista) {
             titulo.style.color = "#d4af37";
             titulo.innerText = "PANEL MAYORISTA";
         } else {
@@ -303,7 +311,6 @@
         const CLAVE_CLIENTES = "1122";
         const CLAVE_DISTRIBUIDORES = "dis";
 
-        let esRutaMayorista = urlDestino.includes('distribuidores');
         let claveCorrecta = esRutaMayorista ? CLAVE_DISTRIBUIDORES : CLAVE_CLIENTES;
 
         if (pass === claveCorrecta) {
