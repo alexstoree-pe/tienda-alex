@@ -239,7 +239,7 @@ header h1 { font-size: 1.5rem; font-weight: 800; background: var(--gold-gradient
 .service-text h3 { font-size: 1.20rem; color: #fff; font-weight: 600; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .product-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
 .grid-mode .product-tags { justify-content: center; }
-.tag-prop { background: rgba(255, 255, 255, 0.06); border: 1.px solid rgba(255, 255, 255, 0.10); padding: 3px 8px; border-radius: 6px; font-size: 0.68rem; color: #d1d1d6; font-weight: 500; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.tag-prop { background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.10); padding: 3px 8px; border-radius: 6px; font-size: 0.68rem; color: #d1d1d6; font-weight: 500; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
 .tag-prop i { color: var(--primary); font-size: 0.6rem; }
 .premium .tag-prop i { color: var(--promo); }
 
