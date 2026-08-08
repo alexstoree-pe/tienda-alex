@@ -42,10 +42,8 @@ CACHE = {
 TIEMPO_CACHE = 15  
 
 
-URL_CSV_STOCK = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQeyVXKraDIzBqGDqQVAzzjzLVnWuXJPLiLdIIMY2_UgRpm0tEOAKNlK7yejbgURH4wfuhPtvFYyOSp/pub?gid=688736190&single=true&output=csv"
-
-URL_CSV_PRECIOS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQeyVXKraDIzBqGDqQVAzzjzLVnWuXJPLiLdIIMY2_UgRpm0tEOAKNlK7yejbgURH4wfuhPtvFYyOSp/pub?gid=1637132548&single=true&output=csv"
-
+URL_CSV_STOCK = os.getenv('URL_CSV_STOCK')
+URL_CSV_PRECIOS = os.getenv('URL_CSV_PRECIOS')
 
 @main_bp.route('/api/obtener-datos-stock')
 def obtener_stock_seguro():
