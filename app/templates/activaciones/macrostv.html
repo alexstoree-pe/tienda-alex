@@ -1,0 +1,14 @@
+{% macro tarjeta_streaming(nombre, imagen, link, color_btn, color_sombra) %}
+<div class="col-12 mb-4">
+    <div class="card shadow-lg text-center card-activacion">
+        <img src="{{ url_for('static', filename='img/' ~ imagen) }}" alt="{{ nombre }}" style="filter: drop-shadow(0 4px 15px {{ color_sombra }});">
+        
+        <h5>Plataforma {{ nombre }}</h5>
+        <p>Link de Activacion para TV.</p>
+        
+        <a href="{{ link }}" target="_blank" class="btn-activar" style="background: {{ color_btn }}; box-shadow: 0 4px 15px {{ color_sombra }};">
+            IR A ACTIVAR <i class="fas fa-link"></i>
+        </a>
+    </div>
+</div>
+{% endmacro %}

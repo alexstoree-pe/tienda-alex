@@ -1,0 +1,41 @@
+<!-- Importamos los 3 moldes de legos -->
+{% from 'activaciones/macrosiptv.html' import card_iptv, link_row, app_row %}
+
+<!-- 1. TARJETA FLUJO TV (Le pasamos 'tema-naranja') -->
+{% call card_iptv('Flujo TV', 'v8.5.2', 'Versión optimizada para Smart TV y Fire Stick', 'tema-naranja', '7513092') %}
+    {{ link_row('Enlaces de descarga para tv', 'https://bitcc.net/flujo-tv-v852') }}
+    {{ link_row('Enlaces de descarga para celular', 'https://bitcc.net/flujo-mobile-v852') }}
+{% endcall %}
+
+<!-- 2. TARJETA SMARTERS PRO (Le pasamos 'tema-azul') -->
+{% call card_iptv('IPTV SMARTERS PRO', 'v5.0', 'Versión optimizada para tablet o android', 'tema-azul', '6468112') %}
+    {{ link_row('Enlaces de descarga para celular', 'https://www.iptvsmarters.com/iptv-smarters-5.0.apk') }}
+{% endcall %}
+
+<!-- 3. TARJETA TIENDA APPS -->
+<div class="col-12 mb-4">
+    <div class="card shadow-lg card-iptv tema-celeste">
+        <h5 class="tienda-title">APPS PARA IPTV CELULAR</h5>
+        
+        <div class="header-app">
+            <div class="icon-app"><i class="fas fa-cloud-download-alt"></i></div>
+            <h5 class="title-app">ZONA DE DESCARGAS DIRECTAS</h5>
+            <p class="desc-app">Descarga las aplicaciones (APK) listas para instalar en tu TV o Celular.</p>
+        </div>
+
+        <div class="info-box">
+            <p class="info-title"><i class="fas fa-info-circle"></i> ¿Problemas para descargar desde el celular?</p>
+            <p class="info-desc">
+                1. Si no puedes descargar desde el celular <b>(︙)</b> copia el link y abrelo desde Chrome en <b>incognito</b>.<br>
+                2. Si Drive muestra advertencia, presiona <b>"Descargar de todos modos"</b>.
+            </p>
+        </div>
+
+        <div class="apps-container">
+            <!-- Solo llamamos al molde para agregar APPS -->
+            {{ app_row('LAMTV', 'lamtv.webp', 'https://drive.google.com/uc?export=download&id=1wXB_epPqB_40ASyFq53W78MXC0Mt8xbv') }}
+            
+            {{ app_row('XTREAMPLAYER', 'xtream.webp', 'https://drive.google.com/uc?export=download&id=1Oa0pLLa-L1WUdhma0099t1nlmUTYMI1m') }}
+        </div>
+    </div>
+</div>

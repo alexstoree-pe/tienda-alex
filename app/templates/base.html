@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Store | Streaming VIP</title>
+
+    <!-- ANTI-CACHÉ GLOBAL -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <link rel="icon" type="image/webp" href="{{ url_for('static', filename='img/logo.webp') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/logo.webp') }}">
+    <meta name="apple-mobile-web-app-title" content="Alex Store">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#050505">
+
+    <!-- ========================================== -->
+    <!-- META ETIQUETAS PARA WHATSAPP Y REDES (Open Graph) -->
+    <!-- ========================================== -->
+    <meta property="og:title" content="Alex Store | Streaming VIP">
+    <meta property="og:description" content="Adquiere tus cuentas de Streaming, perfiles VIP e IPTV al mejor precio y con entrega inmediata.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url }}">
+    
+    <!-- 🔥 LA MAGIA ESTÁ AQUÍ: _external=True crea el link completo (https://...) que exige WhatsApp -->
+    <meta property="og:image" content="{{ url_for('static', filename='img/logo.png', _external=True) }}">
+    <meta property="og:image:width" content="400">
+    <meta property="og:image:height" content="400">
+    <meta property="og:image:type" content="image/png">
+    
+
+    <!-- Enlazar tu hoja de estilos desde Flask -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Fondos y Efectos Globales -->
+<div class="particles-container">
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+</div>
+
+<div id="toast-container"></div>
+<button id="back-to-top" title="Volver Arriba"><i class="fas fa-chevron-up"></i></button>
+
+<!-- MODAL PARA PEDIDOS (Elegir Nombre o Perfil) -->
+<div id="modal-pedido-vip" class="modal-overlay">
+    <div class="modal-content">
+        <div id="paso-seleccion">
+            <h2>¿QUÉ ADQUIRISTE?</h2>
+            <p>Selecciona que opción adquiriste:</p>
+            <button class="btn-modal-main" onclick="irAPasoNombre()">👤 PERFIL</button>
+            <button class="btn-modal-back" onclick="finalizarSinNombre()">CUENTA COMPLETA / OTRA PLATAFORMA</button>
+            <span style="display:block; margin-top:20px; color:#555; font-size:0.90rem; cursor:pointer;" onclick="cerrarModalPedido()">Cancelar</span>
+        </div>
+        <div id="paso-nombre" style="display: none;">
+            <h2>DATOS DEL PERFIL</h2>
+            <p>Ingresa los nombres para tus perfiles/cuentas:</p>
+            <div id="dynamic-inputs-container" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px; padding-right: 5px; text-align: left;">
+            </div>
+            <button class="btn-modal-main" onclick="finalizarConNombre()">FINALIZAR PEDIDO</button>
+            <button class="btn-modal-back" onclick="volverAPaso1()">← Volver</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL DE PEDIDOS EXCLUSIVO PARA CLIENTES -->
+<div id="modal-pedido-cliente" class="modal-overlay">
+    <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
+        
+        <!-- PASO 1: Formulario de Datos -->
+        <div id="paso-cliente-1">
+            <h2>DATOS DE COMPRA</h2>
+            <p>Completa tu información para agilizar la entrega:</p>
+            
+            <div style="text-align: left; margin-bottom: 20px;">
+                <label class="label-dynamic">¿Eres cliente nuevo?</label>
+                <!-- Agregamos onchange para detectar cuando cambian la opción -->
+                <select id="cliente-tipo" class="nombre-perfil-input-dynamic" style="margin-bottom: 15px; cursor: pointer;" onchange="window.toggleCamposCliente()">
+                    <option value="Cliente Nuevo">Sí, soy cliente nuevo</option>
+                    <option value="Cliente Antiguo">No, ya he comprado antes</option>
+                </select>
+
+                <!-- Envolvemos los campos en este DIV para ocultarlos si es antiguo -->
+                <div id="div-datos-nuevo">
+                    <label class="label-dynamic">Nombre Completo</label>
+                    <input type="text" id="cliente-nombre" class="nombre-perfil-input-dynamic" placeholder="Ej: Juan Pérez" autocomplete="off">
+
+                    <label class="label-dynamic">Número de Celular</label>
+                    <input type="tel" id="cliente-celular" class="nombre-perfil-input-dynamic" placeholder="Ej: 999 888 777" autocomplete="off">
+                </div>
+            </div>
+
+            <button class="btn-modal-main" onclick="irAPasoNombreCliente()">CONTINUAR</button>
+            <span style="display:block; margin-top:20px; color:#555; font-size:0.75rem; cursor:pointer;" onclick="cerrarModalCliente()">Cancelar</span>
+        </div>
+        
+        <!-- PASO 2: Nombres de los Perfiles -->
+        <div id="paso-cliente-2" style="display: none;">
+            <h2>NOMBRES DE PERFILES</h2>
+            <p>Ingresa los nombres para tus perfiles/cuentas:</p>
+            <div id="dynamic-inputs-cliente" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px; padding-right: 5px; text-align: left;">
+            </div>
+            <button class="btn-modal-main" onclick="finalizarPedidoCliente()">ENVIAR PEDIDO A WHATSAPP</button>
+            <button class="btn-modal-back" onclick="volverAPaso1Cliente()">← Volver</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- MODAL DE INICIO DE SESIÓN -->
+<div id="modal-login-distribuidor" class="modal-pass" style="display:none;">
+    <div class="modal-content">
+        <h2 style="color:var(--primary); font-weight: 800; margin-bottom:10px;">ACCESO PRIVADO</h2>
+        <p style="color:#889; font-size:0.8rem; margin-bottom:20px;">Ingresa tu código de acceso</p>
+        <div id="error-msg" style="color: var(--danger); font-size: 0.8rem; margin-bottom: 10px; font-weight: 600; height: 1.2rem;"></div>
+        <div class="input-wrapper">
+            <input type="password" id="input-dist-pass" maxlength="8" oninput="checkInputPass(this)" onkeydown="if(event.key==='Enter') validarAcceso()" autocomplete="new-password">
+            <div id="stars-placeholder" class="stars-bg">* * * *</div>
+        </div>
+        <button onclick="validarAcceso()" class="btn-modal-main">ENTRAR</button>
+        <span style="display:block; margin-top:20px; color:#555; font-size:0.75rem; cursor:pointer;" onclick="window.history.back()">Regresar al portal</span>
+    </div>
+</div>
+
+<!-- ========================================== -->
+<!-- 1. BLOQUE DE CONTENIDO DINÁMICO (PRODUCTOS) -->
+<!-- ========================================== -->
+{% block content %}
+{% endblock %}
+
+<!-- ========================================== -->
+<!-- 2. PREGUNTAS FRECUENTES (Común en todas) -->
+<!-- ========================================== -->
+<div class="container" id="faq-container" style="margin-bottom: 100px;">
+    <div class="faq-title"><i class="fas fa-question-circle"></i> PREGUNTAS FRECUENTES</div>
+    
+    <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+            ¿Cómo es el proceso de entrega? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            Una vez realizado el pago y enviado el comprobante por WhatsApp, nuestro sistema validará tu compra y te entregaremos los accesos de tu cuenta de forma inmediata y segura.
+        </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+            ¿Las cuentas tienen garantía total? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            ¡Sí! Todas nuestras cuentas están cubiertas por garantía durante la totalidad del tiempo contratado. Si llegas a tener cualquier percance, te damos soporte rápido.
+        </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+            ¿Puedo renovar mi misma cuenta el próximo mes? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            Por supuesto. Para los servicios marcados como "Renovables", te avisaremos antes del corte para que puedas conservar tu mismo perfil, listas y recomendaciones.
+        </div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+            ¿Cómo activo mi cuenta NETFLIX en mi TV o celular? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            Hemos preparado guías paso a paso. <br><br>
+            <a href="{{ url_for('main.guias') }}" style="display:inline-block; padding:8px 15px; background:#fff; color:#000; border-radius:5px; text-decoration:none; font-weight:bold; font-size:0.85rem;">👉 Ver Guías de Activación</a>
+        </div>
+    </div>
+</div>
+
+<!-- VENTANA MODAL DE PREGUNTAS FRECUENTES CON ANIMACIÓN -->
+<div id="modal-faq" class="modal-overlay">
+    <div class="modal-content modal-cristal" style="max-width: 500px; text-align: left;">
+        
+        <!-- Cabecera del Modal -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">
+            <h2 style="color: var(--primary); margin: 0; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-question-circle"></i> Preguntas Frecuentes
+            </h2>
+            <button onclick="cerrarModalFaq()" style="background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Contenedor con las Preguntas (Usa tus clases originales) -->
+        <div style="max-height: 65vh; overflow-y: auto; padding-right: 5px;">
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaqModal(this)">
+                    <span>¿Cómo es el proceso de entrega?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    La entrega es inmediata una vez confirmado tu pago a través de nuestro botón de WhatsApp.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaqModal(this)">
+                    <span>¿Las cuentas tienen garantía total?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Sí, todas nuestras cuentas cuentan con garantía durante todo el tiempo que dure tu suscripción.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaqModal(this)">
+                    <span>¿Puedo renovar mi misma cuenta el próximo mes?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    ¡Claro que sí! Puedes conservar tus mismos perfiles y configuraciones al renovar con nosotros.
+                </div>
+            </div>
+
+        
+
+        </div>
+
+        <!-- Botón de Cerrar -->
+        <button class="btn-modal-back" onclick="cerrarModalFaq()" style="margin-top: 20px;">Cerrar</button>
+    </div>
+</div>
+
+
+
+<!-- MODAL DE INFORMACIÓN (Solo celulares) -->
+<div id="modal-info-lateral" class="modal-overlay" onclick="cerrarModalInfo(event)">
+    <div class="modal-content modal-cristal" onclick="event.stopPropagation()">
+        <h2 style="color: var(--primary); font-size: 1.3rem;"><i class="fas fa-star"></i> INFORMACIÓN ÚTIL</h2>
+        <p style="font-size: 0.8rem; margin-bottom: 25px;">Todo lo que necesitas saber antes de tu compra en Alex Store.</p>
+        <div class="info-seccion">
+            <h3><i class="fas fa-shopping-cart"></i> ¿Cómo Comprar?</h3>
+            <p>1. Selecciona tus plataformas favoritas.</p>
+            <p>2. Presiona el botón de WhatsApp abajo.</p>
+            <p>3. Coordina el pago y recibe en minutos.</p>
+        </div>
+        <div class="info-seccion">
+            <h3><i class="fas fa-clock"></i> Horario de Atención</h3>
+            <p>Lunes a viernes: <strong>9:30 AM - 5:00 PM y 8:30 PM - 10:00 PM</strong></p>
+            <p>Sabado: <strong>9:30 AM - 2:00PM y 4:00 PM - 8:00 PM</strong></p>
+            <p>Domingo: <strong>10:00 AM - 2:30 PM y 6:30 PM - 10:00 PM</strong></p>
+        </div>
+        <div class="info-seccion" style="border-bottom: none; padding-bottom: 0;">
+            <h3 style="color: var(--promo);"><i class="fas fa-gift"></i> Promoción Activa</h3>
+            <p>¡Llevando 2 o más cuentas obtienes un descuento automático en tu carrito! 🎁</p>
+        </div>
+        <!-- ================================================== -->
+        <!-- NUEVO BOTÓN PARA IR A LA PÁGINA DE GUÍAS           -->
+        <!-- ================================================== -->
+        <div style="text-align: center; border-bottom: none; margin-top: 12px; padding-bottom: 0;">
+            <p style="color: #ffffff; font-size: 0.80rem"><strong> pasos para activar netflix y otras plataformas con codigo de acceso</strong></p>
+            
+            <!-- CORRECCIÓN AQUÍ: Usamos 'main.guias' -->
+            <a href="{{ url_for('main.guias') }}" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #000; padding: 12px 20px; font-size: 0.85rem; font-weight: 800; border-radius: 30px; text-decoration: none; box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4); display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; transition: transform 0.3s;">
+                <i class="fas fa-book-open" style="font-size: 0.85rem;"></i> VER GUÍAS DE ACTIVACIÓN
+            </a>
+        </div>
+        <!-- ================================================== -->
+        <button class="btn-modal-back" onclick="cerrarModalInfo(event)" style="margin-top: 25px;">ENTENDIDO</button>
+    </div>
+</div>
+
+<!-- SIDEBARS LATERALES (Solo PC) -->
+<div class="sidebar-lateral izquierdo">
+    <div class="sidebar-card">
+        <h3><i class="fas fa-shopping-cart"></i> ¿Cómo Comprar?</h3>
+        <p>1. Selecciona tus plataformas favoritas.</p>
+        <p>2. Presiona el botón de WhatsApp abajo.</p>
+        <p>3. Coordina el pago y recibe en minutos.</p>
+    </div>
+    <div class="sidebar-card">
+        <h3><i class="fas fa-star"></i> Beneficios</h3>
+        <p>• Cuentas estables y renovables.</p>
+        <p>• Garantía completa contratada.</p>
+    </div>
+    <div class="sidebar-card" style="text-align: center; border-bottom: none; margin-top: 20px; padding-bottom: 0;">
+            <p style="color: #aaa; font-size: 0.8rem; margin-bottom: 10px;">pasos para activar netflix y otras plataformas con codigo de acceso</p>
+            
+            <!-- CORRECCIÓN AQUÍ: Usamos 'main.guias' -->
+            <a href="{{ url_for('main.guias') }}" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #000; padding: 12px 20px; font-size: 0.85rem; font-weight: 800; border-radius: 50px; text-decoration: none; box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4); display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; transition: transform 0.3s;">
+                <i class="fas fa-book-open" style="font-size: 1rem;"></i> VER GUÍAS DE ACTIVACIÓN
+            </a>
+    </div>
+</div>
+
+
+
+
+<div class="sidebar-lateral derecho">
+    <div class="sidebar-card">
+            <h3><i class="fas fa-clock"></i> Horario de Atención</h3>
+            <p>Lunes a viernes: <strong>9:30 AM - 5:00 PM y 8:30 PM - 10:00 PM</strong></p>
+            <p>Sabado: <strong>9:30 AM - 2:00PM y 4:00 PM - 8:00 PM</strong></p>
+            <p>Domingo: <strong>10:00 AM - 2:30 PM y 6:30 PM - 10:00 PM</strong></p>
+    </div>
+    <div class="sidebar-card" style="border-color: var(--promo);">
+        <h3 style="color: var(--promo);"><i class="fas fa-gift"></i> Promoción Activa</h3>
+        <p>¡Llevando 2 o más cuentas obtienes un descuento automático en tu carrito! 🎁</p>
+    </div>
+</div>
+
+<!-- ========================================== -->
+<!-- 4. CARRITO FLOTANTE WHATSAPP -->
+<!-- ========================================== -->
+<div id="whatsapp-btn" class="floating-btn hidden">
+    <div class="cart-content-wrapper">
+        <div class="btn-clear-cart" onclick="limpiarTodo(event)" title="Limpiar selección">
+            <i class="fas fa-trash-alt"></i>
+        </div>
+        <div class="btn-send-order" onclick="enviarPedido()">
+            <div style="display:flex; align-items:center; gap:12px;">
+                <span id="cart-count" style="background:rgba(0,0,0,0.3); padding:5px 12px; border-radius:12px; font-weight:800;">0</span>
+                <span style="font-weight:800; text-transform:uppercase; font-size:0.9rem;">Pedir WhatsApp</span>
+            </div>
+            
+            <div style="display:flex; flex-direction:column; align-items:flex-end; line-height: 1.2;">
+                <!-- Precio original tachado (Oculto por defecto) -->
+                <span id="cart-original-price" style="display:none; font-size: 0.75rem; text-decoration: line-through; color: rgba(255,255,255,0.7); font-weight: 600;">S/ 0.00</span>
+                
+                <!-- Precio Final -->
+                <span id="cart-total" style="font-weight:900; font-size:1.3rem; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">S/ 0.00</span>
+                
+                <!-- Etiqueta de Ahorro tipo "Píldora" -->
+                <span id="discount-label" style="display:none; background: var(--promo); color: #000; font-size: 0.65rem; font-weight: 900; padding: 2px 8px; border-radius: 6px; margin-top: 2px; letter-spacing: 0.5px; text-transform: uppercase; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts de Librerías -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
+
+<!-- ENLAZA EL JS AQUÍ (Verifica el nombre de tu archivo js, yo le puse base.js) -->
+<script src="{{ url_for('static', filename='js/base.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>

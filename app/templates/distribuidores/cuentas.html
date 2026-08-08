@@ -1,0 +1,301 @@
+<div class="category-title" ><i class="fas fa-users"></i> ZONA CUENTAS COMPLETAS</div>
+    
+    <div class="service-item premium oferta" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">Mas Solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <!-- Esta imagen es externa de Wikipedia, por lo que no lleva url_for -->
+            <div class="img-wrapper"><div class="skeleton"></div><img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Netflix-new-icon.png" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">NETFLIX PREMIUM CUENTA COMPLETA</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> 4 Pantallas simultaneamente</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Premium</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion 4K</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 42</span>
+            </div>
+            <div class="stock-badge" data-plataforma="netflix" data-tipo="cuenta">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="service-item  " onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/paramount.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">PARAMOUNT STANDARD CUENTA COMPLETA</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> 2 Pantallas simultaneamente</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 6 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Standar</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolcion Full HD</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 8</span>
+            </div>
+            <div class="stock-badge" data-plataforma="paramount" data-tipo="cuenta">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium oferta" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">🔥 OFERTA DISPONIBLE POR TIEMPO LIMITADO</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/paramount.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">PARAMOUNT PREMIUM CUENTA COMPLETA</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> 4 Pantallas simultaneamente</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 6 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Premium</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion 4K</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Canales DSPORTS</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 10   </span>
+                <div class="stock-badge" data-plataforma="paramount premium" data-tipo="cuenta">
+                </div>
+            </div>
+    
+        </div>
+    </div>
+
+    <div class="service-item oferta" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">🔥 Muy solicitado</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/prime.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">PRIME VIDEO CUENTA COMPLETA</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> 3 Pantallas simultaneamente</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 6 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Premium</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion 4K</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 10</span>
+            </div>
+            <div class="stock-badge" data-plataforma="amazon prime" data-tipo="cuenta">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="service-item disponible" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/disneys.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">Disney Premium Completa (SIN ESPN)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> 4 Pantallas simultaneamente</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 7 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Premium</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion 4K</span>
+                    <span class="tag-prop"><i class="fas fa-circle-xmark"></i> No Contiene Canales ESPN</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ ...</span>
+            </div>
+            <div class="stock-badge" data-plataforma="disney plus" data-tipo="cuenta">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium oferta " onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">Ultimas unidades disponible🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/disneyp.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">Disney Premium Completa</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> 4 Pantallas simultaneamente</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 7 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Premium</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion 4K</span>
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> Contiene Canales ESPN</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 22</span>
+            </div>
+            <div class="stock-badge" data-plataforma="disney premium" data-tipo="cuenta">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium oferta " onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">Mas solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/dgo.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">DGO + Liga 1 Max Completa</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Oro o Plata aletorio</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion full HD</span>
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> Contiene Canales ESPN</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> Canal l1max disponible(2 simultaneamente)</span>
+                    <span class="tag-prop"><i class="fas fa-circle-play"></i> 4 Pantallas simultaneamente(El resto de canales)</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 32</span>
+            </div>
+            <div class="stock-badge" data-plataforma="dgo con liga" data-tipo="cuenta">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium oferta" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">Mas Solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/movistar.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">Movistar Play + Liga 1 Max Completa</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Full Hd</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion full HD</span>
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> Contiene Canales ESPN</span>
+                    <span class="tag-prop"><i class="fas fa-tv"></i> Canal l1max disponible(2 simultaneamente)</span>
+                    <span class="tag-prop"><i class="fas fa-circle-play"></i> 2 Pantallas simultaneamente(El resto de canales)</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 25</span>
+            </div>
+            <div class="stock-badge" data-plataforma="movistar play" data-tipo="cuenta">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium oferta " onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">Mas solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/max.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">HBO MAX PLATINO completa</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Platino </span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion 4K</span>
+                    <span class="tag-prop"><i class="fas fa-circle-play"></i> 4 Dispositivos simultaneamente</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 12</span>
+            </div>
+            <div class="stock-badge" data-plataforma="max platino" data-tipo="cuenta">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item oferta disponible" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">Mas solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/max.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">HBO MAX STANDARD completa</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Standard </span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion full HD</span>
+                    <span class="tag-prop"><i class="fas fa-circle-play"></i> 2 Dispositivos simultaneamente</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 7</span>
+            </div>
+            <div class="stock-badge" data-plataforma="max" data-tipo="cuenta">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item oferta disponible" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">Mas solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/vix.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">VIX PREMIUM</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan Premum </span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion Full HD</span>
+                    <span class="tag-prop"><i class="fas fa-circle-play"></i> 3 Dispositivos simultaneamente</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 5</span>
+            </div>
+            <div class="stock-badge" data-plataforma="vix premium" data-tipo="cuenta">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item oferta" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">Mas solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/crunchyroll.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">crunchyroll Cuenta Completa</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> Alquiler Mensual</span>
+                    <span class="tag-prop"><i class="fas fa-users"></i> 5 perfiles disponible</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i> Plan MegaFan</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion Full HD</span>
+                    <span class="tag-prop"><i class="fas fa-circle-play"></i> 3 Dispositivos simultaneamente</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 8</span>
+            </div>
+            <div class="stock-badge" data-plataforma="crunchyroll" data-tipo="cuenta">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+<!-- Pegas aquí las demás tarjetas de CUENTAS COMPLETAS -->

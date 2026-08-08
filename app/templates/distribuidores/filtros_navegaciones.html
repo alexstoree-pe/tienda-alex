@@ -1,0 +1,47 @@
+
+<div class="search-container-wrapper">
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Buscar plataforma..." autocomplete="off" onkeyup="filtrarPlataformas()">
+        <i class="fas fa-search"></i>
+
+        <div class="filter-wrapper">
+            <div class="scroll-indicator" onclick="scrollFilters(-100)"><i class="fas fa-chevron-left"></i></div>
+            <div class="filter-container" id="filterScroll">
+                <button class="btn-nav active" onclick="filtrarCategoria('TODOS', this)">TODOS</button>
+                <button class="btn-nav" onclick="filtrarCategoria('ZONA CUENTAS COMPLETAS', this)"><i class="fas fa-users"></i> COMPLETAS</button>
+                <button class="btn-nav" onclick="filtrarCategoria('ZONA PERFILES', this)"><i class="fas fa-user-circle"></i> PERFILES</button>
+                <button class="btn-nav" onclick="filtrarCategoria('MUSICA', this)"><i class="fas fa-music"></i> MÚSICA</button> 
+                <button class="btn-nav" onclick="filtrarCategoria('IPTV Y FLUJO', this)"><i class="fas fa-users"></i> IPTV Y FLUJO</button>
+                <button class="btn-nav" onclick="filtrarCategoria('DISEÑOS Y MAS', this)"><i class="fas fa-palette"></i> DISEÑO</button>
+                <button class="btn-nav" onclick="filtrarCategoria('APPS DE PAGA', this)"><i class="fas fa-cubes"></i> APPS IPTV</button> 
+                
+            </div>
+            <div class="scroll-indicator" onclick="scrollFilters(100)"><i class="fas fa-chevron-right"></i></div>
+        </div>
+        
+        <div class="view-controls">
+
+            <button class="btn-accion-extra" id="btn-list" onclick="abrirModalInfo()" style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600;">
+              <i class="fas fa-info-circle" style="color: var(--primary);"></i> INFO</button>
+            <button class="btn-view active" id="btn-list" onclick="cambiarVista('lista', this)"><i class="fas fa-list"></i></button>
+            <button class="btn-view" id="btn-grid" onclick="cambiarVista('cuadricula', this)"><i class="fas fa-th-large"></i></button>
+            <button class="btn-accion-extra" onclick="abrirModalFaq()" title="Preguntas Frecuentes" style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600;">
+              <i class="fas fa-question-circle" style="color: var(--primary);"></i> FAQ</button>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="padding-top: 0;">
+    <div class="grid-botones" >
+        <a href="{{ url_for('main.inicio') }}" class="btn-universal" style="background:var(--glass); color:#fff; border:1px solid var(--glass-border);"><i class="fas fa-home" style="margin-right: 5px;"></i> Volver Atras</a>
+        <a href="{{ url_for('distribuidores.promos_vip') }}" class="btn-universal" style="background:var(--gold-gradient); color:#000;"><i class="fas fa-crown" style="margin-right: 5px;"></i> PROMOS VIP</a>
+    </div>
+    <div class="grid-botones" style="grid-template-columns: 1fr; margin-top: 8px;">
+        <a href="{{ url_for('distribuidores.servicio_iptv') }}" class="btn-universal" style="background:linear-gradient(135deg, var(--primary), var(--secondary)); color:#fff;"><i class="fas fa-tv" style="margin-right: 5px;"></i> SERVICIO IPTV</a>
+    </div>
+    <div style="text-align: center; margin: 25px 0;">
+    <a href="{{ url_for('main.activaciones') }}" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #000; padding: 12px 25px; border-radius: 50px; font-weight: 800; text-decoration: none; font-size: 0.9rem; box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3); text-transform: uppercase;">
+        <i class="fas fa-tv"></i> Links de Activación para TV
+    </a>
+    </div>
+</div>

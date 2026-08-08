@@ -1,0 +1,296 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- ESTILOS EXCLUSIVOS PARA LA GALERÍA DE TUTORIALES -->
+<style>
+    .tutorial-card {
+        background: rgba(5, 5, 5, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        padding: 25px 20px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        margin-bottom: 30px;
+    }
+    
+    .tutorial-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 15px;
+    }
+
+    .tutorial-logo-box {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        background: rgba(0,0,0,0.5);
+    }
+
+    /* Contenedor del Slide */
+    .tutorial-slide {
+        display: none; /* Ocultamos todos por defecto */
+        animation: fadeSlide 0.4s ease-out forwards;
+        text-align: center;
+    }
+    .tutorial-slide.activo {
+        display: block; /* Solo mostramos el que tiene la clase activo */
+    }
+
+    @keyframes fadeSlide {
+        from { opacity: 0; transform: translateX(10px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    .tutorial-img {
+        width: 100%;
+        max-width: 400px; /* Tamaño máximo para que no se vea gigante en PC */
+        height: 220px;
+        object-fit: contain; /* Para que la captura no se recorte */
+        background: #000;
+        border-radius: 12px;
+        border: 1px solid rgba(255,255,255,0.1);
+        margin: 0 auto 20px auto;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+    .tutorial-paso-badge {
+        display: inline-block;
+        background: var(--primary);
+        color: #000;
+        font-weight: 900;
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        border-radius: 20px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    .tutorial-desc {
+        color: #ddd;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        min-height: 60px; /* Altura mínima para que los botones no salten al cambiar de paso */
+        margin-bottom: 20px;
+    }
+
+    /* Controles de Navegación */
+    .tutorial-controles {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 50px;
+        padding: 5px;
+        border: 1px solid rgba(255,255,255,0.05);
+        max-width: 350px;
+        margin: 0 auto;
+    }
+
+    .btn-tuto {
+        background: rgba(255, 255, 255, 0.05);
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 800;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .btn-tuto:hover {
+        background: var(--primary);
+        color: #000;
+    }
+    .tutorial-indicador {
+        color: var(--primary);
+        font-weight: 900;
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+    }
+</style>
+
+<div class="container" style="padding-top: 0;">
+    <div style="display: flex; justify-content: center; margin: 15px auto;">
+        <a href="{{ url_for('main.inicio') }}" class="btn-universal" style="background:var(--glass); color:#fff; border:2px solid var(--glass-border); padding: 15px 50px; min-width: 280px; font-size: 0.9rem; letter-spacing: 1px;">
+            <i class="fas fa-home" style="margin-right: 8px;"></i> VOLVER ATRÁS
+        </a>
+    </div>
+</div>       
+
+<div class="container mt-4 mb-5">
+    <div style="text-align: center; margin-bottom: 40px; width: 100%;">
+        <h2 style="color: var(--primary); font-weight: 800; text-transform: uppercase;">
+            <i class="fas fa-images"></i> GUÍAS PASO A PASO
+        </h2>
+        <p style="color: #aaa; font-size: 0.9rem;">Desliza para ver cómo activar cada plataforma.</p>
+    </div>
+
+    <div class="row">
+
+        <!-- ========================================== -->
+        <!-- GALERÍA 1: NETFLIX                         -->
+        <!-- ========================================== -->
+        <div class="col-12 col-md-6 mb-4">
+            <div class="tutorial-card shadow-lg" id="galeria-netflix">
+                
+                <!-- Encabezado -->
+                <div class="tutorial-header">
+                    <div class="tutorial-logo-box" style="box-shadow: 0 0 15px rgba(229, 9, 20, 0.4);">
+                        <img src="{{ url_for('static', filename='img/netflix.webp') }}" style="width: 35px; object-fit: contain;">
+                    </div>
+                    <div>
+                        <h5 style="color: white; font-weight: 800; margin: 0; text-transform: uppercase;">Activar Netflix</h5>
+                        <p style="color: #aaa; font-size: 0.75rem; margin: 0;">Por código TV Link</p>
+                    </div>
+                </div>
+
+                <!-- SLIDES (PASOS) -->
+                <div class="tutorial-contenedor-slides">
+                    
+                    <!-- PASO 1 -->
+                    <div class="tutorial-slide activo">
+                        <img src="{{ url_for('static', filename='img/guias/nettv1.jpg') }}" class="tutorial-img" alt="Paso 1">
+                        <span class="tutorial-paso-badge">Paso 1</span>
+                        <p class="tutorial-desc">Abre la aplicación de Netflix en tu Smart TV y selecciona la opción <strong>"Iniciar sesión"</strong></p>
+                    </div>
+                    
+                    <!-- PASO 2 -->
+                    <div class="tutorial-slide">
+                        <img src="{{ url_for('static', filename='img/guias/nettv2.jpg') }}" class="tutorial-img" alt="Paso 2">
+                        <span class="tutorial-paso-badge">Paso 2</span>
+                        <p class="tutorial-desc">Opcion rapida: presione en la opcion de  <strong>Usar telefono</strong> y le aparecera unos codigos de activacion (Ejemplo: 1234-5678). Mantén esa pantalla abierta. e indique a su proveedor</p>
+                    </div>
+
+                    <!-- PASO 3 -->
+                    <div class="tutorial-slide">
+                        <img src="{{ url_for('static', filename='img/guias/nettv3.jpg') }}" class="tutorial-img" alt="Paso 3">
+                        <span class="tutorial-paso-badge">Paso 3</span>
+                        <p class="tutorial-desc"><strong>opcion mas larga:</strong>  presione en usar control remoto <strong>digite el correo brindado </strong>y presione en <strong style="color: #ffcc00">SIGUIENTE</strong></p>
+                    </div>
+
+                    <div class="tutorial-slide">
+                        <img src="{{ url_for('static', filename='img/guias/nettv4.jpg') }}" class="tutorial-img" alt="Paso 3">
+                        <span class="tutorial-paso-badge">Paso 4</span>
+                        <p class="tutorial-desc">le saldra la siguientes opciones; dele en  <strong>ENVIAR ENLACE DE INICIO DE SESION</strong>y mantenga la pantalla activa hasta que su proveedor acepte la solicitiud</p>
+                    </div>
+
+                </div>
+
+                <!-- Controles -->
+                <div class="tutorial-controles">
+                    <button class="btn-tuto" onclick="cambiarPaso('galeria-netflix', -1)"><i class="fas fa-chevron-left"></i></button>
+                    <span class="tutorial-indicador">...</span>
+                    <button class="btn-tuto" onclick="cambiarPaso('galeria-netflix', 1)"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 mb-4">
+            <div class="tutorial-card shadow-lg" id="galeria-netflix-celular">
+                
+                <!-- Encabezado -->
+                <div class="tutorial-header">
+                    <div class="tutorial-logo-box" style="box-shadow: 0 0 15px rgba(229, 9, 20, 0.4);">
+                        <img src="{{ url_for('static', filename='img/netflix.webp') }}" style="width: 35px; object-fit: contain;">
+                    </div>
+                    <div>
+                        <h5 style="color: white; font-weight: 800; margin: 0; text-transform: uppercase;">Activar Netflix</h5>
+                        <p style="color: #aaa; font-size: 0.75rem; margin: 0;">Para celular o pc</p>
+                    </div>
+                </div>
+
+                <!-- SLIDES (PASOS) -->
+                <div class="tutorial-contenedor-slides">
+                    
+                    <!-- PASO 1 -->
+                    <div class="tutorial-slide activo">
+                        <img src="{{ url_for('static', filename='img/guias/netc1.jpg') }}" class="tutorial-img" alt="Paso 1">
+                        <span class="tutorial-paso-badge">Paso 1</span>
+                        <p class="tutorial-desc">Abre la aplicación de Netflix en tu celular o pc y presione en  <strong>"Iniciar sesión"</strong></p>
+                    </div>
+                    
+                    <!-- PASO 2 -->
+                    <div class="tutorial-slide">
+                        <img src="{{ url_for('static', filename='img/guias/netc2.jpg') }}" class="tutorial-img" alt="Paso 2">
+                        <span class="tutorial-paso-badge">Paso 2</span>
+                        <p class="tutorial-desc">coloque el correo brindado y presione en  <strong>CONTINUAR</strong></p>
+                    </div>
+
+                    <!-- PASO 3 -->
+                    <div class="tutorial-slide">
+                        <img src="{{ url_for('static', filename='img/guias/netC3.jpg') }}" class="tutorial-img" alt="Paso 3">
+                        <span class="tutorial-paso-badge">Paso 3</span>
+                        <p class="tutorial-desc">la app le pedira unos codigos de acceso unico que llegaran al correo , <strong style="color: #0099ff">indique a su proveedor que le brinde los codigos de acceso</strong></p>
+                    </div>
+
+                </div>
+
+                <!-- Controles -->
+                <div class="tutorial-controles">
+                    <button class="btn-tuto" onclick="cambiarPaso('galeria-netflix-celular', -1)"><i class="fas fa-chevron-left"></i></button>
+                    <span class="tutorial-indicador">...</span>
+                    <button class="btn-tuto" onclick="cambiarPaso('galeria-netflix-celular', 1)"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // =========================================================
+    // INICIADOR AUTOMÁTICO DE GALERÍAS
+    // =========================================================
+    document.addEventListener("DOMContentLoaded", () => {
+        // Busca todas las galerías que existan en la página
+        const galerias = document.querySelectorAll('.tutorial-card');
+        
+        galerias.forEach(galeria => {
+            const slides = galeria.querySelectorAll('.tutorial-slide');
+            const indicador = galeria.querySelector('.tutorial-indicador');
+            
+            // Si la galería tiene fotos, ajusta el texto automáticamente al cargar
+            if (slides.length > 0 && indicador) {
+                indicador.innerText = `1 / ${slides.length}`;
+            }
+        });
+    });
+
+    // =========================================================
+    // LÓGICA PARA CAMBIAR DE PASO
+    // =========================================================
+    function cambiarPaso(idGaleria, direccion) {
+        const galeria = document.getElementById(idGaleria);
+        if (!galeria) return;
+
+        const slides = galeria.querySelectorAll('.tutorial-slide');
+        const indicador = galeria.querySelector('.tutorial-indicador');
+        
+        let pasoActual = 0;
+        
+        slides.forEach((slide, index) => {
+            if (slide.classList.contains('activo')) {
+                pasoActual = index;
+            }
+        });
+
+        let nuevoPaso = pasoActual + direccion;
+
+        if (nuevoPaso < 0) nuevoPaso = slides.length - 1;
+        if (nuevoPaso >= slides.length) nuevoPaso = 0;
+
+        slides.forEach(slide => slide.classList.remove('activo'));
+        slides[nuevoPaso].classList.add('activo');
+
+        // Aquí ya era inteligente, pero ahora funciona en equipo con el iniciador
+        indicador.innerText = `${nuevoPaso + 1} / ${slides.length}`;
+    }
+</script>
+{% endblock %}

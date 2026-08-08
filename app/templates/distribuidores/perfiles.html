@@ -1,0 +1,296 @@
+<div class="category-title"><i class="fas fa-user-circle"></i> ZONA PERFILES</div>
+
+    <div class="service-item premium oferta disponible" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">Mas solicitado 🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/netflix.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            
+            <div class="service-text">
+                <h3 class="nombre-prod">Netflix PREMIUM Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-video"></i> Ultra HD 4K</span>
+                    <span class="tag-prop"><i class="fas fa-desktop"></i> 1 Pantalla en simultaneo</span>
+                    <span class="tag-prop"><i class="fas fa-sync-alt"></i> Renovable(no pierdes historial si deseas)</span>
+                    <span class="tag-prop"><i class="fas fa-house-signal"></i> Activación por codigo</span>
+                </div>
+            </div>
+            <div class="price-container">
+            <span class="price-tag precio-prod">S/ 12</span>    
+            </div>
+            <div class="stock-badge" data-plataforma="netflix" data-tipo="perfil">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item  disponible" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/disneys.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">Disney standar Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-circle-xmark"></i> Sin ESPN</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Calidad premium 4K</span>
+                    <span class="tag-prop"><i class="fas fa-lock"></i> PIN privado</span>
+                    <span class="tag-prop"><i class="fas fa-house-signal"></i> Activacion por codigo(clientes nuevos ) </span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 4</span>
+            </div>
+            <div class="stock-badge" data-plataforma="disney plus" data-tipo="perfil">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium disponible" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/disneyp.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">Disney premium Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-house-signal"></i> Activacion por codigo(clientes nuevos ) </span>
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> Con Canales ESPN</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Calidad premium 4K</span>
+                    <span class="tag-prop"><i class="fas fa-eye-slash"></i> Perfil privado</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 8</span>
+            </div>
+            <div class="stock-badge" data-plataforma="disney premium" data-tipo="perfil">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item  disponible" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/prime.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">AMAZON PRIME Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-user"></i> 1 Perfil en simultaneo</span>
+                    <span class="tag-prop"><i class="fas fa-envelope"></i> Se entrega Correo y Contrasñea</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion 4K</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 4</span>
+            </div>
+            <div class="stock-badge" data-plataforma="prime video" data-tipo="perfil">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item disponible" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/prime.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">AMAZON PRIME Perfil (TV)</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-user"></i> 1 Perfil </span>
+                    <span class="tag-prop"><i class="fas fa-house-signal"></i> activacion a tv(por codigo)</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolcion 4K</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+            </div>
+            <div class="stock-badge" data-plataforma="amazon prime" data-tipo="perfil">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium disponible" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/vix.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">VIX PREMIUM Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-star"></i>plan Premium </span>
+                    <span class="tag-prop"><i class="fas fa-film"></i> Telenovelas Mexicanas</span>
+                    <span class="tag-prop"><i class="fas fa-user"></i> 1 dispositivo en simultaneo </span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+            </div>
+            <div class="stock-badge" data-plataforma="vix premium" data-tipo="perfil">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="service-item premium disponible" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">EL MUNDIAL POR 👇</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/paramount.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">PARAMOUNT STANDARD Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 mes</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i>Resolucion FULL HD</span>
+                    <span class="tag-prop"><i class="fas fa-user"></i> para 1 dispositivo </span>
+                    <span class="tag-prop"><i class="fas fa-ticket-alt"></i> Estrenos y deportes en vivo</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+            </div>
+            <div class="stock-badge" data-plataforma="paramount" data-tipo="perfil">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item premium disponible" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta"></div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/paramount.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">PARAMOUNT PREMIUM Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-calendar-alt"></i> 1 mes</span>
+                    <span class="tag-prop"><i class="fas fa-star"></i>Resolucion Premium 4K</span>
+                    <span class="tag-prop"><i class="fas fa-user"></i> para 1 dispositivo </span>
+                    <span class="tag-prop"><i class="fas fa-ticket-alt"></i> Estrenos y deportes en vivo</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 5</span>
+            </div>
+            <div class="stock-badge" data-plataforma="paramount premium" data-tipo="perfil">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item disponible" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/crunchyroll.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">CRUNCHYROLL Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion Full HD</span>
+                    <span class="tag-prop"><i class="fas fa-eye-slash"></i> Perfil Privado</span>
+                    <span class="tag-prop"><i class="fas fa-envelope"></i> Se entrega correo y contraseña</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 4</span>
+            </div>
+            <div class="stock-badge" data-plataforma="crunchyroll" data-tipo="perfil">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-item " onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">Mas Solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/max.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">HBO Max Standard  perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-user"></i> 1 Dispositivo en simultaneo</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolucion Full HD</span>
+                    <span class="tag-prop"><i class="fas fa-eye-slash"></i> Perfil Privado</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 3</span>
+            </div>
+            <div class="stock-badge" data-plataforma="MAX" data-tipo="perfil">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+            
+    <div class="service-item premium  disponible" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">Mas Solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/max.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod"> HBO Max Platino </h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-user"></i> 1 Dispositivo en simultaneo</span>
+                    <span class="tag-prop"><i class="fas fa-video"></i> Resolcuion premium 4K</span>
+                    <span class="tag-prop"><i class="fas fa-eye-slash"></i> Perfil Privado</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 4</span>
+            </div>
+            <div class="stock-badge" data-plataforma="max platino" data-tipo="perfil">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+     </div>
+        
+    <div class="service-item premium oferta" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">Mas Solicitado🔥</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/movistar.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">Movistar Play + Liga 1 Max Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-house-signal"></i> Activacion por codigo</span>
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> Todo los canales ESPN</span>
+                    <span class="tag-prop"><i class="fas fa-list-ol"></i> +90 Canales</span>
+                    <span class="tag-prop"><i class="fas fa-circle-check"></i> Canal L1max disponible</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 13</span>
+            </div>
+            <div class="stock-badge" data-plataforma="movistar play" data-tipo="perfil">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="service-item premium  disponible" onclick="toggleCarrito(this)" >
+        <div class="service-card">
+            <div class="badge-oferta">EL MUNDIAL POR 👇</div>
+            <div class="check-icon">✓</div>
+            <div class="img-wrapper"><div class="skeleton"></div><img src="{{ url_for('static', filename='img/dgo.webp') }}" class="service-logo" onload="this.classList.add('loaded')"></div>
+            <div class="service-text">
+                <h3 class="nombre-prod">DGO + Liga 1 Max Perfil</h3>
+                <div class="product-tags">
+                    <span class="tag-prop"><i class="fas fa-house-signal"></i> Activacion por codigo</span>
+                    <span class="tag-prop"><i class="fas fa-futbol"></i> Todo los canales ESPN</span>
+                    <span class="tag-prop"><i class="fas fa-list-ol"></i> +97 Canales</span>
+                    <span class="tag-prop"><i class="fas fa-circle-check"></i> Canal L1max disponible</span>
+                </div>
+            </div>
+            <div class="price-container">
+                <span class="price-tag precio-prod">S/ 20</span>
+            </div>
+            <div class="stock-badge" data-plataforma="dgo con liga" data-tipo="perfil">
+             <i class="fas fa-box"></i> Stock: <span>...</span>
+            </div>
+        </div>
+    </div>

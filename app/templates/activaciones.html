@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+<!-- 1. Importamos el molde de tarjetas de TV -->
+{% from 'activaciones/macrostv.html' import tarjeta_streaming %}
+
+{% block content %}
+<!-- 2. Cargamos el archivo CSS exclusivo de esta sección -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/activaciones.css') }}">
+
+<div class="container" style="padding-top: 0;">
+    <div style="display: flex; justify-content: center; margin: 15px auto;">
+        <a href="{{ url_for('distribuidores.distribuidores') }}" class="btn-universal" style="background:var(--glass); color:#fff; border:2px solid var(--glass-border); padding: 15px 50px; min-width: 280px; font-size: 0.9rem; letter-spacing: 1px;">
+            <i class="fas fa-home" style="margin-right: 8px;"></i> VOLVER ATRÁS
+        </a>
+    </div>
+</div>     
+
+<div class="container mt-5 mb-5">
+    <div style="text-align: center; margin-bottom: 40px; width: 100%;">
+        <h2 style="color: var(--primary); font-weight: 800; text-transform: uppercase;">
+            <i class="fas fa-play-circle"></i> ACTIVACIONES PARA TV LINK
+        </h2>
+        <p style="color: #aaa; font-size: 0.9rem;">Guías paso a paso y enlaces directos para activar tus servicios sin complicaciones.</p>
+    </div>
+        
+    <div class="row">
+        <!-- 3. Tarjetas de Streaming usando el Molde (Macros) -->
+        {{ tarjeta_streaming('Netflix', 'netflix.webp', 'https://www.netflix.com/tv8', '#e50914', 'rgba(229, 9, 20, 0.6)') }}
+        
+        {{ tarjeta_streaming('Max', 'max.webp', 'https://auth.hbomax.com/link', '#0055ff', 'rgba(0, 85, 255, 0.6)') }}
+        
+        {{ tarjeta_streaming('Paramount', 'paramount.webp', 'https://www.paramountplus.com/pe/tv/', '#007bb6', 'rgba(0, 100, 255, 0.6)') }}
+        
+        {{ tarjeta_streaming('Disney', 'disneyp.webp', 'https://www.disneyplus.com/es-419/begin', '#007bb6', 'rgba(0, 100, 255, 0.6)') }}
+
+         {{ tarjeta_streaming('DIRECTV GO', 'dgo.webp', 'https://www.directvgo.com/activar-tv', '#75c7ec', 'rgba(57, 124, 224, 0.6)') }}
+
+        <!-- 4. Llamamos a todo el bloque complejo de IPTV -->
+        {% include 'activaciones/iptv_flujo.html' %}
+    </div>
+</div>
+{% endblock %}

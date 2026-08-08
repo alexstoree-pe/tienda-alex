@@ -1,0 +1,66 @@
+<!-- MOLDE 1: TARJETA PRINCIPAL (FLUJO / SMARTERS) -->
+{% macro card_iptv(nombre, version, desc, tema, code_downloader) %}
+<div class="col-12 mb-4">
+    <div class="card shadow-lg card-iptv {{ tema }}">
+        <div class="header-app">
+            <div class="icon-app"><i class="fas fa-tv"></i></div>
+            <div>
+                <h5 class="title-app">{{ nombre }} <span class="badge-version">{{ version }}</span></h5>
+                <p class="desc-app">{{ desc }}</p>
+            </div>
+        </div>
+
+        <div class="box-links">
+            <!-- Aquí adentro inyectaremos los links -->
+            {{ caller() }}
+        </div>
+
+        <div class="box-downloader">
+            <div class="text-left">
+                <p class="downloader-title"><i class="fas fa-hashtag"></i> Código DOWNLOADER:</p>
+                <p class="downloader-code">{{ code_downloader }}</p>
+            </div>
+            <button onclick="navigator.clipboard.writeText('{{ code_downloader }}'); showToast('Código copiado', true);" class="btn-downloader">
+                <i class="fas fa-copy"></i> COPIAR
+            </button>
+        </div>
+
+        <div class="alert-box">
+            <p><i class="fas fa-exclamation-triangle"></i> Recordamos que esta aplicación <strong>NO</strong> se encuentra en la Google Play Store.</p>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+<!-- MOLDE 2: FILA DE ENLACES PARA COPIAR -->
+{% macro link_row(titulo, url) %}
+<p class="title-link"><i class="fas fa-link"></i> {{ titulo }}:</p>
+<div class="row-link">
+    <span class="text-url">{{ url }}</span>
+    <button onclick="navigator.clipboard.writeText('{{ url }}'); showToast('Enlace copiado', true);" class="btn-copy">
+        <i class="fas fa-copy"></i> COPIAR
+    </button>
+</div>
+{% endmacro %}
+
+<!-- MOLDE 3: FILA PARA APPS DIRECTAS (LAMTV / XTREAM) -->
+{% macro app_row(nombre, imagen, url) %}
+<div class="app-row">
+    <div class="app-row-left">
+        <img src="{{ url_for('static', filename='img/' ~ imagen) }}" alt="{{ nombre }}" class="app-icon">
+        <div class="app-row-info">
+            <h6>{{ nombre }}</h6>
+            <span>Android / Fire Stick</span>
+        </div>
+    </div>
+    <div class="row-link app-link-box">
+        <span class="text-url">{{ url }}</span>
+        <button onclick="navigator.clipboard.writeText('{{ url }}'); showToast('Enlace copiado', true);" class="btn-copy">
+            <i class="fas fa-copy"></i> COPIAR
+        </button>
+    </div>
+    <a href="{{ url }}" target="_blank" class="btn-download">
+        <i class="fas fa-download"></i> DESCARGAR
+    </a>
+</div>
+{% endmacro %}
