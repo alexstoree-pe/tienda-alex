@@ -1015,7 +1015,10 @@ function procesarTextosMoviles() {
     });
 }
 
-window.addEventListener('load', procesarTextosMoviles);
+window.addEventListener('load', () => {
+    setTimeout(procesarTextosMoviles, 400); // Espera 400ms a que el celular pinte la pantalla
+});
+
 window.addEventListener('resize', procesarTextosMoviles);
 document.addEventListener("DOMContentLoaded", () => {
     const botonesVista = document.querySelectorAll('.btn-view');
