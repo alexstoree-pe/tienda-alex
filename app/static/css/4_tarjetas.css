@@ -73,24 +73,41 @@
 .service-item.selected .check-icon { display: flex !important; animation: popCheck 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;}
 .service-item.premium.selected .check-icon { background: var(--gold-gradient) !important; box-shadow: 0 0 15px rgba(212, 175, 55, 0.6) !important;}
 
-/* Corregir el contenedor de texto para que no oculte los textos al hacer scroll */
+/* CORRECCIÓN ESTABILIZADORA DE TEXTOS EN MÓVIL */
 .service-text {
     overflow: visible !important;
     position: relative;
 }
 
-/* Evitar que las etiquetas y textos se colapsen o desaparezcan */
-.service-text h3, .tag-prop, .nombre-prod {
-    display: inline-block !important;
-    max-width: 100% !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
+/* Permitir que los tags y títulos se muestren siempre estables sin ocultarse */
+.service-text h3, .nombre-prod {
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 4px;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
 }
 
-/* Si la animación de texto largo se activa, aseguramos que mantenga su bloque */
-.service-text h3.animacion-texto-largo, 
-.tag-prop.animacion-texto-largo {
+.product-tags { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 6px; 
+    margin-top: 6px;
     overflow: visible !important;
-    white-space: nowrap !important;
+}
+
+.tag-prop { 
+    background: rgba(255, 255, 255, 0.06); 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    padding: 3px 8px; 
+    border-radius: 6px; 
+    font-size: 0.68rem; 
+    color: #d1d1d6; 
+    font-weight: 500; 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 4px; 
+    white-space: nowrap;
 }
