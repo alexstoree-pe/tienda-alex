@@ -84,3 +84,27 @@
     opacity: 1 !important;
     visibility: visible !important;
 }
+
+/* Forzar la estabilidad de renderizado en móviles durante el scroll */
+.service-item, .service-card, .service-text {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Evitar que los esqueletos fantasmas reaparezcan al hacer scroll */
+.service-logo.loaded ~ .service-text .skeleton,
+.service-item.loaded .skeleton {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* Forzar que el texto y los títulos permanezcan visibles en todo momento */
+.service-text h3, .tag-prop, .price-tag {
+    opacity: 1 !important;
+    visibility: visible !important;
+    -webkit-font-smoothing: antialiased;
+}
