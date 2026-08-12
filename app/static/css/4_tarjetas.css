@@ -73,3 +73,14 @@
 .service-item.premium.selected .service-card { background: rgba(212, 175, 55, 0.12) !important; border-color: var(--vip) !important; box-shadow: 0 0 30px rgba(212, 175, 55, 0.5) !important; background-image: none !important;}
 .service-item.selected .check-icon { display: flex !important; animation: popCheck 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;}
 .service-item.premium.selected .check-icon { background: var(--gold-gradient) !important; box-shadow: 0 0 15px rgba(212, 175, 55, 0.6) !important;}
+/* Forzar la ocultación del esqueleto si el texto ya está cargado o hay un retraso */
+.service-item.loaded .skeleton,
+.service-text.loaded .skeleton {
+    display: none !important;
+}
+
+/* Asegurar que las etiquetas internas no se colapsen en móvil */
+.service-text h3, .tag-prop {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
