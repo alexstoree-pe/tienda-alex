@@ -74,7 +74,6 @@
 .service-item.selected .check-icon { display: flex !important; animation: popCheck 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;}
 .service-item.premium.selected .check-icon { background: var(--gold-gradient) !important; box-shadow: 0 0 15px rgba(212, 175, 55, 0.6) !important;}
 /* Forzar la ocultación del esqueleto si el texto ya está cargado o hay un retraso */
-.service-item.loaded .skeleton,
 .service-text.loaded .skeleton {
     display: none !important;
 }
@@ -107,4 +106,19 @@
     opacity: 1 !important;
     visibility: visible !important;
     -webkit-font-smoothing: antialiased;
+}
+
+/* Evitar que los esqueletos vuelvan a aparecer o parpadeen al hacer scroll */
+.service-item .skeleton {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Mantener el texto y los precios fijos y visibles ante cualquier movimiento */
+.service-text, .service-text h3, .price-tag, .tag-prop {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
 }
