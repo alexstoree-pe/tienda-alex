@@ -111,3 +111,28 @@
     gap: 4px; 
     white-space: nowrap;
 }
+
+/* ========================================================= */
+/* CORRECCIÓN CRÍTICA DE RENDERIZADO MÓVIL (GPU FIX)         */
+/* ========================================================= */
+@media (max-width: 768px) {
+    /* Desactivar la animación flotante y el overflow oculto en móviles para evitar que el navegador borre los textos al hacer scroll */
+    .service-item {
+        animation: none !important;
+        overflow: visible !important;
+        transform: none !important;
+        max-height: none !important;
+    }
+    
+    .service-card {
+        overflow: visible !important;
+        /* Desactivar el backdrop-filter pesado en móviles que colapsa el repintado al hacer scroll */
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background-color: rgba(12, 12, 15, 0.95) !important;
+    }
+
+    .img-wrapper {
+        overflow: visible !important;
+    }
+}
