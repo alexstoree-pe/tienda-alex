@@ -1,0 +1,25 @@
+<!-- ================= MODAL DEL CARRITO DE COMPRAS ================= -->
+<div class="modal-overlay" id="modal-carrito-resumen">
+    <!-- El modal ahora es una caja flexible fija que no pasa del 85% del alto de la pantalla -->
+    <div class="modal-content modal-cristal" style="max-width: 500px; padding: 25px 20px; display: flex; flex-direction: column; max-height: 85vh; overflow: hidden;">
+        
+        <!-- 1. TÍTULO CON DEGRADADO DORADO -->
+        <h2 style="flex-shrink: 0; margin-bottom: 15px; background: linear-gradient(45deg, #d4af37, #f4d03f); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🛒 RESUMEN DEL PEDIDO</h2>
+        
+        <div id="carrito-items-container" style="text-align: left; margin-bottom: 15px; flex-grow: 1; overflow-y: auto; padding-right: 8px;"></div>
+
+        <div class="resumen-totales" style="flex-shrink: 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; margin-bottom: 15px;">
+            <div id="carrito-descuento-text" style="color: var(--promo); font-weight: 800; font-size: 0.85rem; margin-bottom: 8px; display: none;">
+                <!-- Texto de descuento -->
+            </div>
+            <!-- 2. TOTAL EN VERDE NEÓN -->
+            <div style="font-size: 1.3rem; font-weight: 800; color: white;">
+                TOTAL: <span id="carrito-total-text" style="color: #25d366; text-shadow: 0 0 12px rgba(37, 211, 102, 0.4);">S/ 0.00</span>
+            </div>
+        </div>
+
+        <!-- 3. BOTÓN VERDE DE WHATSAPP (Añadimos la clase btn-whatsapp-verde) -->
+        <button class="btn-modal-main btn-whatsapp-verde" onclick="continuarPedido()" style="flex-shrink: 0;">ENVIAR A WHATSAPP <i class="fab fa-whatsapp" style="margin-left: 5px;"></i></button>
+        <button class="btn-modal-back" onclick="cerrarModalCarrito()" style="flex-shrink: 0;">SEGUIR COMPRANDO</button>
+    </div>
+</div>

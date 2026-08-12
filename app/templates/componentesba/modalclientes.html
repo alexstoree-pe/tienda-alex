@@ -1,0 +1,42 @@
+<div id="modal-pedido-cliente" class="modal-overlay">
+    <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
+        
+        <!-- PASO 1: Formulario de Datos -->
+        <div id="paso-cliente-1">
+            <h2>DATOS DE COMPRA</h2>
+            <p>Completa tu información para agilizar la entrega:</p>
+            
+            <div style="text-align: left; margin-bottom: 20px;">
+                <label class="label-dynamic">¿Eres cliente nuevo?</label>
+                <!-- Agregamos onchange para detectar cuando cambian la opción -->
+                <select id="cliente-tipo" class="nombre-perfil-input-dynamic" style="margin-bottom: 15px; cursor: pointer;" onchange="window.toggleCamposCliente()">
+                    <option value="Cliente Nuevo">Sí, soy cliente nuevo</option>
+                    <option value="Cliente Antiguo">No, ya he comprado antes</option>
+                </select>
+
+                <!-- Envolvemos los campos en este DIV para ocultarlos si es antiguo -->
+                <div id="div-datos-nuevo">
+                    <label class="label-dynamic">Nombre Completo</label>
+                    <input type="text" id="cliente-nombre" class="nombre-perfil-input-dynamic" placeholder="Ej: Juan Pérez" autocomplete="off">
+
+                    <label class="label-dynamic">Número de Celular</label>
+                    <input type="tel" id="cliente-celular" class="nombre-perfil-input-dynamic" placeholder="Ej: 999 888 777" autocomplete="off">
+                </div>
+            </div>
+
+            <button class="btn-modal-main" onclick="irAPasoNombreCliente()">CONTINUAR</button>
+            <span style="display:block; margin-top:20px; color:#555; font-size:0.75rem; cursor:pointer;" onclick="cerrarModalCliente()">Cancelar</span>
+        </div>
+        
+        <!-- PASO 2: Nombres de los Perfiles -->
+        <div id="paso-cliente-2" style="display: none;">
+            <h2>NOMBRES DE PERFILES</h2>
+            <p>Ingresa los nombres para tus perfiles/cuentas:</p>
+            <div id="dynamic-inputs-cliente" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px; padding-right: 5px; text-align: left;">
+            </div>
+            <button class="btn-modal-main" onclick="finalizarPedidoCliente()">ENVIAR PEDIDO A WHATSAPP</button>
+            <button class="btn-modal-back" onclick="volverAPaso1Cliente()">← Volver</button>
+        </div>
+
+    </div>
+</div>

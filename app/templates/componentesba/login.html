@@ -1,0 +1,14 @@
+<!-- MODAL DE INICIO DE SESIÓN -->
+<div id="modal-login-distribuidor" class="modal-pass" style="display:none;">
+    <div class="modal-content">
+        <h2 style="color:var(--primary); font-weight: 800; margin-bottom:10px;">ACCESO PRIVADO</h2>
+        <p style="color:#889; font-size:0.8rem; margin-bottom:20px;">Ingresa tu código de acceso</p>
+        <div id="error-msg" style="color: var(--danger); font-size: 0.8rem; margin-bottom: 10px; font-weight: 600; height: 1.2rem;"></div>
+        <div class="input-wrapper">
+            <input type="password" id="input-dist-pass" maxlength="8" oninput="checkInputPass(this)" onkeydown="if(event.key==='Enter') validarAcceso()" autocomplete="new-password">
+            <div id="stars-placeholder" class="stars-bg">* * * *</div>
+        </div>
+        <button onclick="validarAcceso()" class="btn-modal-main">ENTRAR</button>
+        <span style="display:block; margin-top:20px; color:#555; font-size:0.75rem; cursor:pointer;" onclick="window.history.back()">Regresar al portal</span>
+    </div>
+</div>

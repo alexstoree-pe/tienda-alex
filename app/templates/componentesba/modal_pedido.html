@@ -1,0 +1,31 @@
+<!-- Fondos y Efectos Globales -->
+<div class="particles-container">
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+</div>
+
+<div id="toast-container"></div>
+<button id="back-to-top" title="Volver Arriba"><i class="fas fa-chevron-up"></i></button>
+
+<!-- MODAL PARA PEDIDOS (Elegir Nombre o Perfil) -->
+<div id="modal-pedido-vip" class="modal-overlay">
+    <div class="modal-content">
+        <div id="paso-seleccion">
+            <h2>¿QUÉ ADQUIRISTE?</h2>
+            <p>Selecciona que opción adquiriste:</p>
+            <button class="btn-modal-main" onclick="irAPasoNombre()">👤 PERFIL</button>
+            <button class="btn-modal-back" onclick="finalizarSinNombre()">CUENTA COMPLETA / OTRA PLATAFORMA</button>
+            <span style="display:block; margin-top:20px; color:#555; font-size:0.90rem; cursor:pointer;" onclick="cerrarModalPedido()">Cancelar</span>
+        </div>
+        <div id="paso-nombre" style="display: none;">
+            <h2>DATOS DEL PERFIL</h2>
+            <p>Ingresa los nombres para tus perfiles/cuentas:</p>
+            <div id="dynamic-inputs-container" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px; padding-right: 5px; text-align: left;">
+            </div>
+            <button class="btn-modal-main" onclick="finalizarConNombre()">FINALIZAR PEDIDO</button>
+            <button class="btn-modal-back" onclick="volverAPaso1()">← Volver</button>
+        </div>
+    </div>
+</div>
+
+

@@ -1,17 +1,10 @@
 {% extends "base.html" %}
 
-<!-- ELIMINAMOS EL BLOQUE DE CUSTOM CSS PORQUE YA TODO VIVE EN BASE.CSS -->
+
 
 {% block content %}
-<!-- Encabezado para Clientes -->
 <header>
-    <img src="{{ url_for('static', filename='img/logo.webp') }}" class="brand-logo">
-    <h1>CATÁLOGO CLIENTES</h1>
-    <div class="trust-bar">
-        <div class="trust-item"><i class="fas fa-headset"></i>Soporte 24/7</div>
-        <div class="trust-item"><i class="fas fa-shield-alt"></i>Garantía Total</div>
-        <div class="trust-item"><i class="fas fa-bolt"></i>Entrega Rápida</div>
-    </div>
+    {% include 'titulos/clientes.html' %}
 </header>
     
 {% include 'clientes/filtros_navegaciones.html' %}
