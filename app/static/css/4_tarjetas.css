@@ -19,7 +19,6 @@
 
 /* Interior de Tarjetas */
 .img-wrapper { position: relative; width: 60px; height: 60px; border-radius: 16px; flex-shrink: 0; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);}
-.skeleton { position: absolute; inset: 0; background: #1a1a1a; animation: pulseSkeleton 1.5s infinite; z-index: 1; border-radius: 16px;}
 .service-logo { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 2; transition: opacity 0.3s, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0;}
 .service-logo.loaded { opacity: 1;}
 .service-text { flex-grow: 1; min-width: 0; padding-right: 10px;}
@@ -104,4 +103,15 @@
     opacity: 1 !important;
     visibility: visible !important;
     transform: none !important;
+}
+/* Eliminar rastro y existencia de cualquier esqueleto visualmente */
+.skeleton {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* Asegurar que el logo y los textos carguen directo sin esperar estados */
+.service-logo {
+    opacity: 1 !important;
 }

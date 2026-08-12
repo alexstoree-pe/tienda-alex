@@ -2,6 +2,17 @@
 // 3. ANIMACIONES, EFECTOS VISUALES Y CINEMATOGRAFÍA (CORREGIDO)
 // =========================================================
 window.activarEfectoCineNativo = function() {
+    // Si es móvil, evitamos por completo que oculte las tarjetas para que nunca desaparezcan al hacer scroll
+    const esMovil = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (esMovil) {
+        document.querySelectorAll('.service-item, .category-title').forEach(el => {
+            el.classList.add('premium-visible');
+            el.classList.remove('premium-hidden');
+        });
+        return;
+    }
+
+    // Código original para PC de escritorio
     const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -13,7 +24,6 @@ window.activarEfectoCineNativo = function() {
     }, { threshold: 0.01, rootMargin: '100px 0px 100px 0px' });
 
     document.querySelectorAll('.service-item:not(.premium-visible), .category-title:not(.premium-visible)').forEach(el => {
-        // Solo aplica el efecto oculto si la tarjeta es totalmente nueva y nunca se ha mostrado
         if (!el.classList.contains('premium-visible')) {
             el.classList.add('premium-hidden');
             observer.observe(el);
