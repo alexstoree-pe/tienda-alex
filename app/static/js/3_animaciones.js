@@ -1,19 +1,27 @@
 // =========================================================
-// 3. ANIMACIONES, EFECTOS VISUALES Y CINEMATOGRAFÍA
+// 3. ANIMACIONES, EFECTOS VISUALES Y CINEMATOGRAFÍA (CORREGIDO)
 // =========================================================
 window.activarEfectoCineNativo = function() {
     const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting && !entry.target.classList.contains('oculto-filtro')) {
+            if (entry.isIntersecting) {
+                // Añadimos la clase visible y aseguramos remover la oculta permanentemente
                 entry.target.classList.add('premium-visible');
+                entry.target.classList.remove('premium-hidden');
+                
+                // 🔥 LA CLAVE: Desconectar el observer para este elemento. 
+                // Así el scroll arriba/abajo jamás volverá a reiniciar la animación ni a ocultar el texto.
                 obs.unobserve(entry.target); 
             }
         });
-    }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+    }, { threshold: 0.01, rootMargin: '50px 0px 50px 0px' }); // Ampliamos un poco el margen para que cargue antes de verse
 
-    document.querySelectorAll('.service-item:not(.premium-hidden), .category-title:not(.premium-hidden)').forEach(el => {
-        el.classList.add('premium-hidden');
-        observer.observe(el);
+    document.querySelectorAll('.service-item, .category-title').forEach(el => {
+        // Solo aplicar si no ha sido cargado antes para evitar parpadeos al hacer scroll
+        if (!el.classList.contains('premium-visible')) {
+            el.classList.add('premium-hidden');
+            observer.observe(el);
+        }
     });
 };
 
