@@ -5,19 +5,15 @@ window.activarEfectoCineNativo = function() {
     const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Añadimos la clase visible y aseguramos remover la oculta permanentemente
                 entry.target.classList.add('premium-visible');
                 entry.target.classList.remove('premium-hidden');
-                
-                // 🔥 LA CLAVE: Desconectar el observer para este elemento. 
-                // Así el scroll arriba/abajo jamás volverá a reiniciar la animación ni a ocultar el texto.
                 obs.unobserve(entry.target); 
             }
         });
-    }, { threshold: 0.01, rootMargin: '50px 0px 50px 0px' }); // Ampliamos un poco el margen para que cargue antes de verse
+    }, { threshold: 0.01, rootMargin: '100px 0px 100px 0px' });
 
-    document.querySelectorAll('.service-item, .category-title').forEach(el => {
-        // Solo aplicar si no ha sido cargado antes para evitar parpadeos al hacer scroll
+    document.querySelectorAll('.service-item:not(.premium-visible), .category-title:not(.premium-visible)').forEach(el => {
+        // Solo aplica el efecto oculto si la tarjeta es totalmente nueva y nunca se ha mostrado
         if (!el.classList.contains('premium-visible')) {
             el.classList.add('premium-hidden');
             observer.observe(el);
