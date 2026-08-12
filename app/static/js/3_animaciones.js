@@ -40,8 +40,7 @@ window.limpiarAnimacionesPrevias = function() {
 
 window.procesarTextosMoviles = function() {
     if (window.innerWidth > 768) return;
-    window.limpiarAnimacionesPrevias();
-
+    
     const contenedores = document.querySelectorAll('.service-text');
     contenedores.forEach(contenedor => {
         const esCuadricula = contenedor.closest('.grid-mode') !== null;
@@ -52,15 +51,22 @@ window.procesarTextosMoviles = function() {
         const distanciaTags = esCuadricula ? 30 : 20;
 
         const titulo = contenedor.querySelector('h3, .nombre-prod');
-        if (titulo && titulo.offsetWidth > espacioVisible) {
-            titulo.style.setProperty('--distancia-sobrante', `-${(titulo.offsetWidth - espacioVisible) + distanciaBase}px`);
-            titulo.classList.add('animacion-texto-largo');
+        if (titulo) {
+            // Verificamos si realmente desborda antes de aplicar la animación de desplazamiento
+            if (titulo.scrollWidth > espacioVisible) {
+                titulo.style.setProperty('--distancia-sobrante', `-${(titulo.scrollWidth - espacioVisible) + distanciaBase}px`);
+                titulo.classList.add('animacion-texto-largo');
+            } else {
+                titulo.classList.remove('animacion-texto-largo');
+            }
         }
         
         contenedor.querySelectorAll('.tag-prop').forEach(tag => {
-            if (tag.offsetWidth > espacioVisible) {
-                tag.style.setProperty('--distancia-sobrante', `-${(tag.offsetWidth - espacioVisible) + distanciaTags}px`);
+            if (tag.scrollWidth > espacioVisible) {
+                tag.style.setProperty('--distancia-sobrante', `-${(tag.scrollWidth - espacioVisible) + distanciaTags}px`);
                 tag.classList.add('animacion-texto-largo');
+            } else {
+                tag.classList.remove('animacion-texto-largo');
             }
         });
     });
@@ -124,6 +130,16 @@ window.iniciarNotificacionesCompras = function() {
 window.activarEfectoCineNativo();
 window.addEventListener('resize', window.procesarTextosMoviles);
 setTimeout(window.procesarTextosMoviles, 400);
+
+let scrollTimeout;
+window.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+        if (window.innerWidth <= 768) {
+            window.procesarTextosMoviles();
+        }
+    }, 150);
+}, { passive: true });
 
 const esMovil = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 if (typeof VanillaTilt !== 'undefined' && !esMovil) {

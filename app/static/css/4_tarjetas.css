@@ -73,45 +73,24 @@
 .service-item.selected .check-icon { display: flex !important; animation: popCheck 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;}
 .service-item.premium.selected .check-icon { background: var(--gold-gradient) !important; box-shadow: 0 0 15px rgba(212, 175, 55, 0.6) !important;}
 
-
-/* Asegurar que las etiquetas internas no se colapsen en móvil */
-.service-text h3, .tag-prop {
-    opacity: 1 !important;
-    visibility: visible !important;
+/* Corregir el contenedor de texto para que no oculte los textos al hacer scroll */
+.service-text {
+    overflow: visible !important;
+    position: relative;
 }
 
-/* Forzar la estabilidad de renderizado en móviles durante el scroll */
-.service-item, .service-card, .service-text {
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    perspective: 1000px;
+/* Evitar que las etiquetas y textos se colapsen o desaparezcan */
+.service-text h3, .tag-prop, .nombre-prod {
+    display: inline-block !important;
+    max-width: 100% !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
-
-/* Forzar que el texto y los títulos permanezcan visibles en todo momento */
-.service-text h3, .tag-prop, .price-tag {
-    opacity: 1 !important;
-    visibility: visible !important;
-    -webkit-font-smoothing: antialiased;
-}
-
-
-/* Mantener el texto y los precios fijos y visibles ante cualquier movimiento */
-.service-text, .service-text h3, .price-tag, .tag-prop {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
-}
-/* Eliminar rastro y existencia de cualquier esqueleto visualmente */
-.skeleton {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-}
-
-/* Asegurar que el logo y los textos carguen directo sin esperar estados */
-.service-logo {
-    opacity: 1 !important;
+/* Si la animación de texto largo se activa, aseguramos que mantenga su bloque */
+.service-text h3.animacion-texto-largo, 
+.tag-prop.animacion-texto-largo {
+    overflow: visible !important;
+    white-space: nowrap !important;
 }
