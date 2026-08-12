@@ -1,0 +1,28 @@
+#toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none;}
+.toast { background: rgba(10, 10, 15, 0.95); border-left: 4px solid var(--primary); border-radius: 8px; padding: 12px 20px; color: white; font-size: 0.8rem; font-weight: 600; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); animation: slideInRight 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; display: flex; align-items: center; gap: 10px;}
+.toast.remove { border-left-color: var(--danger);}
+.toast.fadeOut { animation: fadeOutRight 0.4s forwards;}
+.sales-popup { position: fixed !important; top: 25px !important; left: 25px !important; z-index: 999999 !important; background: rgba(10, 10, 12, 0.95) !important; border-left: 4px solid var(--primary) !important; border-radius: 12px; padding: 12px 16px; color: white; display: flex; align-items: center; gap: 14px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8) !important; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); transform: translateX(-150%); opacity: 0; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); max-width: 320px; border: 1px solid rgba(255, 255, 255, 0.05);}
+.sales-popup.show { transform: translateX(0); opacity: 1 !important;}
+.sales-popup img { width: 40px; height: 40px; border-radius: 8px; object-fit: contain; background: rgba(0, 0, 0, 0.5); padding: 2px;}
+.sales-popup-text { font-size: 0.8rem; line-height: 1.3; font-weight: 500;}
+.sales-popup-text strong { color: var(--primary); font-size: 0.85rem; font-weight: 800; text-transform: uppercase;}
+.sales-popup-time { color: #889; font-size: 0.65rem; margin-top: 4px; font-weight: 600;}
+
+#btn-info-movil { position: fixed; bottom: 120px; left: 20px; z-index: 1000; display: flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 50px; background: rgba(5, 5, 5, 0.85); border: 1px solid var(--primary); color: #fff; font-size: 0.85rem; font-weight: 800; letter-spacing: 1px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); cursor: pointer; transition: all 0.3s ease;}
+body:has(#whatsapp-btn:not(.hidden)) #btn-info-movil { bottom: 110px;}
+#back-to-top { position: fixed; bottom: 110px; right: 20px; width: 45px; height: 45px; background: var(--primary); color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; z-index: 2500; border: none; box-shadow: 0 0 15px rgba(0, 212, 255, 0.5); opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform: translateY(20px);}
+#back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0);}
+.floating-btn { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #25d366, #128c7e); color: white; padding: 0; border-radius: 22px; width: 92%; max-width: 480px; z-index: 3000; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); overflow: hidden; animation: pulseOrder 2s infinite ease-in-out; border: 1px solid rgba(255, 255, 255, 0.2);}
+.cart-content-wrapper { display: flex; align-items: center; width: 100%; height: 70px;}
+.btn-send-order { flex-grow: 1; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; cursor: pointer; height: 100%;}
+.btn-clear-cart { background: rgba(255, 0, 0, 0.2); color: #ff4d4d; border: none; width: 50px; height: 50px; border-radius: 15px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; margin-left: 10px; z-index: 3001;}
+#cart-total { transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: inline-block; font-weight: 800; font-size: 1.2rem;}
+.grid-botones { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px auto 0; max-width: 600px;}
+.btn-universal { display: flex; align-items: center; justify-content: center; padding: 10px 8px; border-radius: 50px; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; cursor: pointer; text-decoration: none; border: none; text-align: center; transition: 0.3s;}
+.btn-home { background: var(--glass); color: #ffffff !important; border: 1px solid var(--glass-border);}
+.btn-promo { background: var(--danger); color: #ffffff !important;}
+.btn-referencias { background: var(--primary); color: #000000 !important;}
+.btn-comunidad { background: linear-gradient(135deg, #128c7e, #25d366); color: #ffffff !important;}
+.btn-whatsapp-verde { background: linear-gradient(135deg, #25d366, #128c7e) !important; color: white !important; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important;}
+.btn-whatsapp-verde:hover { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5) !important; transform: translateY(-2px);}

@@ -1,0 +1,40 @@
+/* Grid Mode responsive para tarjetas */
+.container.grid-mode { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; max-width: 90% !important; width: 100%; padding: 15px;}
+@media (min-width: 900px) { .container.grid-mode { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }}
+.grid-mode .category-title { grid-column: 1 / -1; width: 100%; margin-top: 30px; display: flex;}
+.grid-mode .service-card { flex-direction: column; text-align: center; justify-content: space-between; padding: 25px 15px 45px; min-height: 350px !important; align-items: flex-start !important;}
+.grid-mode .service-text,
+.grid-mode .service-text h3 { text-align: left !important; justify-content: flex-start !important; align-items: flex-start !important; width: 100%; padding-right: 0;}
+.grid-mode .product-tags { justify-content: flex-start !important; text-align: left !important; width: 100% !important;}
+.grid-mode .price-container { margin-top: 15px !important; margin-bottom: 12px !important; width: 100% !important; align-items: flex-start !important; margin-left: 0; padding-left: 0;}
+.grid-mode .img-wrapper { margin: 0 auto 12px auto !important; align-self: center !important; width: 65px; height: 65px;}
+.grid-mode .badge-renovacion { font-size: 0.55rem; margin-top: 6px;}
+.grid-mode .premium .service-card::after { display: none !important;}
+.grid-mode .badge-oferta { left: 0 !important; width: 100% !important; text-align: center; border-radius: 20px 20px 0 0;}
+
+/* Sidebars laterales */
+@media (min-width: 1250px) { .sidebar-lateral { display: flex; }}
+@media (max-width: 1650px) { .grid-mode ~ .sidebar-lateral, body:has(.grid-mode) .sidebar-lateral { display: none !important; }}
+body.grid-activa .sidebar-lateral { display: none !important;}
+
+/* Modales en pantallas medianas */
+@media (max-width: 1199px) { 
+    #modal-info-lateral.modal-overlay { top: 0; align-items: center; } 
+    #modal-info-lateral .modal-cristal { margin-top: 15px; max-height: calc(100vh - 100px); }
+}
+
+/* Botón flotante móvil */
+@media (min-width: 992px) { #btn-info-movil { display: none !important; }}
+
+/* Pantallas pequeñas y móviles */
+@media (max-width: 768px) { 
+    .sales-popup { top: 20px !important; left: 10px !important; max-width: 260px; padding: 10px 12px; } 
+    .service-card { padding-bottom: 38px !important; } 
+    .price-container { margin-bottom: 10px !important; } 
+    .product-tags { margin-bottom: 6px !important; } 
+    .service-text { position: relative; width: 100% !important; overflow: hidden !important; } 
+    .service-text h3, .nombre-prod { display: block !important; width: max-content !important; max-width: none !important; white-space: nowrap !important; overflow: visible !important; text-overflow: clip !important; will-change: transform; text-align: left !important; margin-left: 0 !important; margin-right: auto !important; } 
+    .product-tags { display: flex !important; flex-wrap: wrap !important; gap: 6px !important; width: 100% !important; justify-content: flex-start !important; } 
+    .tag-prop { width: max-content !important; max-width: none !important; flex-shrink: 0 !important; white-space: nowrap !important; will-change: transform; margin: 0 !important; } 
+    .animacion-texto-largo { animation: vaivenTexto 6s ease-in-out infinite alternate !important; margin-left: 0 !important; margin-right: auto !important; }
+}
