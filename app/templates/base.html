@@ -40,6 +40,32 @@
 </head>
 <body>
 
+<!-- ================= MODAL DEL CARRITO DE COMPRAS ================= -->
+<div class="modal-overlay" id="modal-carrito-resumen">
+    <!-- El modal ahora es una caja flexible fija que no pasa del 85% del alto de la pantalla -->
+    <div class="modal-content modal-cristal" style="max-width: 500px; padding: 25px 20px; display: flex; flex-direction: column; max-height: 85vh; overflow: hidden;">
+        
+        <!-- 1. TÍTULO CON DEGRADADO DORADO -->
+        <h2 style="flex-shrink: 0; margin-bottom: 15px; background: linear-gradient(45deg, #d4af37, #f4d03f); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🛒 RESUMEN DEL PEDIDO</h2>
+        
+        <div id="carrito-items-container" style="text-align: left; margin-bottom: 15px; flex-grow: 1; overflow-y: auto; padding-right: 8px;"></div>
+
+        <div class="resumen-totales" style="flex-shrink: 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; margin-bottom: 15px;">
+            <div id="carrito-descuento-text" style="color: var(--promo); font-weight: 800; font-size: 0.85rem; margin-bottom: 8px; display: none;">
+                <!-- Texto de descuento -->
+            </div>
+            <!-- 2. TOTAL EN VERDE NEÓN -->
+            <div style="font-size: 1.3rem; font-weight: 800; color: white;">
+                TOTAL: <span id="carrito-total-text" style="color: #25d366; text-shadow: 0 0 12px rgba(37, 211, 102, 0.4);">S/ 0.00</span>
+            </div>
+        </div>
+
+        <!-- 3. BOTÓN VERDE DE WHATSAPP (Añadimos la clase btn-whatsapp-verde) -->
+        <button class="btn-modal-main btn-whatsapp-verde" onclick="continuarPedido()" style="flex-shrink: 0;">ENVIAR A WHATSAPP <i class="fab fa-whatsapp" style="margin-left: 5px;"></i></button>
+        <button class="btn-modal-back" onclick="cerrarModalCarrito()" style="flex-shrink: 0;">SEGUIR COMPRANDO</button>
+    </div>
+</div>
+
 <!-- Fondos y Efectos Globales -->
 <div class="particles-container">
     <div class="particle"></div><div class="particle"></div>
@@ -312,31 +338,22 @@
     </div>
 </div>
 
-<!-- ========================================== -->
-<!-- 4. CARRITO FLOTANTE WHATSAPP -->
-<!-- ========================================== -->
-<div id="whatsapp-btn" class="floating-btn hidden">
-    <div class="cart-content-wrapper">
-        <div class="btn-clear-cart" onclick="limpiarTodo(event)" title="Limpiar selección">
+<!-- ================= BOTÓN FLOTANTE: IR AL CARRITO ================= -->
+<div id="whatsapp-btn" class="floating-btn hidden" style="background: linear-gradient(135deg, #00d4ff, #0055ff);">
+    <div class="cart-content-wrapper" style="justify-content: space-between; height: 60px;">
+        <!-- Botón de limpiar todo (Basurero) -->
+        <button class="btn-clear-cart" onclick="limpiarTodo(event)" style="margin-left: 5px;">
             <i class="fas fa-trash-alt"></i>
+        </button>
+        
+        <!-- Zona clickeable para abrir el carrito -->
+        <div onclick="enviarPedido()" style="flex-grow: 1; display: flex; justify-content: center; align-items: center; gap: 15px; font-size: 1.1rem; font-weight: 800; color: white; letter-spacing: 1px; cursor: pointer; height: 100%;">
+            <span id="cart-count" style="background: white; color: #0055ff; border-radius: 50%; width: 28px; height: 28px; display: flex; justify-content: center; align-items: center; font-size: 0.95rem;">0</span>
+            IR AL CARRITO <i class="fas fa-shopping-cart" style="font-size: 1.2rem;"></i>
         </div>
-        <div class="btn-send-order" onclick="enviarPedido()">
-            <div style="display:flex; align-items:center; gap:12px;">
-                <span id="cart-count" style="background:rgba(0,0,0,0.3); padding:5px 12px; border-radius:12px; font-weight:800;">0</span>
-                <span style="font-weight:800; text-transform:uppercase; font-size:0.9rem;">Pedir WhatsApp</span>
-            </div>
-            
-            <div style="display:flex; flex-direction:column; align-items:flex-end; line-height: 1.2;">
-                <!-- Precio original tachado (Oculto por defecto) -->
-                <span id="cart-original-price" style="display:none; font-size: 0.75rem; text-decoration: line-through; color: rgba(255,255,255,0.7); font-weight: 600;">S/ 0.00</span>
-                
-                <!-- Precio Final -->
-                <span id="cart-total" style="font-weight:900; font-size:1.3rem; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">S/ 0.00</span>
-                
-                <!-- Etiqueta de Ahorro tipo "Píldora" -->
-                <span id="discount-label" style="display:none; background: var(--promo); color: #000; font-size: 0.65rem; font-weight: 900; padding: 2px 8px; border-radius: 6px; margin-top: 2px; letter-spacing: 0.5px; text-transform: uppercase; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"></span>
-            </div>
-        </div>
+        
+        <!-- Espaciador invisible para centrar el texto perfectamente -->
+        <div style="width: 60px;"></div> 
     </div>
 </div>
 

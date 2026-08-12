@@ -308,23 +308,9 @@ window.scrollFilters = function(val) {
 let carrito = [];
 
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Inyectamos los clics y el carrito PARA TODOS (Clientes y Distribuidores)
+    // 1. Solo activamos el clic para seleccionar la tarjeta
     document.querySelectorAll('.service-item').forEach(item => {
         item.onclick = function(e) { window.toggleCarrito(this, e); };
-        
-        const card = item.querySelector('.service-card');
-        const priceContainer = card ? card.querySelector('.price-container') : null;
-
-        if (priceContainer && !priceContainer.querySelector('.qty-controls')) {
-            const controles = document.createElement('div');
-            controles.className = 'qty-controls';
-            controles.innerHTML = `
-                <button class="qty-btn" onclick="window.cambiarCantidad(event, -1, this)"><i class="fas fa-minus"></i></button>
-                <span class="qty-display">1</span>
-                <button class="qty-btn" onclick="window.cambiarCantidad(event, 1, this)"><i class="fas fa-plus"></i></button>
-            `;
-            priceContainer.appendChild(controles);
-        }
     });
 
     const esMovil = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -390,21 +376,6 @@ window.toggleCarrito = function(elemento, ev) {
     }
     reconstruirCarritoDesdeUI();
 };
-
-window.cambiarCantidad = function(event, delta, btn) {
-    event.stopPropagation(); 
-    const item = btn.closest('.service-item');
-    if (item.classList.contains('agotado')) return;
-
-    let qty = parseInt(item.getAttribute('data-cantidad') || '1');
-    qty += delta;
-    if (qty < 1) qty = 1; 
-
-    item.setAttribute('data-cantidad', qty);
-    btn.parentElement.querySelector('.qty-display').innerText = qty;
-    reconstruirCarritoDesdeUI();
-};
-
 function reconstruirCarritoDesdeUI() {
     carrito = [];
     document.querySelectorAll('.service-item.selected').forEach(el => {
@@ -416,18 +387,22 @@ function reconstruirCarritoDesdeUI() {
         const renovacionEl = el.querySelector('.badge-renovacion');
         const renovacion = renovacionEl ? renovacionEl.innerText : null;
         const cantidad = parseInt(el.getAttribute('data-cantidad') || '1');
+        
+        // 🔥 Detectamos si es una tarjeta Premium VIP
+        const isPremium = el.classList.contains('premium');
 
-        // 🔥 AQUÍ ORDENAMOS LAS CARACTERÍSTICAS EN FILA (Una debajo de otra)
         const tagsElements = el.querySelectorAll('.tag-prop');
         let caracteristicas = "";
+        let tagsArray = []; // Guardamos las etiquetas en un arreglo para el Modal
+        
         if (tagsElements.length > 0) {
-            const tagsArray = Array.from(tagsElements).map(tag => tag.innerText.trim());
-            caracteristicas = " 🔹 " + tagsArray.join("\n 🔹 ");
+            tagsArray = Array.from(tagsElements).map(tag => tag.innerText.trim());
+            caracteristicas = " 🔹 " + tagsArray.join("\n 🔹 "); // Esto se sigue usando para el mensaje de WhatsApp
         } else {
             caracteristicas = " 🔹 Sin descripción extra";
         }
 
-        carrito.push({ nombre, precio, caracteristicas, renovacion, cantidad: cantidad }); 
+        carrito.push({ nombre, precio, caracteristicas, tagsArray, renovacion, cantidad, isPremium }); 
     });
     actualizarCarritoUI();
 }
@@ -445,72 +420,217 @@ window.limpiarTodo = function(e) {
 
 function actualizarCarritoUI() {
     const contador = document.getElementById('cart-count');
-    const totalTxt = document.getElementById('cart-total');
-    const originalTxt = document.getElementById('cart-original-price'); 
     const barra = document.getElementById('whatsapp-btn');
-    const labelDescuento = document.getElementById('discount-label'); 
+    
+    // Verificamos si el modal del carrito está abierto en la pantalla
+    const modalCarrito = document.getElementById('modal-carrito-resumen');
+    const modalAbierto = modalCarrito && modalCarrito.style.display === 'flex';
     
     let totalItems = carrito.reduce((sum, p) => sum + p.cantidad, 0);
-    let totalOriginal = carrito.reduce((sum, p) => sum + (p.precio * p.cantidad), 0);
-    let totalSoles = totalOriginal; 
-    let descuento = 0;
-    
-    const path = window.location.pathname.toLowerCase();
-    const esSoloClientes = (path.endsWith("/clientes") || path.endsWith("/clientes.html") || path === "/") && !path.includes("promociones") && !path.includes("distribuidor") && !path.includes("vip"); 
-    
-    if (esSoloClientes && totalItems >= 2) {
-        let precios = [];
-        carrito.forEach(p => { for (let i = 0; i < p.cantidad; i++) { precios.push(p.precio); } });
-        precios.sort((a, b) => b - a);
-        
-        for (let i = 1; i < precios.length; i++) {
-            if (precios[i] >= 10) descuento += 2.00;
-            else descuento += 1.00;
-        }
-        totalSoles = totalOriginal - descuento; 
-    }
-    
-    if (descuento > 0) {
-        if (originalTxt) { originalTxt.innerText = `S/ ${totalOriginal.toFixed(2)}`; originalTxt.style.display = 'block'; }
-        if (labelDescuento) { labelDescuento.innerText = `¡AHORRAS S/ ${descuento.toFixed(2)}!`; labelDescuento.style.display = 'inline-block'; }
-    } else {
-        if (originalTxt) originalTxt.style.display = 'none';
-        if (labelDescuento) labelDescuento.style.display = 'none';
-    }
     
     if(contador) contador.innerText = totalItems; 
-    if(totalTxt) totalTxt.innerText = `S/ ${totalSoles.toFixed(2)}`;
     
     if(barra) {
-        if (carrito.length > 0) {
+        // 🔥 LA MAGIA: Solo mostramos el botón si hay items Y el modal está cerrado
+        if (carrito.length > 0 && !modalAbierto) {
             barra.classList.remove('hidden');
             barra.style.display = 'flex'; 
         } else {
             barra.classList.add('hidden');
             barra.style.display = 'none';
+            
+            // Si el carrito se queda vacío estando abierto, lo cerramos automáticamente
+            if (carrito.length === 0 && modalAbierto && typeof cerrarModalCarrito === 'function') {
+                cerrarModalCarrito();
+            }
         }
     }
 }
 
 // =========================================================
-// ENVÍO DE PEDIDO A WHATSAPP (INTELIGENTE: CLIENTE VS DISTRIBUIDOR)
+// ENVÍO DE PEDIDO A WHATSAPP (CON CARRITO INTERMEDIO)
 // =========================================================
+
+// 1. Interceptamos el botón flotante para abrir el resumen primero
 window.enviarPedido = function() {
     if (carrito.length === 0) return; 
+    abrirModalCarrito();
+};
 
+// 1. Modificamos la función que abre el modal
+window.abrirModalCarrito = function() {
+    renderizarItemsCarrito();
+    document.getElementById('modal-carrito-resumen').style.display = 'flex';
+    actualizarCarritoUI(); // <-- Agregamos esto para que se dé cuenta que se abrió
+};
+
+// 2. Modificamos la función que cierra el modal
+window.cerrarModalCarrito = function() {
+    document.getElementById('modal-carrito-resumen').style.display = 'none';
+    actualizarCarritoUI(); // <-- Agregamos esto para que reaparezca el botón flotante
+};
+
+// 2. Modificar cantidades de perfiles DESDE DENTRO DEL CARRITO
+window.modificarCantidadDesdeCarrito = function(nombreProducto, delta) {
+    const tarjetas = document.querySelectorAll('.service-item.selected');
+    let tarjetaEncontrada = null;
+    
+    // Buscamos la tarjeta original en la web para mantener la sincronización
+    tarjetas.forEach(t => {
+        const nombreElement = t.querySelector('.nombre-prod') || t.querySelector('h3');
+        if (nombreElement && nombreElement.innerText === nombreProducto) {
+            tarjetaEncontrada = t;
+        }
+    });
+
+    if (tarjetaEncontrada) {
+        let qty = parseInt(tarjetaEncontrada.getAttribute('data-cantidad') || '1');
+        qty += delta;
+        
+        if (qty < 1) {
+            // Si baja de 1, deseleccionamos el producto y lo quitamos del carrito
+            tarjetaEncontrada.classList.remove('selected');
+            tarjetaEncontrada.setAttribute('data-cantidad', '0');
+            const qtyDisplay = tarjetaEncontrada.querySelector('.qty-display');
+            if (qtyDisplay) qtyDisplay.innerText = '1';
+            showToast(`Quitaste ${nombreProducto}`, false);
+        } else {
+            tarjetaEncontrada.setAttribute('data-cantidad', qty);
+            const qtyDisplay = tarjetaEncontrada.querySelector('.qty-display');
+            if (qtyDisplay) qtyDisplay.innerText = qty;
+        }
+        
+        // Reconstruimos la base de datos local y actualizamos UI
+        reconstruirCarritoDesdeUI();
+        
+        if (carrito.length === 0) {
+            cerrarModalCarrito(); // Si borró todo, se cierra el modal
+        } else {
+            renderizarItemsCarrito(); // Refresca los datos en el modal
+        }
+    }
+};
+
+window.toggleDetallesCarrito = function(elemento) {
+    // Al tocar el encabezado, busca la tarjeta entera y le pone o quita la clase 'abierto'
+    const item = elemento.closest('.carrito-item-modal');
+    item.classList.toggle('abierto');
+};
+
+window.renderizarItemsCarrito = function() {
+    const container = document.getElementById('carrito-items-container');
+    if (!container) return;
+    container.innerHTML = '';
+    
+    carrito.forEach(p => {
+        let tagsHtml = '';
+        if (p.tagsArray && p.tagsArray.length > 0) {
+            tagsHtml = p.tagsArray.map(tag => `<li class="carrito-tag"><i class="fas fa-diamond"></i> ${tag}</li>`).join('');
+        }
+        let premiumClass = p.isPremium ? 'carrito-item-premium' : '';
+        
+        const itemHtml = `
+            <div class="carrito-item-modal ${premiumClass}">
+                <!-- ENCABEZADO (Siempre visible, activa el acordeón al hacer clic) -->
+                <div class="ci-header" onclick="toggleDetallesCarrito(this)">
+                    <div class="ci-title-row">
+                        <h4>${p.nombre}</h4>
+                        <i class="fas fa-chevron-down ci-chevron"></i>
+                    </div>
+                    <div class="ci-summary-row">
+                        <div class="carrito-item-precio">S/ ${(p.precio * p.cantidad).toFixed(2)}</div>
+                        <!-- IMPORTANTE: event.stopPropagation() evita que el acordeón se abra/cierre al tocar los botones de + o - -->
+                        <div class="carrito-item-controls" onclick="event.stopPropagation()">
+                            <button onclick="modificarCantidadDesdeCarrito('${p.nombre}', -1)"><i class="fas fa-minus"></i></button>
+                            <span>${p.cantidad}</span>
+                            <button onclick="modificarCantidadDesdeCarrito('${p.nombre}', 1)"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DETALLES (Ocultos por defecto) -->
+                <div class="ci-detalles">
+                    <ul class="carrito-tags-list">
+                        ${tagsHtml}
+                    </ul>
+                    ${p.renovacion ? `<p class="carrito-item-renovacion">🔄 ${p.renovacion}</p>` : ''}
+                </div>
+            </div>
+        `;
+        container.innerHTML += itemHtml;
+    });
+
+    // Cálculos de totales (igual que antes)
+    let totalItems = carrito.reduce((sum, p) => sum + p.cantidad, 0);
+    let totalOriginal = carrito.reduce((sum, p) => sum + (p.precio * p.cantidad), 0);
+    let totalSoles = totalOriginal;
+    let descuento = 0;
+
+    const path = window.location.pathname.toLowerCase();
+    const esSoloClientes = (path.endsWith("/clientes") || path.endsWith("/clientes.html") || path === "/") && !path.includes("promociones") && !path.includes("distribuidor") && !path.includes("vip"); 
+
+    if (esSoloClientes && totalItems >= 2) {
+        let precios = [];
+        carrito.forEach(p => { for (let i = 0; i < p.cantidad; i++) { precios.push(p.precio); } });
+        precios.sort((a, b) => b - a);
+        for (let i = 1; i < precios.length; i++) {
+            if (precios[i] >= 10) descuento += 2.00;
+            else descuento += 1.00;
+        }
+        totalSoles = totalOriginal - descuento;
+    }
+
+    const descuentoText = document.getElementById('carrito-descuento-text');
+    const totalText = document.getElementById('carrito-total-text');
+    
+    if (descuento > 0) {
+        descuentoText.innerHTML = `🎁 ¡Tienes un descuento aplicado de S/ ${descuento.toFixed(2)}!<br><span style="text-decoration:line-through; color:#888; font-size:0.75rem;">Precio normal: S/ ${totalOriginal.toFixed(2)}</span>`;
+        descuentoText.style.display = 'block';
+    } else {
+        descuentoText.style.display = 'none';
+    }
+    
+    totalText.innerText = `S/ ${totalSoles.toFixed(2)}`;
+};
+
+// =========================================================
+// PUENTE: DEL CARRITO A LOS MODALES DE DATOS (NOMBRES)
+// =========================================================
+window.continuarPedido = function() {
+    // 1. Cerramos y ocultamos el carrito
+    const modalCarrito = document.getElementById('modal-carrito-resumen');
+    if (modalCarrito) {
+        modalCarrito.style.display = 'none';
+    }
+    
+    // 2. Refrescamos la UI del botón flotante
+    if (typeof actualizarCarritoUI === 'function') {
+        actualizarCarritoUI();
+    }
+
+    // 3. Verificamos en qué página estamos
     const path = window.location.pathname.toLowerCase();
     const esDistribuidor = path.includes("distribuidor") || path.includes("vip") || path.includes("iptv");
 
+    // 4. Abrimos el modal correcto según el tipo de cliente
     if (esDistribuidor) {
-        // Abre el modal corto clásico (Para Distribuidores)
-        document.getElementById('paso-seleccion').style.display = 'block';
-        document.getElementById('paso-nombre').style.display = 'none';
-        document.getElementById('modal-pedido-vip').style.display = 'flex';
+        const modalVip = document.getElementById('modal-pedido-vip');
+        if (modalVip) {
+            document.getElementById('paso-seleccion').style.display = 'block';
+            document.getElementById('paso-nombre').style.display = 'none';
+            modalVip.style.display = 'flex';
+        } else {
+            console.error("Error: No se encontró el modal de distribuidores");
+        }
     } else {
-        // Abre el nuevo modal con formulario completo (Para Clientes)
-        document.getElementById('paso-cliente-1').style.display = 'block';
-        document.getElementById('paso-cliente-2').style.display = 'none';
-        document.getElementById('modal-pedido-cliente').style.display = 'flex';
+        const modalCliente = document.getElementById('modal-pedido-cliente');
+        if (modalCliente) {
+            document.getElementById('paso-cliente-1').style.display = 'block';
+            document.getElementById('paso-cliente-2').style.display = 'none';
+            modalCliente.style.display = 'flex';
+        } else {
+            console.error("Error: No se encontró el modal de clientes");
+        }
     }
 };
 
