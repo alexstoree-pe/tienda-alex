@@ -138,11 +138,3 @@ window.actualizarPreciosEnTarjetas = function(diccionarioPrecios) {
     });
     if (huboCambios && typeof window.reconstruirCarritoDesdeUI === 'function') window.reconstruirCarritoDesdeUI();
 };
-
-// Arrancar cronómetros
-setTimeout(() => { 
-    window.cargarPreciosDeGoogleSheets(); setInterval(window.cargarPreciosDeGoogleSheets, 2000);
-    if (window.location.pathname.toLowerCase().match(/distribuidor|iptv|vip/) || document.querySelector('.stock-badge')) {
-        window.cargarStockDeGoogleSheets(); setInterval(window.cargarStockDeGoogleSheets, 2000); 
-    }
-}, 500);

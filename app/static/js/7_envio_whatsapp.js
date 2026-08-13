@@ -1,7 +1,6 @@
 // =========================================================
 // 7. CHECKOUT Y ENVÍO A WHATSAPP
 // =========================================================
-
 window.enviarPedido = function() {
     if (window.carrito.length === 0) return; 
     window.abrirModalCarrito();
@@ -29,7 +28,11 @@ window.continuarPedido = function() {
 };
 
 // LÓGICA VIP
-window.cerrarModalPedido = function() { document.getElementById('modal-pedido-vip').style.display = 'none'; };
+window.cerrarModalPedido = function() { 
+    document.getElementById('modal-pedido-vip').style.display = 'none'; 
+    const btnCarrito = document.getElementById('whatsapp-btn');
+    if (btnCarrito && window.carrito.length > 0) btnCarrito.style.display = 'flex';
+};
 window.irAPasoNombre = function() {
     const container = document.getElementById('dynamic-inputs-container');
     if (!container) return;
@@ -62,7 +65,11 @@ window.finalizarConNombre = function() {
 };
 
 // LÓGICA CLIENTES
-window.cerrarModalCliente = function() { document.getElementById('modal-pedido-cliente').style.display = 'none'; };
+window.cerrarModalCliente = function() { 
+    document.getElementById('modal-pedido-cliente').style.display = 'none'; 
+    const btnCarrito = document.getElementById('whatsapp-btn');
+    if (btnCarrito && window.carrito.length > 0) btnCarrito.style.display = 'flex';
+};
 window.toggleCamposCliente = function() {
     const tipo = document.getElementById('cliente-tipo').value;
     document.getElementById('div-datos-nuevo').style.display = (tipo === "Cliente Nuevo") ? 'block' : 'none';
@@ -70,7 +77,7 @@ window.toggleCamposCliente = function() {
 window.irAPasoNombreCliente = function() {
     const tipo = document.getElementById('cliente-tipo').value;
     if (tipo === "Cliente Nuevo" && (document.getElementById('cliente-nombre').value.trim() === "" || document.getElementById('cliente-celular').value.trim() === "")) {
-        window.showToast("⚠️ Ingresa Nombre y Celular para continuar", false); return;
+        if (typeof window.showToast === 'function') window.showToast("⚠️ Ingresa Nombre y Celular para continuar", false); return;
     }
     const container = document.getElementById('dynamic-inputs-cliente');
     container.innerHTML = ''; 

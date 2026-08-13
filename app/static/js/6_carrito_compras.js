@@ -1,14 +1,7 @@
 // =========================================================
 // 6. MOTOR DEL CARRITO DE COMPRAS
 // =========================================================
-
-// Esta variable DEBE vivir en window para que whatsapp.js la encuentre
 window.carrito = [];
-
-// Activador de clics en tarjetas
-document.querySelectorAll('.service-item').forEach(item => {
-    item.onclick = function(e) { window.toggleCarrito(this, e); };
-});
 
 window.toggleCarrito = function(elemento, ev) {
     if(elemento.classList.contains('agotado')) return;
@@ -19,11 +12,11 @@ window.toggleCarrito = function(elemento, ev) {
     if (wasSelected) {
         elemento.classList.remove('selected');
         elemento.setAttribute('data-cantidad', '0');
-        window.showToast(`Quitaste ${nombre}`, false);
+        if (typeof window.showToast === 'function') window.showToast(`Quitaste ${nombre}`, false);
     } else {
         elemento.classList.add('selected');
         elemento.setAttribute('data-cantidad', '1');
-        window.showToast(`Añadiste ${nombre}`, true);
+        if (typeof window.showToast === 'function') window.showToast(`Añadiste ${nombre}`, true);
     }
     window.reconstruirCarritoDesdeUI();
 };
@@ -76,7 +69,7 @@ window.limpiarTodo = function(e) {
     document.querySelectorAll('.service-item.selected').forEach(t => {
         t.classList.remove('selected'); t.setAttribute('data-cantidad', '0');
     });
-    window.showToast("Selección limpiada", false);
+    if (typeof window.showToast === 'function') window.showToast("Selección limpiada", false);
     window.actualizarCarritoUI();
 };
 
@@ -103,7 +96,7 @@ window.modificarCantidadDesdeCarrito = function(nombreProducto, delta) {
         if (qty < 1) {
             tarjetaEncontrada.classList.remove('selected');
             tarjetaEncontrada.setAttribute('data-cantidad', '0');
-            window.showToast(`Quitaste ${nombreProducto}`, false);
+            if (typeof window.showToast === 'function') window.showToast(`Quitaste ${nombreProducto}`, false);
         } else {
             tarjetaEncontrada.setAttribute('data-cantidad', qty);
         }

@@ -63,11 +63,9 @@ window.filtrarCategoria = function(categoria, boton) {
         while (hermano && !hermano.classList.contains('category-title')) {
             if (hermano.classList.contains('service-item')) {
                 if (coincide) {
-                    hermano.classList.remove('oculto-filtro');
-                    hermano.classList.add('premium-visible');
+                    hermano.classList.remove('oculto-filtro'); hermano.classList.add('premium-visible');
                 } else {
-                    hermano.classList.add('oculto-filtro');
-                    hermano.classList.remove('premium-visible');
+                    hermano.classList.add('oculto-filtro'); hermano.classList.remove('premium-visible');
                 }
             }
             hermano = hermano.nextElementSibling;
