@@ -1,3 +1,6 @@
+<!-- ========================================================= -->
+<!-- 1. SECCIÓN DE PREGUNTAS FRECUENTES (VISTA PRINCIPAL)       -->
+<!-- ========================================================= -->
 <div class="container" id="faq-container" style="margin-bottom: 100px;">
     <div class="faq-title"><i class="fas fa-question-circle"></i> PREGUNTAS FRECUENTES</div>
     
@@ -29,7 +32,10 @@
     </div>
 </div>
 
-<!-- VENTANA MODAL DE PREGUNTAS FRECUENTES CON ANIMACIÓN -->
+
+<!-- ========================================================= -->
+<!-- 2. VENTANA MODAL DE PREGUNTAS FRECUENTES                  -->
+<!-- ========================================================= -->
 <div id="modal-faq" class="modal-overlay">
     <div class="modal-content modal-cristal" style="max-width: 500px; text-align: left;">
         
@@ -38,15 +44,13 @@
             <h2 style="color: var(--primary); margin: 0; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;">
                 <i class="fas fa-question-circle"></i> Preguntas Frecuentes
             </h2>
-        <div class="modal-body-scroll">
             <button onclick="cerrarModalFaq()" style="background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer;">
                 <i class="fas fa-times"></i>
             </button>
         </div>
 
-        <!-- Contenedor con las Preguntas (Usa tus clases originales) -->
-        <div style="max-height: 65vh; overflow-y: auto; padding-right: 5px;">
-            
+        <!-- Contenedor con Scroll para las Preguntas -->
+        <div class="modal-body-scroll">
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaqModal(this)">
                     <span>¿Cómo es el proceso de entrega?</span>
@@ -78,24 +82,21 @@
             </div>
         </div>
 
-        
-
-        </div>
-
         <!-- Botón de Cerrar -->
         <button class="btn-modal-back" onclick="cerrarModalFaq()" style="margin-top: 20px;">Cerrar</button>
     </div>
 </div>
 
 
-
-<!-- MODAL DE INFORMACIÓN (Solo celulares) -->
+<!-- ========================================================= -->
+<!-- 3. MODAL DE INFORMACIÓN (Solo celulares)                  -->
+<!-- ========================================================= -->
 <div id="modal-info-lateral" class="modal-overlay">
     <div class="modal-content modal-cristal">
         <h2><i class="fas fa-star"></i> INFORMACIÓN ÚTIL</h2>
         <p>Todo lo que necesitas saber antes de tu compra en Alex Store.</p>
         
-        <!-- 🔥 INICIO DEL CONTENEDOR CON SCROLL -->
+        <!-- Contenedor con Scroll -->
         <div class="modal-body-scroll">
             
             <!-- Item 1: Cómo Comprar -->
@@ -124,45 +125,45 @@
                 </div>
             </div>
 
-            <!-- Item 3: Promoción y Guías -->
+            <!-- Item 3: Promoción -->
             <div class="faq-item">
                 <div class="faq-question" onclick="window.toggleFaqModal(this)">
                     <span style="color: var(--promo);"><i class="fas fa-gift"></i> Promoción Activa</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    ¡Llevando 2 o más cuentas obtienes un descuento automático en tu carrito! 🎁<br><br>
+                    ¡Llevando 2 o más cuentas obtienes un descuento automático en tu carrito! 🎁
                 </div>
             </div>
             
+            <!-- Item 4: Guías de Activación (Acordeón con Scroll) -->
+            <div class="faq-item faq-item-guias">
+                <div class="faq-question" onclick="window.toggleFaqModal(this)">
+                    <span class="faq-question-content">
+                        <i class="fas fa-gift icon-promo"></i> 
+                        <span class="faq-text-highlight">
+                            Pasos para activar Netflix y otras plataformas con código de acceso
+                        </span>
+                    </span>
+                    <i class="fas fa-chevron-down faq-chevron-right"></i>
+                </div>
+                <div class="faq-answer">
+                    <a href="{{ url_for('main.guias') }}" class="btn-guias-activacion">
+                        <i class="fas fa-book-open"></i> VER GUÍAS DE ACTIVACIÓN
+                    </a>
+                </div>
+            </div>
 
-        <!-- Item Especial: Guías de Activación -->
-<div class="faq-item faq-item-guias">
-    <!-- Pregunta (Lo que se ve siempre) -->
-    <div class="faq-question" onclick="window.toggleFaqModal(this)">
-        <span class="faq-question-content">
-            <i class="fas fa-gift icon-promo"></i> 
-            <span class="faq-text-highlight">
-                Pasos para activar Netflix y otras plataformas con código de acceso
-            </span>
-        </span>
-        <i class="fas fa-chevron-down faq-chevron-right"></i>
-    </div>
-    
-    <!-- Respuesta (El botón que se despliega) -->
-    <div class="faq-answer">
-        <a href="{{ url_for('main.guias') }}" class="btn-guias-activacion">
-            <i class="fas fa-book-open"></i> VER GUÍAS DE ACTIVACIÓN
-        </a>
-    </div>
-</div>
-    
-        <!-- ================================================== -->
+        </div>
+
         <button class="btn-modal-back" onclick="cerrarModalInfo(event)" style="margin-top: 25px;">ENTENDIDO</button>
     </div>
 </div>
 
-<!-- SIDEBARS LATERALES (Solo PC) -->
+
+<!-- ========================================================= -->
+<!-- 4. SIDEBARS LATERALES (Independientes, solo para PC)      -->
+<!-- ========================================================= -->
 <div class="sidebar-lateral izquierdo">
     <div class="sidebar-card">
         <h3><i class="fas fa-shopping-cart"></i> ¿Cómo Comprar?</h3>
@@ -175,12 +176,17 @@
         <p>• Cuentas estables y renovables.</p>
         <p>• Garantía completa contratada.</p>
     </div>
-    <div class="sidebar-card" style="text-align: center; border-bottom: none; margin-top: 20px; padding-bottom: 0;">
-            <p style="color: #aaa; font-size: 0.8rem; margin-bottom: 10px;">pasos para activar netflix y otras plataformas con codigo de acceso</p>
-            
-            <!-- CORRECCIÓN AQUÍ: Usamos 'main.guias' -->
-            <a href="{{ url_for('main.guias') }}" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #000; padding: 12px 20px; font-size: 0.85rem; font-weight: 800; border-radius: 50px; text-decoration: none; box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4); display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; transition: transform 0.3s;">
-                <i class="fas fa-book-open" style="font-size: 1rem;"></i> VER GUÍAS DE ACTIVACIÓN
-            </a>
+</div>
+
+<div class="sidebar-lateral derecho">
+    <div class="sidebar-card">
+            <h3><i class="fas fa-clock"></i> Horario de Atención</h3>
+            <p>Lunes a viernes: <strong>9:30 AM - 5:00 PM y 8:30 PM - 10:00 PM</strong></p>
+            <p>Sabado: <strong>9:30 AM - 2:00PM y 4:00 PM - 8:00 PM</strong></p>
+            <p>Domingo: <strong>10:00 AM - 2:30 PM y 6:30 PM - 10:00 PM</strong></p>
+    </div>
+    <div class="sidebar-card" style="border-color: var(--promo);">
+        <h3 style="color: var(--promo);"><i class="fas fa-gift"></i> Promoción Activa</h3>
+        <p>¡Llevando 2 o más cuentas obtienes un descuento automático en tu carrito! 🎁</p>
     </div>
 </div>

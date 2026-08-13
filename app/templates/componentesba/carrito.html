@@ -23,3 +23,22 @@
         <button class="btn-modal-back" onclick="cerrarModalCarrito()" style="flex-shrink: 0;">SEGUIR COMPRANDO</button>
     </div>
 </div>
+
+<!-- ================= BOTÓN FLOTANTE: IR AL CARRITO ================= -->
+<div id="whatsapp-btn" class="floating-btn hidden" style="background: linear-gradient(135deg, #00d4ff, #0055ff);">
+    <div class="cart-content-wrapper" style="justify-content: space-between; height: 60px;">
+        <!-- Botón de limpiar todo (Basurero) -->
+        <button class="btn-clear-cart" onclick="limpiarTodo(event)" style="margin-left: 5px;">
+            <i class="fas fa-trash-alt"></i>
+        </button>
+        
+        <!-- Zona clickeable para abrir el carrito -->
+        <div onclick="enviarPedido()" style="flex-grow: 1; display: flex; justify-content: center; align-items: center; gap: 15px; font-size: 1.1rem; font-weight: 800; color: white; letter-spacing: 1px; cursor: pointer; height: 100%;">
+            <span id="cart-count" style="background: white; color: #0055ff; border-radius: 50%; width: 28px; height: 28px; display: flex; justify-content: center; align-items: center; font-size: 0.95rem;">0</span>
+            IR AL CARRITO <i class="fas fa-shopping-cart" style="font-size: 1.2rem;"></i>
+        </div>
+        
+        <!-- Espaciador invisible para centrar el texto perfectamente -->
+        <div style="width: 60px;"></div> 
+    </div>
+</div>

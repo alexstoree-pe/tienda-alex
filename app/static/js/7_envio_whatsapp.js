@@ -29,9 +29,16 @@ window.continuarPedido = function() {
 
 // LÓGICA VIP
 window.cerrarModalPedido = function() { 
+    // 1. Ocultamos el modal VIP actual de datos/nombres
     document.getElementById('modal-pedido-vip').style.display = 'none'; 
-    const btnCarrito = document.getElementById('whatsapp-btn');
-    if (btnCarrito && window.carrito.length > 0) btnCarrito.style.display = 'flex';
+    
+    // 2. Volvemos a abrir el modal de resumen del carrito anterior
+    if (typeof window.abrirModalCarrito === 'function') {
+        window.abrirModalCarrito();
+    } else {
+        const modalCarrito = document.getElementById('modal-carrito-resumen');
+        if (modalCarrito) modalCarrito.style.display = 'flex';
+    }
 };
 window.irAPasoNombre = function() {
     const container = document.getElementById('dynamic-inputs-container');
@@ -91,8 +98,17 @@ window.irAPasoNombreCliente = function() {
     document.getElementById('paso-cliente-2').style.display = 'block';
 };
 window.volverAPaso1Cliente = function() {
-    document.getElementById('paso-cliente-1').style.display = 'block';
-    document.getElementById('paso-cliente-2').style.display = 'none';
+    // 1. Ocultamos el modal actual de datos de compra
+    const modalCliente = document.getElementById('modal-pedido-cliente');
+    if (modalCliente) modalCliente.style.display = 'none';
+
+    // 2. Volvemos a abrir el modal anterior (Resumen del carrito con descripciones)
+    if (typeof window.abrirModalCarrito === 'function') {
+        window.abrirModalCarrito();
+    } else {
+        const modalCarrito = document.getElementById('modal-carrito-resumen');
+        if (modalCarrito) modalCarrito.style.display = 'flex';
+    }
 };
 window.finalizarPedidoCliente = function() {
     const inputs = document.querySelectorAll('.input-cliente');
