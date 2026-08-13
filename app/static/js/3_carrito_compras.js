@@ -47,15 +47,21 @@ window.procesarTextosMoviles = function() {
         if (espacioVisible === 0) return; 
 
         const titulo = contenedor.querySelector('h3, .nombre-prod');
-        if (titulo && titulo.scrollWidth > espacioVisible) {
-            titulo.style.setProperty('--distancia-sobrante', `-${(titulo.scrollWidth - espacioVisible) + 25}px`);
-            titulo.classList.add('animacion-texto-largo');
+        if (titulo) {
+            if (titulo.scrollWidth > espacioVisible) {
+                titulo.style.setProperty('--distancia-sobrante', `-${(titulo.scrollWidth - espacioVisible) + 25}px`);
+                titulo.classList.add('animacion-texto-largo');
+            } else {
+                titulo.classList.remove('animacion-texto-largo');
+            }
         }
         
         contenedor.querySelectorAll('.tag-prop').forEach(tag => {
             if (tag.scrollWidth > espacioVisible) {
                 tag.style.setProperty('--distancia-sobrante', `-${(tag.scrollWidth - espacioVisible) + 20}px`);
                 tag.classList.add('animacion-texto-largo');
+            } else {
+                tag.classList.remove('animacion-texto-largo');
             }
         });
     });
@@ -119,7 +125,6 @@ window.iniciarNotificacionesCompras = function() {
 window.activarEfectoCineNativo();
 window.addEventListener('resize', window.procesarTextosMoviles);
 setTimeout(window.procesarTextosMoviles, 400);
-
 
 const esMovil = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 if (typeof VanillaTilt !== 'undefined' && !esMovil) {

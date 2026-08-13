@@ -1,5 +1,5 @@
 // =========================================================
-// 1. LÓGICA DE ACCESO GLOBAL E INTELIGENTE
+// LÓGICA DE ACCESO GLOBAL E INTELIGENTE (PORTAL MULTI-ZONA)
 // =========================================================
 (function() {
     const path = window.location.pathname.toLowerCase();
@@ -21,42 +21,53 @@
         if (tieneCliente || tieneDistribuidor) tienePermiso = true;
     }
 
-    if (tienePermiso) {
-        document.documentElement.style.visibility = "visible";
-        document.body.style.visibility = "visible";
-    } else {
-        const modal = document.getElementById('modal-login-distribuidor');
-        if (modal) {
-            const titulo = modal.querySelector('h2');
-            const texto = modal.querySelector('p');
-            
-            if (esDistribuidores) {
-                if (titulo) titulo.innerText = "ZONA DISTRIBUIDORES";
-                if (texto) texto.innerText = "Ingresa tu PIN VIP para acceder a esta área";
-            } else if (esClientes) {
-                if (titulo) titulo.innerText = "ZONA CLIENTES";
-                if (texto) texto.innerText = "Ingresa la contraseña de clientes";
-            } else {
-                if (titulo) titulo.innerText = "BIENVENIDO A ALEX STORE";
-                if (texto) texto.innerText = "Ingresa tu código (Cliente o VIP)";
-            }
+    // 🔥 LA CURA: Siempre hacemos visible el documento principal
+    document.documentElement.style.visibility = "visible";
 
-            modal.style.display = 'flex';
-            document.body.style.visibility = 'hidden'; 
-            modal.style.visibility = 'visible';
-        }
+    if (tienePermiso) {
+        document.addEventListener("DOMContentLoaded", () => {
+            document.body.style.visibility = "visible";
+        });
+    } else {
+        document.addEventListener("DOMContentLoaded", () => {
+            // 🔥 Hacemos visible el body obligatoriamente para que el modal se pueda ver
+            document.body.style.visibility = "visible"; 
+            
+            // Buscamos el modal de login
+            const modal = document.getElementById('modal-login-distribuidor') || document.querySelector('.modal-pass');
+            
+            if (modal) {
+                const titulo = modal.querySelector('h2');
+                const texto = modal.querySelector('p');
+                
+                if (esDistribuidores) {
+                    if (titulo) titulo.innerText = "ZONA DISTRIBUIDORES";
+                    if (texto) texto.innerText = "Ingresa tu PIN VIP para acceder a esta área";
+                } else if (esClientes) {
+                    if (titulo) titulo.innerText = "ZONA CLIENTES";
+                    if (texto) texto.innerText = "Ingresa la contraseña de clientes";
+                } else {
+                    if (titulo) titulo.innerText = "BIENVENIDO A ALEX STORE";
+                    if (texto) texto.innerText = "Ingresa tu código (Cliente o VIP)";
+                }
+
+                // Mostramos el modal de login sobre la página
+                modal.style.display = 'flex';
+                modal.style.visibility = 'visible';
+            }
+        });
     }
 })();
 
-window.checkInputPass = function(el) {
+function checkInputPass(el) {
     const stars = document.getElementById('stars-placeholder');
     if (stars) {
         if (el.value.length > 0) stars.classList.add('hide-stars');
         else stars.classList.remove('hide-stars');
     }
-};
+}
 
-window.validarAcceso = function() {
+function validarAcceso() {
     const inputPass = document.getElementById('input-dist-pass');
     const errorMsg = document.getElementById('error-msg');
     const pass = inputPass.value.trim().toLowerCase();
@@ -67,7 +78,7 @@ window.validarAcceso = function() {
 
     if (pass === "1122") {
         if (esDistribuidores) {
-            window.mostrarError("CONTRASEÑA SOLO VÁLIDA PARA CLIENTES", inputPass, errorMsg);
+            mostrarError("CONTRASEÑA SOLO VÁLIDA PARA CLIENTES", inputPass, errorMsg);
             return;
         }
         sessionStorage.setItem("acceso_cliente", "true");
@@ -80,11 +91,11 @@ window.validarAcceso = function() {
         else location.reload();
     } 
     else {
-        window.mostrarError("CONTRASEÑA INCORRECTA", inputPass, errorMsg);
+        mostrarError("CONTRASEÑA INCORRECTA", inputPass, errorMsg);
     }
-};
+}
 
-window.mostrarError = function(mensaje, inputPass, errorMsg) {
+function mostrarError(mensaje, inputPass, errorMsg) {
     errorMsg.innerText = mensaje;
     inputPass.classList.add('error-shake');
     inputPass.value = "";
@@ -95,4 +106,4 @@ window.mostrarError = function(mensaje, inputPass, errorMsg) {
         inputPass.classList.remove('error-shake'); 
         errorMsg.innerText = ""; 
     }, 3000);
-};
+}

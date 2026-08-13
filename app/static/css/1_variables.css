@@ -1,18 +1,10 @@
-:root { 
-    --primary: #00d4ff; 
-    --secondary: #0055ff; 
-    --dark: #050505; 
-    --glass: rgba(255, 255, 255, 0.02); 
-    --glass-border: rgba(255, 255, 255, 0.06); 
-    --whatsapp: #25d366; 
-    --promo: #f4d03f; 
-    --danger: #ff4444; 
-    --vip: #d4af37; 
-    --gold-gradient: linear-gradient(45deg, #d4af37, #f4d03f, #b38728); 
-    --border-glow: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.02) 40%, rgba(0, 212, 255, 0.05));
-}
+/* ========================================================= */
+/* 1. VARIABLES Y CONFIGURACIÓN GLOBAL                       */
+/* ========================================================= */
+:root { --primary: #00d4ff; --secondary: #0055ff; --dark: #050505; --glass: rgba(255, 255, 255, 0.02); --glass-border: rgba(255, 255, 255, 0.06); --whatsapp: #25d366; --promo: #f4d03f; --danger: #ff4444; --vip: #d4af37; --gold-gradient: linear-gradient(45deg, #d4af37, #f4d03f, #b38728); --border-glow: linear-gradient( 135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.02) 40%, rgba(0, 212, 255, 0.05) );}
 html { background-color: var(--dark); scroll-behavior: smooth;}
 * { margin: 0; padding: 0; box-sizing: border-box;}
-body { font-family: "Poppins", sans-serif; color: white; line-height: 1.4; padding-bottom: 100px; position: relative; background-color: var(--dark); overflow-x: hidden; visibility: hidden;}
+body { font-family: "Poppins", sans-serif; color: white; line-height: 1.4; padding-bottom: 100px; position: relative; background-color: var(--dark); overflow-x: hidden; visibility: hidden;} 
+/* Fondo principal de la web */
 body::before { content: ""; position: fixed; top: -5%; left: -5%; width: 110%; height: 110%; z-index: -2; background: radial-gradient( circle at 50% 30%, transparent 10%, rgba(5, 5, 5, 0.65) 60%, rgba(5, 5, 5, 0.95) 100% ), linear-gradient( to bottom, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.3) 20%, rgba(5, 5, 5, 0.75) 50%, rgba(5, 5, 5, 0.95) 100% ), linear-gradient(rgba(5, 5, 5, 0.82), rgba(5, 5, 5, 0.92)), url("../img/fondo-mundial.jpg") no-repeat center center; background-size: cover; transition: transform 0.1s ease-out; will-change: transform;}
 .hidden { display: none !important;}
