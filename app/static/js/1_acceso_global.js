@@ -21,19 +21,20 @@
         if (tieneCliente || tieneDistribuidor) tienePermiso = true;
     }
 
-    // 🔥 LA CURA: Siempre hacemos visible el documento principal
     document.documentElement.style.visibility = "visible";
 
     if (tienePermiso) {
         document.addEventListener("DOMContentLoaded", () => {
-            document.body.style.visibility = "visible";
+            // 🔥 RETRASO GLOBAL: Esperamos medio segundo antes de mostrar la web
+            // para que todo el CSS y las fuentes carguen perfectamente sin parpadeos.
+            setTimeout(() => {
+                document.body.style.visibility = "visible";
+            }, 600);
         });
     } else {
         document.addEventListener("DOMContentLoaded", () => {
-            // 🔥 Hacemos visible el body obligatoriamente para que el modal se pueda ver
             document.body.style.visibility = "visible"; 
             
-            // Buscamos el modal de login
             const modal = document.getElementById('modal-login-distribuidor') || document.querySelector('.modal-pass');
             
             if (modal) {
@@ -51,7 +52,6 @@
                     if (texto) texto.innerText = "Ingresa tu código (Cliente o VIP)";
                 }
 
-                // Mostramos el modal de login sobre la página
                 modal.style.display = 'flex';
                 modal.style.visibility = 'visible';
             }
