@@ -1,111 +1,256 @@
-    .tutorial-card {
-        background: rgba(5, 5, 5, 0.85);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 15px;
-        padding: 25px 20px;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        margin-bottom: 30px;
-    }
-    
-    .tutorial-header {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        margin-bottom: 20px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        padding-bottom: 15px;
-    }
+/* ========================================================= */
+/* ESTILOS PREMIUM PARA TARJETAS DE GUÍAS                    */
+/* ========================================================= */
 
-    .tutorial-logo-box {
-        width: 50px;
-        height: 50px;
-        border-radius: 12px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.5rem;
-        background: rgba(0,0,0,0.5);
-    }
+.tutorial-card {
+    background: rgba(12, 12, 15, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 24px !important;
+    padding: 30px 24px !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+    margin-bottom: 35px !important;
+    position: relative !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}
 
-    /* Contenedor del Slide */
-    .tutorial-slide {
-        display: none; /* Ocultamos todos por defecto */
-        animation: fadeSlide 0.4s ease-out forwards;
-        text-align: center;
-    }
-    .tutorial-slide.activo {
-        display: block; /* Solo mostramos el que tiene la clase activo */
-    }
+.tutorial-card:hover {
+    border-color: rgba(0, 212, 255, 0.35) !important;
+    box-shadow: 0 25px 50px rgba(0, 212, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-4px);
+}
 
-    @keyframes fadeSlide {
-        from { opacity: 0; transform: translateX(10px); }
-        to { opacity: 1; transform: translateX(0); }
-    }
+/* Encabezado elegante con línea divisoria sutil */
+.tutorial-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+    margin-bottom: 24px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+    padding-bottom: 18px !important;
+}
 
-    .tutorial-img {
-        width: 100%;
-        max-width: 400px; /* Tamaño máximo para que no se vea gigante en PC */
-        height: 220px;
-        object-fit: contain; /* Para que la captura no se recorte */
-        background: #000;
-        border-radius: 12px;
-        border: 1px solid rgba(255,255,255,0.1);
-        margin: 0 auto 20px auto;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-    }
+/* Caja de logo futurista */
+.tutorial-logo-box {
+    width: 54px !important;
+    height: 54px !important;
+    min-width: 54px !important;
+    border-radius: 14px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.8)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
 
-    .tutorial-paso-badge {
-        display: inline-block;
-        background: var(--primary);
-        color: #000;
-        font-weight: 900;
-        font-size: 0.75rem;
-        padding: 4px 10px;
-        border-radius: 20px;
-        text-transform: uppercase;
-        margin-bottom: 10px;
-    }
+.tutorial-logo-netflix {
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.35) !important;
+}
 
-    .tutorial-desc {
-        color: #ddd;
-        font-size: 0.9rem;
-        line-height: 1.5;
-        min-height: 60px; /* Altura mínima para que los botones no salten al cambiar de paso */
-        margin-bottom: 20px;
-    }
+.tutorial-logo-img {
+    width: 32px !important;
+    height: 32px !important;
+    object-fit: contain !important;
+    display: block !important;
+}
 
-    /* Controles de Navegación */
-    .tutorial-controles {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(0, 0, 0, 0.4);
-        border-radius: 50px;
-        padding: 5px;
-        border: 1px solid rgba(255,255,255,0.05);
-        max-width: 350px;
-        margin: 0 auto;
-    }
+.tutorial-card-title {
+    color: #ffffff !important;
+    font-weight: 800 !important;
+    font-size: 1.1rem !important;
+    letter-spacing: 0.5px !important;
+    margin: 0 0 4px 0 !important;
+    text-transform: uppercase !important;
+}
 
-    .btn-tuto {
-        background: rgba(255, 255, 255, 0.05);
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 50px;
-        font-size: 0.8rem;
-        font-weight: 800;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-    .btn-tuto:hover {
-        background: var(--primary);
-        color: #000;
-    }
-    .tutorial-indicador {
-        color: var(--primary);
-        font-weight: 900;
-        font-size: 0.9rem;
-        letter-spacing: 2px;
-    }
+.tutorial-card-subtitle {
+    color: #9999aa !important;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    margin: 0 !important;
+}
+
+/* ========================================================= */
+/* SLIDES Y CONTENEDOR DE IMÁGENES                           */
+/* ========================================================= */
+
+.tutorial-slide {
+    display: none;
+    animation: fadeSlide 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    text-align: center;
+}
+
+.tutorial-slide.activo {
+    display: block;
+}
+
+@keyframes fadeSlide {
+    from { opacity: 0; transform: scale(0.97) translateY(8px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.tutorial-img {
+    width: 100%;
+    max-width: 440px;
+    height: 230px;
+    object-fit: contain;
+    background: radial-gradient(circle at center, rgba(25, 25, 35, 0.6) 0%, rgba(3, 3, 5, 0.95) 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    margin: 0 auto 18px auto;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(255, 255, 255, 0.02);
+    display: block;
+}
+
+/* ========================================================= */
+/* BLOQUE DE INSTRUCCIONES TIPO TARJETA MODULAR              */
+/* ========================================================= */
+
+.tutorial-info-block {
+    background: rgba(15, 15, 20, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 4px solid var(--primary); /* Borde lateral estilo bloque tecnológico */
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin: 15px auto 22px auto;
+    max-width: 440px;
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.tutorial-paso-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0, 212, 255, 0.12);
+    color: var(--primary);
+    font-weight: 800;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(0, 212, 255, 0.25);
+}
+
+.tutorial-desc {
+    color: #d8d8e2;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* ========================================================= */
+/* CONTROLES DE NAVEGACIÓN TIPO CÁPSULA FLOTANTE             */
+/* ========================================================= */
+
+.tutorial-controles {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    padding: 6px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    max-width: 320px;
+    margin: 0 auto;
+    backdrop-filter: blur(10px);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-tuto {
+    background: rgba(255, 255, 255, 0.04);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.btn-tuto:hover {
+    background: var(--primary);
+    color: #000;
+    border-color: transparent;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.tutorial-indicador {
+    color: var(--primary);
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+/* Textos destacados */
+.text-highlight-yellow {
+    color: #ffcc00;
+    font-weight: 700;
+}
+
+.text-highlight-blue {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* ========================================================= */
+/* SELECTOR DE OPCIONES RÁPIDAS                              */
+/* ========================================================= */
+
+.tutorial-opciones-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 22px;
+    justify-content: center;
+}
+
+.btn-opcion {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #9999aa;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-opcion:hover {
+    background: rgba(0, 212, 255, 0.1);
+    color: #fff;
+    border-color: rgba(0, 212, 255, 0.3);
+}
+
+.btn-opcion.active {
+    background: rgba(0, 212, 255, 0.15);
+    border-color: var(--primary);
+    color: var(--primary);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.25);
+}
+
+/* Brillo específico para Disney+ (Celeste / Azul) */
+.tutorial-logo-disney {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.45) !important;
+}
+
+/* O si prefieres un brillo azul clásico de Disney */
+.tutorial-logo-disney-classic {
+    box-shadow: 0 0 20px rgba(17, 60, 207, 0.6) !important;
+}

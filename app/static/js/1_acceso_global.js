@@ -3,6 +3,7 @@
 // =========================================================
 (function() {
     const path = window.location.pathname.toLowerCase();
+    const esActivaciones = path.includes("activacion");
     const esIndex = path === "/" || path.includes("index") || path.includes("inicio");
     const esDistribuidores = path.includes("distribuidor") || path.includes("iptv") || path.includes("vip");
     const esClientes = !esIndex && !esDistribuidores; 
@@ -11,7 +12,11 @@
     const tieneDistribuidor = sessionStorage.getItem("acceso_distribuidor") === "true";
 
     let tienePermiso = false;
-    if (esIndex) { if (tieneCliente || tieneDistribuidor) tienePermiso = true; } 
+    
+    if (esIndex) { if (tieneCliente || tieneDistribuidor) tienePermiso = true; }
+    if (esActivaciones) {
+        tienePermiso = true; }
+    
     else if (esDistribuidores) { if (tieneDistribuidor) tienePermiso = true; } 
     else if (esClientes) { if (tieneCliente || tieneDistribuidor) tienePermiso = true; }
 

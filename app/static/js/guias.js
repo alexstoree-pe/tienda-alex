@@ -45,3 +45,32 @@
         // Aquí ya era inteligente, pero ahora funciona en equipo con el iniciador
         indicador.innerText = `${nuevoPaso + 1} / ${slides.length}`;
     }
+
+    window.irAPasoDirecto = function(galleryId, indexSlide, botonElemento) {
+    const card = document.getElementById(galleryId);
+    if (!card) return;
+
+    const slides = card.querySelectorAll('.tutorial-slide');
+    
+    // Ocultar todas las diapositivas
+    slides.forEach(slide => slide.classList.remove('activo'));
+    
+    // Activar la seleccionada
+    if (slides[indexSlide]) {
+        slides[indexSlide].classList.add('activo');
+    }
+
+    // Actualizar estados visuales de los botones de opción superior
+    const selectorContainer = card.querySelector('.tutorial-opciones-selector');
+    if (selectorContainer) {
+        selectorContainer.querySelectorAll('.btn-opcion').forEach(btn => btn.classList.remove('active'));
+    }
+    if (botonElemento) {
+        botonElemento.classList.add('active');
+    }
+
+    // Actualizar indicador numérico si tu JS global lo requiere
+    if (typeof actualizarTextoIndicador === 'function') {
+        actualizarTextoIndicador(card, indexSlide);
+    }
+};

@@ -76,12 +76,6 @@
     padding-bottom: 20px;
 }
 
-/* Asegurar que el chevron se vaya a la derecha incluso si hay iconos al inicio */
-.faq-question {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 .faq-question span {
     display: flex;
     align-items: center;
