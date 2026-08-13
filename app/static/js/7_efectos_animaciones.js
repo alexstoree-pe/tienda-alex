@@ -11,7 +11,10 @@ window.continuarPedido = function() {
     const modalCarrito = document.getElementById('modal-carrito-resumen');
     if (modalCarrito) modalCarrito.style.display = 'none';
     if (typeof window.actualizarCarritoUI === 'function') window.actualizarCarritoUI();
-
+    
+    const btnCarrito = document.getElementById('whatsapp-btn');
+    if (btnCarrito) btnCarrito.style.display = 'none';
+    
     const esDistribuidor = window.location.pathname.toLowerCase().match(/distribuidor|vip|iptv/);
 
     if (esDistribuidor) {
