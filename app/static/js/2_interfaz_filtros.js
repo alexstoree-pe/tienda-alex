@@ -106,6 +106,7 @@ window.addEventListener('load', () => {
         if (botonesFiltro[filtroGuardado]) botonesFiltro[filtroGuardado].click(); 
     }
 
+    // 🔥 LA CURA: Retraso de 900ms para asegurar que procesarTextosMoviles (de 800ms) ya terminó de acomodar las letras.
     setTimeout(() => {
         if (scrollGuardado !== null) {
             const pos = parseInt(scrollGuardado, 10);
@@ -126,5 +127,5 @@ window.addEventListener('load', () => {
                 window._isRestoring = false;
             }, 400); 
         }, 150); 
-    }, 300); 
+    }, 900); // <-- Cronómetro ajustado aquí
 });
