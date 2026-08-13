@@ -4,21 +4,22 @@
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/guias.css') }}">
 
-<div class="container" style="padding-top: 0;">
-    <div style="display: flex; justify-content: center; margin: 15px auto;">
-        <a href="{{ url_for('main.inicio') }}" class="btn-universal" style="background:var(--glass); color:#fff; border:2px solid var(--glass-border); padding: 15px 50px; min-width: 280px; font-size: 0.9rem; letter-spacing: 1px;">
-            <i class="fas fa-home" style="margin-right: 8px;"></i> VOLVER ATRÁS
+<div class="container contenedor-retroceso">
+    <div class="btn-retroceso-wrapper">
+        <a href="javascript:history.back()" class="btn-universal btn-retroceso">
+            <i class="fas fa-arrow-left"></i> VOLVER ATRÁS
         </a>
     </div>
 </div>       
 
 <div class="container mt-4 mb-5">
-    <div style="text-align: center; margin-bottom: 40px; width: 100%;">
-        <h2 style="color: var(--primary); font-weight: 800; text-transform: uppercase;">
+    <div class="guias-header">
+        <h2 class="guias-title">
             <i class="fas fa-images"></i> GUÍAS PASO A PASO
         </h2>
-        <p style="color: #aaa; font-size: 0.9rem;">Desliza para ver cómo activar cada plataforma.</p>
+        <p class="guias-subtitle">Desliza para ver cómo activar cada plataforma.</p>
     </div>
+</div>
 
     <div class="row">
 
