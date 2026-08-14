@@ -93,7 +93,8 @@
 .tutorial-img {
     width: 100%;
     max-width: 440px;
-    height: 230px;
+    height: 230px; /* Al fijar la altura evitamos el colapso y el salto */
+    min-height: 230px; /* Asegura que el espacio nunca sea menor en celulares */
     object-fit: contain;
     background: radial-gradient(circle at center, rgba(25, 25, 35, 0.6) 0%, rgba(3, 3, 5, 0.95) 100%);
     border-radius: 16px;
@@ -101,6 +102,13 @@
     margin: 0 auto 18px auto;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(255, 255, 255, 0.02);
     display: block;
+    /* Efecto para que la imagen aparezca suavemente */
+    animation: imageFadeIn 0.3s ease forwards; 
+}
+
+@keyframes imageFadeIn {
+    from { opacity: 0.5; }
+    to { opacity: 1; }
 }
 
 /* ========================================================= */
