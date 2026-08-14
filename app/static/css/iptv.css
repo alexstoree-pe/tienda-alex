@@ -1,0 +1,71 @@
+/* Estilo para el subtítulo del precio por crédito */
+.subtext-precio {
+    font-size: 0.65rem !important;
+    color: #aaaaaa !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    margin-top: 7px !important; /* 🔥 Aumenta o disminuye este valor para darle más separación */
+    white-space: nowrap !important;
+    letter-spacing: 0.4px !important;
+}
+
+/* Si es una tarjeta VIP/Premium */
+.premium .subtext-precio {
+    color: #e5c158 !important; 
+}
+
+/* Contenedor flexible para alinear el título y el botón en una misma línea */
+.category-header-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 16px 0 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    padding: 8px 12px;
+    border-left: 4px solid var(--primary);
+}
+
+/* Ajuste de la categoría dentro del flex */
+.category-header-flex .category-title {
+    margin: 0 !important;
+    border-left: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    font-size: 1.1rem !important;
+}
+
+/* Cabecera interna del modal */
+.modal-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.btn-cerrar-modal {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.btn-cerrar-modal:hover {
+    background: var(--danger);
+    border-color: transparent;
+}
+
+.modal-body-scroll {
+    max-height: 260px !important;
+    overflow-y: auto !important;
+    padding-right: 4px !important;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,42 @@
+<div class="modal-overlay" id="modal-precios-panel">
+    <div class="modal-content modal-cristal">
+        
+        <div class="modal-header-row">
+            <h2><i class="fas fa-star" style="color: var(--vip);"></i> Precios Exclusivos para clientes con panel</h2>
+            <button type="button" class="btn-cerrar-modal" onclick="cerrarModalPanel()"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <p>Tarifas especiales de recarga y renovación para socios que ya cuentan con panel activo:</p>
+        
+        <!-- Contenedor con Scroll -->
+        <div class="modal-body-scroll">
+            
+            <!-- Subtarjeta 1 -->
+            <div class="carrito-item-modal carrito-item-premium">
+                <div class="ci-title-row" onclick="toggleDetallesModal(this)" style="cursor: pointer;">
+                    <h4> (Recarga) Reseller 1 <i class="fas fa-chevron-down" style="font-size: 0.8rem; float: right; transition: 0.3s;"></i></h4>
+                    <span class="carrito-item-precio">S/ 22</span>
+                </div>
+                <div class="ci-detalles" style="max-height: 0px; overflow: hidden; opacity: 0; transition: all 0.3s ease; margin-top: 0px;">
+                    <p class="carrito-tag"><i class="fas fa-check"></i>Recarga  5 creditos + 1 de regalo 🎁</p>
+                </div>
+            </div>
+
+            <!-- Subtarjeta 2 -->
+            <div class="carrito-item-modal carrito-item-premium">
+                <div class="ci-title-row" onclick="toggleDetallesModal(this)" style="cursor: pointer;">
+                    <h4> (Recarga) Reseller 2 <i class="fas fa-chevron-down" style="font-size: 0.8rem; float: right; transition: 0.3s;"></i></h4>
+                    <span class="carrito-item-precio">S/ 33</span>
+                </div>
+                <div class="ci-detalles" style="max-height: 0px; overflow: hidden; opacity: 0; transition: all 0.3s ease; margin-top: 0px;">
+                    <p class="carrito-tag"><i class="fas fa-check"></i>Recarga 10 creditos + 1 de regalo 🎁</p>
+                </div>
+            </div>
+
+        
+
+        </div>
+
+        <button type="button" class="btn-modal-back" onclick="cerrarModalPanel()">ENTENDIDO</button>
+    </div>
+</div>
