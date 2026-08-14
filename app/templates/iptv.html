@@ -44,8 +44,10 @@
 </div>
     
 <div class="container" id="product-container">
-{% include 'iptv/tarjetas.html' %}
+{% include 'iptv/tarjetasstandar.html' %}
+{% include 'iptv/tarjetasbasica.html' %}
 </div>
 
 <script src="{{ url_for('static', filename='js/iptv.js') }}"></script>
+<script src="{{ url_for('static', filename='js/iptvbasico.js') }}"></script>
 {% endblock %}

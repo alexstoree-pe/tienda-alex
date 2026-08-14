@@ -1,8 +1,4 @@
-// =========================================================
-// 2. INTERFAZ GLOBAL Y RESTAURACIÓN DE SCROLL
-// =========================================================
 
-// --- 1. NOTIFICACIONES TOAST ---
 window.showToast = function(message, isAdded = true) {
     const container = document.getElementById('toast-container');
     if(!container) return;
@@ -16,7 +12,7 @@ window.showToast = function(message, isAdded = true) {
     }, 2500);
 };
 
-// --- 2. MOTOR CINEMATOGRÁFICO NATIVO ---
+
 window.activarEfectoCineNativo = function() {
     const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
@@ -33,7 +29,7 @@ window.activarEfectoCineNativo = function() {
     });
 };
 
-// --- 3. BOTÓN VOLVER ARRIBA ---
+
 window.onscroll = function() {
     const btnSubir = document.getElementById("back-to-top");
     if(btnSubir) {
@@ -46,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnSubir) btnSubir.addEventListener("click", () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 });
 
-// --- 4. RESTAURACIÓN DE SCROLL Y TELÓN ---
+
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 if (sessionStorage.getItem('modal_activo_interes') === 'true') {
@@ -106,7 +102,7 @@ window.addEventListener('load', () => {
         if (botonesFiltro[filtroGuardado]) botonesFiltro[filtroGuardado].click(); 
     }
 
-    // 🔥 LA CURA: Retraso de 900ms para asegurar que procesarTextosMoviles (de 800ms) ya terminó de acomodar las letras.
+    
     setTimeout(() => {
         if (scrollGuardado !== null) {
             const pos = parseInt(scrollGuardado, 10);
@@ -127,5 +123,5 @@ window.addEventListener('load', () => {
                 window._isRestoring = false;
             }, 400); 
         }, 150); 
-    }, 900); // <-- Cronómetro ajustado aquí
+    }, 900);
 });

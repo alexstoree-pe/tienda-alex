@@ -23,7 +23,7 @@
 .category-header-flex .btn-accion-extra,
 .category-title + .btn-accion-extra,
 header ~ .container .category-title button {
-    margin-left: auto !important;
+    margin-bottom: 22px !important;
 }
 
 /* ========================================================= */
@@ -71,4 +71,26 @@ header ~ .container .category-title button {
 div:has(.fa-question-circle),
 section:has(.fa-question-circle) {
     display: none !important;
+}
+
+.btn-wsp-recarga {
+    background: #25d366 !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    transition: 0.3s ease !important;
+    width: 100% !important;
+}
+
+.btn-wsp-recarga:hover {
+    background: #20ba5a !important;
+    transform: translateY(-1px) !important;
 }

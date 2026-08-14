@@ -74,3 +74,4 @@
         actualizarTextoIndicador(card, indexSlide);
     }
 };
+
