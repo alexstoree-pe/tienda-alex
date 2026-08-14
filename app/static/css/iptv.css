@@ -1,18 +1,25 @@
 /* ========================================================= */
-/* ALINEACIÓN DE TÍTULO Y BOTÓN DE CLIENTES CON PANEL (SOLO CSS) */
+/* CORRECCIÓN PARA MÓVILES: TÍTULO DE CATEGORÍA Y BOTÓN      */
 /* ========================================================= */
-
-/* Contenedor flexible para la categoría y el botón */
 .category-title {
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
     display: flex !important;
-    align-items: center !important;
+    flex-direction: row !important;
     justify-content: space-between !important;
+    align-items: center !important;
     flex-wrap: wrap !important;
+    padding: 12px 15px !important;
     gap: 10px !important;
 }
 
-/* Estilo y posicionamiento del botón inyectado mediante la clase existente */
-.category-title .btn-accion-extra,
+/* Ajustar el tamaño del botón en pantallas pequeñas para que encaje perfecto */
+.category-title .btn-accion-extra {
+    font-size: 0.7rem !important;
+    padding: 6px 10px !important;
+    white-space: nowrap !important;
+}
 .category-header-flex .btn-accion-extra,
 .category-title + .btn-accion-extra,
 header ~ .container .category-title button {
