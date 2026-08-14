@@ -1,0 +1,45 @@
+<div class="col-12 col-md-6 mb-4">
+            <div class="tutorial-card shadow-lg" id="galeria-disney-tv">
+                
+                <div class="tutorial-header">
+                    <div class="tutorial-logo-box tutorial-logo-disney">
+                        <img src="{{ url_for('static', filename='img/disneyp.webp') }}" class="tutorial-logo-img" alt="disney+">
+                    </div>
+                    <div>
+                        <h5 class="tutorial-card-title">Activar disney para tv</h5>
+                        <p class="tutorial-card-subtitle">para SMART TV</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-contenedor-slides">
+                    
+                    <div class="tutorial-slide activo">
+                        <img src="{{ url_for('static', filename='img/guias/disney/disney1.jpg') }}" class="tutorial-img" alt="Paso 1">
+                        <div class="tutorial-info-block">
+                        <span class="tutorial-paso-badge">Paso 1</span>
+                        <p class="tutorial-desc">Abre la aplicación de Disney desde tu TV  presiona en<strong>"Iniciar sesión"</strong></p>
+                    </div>
+                    </div>
+                    <div class="tutorial-slide">
+                        <img src="{{ url_for('static', filename='img/guias/disney/disney2.jpg') }}" class="tutorial-img" alt="Paso 2">
+                        <div class="tutorial-info-block">
+                        <span class="tutorial-paso-badge">Paso 2</span>
+                        <p class="tutorial-desc">La app le dara unos codigos de acceso en numeros dentro de la pantalla <strong>Espere ahi e indique a su proveedor</strong></p>
+                    </div>
+                    </div>    
+                    <div class="tutorial-slide">
+                        <img src="{{ url_for('static', filename='img/guias/disney/disney3.jpg') }}" class="tutorial-img" alt="Paso 3">
+                        <div class="tutorial-info-block">
+                        <span class="tutorial-paso-badge">Paso 3</span>
+                        <p class="tutorial-desc">Y LISTO, <strong class="text-highlight-blue">su cuenta disney se activo satisfactoriamente</strong></p>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="tutorial-controles">
+                    <button class="btn-tuto" onclick="cambiarPaso('galeria-disney-tv', -1)"><i class="fas fa-chevron-left"></i></button>
+                    <span class="tutorial-indicador">...</span>
+                    <button class="btn-tuto" onclick="cambiarPaso('galeria-disney-tv', 1)"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+</div>

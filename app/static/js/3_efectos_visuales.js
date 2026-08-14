@@ -1,6 +1,3 @@
-// =========================================================
-// 3. EFECTOS VISUALES (Logos y Animaciones de Textos)
-// =========================================================
 function crearLluviaDeLogos() {
     if(document.querySelector('.falling-logos-container')) return;
     const container = document.createElement('div');

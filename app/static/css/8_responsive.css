@@ -1,6 +1,3 @@
-/* ========================================================= */
-/* 11. VISTA CUADRÍCULA (GRID MODE)                          */
-/* ========================================================= */
 .container.grid-mode { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; max-width: 90% !important; width: 100%; padding: 15px;}
 @media (min-width: 900px) { .container.grid-mode { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }}
 .grid-mode .category-title { grid-column: 1 / -1; width: 100%; margin-top: 30px; display: flex;}
@@ -14,9 +11,6 @@
 .grid-mode .premium .service-card::after { display: none !important;}
 .grid-mode .badge-oferta { left: 0 !important; width: 100% !important; text-align: center; border-radius: 20px 20px 0 0;}
 
-/* ========================================================= */
-/* 12. OPTIMIZACIONES PARA MÓVILES Y RESPONSIVE GENERAL      */
-/* ========================================================= */
 @media (min-width: 1250px) { .sidebar-lateral { display: flex; }}
 @media (max-width: 1650px) { .grid-mode ~ .sidebar-lateral, body:has(.grid-mode) .sidebar-lateral { display: none !important; }}
 @media (min-width: 992px) { #btn-info-movil { display: none !important; }}
@@ -24,7 +18,6 @@ body.grid-activa .sidebar-lateral { display: none !important;}
 @media (max-width: 1199px) { #modal-info-lateral.modal-overlay { top: 0; align-items: center; } #modal-info-lateral .modal-cristal { margin-top: 15px; max-height: calc(100vh - 100px); }}
 
 @media (max-width: 768px) { 
-    /* Posicionamiento de notificaciones flotantes */
     .sales-popup { 
         top: 20px !important; 
         left: 10px !important; 
@@ -32,7 +25,6 @@ body.grid-activa .sidebar-lateral { display: none !important;}
         padding: 10px 12px; 
     } 
 
-    /* Estructura general de la tarjeta en móvil */
     .service-card { 
         padding-bottom: 20px !important; 
         position: relative !important;
@@ -42,7 +34,6 @@ body.grid-activa .sidebar-lateral { display: none !important;}
         text-align: center !important;
     } 
 
-    /* Logo centrado arriba */
     .img-wrapper {
         margin: 0 auto 8px auto !important;
     }
@@ -55,7 +46,6 @@ body.grid-activa .sidebar-lateral { display: none !important;}
         text-align: center !important;
     } 
 
-    /* 🔄 MOVIMIENTO DE VAIVÉN SOLO PARA TÍTULOS LARGOS (Centrado) */
     .service-text h3, 
     .nombre-prod { 
         display: inline-block !important; 
@@ -69,7 +59,6 @@ body.grid-activa .sidebar-lateral { display: none !important;}
         margin: 0 auto 4px auto !important;
     } 
 
-    /* Etiquetas internas centradas */
     .product-tags { 
         display: flex !important; 
         flex-wrap: wrap !important; 
@@ -88,7 +77,6 @@ body.grid-activa .sidebar-lateral { display: none !important;}
         font-size: 0.65rem !important;
     } 
 
-    /* 💰 PRECIO AL MEDIO (DEBAJO DE LAS ETIQUETAS) */
     .price-container { 
         position: static !important; /* Quitamos el absoluto para que baje de forma natural al medio */
         display: flex !important;
@@ -113,7 +101,6 @@ body.grid-activa .sidebar-lateral { display: none !important;}
         margin-top: 3px !important;
     }
 
-    /* Activador de la animación de títulos largos */
     .animacion-texto-largo { 
         animation: vaivenTexto 6s ease-in-out infinite alternate !important; 
     }

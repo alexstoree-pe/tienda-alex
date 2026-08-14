@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template
 
-# Creamos el blueprint llamado 'clientes'
 clientes_bp = Blueprint('clientes', __name__)
 
 @clientes_bp.route('/clientes')

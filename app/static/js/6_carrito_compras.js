@@ -1,6 +1,3 @@
-// =========================================================
-// 6. MOTOR DEL CARRITO DE COMPRAS
-// =========================================================
 window.carrito = [];
 
 window.toggleCarrito = function(elemento, ev) {

@@ -1,6 +1,3 @@
-// =========================================================
-// 1. LÓGICA DE ACCESO GLOBAL E INTELIGENTE
-// =========================================================
 (function() {
     const path = window.location.pathname.toLowerCase();
     const esActivaciones = path.includes("activacion");

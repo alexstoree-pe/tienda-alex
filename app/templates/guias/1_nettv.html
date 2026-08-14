@@ -1,0 +1,73 @@
+<div class="col-12 col-md-8 offset-md-2 mb-4">
+    <div class="tutorial-card shadow-lg" id="galeria-netflix-tv">
+        
+        <!-- Encabezado -->
+        <div class="tutorial-header">
+            <div class="tutorial-logo-box tutorial-logo-netflix">
+                <img src="{{ url_for('static', filename='img/netflix.webp') }}" class="tutorial-logo-img" alt="Netflix">
+            </div>
+            <div>
+                <h5 class="tutorial-card-title">Activar Netflix en Smart TV</h5>
+                <p class="tutorial-card-subtitle">Elige tu método de activación preferido</p>
+            </div>
+        </div>
+
+        <div class="tutorial-opciones-selector">
+            <button type="button" class="btn-opcion active" id="btn-opt-1" onclick="irAPasoDirecto('galeria-netflix-tv', 0, this)">
+                <i class="fas fa-bolt"></i> Opción 1 (Rápida)
+            </button>
+            <button type="button" class="btn-opcion" id="btn-opt-2" onclick="irAPasoDirecto('galeria-netflix-tv', 2, this)">
+                <i class="fas fa-envelope"></i> Opción 2 (Por Enlace)
+            </button>
+        </div>
+
+        <div class="tutorial-contenedor-slides">
+            
+            <div class="tutorial-slide activo">
+                <img src="{{ url_for('static', filename='img/guias/nettv1.jpg') }}" class="tutorial-img" alt="Paso 1">
+                <div class="tutorial-info-block">
+                    <span class="tutorial-paso-badge"><i class="fas fa-check-circle"></i> Opción 1 • Paso 1</span>
+                    <p class="tutorial-desc">Abre la aplicación de Netflix en tu Smart TV y selecciona la opción <strong>"Iniciar sesión"</strong></p>
+                </div>
+            </div>
+            
+            <div class="tutorial-slide">
+                <img src="{{ url_for('static', filename='img/guias/nettv2.jpg') }}" class="tutorial-img" alt="Paso 2">
+                <div class="tutorial-info-block">
+                    <span class="tutorial-paso-badge"><i class="fas fa-check-circle"></i> Opción 1 • Paso 2</span>
+                    <p class="tutorial-desc">Presiona en <strong>Usar teléfono</strong>. Te aparecerá un código de activación en pantalla. Mantén esa pantalla abierta e indícaselo a tu proveedor.</p>
+                </div>
+            </div>
+
+            <div class="tutorial-slide">
+                <img src="{{ url_for('static', filename='img/guias/nettv1.jpg') }}" class="tutorial-img" alt="Paso 3">
+                <div class="tutorial-info-block">
+                    <span class="tutorial-paso-badge" style="color: #ffcc00; background: rgba(255,204,0,0.1); border-color: rgba(255,204,0,0.3);"><i class="fas fa-envelope"></i> Opción 2 • Paso 1</span>
+                    <p class="tutorial-desc">Si prefieres por control remoto, presiona nuevamente en <strong class="text-highlight-yellow">INICIAR SESION</strong></p>
+                </div>
+            </div>
+            <div class="tutorial-slide">
+                <img src="{{ url_for('static', filename='img/guias/nettv3.jpg') }}" class="tutorial-img" alt="Paso 4">
+                <div class="tutorial-info-block">
+                    <span class="tutorial-paso-badge" style="color: #ffcc00; background: rgba(255,204,0,0.1); border-color: rgba(255,204,0,0.3);"><i class="fas fa-envelope"></i> Opción 2 • Paso 2</span>
+                    <p class="tutorial-desc">Presiona usar control remoto, digita el correo brindado y presiona en <strong class="text-highlight-yellow">SIGUIENTE</strong></p>
+                </div>
+            </div>
+
+            <div class="tutorial-slide">
+                <img src="{{ url_for('static', filename='img/guias/nettv4.jpg') }}" class="tutorial-img" alt="Paso 5">
+                <div class="tutorial-info-block">
+                    <span class="tutorial-paso-badge" style="color: #ffcc00; background: rgba(255,204,0,0.1); border-color: rgba(255,204,0,0.3);"><i class="fas fa-envelope"></i> Opción 2 • Paso 3</span>
+                    <p class="tutorial-desc">Te saldrá la opción: <strong>ENVIAR ENLACE DE INICIO DE SESIÓN</strong>. Selecciónala y mantén la pantalla activa hasta que tu proveedor acepte la solicitud.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tutorial-controles">
+            <button type="button" class="btn-tuto" onclick="cambiarPaso('galeria-netflix-tv', -1)"><i class="fas fa-chevron-left"></i></button>
+            <span class="tutorial-indicador">...</span>
+            <button type="button" class="btn-tuto" onclick="cambiarPaso('galeria-netflix-tv', 1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+</div>

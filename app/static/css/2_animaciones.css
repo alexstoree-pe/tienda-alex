@@ -1,6 +1,3 @@
-/* ========================================================= */
-/* 2. EFECTOS DE FONDO Y ANIMACIONES (Keyframes)             */
-/* ========================================================= */
 .particles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; overflow: hidden;}
 .particle { position: absolute; background: var(--vip); border-radius: 50%; opacity: 0.3; animation: floatUp 15s infinite linear; filter: blur(3px);}
 .particle:nth-child(1) { width: 8px; height: 8px; left: 10%; bottom: -10px; animation-duration: 25s;}
@@ -9,9 +6,6 @@
 .particle:nth-child(4) { width: 10px; height: 10px; left: 70%; bottom: -15px; animation-duration: 18s; animation-delay: 8s; background: var(--primary);}
 .particle:nth-child(5) { width: 20px; height: 20px; left: 90%; bottom: -25px; animation-duration: 22s; animation-delay: 1s; opacity: 0.15;}
 
-/* ========================================================= */
-/* CONTENEDOR DETRÁS DE LAS TARJETAS                         */
-/* ========================================================= */
 .falling-logos-container {
     position: fixed !important;
     top: 0 !important;
@@ -23,9 +17,6 @@
     overflow: hidden !important;
 }
 
-/* ========================================================= */
-/* ESTILO Y OPACIDAD CLARA DE LOS LOGOS                      */
-/* ========================================================= */
 .falling-logo {
     position: absolute;
     width: 35px;

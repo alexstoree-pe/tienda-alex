@@ -1,6 +1,3 @@
-// =========================================================
-// 5. API Y COMUNICACIÓN CON GOOGLE SHEETS
-// =========================================================
 window.cargarStockDeGoogleSheets = async function() {
     try {
         const respuesta = await fetch('/api/obtener-datos-stock');

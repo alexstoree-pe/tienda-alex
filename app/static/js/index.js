@@ -1,9 +1,9 @@
   let urlDestino = "";
-    let esRutaMayorista = false; // Nueva variable para rastrear el tipo de zona
+    let esRutaMayorista = false; 
 
-    function solicitarAccesso(url, esMayorista) { // <-- Cambiamos la función para recibir una pista clara
+    function solicitarAccesso(url, esMayorista) { 
         urlDestino = url;
-        esRutaMayorista = esMayorista; // Guardamos si es mayorista o no de forma directa
+        esRutaMayorista = esMayorista; 
         
         const modal = document.getElementById('modal-pass');
         const titulo = document.getElementById('modal-titulo');

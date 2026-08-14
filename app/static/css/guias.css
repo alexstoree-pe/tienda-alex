@@ -245,12 +245,10 @@
     box-shadow: 0 0 15px rgba(0, 212, 255, 0.25);
 }
 
-/* Brillo específico para Disney+ (Celeste / Azul) */
 .tutorial-logo-disney {
     box-shadow: 0 0 20px rgba(0, 212, 255, 0.45) !important;
 }
 
-/* O si prefieres un brillo azul clásico de Disney */
 .tutorial-logo-disney-classic {
     box-shadow: 0 0 20px rgba(17, 60, 207, 0.6) !important;
 }

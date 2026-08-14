@@ -1,0 +1,45 @@
+<div class="col-12 col-md-6 mb-4">
+            <div class="tutorial-card shadow-lg" id="galeria-netflix-celular">
+                
+                <div class="tutorial-header">
+                    <div class="tutorial-logo-box tutorial-logo-netflix">
+                        <img src="{{ url_for('static', filename='img/netflix.webp') }}" class="tutorial-logo-img" alt="Netflix">
+                    </div>
+                    <div>
+                        <h5 class="tutorial-card-title">Activar Netflix PARA CEL O PC</h5>
+                        <p class="tutorial-card-subtitle">Para celular o pc</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-contenedor-slides">
+                    
+                    <div class="tutorial-slide activo">
+                        <img src="{{ url_for('static', filename='img/guias/netc1.jpg') }}" class="tutorial-img" alt="Paso 1">
+                        <div class="tutorial-info-block">
+                            <span class="tutorial-paso-badge">Paso 1</span>
+                            <p class="tutorial-desc">Abre la aplicación de Netflix en tu celular o pc y presione en  <strong>"Iniciar sesión"</strong></p>
+                        </div>
+                    </div>
+                    <div class="tutorial-slide">
+                        <img src="{{ url_for('static', filename='img/guias/netc2.jpg') }}" class="tutorial-img" alt="Paso 2">
+                        <div class="tutorial-info-block">
+                            <span class="tutorial-paso-badge">Paso 2</span>
+                            <p class="tutorial-desc">coloque el correo brindado y presione en  <strong>CONTINUAR</strong></p>
+                        </div>
+                    </div>    
+                    <div class="tutorial-slide">
+                        <img src="{{ url_for('static', filename='img/guias/netC3.jpg') }}" class="tutorial-img" alt="Paso 3">
+                        <div class="tutorial-info-block">
+                            <span class="tutorial-paso-badge">Paso 3</span>
+                            <p class="tutorial-desc">la app le pedira unos codigos de acceso unico que llegaran al correo , <strong class="text-highlight-blue">indique a su proveedor que le brinde los codigos de acceso</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tutorial-controles">
+                    <button class="btn-tuto" onclick="cambiarPaso('galeria-netflix-celular', -1)"><i class="fas fa-chevron-left"></i></button>
+                    <span class="tutorial-indicador">...</span>
+                    <button class="btn-tuto" onclick="cambiarPaso('galeria-netflix-celular', 1)"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>

@@ -1,4 +1,4 @@
-// --- FUNCIONES PARA EL MODAL DE IPTV BÁSICO ---
+
 
 window.abrirModalBasico = function() {
     const modal = document.getElementById('modal-precios-basico');
@@ -29,7 +29,6 @@ window.enviarRecargaWhatsAppBasico = function(paquete) {
 
     if (alerta) alerta.style.display = 'none';
 
-    // Tu número de WhatsApp
     const tuNumeroWhatsApp = '51999999999'; 
 
     const mensaje = `Hola, deseo solicitar una recarga de panel BÁSICO.\n\n👤 *Usuario:* ${usuario}\n📦 *Paquete:* ${paquete}`;

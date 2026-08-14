@@ -1,9 +1,7 @@
 {% extends "base.html" %}
-<!-- 1. Importamos el molde de tarjetas de TV -->
 {% from 'activaciones/macrostv.html' import tarjeta_streaming %}
 
 {% block content %}
-<!-- 2. Cargamos el archivo CSS exclusivo de esta sección -->
 <link rel="stylesheet" href="{{ url_for('static', filename='css/activaciones.css') }}">
 
 <div class="container" style="padding-top: 0;">
@@ -23,7 +21,6 @@
     </div>
         
     <div class="row">
-        <!-- 3. Tarjetas de Streaming usando el Molde (Macros) -->
         {{ tarjeta_streaming('Netflix', 'netflix.webp', 'https://www.netflix.com/tv8', '#e50914', 'rgba(229, 9, 20, 0.6)') }}
         
         {{ tarjeta_streaming('Max', 'max.webp', 'https://auth.hbomax.com/link', '#0055ff', 'rgba(0, 85, 255, 0.6)') }}
@@ -34,7 +31,6 @@
 
          {{ tarjeta_streaming('DIRECTV GO', 'dgo.webp', 'https://www.directvgo.com/activar-tv', '#75c7ec', 'rgba(57, 124, 224, 0.6)') }}
 
-        <!-- 4. Llamamos a todo el bloque complejo de IPTV -->
         {% include 'activaciones/iptv_flujo.html' %}
     </div>
 </div>

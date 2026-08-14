@@ -1,6 +1,3 @@
-// =========================================================
-// 4. FILTROS, CATEGORÍAS Y VISTAS (GRID)
-// =========================================================
 window.cambiarVista = function(modo, btn) {
     const cont = document.querySelector('.container#product-container') || document.querySelector('.container');
     document.querySelectorAll('.btn-view').forEach(b => b.classList.remove('active'));

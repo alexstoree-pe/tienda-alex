@@ -15,10 +15,6 @@
 <div id="toast-container"></div>
 <button id="back-to-top" title="Volver Arriba"><i class="fas fa-chevron-up"></i></button>
 
-{# ========================================================= #}
-{# CONDICIONAL INTELIGENTE: Solo carga la tienda y sus modales #}
-{# si la URL NO es la página de activaciones                  #}
-{# ========================================================= #}
 {% if 'activacion' not in request.path.lower() and 'guia' not in request.path.lower() %}
     {% include 'componentesba/carrito.html' %}
     {% include 'componentesba/modalclientes.html' %}

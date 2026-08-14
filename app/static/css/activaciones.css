@@ -1,7 +1,3 @@
-/* ========================================= */
-/* ESTILOS DE ZONA DE ACTIVACIONES TV        */
-/* ========================================= */
-
 .card-activacion {
     background: rgba(5, 5, 5, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -53,11 +49,6 @@
     text-decoration: none;
 }
 
-/* ========================================= */
-/* ZONA IPTV Y DESCARGAS (TARJETAS)          */
-/* ========================================= */
-
-/* TEMAS DE COLOR DINÁMICOS */
 .tema-naranja {
     --iptv-border: rgba(255, 115, 0, 0.2);
     --iptv-grad: linear-gradient(135deg, #ff7300, #ff4400);
@@ -83,7 +74,6 @@
     --iptv-color: #03a3ff;
 }
 
-/* ESTRUCTURA PRINCIPAL */
 .card-iptv {
     background: rgba(5, 5, 5, 0.8);
     border: 1px solid var(--iptv-border);
@@ -119,7 +109,6 @@
 
 .desc-app { color: #ccc; font-size: 0.85rem; margin-bottom: 0; }
 
-/* CAJAS DE ENLACES */
 .box-links {
     width: 100%; max-width: 500px; background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px;
@@ -148,7 +137,6 @@
 }
 .btn-copy:hover { background: rgba(0, 212, 255, 0.3); }
 
-/* SECCIÓN DOWNLOADER */
 .box-downloader {
     width: 100%; max-width: 500px; background: var(--iptv-bg-light);
     border: 1px solid var(--iptv-border-light); border-radius: 12px;
@@ -166,7 +154,6 @@
     box-shadow: 0 4px 10px var(--iptv-shadow); margin-left: auto;
 }
 
-/* ALERTAS Y TIENDA APPS */
 .alert-box { width: 100%; max-width: 500px; text-align: center; margin-top: 10px; }
 .alert-box p {
     color: #ff4d4d; font-size: 0.75rem; margin-bottom: 0; font-weight: 600;
@@ -181,7 +168,6 @@
 .info-title { color: #00d4ff; font-size: 0.8rem; font-weight: 700; margin-bottom: 5px; }
 .info-desc { color: #bbb; font-size: 0.75rem; margin: 0; line-height: 1.4; }
 
-/* LISTA DE APPS (LAMTV, XTREAM) */
 .apps-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 15px; }
 .app-row {
     background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255,255,255,0.05);

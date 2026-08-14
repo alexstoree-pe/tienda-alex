@@ -1,6 +1,3 @@
-// =========================================================
-// 7. CHECKOUT Y ENVÍO A WHATSAPP
-// =========================================================
 window.enviarPedido = function() {
     if (window.carrito.length === 0) return; 
     window.abrirModalCarrito();
@@ -27,12 +24,9 @@ window.continuarPedido = function() {
     }
 };
 
-// LÓGICA VIP
 window.cerrarModalPedido = function() { 
-    // 1. Ocultamos el modal VIP actual de datos/nombres
     document.getElementById('modal-pedido-vip').style.display = 'none'; 
     
-    // 2. Volvemos a abrir el modal de resumen del carrito anterior
     if (typeof window.abrirModalCarrito === 'function') {
         window.abrirModalCarrito();
     } else {
@@ -71,7 +65,6 @@ window.finalizarConNombre = function() {
     window.cerrarModalPedido();
 };
 
-// LÓGICA CLIENTES
 window.cerrarModalCliente = function() { 
     document.getElementById('modal-pedido-cliente').style.display = 'none'; 
     const btnCarrito = document.getElementById('whatsapp-btn');
@@ -98,11 +91,9 @@ window.irAPasoNombreCliente = function() {
     document.getElementById('paso-cliente-2').style.display = 'block';
 };
 window.volverAPaso1Cliente = function() {
-    // 1. Ocultamos el modal actual de datos de compra
     const modalCliente = document.getElementById('modal-pedido-cliente');
     if (modalCliente) modalCliente.style.display = 'none';
 
-    // 2. Volvemos a abrir el modal anterior (Resumen del carrito con descripciones)
     if (typeof window.abrirModalCarrito === 'function') {
         window.abrirModalCarrito();
     } else {
@@ -123,7 +114,6 @@ window.finalizarPedidoCliente = function() {
     window.cerrarModalCliente();
 };
 
-// FORMATEADOR DEL MENSAJE FINAL WA
 window.ejecutarEnvioWhatsApp = function(nombresData, tipoUsuario) {
     let totalItems = window.carrito.reduce((sum, p) => sum + p.cantidad, 0);
     let totalSoles = window.carrito.reduce((sum, p) => sum + (p.precio * p.cantidad), 0);

@@ -6,7 +6,6 @@ import csv
 import io
 from dotenv import load_dotenv
 
-# Buscador inteligente de .env (Intacto)
 for ruta_env in [
     os.path.join(os.getcwd(), '.env'),
     os.path.join(os.path.dirname(__file__), '.env'),
@@ -19,7 +18,6 @@ for ruta_env in [
 
 main_bp = Blueprint('main', __name__)
 
-# --- TUS RUTAS HTML INTACTAS ---
 @main_bp.route('/')
 @main_bp.route('/inicio')
 def inicio():
@@ -58,7 +56,6 @@ def obtener_stock_seguro():
         reader = csv.reader(f)
         filas = list(reader)
         
-        # Saltamos las 2 primeras filas (Encabezados verdes y títulos)
         filas_datos = filas[2:] 
 
         revendedores = []
@@ -68,11 +65,9 @@ def obtener_stock_seguro():
             while len(fila) < 4: 
                 fila.append("")
             
-            # Guardar Revendedores (Columnas A y B) si no están vacías
             if fila[0].strip() != "" or fila[1].strip() != "":
                 revendedores.append({"c": [{"v": fila[0]}, {"v": fila[1]}]})
             
-            # Guardar Clientes (Columnas C y D) si no están vacías
             if fila[2].strip() != "" or fila[3].strip() != "":
                 clientes.append({"c": [{"v": fila[2]}, {"v": fila[3]}]})
                 

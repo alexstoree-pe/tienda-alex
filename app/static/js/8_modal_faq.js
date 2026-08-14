@@ -1,7 +1,3 @@
-// =========================================================
-// 8. FUNCIONES DE MODALES Y FAQS
-// =========================================================
-
 window.abrirModalFaq = function() {
     sessionStorage.setItem('modal_activo_interes', 'true');
     const modal = document.getElementById('modal-faq');
@@ -38,13 +34,8 @@ window.toggleFaqModal = function(elemento) {
     elemento.parentElement.classList.toggle('active');
 };
 
-// =========================================================
-// 9. AUTO INYECTOR Y ARRANQUE GLOBAL (BOOTSTRAPPER)
-// =========================================================
-// Esto garantiza que todos los scripts anteriores se conecten al HTML
 document.addEventListener("DOMContentLoaded", () => {
     
-    // 1. Inyectamos los botones del carrito a cada tarjeta
     document.querySelectorAll('.service-item').forEach(item => {
         item.onclick = function(e) { window.toggleCarrito(this, e); };
         const priceContainer = item.querySelector('.price-container');
@@ -60,7 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 2. Animación Vanilla Tilt para Escritorio
     const esMovil = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     if (typeof VanillaTilt !== 'undefined') {
         const tarjetas = document.querySelectorAll(".service-item");
@@ -68,16 +58,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!esMovil) VanillaTilt.init(tarjetas, { max: 10, speed: 400, glare: true, "max-glare": 0.2 });
     }
     
-    // 3. Carga suave de logos
     document.querySelectorAll('.service-logo').forEach(img => {
         img.addEventListener('load', () => img.classList.add('loaded'));
         if (img.complete) img.classList.add('loaded');
     });
 
-    // 4. Encendemos el motor de aparición al hacer scroll
     if (typeof window.activarEfectoCineNativo === 'function') window.activarEfectoCineNativo();
 
-    // 5. Arrancamos efectos secundarios y APIs tras medio segundo (Performance)
     setTimeout(() => { 
         if (typeof crearLluviaDeLogos === 'function') crearLluviaDeLogos(); 
         if (typeof iniciarNotificacionesCompras === 'function') iniciarNotificacionesCompras(); 
