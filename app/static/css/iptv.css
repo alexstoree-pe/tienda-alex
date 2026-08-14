@@ -69,3 +69,23 @@
     padding-right: 4px !important;
     margin-bottom: 10px;
 }
+
+/* ========================================================= */
+/* PRECIO Y SUBTÍTULO LADO A LADO (EXCLUSIVO PARA IPTV)      */
+/* ========================================================= */
+
+/* Si tus tarjetas de IPTV tienen un contenedor o clase específica, o afectando directo al price-container en iptv */
+.service-card .price-container {
+    display: flex !important;
+    flex-direction: row !important; /* Coloca el precio y el subtítulo uno al lado del otro */
+    align-items: baseline !important; /* Los alinea correctamente por la base del texto */
+    gap: 8px !important; /* Espacio de separación horizontal */
+    justify-content: flex-end !important; /* Alineado hacia la derecha o cámbialo a center si prefieres */
+}
+
+/* Ajuste del subtítulo para que encaje perfectamente al lado */
+.service-card .subtext-precio {
+    font-size: 0.58rem !important;
+    margin-top: 0 !important;
+    white-space: nowrap !important;
+}
