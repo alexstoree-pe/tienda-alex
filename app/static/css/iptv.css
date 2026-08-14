@@ -58,11 +58,17 @@ header ~ .container .category-title button {
 }
 
 /* ========================================================= */
-/* OCULTAR PREGUNTAS FRECUENTES SOLO EN LA PÁGINA IPTV       */
+/* OCULTAR COMPLETAMENTE LAS PREGUNTAS FRECUENTES EN IPTV    */
 /* ========================================================= */
-.faq-section, 
+.faq, 
 #faq, 
-.faq-container, 
-.preguntas-frecuentes {
+.faq-section, 
+.preguntas-frecuentes, 
+.preguntas, 
+#preguntas, 
+.accordion, 
+.accordion-flush,
+div:has(.fa-question-circle),
+section:has(.fa-question-circle) {
     display: none !important;
 }
