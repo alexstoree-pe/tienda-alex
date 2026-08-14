@@ -32,16 +32,19 @@ body.grid-activa .sidebar-lateral { display: none !important;}
         padding: 10px 12px; 
     } 
 
-    /* Espacio inferior en la tarjeta para acomodar el precio abajo */
+    /* Estructura general de la tarjeta en móvil */
     .service-card { 
-        padding-bottom: 55px !important; 
+        padding-bottom: 20px !important; 
         position: relative !important;
-        display: block !important; /* Tarjeta normal en bloque */
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important; /* Todo centrado horizontalmente */
+        text-align: center !important;
     } 
 
-    /* Logo y textos alineados de forma limpia arriba */
+    /* Logo centrado arriba */
     .img-wrapper {
-        margin: 0 auto 10px auto !important;
+        margin: 0 auto 8px auto !important;
     }
 
     .service-text { 
@@ -49,32 +52,31 @@ body.grid-activa .sidebar-lateral { display: none !important;}
         width: 100% !important; 
         overflow: hidden !important; 
         margin-bottom: 8px !important;
+        text-align: center !important;
     } 
 
-    /* 🔄 MOVIMIENTO DE VAIVÉN SOLO PARA TÍTULOS LARGOS */
+    /* 🔄 MOVIMIENTO DE VAIVÉN SOLO PARA TÍTULOS LARGOS (Centrado) */
     .service-text h3, 
     .nombre-prod { 
-        display: block !important; 
+        display: inline-block !important; 
         width: max-content !important; 
         max-width: none !important; 
         white-space: nowrap !important; 
         overflow: visible !important; 
         text-overflow: clip !important; 
         will-change: transform; 
-        text-align: left !important; 
-        margin-left: 0 !important; 
-        margin-right: auto !important; 
         font-size: 0.95rem !important;
+        margin: 0 auto 4px auto !important;
     } 
 
-    /* Etiquetas internas ordenadas */
+    /* Etiquetas internas centradas */
     .product-tags { 
         display: flex !important; 
         flex-wrap: wrap !important; 
         gap: 5px !important; 
         width: 100% !important; 
-        justify-content: flex-start !important; 
-        margin-bottom: 10px !important;
+        justify-content: center !important; /* Etiquetas al medio */
+        margin-bottom: 12px !important;
     } 
 
     .tag-prop { 
@@ -86,32 +88,33 @@ body.grid-activa .sidebar-lateral { display: none !important;}
         font-size: 0.65rem !important;
     } 
 
-    /* 💰 PRECIO ABAJO A LA DERECHA (SIN CHOCAR) */
+    /* 💰 PRECIO AL MEDIO (DEBAJO DE LAS ETIQUETAS) */
     .price-container { 
-        position: absolute !important;
-        bottom: 10px !important;
-        right: 15px !important;
+        position: static !important; /* Quitamos el absoluto para que baje de forma natural al medio */
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        margin-top: 5px !important;
         margin-bottom: 0 !important; 
-        text-align: right !important;
-        z-index: 3 !important;
+        text-align: center !important;
     } 
 
     .price-tag, 
     .precio-prod {
-        font-size: 1.4rem !important;
-        line-height: 1 !important;
+        font-size: 1.5rem !important;
+        line-height: 1.1 !important;
     }
 
     .subtext-precio {
         font-size: 0.6rem !important;
         display: block !important;
-        margin-top: 2px !important;
+        margin-top: 3px !important;
     }
 
-    /* Activador de la animación solo si el título lo requiere */
+    /* Activador de la animación de títulos largos */
     .animacion-texto-largo { 
         animation: vaivenTexto 6s ease-in-out infinite alternate !important; 
-        margin-left: 0 !important; 
-        margin-right: auto !important; 
     }
 }
