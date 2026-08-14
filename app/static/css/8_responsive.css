@@ -24,14 +24,95 @@ body.grid-activa .sidebar-lateral { display: none !important;}
 @media (max-width: 1199px) { #modal-info-lateral.modal-overlay { top: 0; align-items: center; } #modal-info-lateral .modal-cristal { margin-top: 15px; max-height: calc(100vh - 100px); }}
 
 @media (max-width: 768px) { 
-    .sales-popup { top: 20px !important; left: 10px !important; max-width: 260px; padding: 10px 12px; } 
-    .service-card { padding-bottom: 38px !important; } 
-    .price-container { margin-bottom: 10px !important; } 
-    .product-tags { margin-bottom: 6px !important; } 
-    /* Desplazamiento inteligente de textos */ 
-    .service-text { position: relative; width: 100% !important; overflow: hidden !important; } 
-    .service-text h3, .nombre-prod { display: block !important; width: max-content !important; max-width: none !important; white-space: nowrap !important; overflow: visible !important; text-overflow: clip !important; will-change: transform; text-align: left !important; margin-left: 0 !important; margin-right: auto !important; } 
-    .product-tags { display: flex !important; flex-wrap: wrap !important; gap: 6px !important; width: 100% !important; justify-content: flex-start !important; } 
-    .tag-prop { width: max-content !important; max-width: none !important; flex-shrink: 0 !important; white-space: nowrap !important; will-change: transform; margin: 0 !important; } 
-    .animacion-texto-largo { animation: vaivenTexto 6s ease-in-out infinite alternate !important; margin-left: 0 !important; margin-right: auto !important; }
+    /* Posicionamiento de notificaciones flotantes (lo conservamos de tu código anterior) */
+    .sales-popup { 
+        top: 20px !important; 
+        left: 10px !important; 
+        max-width: 260px; 
+        padding: 10px 12px; 
+    } 
+
+    /* Estructura limpia de 3 columnas para TODAS las tarjetas en móvil */
+    .service-card {
+        display: grid !important;
+        grid-template-columns: 50px 1fr auto !important;
+        gap: 8px !important;
+        padding: 12px 10px !important;
+        align-items: center !important;
+    }
+
+    /* Logo compacto y fijo */
+    .img-wrapper {
+        width: 50px !important;
+        height: 50px !important;
+        min-width: 50px !important;
+        margin: 0 !important;
+    }
+
+    .service-logo {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+    }
+
+    /* Contenedor del texto adaptado al espacio restante (1fr) */
+    .service-text {
+        min-width: 0 !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Título con salto de línea automático (sin desbordarse) */
+    .service-text h3, 
+    .nombre-prod {
+        font-size: 0.8rem !important;
+        display: block !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+        line-height: 1.2 !important;
+        margin: 0 0 4px 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    /* Etiquetas internas organizadas */
+    .product-tags {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 3px !important;
+        max-height: 42px !important;
+        overflow: hidden !important;
+        margin-bottom: 0 !important;
+        width: 100% !important;
+    }
+
+    .tag-prop {
+        font-size: 0.58rem !important;
+        padding: 1px 4px !important;
+        white-space: nowrap !important;
+        margin: 0 !important;
+    }
+
+    /* Contenedor de precios al lado derecho sin estorbar */
+    .price-container {
+        text-align: right !important;
+        padding-left: 4px !important;
+        margin: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+    }
+
+    .price-tag, 
+    .precio-prod {
+        font-size: 1.15rem !important;
+        line-height: 1 !important;
+    }
+
+    .subtext-precio {
+        font-size: 0.55rem !important;
+        margin-top: 3px !important;
+        white-space: nowrap !important;
+    }
 }
