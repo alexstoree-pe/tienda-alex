@@ -24,7 +24,7 @@ body.grid-activa .sidebar-lateral { display: none !important;}
 @media (max-width: 1199px) { #modal-info-lateral.modal-overlay { top: 0; align-items: center; } #modal-info-lateral .modal-cristal { margin-top: 15px; max-height: calc(100vh - 100px); }}
 
 @media (max-width: 768px) { 
-    /* Posicionamiento de notificaciones flotantes (lo conservamos de tu código anterior) */
+    /* Posicionamiento del popup de ventas */
     .sales-popup { 
         top: 20px !important; 
         left: 10px !important; 
@@ -32,87 +32,67 @@ body.grid-activa .sidebar-lateral { display: none !important;}
         padding: 10px 12px; 
     } 
 
-    /* Estructura limpia de 3 columnas para TODAS las tarjetas en móvil */
+    /* La tarjeta se adapta y crece automáticamente según su contenido */
     .service-card {
-        display: grid !important;
-        grid-template-columns: 50px 1fr auto !important;
-        gap: 8px !important;
-        padding: 12px 10px !important;
-        align-items: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        height: auto !important;
+        min-height: auto !important;
+        padding: 14px !important;
+        position: relative !important;
     }
 
-    /* Logo compacto y fijo */
-    .img-wrapper {
-        width: 50px !important;
-        height: 50px !important;
-        min-width: 50px !important;
-        margin: 0 !important;
-    }
-
-    .service-logo {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: contain !important;
-    }
-
-    /* Contenedor del texto adaptado al espacio restante (1fr) */
+    /* Estructura interna flexible para que el logo y el texto fluyan bien */
     .service-text {
-        min-width: 0 !important;
-        overflow: hidden !important;
-        padding: 0 !important;
         width: 100% !important;
+        overflow: hidden !important;
+        margin-bottom: 8px !important;
     }
 
-    /* Título con salto de línea automático (sin desbordarse) */
+    /* Textos largos: activamos el desplazamiento de derecha a izquierda (vaivén) */
     .service-text h3, 
     .nombre-prod {
-        font-size: 0.8rem !important;
         display: block !important;
-        white-space: normal !important;
-        word-break: break-word !important;
-        line-height: 1.2 !important;
-        margin: 0 0 4px 0 !important;
-        max-width: 100% !important;
-        width: 100% !important;
+        width: max-content !important;
+        max-width: none !important;
+        white-space: nowrap !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        text-align: left !important;
+        animation: vaivenTexto 6s ease-in-out infinite alternate !important;
     }
 
-    /* Etiquetas internas organizadas */
+    /* Etiquetas: se muestran TODAS completas sin recortar ninguna */
     .product-tags {
         display: flex !important;
         flex-wrap: wrap !important;
-        gap: 3px !important;
-        max-height: 42px !important;
-        overflow: hidden !important;
-        margin-bottom: 0 !important;
+        gap: 5px !important;
+        max-height: none !important; /* 🔥 Elimina el límite para que se vea todo */
+        overflow: visible !important;
         width: 100% !important;
+        margin-bottom: 12px !important;
     }
 
     .tag-prop {
-        font-size: 0.58rem !important;
-        padding: 1px 4px !important;
+        width: max-content !important;
+        max-width: none !important;
+        flex-shrink: 0 !important;
         white-space: nowrap !important;
+        font-size: 0.6rem !important;
+        padding: 2px 6px !important;
         margin: 0 !important;
     }
 
-    /* Contenedor de precios al lado derecho sin estorbar */
+    /* Contenedor de precio ubicado ordenadamente abajo a la derecha */
     .price-container {
+        align-self: flex-end !important;
+        margin-top: 4px !important;
+        margin-bottom: 5px !important;
         text-align: right !important;
-        padding-left: 4px !important;
-        margin: 0 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
     }
 
     .price-tag, 
     .precio-prod {
-        font-size: 1.15rem !important;
-        line-height: 1 !important;
-    }
-
-    .subtext-precio {
-        font-size: 0.55rem !important;
-        margin-top: 3px !important;
-        white-space: nowrap !important;
+        font-size: 1.3rem !important;
     }
 }
