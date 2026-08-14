@@ -24,7 +24,7 @@ body.grid-activa .sidebar-lateral { display: none !important;}
 @media (max-width: 1199px) { #modal-info-lateral.modal-overlay { top: 0; align-items: center; } #modal-info-lateral .modal-cristal { margin-top: 15px; max-height: calc(100vh - 100px); }}
 
 @media (max-width: 768px) { 
-    /* Posicionamiento del popup de ventas */
+    /* Posicionamiento de notificaciones flotantes */
     .sales-popup { 
         top: 20px !important; 
         left: 10px !important; 
@@ -32,67 +32,86 @@ body.grid-activa .sidebar-lateral { display: none !important;}
         padding: 10px 12px; 
     } 
 
-    /* La tarjeta se adapta y crece automáticamente según su contenido */
-    .service-card {
-        display: flex !important;
-        flex-direction: column !important;
-        height: auto !important;
-        min-height: auto !important;
-        padding: 14px !important;
+    /* Espacio inferior en la tarjeta para acomodar el precio abajo */
+    .service-card { 
+        padding-bottom: 55px !important; 
         position: relative !important;
+        display: block !important; /* Tarjeta normal en bloque */
+    } 
+
+    /* Logo y textos alineados de forma limpia arriba */
+    .img-wrapper {
+        margin: 0 auto 10px auto !important;
     }
 
-    /* Estructura interna flexible para que el logo y el texto fluyan bien */
-    .service-text {
-        width: 100% !important;
-        overflow: hidden !important;
+    .service-text { 
+        position: relative; 
+        width: 100% !important; 
+        overflow: hidden !important; 
         margin-bottom: 8px !important;
-    }
+    } 
 
-    /* Textos largos: activamos el desplazamiento de derecha a izquierda (vaivén) */
+    /* 🔄 MOVIMIENTO DE VAIVÉN SOLO PARA TÍTULOS LARGOS */
     .service-text h3, 
-    .nombre-prod {
-        display: block !important;
-        width: max-content !important;
-        max-width: none !important;
-        white-space: nowrap !important;
-        overflow: visible !important;
-        text-overflow: clip !important;
-        text-align: left !important;
-        animation: vaivenTexto 6s ease-in-out infinite alternate !important;
-    }
+    .nombre-prod { 
+        display: block !important; 
+        width: max-content !important; 
+        max-width: none !important; 
+        white-space: nowrap !important; 
+        overflow: visible !important; 
+        text-overflow: clip !important; 
+        will-change: transform; 
+        text-align: left !important; 
+        margin-left: 0 !important; 
+        margin-right: auto !important; 
+        font-size: 0.95rem !important;
+    } 
 
-    /* Etiquetas: se muestran TODAS completas sin recortar ninguna */
-    .product-tags {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        gap: 5px !important;
-        max-height: none !important; /* 🔥 Elimina el límite para que se vea todo */
-        overflow: visible !important;
-        width: 100% !important;
-        margin-bottom: 12px !important;
-    }
+    /* Etiquetas internas ordenadas */
+    .product-tags { 
+        display: flex !important; 
+        flex-wrap: wrap !important; 
+        gap: 5px !important; 
+        width: 100% !important; 
+        justify-content: flex-start !important; 
+        margin-bottom: 10px !important;
+    } 
 
-    .tag-prop {
-        width: max-content !important;
-        max-width: none !important;
-        flex-shrink: 0 !important;
-        white-space: nowrap !important;
-        font-size: 0.6rem !important;
-        padding: 2px 6px !important;
-        margin: 0 !important;
-    }
+    .tag-prop { 
+        width: max-content !important; 
+        max-width: none !important; 
+        flex-shrink: 0 !important; 
+        white-space: nowrap !important; 
+        margin: 0 !important; 
+        font-size: 0.65rem !important;
+    } 
 
-    /* Contenedor de precio ubicado ordenadamente abajo a la derecha */
-    .price-container {
-        align-self: flex-end !important;
-        margin-top: 4px !important;
-        margin-bottom: 5px !important;
+    /* 💰 PRECIO ABAJO A LA DERECHA (SIN CHOCAR) */
+    .price-container { 
+        position: absolute !important;
+        bottom: 10px !important;
+        right: 15px !important;
+        margin-bottom: 0 !important; 
         text-align: right !important;
-    }
+        z-index: 3 !important;
+    } 
 
     .price-tag, 
     .precio-prod {
-        font-size: 1.3rem !important;
+        font-size: 1.4rem !important;
+        line-height: 1 !important;
+    }
+
+    .subtext-precio {
+        font-size: 0.6rem !important;
+        display: block !important;
+        margin-top: 2px !important;
+    }
+
+    /* Activador de la animación solo si el título lo requiere */
+    .animacion-texto-largo { 
+        animation: vaivenTexto 6s ease-in-out infinite alternate !important; 
+        margin-left: 0 !important; 
+        margin-right: auto !important; 
     }
 }
