@@ -1,99 +1,51 @@
 /* ========================================================= */
-/* CORRECCIONES EXCLUSIVAS PARA PÁGINA IPTV (MÓVIL Y PC)     */
+/* ALINEACIÓN DE TÍTULO Y BOTÓN DE CLIENTES CON PANEL (SOLO CSS) */
 /* ========================================================= */
 
-@media (max-width: 768px) { 
-    /* 1. Restaurar la tarjeta en bloque normal (sin centrar todo a la fuerza) */
-    .service-card { 
-        padding-bottom: 20px !important; 
-        position: relative !important;
-        display: block !important;
-        text-align: left !important; /* Textos alineados a la izquierda por defecto */
-    } 
-
-    /* Logo centrado arriba de forma limpia */
-    .img-wrapper {
-        margin: 0 auto 10px auto !important;
-    }
-
-    .service-text { 
-        position: relative; 
-        width: 100% !important; 
-        overflow: hidden !important; 
-        margin-bottom: 8px !important;
-        text-align: left !important;
-    } 
-
-    /* Títulos con movimiento de vaivén si son largos */
-    .service-text h3, 
-    .nombre-prod { 
-        display: block !important; 
-        width: max-content !important; 
-        max-width: none !important; 
-        white-space: nowrap !important; 
-        overflow: visible !important; 
-        text-overflow: clip !important; 
-        font-size: 0.95rem !important;
-        margin: 0 0 4px 0 !important;
-        color: #fff !important;
-    } 
-
-    /* Etiquetas internas alineadas a la izquierda */
-    .product-tags { 
-        display: flex !important; 
-        flex-wrap: wrap !important; 
-        gap: 5px !important; 
-        width: 100% !important; 
-        justify-content: flex-start !important; 
-        margin-bottom: 15px !important;
-    } 
-
-    .tag-prop { 
-        width: max-content !important; 
-        max-width: none !important; 
-        flex-shrink: 0 !important; 
-        white-space: nowrap !important; 
-        margin: 0 !important; 
-        font-size: 0.65rem !important;
-    } 
-
-    /* 💰 2. PRECIO Y SUBTÍTULO LADO A LADO ALINEADOS A LA DERECHA */
-    .service-card .price-container { 
-        display: flex !important;
-        flex-direction: row !important; /* Lado a lado */
-        align-items: baseline !important;
-        justify-content: flex-end !important; /* ¡Enviado a la derecha! */
-        gap: 8px !important;
-        width: 100% !important;
-        margin-top: 10px !important;
-        text-align: right !important;
-    } 
-
-    .price-tag, 
-    .precio-prod {
-        font-size: 1.4rem !important;
-        line-height: 1 !important;
-        color: var(--accent, #ffcc00) !important;
-    }
-
-    .subtext-precio {
-        font-size: 0.58rem !important;
-        margin-top: 0 !important;
-        white-space: nowrap !important;
-        color: #ccc !important;
-    }
-}
-
-/* 3. Asegurar visibilidad total del título de la categoría en IPTV */
-.category-header-flex .category-title {
-    color: #fff !important;
-    font-size: 1.05rem !important;
-    font-weight: bold !important;
+/* Contenedor flexible para la categoría y el botón */
+.category-title {
     display: flex !important;
     align-items: center !important;
-    gap: 8px !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
 }
 
-.category-header-flex .category-title i {
-    color: var(--primary, #ff4b2b);
+/* Estilo y posicionamiento del botón inyectado mediante la clase existente */
+.category-title .btn-accion-extra,
+.category-header-flex .btn-accion-extra,
+.category-title + .btn-accion-extra,
+header ~ .container .category-title button {
+    margin-left: auto !important;
+}
+
+/* ========================================================= */
+/* AJUSTE PARA EL TEXTO DEL PRECIO Y SUBTÍTULO               */
+/* ========================================================= */
+.price-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+}
+
+.subtext-precio {
+    font-size: 0.65rem !important;
+    color: #aaaaaa !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    margin-top: 4px !important;
+    letter-spacing: 0.5px !important;
+    white-space: nowrap !important;
+}
+
+/* Si es tarjeta VIP / Premium */
+.premium .subtext-precio {
+    color: #e5c158 !important;
+}
+
+/* Asegurar que el título de la tarjeta no se corte feo */
+.service-text h3 {
+    white-space: normal !important;
+    line-height: 1.3 !important;
 }
