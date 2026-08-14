@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alex Store | Acceso Premium</title>
 
-    <!-- ANTI-CACHÉ PORTAL DE ACCESO -->
+    
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
 
-    <!-- Logo adaptado a Flask -->
+    
     <link rel="icon" type="image/webp" href="{{ url_for('static', filename='img/logo.webp') }}">
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/logo.webp') }}">
     
@@ -37,7 +37,7 @@
 
 <div class="main-container">
     <div class="logo-section">
-        <!-- Llamada al logo usando url_for -->
+       
         <img src="{{ url_for('static', filename='img/logo.webp') }}" alt="Alex Store Logo" class="main-logo">
         <p>Cuentas Premium al Mejor Precio</p>
     </div>
@@ -48,7 +48,7 @@
     </div>
     
 <div class="buttons-grid">
-    <!-- Clientes (false) -->
+  
     <div onclick="solicitarAccesso('{{ url_for('clientes.catalogo') }}', false)" class="btn-access btn-clients">
         <i class="fa-solid fa-store"></i>
         <div class="btn-info">
@@ -72,7 +72,7 @@
 </div>
 
 <div class="buttons-grid">
-    <!-- Mayoristas (true) -->
+    
     <div onclick="solicitarAccesso('{{ url_for('distribuidores.distribuidores') }}', true)" class="btn-access btn-dist">
         <i class="fa-solid fa-briefcase"></i>
         <div class="btn-info">
@@ -109,5 +109,6 @@
 </div>
 
 <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+<script src="{{ url_for('static', filename='js/block.js') }}"></script>
 </body>
 </html>
