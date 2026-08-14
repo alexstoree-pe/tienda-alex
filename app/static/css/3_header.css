@@ -1,3 +1,15 @@
+html {
+            color-scheme: dark !important;
+        }
+        img, 
+        .service-card, 
+        .modal-content, 
+        body, 
+        div {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
 /* ========================================================= */
 /* 3. HEADER, BUSCADOR Y FILTROS                             */
 /* ========================================================= */
