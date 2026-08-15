@@ -23,6 +23,10 @@ body:has(#whatsapp-btn:not(.hidden)) #btn-info-movil { bottom: 110px;}
 #cart-total { transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: inline-block; font-weight: 800; font-size: 1.2rem;}
 
 .grid-botones { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px auto 0; max-width: 600px;}
+.botones-tercera-fila {
+    grid-template-columns: 1fr !important; /* Forzamos a que sea de 1 sola columna */
+    justify-items: center;                  /* Centramos el contenido al medio */
+}
 .btn-universal { display: flex; align-items: center; justify-content: center; padding: 10px 8px; border-radius: 50px; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; cursor: pointer; text-decoration: none; border: none; text-align: center; transition: 0.3s;}
 .btn-home { background: var(--glass); color: #ffffff !important; border: 1px solid var(--glass-border);}
 .btn-promo { background: var(--danger); color: #ffffff !important;}
