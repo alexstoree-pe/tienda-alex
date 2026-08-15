@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/actualizar_hogar.css') }}">
+
+<header class="info-header">
+    <img src="{{ url_for('static', filename='img/logo.webp') }}" class="brand-logo" alt="Logo">
+    <h1 class="info-titulo-principal">ACTUALIZACIÓN DE HOGAR</h1>
+    <p class="info-subtitulo">Guía rápida para resolver bloqueos de pantalla</p>
+</header>
+
+<div class="container" style="padding-top: 0; margin-bottom: 20px;">
+    <div class="grid-botones">
+        <a href="javascript:history.back()" class="btn-universal btn-volver">
+            <i class="fas fa-arrow-left"></i> VOLVER ATRÁS
+        </a>
+    </div>
+</div>
+
+<div class="container">
+    
+    <div class="info-card">
+        <h2><i class="fas fa-question-circle"></i> ¿Por qué aparece este mensaje en NETFLIX?</h2>
+    <div class="info-img-contenedor">
+                <img src="{{ url_for('static', filename='img/guias/actualizar/act1.webp') }}" alt="Pantalla de error de hogar" class="info-img-responsive">
+            </div>
+    
+        <div class="info-text">
+    
+    <!-- Párrafo 1 -->
+    <div class="info-paragraph-wrapper">
+        <div class="info-badge-num">1</div>
+        <p>Varias plataformas de streaming han implementado nuevas políticas de seguridad para verificar que los dispositivos se conecten desde un mismo "Hogar" (red Wi-Fi principal).</p>
+    </div>
+
+    <!-- Párrafo 2 -->
+    <div class="info-paragraph-wrapper">
+        <div class="info-badge-num">2</div>
+        <p>Como nuestras cuentas son compartidas y cada usuario tiene su propio perfil, es para ofrecerte el mejor precio, el sistema de la plataforma detecta que estás en una red distinta a la principal y, por seguridad, <strong>pausa temporalmente el acceso solicitando confirmar que eres parte o propietario de la cuenta.</strong></p>
+    </div>
+
+    <!-- Párrafo 3 -->
+    <div class="info-paragraph-wrapper">
+        <div class="info-badge-num">3</div>
+        <p>No te preocupes, <strong>tu cuenta no está cancelada ni has perdido tu servicio</strong>. Solo requiere una validación rápida que nosotros te proporcionamos.</p>
+    </div>
+
+</div>
+    <!-- SECCIÓN: PASOS PARA SOLUCIONARLO -->
+    <div class="info-card">
+        <h2><i class="fas fa-tools"></i> Pasos para solicitar la verificacion de hogar </h2>
+        
+        <div class="steps-container">
+            <!-- PASO 1 -->
+            <div class="step-box">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <H4>Te saldra dos opciones</H4>
+                    <p>Presiona en <span style="color: #ffe600;">-------</span><strong style="color: #00A6FF;"> ESTA ES MI CUENTA</strong></p>
+                    
+
+                    <div class="step-img-wrapper">
+                        <img src="{{ url_for('static', filename='img/paso1_boton.webp') }}" alt="Paso 1" class="step-img">
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 2 -->
+            <div class="step-box">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Te saldra dos opciones mas </h4>
+                    <p>Presiona en la primera opcion que es <span style="color: #ffe600;">-------</span><strong style="color: #00A6FF;"> ESTOY DE VIAJE</strong></P>
+                    
+                    
+                    <div class="step-img-wrapper">
+                        <img src="{{ url_for('static', filename='img/paso2_whatsapp.webp') }}" alt="Paso 2" class="step-img">
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="step-box">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Enviar Email</h4>
+                    <p>Por ultimo presiones en la opcion de <span style="color: #ffe600;">-------</span><strong style="color: #00A6FF;"> ENVIAR EMAIL</strong> y se dirige con su proveedor para que le envien los codigos de 4 digitos</P>
+                    
+                    <div class="step-img-wrapper">
+                        <img src="{{ url_for('static', filename='img/paso3_exito.webp') }}" alt="Paso 3" class="step-img">
+                    </div>
+                </div>
+            </div>
+            
+            <h2><i class="fas fa-xmark" style="font-size: 40px;"></i> No presionar lo siguiente </h2>
+            <div class="step-box">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4><i class="fas fa-xmark" style="color: #fc2c08;" style="font-size: 5px;"></i> No presionar en </h4>
+                    <P><strong style="color: #fc2c08;"> ACTUALIZAR HOGAR</strong> O <strong style="color: #fc2c08;"> CAMBIAR HOGAR</strong></P>
+                    <P> Por ningun motivo presione estas opciones, <strong><em><i style="color: #ece2e2;"> si solo le sale esta opcion en pantalla comunicar a su proveedor</i></em></strong></p>
+                    <div class="step-img-wrapper">
+                        <img src="{{ url_for('static', filename='img/paso3_exito.webp') }}" alt="Paso 3" class="step-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🔥 Nuevo bloque de ingreso de correo -->
+        <div style="margin-top: 25px; margin-bottom: 15px;">
+            <label style="color: #e5c158; font-size: 0.85rem; display: block; margin-bottom: 6px; font-weight: 600;">
+                <i class="fas fa-envelope"></i> Ingresa el correo de la cuenta:
+            </label>
+            <input type="email" id="input-correo-cuenta" placeholder="ejemplo@correo.com" style="width: 100%; padding: 12px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; color: #fff; font-size: 0.95rem; outline: none; box-sizing: border-box;">
+        </div>
+
+        <!-- Alerta de error -->
+        <div id="alerta-error-correo" style="display: none; background: rgba(255, 75, 43, 0.15); border: 1px solid #ff4b2b; color: #ff8b7c; padding: 10px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 15px; align-items: center; gap: 8px;">
+            <i class="fas fa-exclamation-triangle"></i> Por favor, ingresa el correo de la cuenta primero.
+        </div>
+
+        <!-- Botón que activa la función -->
+        <button type="button" class="btn-wsp-soporte" onclick="enviarWhatsAppActualizar()">
+            <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> SOLICITAR CÓDIGO AHORA
+        </button>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/actualizar_hogar.js') }}"></script>
+{% endblock %}

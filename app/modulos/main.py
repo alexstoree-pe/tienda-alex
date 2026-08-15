@@ -31,6 +31,10 @@ def activaciones():
 def guias():
     return render_template('guias.html')
 
+@main_bp.route('/actualizar-hogar')
+def actualizar_hogar():
+    return render_template('actualizar_hogar.html')
+
 
 
 CACHE = {

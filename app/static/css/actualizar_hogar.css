@@ -1,0 +1,212 @@
+/* ========================================================= */
+/* ESTILOS PARA LA PÁGINA DE ACTUALIZAR HOGAR                */
+/* ========================================================= */
+
+.info-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.info-titulo-principal {
+    background: linear-gradient(45deg, #ff4b2b, #ff416c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.info-subtitulo {
+    color: #ccc;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.btn-volver {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    display: block;
+    width: 100%;          /* Hace que ocupe todo el ancho disponible */
+    max-width: 150px;     /* (Opcional) Si no quieres que sea tan gigante en pantallas grandes, le pones un límite */
+    text-align: center;
+    padding: 12px 20px;   /* Da más altura y espacio interno */
+}
+
+.grid-botones {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;     /* Ajusta este valor (ej. 400px, 500px) para hacerlo más largo */
+    margin: 0 auto;       /* Lo mantiene centrado en la página */
+}
+
+.btn-volver i {
+    margin-right: 5px;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 25px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.info-card h2 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-card h2 i {
+    color: #ff4b2b;
+}
+
+.info-text {
+    color: #cccccc;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.info-text strong {
+    color: #e5c158;
+}
+
+.info-parrafo-espaciado {
+    margin-top: 10px;
+}
+
+.info-img-contenedor {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.info-img-responsive {
+    max-width: 100%;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Contenedor de pasos */
+.steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.step-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 15px;
+    border-radius: 12px;
+    border-left: 4px solid #ff4b2b;
+}
+
+.step-number {
+    background: linear-gradient(45deg, #ff4b2b, #ff416c);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.step-content {
+    width: 100%;
+}
+
+.step-content h4 {
+    color: #fff;
+    margin: 0 0 5px 0;
+    font-size: 1.05rem;
+}
+
+.step-content p {
+    color: #aaa;
+    font-size: 0.85rem;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.step-img-wrapper {
+    margin-top: 12px;
+}
+
+.step-img {
+    max-width: 250px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.btn-wsp-soporte {
+    background: #25d366;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: 0.3s ease;
+    width: 100%;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.btn-wsp-soporte i {
+    font-size: 1.2rem;
+}
+
+.btn-wsp-soporte:hover {
+    background: #20ba5a;
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+/* Estilos para los párrafos numerados */
+.info-paragraph-wrapper {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    align-items: flex-start;
+}
+
+.info-badge-num {
+    background: rgba(65, 12, 3, 0.2); /* Color rojo suave */
+    color: #e9d3d0;
+    border: 1px solid rgba(255, 75, 43, 0.4);
+    min-width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin-top: 2px; /* Alineado con la primera línea de texto */
+}
+
+
+/* ========================================================= */
+/* OCULTAR PREGUNTAS FRECUENTES EN ACTUALIZAR HOGAR          */
+/* ========================================================= */
+#faq-container {
+    display: none !important;
+}
