@@ -1,12 +1,11 @@
 window.cargarStockDeGoogleSheets = async function() {
     try {
-        const respuesta = await fetch('/api/obtener-datos-stock');
+        // Solución anti-caché aplicada correctamente aquí
+        const respuesta = await fetch('/api/obtener-datos-stock?t=' + new Date().getTime());
         const data = await respuesta.json();
 
         if (!data) return;
 
-        // Soporte optimizado: Si el backend ya manda los conteos listos (Recomendado) 
-        // o si manda las filas originales, las procesamos de forma limpia y directa.
         let conteoAB = data.conteoAB || {};
         let conteoCD = data.conteoCD || {};
 
@@ -33,6 +32,30 @@ window.cargarStockDeGoogleSheets = async function() {
         window.actualizarTarjetasConStock(conteoAB, conteoCD);
     } catch (error) { 
         console.error("Error al conectar con stock:", error); 
+    }
+};
+
+window.cargarPreciosDeGoogleSheets = async function() {
+    try {
+        const respuesta = await fetch('/api/obtener-datos-precios?t=' + new Date().getTime());
+        const data = await respuesta.json(); 
+
+        if (data && data.table && data.table.rows) {
+            let diccionarioPrecios = {};
+            data.table.rows.forEach((fila, indice) => {
+                if (indice > 0 && fila.c && fila.c[0] && fila.c[0].v) {
+                    let clave = fila.c[0].v.toString().trim().toLowerCase();
+                    diccionarioPrecios[clave] = {
+                        cliente: fila.c[1]?.v?.toString().trim() || "0",
+                        dist_perfil: fila.c[2]?.v?.toString().trim() || "0",
+                        dist_cuenta: fila.c[3]?.v?.toString().trim() || "0"
+                    };
+                }
+            });
+            window.actualizarPreciosEnTarjetas(diccionarioPrecios);
+        }
+    } catch (error) { 
+        console.error("Error precios:", error); 
     }
 };
 
@@ -99,31 +122,6 @@ window.actualizarTarjetasConStock = function(conteoAB, conteoCD) {
     }
 };
 
-window.cargarStockDeGoogleSheets = async function() {
-    try {
-        const respuesta = await fetch('/api/obtener-datos-stock?t=' + new Date().getTime());
-        const data = await respuesta.json();
-
-        if (!data) return;
-
-        if (data && data.table && data.table.rows) {
-            let diccionarioPrecios = {};
-            data.table.rows.forEach((fila, indice) => {
-                if (indice > 0 && fila.c && fila.c[0] && fila.c[0].v) {
-                    let clave = fila.c[0].v.toString().trim().toLowerCase();
-                    diccionarioPrecios[clave] = {
-                        cliente: fila.c[1]?.v?.toString().trim() || "0",
-                        dist_perfil: fila.c[2]?.v?.toString().trim() || "0",
-                        dist_cuenta: fila.c[3]?.v?.toString().trim() || "0"
-                    };
-                }
-            });
-            window.actualizarPreciosEnTarjetas(diccionarioPrecios);
-        }
-    } catch (error) { 
-        console.error("Error precios:", error); 
-    }
-};
 
 window.actualizarPreciosEnTarjetas = function(diccionarioPrecios) {
     const esDistribuidor = /distribuidor|iptv|vip/i.test(window.location.pathname);
