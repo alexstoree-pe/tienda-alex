@@ -165,3 +165,15 @@ window.actualizarPreciosEnTarjetas = function(diccionarioPrecios) {
         window.reconstruirCarritoDesdeUI();
     }
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+    // 40000 milisegundos equivalen a 40 segundos. 
+    // Si prefieres 1 minuto exacto, cambia el valor a 60000.
+    const intervaloDeActualizacion = 40000; 
+
+    setInterval(() => {
+        if (typeof window.cargarStockDeGoogleSheets === 'function') {
+            window.cargarStockDeGoogleSheets();
+        }
+    }, intervaloDeActualizacion);
+});
