@@ -47,6 +47,8 @@ TIEMPO_CACHE = 15
 URL_CSV_STOCK = os.getenv('URL_CSV_STOCK')
 URL_CSV_PRECIOS = os.getenv('URL_CSV_PRECIOS')
 
+
+
 @main_bp.route('/api/obtener-datos-stock')
 def obtener_stock_seguro():
     ahora = time.time()
@@ -69,11 +71,16 @@ def obtener_stock_seguro():
             while len(fila) < 4: 
                 fila.append("")
             
-            if fila[0].strip() != "" or fila[1].strip() != "":
-                revendedores.append({"c": [{"v": fila[0]}, {"v": fila[1]}]})
+            plat_rev = fila[0].strip()
+            est_rev = fila[1].strip()
+            plat_cli = fila[2].strip()
+            est_cli = fila[3].strip()
             
-            if fila[2].strip() != "" or fila[3].strip() != "":
-                clientes.append({"c": [{"v": fila[2]}, {"v": fila[3]}]})
+            if plat_rev != "":
+                revendedores.append({"c": [{"v": plat_rev}, {"v": est_rev}]})
+            
+            if plat_cli != "":
+                clientes.append({"c": [{"v": plat_cli}, {"v": est_cli}]})
                 
         datos_finales = {"revendedores": revendedores, "clientes": clientes}
         
@@ -86,7 +93,6 @@ def obtener_stock_seguro():
         if CACHE['stock']['data'] is not None:
             return jsonify(CACHE['stock']['data'])
         return jsonify({"error": str(e)}), 500
-
 
 @main_bp.route('/api/obtener-datos-precios')
 def obtener_precios_seguro():
