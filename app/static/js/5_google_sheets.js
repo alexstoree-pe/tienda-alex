@@ -15,7 +15,7 @@ window.cargarStockDeGoogleSheets = async function() {
                     if (fila.c?.[0]?.v && fila.c?.[1]?.v) {
                         let plat = fila.c[0].v.toString().trim().toLowerCase();
                         let est = fila.c[1].v.toString().trim().toLowerCase();
-                        if (est.includes("libre")) conteoAB[plat] = (conteoAB[plat] || 0) + 1;
+                        if (est === "libre") conteoAB[plat] = (conteoAB[plat] || 0) + 1;
                     }
                 });
             }
@@ -24,7 +24,7 @@ window.cargarStockDeGoogleSheets = async function() {
                     if (fila.c?.[0]?.v && fila.c?.[1]?.v) {
                         let plat = fila.c[0].v.toString().trim().toLowerCase();
                         let est = fila.c[1].v.toString().trim().toLowerCase();
-                        if (est.includes("libre")) conteoCD[plat] = (conteoCD[plat] || 0) + 1;
+                        if (est === "libre") conteoAB[plat] = (conteoAB[plat] || 0) + 1;
                     }
                 });
             }
