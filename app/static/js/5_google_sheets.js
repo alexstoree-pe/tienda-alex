@@ -99,10 +99,12 @@ window.actualizarTarjetasConStock = function(conteoAB, conteoCD) {
     }
 };
 
-window.cargarPreciosDeGoogleSheets = async function() {
+window.cargarStockDeGoogleSheets = async function() {
     try {
-        const respuesta = await fetch('/api/obtener-datos-precios');
-        const data = await respuesta.json(); 
+        const respuesta = await fetch('/api/obtener-datos-stock?t=' + new Date().getTime());
+        const data = await respuesta.json();
+
+        if (!data) return;
 
         if (data && data.table && data.table.rows) {
             let diccionarioPrecios = {};

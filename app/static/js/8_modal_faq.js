@@ -70,18 +70,14 @@ document.addEventListener("DOMContentLoaded", () => {
         if (typeof iniciarNotificacionesCompras === 'function') iniciarNotificacionesCompras(); 
         
         if (typeof window.cargarPreciosDeGoogleSheets === 'function') {
-            window.cargarPreciosDeGoogleSheets(); 
-            setInterval(window.cargarPreciosDeGoogleSheets, 2000);
-        }
+    window.cargarPreciosDeGoogleSheets(); 
+    setInterval(window.cargarPreciosDeGoogleSheets, 60000); 
+    }
 
-        const path = window.location.pathname.toLowerCase();
-        const esZonaDistribuidores = path.includes("distribuidor") || path.includes("iptv") || path.includes("vip");
+const path = window.location.pathname.toLowerCase();
+const esZonaDistribuidores = path.includes("distribuidor") || path.includes("iptv") || path.includes("vip");
 
-        if (typeof window.cargarStockDeGoogleSheets === 'function' && (esZonaDistribuidores || document.querySelector('.stock-badge'))) {
-            window.cargarStockDeGoogleSheets();
-            setInterval(window.cargarStockDeGoogleSheets, 2000); 
-        }
-    }, 500);
-});
-
-
+if (typeof window.cargarStockDeGoogleSheets === 'function' && (esZonaDistribuidores || document.querySelector('.stock-badge'))) {
+    window.cargarStockDeGoogleSheets();
+    setInterval(window.cargarStockDeGoogleSheets, 60000);
+    }
