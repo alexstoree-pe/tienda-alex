@@ -82,6 +82,7 @@ window.addEventListener('load', () => setTimeout(procesarTextosMoviles, 800));
 window.addEventListener('resize', () => setTimeout(procesarTextosMoviles, 400));
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('.btn-view').forEach(btn => {
-        btn.addEventListener('click', () => { setTimeout(procesarTextosMoviles, 100); setTimeout(procesarTextosMoviles, 500); });
+    btn.addEventListener('click', () => { 
+        setTimeout(procesarTextosMoviles, 150); });
     });
 });
